@@ -1,0 +1,122 @@
+Ba et al., Sci. Adv. 8, eabn0756 (2022)     9 September 2022
+SCIENCE ADVANCES |  RESEARCH ARTICLE
+8 of 13
+genes. We also found that coevolution of expression layers is strong 
+and prevalent across gene classes. In our results, the global proteome 
+variability is comparable to or even slightly higher than the tran-
+scriptome level across species (see Fig. 5A and fig. S10), emphasiz-
+ing the evolution of lineage adaptions, rather than the genome-wide 
+compensatory evolution (2), at the proteome level. Processes such 
+as negative regulation of G protein–coupled receptor signaling and 
+mRNA methylation, as examples that can be extracted from table 
+S4, seem to show a higher variability at the protein level than at the 
+RNA level. In addition, our data further suggest that the involve-
+ment in protein complexes or protein-protein interactions presents 
+additional constraints potentially reducing the transcriptome-  
+proteome coevolution.
+The biological variabilities between individuals and between 
+species jointly shape the biological diversity on Earth. Our data ad-
+dressed two principles underlying biodiversity. The first principle is 
+that the proteome largely reflects variability at the transcriptional 
+level. As shown in Fig. 3A, gene expression variabilities at mRNA 
+and corresponding protein levels are overall tightly controlled with-
+in classes of genes of the same molecular functions. Extracellular 
+matrix proteins overall show a very high evolvability. The dynamics 
+of gene products participating in the extracellular matrix might ren-
+der each mammalian species a rapid environment adaptive response. 
+In contrast, the expression of proteasome components seems to be 
+evolutionarily conserved as reported (33). According to our data, 
+the tight expression regulation is already detectable at the transcrip-
+tional level, probably due to the high cost of protein synthesis (46). 
+Accordingly, the translation-relevant gene expressions are particu-
+larly stabilized at the protein level across species (Fig. 3A). This re-
+inforces the previous finding that translation efficiency profile is 
+highly conserved in evolution (47).
+In a mammalian cell, the proteasome and lysosome represent 
+the two major machineries for protein degradation (48). Previously, 
+Ub-proteasome pathway was found to be evolutionarily conserved 
+(33), but little is known about the evolutionary conservation of the 
+lysosomal proteolysis pathway and the entire Ub system. We discov-
+ered a much higher variability of the lysosomal degradation pathway. 
+Considering that the endosome transportation–associated protein 
+expressions are quite stable across species, our discovery might be 
+associated with lysosomal exocytosis for remodeling extracellular 
+proteins (49). Consistent to this finding, previous studies about the 
+Ub code (50) suggested that K48-linked Ub, the most stable Ub 
+codes we found here, is mainly involved in canonical protein degra-
+dation via proteasome. In contrast, other lysine-linked Ubs carrying 
+diverse functions, such as endocytosis and DNA damage responses 
+(K63), were quantitatively more variable between species in our re-
+sults. Even for proteasome itself, the immunoproteasome components 
+such as PSME2 (11) manifested high interspecies variation than other 
+proteasome components. Together, our data delineate a complex and 
+manifold relationship between protein degradation and biodiversity.
+The second principle underlying biodiversity at the molecular 
+level is that proteome variability tends to be parallel at both the in-
+dividual and species scales (Fig. 3B). Although it is expected that 
+interspecies protein variability globally exceeds the interindividual 
+variability, proteins in extracellular matrix and proteasome again 
+showed the highest and the lowest variable abundances, respectively, 
+also among humans. Functional classes such as mRNA splicing, mRNA 
+metabolism, and cell division that showed exceptionally higher in-
+terspecies variability are intriguing and warrant future investigations. 
+For example, Keren et al. (51) have summarized various changing 
+models of mRNA alternative splicing (AS) in different eukaryotic 
+lineages. AS provides a strategy for relaxing negative selection pres-
+sure against evolutionary change (52). In our data, the evolutionary 
+variability of the AS pathway is strong at the protein level, which might 
+enhance evolvability and proteotype diversity. The cell division–  
+associated protein variability among mammals was further supported 
+by phosphoproteomic data. Our cross-scale analysis represents a critical 
+step toward comprehensive understanding of inherent protein ex-
+pression variability. For many proteins such as those in and related 
+to the extracellular matrix–mediated pathways, their expressions 
+exhibit marked individual differences through intrinsic regulatory 
+machineries, the evolutionary selective forces in speciation and 
+phylogeny would prefer to just expand the magnitude of their intra-
+specific protein diversity. For the other type of proteins, they are 
+regulated particularly along the evolution axis, irrespective of their 
+biological variability within species, such as RNA processing. It is 
+thus essential to classify two types of protein variabilities for future 
+evolutionary research.
+Compared to early studies (53), our phosphoproteome data are 
+fairly large in coverage and quantitative. Previously, little was known 
+about the evolution of phosphorylation signaling networks. Our co-
+variance analysis between P-sites provides a first coevolutionary 
+phosphorylation network independent of protein levels. The enriched 
+sequence motifs around the common P-sites pointed out similar 
+kinases such as CDKs heavily evolving in mammalian evolution. We 
+found the patterns of depleted glutamic acid (E) and enriching argi-
+nine (R) residues around the common P-site. This result agrees well 
+to our previous study that showed that such patterns tend to accel-
+erate protein turnover when the P-sites get phosphorylated (20). 
+Thus, the timely phosphoprotein turnover may render active selec-
+tion on P-sites in mammalian evolution.
+The present study only analyzed fibroblast cells, whereas enor-
+mous single-cell and multitissue studies have demonstrated the 
+complexity and diversity of gene expression among different cell types 
+(14–16). Our datasets could provide additional broad impacts, be-
+cause skin-derived fibroblast cells play an essential role during cuta-
+neous wound healing and were used to discover different molecular 
+traits associated with the longevity between different mammals and 
+other species previously (54,  55), and skin fibroblasts are critical de-
+terminants of skin cancer malignancy across species (56, 57). More-
+over, cryobanking of fibroblast cells presents a national-wide tool 
+that facilitates the biological diversity characterization and contrib-
+utes to ex situ conservation of genetic resources (58). Although 
+most of our conclusions, such as transcriptome-proteome coevolu-
+tion and biological variability control, are unlikely to be limited to 
+fibroblast cells, our results promisingly anchor future proteotype char-
+acterization studies on other cell types and multiple tissues across 
+species. In addition, the species differences of molecular events 
+might be more apparent in studies of the disturbed or dynamic sys-
+tems. Moreover, as already shown in studies analyzing protein turn-
+over (9,  59), thermal stability (60), protein-protein interaction (61), 
+and specific phosphorylation signaling process (62,  63), the MS-
+based quantitative proteomic analysis across multiple species will 
+provide additional insights into answering fundamental evolution-
+ary questions and beyond. We expect the establishment of quantitative 
+landscape of proteins and posttranslational modifications across spe-
+cies to further contribute to our understanding of biological vari-
+ability and biodiversity on Earth.
+Downloaded from https://www.science.org on August 19, 2025

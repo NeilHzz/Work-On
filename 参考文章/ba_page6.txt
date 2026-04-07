@@ -1,0 +1,199 @@
+Ba et al., Sci. Adv. 8, eabn0756 (2022)     9 September 2022
+SCIENCE ADVANCES |  RESEARCH ARTICLE
+6 of 13
+(S) around the common P-sites (Fig. 5E). These motifs and rules 
+might be useful for predicting P-site evolutionary conservation 
+in mammals.
+Previously, little has been known about the structure and evolu-
+tion of phosphorylation signaling networks. We here built a phos-
+phorylation coevolution network (Fig. 5F and fig. S11 for all P-site 
+identities). Each node represents a particular P-site. In addition, each 
+edge denotes a strong site-to-site Pearson correlation (P  <  0.001) 
+based on the P-site_reg levels across the 11 mammalian species. We 
+found that the majority (i.e., 96.23%) site-to-site correlations are 
+strongly positive and coevolving in the network. Also, the biological 
+annotation suggests that most of the P-sites (i.e., 74.85%) could be 
+functionally annotated to five processes including transport, RNA 
+processing, protein modification process, organelle organization, and 
+developmental process. The top nine kinases, including three CDKs 
+(1, 2, and 5), could govern 18.69% of the P-sites in this network 
+(Fig. 5F), indicating their prevalent roles in mammalian evolution.
+In summary, our phosphoproteomics analysis has revealed con-
+servative P-site motifs and a pilot phosphorylation coevolutionary 
+network containing variance independent of protein abundance. We 
+lastly generated a website to facilitate the navigation of the multi-omic 
+data basis (https://yslproteomics.shinyapps.io/Evolutome/; fig. S12).
+DISCUSSION
+Our proteomic data delineate both protein expression and activity 
+regulation underlying evolutionary diversity on a large scale. In 
+agreement with Wang et al. (2) that measured translational rates, 
+we found that the old, essential, and housekeeping genes tend to be 
+expressed with much smaller between-species divergence than other 
+Across-species SD
+Proteasome
+PSMD7
+PSMD2
+PSMA5
+PSMB4
+PSMD12
+PSMB7
+PSMD11
+PSMF1
+PSMD1
+PSMD3
+PSMA4
+PSME2
+Lysosomal hydrolases
+CTSZ
+FUCA1
+AGA
+GBA
+GLB1
+LGMN
+PPT1
+NAGA
+CTSB
+DUB
+VCPIP1
+CYLD
+USP24
+BABAM2
+USP7
+USP8
+ABRAXAS2
+STAMBP
+USP47
+USP5
+USP14
+UCHL5
+USP48
+USP19
+UCHL1
+OTULIN
+E3
+UBE3C
+UBE4A
+SYVN1
+TRIP12
+CUL2
+DDB1
+PRPF19
+UBE3B
+UBE3A
+CUL3
+CUL4A
+HERC4
+SMURF2
+CDC16
+HUWE1
+MGRN1
+XIAP
+ITCH
+K48K 63
+−4
+−3
+−2
+−1
+0
+1
+Log10 (modified/unmodified)
+Low High
+Opossum
+Pig
+Cat
+Sheep
+Horse
+Cow
+Dog
+Rabbit
+Rat
+Monkey
+Human
+A
+B
+XIAP
+ABRAXAS2USP48
+CTSZ
+UBE3C
+CTSB
+UBE4A
+USP47
+VCPIP1
+PSMD12
+ITCH
+PSMF1
+MGRN1
+PSMD1
+SMURF2
+PSMB4
+CUL2
+PSMA5
+USP5
+PSME2
+STAMBP
+PSMD2
+CUL4A
+PSMB7
+UBE3A
+PSMA4
+DDB1
+HERC4
+USP14
+NAGA
+GBA
+PSMD3 FUCA1
+USP8
+USP24
+UBE3B
+UCHL5
+UCHL1
+CUL3
+OTULIN
+CYLD
+CDC16
+PRPF19
+PPT1
+USP19
+GLB1
+PSMD11
+AGA
+TRIP12
+BABAM2
+SYVN1
+USP7
+HUWE1
+LGMNPSMD7
+mRNA Protein
+02 0.67
+Proteasome Lysosome
+DUBE3
+0.5
+1.0
+1.5
+2.0
+0.0 0.1 0.2 0.3
+CV of experimental replicates 
+(human)
+CV across-species  
+DUB
+E3
+Lysosomal
+Proteasome
+C
+D
+R = 0.127
+P = 0.355
+−2
+−1
+0
+1
+2
+Log2 (expression relative to average)
+Fig. 4. The distinctive interspecies quantitative diversity for proteasomal and lysosomal protein degradation. (A) Heatmaps visualizing the protein-specific vari-
+ability in 11 species for proteins detected and annotated as proteasome, lysosomal hydrolases, Ub enzymes including both DUBs and E3 Ub ligases. The color bar rep-
+resents expressive values relative to the average, as calculated by the log 2 (intensity) in the particular species subtracted by mean of the log 2 (intensity) across species. 
+(B) Network analysis visualizing STRING interactions between proteins. The outer ring and inner circle are colored for mRNA and protein SDs, respectively. SD, SD of the 
+relative expression across 11 species. (C) The distribution of the quantitative CVs among experimental replicates for human along with the CVs across 11 species. CV, co-
+efficient of variation of the raw scale (before log transformation) expression. (D) The log-scale ratios of modified Ub peptide versus unmodified peptide reference for K48 
+and K63 that were quantified across species.
+Downloaded from https://www.science.org on August 19, 2025

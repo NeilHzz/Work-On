@@ -1,0 +1,140 @@
+mapped in the previous step were extracted and mapped using bwa-
+mem2) against the phased genome for Anas platyrhynchos bAnaPla2.
+The assumption is that duplication of the OC116 gene would cause
+reads to match in multiple places across both haploids. The mapping
+quality score (MapQ) was used to assess the con ﬁdence that a read
+matches conﬁdently to a given region in the genome, and a MapQ
+score of three or less was considered evidence that a read matched to
+more than one area of the genome (Supplementary Table 2).
+Variant calling. Variant calling uses probabilistic models to determine
+what intraspeciﬁc SNPs are well supported for the target gene, and
+provides information about the frequency of different variants across
+the sample population
+95. We performed variant calling using GATK
+v.4.5.0.096 following best practice guidelines97,98. Using the reads that
+were previously mapped to the target OC116 gene, we performed
+single-sample Genomic Variant Call Format (GVCF) calling for each
+sample, followed by joint genotyping across all samples. The resulting
+variants were thenﬁltered to remove those with low conﬁdence values,
+including mapping quality less than 40 (MQ < 40.0), andﬁltered again
+using VCFtools (0.1.16)
+99 to exclude variants with read depth less than
+1 0 ( D P=<1 0 ) a n d l o w m i n o r a l l e l e f r e q u e n c y ( m a f=< 0 . 0 5 ) . T h e
+resulting data provides the location, identity and frequency of SNPs
+that are most likely to result from true variability among the Anas
+platyrhynchossamples (see Supplementary Note 2).
+Analysis of pairwise distance. A pairwise distance matrix was created
+for each protein from dataset 1 in R v.4.4.2
+100 using the dist.alignment
+function with the identity method (square-root of the pairwise dis-
+tance) and ignoring gaps (seqinr v.4.2-36
+101). These matrices were
+subsetted to include only genera represented by at leastﬁve different
+species. For each protein, intraspecies and interspecies distances were
+calculated individually for each genus using the sppDist function from
+the spider package v.1.5.0
+102. The sppDist function was additionally
+called on the entire OC116 subset to calculate the intergenus distances
+for this protein. Calculated distances were combined for each protein
+and summarised using violin plots from the ggplot2 package v.3.5.1
+103.
+T h ea v e r a g en u m b e ro fi n t e r - t a x o nS A P sf o re a c hp r o t e i ni nF i g .3 and
+Supplementary Data 4 was calculated as the mean distance, squared,
+multiplied by the length of the sequence.
+Phylogenetic trees. We reconstructed a maximum likelihood phylo-
+genetic tree for each of the 13 protein alignment from dataset 1 using
+IQTREE v.2.36
+104 with 1000 ultrafast bootstrap replicates 105 after
+selecting the best-ﬁtting model of sequence evolution106.W ei n c l u d e d
+sequences from NCBI forGrus americanaas an outgroup and trimmed
+these sequences to match the leng th of the remaining species if
+necessary. We also analyzed all proteins together in a concatenated
+analysis while allowing separate partitions for each of the 13 proteins.
+Phylogenetic trees for single proteins were plotted in R using
+treeio v.1.30.0
+107, tidytree v.0.4.6 108 and ggtree v.3.14.0 109 packages.
+Trees were trimmed to exclude the outgroup and scaled individually to
+improve visibility of branches. The concatenated protein tree was
+visualised with branch lengths excluded and tip labels aligned. Dis-
+crimination of taxa was considered well-supported for bootstrap
+scores > 80 and highly supported for bootstrap scores > 90.
+Annotation of non-Anatidae specimens.T ot e s tf o rv a r i a t i o no u t s i d e
+of Anatidae, bird species with multiple genomes available were
+downloaded from NCBI and annotated using the pipeline described
+above for OC116 and Ovocalyxin-32, proteins which both have homo-
+logues in mammals (matrix extracellular phosphoglycoprotein (MEPE)
+and Retinoic acid receptor responder protein 1 (RARRES1) respec-
+tively). Our previous testing had identi ﬁed some species where
+intraspecies variability had occurred ( Rhynochetos jubatus -G r u i -
+formes, Pelecanus crispus -P e l e c a n i f o r m e sa n dChlamydotis
+macqueenii - Otidiformes), while other species were chosen because
+many genomes were available (Calidris pugnax-C h a r a d r i i f o r m e s ,Grus
+americana -G r u i f o r m e s ,Lycocorax pyrrhopterus - Passeriformes, and
+Accipiter gentilis - Accipitriformes) Supplementary Data 7. Thus, this
+sample represents a very small list, covering only six orders of birds. In
+order to annotate this diverse group most effectively, we employed
+multiple OC116 reference sequences and the best were retained,
+namely Aphelocoma coerulescens (XP_068854609.1), Rissa tridactyla
+(XP_054058069.1), Grus americana(XP_054681061.1), Accipiter gentilis
+(XP_049670802.1). For ovocalyxin-32, we also employed Haliaeetus
+albicilla (XP_069648969.1) as the reference sequence. Annotations
+w e r ec u r a t e da n da l i g n e da sa b o v ea n dt h en u m b e ro fl o c a t i o n sw h e r e
+intraspecies SAPs occurred were counted and are presented in Sup-
+plementary Data 8.
+Application to archeological data. We reanalysed published tandem
+mass spectrometry (nano LC-MS/MS) data for samples MC148, MC123,
+MC182 and MC171 from Codlin et al.
+19, representative of unidentiﬁed
+duck groups labelled 1-4, respectively (available through Proteo-
+meXchange, PXD034547). These samples were analysed on Peaks
+Studio 11
+110 using dataset 2 combined with all avian proteins available
+on NCBI as of 01/08/2024 and common contaminants (cRAP: https://
+www.thegpm.org/crap/). Samples were run using a Peaks Spider
+search with in-built PTMs and the following settings: Precursor Mass
+Error Tolerance 15.00 ppm, Fragment Mass Error Tolerance 0.05 Da,
+Variable Modiﬁcations, set for Deamidation (NQ), Hydroxyproline (P),
+Oxidation (M). Data were ﬁltered using the following: Peptide FDR =
+0.5%, Proteins −10 lgP ≥ 15.0, Denovo Only ALC ≥ 80.0%. Filtered
+results were searched to con ﬁrm peptide sequences for the key dis-
+tinguishing peptide mass markers identiﬁed in Codlin et al.
+19,a n dt h e s e
+peptide sequences were examined in the complete database to
+observe which species presented these peptides, and which closely
+related species could have this peptide but are missing this portion of
+the sequence. These species lists were compared against the top
+protein hits from Peaks and the species possibly available in pre-
+Colonial Mexico.
+Samples from Yeomans et al.
+69 included two from the unknown
+Anatidae group, PALTO 114D and PALTO 119D,Cygnus sp., PALTO 689,
+and Anser/Branta PALTO 693 (available on ProteomeXchange,
+PXD047233). These tandem mass spectrometry data were searched
+using PEAKS 11 using the same settings as above, except for removing
+Hydroxyproline (P) and the addition of Carbamidomethylation
+(+57.02) as a ﬁxed modiﬁcation. The ﬁltered proteins were examined
+to identify which species were identi ﬁed as top hits, and to con ﬁrm
+quality and coverage of key distinguishing amino acids (Supplemen-
+tary Data 10 –33). See Supplementary Note 3, Supplementary Fig. 16
+and Supplementary Tables 3 and 4, for full discussion of identiﬁcation
+and MS2s of selected peptides. Identiﬁc a t i o n sw e r em a d eb ye x a m i n -
+ing the range of variation for the SAPs observed in the archaeological
+samples, giving weight to SAPs that are consistent across a range of
+individuals or species. In the case of Cygnus olor,i d e n t iﬁcation was
+made despite the presence of only one individual in the database. This
+is due to the fact there are multiple SAPs shared between the archae-
+ological specimen and the phased genomic data available for C. olor.
+More speciﬁcally the identi ﬁcation was made based on matches to
+SAPs that are either not found in other species of Cygnus,o rt h a ta r e
+shared betweenC. olor, C. melancoryphusand C. atratus- the latter two
+being birds which are native to South America and Australia respec-
+tively. In our interpretation about ﬁnal species identi ﬁcations, we
+considered information about current species distribution
+66 and the
+fact that in both Jordan and Central Mexico, the environment has
+changed considerably since the date of occupation of the archae-
+ological site and thus we considered it possible that species never
+recorded in these regions could potentially have been found there in
+the past.
+Article https://doi.org/10.1038/s41467-025-63886-1
+Nature Communications|         (2025) 16:8820 10

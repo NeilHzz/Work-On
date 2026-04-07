@@ -1,0 +1,3425 @@
+Article https://doi.org/10.1038/s41467-025-63886-1
+A library of avian proteins improves
+palaeoproteomic taxonomic identiﬁcation
+and reveals widespread intraspecies
+variability
+Maria C. Codlin 1 ,L i s aY e o m a n s2,3,J o s eﬁnS t i l l e r4 & Beatrice Demarchi 1
+Biomineral-associated proteins, such as those found in bone, teeth, and egg-
+shell, have become instrumental for studying ancient life, as they often survive
+far longer than DNA. Harnessing advancements in avian genomics, we anno-
+tate bone and eggshell protein sequences for 112 Anatidae (ducks, geese and
+swans) species, a biologically complex group of birds that are central to many
+archaeological and ecological questions. While palaeoproteomics con-
+ventionally assumes that protein sequences vary only between-species or
+above, our research demonstrates widespread evidence for single amino acid
+polymorphisms (SAPs) occurring within-species, particularly within avian
+eggshell proteins. Furthermore, we construct a phylogenetic tree from 13
+proteins that aligns with mtDNA-based phylogenies, while revealing highly
+variable topologies for individual protein trees, underscoring the need for
+caution when using fragmented proteins for taxonomic identiﬁcation and
+determining evolutionary relationships. However, with comprehensive taxo-
+nomic coverage of Anatidae proteins, clear taxonomic patterns enable reliable
+identiﬁcation of bone and eggshell. We demonstrate this application to
+archaeological material from Teotihuacan, Mexico, and Shubayqa, Jordan. We
+highlight that extensive curated protein datasets accompanied by rigorous
+standards for assessing SAPs as taxonomic biomarkers are fundamental for
+correct taxonomic identiﬁcation, setting benchmarks for palaeoproteomic
+applications in archaeology, ecology, and evolutionary biology.
+Ancient biomolecules offer unprecedented insights into evolu-
+tionary pathways and are instrumental for improving the taxonomic
+identiﬁcation of human, animal, plant and microbial remains
+recovered from archaeological and palaeoecological deposits, illu-
+minating all facets of past cultural and natural environments
+1–10.
+Abundant or highly resistant biomineral-associated proteins, such
+as collagen type I in bone, amelogenin, ameloblastin and enamelin in
+dental enamel, or C-type lectins and ovocleidin in eggshell, often
+survive post mortem degradation
+3,4,7,11–16. When protein survival
+occurs, mass spectrometry techniques enable the reconstruction
+of ancient amino acid sequences that express mutations accumu-
+lated over time in coding regions of DNA. These amino acid poly-
+morphisms form the basis for the identi ﬁcation of organisms
+and tissues, but a key question from evolutionary biologists and
+Received: 30 January 2025
+Accepted: 1 September 2025
+Check for updates
+1Department of Life Sciences and Systems Biology, University of Turin, Turin, Italy.2Globe Institute, Section for GeoBiology, University of Copenhagen,
+Copenhagen, Denmark.3Institute of Archaeology, University College London, London, UK.4Department of Biology, University of Copenhagen,
+Copenhagen, Denmark. e-mail: maria.codlin@unito.it
+Nature Communications|         (2025) 16:8820 1
+1234567890():,;
+1234567890():,;
+zooarchaeologists is the level of taxonomic resolution that these
+ancient proteins can offer.
+Classic applications of palaeoproteomics (the study of ancient
+proteins by mass spectrometry) are based on collagen retrieved from
+osseous materials. Additionally, peptide ﬁngerprinting applications
+such as “ZooMS - zooarchaeology by mass spectrometry” have found
+that, with some exceptions, bone collagen from mammals typically
+allows for taxonomic discrimination at the genus level
+17. While exten-
+sive research has continued to re ﬁne both the resolution and the
+conﬁdence of collagen-based taxonomic identiﬁcations across multi-
+ple taxa 18–25, including species-level identi ﬁcations of ﬁsh21,25 and
+amphibians23, the possibility of intraspecies diversity in protein
+sequences has not been systematically examined by the palaeopro-
+teomics community. More recently, collagen and other protein
+sequences have been used to resolve the phylogenetic placement of
+human and animal fossils in the absence of preserved ancient DNA
+5,6,8,26
+albeit tree topologies based on fragments of ancient proteins may not
+correspond to those obtained by large-scale phylogenomics, particu-
+larly for more recent divergences, or may not be very robust
+13,27.
+Most of these applications are underpinned by the assumption
+that protein sequences do not vary within species but only at the level
+of species or above. Here we argue that close examination of this
+biological diversity, speci ﬁcally single amino acid polymorphisms
+(SAPs), also offers glimpses of ﬁner-grained variability both between
+and within species. Intraspecies SAPs have been identiﬁed in primates,
+speciﬁcally in ancient hominin and modernPongo (orangutan) enamel
+and bone proteomes
+28,29, including multiple apparent SAPs in recov-
+ered Denisovan collagen peptides30.I ft h e s ep a t t e r n sa r ec o nﬁrmed in
+other systems, it could ultimately mean that evolutionary relationships
+may not be so easily reconstructed by using ancient amino acid
+sequences from a single specimen and that mixed phylogenetic signals
+may impact large-scale proteinﬁngerprinting of ancient materials.
+One of the major challenges in palaeoproteomic research thus far
+has been the limited availability of genomic data for a wide range of
+taxa, from which protein sequences may be derived. We leverage
+opportunities offered by the rapid development of avian genomics
+31–33
+to annotate bird bone and eggshell sequences and systematically
+explore inter-taxon and intra-taxon variability in proteins employed in
+palaeoproteomic applications. We focus on Anatidae (ducks, geese
+and swans), birds which are often migratory, have specialised ecolo-
+gical requirements, frequently inter-breed, and have a long shared
+history with humans, making them biologically complex yet highly
+pertinent to archaeological and ecological questions. We present a
+phylogenetic tree based on these annotated proteins which is largely
+consistent with mtDNA based phylogenies. We also apply our protein
+dataset to precisely identify avian species at two sites, Tlajinga, Teo-
+tihuacan (Mexico) and Shubayqa (Jordan), which improves our
+understanding of human-avian relationships at key moments in human
+history. By targeting such a challenging taxonomic grouping, we pro-
+vide theoretical and practical benchmarks for the application of
+palaeoproteomics in archaeology, ecology and evolutionary biology.
+Results
+We annotated 1928 sequences from 160 Anatidae genomes, including
+112 species from 43 genera for 13 proteins that are suitable for
+palaeoproteomic applications (Supplementary Data 1-3). These inclu-
+ded type I collagen (COL1a1 and COL1a2) and selected eggshell pro-
+teins (c-type lectins XCA1 and XCA2, Ovocleidin116 (OC116), Albumin,
+BPI fold containing family B, member 4 (BPI-fold-B-4, BPIFB4), Clus-
+terin, Lactadherin, Ovalbumin, Ovocalyxin32, Ovomucoid, and Ovo-
+transferrin). A minimum coverage of 70% was used as a cut-off point
+for “complete” sequences used to analyse taxonomic variability
+(dataset 1, n = 1832), while both complete and partial sequences were
+included in a set of unique sequences used to derive markers for
+palaeoproteomic applications (dataset 2,n = 1566). Phylogenetic trees
+were created from each protein alignment in dataset 1 (Supplementary
+Figs. 2–14), as well as a concatenated alignment based on all 13 pro-
+teins (Fig. 1).
+Protein-based phylogenies of Anatidae
+The concatenated phylogenetic tree (Fig.1), covering 5553 amino acid
+positions, had high bootstrap resampling support (>90) for most
+branches, and was largely consistent with tree topologies expected
+from DNA data
+34,35. For individual protein trees, early branches corre-
+sponding to groups of species traditionally classiﬁed within the same
+tribe were well-supported (bootstrap resampling score >80) and these
+broad groupings were largely consistent with phylogenetic clades
+based on mtDNA
+34–36. For OC116, Albumin, Clusterin and Ovo-
+transferrin, divergences for most genera were also well-supported,
+especially where multiple species were available for a given genus. For
+other proteins, divergences known to occur deeper in time, such as
+those between Cygnus (swans) and the Anser/Branta (geese) genera,
+and the early diverging Dendrocygna (whistling ducks)
+34, were often
+well-supported, while more recent divergences were frequently poorly
+supported, even when species of the same genus appeared to cluster
+together. The topologies however varied remarkably by proteins,
+especially within the larger clade groupings, such as Anatini (dabbling
+ducks) (Fig.2). In some proteins, such as OC116,Mareca and Anas were
+more closely related to each other than either is to Spatula, while in
+COL1a2, Spatula and Anas were indistinguishable, and Mareca was a
+distinct group. In XCA1 and XCA2, Mareca and Spatula were more
+closely related to each other than toAnas. Therefore, while taxonomic
+information is undoubtedly stored in protein sequences, single-
+protein trees are not always able to track evolutionary relationships.
+This was further complicated by our observation that intraspecies
+variation (SAPs) occurred in annotated amino acid sequences in all
+protein types.
+Intra- and interspecies variation
+In order to assess how variability in amino acid sequences differed
+across proteins, and therefore to examine their utility for palaeopro-
+teomic applications, we analysed the pairwise intra- and interspecies
+distances for each protein (Fig. 3). This analysis was inspired by DNA
+barcoding gap studies
+37–39, aiming to assess where variability was
+o c c u r r i n gb e t w e e nt a x aa tab r o a dl e v e l .
+We found at least one instance of intraspecies variation (SAPs) in
+every protein, most commonly in BPIfoldB4 (13 of 27 species for which
+multiple individuals were available for comparison, henceforth deno-
+ted by “species
+mi”), Clusterin (9 of 14 species mi), OC116 (20 of
+26 speciesmi) and Ovotransferrin (13 of 26 species mi), and seldom in
+Albumin (4 of 27 speciesmi), COL1a1 (2 of 11 speciesmi), and COL1a2 (3 of
+26 speciesmi)( F i g .3). Mean number of intraspeci ﬁcS A P s( c a l c u l a t e d
+across all genomes) was highest in Clusterin (2.8 SAPs per genome)
+and OC116 (6.2 SAPs per genome) and lowest in Albumin, COL1a1 and
+COL1a2 each. Mean SAPs may seem negligible for some proteins,
+including collagen and albumin (Fig. 3c), but Fig. 3bs h o w st h a te v e n
+for these proteins, intraspecies SAPs were observed for 11-18% of
+species
+mi, hence intraspecies variation is certainly not a rare occur-
+rence and cannot be dismissed. Similarly, intraspecies distances were
+highest in OC116 and Clusterin, with mean SAPs per genome 12.8 and
+4.8, respectively, and lowest in COL1a1 (0.1 SAPs), COL1a2 and Ovo-
+mucoid (both 0.2 SAPs) (Supplementary Data 4).
+Overall, all eggshell proteins, except perhaps Ovomucoid, were
+more variable than the bone collagen proteins. These results demon-
+strate that, with large enough sequence datasets containing sufﬁcient
+species
+mi, variability in protein sequence becomes strikingly evident.
+Indeed, given that most species are still represented by a single gen-
+ome, for many observed interspecies SAPs, we cannot distinguish
+which might be SAPs indicative of taxonomic differences from those
+that might reﬂect variation within a species.
+Article https://doi.org/10.1038/s41467-025-63886-1
+Nature Communications|         (2025) 16:8820 2
+For practical applications, e.g., in zooarchaeology or palaeontol-
+ogy, genera are useful categories for classifying ancient organisms into
+groups that share morphological and behavioural characteristics.
+Therefore, we investigated the frequency of SAPs in the most variable
+protein (OC116) across the traditional taxonomic units (Fig.4). Many of
+the intergenus distance plots displayed a bimodal distribution, likely
+reﬂecting early evolutionary separation of Anatinae (most ducks) and
+Anserinae (geese and swans)
+34. Overall, we found that there was little to
+no overlap between the intergenus and interspecies distances for most
+genera, indicating that a large number of SAPs are shared among
+species of the same genus. Moreover, we identiﬁed intraspecies SAPs
+in most genera where pairwise comparisons were available, and Mar-
+eca, Anas and Anser were the most variable.
+Examining sources of intraspecies diversity
+Given the unexpected ﬁnding of frequent intraspecies diversity in
+these protein sequences, we considered multiple sources of error, as
+well as biological processes that could result in SAPs (see methods).
+We ﬁrst considered the annotation process as a potential source of
+spurious SAPs, yet our curated sequences are highly consistent with
+those available for RefSeq genomes (Supplementary Note 1, Supple-
+mentary Data 6)
+40. Next, the impact of sequencing and assembly errors
+was examined systematically for OC116, which had the highest
+observed variability and is frequently recovered from archaeological
+samples. We aligned all available sequence read archives (SRAs,n =8 )
+from seven Anas platyrhynchos (mallard) individuals (Supplementary
+Note 2) to the OC116 gene. We observed that at least 10 or more reads
+were mapped to most single nucleotide polymorphisms (SNPs),
+suggesting assembly errors were not the cause of high variability in the
+genomes and supporting the validity of the observed SAPs.
+We next performed variant calling to identify which SNPs were
+well supported for OC116 and examine the frequency of variants
+across the Anas platyrhynchos sample population. Twenty-six SNPs
+were identiﬁed in protein coding regions of the gene, 16 of which are
+responsible for 15 missense mutations, i.e., leading to an SAP in
+the protein sequence, while nine were silent (Fig. 5). Four missense
+mutations were observed only in a single haploid chromosome, while
+11 occurred ~50% of the time. All mutations observed in the Anas pla-
+tyrhynchos OC116 protein alignment for which SRAs were available
+(Supplementary Fig. 15) were supported by variant calling, with one
+e x c e p t i o n( s e eS u p p l e m e n t a r yN o t e2 ) ,a l t h o u g ht h a tv a r i a n tw a s
+found in two Anas platyrhynchos samples without SRAs available for
+evaluation. In three out of seven individuals, heterozygosity was
+observed for multiple variants.
+Because multiple individuals were observed to be heterozygous at
+variant sites, we tested for the possibility of gene duplication by
+examining whether reads mapping to theOC116 gene also mapped to
+other areas of the genome but found only a small number of reads that
+did so (0-6%, Supplementary Note 2). This indicates that observed
+intraspecies variability in OC116 was more likely the result of biological
+processes.
+To rule out the possibility that intraspecies variation was observed
+in Anatidae due to the unique characteristics of this family, such as
+widespread hybridization and history of domestication, we annotated
+OC116 and Ovocalyxin-32 sequences from seven other species
+mi
+(n = 32, Supplementary Data 7–8). We observed intraspecies variability
+> 70% complete
+< 70% complete
+No annotation
+Sequence key
+> 90
+80 - 90
+< 80
+Node score
+Anas
+Mareca
+Spatula
+Aythya
+Chloephaga Tadorna
+Melanitta Somateria
+Anser
+Branta
+Cygnus
+Dendrocygna
+COL1a
+1
+COL1
+a2
+XCA1 XCA2 OC116AlbuminBPIfold
+B4
+ClusterinLactadherinOvalbuminOv
+ocalyx
+in32
+Ovo
+mucoid
+Ovotrans
+ferrin
+83
+82.0%
+# Sequences
+Mean coverage
+156
+97.7%
+112
+92.6%
+140
+94.6%
+158
+97.8%
+160
+99.9%
+157
+98.6%
+81
+79.9%
+157
+97.1%
+157
+99.7%
+156
+93.0%
+158
+99.7%
+157
+99.6%
+COL1a1COL1a2XCA1XCA2OC116Albumin
+BPIfoldB4
+Clusterin
+Lactadherin
+Ovalbumin
+Ovocalyxin32
+Ovomucoid
+Ovotransferrin
+Fig. 1 | Annotation of 13 proteins across 160 Anatidae genomes. The phyloge-
+netic tree was constructed from a concatenation of 13 avian proteins showing
+complete (> 70%), partial (<70%) and missing annotations for the 160 Anatidae
+genomes and the number of individuals annotated with at least 70% sequence
+length and mean sequence coverage for each protein. Node score represents the
+bootstrap resampling support for each node. Samples are coloured by genus and
+index values represent genomes (see Supplementary Data 5, Supplementary Fig. 1
+for species names and genome accession). Genera with at least 5 species are
+labelled. The tree was rooted with the outgroupGrus americana(whooping crane),
+which is not shown in the plots. Source data available on Zenodo
+87.
+Article https://doi.org/10.1038/s41467-025-63886-1
+Nature Communications|         (2025) 16:8820 3
+A. acuta
+A. platyrhynchos
+A. platyrhynchos
+A. georgica
+A. bernieri
+A. platyrhynchos
+A. zonorhyncha
+A. platyrhynchos
+A. platyrhynchos
+A. platyrhynchos
+A. platyrhynchos
+A. acuta
+A. bernieri
+A. capensis
+A. undulata
+A. platyrhynchos
+A. platyrhynchos
+A. acuta
+M. penelope
+M. strepera
+M. americana
+M. sibilatrix
+S. smithii
+S. rhynchotis
+S. querquedula
+S. discors7272727272727272727272727272727272
+COL1a1 A. platyrhynchosA. platyrhynchos
+A. platyrhynchosA. zonorhyncha
+A. platyrhynchosA. platyrhynchos
+A. capensisA. luzonicaA. bernieriA. platyrhynchosA. platyrhynchos
+A. georgica
+A. platyrhynchos
+A. melleriA. platyrhynchosA. platyrhynchosA. platyrhynchosA. superciliosaA. undulata
+A. platyrhynchos
+A. acuta
+A. acutaA. bahamensis
+A. acuta
+A. fulvigula
+A. gibberifrons
+A. bernieriA. platyrhynchos
+M. americanaM. strepera
+M. sibilatrixM. streperaM. falcataM. americanaM. penelope
+S. clypeata
+S. rhynchotisS. discors
+S. smithii
+S. versicolor
+S. platalea
+S. querquedula93
+9583
+919884
+93
+9583
+919884
+93
+9583
+919884
+93
+9583
+919884
+93
+9583
+919884
+93
+9583
+919884
+93
+9583
+919884
+93
+9583
+919884
+93
+9583
+919884
+93
+9583
+919884
+93
+9583
+919884
+93
+9583
+919884
+93
+9583
+919884
+93
+9583
+919884
+93
+9583
+919884
+93
+9583
+919884
+93
+9583
+919884
+COL1a2
+A. platyrhynchos
+A. superciliosa
+A. melleri
+A. luzonica
+A. platyrhynchos
+A. zonorhyncha
+A. platyrhynchos
+A. platyrhynchos
+A. platyrhynchos
+A. platyrhynchos
+A. platyrhynchos
+A. platyrhynchos
+A. undulata
+A. platyrhynchos
+A. platyrhynchos
+A. acuta
+A. acuta
+A. acuta
+A. capensis
+A. bernieri
+A. bernieri
+A. georgica
+M. strepera
+M. americana
+M. americana
+M. strepera
+M. penelope
+M. sibilatrix
+S. smithii
+S. querquedula
+S. rhynchotis
+S. discors
+96
+85
+81
+93
+81
+85
+88
+78
+95
+82 71
+99
+96
+85
+81
+93
+81
+85
+88
+78
+95
+82 71
+99
+96
+85
+81
+93
+81
+85
+88
+78
+95
+82 71
+99
+96
+85
+81
+93
+81
+85
+88
+78
+95
+82 71
+99
+96
+85
+81
+93
+81
+85
+88
+78
+95
+82 71
+99
+96
+85
+81
+93
+81
+85
+88
+78
+95
+82 71
+99
+96
+85
+81
+93
+81
+85
+88
+78
+95
+82 71
+99
+96
+85
+81
+93
+81
+85
+88
+78
+95
+82 71
+99
+96
+85
+81
+93
+81
+85
+88
+78
+95
+82 71
+99
+96
+85
+81
+93
+81
+85
+88
+78
+95
+82 71
+99
+96
+85
+81
+93
+81
+85
+88
+78
+95
+82 71
+99
+96
+85
+81
+93
+81
+85
+88
+78
+95
+82 71
+99
+96
+85
+81
+93
+81
+85
+88
+78
+95
+82 71
+99
+96
+85
+81
+93
+81
+85
+88
+78
+95
+82 71
+99
+96
+85
+81
+93
+81
+85
+88
+78
+95
+82 71
+99
+96
+85
+81
+93
+81
+85
+88
+78
+95
+82 71
+99
+96
+85
+81
+93
+81
+85
+88
+78
+95
+82 71
+99
+XCA1
+A. gibberifrons
+A. acutaA. platyrhynchos
+A. platyrhynchos
+A. fulvigulaA. undulata
+A. platyrhynchosA. melleri
+A. acutaA. zonorhyncha
+A. platyrhynchosA. platyrhynchosA. platyrhynchosA. platyrhynchosA. luzonicaA. platyrhynchosA. platyrhynchosA. platyrhynchosA. platyrhynchos
+A. acuta
+A. bernieri
+A. georgica
+A. bernieriA. superciliosa
+M. americanaM. falcata
+M. americana
+M. penelopeM. streperaM. strepera
+M. sibilatrix
+S. platalea
+S. clypeataS. rhynchotis
+S. smithiiS. querquedulaS. discors
+S. versicolor
+96
+99
+96
+9796
+99
+96
+9796
+99
+96
+9796
+99
+96
+9796
+99
+96
+9796
+99
+96
+9796
+99
+96
+9796
+99
+96
+9796
+99
+96
+9796
+99
+96
+9796
+99
+96
+9796
+99
+96
+9796
+99
+96
+9796
+99
+96
+9796
+99
+96
+9796
+99
+96
+9796
+99
+96
+97
+XCA2
+A. acutaA. capensis
+A. georgicaA. acuta
+A. acutaA. melleri
+A. platyrhynchosA. platyrhynchos
+A. platyrhynchosA. zonorhyncha
+A. superciliosaA. platyrhynchosA. platyrhynchosA. undulataA. fulvigula
+A. luzonica
+A. platyrhynchosA. platyrhynchos
+A. platyrhynchos
+A. platyrhynchosA. platyrhynchos
+A. platyrhynchosA. platyrhynchos
+A. platyrhynchosA. platyrhynchos
+A. bahamensis
+A. bernieri
+A. bernieri
+A. gibberifrons
+M. americanaM. sibilatrix
+M. streperaM. strepera
+M. penelopeM. americana
+M. falcata
+S. clypeataS. rhynchotisS. smithiiS. platalea
+S. versicolorS. querquedulaS. discors
+92
+81
+100
+8582
+879180
+86100
+79
+100
+99
+74997599
+93
+94100
+90
+81
+92
+81
+100
+8582
+879180
+86100
+79
+100
+99
+74997599
+93
+94100
+90
+81
+92
+81
+100
+8582
+879180
+86100
+79
+100
+99
+74997599
+93
+94100
+90
+81
+92
+81
+100
+8582
+879180
+86100
+79
+100
+99
+74997599
+93
+94100
+90
+81
+92
+81
+100
+8582
+879180
+86100
+79
+100
+99
+74997599
+93
+94100
+90
+81
+92
+81
+100
+8582
+879180
+86100
+79
+100
+99
+74997599
+93
+94100
+90
+81
+92
+81
+100
+8582
+879180
+86100
+79
+100
+99
+74997599
+93
+94100
+90
+81
+92
+81
+100
+8582
+879180
+86100
+79
+100
+99
+74997599
+93
+94100
+90
+81
+92
+81
+100
+8582
+879180
+86100
+79
+100
+99
+74997599
+93
+94100
+90
+81
+92
+81
+100
+8582
+879180
+86100
+79
+100
+99
+74997599
+93
+94100
+90
+81
+92
+81
+100
+8582
+879180
+86100
+79
+100
+99
+74997599
+93
+94100
+90
+81
+92
+81
+100
+8582
+879180
+86100
+79
+100
+99
+74997599
+93
+94100
+90
+81
+92
+81
+100
+8582
+879180
+86100
+79
+100
+99
+74997599
+93
+94100
+90
+81
+92
+81
+100
+8582
+879180
+86100
+79
+100
+99
+74997599
+93
+94100
+90
+81
+92
+81
+100
+8582
+879180
+86100
+79
+100
+99
+74997599
+93
+94100
+90
+81
+92
+81
+100
+8582
+879180
+86100
+79
+100
+99
+74997599
+93
+94100
+90
+81
+92
+81
+100
+8582
+879180
+86100
+79
+100
+99
+74997599
+93
+94100
+90
+81
+OC116
+A. acutaA. georgica
+A. acutaA. acuta
+A. bernieriA. bernieri
+A. gibberifronsA. bahamensisA. capensis
+A. luzonica
+A. fulvigulaA. platyrhynchos
+A. platyrhynchosA. superciliosaA. platyrhynchosA. melleriA. platyrhynchosA. platyrhynchosA. platyrhynchosA. zonorhynchaA. platyrhynchos
+A. platyrhynchos
+A. platyrhynchosA. platyrhynchosA. platyrhynchosA. platyrhynchos
+A. platyrhynchosA. platyrhynchos
+A. undulata
+M. americanaM. penelope
+M. americanaM. sibilatrixM. falcata
+M. streperaM. strepera
+S. clypeataS. smithii
+S. rhynchotisS. querquedulaS. discorsS. plataleaS. versicolor
+00
+95
+99
+83
+100
+88
+100100
+99
+9999
+00
+95
+99
+83
+100
+88
+100100
+99
+9999
+00
+95
+99
+83
+100
+88
+100100
+99
+9999
+00
+95
+99
+83
+100
+88
+100100
+99
+9999
+00
+95
+99
+83
+100
+88
+100100
+99
+9999
+00
+95
+99
+83
+100
+88
+100100
+99
+9999
+00
+95
+99
+83
+100
+88
+100100
+99
+9999
+00
+95
+99
+83
+100
+88
+100100
+99
+9999
+00
+95
+99
+83
+100
+88
+100100
+99
+9999
+00
+95
+99
+83
+100
+88
+100100
+99
+9999
+00
+95
+99
+83
+100
+88
+100100
+99
+9999
+00
+95
+99
+83
+100
+88
+100100
+99
+9999
+00
+95
+99
+83
+100
+88
+100100
+99
+9999
+00
+95
+99
+83
+100
+88
+100100
+99
+9999
+00
+95
+99
+83
+100
+88
+100100
+99
+9999
+00
+95
+99
+83
+100
+88
+100100
+99
+9999
+00
+95
+99
+83
+100
+88
+100100
+99
+9999
+Albumin
+A. acutaA. georgica
+A. bahamensis
+A. acutaA. platyrhynchos
+A. luzonicaA. platyrhynchos
+A. acuta
+A. platyrhynchosA. platyrhynchos
+A. platyrhynchosA. platyrhynchosA. platyrhynchosA. platyrhynchosA. platyrhynchosA. platyrhynchos
+A. bernieriA. bernieri
+A. superciliosa
+A. capensisA. undulata
+A. fulvigula
+A. melleriA. zonorhyncha
+A. platyrhynchos
+A. gibberifronsA. platyrhynchosA. platyrhynchos
+A. platyrhynchos
+M. americanaM. sibilatrix
+M. falcataM. streperaM. americanaM. penelope
+M. strepera
+S. rhynchotis
+S. clypeataS. platalea
+S. querquedulaS. smithii
+S. discorsS. versicolor
+99
+100
+99
+8999
+90
+96
+99
+100
+99
+8999
+90
+96
+99
+100
+99
+8999
+90
+96
+99
+100
+99
+8999
+90
+96
+99
+100
+99
+8999
+90
+96
+99
+100
+99
+8999
+90
+96
+99
+100
+99
+8999
+90
+96
+99
+100
+99
+8999
+90
+96
+99
+100
+99
+8999
+90
+96
+99
+100
+99
+8999
+90
+96
+99
+100
+99
+8999
+90
+96
+99
+100
+99
+8999
+90
+96
+99
+100
+99
+8999
+90
+96
+99
+100
+99
+8999
+90
+96
+99
+100
+99
+8999
+90
+96
+99
+100
+99
+8999
+90
+96
+99
+100
+99
+8999
+90
+96
+BPIfoldB4
+A. acuta
+A. bernieri
+A. bernieri
+A. platyrhynchos
+A. melleri
+A. platyrhynchos
+A. platyrhynchos
+A. platyrhynchos
+A. zonorhyncha
+A. luzonica
+A. platyrhynchos
+A. platyrhynchos
+A. undulata
+A. superciliosa
+A. fulvigula
+A. acuta
+A. georgica
+A. bahamensis
+M. americana
+M. americana
+M. penelope
+M. sibilatrix
+M. falcata
+M. strepera
+M. strepera
+S. clypeata
+S. smithii
+S. rhynchotis
+S. querquedula
+98
+91
+87
+79
+85100
+78
+71
+97
+93
+95
+86
+71
+100
+100100
+98
+91
+87
+79
+85100
+78
+71
+97
+93
+95
+86
+71
+100
+100100
+98
+91
+87
+79
+85100
+78
+71
+97
+93
+95
+86
+71
+100
+100100
+98
+91
+87
+79
+85100
+78
+71
+97
+93
+95
+86
+71
+100
+100100
+98
+91
+87
+79
+85100
+78
+71
+97
+93
+95
+86
+71
+100
+100100
+98
+91
+87
+79
+85100
+78
+71
+97
+93
+95
+86
+71
+100
+100100
+98
+91
+87
+79
+85100
+78
+71
+97
+93
+95
+86
+71
+100
+100100
+98
+91
+87
+79
+85100
+78
+71
+97
+93
+95
+86
+71
+100
+100100
+98
+91
+87
+79
+85100
+78
+71
+97
+93
+95
+86
+71
+100
+100100
+98
+91
+87
+79
+85100
+78
+71
+97
+93
+95
+86
+71
+100
+100100
+98
+91
+87
+79
+85100
+78
+71
+97
+93
+95
+86
+71
+100
+100100
+98
+91
+87
+79
+85100
+78
+71
+97
+93
+95
+86
+71
+100
+100100
+98
+91
+87
+79
+85100
+78
+71
+97
+93
+95
+86
+71
+100
+100100
+98
+91
+87
+79
+85100
+78
+71
+97
+93
+95
+86
+71
+100
+100100
+98
+91
+87
+79
+85100
+78
+71
+97
+93
+95
+86
+71
+100
+100100
+98
+91
+87
+79
+85100
+78
+71
+97
+93
+95
+86
+71
+100
+100100
+98
+91
+87
+79
+85100
+78
+71
+97
+93
+95
+86
+71
+100
+100100
+Clusterin
+A. acuta
+A. bernieri
+A. acutaA. platyrhynchos
+A. platyrhynchos
+A. superciliosaA. platyrhynchosA. platyrhynchosA. bernieriA. platyrhynchosA. platyrhynchosA. zonorhynchaA. fulvigulaA. platyrhynchos
+A. platyrhynchosA. platyrhynchos
+A. luzonicaA. platyrhynchosA. georgica
+A. platyrhynchos
+A. bahamensis
+A. platyrhynchosA. platyrhynchosA. melleriA. platyrhynchos
+A. gibberifronsA. acutaA. undulata
+A. capensis
+M. sibilatrix
+M. penelope
+M. falcata
+M. americana
+M. strepera
+M. strepera
+M. americana
+S. versicolor
+S. platalea
+S. clypeata
+S. querquedula
+S. discorsS. rhynchotisS. smithii
+9494949494949494949494949494949494
+Lactadherin A. platyrhynchosA. fulvigula
+A. luzonicaA. platyrhynchosA. platyrhynchosA. superciliosaA. undulataA. bahamensisA. platyrhynchos
+A. platyrhynchosA. platyrhynchos
+A. platyrhynchosA. platyrhynchos
+A. zonorhynchaA. platyrhynchosA. melleriA. platyrhynchosA. platyrhynchos
+A. acutaA. acutaA. bernieri
+A. bernieri
+A. georgicaA. gibberifrons
+A. platyrhynchos
+A. acuta
+A. capensis
+M. americanaM. strepera
+M. sibilatrixM. penelopeM. streperaM. falcataM. americana
+S. querquedula
+S. versicolor
+S. clypeataS. discorsS. rhynchotis
+S. smithiiS. platalea
+00
+98
+97
+85
+82
+96
+00
+98
+97
+85
+82
+96
+00
+98
+97
+85
+82
+96
+00
+98
+97
+85
+82
+96
+00
+98
+97
+85
+82
+96
+00
+98
+97
+85
+82
+96
+00
+98
+97
+85
+82
+96
+00
+98
+97
+85
+82
+96
+00
+98
+97
+85
+82
+96
+00
+98
+97
+85
+82
+96
+00
+98
+97
+85
+82
+96
+00
+98
+97
+85
+82
+96
+00
+98
+97
+85
+82
+96
+00
+98
+97
+85
+82
+96
+00
+98
+97
+85
+82
+96
+00
+98
+97
+85
+82
+96
+00
+98
+97
+85
+82
+96
+Ovalbumin
+A. platyrhynchosA. platyrhynchos
+A. fulvigulaA. platyrhynchos
+A. platyrhynchosA. platyrhynchos
+A. platyrhynchosA. platyrhynchos
+A. platyrhynchos
+A. zonorhyncha
+A. platyrhynchosA. undulataA. platyrhynchosA. platyrhynchos
+A. acutaA. platyrhynchos
+A. acuta
+A. acutaA. luzonica
+A. platyrhynchosA. superciliosa
+A. melleriA. bahamensis
+A. georgicaA. capensis
+A. bernieriA. bernieri
+A. gibberifrons
+M. falcataM. streperaM. sibilatrix
+M. americanaM. strepera
+M. americana
+M. penelope
+S. versicolorS. smithiiS. clypeata
+S. discorsS. rhynchotis
+S. querquedulaS. platalea
+92
+74
+99
+85
+88
+100
+92
+74
+99
+85
+88
+100
+92
+74
+99
+85
+88
+100
+92
+74
+99
+85
+88
+100
+92
+74
+99
+85
+88
+100
+92
+74
+99
+85
+88
+100
+92
+74
+99
+85
+88
+100
+92
+74
+99
+85
+88
+100
+92
+74
+99
+85
+88
+100
+92
+74
+99
+85
+88
+100
+92
+74
+99
+85
+88
+100
+92
+74
+99
+85
+88
+100
+92
+74
+99
+85
+88
+100
+92
+74
+99
+85
+88
+100
+92
+74
+99
+85
+88
+100
+92
+74
+99
+85
+88
+100
+92
+74
+99
+85
+88
+100
+Ovocalyxin32
+A. capensisA. platyrhynchos
+A. platyrhynchosA. undulata
+A. acutaA. platyrhynchosA. platyrhynchosA. platyrhynchosA. bahamensisA. bernieriA. platyrhynchosA. acutaA. fulvigulaA. platyrhynchos
+A. platyrhynchosA. platyrhynchosA. platyrhynchosA. platyrhynchosA. georgicaA. platyrhynchos
+A. melleriA. zonorhynchaA. acutaA. superciliosaA. gibberifronsA. platyrhynchos
+A. platyrhynchosA. luzonica
+A. bernieri
+M. americanaM. penelope
+M. streperaM. americana
+M. falcataM. sibilatrixM. strepera
+S. querquedula
+S. plataleaS. discorsS. versicolorS. smithii
+S. rhynchotisS. clypeata
+97
+749071
+100
+8299
+99
+97
+749071
+100
+8299
+99
+97
+749071
+100
+8299
+99
+97
+749071
+100
+8299
+99
+97
+749071
+100
+8299
+99
+97
+749071
+100
+8299
+99
+97
+749071
+100
+8299
+99
+97
+749071
+100
+8299
+99
+97
+749071
+100
+8299
+99
+97
+749071
+100
+8299
+99
+97
+749071
+100
+8299
+99
+97
+749071
+100
+8299
+99
+97
+749071
+100
+8299
+99
+97
+749071
+100
+8299
+99
+97
+749071
+100
+8299
+99
+97
+749071
+100
+8299
+99
+97
+749071
+100
+8299
+99
+Ovomucoid
+A. acutaA. acuta
+A. acutaA. georgicaA. capensis
+A. bahamensisA. gibberifrons
+A. superciliosaA. bernieriA. bernieri
+A. fulvigula
+A. luzonicaA. platyrhynchos
+A. platyrhynchosA. platyrhynchosA. platyrhynchosA. platyrhynchos
+A. platyrhynchosA. platyrhynchosA. platyrhynchosA. platyrhynchosA. platyrhynchosA. platyrhynchos
+A. platyrhynchosA. melleriA. platyrhynchosA. platyrhynchosA. zonorhyncha
+A. undulata
+M. americana
+M. americana
+M. falcataM. streperaM. strepera
+M. penelopeM. sibilatrix
+S. clypeataS. rhynchotis
+S. querquedulaS. discorsS. smithiiS. plataleaS. versicolor
+99
+99
+95
+99100100
+90
+90
+100 100
+100
+9998
+98
+99
+99
+95
+99100100
+90
+90
+100 100
+100
+9998
+98
+99
+99
+95
+99100100
+90
+90
+100 100
+100
+9998
+98
+99
+99
+95
+99100100
+90
+90
+100 100
+100
+9998
+98
+99
+99
+95
+99100100
+90
+90
+100 100
+100
+9998
+98
+99
+99
+95
+99100100
+90
+90
+100 100
+100
+9998
+98
+99
+99
+95
+99100100
+90
+90
+100 100
+100
+9998
+98
+99
+99
+95
+99100100
+90
+90
+100 100
+100
+9998
+98
+99
+99
+95
+99100100
+90
+90
+100 100
+100
+9998
+98
+99
+99
+95
+99100100
+90
+90
+100 100
+100
+9998
+98
+99
+99
+95
+99100100
+90
+90
+100 100
+100
+9998
+98
+99
+99
+95
+99100100
+90
+90
+100 100
+100
+9998
+98
+99
+99
+95
+99100100
+90
+90
+100 100
+100
+9998
+98
+99
+99
+95
+99100100
+90
+90
+100 100
+100
+9998
+98
+99
+99
+95
+99100100
+90
+90
+100 100
+100
+9998
+98
+99
+99
+95
+99100100
+90
+90
+100 100
+100
+9998
+98
+99
+99
+95
+99100100
+90
+90
+100 100
+100
+9998
+98
+Ovotransferrin
+A. acutaA. acuta
+A. acutaA. georgicaA. bahamensis
+A. fulvigula
+A. platyrhynchosA. platyrhynchos
+A. platyrhynchosA. platyrhynchos
+A. platyrhynchos
+A. platyrhynchos
+A. luzonicaA. platyrhynchos
+A. melleriA. platyrhynchosA. platyrhynchosA. platyrhynchosA. platyrhynchosA. platyrhynchosA. zonorhyncha
+A. platyrhynchosA. platyrhynchos
+A. superciliosaA. undulata
+A. bernieriA. bernieri
+A. gibberifronsA. capensis
+M. americanaM. penelopeM. americanaM. sibilatrix
+M. falcataM. streperaM. strepera
+S. clypeataS. rhynchotisS. smithii
+S. discorsS. platalea
+S. querquedulaS. versicolor
+00
+94
+99 99100100
+100 99 84
+10091
+100
+79
+77
+100100
+100
+9799
+89
+99100
+100100
+00
+94
+99 99100100
+100 99 84
+10091
+100
+79
+77
+100100
+100
+9799
+89
+99100
+100100
+00
+94
+99 99100100
+100 99 84
+10091
+100
+79
+77
+100100
+100
+9799
+89
+99100
+100100
+00
+94
+99 99100100
+100 99 84
+10091
+100
+79
+77
+100100
+100
+9799
+89
+99100
+100100
+00
+94
+99 99100100
+100 99 84
+10091
+100
+79
+77
+100100
+100
+9799
+89
+99100
+100100
+00
+94
+99 99100100
+100 99 84
+10091
+100
+79
+77
+100100
+100
+9799
+89
+99100
+100100
+00
+94
+99 99100100
+100 99 84
+10091
+100
+79
+77
+100100
+100
+9799
+89
+99100
+100100
+00
+94
+99 99100100
+100 99 84
+10091
+100
+79
+77
+100100
+100
+9799
+89
+99100
+100100
+00
+94
+99 99100100
+100 99 84
+10091
+100
+79
+77
+100100
+100
+9799
+89
+99100
+100100
+00
+94
+99 99100100
+100 99 84
+10091
+100
+79
+77
+100100
+100
+9799
+89
+99100
+100100
+00
+94
+99 99100100
+100 99 84
+10091
+100
+79
+77
+100100
+100
+9799
+89
+99100
+100100
+00
+94
+99 99100100
+100 99 84
+10091
+100
+79
+77
+100100
+100
+9799
+89
+99100
+100100
+00
+94
+99 99100100
+100 99 84
+10091
+100
+79
+77
+100100
+100
+9799
+89
+99100
+100100
+00
+94
+99 99100100
+100 99 84
+10091
+100
+79
+77
+100100
+100
+9799
+89
+99100
+100100
+00
+94
+99 99100100
+100 99 84
+10091
+100
+79
+77
+100100
+100
+9799
+89
+99100
+100100
+00
+94
+99 99100100
+100 99 84
+10091
+100
+79
+77
+100100
+100
+9799
+89
+99100
+100100
+00
+94
+99 99100100
+100 99 84
+10091
+100
+79
+77
+100100
+100
+9799
+89
+99100
+100100
+13 proteins
+Anas
+Mareca
+Spatula
+mtDNA34
+Spatula hottentotaSpatula querquedulaSpatula punaSpatula versicolorSpatula clypeataSpatula smithiiSpatula rhynchotisSpatula platalea
+Spatula septentrionaliumSpatula cyanopteraSpatula discorsMareca streperaMareca penelopMareca falcataMareca sibilatrixMareca americanaAnas flavirostrisAnas carolinensisAnas sparsaAnas undulataAnas melleriAnas superciliosaAnas laysanensisAnas fulvigulaAnas diaziAnas rubripesAnas luzonicaAnas zonorhynchaAnas platyrhynchosAnas poecilorhynchaAnas creccaAnas castaneaAnas gibberifronsAnas bernieriAnas aucklandicaAnas nesiotisAnas chlorotisAnas capensisAnas erythrorhynchaAnas bahamensisAnas acuta
+Anas georgica
+Fig. 2 | Variable topologies of Anas, Mareca and Spatula seen in individual
+protein trees.Bootstrap scores above 70 are displayed. The trees were rooted with
+the outgroup Grus americana (whooping crane). Also shown is a portion of the
+mtDNA phylogeny from Sun et al34. (CC BY 4.0). The dashed line indicates the
+branch was modiﬁed from the original. Source data available on Zenodo87.
+Article https://doi.org/10.1038/s41467-025-63886-1
+Nature Communications|         (2025) 16:8820 4
+in OC116 in ﬁve species across ﬁve of the six orders of birds repre-
+sented, including Pelecanus crispus (Dalmatian pelican), Lycocorax
+pyrrhopterus obiensis(Obi paradise-crow),Accipiter gentilis (Northern
+goshawk), Rhynochetos jubatus (kagu), and Chlamydotis macqueenii
+(MacQueen’s bustard). We observed intraspecies variability in
+Ovocalyxin-32 in Grus americana (whooping crane), Chlamydotis
+macqueenii and Lycocorax pyrrhopterus obiensis.
+The presence of intraspecies variation in collagen was especially
+surprising given the overall higher conservation of this protein (Fig.3).
+We used the only available short-read dataset to assess the validity of
+the intraspecies variation in Anser indicus (bar-headed goose,
+GCA025583725) from a specimen with a single intraspecies COL1a2
+SAP at position 246. In this case, following alignment of reads to the
+COL1a2 reference gene forAnser cygnoides(swan goose), the SAP was
+found to be poorly supported, as only a single read matched this
+location after standard ﬁltering. This demonstrates that while intras-
+pecies variability was identiﬁed in all proteins, and the variability in
+OC116 was well supported, a small number of SAPs may result from
+sequencing or assembly errors.
+Discussion
+From our analysis of 1832 the annotated sequences from 112 species of
+Anatidae, representing ~65% of all Anatidae species
+41, we found unex-
+pectedly high variation in some proteins, including intraspecies
+Clusterin Lactadherin Ovalbumin Ovocalyxin32 Ovomucoid Ovotransferrin
+COL1a1 COL1a2 XCA1 XCA2 OC116 Albumin BPIfoldB4
+0.00
+0.05
+0.10
+0.15
+0.20
+0.25
+0.00
+0.05
+0.10
+0.15
+0.20
+0.25
+Distances
+Sequence pairwise distance Distances
+interspecies
+intraspecies
+0
+20
+40
+60
+COL1a1COL1a2 XCA1 XCA2 OC1
+16
+AlbuminBPIfoldB4Clusterin
+LactadherinOvalbumin
+Ovocalyxin32Ovomucoid
+Ovotransferrin
+% of species with intraspecies SAPs
+0
+1
+2
+3
+4
+5
+6
+XCA1 XCA2 OC1
+16
+BPIfoldB4Clusterin
+LactadherinOvalbumin
+Ovocalyxin32Ovomucoid
+Ovotransferrin
+Average intraspecies SAPs
+0.000
+0.002
+COL1a1COL1a2Albumin
+0.049
+0.029
+0.037
+0.032
+A
+B C
+Fig. 3 | Measures of inter and intraspecies variation for 13 avian proteins.
+A Summary of pairwise distances between species (in green) and within species (in
+blue). Black line represents the median distance value, black diamond represents
+the mean. B Percentage of speciesmi where intraspecies SAPs were observed.
+C Mean number of SAPs per pairwise comparison across the entire dataset. Source
+data available on Zenodo87 in Supplementary Data 4.
+Article https://doi.org/10.1038/s41467-025-63886-1
+Nature Communications|         (2025) 16:8820 5
+Million years ago 
+0
+20
+40
+Sequence pairwise distance
+intergenus
+interspecies
+intraspecies
+188
+5 124 16
+0.0
+0.1
+0.2
+0.3
+0.4
+Anser
+120
+0 52 2
+0.0
+0.1
+0.2
+0.3
+0.4
+Branta
+120
+0 52 2
+Cygnus
+0.0
+0.1
+0.2
+0.3
+0.4
+912 30
+0.0
+0.1
+0.2
+0.3
+0.4
+Dendrocygna
+765 14 3
+0.0
+0.1
+0.2
+0.3
+0.4
+Tadorna
+1057 38 2
+0.0
+0.1
+0.2
+0.3
+0.4
+Chloephaga
+765 18 1
+0.0
+0.1
+0.2
+0.3
+0.4
+Melanitta
+765 8 6
+0.0
+0.1
+0.2
+0.3
+0.4
+Somateria
+3741 622 95
+0.0
+0.1
+0.2
+0.3
+0.4
+Anas
+1057 38 2
+0.0
+0.1
+0.2
+0.3
+0.4
+Mareca
+1057 42
+0.0
+0.1
+0.2
+0.3
+0.4
+Spatula
+12
+12
+11
+11
+9
+9
+85 6
+6
+4321
+5
+4
+3
+2
+1
+1341 70
+0.0
+0.1
+0.2
+0.3
+0.4
+Aythya
+1
+7
+7
+10
+10
+8
+Sequence pairwise distance
+Fig. 4 | Summary of intertaxon pairwise distances for Ovocleidin 116 (OC116),
+separated by genus. Intertaxon distances reﬂect deep evolutionary divergences,
+as shown in the phylogenetic tree modiﬁed from Fig. 2. Sun et al. 34. (CC BY 4.0).
+Density is shown as the width of the plot object. Black line represents the median
+distance value, black diamonds represent the mean. The numbers represent the
+number of pairwise comparisons available at each taxonomic level and individual
+points are shown where sample size is <10. Source data available on Zenodo87 and in
+Supplementary Data 9.
+Fig. 5 | Summary of variant calling for OC116 for eightAnas platyrhynchosSRAs.
+Left: Alignment of reference OC116 annotated from reference genome ofAnas
+platyrhynchos(GCA_015476345.1) and the mutations supported by variant calling.
+Uppercase letters represent missense mutations while lowercase letters represent
+silent mutation sites. Right: Occurrence of SNPs causing missense mutations over
+the 8 SRAs, showing amino acid (aa) positions (pos.) relative to the OC116 reference
+sequence, and nucleotide (nt) positions relative to the OC116 gene
+(NC_051772.1:LOC101798662). Amino acids and nucleotides observed in the
+reference sequence are in blue, while mutations observed in the SRA samples are in
+orange. Note that the variant at aa pos. 84 is caused by two SNPs. Four additional
+SAPs were observed in annotated Anas platyrhynchosOC116 sequences (Supple-
+mentary Fig. 15) that were not evaluated because SRAs were not available. *denotes
+a variant that was conﬁrmed by variant calling, but is not expressed in the anno-
+tated proteins (see Supplementary Note 2). All positions are relative to the refer-
+ence sequence, not aligned datasets.
+Article https://doi.org/10.1038/s41467-025-63886-1
+Nature Communications|         (2025) 16:8820 6
+variation across all 13 protein types. The frequency of SAPs differed by
+protein type, as well as by taxon considered (i.e., taxonomic rank). As
+expected, the highly structured collagen proteins had fewer amino
+acid substitutions relative to length, while XCA1, OC116, Clusterin and
+Ovocalyxin-32 were the most diverse relative to length. Although
+intraspecies and interspecies variation was infrequent in many pro-
+teins, this study demonstrates that when a suf ﬁcient number of sam-
+ples are analysed, the observation of SAPs occurring between and
+w i t h i ns p e c i e si sc o m m o n .
+For OC116 we identi ﬁed 15 missense mutations within Anas pla-
+tyrhynchos alone and determined that heterozygosity was present in
+three out of seven individuals examined. DNA damage causes G-T or
+C-A nucleotide mutations, which is often associated with low-
+frequency variants (~1-5%)
+42. But none of those observed in Anas pla-
+tyrhynchos resulted from these substitutions, although the one
+example of intraspecies variability we were able to examine for COL1a2
+was the result of a poorly supported C-A SNP. Mutagenic damage, like
+other sequencing and assembly errors, is an infrequent but persistent
+issue in published genomic databases
+33,42,43. While our results demon-
+strate that most of the observed intraspecies protein variation is not an
+artefact of sequencing or assembly, but is occurring at the biological
+level, the evidence for variants caused by mutagenic damage empha-
+sises the need for careful consideration of the SAPs chosen for taxo-
+nomic discrimination. Given that some, if rare, intraspecies variation
+does occur within collagen sequences of birds, as has been observed in
+orangutans and hominins
+28,30, the application of collagen peptide mass
+ﬁngerprinting (ZooMS) to identify archaeological samples should also
+consider this possibility when identifying biomarkers for taxonomic
+determination, particularly if the aim is to distinguish closely related
+groups. This is especially important for ﬁsh
+21,25 and amphibians23 for
+which interspeciﬁc variability is common. Crucially, our observation of
+both intra- and interspecies variation in all annotated protein groups
+complicates the standard assumption that SAPs observed between two
+species or genera can be used for taxonomic identi ﬁcation or evolu-
+tionary placement.
+The observed intraspecies variation may have several biological
+causes, among which frequent hybridization among Anatidae
+44,45 and a
+millennary history of human modiﬁcation and management of Anati-
+dae populations46,47, which continues today at industrialised scales48,49,
+certainly play a fundamental role. Variants in the genes involved in egg-
+laying and reproduction in domesticated chicken and duck breeds are
+known to produce changes in eggshell or reproductive traits, such as
+egg shape and weight, and clutch size, and are often encouraged by
+agricultural specialists today
+50–57. Importantly, however, our observa-
+tion of intraspecies variability across multiple orders of birds, includ-
+ing paradise-crow, goshawk, bustard, pelican, whooping crane and
+kagu, highlights the widespread nature of intraspecies protein varia-
+tion among birds. Moreover, while most of the intraspecies variation
+we observed occurs in eggshell proteins associated with reproduction,
+many of these sequences have homologues in other animals, including
+ovocalyxin-32 and OC116
+58. Avian ovocleidin 116 is homologous to the
+matrix extracellular phosphoglycoprotein (MEPE) in mammals that
+plays a role in biomineralisation of bone
+59. As of 18/04/2025, there are
+at least 721 observed variants for Human MEPE on UniProt60 indicating
+that this variation is not related speci ﬁcally to avian reproduction. If
+intraspecies variation affects all organisms, then the answer to the
+question “what level of taxonomic resolution can ancient proteins
+offer?” needs to be carefully evaluated.
+Evolutionary palaeoproteomics is perhaps the most exciting
+avenue for reconstructing the history of life, as it is able to leverage the
+genetic information encoded in ancient samples in which DNA is not
+preserved. We conﬁrm that proteins describe divergences occurring in
+deep time, e.g., between large orders of birds such as Galliformes
+(landfowl), Anseriformes (waterfowl) and Columbiformes (pigeons
+and doves)
+13,19,61,62, all between 70 and 60 mya 32,a n df a m i l i e sl i k e
+Phasianidae (pheasants, partridges) and Odontophoridae (New World
+quails)13,19,63,w h i c hs e p a r a t e d3 7m y a32. Between-species relationships
+f o rA n a t i d a eh a v en o ty e tb e e nr e s o l v e db yg e n o m e - w i d es t u d i e s .
+Multiple phylogenies are available based on mitochondrial genes or
+mitogenomes, which differ in topology
+34,35,44,64.H e r ew ec o m p a r eo u r
+protein-based phylogenies to Sun et al.34,w h o s em i t o c h o n d r i a lg e n e -
+based tree contains the most comparable range of species to our
+study. Our concatenated protein-based phylogeny of 13 nuclear-
+encoded genes demonstrates high bootstrap support (>90) for
+separating all genera (except Chenonetta). This includes recent diver-
+gences, such as Lophonetta + Tachyeres (5.3 mya), and Amazonetta +
+Speculanas (3.9 mya)
+34. In general, the relationships between genera
+are consistent with those presented by Sun et al. 34 with two major
+differences. Our protein phylogeny placesCairinaand Aix in a separate
+clade rather than as a sister branch toTadorna(diverging 12.5 mya) and
+Chloephaga. Similarly, our tree places Oxyura outside of Anserinae,
+inconsistent with the mitochondrial DNA tree (diverging 22.5 mya).
+Tree topologies vary more between the protein and mitochondrial
+DNA trees within genera, and species divergence is less well-supported
+by bootstrap scores, especially where speciation occurred within the
+last 2–3 million years (as estimated by Sun et al.
+34).
+The congruence between the mtDNA and protein trees highlights
+the utility of protein sequences for encoding taxonomic information.
+However, our tree is based on multiple proteins covering 5553 amino
+acid positions, an amount of data that is unlikely to be generated
+by most palaeoproteomic studies. Moreover, for practical applications
+of palaeoproteomics it is important to note that proteins are
+tissue speciﬁc (i.e., collagen is recovered from bone and not eggshell),
+and degraded. Therefore, the utility of proteins for taxonomic
+identiﬁcation changes according to substrate type and extent of
+molecular preservation. Nonetheless, multiple lines of evidence, such
+as morphology and species distributions, can be integrated to narrow
+down taxonomic identiﬁcations, and through rigorous assessment of
+phylogenetically informative SAPs in bone collagen and eggshell pro-
+teins, palaeoproteomic applications can signi ﬁcantly improve our
+ability to identify avian species from fragmentary remains. We
+demonstrate this point by applying these reference sequences (dataset
+2) to reevaluate ancient protein data from two previous studies that
+failed to identify archaeological avian remains below the family or
+genus level.
+The data from two archaeological sites, Tlajinga, Teotihuacan
+(Mexico) and Shubayqa (Jordan), now give us a ﬁne-grained picture of
+complex human-environment relationships in the past. Codlin et al.
+19
+published a large-scale application of ZooMS to avifaunal bone from
+Teotihuacan city, Mexico (200 BCE − 600 CE). They revealed a high
+diversity of aquatic birds consumed in the city, including four groups
+of archaeological specimens that were only able to be identi ﬁed to
+family level (Anatidae). We reevaluated the four specimens repre-
+sentative of these groups, for which both LC-MS/MS and MALDI-TOF
+MS data was available, and used dataset 2 to re ﬁne identiﬁcations,
+relying on SAPs that are observed consistently across multiple indivi-
+duals from the taxonomic groups concerned: widgeon ( Mareca sp.),
+pintail ( Anas acuta ), ruddy duck ( Oxyura jamaicensis)a n dal a r g e
+group which could include multiple Anatini genera and Aythya (Sup-
+plementary Note 3). The diversity of ducks alongside the other aquatic
+birds mirrors that of earlier lakeside communities
+65, suggesting that
+the residents likely had direct access to the lake resources and targeted
+shallow waters with open grasslands and marshy areas with standing
+vegetation
+66. At Teotihuacan, this approach provides an improved
+means to identify lake exploitation practices, evidence for which has
+been tantalisingly scarce67,68.
+Yeomans et al. 69 presented peptide biomarkers for the identi ﬁ-
+cation of Anatidae eggshell and demonstrated the presence of a year-
+round wetland during the Pleistocene-Holocene transition at the site of
+Shubayqa in Eastern Jordan. They identiﬁed swan (Cygnus) and goose
+Article https://doi.org/10.1038/s41467-025-63886-1
+Nature Communications|         (2025) 16:8820 7
+(Anser or Branta) and one unidentiﬁed group of ducks. Using dataset 2,
+we reassessed the four published LC-MS/MS analyses available for
+these samples and identiﬁed multiple consistent SAPs across proteins.
+These allow us to attribute the previously unidentiﬁed group of ducks
+to either shelduck ( Tadorna sp.) or Egyptian goose ( Alopochen
+aegyptiaca). Alopochen aegyptiaca is less likely because it is not known
+to occur naturally in Jordan
+70. This taxon cannot be ruled out on a
+molecular basis because many of its protein sequences are not avail-
+able in the database, as only a single genome, with low coverage across
+some eggshell genes, was available. Meanwhile, Tadorna is known to
+occasionally breed in the region today
+70 and the peptides detected in
+the archaeological sample match the availableTadorna protein refer-
+ence sequences for this taxon ( Supplementary Note 3). The Anser or
+Branta specimen is now securely identiﬁed as Anser sp., based on SAPs
+that consistently separate the two taxa in XCA1,XCA2, OC116 and
+BPIfoldB4 peptides, although cannot be identiﬁed to species given the
+observed intraspecies variability inAnser OC116 sequences. The swan,
+in contrast, matched uniquely to protein sequences found in mute
+swan (Cygnus olor), where multiple SAPs across XCA2 and OC116 dis-
+tinguish this species from all other individuals belonging to this genus.
+Mute swan is considered a rare or accidental visitor to Jordan today
+71,
+making our ﬁnding the earliest evidence of this swan breeding in Jor-
+dan and further highlighting the potential of palaeoproteomics for
+palaeoecology.
+Our systematic investigation highlighted the widespread pre-
+sence of SAPs derived from heterozygosity and intraspeciﬁc variability
+both in Anatidae, and non-Anatidae species. Intraspeci ﬁcS A P sa r e
+most commonly detected in eggshell proteins but were also observed
+in bone collagen. This means there is an urgent need to expand
+existing standards for palaeoproteomic analysis
+2,72 and improve
+existing standards for identifying taxon-speci ﬁc “marker” SAPs for
+both collagen (as predicted by Richter et al. 1) and non collagenous
+proteins.
+ Sampling multiple individuals per taxonomic group (i.e., genus or
+species) is required to distinguish between the effects of several
+evolutionary mechanisms, including heterozygosity, hybridiza-
+tion, domestication, and artifacts from sequencing, assembly or
+annotation
+33,43,45,73.
+ A general trend is developing in the ﬁeld that markers should be
+conﬁrmed using both genomic and proteomic data, and that
+samples from modern reference materials should aim for at least
+three individuals for a given taxon
+18,20,21. Given that in our admit-
+tedly small set of 8 Anas platyrhynchoswe observed that hetero-
+zygous SAPs were frequently close to 50% (Fig.3), the probability
+of observing the“most common” mutation at least once would be
+87.50% when three individuals are sampled, and 93.75% when four
+individuals are sampled. For highly variable proteins, the sample
+population of reference material should also be considered, as
+characteristic mutations may change geographically and
+overtime.
+ Where available, protein annotation should be carried out using
+phased genomic data, i.e., when both sets of parental chromo-
+somes are assembled, so that heterozygosity is not hidden
+74–77.
+ Genomic markers should be considered alongside studies on
+modern proteins, such as tandem mass spectrometry of proteins
+extracted from several specimens of reference material, i.e., bone
+and eggshell
+13,78.
+ Reference databases and biomarkers for the analysis of ancient
+samples by mass spectrometry should be accompanied by quality
+controls, at a minimum indicating the number of individuals used
+for biomarker conﬁrmation.
+ The issues we have discussed here are in many ways similar to the
+debates surrounding taxonomic determination in zooarchaeol-
+ogy and palaeontology, where many seminal works have pro-
+posed measures for rigorous standards in discovering and
+employing taxonomic markers to identify species or genera of
+extinct and extant organisms (see especially
+79–81).
+Overall, the combination of protein sequence annotation and the
+assessment of the extent of within- and between-taxon variability
+carried out in this study support the utility of protein sequences for
+reconstructing evolutionary relationships when testing very clear
+hypotheses, rather than directly placing an unknown taxon on a
+branch of a tree
+13,78. Indeed, the variable topology observed across
+bone and eggshell protein-based phylogenies highlights that using
+single or fragmented proteins for phylogenetics needs to be approa-
+ched with caution. At the same time, the extensive taxonomic coverage
+of avian protein sequences, covering ~65 % of Anatidae species, pro-
+vided the means to reliably improve identiﬁcation of avian taxa from
+two archaeological sites spanning key periods of human history. This
+allowed us to overcome traditional limitations in morphological
+identiﬁcation of avian remains due to fragmentation and high species
+diversity, to examine past ecologies, biodiversity, avian distribution
+and cultures. However, such studies must rest upon extensive curated
+protein datasets such as the one presented here, and a higher burden
+of proof for establishing the biomarkers for taxonomic identiﬁcation.
+While here we focused on birds, the issues we highlighted derive from
+general evolutionary mechanisms and as such are likely to affect
+palaeoproteomics applied to all life forms, extant and extinct.
+Methods
+Annotating reference protein sequences from avian genomes
+Genomic dataset. The data included 173 genomes from 112 Anatidae
+species; 74 were downloaded from NCBI in February 2024 82 and an
+additional 97 genomes were provided by the Bird 10,000 Genomes
+Project
+31 (B10K, that can be downloaded fromhttps://b10k.com/index/
+index/species.html). Two additional haploid-resolved assemblies for
+Anas platyrhynchosindividualbAnaPla2were downloaded in May 2024
+from the Vertebrate Genome Project33 (VGP) (now available on NCBI
+under GCA_964188345.1 and GCA_964188335.1). Genome species and
+accession list is available in Supplementary Data 1. Species names were
+modiﬁed to be consistent with the Birds of the World digital checklist
+for 2024
+41.
+Reference proteins (queries). Reference sequences for collagen type I
+(COL1a1 and COL1a2), c-type lectins (XCA1 and XCA2), Ovocleidin 116
+(OC116), albumin, BPI fold containing family B member 4 (BPI-fold-B4,
+BPIFB4), clusterin, lactadherin, ovalbumin, ovocalyxin 32, ovomucoid,
+and ovotransferrin were downloaded from NCBI and SwissProt (see
+Supplementary Note 4, Supplementary Table 5 and Supplementary
+Fig. 16). Where possible, we used RefSeq annotated proteins for Anas
+platyrhynchosgenome (GCF_015476345.1).
+Annotation pipeline. Protein annotation was performed using the
+University of Turin’s High Performance Computing cluster (C
+3S). The
+basic annotation of a query protein against a target genome was
+conducted in two steps using NCBI BLAST+ v.2.16.0
+83 and Exonerate
+v.2.2.084. First, the genome was indexed and a tblastn search with the
+query protein identiﬁed matching scaffolds which were extracted to
+m i n i m i s et h es e a r c hs p a c e .W et h e nu s e dt h ee x o n e r a t ep r o t e i n 2 g e n -
+ome model to align the query protein to the scaffolds to predict and
+extract “best-hit” coding regions for the query protein, which are then
+translated with fastatranslate
+84.
+Additional annotations were performed to improve coverage of
+protein sequences as sometimes only parts of the sequence could be
+identiﬁed in the genomes. The query was cut into seven overlapping
+segments so that each part of the protein was covered by two seg-
+ments. Exonerate was used to align each query segment to the scaf-
+folds to extract and translate matching regions and then ﬁltered to
+retain only those segments for which a blastp search against the
+Article https://doi.org/10.1038/s41467-025-63886-1
+Nature Communications|         (2025) 16:8820 8
+reference protein sequence matched with a similarity greater than 90%
+for eggshell proteins or 98% for collagen. Filtered segments were
+aligned using MAFFT v.7.453
+85 to the query sequence and the“best-hit”
+sequence and consensus sequence was created (excluding the query)
+using em_cons from EMBOSS v.6.5.786. We found that this consensus
+sequence often had better c overage than the single “best-hit”
+sequence and substantially reduced spurious segments that can occur
+during assembly or automated annotation of genomes
+43.
+Curation of annotated proteins. For each protein, an alignment was
+created using consensus sequences from all genomes, or the“best hit”
+sequence if no consensus was achieved. The sequences for each gen-
+ome were then manually curated, and compared against closely rela-
+ted specimens and that specimen’s individual fragment alignment, to
+identify and remove errors, especially frameshifts and incorrect spli-
+cing. Where only one annotation was available for a portion of the
+protein sequence that showed variation, a judgement was made whe-
+ther to include a SAP or recode the variant as missing (i.e., a gap) based
+on comparison to other species, the length and type of variation, and
+its proximity to the end of an exon - a common location for splicing
+artefacts to occur, which will frequently be observed in multiple other
+species. Generally, individual SAPs with no clear error were retained,
+while variants longer than three consecutive SAPs were removed
+because it was considered unlikely that such extensive variation would
+occur in proteins from closely related species. All modiﬁcations were
+recorded using Geneious Prime 2024.0 ( https://www.geneious.com)
+and are available in the associated repository
+87. For ovotransferrin, all
+annotated proteins were trimmed to exclude all amino acids after
+position 705 in the reference protein (query), retaining the docu-
+mented section of the protein considered representative of
+ovotransferrin
+88,89, see Supplementary Note 4 for further details.
+No protein sequences were recovered from nine genomes, all
+Cygnus atratus. Four genomes were also excluded from the analysis as
+their protein alignments indicated potential misidentiﬁcations of the
+sample species: D2006016059 ( “Anas acuta ”), DT2207277613-1
+(“Mareca penelope ”), D2104051175 ( “Mareca sibilatrix ”), and
+D2104051303 (“Merganetta armata”).
+Assessment of annotation accuracy. In order to assess the validity of
+our annotations, we compared the results from our annotation pipe-
+line to proteins annotated by NCBI’s RefSeq annotation pipeline. Five
+Anatidae genomes have been annotated by NCBI ’s RefSeq pipeline,
+which were also annotated by our pipeline: GCF_015476345.1 (Anas
+platyrhynchos), GCF_009819795.1(Aythya fuligula), GCF_009769625.2
+(Cygnus olor), GCF_013377495.2(Cygnus atratus), and GCF_011077185.1
+(Oxyura jamaicensis). Because of the irregular naming often applied to
+annotated proteins, we ran our reference protein sequences against
+the RefSeq genomes for Anatidae using blastp
+83. When multiple iso-
+forms were matched, all were included. The RefSeq sequences were
+aligned to the reference and curated sequences from our study and
+examined for differences over the curated portion of the sequence,
+i.e., SAPs, as well as any additional amino acids or sequence coverage
+present in one sequence but not the other. These were recorded for
+the most similar sequence when multiple isoforms were available.
+Some discrepancies identiﬁed in the initial assessment of annotations
+led to the re-annotation of COL1a1, Clusterin and Ovotransferrin with
+different or additional reference proteins (see Supplementary Note 4).
+Final comparison of curated sequences to ReqSeq proteins is pre-
+sented in Supplementary Note 1, Supplementary Data 6.
+Creation of datasets. After establishing the validity of the annotation
+pipeline, the curated sequences (Supplementary Data 2–3) were col-
+lated to create two subsets of the data for further analysis.
+Dataset 1 was created to examine the variability in protein
+sequences across taxonomic groups, and assess the utility of each
+protein for identi ﬁcation by mass spectrometry. This included 1832
+annotated protein sequences that were at least 70% complete,
+including identical sequences from the same species. Some proteins
+were also trimmed for analysis, speciﬁcally the non-helical regions of
+COL1a1 and COL1a2 which include additional variability but are not
+recovered archaeologically, and the ﬁrst 29 amino acids from the
+n-terminus of Clusterin, which had poor coverage in the dataset.
+Dataset 2 was used as the search database for protein-based
+identiﬁcation by mass spectrometry. It contains 1566 sequences from
+all 13 proteins and retains fragmented or short sequences comprising
+at least 30% of the full sequence length. For all proteins except ovo-
+transferrin as stated above, sequences retained their original length,
+excluding likely erroneous portions removed during curation. For each
+species, this dataset provides an example of each unique sequence
+identiﬁed, with no duplication of identical sequences that may be
+shared across individuals. Where two sequences from the same species
+were identical in amino acid sequence but differed in length, the
+longest sequence was retained. Where two sequences from different
+species were identical, both sequences were retained.
+Examination of short read sequence data to evaluate intraspecies
+variants. In order to evaluate the potential biological and non-
+biological origins of the observed intraspecies variation, we focused
+on OC116, which showed the highest variation in sequences annotated
+from 14 Anas platyrhynchosgenomes. We focused on short-read data
+produced by Illumina instrume nts because of their low 0.1 –1%
+sequencing error rate
+90. Nine Sequence Read Archives (SRA) were
+available for seven of the genomes and were downloaded from NCBI
+using SRAtoolkit v.3.1.0 (Supplementary Table 1). This includes two
+SRAs from different biosamples for the Anas platyrhynchos RefSeq
+genome (GCA_015476345.1), which was assembled from pooled indi-
+viduals. In contrast, GCA_037218355.1 is a genome derived from a
+single biosample, and two SRAs are available from the same individual.
+To serve as a target sequence for aligning reads belonging to theOC116
+gene, we downloaded the annotated gene for this protein,
+NC_051775.1:45251005-45254263 from the NCBI RefSeq genome
+assembly GCA_015476345.1. One SRA, SRR25181664 corresponding to
+the genome GCA_030704485.1 was excluded based on the frequent
+observation of three variants at a single nucleotide location, which is
+not expected for a diploid organism and may indicate contamination
+of the genome or assembly from multiple genetically variable indivi-
+duals. This resulted in eight SRAs from seven individuals of A. pla-
+tyrhynchos available for analysis.
+For analysis of COL1a2 variants, only one SRA was identiﬁed that
+would allow us to examine intraspecies variability for this protein. The
+SRA for Anser indicus (GCA025583725) was examined and aligned to
+the COL1a2 gene for Anser cygnoides (XM_048054476.2).
+Short read coverage of SNPs . The SRA reads were trimmed with
+Trimmomatic v.0.39
+91 (LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15
+MINLEN:36) to remove low quality reads and trim low quality sequence
+ends before alignment to the target gene using the bwa-mem2 v.2.2.1
+92
+mem function. The aligned reads were then sorted and the reads
+mapping to the target gene were extracted to a bam ﬁle and indexed
+using samtools v.3.1.0
+93. Mapped reads were then visually inspected in
+Integrative Genome Viewer94 (IGV v.2.17.4) with ﬁlters for duplicate
+and vendor failed reads andﬂagging mapping quality <30, to examine
+read coverage and mapping quality of SNP sites that fall within protein-
+coding regions of the gene for each of theAnas platyrhynchossamples.
+Fair read coverage was considered for ≥10 mapped reads. The Anser
+indicus sample was examined for read coverage at the nucleotide
+location corresponding to the one SAP identiﬁed in this specimen.
+Gene duplication. To examine for potential duplication of the OC116
+gene that could be causing the observed heterozygosity, the reads
+Article https://doi.org/10.1038/s41467-025-63886-1
+Nature Communications|         (2025) 16:8820 9
+mapped in the previous step were extracted and mapped using bwa-
+mem2) against the phased genome for Anas platyrhynchos bAnaPla2.
+The assumption is that duplication of the OC116 gene would cause
+reads to match in multiple places across both haploids. The mapping
+quality score (MapQ) was used to assess the con ﬁdence that a read
+matches conﬁdently to a given region in the genome, and a MapQ
+score of three or less was considered evidence that a read matched to
+more than one area of the genome (Supplementary Table 2).
+Variant calling. Variant calling uses probabilistic models to determine
+what intraspeciﬁc SNPs are well supported for the target gene, and
+provides information about the frequency of different variants across
+the sample population
+95. We performed variant calling using GATK
+v.4.5.0.096 following best practice guidelines97,98. Using the reads that
+were previously mapped to the target OC116 gene, we performed
+single-sample Genomic Variant Call Format (GVCF) calling for each
+sample, followed by joint genotyping across all samples. The resulting
+variants were thenﬁltered to remove those with low conﬁdence values,
+including mapping quality less than 40 (MQ < 40.0), andﬁltered again
+using VCFtools (0.1.16)
+99 to exclude variants with read depth less than
+1 0 ( D P=<1 0 ) a n d l o w m i n o r a l l e l e f r e q u e n c y ( m a f=< 0 . 0 5 ) . T h e
+resulting data provides the location, identity and frequency of SNPs
+that are most likely to result from true variability among the Anas
+platyrhynchossamples (see Supplementary Note 2).
+Analysis of pairwise distance. A pairwise distance matrix was created
+for each protein from dataset 1 in R v.4.4.2
+100 using the dist.alignment
+function with the identity method (square-root of the pairwise dis-
+tance) and ignoring gaps (seqinr v.4.2-36
+101). These matrices were
+subsetted to include only genera represented by at leastﬁve different
+species. For each protein, intraspecies and interspecies distances were
+calculated individually for each genus using the sppDist function from
+the spider package v.1.5.0
+102. The sppDist function was additionally
+called on the entire OC116 subset to calculate the intergenus distances
+for this protein. Calculated distances were combined for each protein
+and summarised using violin plots from the ggplot2 package v.3.5.1
+103.
+T h ea v e r a g en u m b e ro fi n t e r - t a x o nS A P sf o re a c hp r o t e i ni nF i g .3 and
+Supplementary Data 4 was calculated as the mean distance, squared,
+multiplied by the length of the sequence.
+Phylogenetic trees. We reconstructed a maximum likelihood phylo-
+genetic tree for each of the 13 protein alignment from dataset 1 using
+IQTREE v.2.36
+104 with 1000 ultrafast bootstrap replicates 105 after
+selecting the best-ﬁtting model of sequence evolution106.W ei n c l u d e d
+sequences from NCBI forGrus americanaas an outgroup and trimmed
+these sequences to match the leng th of the remaining species if
+necessary. We also analyzed all proteins together in a concatenated
+analysis while allowing separate partitions for each of the 13 proteins.
+Phylogenetic trees for single proteins were plotted in R using
+treeio v.1.30.0
+107, tidytree v.0.4.6 108 and ggtree v.3.14.0 109 packages.
+Trees were trimmed to exclude the outgroup and scaled individually to
+improve visibility of branches. The concatenated protein tree was
+visualised with branch lengths excluded and tip labels aligned. Dis-
+crimination of taxa was considered well-supported for bootstrap
+scores > 80 and highly supported for bootstrap scores > 90.
+Annotation of non-Anatidae specimens.T ot e s tf o rv a r i a t i o no u t s i d e
+of Anatidae, bird species with multiple genomes available were
+downloaded from NCBI and annotated using the pipeline described
+above for OC116 and Ovocalyxin-32, proteins which both have homo-
+logues in mammals (matrix extracellular phosphoglycoprotein (MEPE)
+and Retinoic acid receptor responder protein 1 (RARRES1) respec-
+tively). Our previous testing had identi ﬁed some species where
+intraspecies variability had occurred ( Rhynochetos jubatus -G r u i -
+formes, Pelecanus crispus -P e l e c a n i f o r m e sa n dChlamydotis
+macqueenii - Otidiformes), while other species were chosen because
+many genomes were available (Calidris pugnax-C h a r a d r i i f o r m e s ,Grus
+americana -G r u i f o r m e s ,Lycocorax pyrrhopterus - Passeriformes, and
+Accipiter gentilis - Accipitriformes) Supplementary Data 7. Thus, this
+sample represents a very small list, covering only six orders of birds. In
+order to annotate this diverse group most effectively, we employed
+multiple OC116 reference sequences and the best were retained,
+namely Aphelocoma coerulescens (XP_068854609.1), Rissa tridactyla
+(XP_054058069.1), Grus americana(XP_054681061.1), Accipiter gentilis
+(XP_049670802.1). For ovocalyxin-32, we also employed Haliaeetus
+albicilla (XP_069648969.1) as the reference sequence. Annotations
+w e r ec u r a t e da n da l i g n e da sa b o v ea n dt h en u m b e ro fl o c a t i o n sw h e r e
+intraspecies SAPs occurred were counted and are presented in Sup-
+plementary Data 8.
+Application to archeological data. We reanalysed published tandem
+mass spectrometry (nano LC-MS/MS) data for samples MC148, MC123,
+MC182 and MC171 from Codlin et al.
+19, representative of unidentiﬁed
+duck groups labelled 1-4, respectively (available through Proteo-
+meXchange, PXD034547). These samples were analysed on Peaks
+Studio 11
+110 using dataset 2 combined with all avian proteins available
+on NCBI as of 01/08/2024 and common contaminants (cRAP: https://
+www.thegpm.org/crap/). Samples were run using a Peaks Spider
+search with in-built PTMs and the following settings: Precursor Mass
+Error Tolerance 15.00 ppm, Fragment Mass Error Tolerance 0.05 Da,
+Variable Modiﬁcations, set for Deamidation (NQ), Hydroxyproline (P),
+Oxidation (M). Data were ﬁltered using the following: Peptide FDR =
+0.5%, Proteins −10 lgP ≥ 15.0, Denovo Only ALC ≥ 80.0%. Filtered
+results were searched to con ﬁrm peptide sequences for the key dis-
+tinguishing peptide mass markers identiﬁed in Codlin et al.
+19,a n dt h e s e
+peptide sequences were examined in the complete database to
+observe which species presented these peptides, and which closely
+related species could have this peptide but are missing this portion of
+the sequence. These species lists were compared against the top
+protein hits from Peaks and the species possibly available in pre-
+Colonial Mexico.
+Samples from Yeomans et al.
+69 included two from the unknown
+Anatidae group, PALTO 114D and PALTO 119D,Cygnus sp., PALTO 689,
+and Anser/Branta PALTO 693 (available on ProteomeXchange,
+PXD047233). These tandem mass spectrometry data were searched
+using PEAKS 11 using the same settings as above, except for removing
+Hydroxyproline (P) and the addition of Carbamidomethylation
+(+57.02) as a ﬁxed modiﬁcation. The ﬁltered proteins were examined
+to identify which species were identi ﬁed as top hits, and to con ﬁrm
+quality and coverage of key distinguishing amino acids (Supplemen-
+tary Data 10 –33). See Supplementary Note 3, Supplementary Fig. 16
+and Supplementary Tables 3 and 4, for full discussion of identiﬁcation
+and MS2s of selected peptides. Identiﬁc a t i o n sw e r em a d eb ye x a m i n -
+ing the range of variation for the SAPs observed in the archaeological
+samples, giving weight to SAPs that are consistent across a range of
+individuals or species. In the case of Cygnus olor,i d e n t iﬁcation was
+made despite the presence of only one individual in the database. This
+is due to the fact there are multiple SAPs shared between the archae-
+ological specimen and the phased genomic data available for C. olor.
+More speciﬁcally the identi ﬁcation was made based on matches to
+SAPs that are either not found in other species of Cygnus,o rt h a ta r e
+shared betweenC. olor, C. melancoryphusand C. atratus- the latter two
+being birds which are native to South America and Australia respec-
+tively. In our interpretation about ﬁnal species identi ﬁcations, we
+considered information about current species distribution
+66 and the
+fact that in both Jordan and Central Mexico, the environment has
+changed considerably since the date of occupation of the archae-
+ological site and thus we considered it possible that species never
+recorded in these regions could potentially have been found there in
+the past.
+Article https://doi.org/10.1038/s41467-025-63886-1
+Nature Communications|         (2025) 16:8820 10
+Reporting summary
+Further information on research design is available in the Nature
+Portfolio Reporting Summary linked to this article.
+Data availability
+All data, curated sequences and relatedﬁles produced are available in
+the supplementaryﬁles or on Zenodo athttps://doi.org/10.5281/zenodo.
+1693272087. See Supplementary Note 5 for a description ofﬁles available
+on Zenodo. Genomes used in this analysis are publicly available for
+download from NCBI or the Bird 10,000 Genomes Project website
+https://b10k.com/index/index/species.html. The complete genome
+accession list is available in Supplementary Data 1, accessions for Short
+Read Archives are available in Supplementary Table 1 and for reference
+proteins accessions are provided in Supplementary Table 5]. LC-MS/MS
+data used in this article was do wnloaded from through Proteo-
+meXchange (PXD034547and PXD047233). Source Data for Figs.1–5 can
+be found on Zenodo at https://doi.org/10.5281/zenodo.16932720
+87,a s
+well as in the Supplementary Data 4 for Fig.3 and Supplementary Data 9
+for Fig. 5.
+Code availability
+All source code relating to ﬁgures, tables and analyses, including a
+demo for the annotation pipeline, are available on Zenodo at https://
+doi.org/10.5281/zenodo.1693272087. A description of these ﬁles is
+available in Supplementary Note 5.
+References
+1. Richter, K. K., Codlin, M. C., Seabrook, M. & Warinner, C. A primer
+for ZooMS applications in archaeology.P r o c .N a t l .A c a d .S c i .U S A
+119, e2109323119 (2022).
+2. Hendy, J. et al. A guide to ancient protein studies. Nat. Ecol. Evol.2,
+791–799 (2018).
+3. Buckley, M., Collins, M., Thom as-Oates, J. & Wilson, J. C. Species
+identiﬁcation by analysis of bone collagen using matrix-assisted
+laser desorption/ionisation time-of-ﬂight mass spectrometry.
+Rapid Commun. Mass Spectrom.23,3 8 4 3–3854 (2009).
+4. Warinner, C., Korzow Richter, K. & Collins, M. J. Paleoproteomics.
+Chem. Rev. 122,1 3 4 0 1–13446 (2022).
+5. Cappellini, E. et al. Early Pleistocene enamel proteome from
+Dmanisi resolves Stephanorhinus phylogeny.Nature 574,
+103–107 (2019).
+6. Welker, F. et al. The dental proteome of Homo antecessor. Nature
+580,2 3 5–238 (2020).
+7. Welker, F. et al. Ancient proteins resolve the evolutionary history
+of Darwin’s South American ungulates.Nature 522,8 1–84 (2015).
+8. Presslee, S. et al. Palaeoproteomics resolves sloth relationships.
+Nat. Ecol. Evol. 3, 1121–1130 (2019).
+9. Smith, G. M. et al. The ecology, subsistence and diet of ~45,000-
+year-old Homo sapiens at Ilsenhöhle in Ranis, Germany.Nat. Ecol.
+Evol. 8,5 6 4–577 (2024).
+10. Brown, S. et al. The earliest Denisovans and their cultural adap-
+tation. Nat. Ecol. Evol. 6,2 8–35 (2022).
+11. Warinner, C. et al. Direct evidence of milk consumption from
+ancient human dental calculus.Sci. Rep. 4, 7104 (2014).
+12. Wadsworth, C. & Buckley, M. Proteome degradation in fossils:
+investigating the longevity of protein survival in ancient bone.
+Rapid Commun. Mass Spectrom.28,6 0 5–615 (2014).
+13. Demarchi, B. et al. Ancient proteins resolve controversy over the
+identity of Genyornis eggshell.Proc. Natl. Acad. Sci. USA 119,
+e2109326119 (2022).
+14. Sakalauskaite, J. et al. Palaeoshellomics ’ reveals the use of fresh-
+water mother-of-pearl in prehistory.Elife 8, e45644 (2019).
+15. Cappellini, E. et al. Proteomic analysis of a Pleistocene mammoth
+femur reveals more than one hundred ancient bone proteins.J.
+Proteome Res. 11,9 1 7–926 (2012).
+16. Umamaheswaran, R. & Dutta, S. Preservation of proteins in the
+geosphere.Nat. Ecol. Evol. 8,8 5 8–865 (2024).
+17. Buckley, M. Zooarchaeology by Mass Spectrometry (ZooMS) col-
+lagen ﬁngerprinting for the species identiﬁcation of archae-
+ological bone fragments. inZooarchaeology in Practice227–247
+(Springer, Cham, 2018).
+18. Janzen, A. et al. Distinguishing African bovids using Zooarch-
+aeology by Mass Spectrometry (ZooMS): New peptide markers
+and insights into Iron Age economies in Zambia. PLoS One 16,
+e0251061 (2021).
+19. Codlin, M. C., Douka, K. & Richter, K. K. An application of zooms to
+identify archaeological avian fauna from Teotihuacan, Mexico.J.
+Archaeol. Sci. 148, 105692 (2022).
+20. Peters, C. et al. Species identi ﬁcation of Australian marsupials
+using collagen ﬁngerprinting. R. Soc. Open Sci. 8, 211229
+(2021).
+21. Dierickx, K. et al. Peptide mass ﬁngerprinting of preserved col-
+lagen in archaeologicalﬁsh bones for the identiﬁcation of ﬂatﬁsh
+in European waters. R. Soc. Open Sci. 9, 220149 (2022).
+2 2 . W e l k e r ,F .e ta l .P a l a e o p r o t e o m i ce v i d e n c ei d e n t iﬁes archaic
+hominins associated with the Châtelperronian at the Grotte du
+Renne. P r o c .N a t l .A c a d .S c i .U S A113,1 1 1 6 2–11167 (2016).
+2 3 . B u c k l e y ,M .&C h e y l a n ,M .C o l l a g e nﬁngerprinting for the species
+identiﬁcation of archaeological amphibian remains.Boreas 49,
+709–717 (2020).
+24. Harvey, V. L. et al. Preserved collagen reveals species identity in
+archaeological marine turtle bones from Caribbean and Florida
+sites. R. Soc. Open Sci. 6, 191137 (2019).
+25. Korzow Richter, K. et al. What ’s the catch? Archaeological appli-
+cation of rapid collagen-based species identiﬁcation for Paciﬁc
+Salmon. J. Archaeol. Sci. 116, 105116 (2020).
+26. Chen, F. et al. A late Middle Ple istocene Denisovan mandible from
+the Tibetan Plateau. Nature 569,4 0 9–412 (2019).
+27. Buckley, M., Lawless, C. & Rybczynski, N. Collagen sequence
+analysis of fossil camels, Camelops and c.f. Paracamelus, from the
+Arctic and sub-Arctic of Plio-Pleistocene North America.J. Pro-
+teom. 194,2 1 8–225 (2019).
+28. Kubat, J. et al. Geometric morphometrics and paleoproteomics
+enlighten the paleodiversity of Pongo.PLoS One 18,e 0 2 9 1 3 0 8
+(2023).
+29. Madupe, P. P. et al. Enamel proteins reveal biological sex and
+genetic variability within southern AfricanParanthropus. bioRxiv
+https://doi.org/10.1101/2023.07.03.547326(2023).
+30. Tsutaya, T. et al. A male Denisovan mandible from Pleistocene
+Taiwan. Science 388,1 7 6–180 (2025).
+31. Zhang, G. et al. Genomics: bird sequencing project takes off.
+Nature 522,3 4( 2 0 1 5 ) .
+32. Stiller, J. et al. Complexity of avian evolution revealed by family-
+level genomes. Nature 629,8 5 1–860 (2024).
+33. Rhie, A. et al. Towards complete and error-free genome assem-
+blies of all vertebrate species.Nature 592,7 3 7–746 (2021).
+34. Sun, Z. et al. Rapid and recent diversi ﬁcation patterns in Anser-
+iformes birds: Inferred from molecular phylogeny and diversiﬁ-
+cation analyses.PLoS One 12,e 0 1 8 4 5 2 9( 2 0 1 7 ) .
+35. Donne-Goussé, C., Laudet, V. & Hänni, C. A molecular phylogeny
+of Anseriformes based on mitochondrial DNA analysis.Mol. Phy-
+logenet. Evol. 23, 339–356 (2002).
+36. Liu, G., Zhou, L., Li, B. & Zhang, L. The complete mitochondrial
+genome of Aix galericulata and Tadorna ferruginea: bearings on
+their phylogenetic position in the Anseriformes.PLoS One 9,
+e109701 (2014).
+37. Aliabadian, M., Kaboli, M., Nijman, V. & Vences, M. Molecular
+identiﬁcation of birds: performance of distance-based DNA bar-
+coding in three genes to delimit parapatric species.PLoS One 4,
+e4119 (2009).
+Article https://doi.org/10.1038/s41467-025-63886-1
+Nature Communications|         (2025) 16:8820 11
+38. Barreira, A. S., Lijtmaer, D. A. & Tubaro, P. L. The multiple appli-
+cations of DNA barcodes in avian evolutionary studies.Genome
+59,8 9 9–911 (2016).
+39. Hebert, P. D. N., Stoeckle, M. Y., Zemlak, T. S. & Francis, C. M.
+Identiﬁcation of birds through DNA barcodes. PLoS Biol. 2,
+e312 (2004).
+40. O ’Leary, N. A. et al. Reference sequence (RefSeq) database at
+NCBI: current status, taxonomic expansion, and functional anno-
+tation. Nucleic Acids Res. 44,D 7 3 3–D745 (2016).
+41. HBW and BirdLife International. Handbook of the Birds of the World
+and BirdLife International Digital Checklist of the Birds of the World.
+Version 8.1.( 2 0 2 4 ) .
+4 2 . C h e n ,L . ,L i u ,P . ,E v a n s ,T .C .J r&E t t w i l l e r ,L .M .D N Ad a m a g ei sa
+pervasive cause of sequencing errors, directly confounding var-
+iant identiﬁcation. Science 355,7 5 2–756 (2017).
+43. Prosdocimi, F., Linard, B., Pontarotti, P., Poch, O. & Thompson, J. D.
+Controversies in modern evolutionary biology: the imperative for
+error detection and quality control.BMC Genom. 13, 5 (2012).
+44. Gonzalez, J., Düttmann, H. & Wink, M. Phylogenetic relationships
+based on two mitochondrial genes and hybridization patterns in
+Anatidae. J. Zool. 279,3 1 0–318 (2009).
+45. Lavretsky, P., McCracken, K. G. & Peters, J. L. Phylogenetics of a
+recent radiation in the mallards and allies (Aves: Anas): Inferences
+from a genomic transect and the multispecies coalescent.Mol.
+Phylogenet. Evol.70,4 0 2–411 (2014).
+4 6 . E d a ,M .e ta l .M u l t i p l el i n e so fe v idence of early goose domestication
+in a 7,000-y-old rice cultivation village in the lower Yangtze River,
+China.P r o c .N a t l .A c a d .S c i .U S A119, e2117064119 (2022).
+47. Yeomans, L. Zooarchaeology o f managed, captive, tame, and
+domestic birds: shifts in human–avian relationships.J. Archaeol.
+Res. https://doi.org/10.1007/s10814-024-09206-5(2025).
+4 8 . T a k a h a s h i ,H . ,S a s a k i ,O . ,N i r a s a w a ,K .&F u r u k a w a ,T .A s s o c i a t i o n
+between ovocalyxin-32 gene haplotypes and eggshell quality
+traits in an F2 intercross between two chicken lines divergently
+selected for eggshell strength: Eggshell traits and ovocalyxin-32
+gene. Anim. Genet. 41,5 4 1–544 (2010).
+49. Tuiskula-Haavisto, M. et al. Val idated quantitative trait loci for
+eggshell quality in experimental and commercial laying hens.
+Anim. Genet. 49,3 2 9–333 (2018).
+50. Asiamah Amponsah, C. et al. Genetic effects of polymorphisms of
+candidate genes associated with ovary development and egg
+production traits in ducks.Anim. Reprod. Sci. 211, 106219 (2019).
+51. Zhang, M. et al. Identi ﬁcation of SNPs and INDELS associated with
+duck egg quality traits through a genome-wide association ana-
+lysis. Poult. Sci.
+103, 104459 (2024).
+52. Dunn, I. C. et al. Polymorphisms in eggshell organic matrix genes
+are associated with eggshell quality measurements in pedigree
+Rhode Island Red hens. Anim. Genet. 40, 110–114 (2009).
+5 3 . F u l t o n ,J .E . ,S o l l e r ,M . ,L u n d ,A .R . ,A r a n g o ,J .&L i p k i n ,E .V a r i a t i o n
+in the ovocalyxin-32 gene in commercial egg-laying chickens and
+its relationship with egg production and egg quality traits.Anim.
+Genet. 43,1 0 2–113 (2012).
+54. Wang, D. et al. Gene polymorphisms are associated with eggshell
+ultrastructure organization in hens.Rev. Bras. Cienc. Avic. 19,
+129–134 (2017).
+55. Ikeh, N. et al. Association of ov ocleidin-116 polymorphisms with
+egg quality traits of Nigerian heavylocal chicken ecotype reared in
+derived Savannah.Niger. J. Anim. Sci. 22,7 4–82 (2020).
+56. Wu, X., Yan, M. J., Lian, S. Y., Liu, X. T. & Li, A. GH gene poly-
+morphisms and expression associated with egg laying in muscovy
+ducks (Cairina moschata).Hereditas 151,1 4–19 (2014).
+57. Wu, Y. et al. The differential expression and SNP analysis of the
+ovoinhibitor gene in the ovaries of laying duck breeds (Anas pla-
+tyrhynchos).Braz. J. Poult. Sci. 20,2 8 1–286 (2018).
+5 8 . L eR o y ,N . ,S t a p a n e ,L . ,G a u t r o n ,J .&H i n c k e ,M .T .E v o l u t i o no ft h e
+avian eggshell biomineralization protein toolkit– new insights
+from multi-omics.Front. Genet. 12, 672433 (2021).
+5 9 . B a r d e t ,C . ,V i n c e n t ,C . ,L a j a r i l l e ,M . - C . ,J a f f r e d o ,T .&S i r e ,J . - Y .O C -
+116, the chicken ortholog of mammalian MEPE found in eggshell, is
+also expressed in bone cells. J. Exp. Zool. B Mol. Dev. Evol. 314,
+653–662 (2010).
+60. UniProt Consortium UniProt: The universal protein knowledge-
+base in 2025. Nucleic Acids Res. 53,D 6 0 9–D617 (2025).
+61. Horn, I. R. et al. Palaeoproteomics of bird bones for taxonomic
+classiﬁcation. Zool. J. Linn. Soc. 186,6 5 0–665 (2019).
+62. Presslee, S. et al. The identi ﬁcation of archaeological eggshell
+using peptide markers.Sci. Technol. Archaeol. Res.3,8 9–99
+(2017).
+63. Eda, M., Morimoto, M., Mizuta, T. & Inoué, T. ZooMS for birds:
+Discrimination of Japanese archaeological chickens and indigen-
+ous pheasants using collagen peptideﬁngerprinting.J. Archaeol.
+Sci. Rep. 34,1 0 2 6 3 5( 2 0 2 0 ) .
+64. Johnson, K. P. & Sorenson, M. D. Phylogeny and Biogeography of
+Dabbling Ducks (Genus: Anas): A Comparison of Molecular and
+Morphological Evidence. Auk 116,7 9 2–805 (1999).
+65. Serra Puche, M. C. Los Recursos Lacustres de La Cuenca de México
+Durante El Formativo(Universidad Nacional Autónoma de México,
+México, DF, 1988).
+66. Birds of the World. Cornell Labor atory of Ornithology. (eds. Bill-
+erman, S. M. et al.) (Cornell Laboratory of Ornithology, Ithaca, NY,
+USA, 2025). https://doi.org/10.2173/bow.
+67. Widmer, R. J. & Storey, R. Skeletal health and patterns of animal
+food consumption at S3W1:33 (Tlajinga 33).Teotihuacan.
+Archaeol. Anthropol. Sci.9,5 1–60 (2017).
+68. Sugiyama, N., Valadez Azúa, R . & Rodríguez Galicia, B. Faunal
+acquisition, maintenance, and consumption: how the Teotihua-
+canos got their meat. Archaeol. Anthropol. Sci.9,6 1–81 (2017).
+6 9 . Y e o m a n s ,L . ,C o d l i n ,M .C . ,M a z z u c a t o ,C . ,D a lB e l l o ,F .&
+D e m a r c h i ,B .W a t e r f o w le g g s h e l lr eﬁnes palaeoenvironmental
+reconstruction and supports multi-species niche construction at
+the Pleistocene-Holocene transition in the Levant.J. Archaeol.
+Method Theory 31,1 3 8 3–1429 (2024).
+7 0 . A n d r e w s ,I .J .The Birds of the Hashemite Kingdom of Jordan
+(Musselburgh, 1995).
+71. Shirihai, H. & Roselaar, C. S. The Birds of Israel: A Complete Avi-
+fauna and Bird Atlas of Israel (Christopher Helm Publishers,
+Incorporated, 1996).
+72. Brown, S., Douka, K., Collins, M. J. & Richter, K. K. On the stan-
+dardization of ZooMS nomenclature.J. Proteom. 235,1 0 4 0 4 1
+(2021).
+73. Kronenberg, Z. N. et al. Extende d haplotype-phasing of long-read
+de novo genome assemblies using Hi-C.Nat. Commun. 12,1 9 3 5
+(2021).
+7 4 . T e w h e y ,R . ,B a n s a l ,V . ,T o r k a m a n i ,A . ,T o p o l ,E .J .&S c h o r k ,N .J .
+The importance of phase information for human genomics.Nat.
+Rev. Genet 12,2 1 5–223 (2011).
+75. Korlach, J. et al. De novo PacBio long-read and phased avian
+genome assemblies correct and add to reference genes gener-
+ated with intermediate and short reads.Gigascience6,1 –16 (2017).
+76. Va šíček, J. et al. Finding haplotypic signatures in proteins.Giga-
+science 12, giad093 (2022).
+77. Suk, E.-K. et al. A comprehensiv ely molecular haplotype-resolved
+genome of a European individual.Genome Res. 21
+,1 6 7 2–1685
+(2011).
+78. Grealy, A. et al. Molecular explor ation of fossil eggshell uncovers
+hidden lineage of giant extinct bird.Nat. Commun.14, 914 (2023).
+79. Wolverton, S. Data quality in zooarchaeological faunal identi ﬁca-
+tion. J. Archaeol. Method Theory20,3 8 1–396 (2013).
+Article https://doi.org/10.1038/s41467-025-63886-1
+Nature Communications|         (2025) 16:8820 12

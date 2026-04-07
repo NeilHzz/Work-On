@@ -1,0 +1,92 @@
+Ba et al., Sci. Adv. 8, eabn0756 (2022)     9 September 2022
+SCIENCE ADVANCES |  RESEARCH ARTICLE
+7 of 13
+0
+1
+2
+3
+4
+mRNA Protein P-site P-site (reg)
+SD
+11 species
+92 3542
+−10
+0
+10
+dTm (°C)
+5396 3280.00
+0.25
+0.50
+0.75
+1.00
+Functional score
+0.00
+0.25
+0.50
+0.75
+1.00
+12345678 91 01 11 21 31 41 5
+ProbabilityP = 0.05
+10fold change
+5
+−5
+−10
+520 56970.00
+0.25
+0.50
+0.75
+1.00
+sift_ala_score
+Common
+P-sites
+OtherCommon
+P-sites
+OtherCommon
+P-sites
+Other
+.......[STY]P...... ....RS.[STY].......
+....R..[STY]P...... .......[STY]P.R....
+1
+2
+3
+4
+0
+1
+2
+3
+4
+Bits
+PKACA
+MTOR
+AMPKA1
+CHK1
+CDK1
+CDK2
+CDK5
+GSK3B
+AKT1
+Developmental process
+Organelle organization
+Protein modification process
+RNA processing
+Transport
+AB
+C
+D
+E
+F
+P = 6.6 × 10−12 P = 3.6 × 10−10
+P = 3.5 × 10−4
+P = 2.4 × 107
+All P < 2.2 × 10−16
+Fig. 5. P-site characteristics among 11 mammalian species. (A) Profiling of SD across 11 species from the average at mRNA, protein, P-site, and protein-corrected P-site 
+levels from the intersecting list between layers. SD, SD of the relative quantification across 11 species. (B) The site-specific parameters and features of the common P-sites 
+(detected in all 11 species) and other human P-sites. P values, Wilcoxon rank sum test. dT m, difference in melting temperature. (C) The sequence logo of surrounding 
+amino acids (±7 amino acids) of common P-sites (detected in all 11 species). (D) Motif analysis of the flanking amino acids (±7 amino acids) around the common P-sites 
+(detected in all 11 species). The representative enriched motifs (four motif examples with >7-fold of enrichment) were shown. (E) Sequence analysis of the flanking amino 
+acids (±7 amino acids) around the P-sites (common P-sites versus other human P-sites). The fold changes (FCs) of significant residues (P < 0.05) were shown. (F) By infer-
+ring the binary, quantitative correlation analysis between any P-site pairs, the phosphorylation coevolution network was built on the significantly associated common 
+P-sites (Pearson’s correlation, P < 0.001) after correction by total protein changes. Red lines indicate positive associations while blue lines indicate negative associa-
+tions. The representative GOBPs of phosphoproteins were highlighted in different colors. The top nine kinases curated from the P-sites as substrates were shown as di-
+amonds, and the kinase-substrates pairs were shown as dashed lines.
+Downloaded from https://www.science.org on August 19, 2025

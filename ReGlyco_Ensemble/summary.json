@@ -1,0 +1,148 @@
+[
+  {
+    "species": "Gallus",
+    "protein": "P01012",
+    "position": 293,
+    "composition": "HexNAc(2)Hex(6)",
+    "AC": "G80966KZ",
+    "use_ac": "G80966KZ",
+    "status": "已存在",
+    "folder": "e:\\Data\\Desktop\\Work On\\ReGlyco_Ensemble\\Gallus_P01012_293_G80966KZ"
+  },
+  {
+    "species": "Anas",
+    "protein": "A0A8B9QNT8",
+    "position": 97,
+    "composition": "HexNAc(6)Hex(3)",
+    "AC": "G20030CU",
+    "use_ac": "G20030CU",
+    "status": "已存在",
+    "folder": "e:\\Data\\Desktop\\Work On\\ReGlyco_Ensemble\\Anas_A0A8B9QNT8_97_G20030CU"
+  },
+  {
+    "species": "Anas",
+    "protein": "A0A8B9QNT8",
+    "position": 97,
+    "composition": "HexNAc(4)Hex(3)",
+    "AC": "G39213VZ",
+    "use_ac": "G39213VZ",
+    "status": "已存在",
+    "folder": "e:\\Data\\Desktop\\Work On\\ReGlyco_Ensemble\\Anas_A0A8B9QNT8_97_G39213VZ"
+  },
+  {
+    "species": "Anas",
+    "protein": "A0A8B9QNT8",
+    "position": 97,
+    "composition": "HexNAc(5)Hex(3)",
+    "AC": "G59471TH",
+    "use_ac": "G59471TH",
+    "status": "已存在",
+    "folder": "e:\\Data\\Desktop\\Work On\\ReGlyco_Ensemble\\Anas_A0A8B9QNT8_97_G59471TH"
+  },
+  {
+    "species": "Columba",
+    "protein": "A0A2I0MWA2",
+    "position": 97,
+    "composition": "HexNAc(5)Hex(3)",
+    "AC": "G59471TH",
+    "use_ac": "G59471TH",
+    "status": "已存在",
+    "folder": "e:\\Data\\Desktop\\Work On\\ReGlyco_Ensemble\\Columba_A0A2I0MWA2_97_G59471TH"
+  },
+  {
+    "species": "Columba",
+    "protein": "A0A2I0MWA2",
+    "position": 97,
+    "composition": "HexNAc(6)Hex(3)",
+    "AC": "G20030CU",
+    "use_ac": "G20030CU",
+    "status": "已存在",
+    "folder": "e:\\Data\\Desktop\\Work On\\ReGlyco_Ensemble\\Columba_A0A2I0MWA2_97_G20030CU"
+  },
+  {
+    "species": "Columba",
+    "protein": "A0A2I0MWA2",
+    "position": 97,
+    "composition": "HexNAc(6)Hex(5)",
+    "AC": "G75051CY",
+    "use_ac": "G99645NK",
+    "status": "completed",
+    "folder": "e:\\Data\\Desktop\\Work On\\ReGlyco_Ensemble\\Columba_A0A2I0MWA2_97_G75051CY",
+    "files": [
+      "all.pdb",
+      "ensemble_stats.csv"
+    ]
+  },
+  {
+    "species": "Columba",
+    "protein": "A0A2I0MWA2",
+    "position": 97,
+    "composition": "HexNAc(2)Hex(11)",
+    "AC": "G64411TU",
+    "use_ac": "G18948TG",
+    "status": "completed",
+    "folder": "e:\\Data\\Desktop\\Work On\\ReGlyco_Ensemble\\Columba_A0A2I0MWA2_97_G64411TU",
+    "files": [
+      "all.pdb",
+      "ensemble_stats.csv"
+    ]
+  },
+  {
+    "species": "Columba",
+    "protein": "A0A2I0MWA2",
+    "position": 97,
+    "composition": "HexNAc(6)Hex(6)",
+    "AC": "G74645FT",
+    "use_ac": "G50078RT",
+    "status": "completed",
+    "folder": "e:\\Data\\Desktop\\Work On\\ReGlyco_Ensemble\\Columba_A0A2I0MWA2_97_G74645FT",
+    "files": [
+      "all.pdb",
+      "ensemble_stats.csv"
+    ]
+  },
+  {
+    "species": "Columba",
+    "protein": "A0A2I0MWA2",
+    "position": 97,
+    "composition": "HexNAc(5)Hex(6)NeuAc(1)",
+    "AC": "G49478NM",
+    "use_ac": "G11034PZ",
+    "status": "completed",
+    "folder": "e:\\Data\\Desktop\\Work On\\ReGlyco_Ensemble\\Columba_A0A2I0MWA2_97_G49478NM",
+    "files": [
+      "all.pdb",
+      "ensemble_stats.csv"
+    ]
+  },
+  {
+    "species": "Columba",
+    "protein": "A0A2I0MWA2",
+    "position": 97,
+    "composition": "HexNAc(2)Hex(12)",
+    "AC": "G57930PW",
+    "use_ac": "G57930PW",
+    "status": "已存在",
+    "folder": "e:\\Data\\Desktop\\Work On\\ReGlyco_Ensemble\\Columba_A0A2I0MWA2_97_G57930PW"
+  },
+  {
+    "species": "Columba",
+    "protein": "A0A2I0MWA2",
+    "position": 97,
+    "composition": "HexNAc(6)Hex(7)",
+    "AC": "G18938DW",
+    "use_ac": "G18938DW",
+    "status": "已存在",
+    "folder": "e:\\Data\\Desktop\\Work On\\ReGlyco_Ensemble\\Columba_A0A2I0MWA2_97_G18938DW"
+  },
+  {
+    "species": "Columba",
+    "protein": "A0A2I0MWA2",
+    "position": 97,
+    "composition": "HexNAc(2)Hex(10)",
+    "AC": "G19958IL",
+    "use_ac": "G19958IL",
+    "status": "已存在",
+    "folder": "e:\\Data\\Desktop\\Work On\\ReGlyco_Ensemble\\Columba_A0A2I0MWA2_97_G19958IL"
+  }
+]

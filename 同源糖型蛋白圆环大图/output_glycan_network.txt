@@ -1,0 +1,15 @@
+糖蛋白  Gallus=266  Anas=320  Columba=192
+蛋白分类: {'three': 128, 'two': 186, 'one': 56, 'singleton': 408}
+糖型链数: {'High Mannose': 10, 'Pauci-mannose': 12, 'Hybrid': 15, 'Complex-Plain': 39, 'Complex-Fucosylated': 72, 'Complex-Sialylated': 64, 'Other': 8}
+蛋白节点总数: 778
+三物种共同蛋白 (GAC): 128 个
+各圈容量: [1, 6, 12, 18, 25, 31, 37]  共 130 槽, GAC 蛋白 128 个
+  Gallus: 231 个  [20 ~100 ]
+  Anas: 162 个  [110 ~235 ]
+  Columba: 71 个  [245 ~370 ]
+  Columba+Gallus: 7 个  [335 ~415 ]
+  Anas+Gallus: 13 个  [65 ~145 ]
+  Anas+Columba: 166 个  [155 ~325 ]
+坐标分配完成: 778 个蛋白节点
+
+已保存: e:\Data\Desktop\Work On\同源糖型蛋白圆环大图\Fig_glycan_network.png

@@ -1,0 +1,143 @@
+(Anser or Branta) and one unidentiﬁed group of ducks. Using dataset 2,
+we reassessed the four published LC-MS/MS analyses available for
+these samples and identiﬁed multiple consistent SAPs across proteins.
+These allow us to attribute the previously unidentiﬁed group of ducks
+to either shelduck ( Tadorna sp.) or Egyptian goose ( Alopochen
+aegyptiaca). Alopochen aegyptiaca is less likely because it is not known
+to occur naturally in Jordan
+70. This taxon cannot be ruled out on a
+molecular basis because many of its protein sequences are not avail-
+able in the database, as only a single genome, with low coverage across
+some eggshell genes, was available. Meanwhile, Tadorna is known to
+occasionally breed in the region today
+70 and the peptides detected in
+the archaeological sample match the availableTadorna protein refer-
+ence sequences for this taxon ( Supplementary Note 3). The Anser or
+Branta specimen is now securely identiﬁed as Anser sp., based on SAPs
+that consistently separate the two taxa in XCA1,XCA2, OC116 and
+BPIfoldB4 peptides, although cannot be identiﬁed to species given the
+observed intraspecies variability inAnser OC116 sequences. The swan,
+in contrast, matched uniquely to protein sequences found in mute
+swan (Cygnus olor), where multiple SAPs across XCA2 and OC116 dis-
+tinguish this species from all other individuals belonging to this genus.
+Mute swan is considered a rare or accidental visitor to Jordan today
+71,
+making our ﬁnding the earliest evidence of this swan breeding in Jor-
+dan and further highlighting the potential of palaeoproteomics for
+palaeoecology.
+Our systematic investigation highlighted the widespread pre-
+sence of SAPs derived from heterozygosity and intraspeciﬁc variability
+both in Anatidae, and non-Anatidae species. Intraspeci ﬁcS A P sa r e
+most commonly detected in eggshell proteins but were also observed
+in bone collagen. This means there is an urgent need to expand
+existing standards for palaeoproteomic analysis
+2,72 and improve
+existing standards for identifying taxon-speci ﬁc “marker” SAPs for
+both collagen (as predicted by Richter et al. 1) and non collagenous
+proteins.
+ Sampling multiple individuals per taxonomic group (i.e., genus or
+species) is required to distinguish between the effects of several
+evolutionary mechanisms, including heterozygosity, hybridiza-
+tion, domestication, and artifacts from sequencing, assembly or
+annotation
+33,43,45,73.
+ A general trend is developing in the ﬁeld that markers should be
+conﬁrmed using both genomic and proteomic data, and that
+samples from modern reference materials should aim for at least
+three individuals for a given taxon
+18,20,21. Given that in our admit-
+tedly small set of 8 Anas platyrhynchoswe observed that hetero-
+zygous SAPs were frequently close to 50% (Fig.3), the probability
+of observing the“most common” mutation at least once would be
+87.50% when three individuals are sampled, and 93.75% when four
+individuals are sampled. For highly variable proteins, the sample
+population of reference material should also be considered, as
+characteristic mutations may change geographically and
+overtime.
+ Where available, protein annotation should be carried out using
+phased genomic data, i.e., when both sets of parental chromo-
+somes are assembled, so that heterozygosity is not hidden
+74–77.
+ Genomic markers should be considered alongside studies on
+modern proteins, such as tandem mass spectrometry of proteins
+extracted from several specimens of reference material, i.e., bone
+and eggshell
+13,78.
+ Reference databases and biomarkers for the analysis of ancient
+samples by mass spectrometry should be accompanied by quality
+controls, at a minimum indicating the number of individuals used
+for biomarker conﬁrmation.
+ The issues we have discussed here are in many ways similar to the
+debates surrounding taxonomic determination in zooarchaeol-
+ogy and palaeontology, where many seminal works have pro-
+posed measures for rigorous standards in discovering and
+employing taxonomic markers to identify species or genera of
+extinct and extant organisms (see especially
+79–81).
+Overall, the combination of protein sequence annotation and the
+assessment of the extent of within- and between-taxon variability
+carried out in this study support the utility of protein sequences for
+reconstructing evolutionary relationships when testing very clear
+hypotheses, rather than directly placing an unknown taxon on a
+branch of a tree
+13,78. Indeed, the variable topology observed across
+bone and eggshell protein-based phylogenies highlights that using
+single or fragmented proteins for phylogenetics needs to be approa-
+ched with caution. At the same time, the extensive taxonomic coverage
+of avian protein sequences, covering ~65 % of Anatidae species, pro-
+vided the means to reliably improve identiﬁcation of avian taxa from
+two archaeological sites spanning key periods of human history. This
+allowed us to overcome traditional limitations in morphological
+identiﬁcation of avian remains due to fragmentation and high species
+diversity, to examine past ecologies, biodiversity, avian distribution
+and cultures. However, such studies must rest upon extensive curated
+protein datasets such as the one presented here, and a higher burden
+of proof for establishing the biomarkers for taxonomic identiﬁcation.
+While here we focused on birds, the issues we highlighted derive from
+general evolutionary mechanisms and as such are likely to affect
+palaeoproteomics applied to all life forms, extant and extinct.
+Methods
+Annotating reference protein sequences from avian genomes
+Genomic dataset. The data included 173 genomes from 112 Anatidae
+species; 74 were downloaded from NCBI in February 2024 82 and an
+additional 97 genomes were provided by the Bird 10,000 Genomes
+Project
+31 (B10K, that can be downloaded fromhttps://b10k.com/index/
+index/species.html). Two additional haploid-resolved assemblies for
+Anas platyrhynchosindividualbAnaPla2were downloaded in May 2024
+from the Vertebrate Genome Project33 (VGP) (now available on NCBI
+under GCA_964188345.1 and GCA_964188335.1). Genome species and
+accession list is available in Supplementary Data 1. Species names were
+modiﬁed to be consistent with the Birds of the World digital checklist
+for 2024
+41.
+Reference proteins (queries). Reference sequences for collagen type I
+(COL1a1 and COL1a2), c-type lectins (XCA1 and XCA2), Ovocleidin 116
+(OC116), albumin, BPI fold containing family B member 4 (BPI-fold-B4,
+BPIFB4), clusterin, lactadherin, ovalbumin, ovocalyxin 32, ovomucoid,
+and ovotransferrin were downloaded from NCBI and SwissProt (see
+Supplementary Note 4, Supplementary Table 5 and Supplementary
+Fig. 16). Where possible, we used RefSeq annotated proteins for Anas
+platyrhynchosgenome (GCF_015476345.1).
+Annotation pipeline. Protein annotation was performed using the
+University of Turin’s High Performance Computing cluster (C
+3S). The
+basic annotation of a query protein against a target genome was
+conducted in two steps using NCBI BLAST+ v.2.16.0
+83 and Exonerate
+v.2.2.084. First, the genome was indexed and a tblastn search with the
+query protein identiﬁed matching scaffolds which were extracted to
+m i n i m i s et h es e a r c hs p a c e .W et h e nu s e dt h ee x o n e r a t ep r o t e i n 2 g e n -
+ome model to align the query protein to the scaffolds to predict and
+extract “best-hit” coding regions for the query protein, which are then
+translated with fastatranslate
+84.
+Additional annotations were performed to improve coverage of
+protein sequences as sometimes only parts of the sequence could be
+identiﬁed in the genomes. The query was cut into seven overlapping
+segments so that each part of the protein was covered by two seg-
+ments. Exonerate was used to align each query segment to the scaf-
+folds to extract and translate matching regions and then ﬁltered to
+retain only those segments for which a blastp search against the
+Article https://doi.org/10.1038/s41467-025-63886-1
+Nature Communications|         (2025) 16:8820 8

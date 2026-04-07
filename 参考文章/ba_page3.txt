@@ -1,0 +1,82 @@
+Ba et al., Sci. Adv. 8, eabn0756 (2022)     9 September 2022
+SCIENCE ADVANCES |  RESEARCH ARTICLE
+3 of 13
+for “secretome” (mean of rho = 0.464) than other processes such as 
+“ubiquitin-mediated proteolysis” (rho = 0.027). The protein~P-site 
+correlation rho was merely 0.245 for “cellular component movement.” 
+Therefore, both posttranscriptional and phosphorylation-mediated 
+regulations among mammals are extensive and gene function specific.
+Transcriptome-proteome coevolution across gene classes
+Phylogenetic relationships can cause nominal correlations among 
+variables even when the variables are in fact evolving independently. 
+To associate mRNA and protein levels with evolutionary process, 
+we performed phylogenetically independent contrast (PIC) analy -
+sis to remove the effect of phylogenetic history (see also Materials 
+and Methods and fig. S5) (24). The thus determined mRNA and 
+protein PICs across phylogenetical nodes are still positively correlated 
+(averaged R = 0.306; fig. S5, A and B), confirming strong transcriptome- 
+proteome coevolution along the phylogeny. The top mRNA~protein 
+coevolving genes are WDR13, XRCC5, GCN1, and others (fig. S5C). 
+To compare coevolution between strongly correlated (R > 0.8) and 
+noncorrelated (|R| < 0.2) genes, we determined the signed geometric 
+mean of mRNA and protein PIC values as a proxy, which integrates the 
+direction and size of evolution. We found that highly correlated 
+mRNA-protein pairs tend to coevolve at all episode nodes through-
+out the phylogenetical tree (fig. S6 for C12 to C21). For example, at 
+node C13 that separates EAOG and LAUT clades, geometric means of 
+mRNA and protein PIC are mostly positive and much higher if 
+mRNA~protein correlation is high (P = 2.4 × 10 −13 ) (Fig. 2A). By 
+mapping the number of protein-protein interactions in the STRING 
+(search tool for retrieval of interacting genes/proteins) database (25) 
+0.0 0.5 1.0 1.50.0 0.5 1.0 1.50123
+RNA Protein
+SD Log10 (N)
+Number
+EssentialityHaplo-
+insufficiencyGene ageSecretomeSurfaceCancer
+biomarker
+Protein
+complexIn
+Out
+In
+Out
+−
++
+−
++
+−
++
+Across 11 species
+Across 11
+ individuals
+−200
+0
+200
+R > 0.8 Other
+Geom mean
+C13
+4231 43
+0
+25
+50
+75
+|R| < 0.2 R > 0.8
+Number of PPI
+P = 2.4 × 10−13
+P = 0.0010
+A
+B
+C
+Fig. 2. Biological features associated with mRNA-protein coevolution and their quantitative variability across 11 mammalian species. (A) Highly correlated mRNA- 
+protein pairs tend to coevolve. The distribution of signed geometric (geom) mean of mRNA and protein PIC values at node C13 for each gene with high mRNA-protein 
+PIC correlations (Pearson’s R > 0.8) and other genes. Node C13 separates LAUT from Eurchontoglires. P values, Wilcoxon rank sum test. (B) Number of protein-protein in-
+teractions (PPI) of each protein with high (Pearson’s R > 0.8) or low (|Pearson’s R| <0.2) mRNA-protein PIC correlations. P values, Wilcoxon rank sum test. (C) Profiling of SD 
+for mRNA and protein levels and their relationship to gene essentiality (Wilcoxon rank sum test P = 9.948 × 10−9  and 0.005369 for nonessential versus conditional essential 
+at the mRNA level and 2.644 × 10−15  and 8.203 × 10−4  at the protein level), haploinsufficiency (P = 2.776 × 10−4 , 3.374 × 10−7 , and 7.44 × 10−9  for haplo-insensitive versus 
+medium, insensitive versus sensitive, and medium versus sensitive at the mRNA level and 0.005101, 3.243 × 10 −5 , and 1.675 × 10 −7  at the protein level), secretome 
+(P = 1.137 × 10−8  and 2.303 × 10−15  at the mRNA and protein levels), surfaceome (P = 6.176 × 10−4  and 4.607 × 10−4  at the mRNA and protein levels), and cancer biomarker 
+annotations (P = 1.514 × 10−7  and 1.036 × 10 −4  at the mRNA and protein levels) and whether the corresponding proteins are in stable protein complex in the CORUM 
+database (Complex_in) or not (Complex_out). Note that P = 4.556 × 10 −4  and 2.393 × 10 −6  were obtained at the mRNA and protein levels, respectively, for comparing 
+Complex_In and Out groups in cross-species comparison and P = 0.2582 and 3.816 × 10−6  in the cross-individual comparison. The point range showed the median, 25th, 
+and 75th quantiles, and the histogram showed gene number in each class. SD, SD of the relative expression across 11 species or 11 individuals.
+Downloaded from https://www.science.org on August 19, 2025
