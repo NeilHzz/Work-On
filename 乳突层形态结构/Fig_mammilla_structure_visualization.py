@@ -8,6 +8,7 @@
 """
 
 import pandas as pd
+import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
@@ -16,9 +17,10 @@ from scipy import stats
 import os
 
 # ─── 全局绘图风格 ──────────────────────────────────────────────────────────
-plt.rcParams['font.sans-serif'] = ['Arial', 'Helvetica', 'Microsoft YaHei']
+plt.rcParams["font.family"] = "Times New Roman"
+plt.rcParams['font.sans-serif'] = ['Times New Roman', 'DejaVu Sans']
 plt.rcParams['axes.unicode_minus'] = False
-sns.set_theme(style="ticks", font="Arial")
+sns.set_theme(style="ticks", font="Times New Roman")
 
 # ─── 数据路径 ──────────────────────────────────────────────────────────────
 FILE_PATH = r'e:\Data\Desktop\Work On\乳突层形态结构\specie.xlsx'
@@ -191,15 +193,15 @@ def plot_microstructure_panels(df_plot, metric_arrays: dict):
     """
     metric_arrays: dict  {species: {density/volume/ratio: np.ndarray}}
     """
-    METRIC_KEYS = ['density', 'volume', 'ratio']
+    # Column Unit Volume panel removed; only Density and Unit Volume Ratio
+    METRIC_KEYS = ['density', 'ratio']
     DF_COLS = [
         'Mammilla Density (per mm²)',
-        'Column Unit Volume (10⁻³ mm³)',
         'Unit Volume Ratio',
     ]
-    titles = ['Mammilla Density', 'Column Unit Volume', 'Unit Volume Ratio']
+    titles = ['Mammilla Density', 'Unit Volume Ratio']
 
-    fig, axes = plt.subplots(1, 3, figsize=(15, 6))
+    fig, axes = plt.subplots(1, 2, figsize=(10, 6))
 
     for i, (mk, col) in enumerate(zip(METRIC_KEYS, DF_COLS)):
         ax = axes[i]
@@ -321,10 +323,8 @@ if __name__ == '__main__':
     print("=== Fig 1: 三指标形态结构面板 (Duncan's MRT) ===")
     plot_microstructure_panels(df_all, m_arrays)
 
-    print("\n=== Fig 2: 乳突密度显著性 (Duncan's MRT) ===")
-    print(f"Chicken n={len(chicken_arr)}, mean={chicken_arr.mean():.2f}")
-    print(f"Duck    n={len(duck_arr)},    mean={duck_arr.mean():.2f}")
-    print(f"Pigeon  n={len(pigeon_arr)},  mean={pigeon_arr.mean():.2f}")
-    plot_mammilla_density_significance(chicken_arr, duck_arr, pigeon_arr)
+    # Fig 2 (mammilla_density_significance) disabled — removed from output
+    # print("\n=== Fig 2: 乳突密度显著性 (Duncan's MRT) ===")
+    # plot_mammilla_density_significance(chicken_arr, duck_arr, pigeon_arr)
 
     print("\n全部图表已生成完毕。")

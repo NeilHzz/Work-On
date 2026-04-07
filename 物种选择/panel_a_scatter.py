@@ -11,6 +11,11 @@ Data sources:
 """
 import pandas as pd, numpy as np, matplotlib
 matplotlib.use('Agg')
+matplotlib.rcParams["font.family"] = "Times New Roman"
+matplotlib.rcParams["font.sans-serif"] = ["Times New Roman", "DejaVu Sans"]
+matplotlib.rcParams["mathtext.fontset"] = "stix"
+matplotlib.rcParams["font.size"] = 10
+import os
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from mpl_toolkits.mplot3d import proj3d
@@ -22,87 +27,13 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
 # ============================================================
-# 1. Load AVONET (Tobias et al. 2022) — BirdLife taxonomy
+# 1. Load pre-processed AVONET scores (aquatic_score, dev_score, cluster)
 # ============================================================
-avonet = pd.read_excel(
-    r'd:\system_folder\Desktop\Work on Desk\Intro\AVONET_Supp1.xlsx',
-    sheet_name='AVONET1_BirdLife', engine='openpyxl')
-
-# ---- Y axis: developmental mode (Starck & Ricklefs 1998) ----
-# 0 = fully precocial, 1 = fully altricial; order-level assignment
-dev_map = {
-    # ratites / paleognaths — fully precocial
-    'Struthioniformes': 0.0, 'Rheiformes': 0.0, 'Casuariiformes': 0.0,
-    'Apterygiformes': 0.0,   'Tinamiformes': 0.0,
-    # waterfowl / gallinaceous — fully precocial
-    'Anseriformes': 0.0, 'Galliformes': 0.0,
-    # transitional precocial
-    'Otidiformes': 0.0,  'Mesitornithiformes': 0.2,
-    'Charadriiformes': 0.2, 'Gruiformes': 0.2, 'Pterocliformes': 0.1,
-    'Phoenicopteriformes': 0.3, 'Gaviiformes': 0.3,
-    'Podicipediformes': 0.4,   'Sphenisciformes': 0.5,
-    # semi-altricial (seabirds, raptors)
-    'Procellariiformes': 0.7, 'Suliformes': 0.7, 'Pelecaniformes': 0.7,
-    'Ciconiiformes': 0.7,     'Accipitriformes': 0.7, 'Falconiformes': 0.7,
-    'Cathartiformes': 0.7,
-    'Cariamiformes': 0.6, 'Eurypygiformes': 0.6, 'Phaethontiformes': 0.6,
-    # fully altricial
-    'Strigiformes': 0.9,   'Caprimulgiformes': 0.8, 'Apodiformes': 1.0,
-    'Opisthocomiformes': 0.9, 'Trogoniformes': 1.0,  'Coraciiformes': 1.0,
-    'Bucerotiformes': 1.0, 'Piciformes': 1.0,       'Musophagiformes': 1.0,
-    'Coliiformes': 1.0,    'Cuculiformes': 0.9,      'Columbiformes': 0.75,
-    'Psittaciformes': 1.0, 'Leptosomiformes': 1.0,   'Passeriformes': 1.0,
-}
-avonet['dev_score'] = avonet['Order1'].map(dev_map)
-
-# ---- X axis: PCA on three AVONET ecological fields ----
-# PC1 = aquatic association axis  → X in 3D scatter
-# PC2 = secondary ecological variation → Y in 3D scatter
-# dev_score = developmental mode       → Z in 3D scatter
-
-lifestyle_w = {
-    'Aquatic':     1.00, 'Generalist':  0.40, 'Terrestrial': 0.15,
-    'Insessorial': 0.05, 'Aerial':      0.00,
-}
-habitat_w = {
-    'Marine': 1.00, 'Wetland': 0.95, 'Riverine': 0.85, 'Coastal': 0.75,
-    'Grassland': 0.18, 'Desert': 0.10, 'Rock': 0.12,
-    'Human Modified': 0.15, 'Shrubland': 0.12, 'Woodland': 0.08, 'Forest': 0.05,
-}
-trophic_w = {
-    'Herbivore aquatic': 1.00, 'Aquatic predator': 0.95,
-    'Omnivore': 0.30, 'Invertivore': 0.20, 'Vertivore': 0.10,
-    'Scavenger': 0.15, 'Granivore': 0.10, 'Frugivore': 0.08,
-    'Herbivore terrestrial': 0.05, 'Nectarivore': 0.05,
-}
-avonet['ls_enc']  = avonet['Primary.Lifestyle'].map(lifestyle_w).fillna(0.25)
-avonet['hab_enc'] = avonet['Habitat'].map(habitat_w).fillna(0.15)
-avonet['tr_enc']  = avonet['Trophic.Niche'].map(trophic_w).fillna(0.15)
-
-# ---- Assemble modelling dataframe ----
-df = avonet[['Species1', 'Order1', 'Family1', 'ls_enc', 'hab_enc', 'tr_enc', 'dev_score',
-             'Primary.Lifestyle', 'Habitat', 'Trophic.Niche']].dropna().copy()
-
-# PCA: standardise → extract PC1 (X) and PC2 (Y)
-_X3  = StandardScaler().fit_transform(df[['ls_enc', 'hab_enc', 'tr_enc']].values)
-_pca = PCA(n_components=3, random_state=42)
-_pcs = _pca.fit_transform(_X3)
-print('PCA explained variance: %s' % _pca.explained_variance_ratio_.round(4))
-print('PC1 loadings (lifestyle, habitat, trophic): %s' % _pca.components_[0].round(4))
-print('PC2 loadings (lifestyle, habitat, trophic): %s' % _pca.components_[1].round(4))
-
-# Orient PC1 so Aquatic species score highest (rightmost on X axis)
-_anas_idx = df.index.get_loc(df[df['Species1'] == 'Anas platyrhynchos'].index[0])
-_gal_idx  = df.index.get_loc(df[df['Species1'] == 'Gallus gallus'].index[0])
-_flip1 = -1 if _pcs[_anas_idx, 0] < _pcs[_gal_idx, 0] else 1
-_pc1 = _pcs[:, 0] * _flip1
-_pc2 = _pcs[:, 1]
-
-# X = PC1 (aquatic association, normalised)
-# Y = |ls_enc - mean(hab_enc, tr_enc)| normalised → lifestyle vs habitat/trophic discordance
-df['aquatic_score'] = (_pc1 - _pc1.min()) / (_pc1.max() - _pc1.min())
-_discord = np.abs(df['ls_enc'].values - (df['hab_enc'].values + df['tr_enc'].values) / 2.0)
-df['pc2_score'] = (_discord - _discord.min()) / (_discord.max() - _discord.min())
+_data_xlsx = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'analysis_data.xlsx')
+df = pd.read_excel(_data_xlsx, sheet_name='AVONET_species_scores', engine='openpyxl')
+df.rename(columns={'Species': 'Species1', 'Order': 'Order1', 'Family': 'Family1',
+                    'Lifestyle': 'Primary.Lifestyle'}, inplace=True)
+df['pc2_score'] = df['discordance_score']
 df['aq_rank'] = df['aquatic_score'].rank(pct=True)
 X2 = df[['aquatic_score', 'dev_score']].values  # KMeans on (PC1, dev_score)
 

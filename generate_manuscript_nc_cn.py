@@ -1,6 +1,6 @@
 """
-Nature Communications 风格 Results 章节 — 中文版
-manuscript_results_nc_cn.docx
+Science Advances 格式 — 中文版
+manuscript_results_sa_cn.docx
 """
 
 from docx import Document
@@ -9,7 +9,7 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
-OUT = r"E:\Data\Desktop\Work On\manuscript_results_nc_cn.docx"
+OUT = r"E:\Data\Desktop\Work On\manuscript_results_sa_cn.docx"
 
 doc = Document()
 
@@ -85,12 +85,58 @@ def head(text):
     return p
 
 def cite(p, numbers):
-    """在段落末尾添加上标文献编号，如 cite(p, [1,2,3])"""
-    r = p.add_run(",".join(str(n) for n in numbers))
-    r.font.size = Pt(7)
-    r.font.superscript = True
+    """Science Advances 格式：行内 (#) 引用，连续文献用破折号压缩"""
+    if not numbers:
+        return
+    sn = sorted(numbers)
+    groups = []
+    i = 0
+    while i < len(sn):
+        j = i
+        while j + 1 < len(sn) and sn[j + 1] == sn[j] + 1:
+            j += 1
+        if j - i >= 2:
+            groups.append(f"{sn[i]}\u2013{sn[j]}")
+        elif j - i == 1:
+            groups.append(f"{sn[i]}, {sn[j]}")
+        else:
+            groups.append(str(sn[i]))
+        i = j + 1
+    r = p.add_run(" (" + ", ".join(groups) + ")")
+    r.font.size = Pt(11)
     rPr = r._r.get_or_add_rPr()
     _set_font(rPr, SCI_F, BODY)
+
+# ════════════════════════════════════════════════════════════════════════════
+# 引言
+# ════════════════════════════════════════════════════════════════════════════
+# ════════════════════════════════════════════════════════════════════════════
+# 封面信息 (Science Advances)
+# ════════════════════════════════════════════════════════════════════════════
+para(
+    "卵白蛋白N-糖链结构类别编码三种禽类发育策略与钙生态适应的复合响应",
+    bold=True, size=14, before=0, after=120,
+    align=WD_ALIGN_PARAGRAPH.CENTER
+)
+
+para(
+    "Short title: 禽类卵白蛋白糖链类别、生态与蛋壳结构",
+    bold=False, size=10, before=0, after=60,
+    align=WD_ALIGN_PARAGRAPH.CENTER
+)
+
+para(
+    "[作者列表 — 待补充]",
+    bold=False, size=11, before=0, after=60,
+    align=WD_ALIGN_PARAGRAPH.CENTER
+)
+
+para(
+    "Teaser: 蛋白层特异性N-糖链类别通过调控蛋壳乳突核化密度与力学抵抗力，"
+    "编码早成-晚成轴上的禽类适应策略。",
+    bold=False, size=10, before=60, after=120,
+    align=WD_ALIGN_PARAGRAPH.CENTER
+)
 
 # ════════════════════════════════════════════════════════════════════════════
 # 引言
@@ -455,19 +501,19 @@ p_cn_s2b = mixed([
      "ρ = 0.419（", False, False),
     ("G. gallus", False, True),
     ("；n = 33个位点；p = 0.015），"
-     "ρ = 0.417（", False, False),
+     "ρ = 0.419（", False, False),
     ("A. platyrhynchos", False, True),
-    ("；n = 190；p = 2.2 × 10⁻⁹），"
-     "ρ = 0.478（", False, False),
+    ("；n = 190；p = 1.8 × 10⁻⁹），"
+     "ρ = 0.473（", False, False),
     ("C. livia", False, True),
-    ("；n = 144；p = 1.4 × 10⁻⁹）（图9–11），"
+    ("；n = 144；p = 2.1 × 10⁻⁹）（图11–13），"
      "这与已报道的跨组织和物种的蛋白质表达量与糖链位点占用度之间的普遍正相关一致。", False, False),
 ])
 cite(p_cn_s2b, [18])
 
 p_cn_s2c = mixed([
-    ("我们进一步对Gallus/Columba两物种直系同源蛋白进行双变量分析，"
-     "以蛋白质log₂FC对糖链log₂FC作图（图4）。"
+    ("我们进一步对三对物种直系同源蛋清蛋白进行双变量分析，"
+     "以蛋白质log₂FC对糖链log₂FC作图（图4–6）。"
      "在糖链位点丰度与蛋白质表达成比例变化的零假设下，"
      "直系同源蛋白应沿等量线（对角线）分布；"
      "对角线下方（糖链log₂FC < 蛋白质log₂FC）表明糖链位点丰度相对于蛋白质表达水平"
@@ -476,7 +522,11 @@ p_cn_s2c = mixed([
      "而对角线上方（糖链log₂FC > 蛋白质log₂FC）则表明，"
      "尽管蛋白质丰度下降，糖链位点丰度却得以维持甚至富集，"
      "提示糖基化蛋白异构体的选择性保留或修饰增强。"
-     "我们发现三个主要蛋清糖蛋白偏离对角线显著："
+     "在", False, False),
+    ("Gallus", False, True),
+    ("/", False, False),
+    ("Columba", False, True),
+    ("比较（图4）中，三个主要蛋清糖蛋白偏离对角线显著："
      "卵白蛋白（OVAL；蛋白质log₂FC −0.73，糖链log₂FC −5.63）"
      "和卵石蛋白-116（OC116；蛋白质log₂FC +2.59，糖链log₂FC −8.35）"
      "均明显位于对角线下方，表明这两个位点的糖链丰度受到特异性抑制——"
@@ -487,10 +537,45 @@ p_cn_s2c = mixed([
      "该位点的糖基化修饰仍得以相对保留。"
      "OC116极端的对角线下方偏移格外引人注目：OC116是一种蛋壳特有的"
      "方解石成核C型凝集素，直接模板化蛋壳矿化过程中碳酸钙晶体的生长，"
-     "仅存在于两个早成种而在晚成的", False, False),
+     "在所有主要蛋壳蛋白中具有最高的种内氨基酸序列多态性，"
+     "且在三对物种比较中均表现出最显著的糖链相对抑制，"
+     "提示该蛋白经历了强烈的谱系特异性序列与糖链修饰重塑。"
+     "在", False, False),
+    ("Gallus", False, True),
+    ("/", False, False),
+    ("Anas", False, True),
+    ("比较（图5）中，对角线下方偏移模式相似："
+     "OVAL（蛋白质log₂FC +2.41，糖链log₂FC −4.17）"
+     "和OC116（蛋白质log₂FC +5.20，糖链log₂FC −11.68）"
+     "均显著位于对角线下方，证实", False, False),
+    ("G. gallus", False, True),
+    ("相对于", False, False),
+    ("A. platyrhynchos", False, True),
+    ("在这些位点的糖链抑制不能归因于蛋白质丰度下降。"
+     "TRFE同样保持在对角线上方（蛋白质log₂FC −2.58，糖链log₂FC −1.77），"
+     "与蛋白质丰度变化无关的选择性糖链保留一致。"
+     "在", False, False),
+    ("Anas", False, True),
+    ("/", False, False),
+    ("Columba", False, True),
+    ("比较（图6）中，OC116偏移方向发生逆转：OC116位于对角线上方"
+     "（蛋白质log₂FC −2.60，糖链log₂FC +3.33），"
+     "表明", False, False),
+    ("A. platyrhynchos", False, True),
+    ("中OC116糖链丰度相对于", False, False),
     ("C. livia", False, True),
-    ("中缺失，且其氨基酸序列在所有主要蛋壳蛋白中的种内多态性最高，"
-     "提示该蛋白经历了强烈的谱系特异性序列与功能重塑。", False, False),
+    ("呈特异性富集——尽管蛋白质丰度更低——"
+     "与其在涉及", False, False),
+    ("G. gallus", False, True),
+    ("的两组比较中对角线下方位置恰好相反。"
+     "OVAL和TRFE在此比较中均接近对角线"
+     "（OVAL：蛋白质log₂FC −3.14，糖链log₂FC −1.46；"
+     "TRFE：蛋白质log₂FC −2.20，糖链log₂FC −1.88），"
+     "表明两者在水栖–晚成生态转变中丰度协同变化。"
+     "三对物种的双变量分析共同表明，主要蛋壳蛋白的糖链位点丰度"
+     "在各谱系中均受到独立的翻译后调控，"
+     "OC116尤其表现出依赖于比较背景的糖链重塑，"
+     "其方向沿早成–晚成生态轴而逆转。", False, False),
 ])
 cite(p_cn_s2c, [19, 21])
 
@@ -501,7 +586,7 @@ head("卵白蛋白的N-糖链结构类型在三物种间存在显著差异")
 
 mixed([
     ("我们对四种蛋清蛋白进行了IGP-MS定量糖链谱分析，鉴定了物种特异性的组成差异"
-     "（图5–8）。", False, False),
+     "（图7–10）。", False, False),
     ("G. gallus", False, True),
     ("的OVAL以高甘露糖型为主（相对丰度60.7%），其次为中性复合/杂合型（30.9%）"
      "和岩藻糖化型（8.4%）。", False, False),
@@ -515,19 +600,23 @@ mixed([
 ])
 
 mixed([
-    ("我们在两个早成种中检测到OC116（一种蛋壳方解石成核C型凝集素），而未在", False, False),
-    ("C. livia", False, True),
-    ("中检出。在", False, False),
+    ("我们在三个物种中均检测到OC116（一种蛋壳方解石成核C型凝集素）。在", False, False),
     ("G. gallus", False, True),
     ("中，OC116携带近等比例的高甘露糖型（51.9%）和中性复合/杂合型（48.1%）；"
      "在", False, False),
     ("A. platyrhynchos", False, True),
-    ("中，中性型占主导（87.6%），另有少量岩藻糖化（8.6%）和唾液酸化（3.2%）。"
+    ("中，中性型占主导（88.3%），另有少量岩藻糖化（8.5%）和唾液酸化（2.6%）；"
+     "而在", False, False),
+    ("C. livia", False, True),
+    ("中，OC116糖链谱则截然不同，以唾液酸化复合/杂合型（40.2%）和"
+     "岩藻糖化复合/杂合型（31.0%）为主，"
+     "另含高甘露糖型（15.1%）、寡甘露糖/截短型（4.5%）及中性型（9.2%）——"
+     "与两个早成种差异显著，与双变量分析中推断的糖链重塑一致。"
      "TRFE糖链谱同样存在物种差异：", False, False),
     ("G. gallus", False, True),
     ("的TRFE完全为中性复合/杂合型（100%）；", False, False),
     ("A. platyrhynchos", False, True),
-    ("的TRFE富含岩藻糖化（48.6%）和唾液酸化（22.2%），另含部分中性型（28.0%）；", False, False),
+    ("的TRFE富含岩藻糖化（48.0%）和唾液酸化（22.4%），另含部分中性型（28.4%）；", False, False),
     ("C. livia", False, True),
     ("的TRFE呈中性型（42.7%）和唾液酸化型（49.0%）近等分布。"
      "鸡特有糖蛋白卵钙素-17（OC17，鸭和鸽中缺失）"
@@ -1161,6 +1250,19 @@ para(
     "Duncan多重范围检验（DMRT；\u03b1\u202f=\u202f0.05）进行物种比较。"
     "所有统计分析在Python中以scipy.stats和statsmodels完成。"
 )
+
+# ════════════════════════════════════════════════════════════════════════════
+# 致谢
+# ════════════════════════════════════════════════════════════════════════════
+head("致谢")
+
+para("作者贡献：[待补充]")
+
+para("利益冲突：作者声明不存在利益冲突。")
+
+para("数据可用性：评估本文结论所需的全部数据均已包含在正文和/或补充材料中。")
+
+para("基金资助：[待补充]")
 
 doc.save(OUT)
 print(f"[OK]  {OUT}")

@@ -26,7 +26,9 @@ import matplotlib.patheffects as pe
 from matplotlib.patches import Wedge
 
 warnings.filterwarnings("ignore")
-matplotlib.rcParams["font.family"] = "Arial"
+matplotlib.rcParams['font.family'] = 'Times New Roman'
+matplotlib.rcParams['font.sans-serif'] = ['Times New Roman', 'DejaVu Sans']
+matplotlib.rcParams['mathtext.fontset'] = 'stix'
 
 # ── 工作目录 ────────────────────────────────────────────────────
 BASE = r"e:\Data\Desktop\Work On"
@@ -61,7 +63,7 @@ def load_gly_ids(fasta_path):
 
 # 三物种糖蛋白 accession 集合（用于判断某蛋白是否为糖蛋白）
 gly_ids = {
-    "Gallus":  load_gly_ids(os.path.join(BASE, "Raw_Data", "原始fasta", "GlyGallus_New.fasta")),
+    "Gallus":  load_gly_ids(os.path.join(BASE, "Raw_Data", "原始fasta", "GlyGallus.fasta")),
     "Anas":    load_gly_ids(os.path.join(BASE, "Raw_Data", "原始fasta", "GlyAnas.fasta")),
     "Columba": load_gly_ids(os.path.join(BASE, "Raw_Data", "原始fasta", "GlyColumba.fasta")),
 }
@@ -73,7 +75,7 @@ print(f"糖蛋白  Gallus={len(gly_ids['Gallus'])}  Anas={len(gly_ids['Anas'])} 
 #   cluster_type: "three"/"two"/"one"（聚类中物种数）或 "singleton"（未聚类）
 #   cluster_size: 聚类内所有蛋白数量（反映保守程度）
 # ══════════════════════════════════════════════════════════════════
-ortho_path = os.path.join(BASE, "三物种糖蛋白BlastP", "Orthogroups.txt.gz.txt")
+ortho_path = os.path.join(BASE, "同源糖型蛋白圆环大图", "Orthogroups.txt.gz.txt")
 groups = parse_orthogroups(ortho_path)
 
 protein_info  = {}   # acc → 属性字典
@@ -145,7 +147,7 @@ def classify_glycan(g):
 
 # 各物种 IGP 强度列名
 IGP_INT = {
-    "Gallus":  ["Intensity J1", "Intensity J2", "Intensity J3"],
+    "Gallus":  ["Intensity G1", "Intensity G2", "Intensity G3"],
     "Anas":    ["Intensity A1", "Intensity A2", "Intensity A3"],
     "Columba": ["Intensity C1", "Intensity C2", "Intensity C3"],
 }
@@ -156,28 +158,13 @@ prot_to_gtypes        = defaultdict(set)     # 蛋白 → 糖型集合
 acc_species           = {}                  # 蛋白 accession → 物种名
 
 MS_FILES = {
-    "Gallus":  os.path.join(BASE, "Raw_Data", "MS_DATA", "Glycan_MS_Gallus_New.xlsx"),
+    "Gallus":  os.path.join(BASE, "Raw_Data", "MS_DATA", "Glycan_MS_Gallus.xlsx"),
     "Anas":    os.path.join(BASE, "Raw_Data", "MS_DATA", "Glycan_MS_Anas.xlsx"),
     "Columba": os.path.join(BASE, "Raw_Data", "MS_DATA", "Glycan_MS_Columba.xlsx"),
 }
-GLYCAN_SHEET_IGP = {
-    "Gallus":  "IGP_quant Normalized",
-    "Anas":    "IGP_quant",
-    "Columba": "IGP_quant",
-}
-GLYCAN_SHEET_SITE = {
-    "Gallus":  "Site_quant Normalized",
-    "Anas":    "Site_quant",
-    "Columba": "Site_quant",
-}
-GLYCAN_SHEET_HEADER = {
-    "Gallus":  1,
-    "Anas":    0,
-    "Columba": 0,
-}
 for sp, fpath in MS_FILES.items():
     # IGP_quant 表：逐行读取蛋白-糖链对，累计强度
-    df_igp   = pd.read_excel(fpath, sheet_name=GLYCAN_SHEET_IGP[sp], header=GLYCAN_SHEET_HEADER[sp])
+    df_igp   = pd.read_excel(fpath, sheet_name="IGP_quant")
     int_cols = [c for c in IGP_INT[sp] if c in df_igp.columns]
     for _, row in df_igp.iterrows():
         acc  = str(row["Protein accession"]).strip()
@@ -191,7 +178,7 @@ for sp, fpath in MS_FILES.items():
         prot_to_gtypes[acc].add(gt)
         acc_species[acc] = sp
     # Site_quant 表：仅记录蛋白-糖型关系（N-glycan modifications 列）
-    df_site = pd.read_excel(fpath, sheet_name=GLYCAN_SHEET_SITE[sp], header=GLYCAN_SHEET_HEADER[sp])
+    df_site = pd.read_excel(fpath, sheet_name="Site_quant")
     if "N-glycan modifications" in df_site.columns:
         for _, row in df_site.iterrows():
             acc  = str(row["Protein accession"]).strip()
@@ -645,9 +632,7 @@ margin = R_GLYCAN + 6.5   # 图像边距 = 糖型圆半径 + 注释文字空间
 ax.set_xlim(-margin, margin)
 ax.set_ylim(-margin, margin)
 plt.tight_layout()
-import pathlib
-out_path = r"e:\Data\Desktop\Work On\同源糖型蛋白圆环大图\Fig_glycan_network.png"
-pathlib.Path(out_path).parent.mkdir(parents=True, exist_ok=True)
+out_path = r"e:\Data\Desktop\Work On\Sci_Adv_Figure\Fig_glycan_network.png"
 plt.savefig(out_path, dpi=200, bbox_inches="tight", facecolor="white")
 print(f"\n已保存: {out_path}")
 plt.show()

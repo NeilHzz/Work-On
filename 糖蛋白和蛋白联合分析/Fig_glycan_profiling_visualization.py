@@ -17,8 +17,8 @@ import os
 import re
 
 # ─── 绘图风格 ──────────────────────────────────────────────────────────────
-mpl.rcParams['font.family']           = 'sans-serif'
-mpl.rcParams['font.sans-serif']       = ['Arial', 'Helvetica', 'DejaVu Sans']
+mpl.rcParams['font.family'] = 'Times New Roman'
+mpl.rcParams['font.sans-serif']       = ['Times New Roman', 'DejaVu Sans']
 mpl.rcParams['axes.spines.top']       = False
 mpl.rcParams['axes.spines.right']     = False
 mpl.rcParams['axes.linewidth']        = 1.5
@@ -29,25 +29,9 @@ mpl.rcParams['ytick.labelsize']       = 12
 
 # ─── 路径配置 ─────────────────────────────────────────────────────────────
 DATA_DIR = r"e:\Data\Desktop\Work On\Raw_Data\MS_DATA"
-OUT_DIR  = r"e:\Data\Desktop\Work On\20260225\Figure"
+OUT_DIR  = r"e:\Data\Desktop\Work On\糖蛋白和蛋白联合分析\Figure"
 os.makedirs(OUT_DIR, exist_ok=True)
-
-# Gallus 新版文件名及 sheet 名
-GLYCAN_FNAME = {
-    'Gallus': 'Glycan_MS_Gallus_New.xlsx',
-    'Anas':   'Glycan_MS_Anas.xlsx',
-    'Columba':'Glycan_MS_Columba.xlsx',
-}
-GLYCAN_SHEET_IGP = {
-    'Gallus': 'IGP_quant Normalized',
-    'Anas':   'IGP_quant',
-    'Columba':'IGP_quant',
-}
-GLYCAN_SHEET_HEADER = {
-    'Gallus': 1,
-    'Anas':   0,
-    'Columba':0,
-}
+NOLEG = os.environ.get('NOLEG', '0') == '1'
 
 # ─── 目标蛋白映射表（Blastp 严格筛选结果） ───────────────────────────────
 TARGET_MAPPING = {
@@ -125,10 +109,9 @@ def get_protein_abundance(protein: str, species: str) -> 'pd.Series | None':
     accessions = TARGET_MAPPING[species].get(protein, [])
     if not accessions:
         return None
-    fpath = os.path.join(DATA_DIR, GLYCAN_FNAME[species])
+    fpath = os.path.join(DATA_DIR, f"Glycan_MS_{species}.xlsx")
     try:
-        df = pd.read_excel(fpath, sheet_name=GLYCAN_SHEET_IGP[species],
-                           header=GLYCAN_SHEET_HEADER[species])
+        df = pd.read_excel(fpath, sheet_name="IGP_quant")
     except Exception:
         return None
 
@@ -186,53 +169,12 @@ def plot_protein_glycan_profiling(protein: str, species_list: list):
     ax.set_ylabel('Relative Abundance (%)', fontsize=14, fontweight='bold')
     ax.set_title(f'{protein} Glycosylation Profiling',
                  fontsize=16, fontweight='bold', pad=20)
-    ax.legend(title='Glycan Classification', bbox_to_anchor=(1.05, 1),
-              loc='upper left', frameon=False, fontsize=11, title_fontsize=12)
+    if not NOLEG:
+        ax.legend(title='Glycan Classification', bbox_to_anchor=(1.05, 1),
+                  loc='upper left', frameon=False, fontsize=11, title_fontsize=12)
     plt.tight_layout()
-    out = os.path.join(OUT_DIR, f'Fig_glycan_profiling_{protein}.png')
-    plt.savefig(out, dpi=300, bbox_inches='tight')
-    plt.close()
-    print(f"  已保存: {out}")
-
-
-# ══════════════════════════════════════════════════════════════════════════════
-# Fig B — OVAL Gallus vs Columba 直接两物种对比（保留原 extract_oval_glycans 功能）
-# ══════════════════════════════════════════════════════════════════════════════
-def plot_oval_two_species_comparison():
-    """(原 extract_oval_glycans.py) Gallus vs Columba 两列对比图"""
-    gallus_data  = get_protein_abundance('OVAL', 'Gallus')
-    columba_data = get_protein_abundance('OVAL', 'Columba')
-
-    if gallus_data is None or columba_data is None:
-        print("  OVAL 两物种数据不完整，跳过对比图")
-        return
-
-    df_plot = pd.DataFrame({
-        'Gallus (Chicken)': gallus_data,
-        'Columba (Pigeon)': columba_data,
-    }).fillna(0)
-
-    plot_classes = [c for c in ORDERED_CLASSES if c in df_plot.index]
-    df_plot = df_plot.loc[plot_classes]
-
-    print("\n--- OVAL Gallus vs Columba 糖型相对丰度 (%) ---")
-    print(df_plot.round(2))
-
-    fig, ax = plt.subplots(figsize=(8, 6))
-    bottom = np.zeros(2)
-    for cls in df_plot.index:
-        vals = df_plot.loc[cls].values
-        ax.bar(df_plot.columns, vals, bottom=bottom, label=cls,
-               color=COLOR_MAP.get(cls, '#333333'), edgecolor='white', width=0.5)
-        bottom += vals
-
-    ax.set_ylabel('Relative Abundance (%)', fontsize=14, fontweight='bold')
-    ax.set_title('OVAL Glycosylation Profiling: Gallus vs. Columba',
-                 fontsize=16, fontweight='bold', pad=20)
-    ax.legend(title='Glycan Classification', bbox_to_anchor=(1.05, 1),
-              loc='upper left', frameon=False, fontsize=11, title_fontsize=12)
-    plt.tight_layout()
-    out = os.path.join(OUT_DIR, 'Fig_glycan_profiling_OVAL_vs_Columba.png')
+    _suffix = '_noleg' if NOLEG else ''
+    out = os.path.join(OUT_DIR, f'Fig_glycan_profiling_{protein}{_suffix}.png')
     plt.savefig(out, dpi=300, bbox_inches='tight')
     plt.close()
     print(f"  已保存: {out}")
@@ -245,13 +187,10 @@ if __name__ == '__main__':
     proteins     = ['OVAL', 'OC116', 'TRFE', 'OC17']
     species_list = ['Gallus', 'Anas', 'Columba']
 
-    print("=== Fig A: 各蛋白糖型分析（三物种） ===")
+    print("=== 各蛋白糖型分析（三物种） ===")
     for protein in proteins:
         print(f"\n{'='*40}")
         print(f"正在处理 {protein} ...")
         plot_protein_glycan_profiling(protein, species_list)
-
-    print("\n=== Fig B: OVAL Gallus vs Columba 直接对比 ===")
-    plot_oval_two_species_comparison()
 
     print("\n全部糖型分析完成！")

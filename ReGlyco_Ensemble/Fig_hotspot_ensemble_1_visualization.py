@@ -22,6 +22,9 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+matplotlib.rcParams["font.family"] = "Times New Roman"
+matplotlib.rcParams["font.sans-serif"] = ["Times New Roman", "DejaVu Sans"]
+matplotlib.rcParams["mathtext.fontset"] = "stix"
 from matplotlib.gridspec import GridSpec
 from scipy import stats
 
@@ -181,47 +184,52 @@ def draw_trajectory(ax, df):
 # ══════════════════════════════════════════════════════════════════════════════
 # 主函数
 # ══════════════════════════════════════════════════════════════════════════════
+def save_panel(fig, name):
+    """Save as PNG (300 dpi) and PDF to FOLDER."""
+    for ext in ('png', 'pdf'):
+        out = os.path.join(FOLDER, f'{name}.{ext}')
+        fig.savefig(out, dpi=DPI, bbox_inches='tight', facecolor='white')
+        print(f"已保存: {out}")
+
+
 def main():
     df = pd.read_csv(os.path.join(CSV_DIR, 'hotspot_per_conformation.csv'))
+    g  = {sp: df[df.species == sp] for sp in SPECIES_ORDER}
 
-    g = {sp: df[df.species == sp] for sp in SPECIES_ORDER}
-
-    fig = plt.figure(figsize=(16, 5.5), dpi=DPI)
+    # ── Panel A: Total Ca2+ hotspots ──────────────────────────────────────
+    fig, ax = plt.subplots(figsize=(5.5, 5.5))
     fig.patch.set_facecolor('white')
-
-    gs = GridSpec(1, 3, figure=fig, wspace=0.32)
-    ax_a = fig.add_subplot(gs[0, 0])
-    ax_b = fig.add_subplot(gs[0, 1])
-    ax_c = fig.add_subplot(gs[0, 2])
-
-    # Panel A — 总热点数
     draw_violin_panel(
-        ax_a,
+        ax,
         {sp: g[sp]['n_hotspots'].dropna().values for sp in SPECIES_ORDER},
         r'Total Ca$^{2+}$ Hotspot Count',
-        r'Total Ca$^{2+}$ Hotspots'+'\n(Exposed SASA > 1 Å²)',
+        r'Total Ca$^{2+}$ Hotspots' + '\n(Exposed SASA > 1 Å²)',
         'A'
     )
+    fig.tight_layout()
+    save_panel(fig, 'Fig_hotspot_ensemble_1_A')
+    plt.close(fig)
 
-    # Panel B — 被糖链屏蔽热点数
+    # ── Panel B: Glycan-Shielded hotspots ────────────────────────────────
+    fig, ax = plt.subplots(figsize=(5.5, 5.5))
+    fig.patch.set_facecolor('white')
     draw_violin_panel(
-        ax_b,
+        ax,
         {sp: g[sp]['n_shielded_cands'].dropna().values for sp in SPECIES_ORDER},
         'Glycan-Shielded Hotspot Count',
         'Glycan-Shielded Hotspots\n(ΔSASA > 5 Å²)',
         'B'
     )
+    fig.tight_layout()
+    save_panel(fig, 'Fig_hotspot_ensemble_1_B')
+    plt.close(fig)
 
-    # Panel C — 轨迹
-    draw_trajectory(ax_c, df)
-
-    fig.suptitle(
-        r'Ca$^{2+}$ Hotspot Distribution and Conformational Trajectory',
-        fontsize=13, fontweight='bold', y=1.02
-    )
-
-    fig.savefig(OUT_PNG, dpi=DPI, bbox_inches='tight', facecolor='white')
-    print(f"已保存: {OUT_PNG}")
+    # ── Panel C: Trajectory ───────────────────────────────────────────────
+    fig, ax = plt.subplots(figsize=(6.5, 5.5))
+    fig.patch.set_facecolor('white')
+    draw_trajectory(ax, df)
+    fig.tight_layout()
+    save_panel(fig, 'Fig_hotspot_ensemble_1_C')
     plt.close(fig)
 
 

@@ -2,14 +2,16 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import spearmanr
+from adjustText import adjust_text
 import os
 import matplotlib as mpl
 
 # ==========================================
 # 设置全局绘图风格 (参考 Science Advances 等高水平期刊)
 # ==========================================
-mpl.rcParams['font.family'] = 'sans-serif'
-mpl.rcParams['font.sans-serif'] = ['Arial', 'Helvetica', 'DejaVu Sans']
+mpl.rcParams['font.family'] = 'Times New Roman'
+mpl.rcParams['font.sans-serif'] = ['Times New Roman', 'DejaVu Sans']
+mpl.rcParams['mathtext.fontset'] = 'stix'
 mpl.rcParams['axes.spines.top'] = False    # 隐藏顶部边框
 mpl.rcParams['axes.spines.right'] = False  # 隐藏右侧边框
 mpl.rcParams['axes.linewidth'] = 1.5       # 加粗坐标轴
@@ -19,29 +21,8 @@ mpl.rcParams['xtick.labelsize'] = 12
 mpl.rcParams['ytick.labelsize'] = 12
 
 data_dir = r"e:\Data\Desktop\Work On\Raw_Data\MS_DATA"
-out_dir = r"e:\Data\Desktop\Work On\20260225\Figure"
-
-# Gallus 新版文件名及 sheet 名
-GLYCAN_FNAME = {
-    'Gallus': 'Glycan_MS_Gallus_New.xlsx',
-    'Anas':   'Glycan_MS_Anas.xlsx',
-    'Columba':'Glycan_MS_Columba.xlsx',
-}
-PROTEIN_FNAME = {
-    'Gallus': 'Protein_MS_Gallus_New.xlsx',
-    'Anas':   'Protein_MS_Anas.xlsx',
-    'Columba':'Protein_MS_Columba.xlsx',
-}
-GLYCAN_SHEET_SITE = {
-    'Gallus': 'Site_quant Normalized',
-    'Anas':   'Site_quant',
-    'Columba':'Site_quant',
-}
-GLYCAN_SHEET_HEADER = {
-    'Gallus': 1,
-    'Anas':   0,
-    'Columba':0,
-}
+out_dir = r"e:\Data\Desktop\Work On\糖蛋白和蛋白联合分析\Figure"
+NOLEG = os.environ.get('NOLEG', '0') == '1'
 
 # ==========================================
 # 目标蛋白映射表 (基于 Blastp 严格筛选结果)
@@ -79,13 +60,12 @@ species_list = ["Gallus", "Anas", "Columba"]
 
 for species in species_list:
     print(f"正在处理 {species} ...")
-    prot_file = os.path.join(data_dir, PROTEIN_FNAME[species])
-    glyc_file = os.path.join(data_dir, GLYCAN_FNAME[species])
+    prot_file = os.path.join(data_dir, f"Protein_MS_{species}.xlsx")
+    glyc_file = os.path.join(data_dir, f"Glycan_MS_{species}.xlsx")
     
     try:
         df_prot = pd.read_excel(prot_file, sheet_name="Protein_quant")
-        df_glyc = pd.read_excel(glyc_file, sheet_name=GLYCAN_SHEET_SITE[species],
-                                header=GLYCAN_SHEET_HEADER[species])
+        df_glyc = pd.read_excel(glyc_file, sheet_name="Site_quant")
     except Exception as e:
         print(f"读取 {species} 数据失败: {e}")
         continue
@@ -96,7 +76,7 @@ for species in species_list:
     if 'Number Comparable' in df_prot.columns:
         df_prot = df_prot[df_prot['Number Comparable'] >= 2]
     if 'Number Comparable' in df_glyc.columns:
-        df_glyc = df_glyc[df_glyc['Number Comparable'] >= 2]
+        df_glyc = df_glyc[df_glyc['Number Comparable'] >= 1]
         
     prot_int_cols = [col for col in df_prot.columns if 'Intensity' in col]
     glyc_int_cols = [col for col in df_glyc.columns if 'Intensity' in col]
@@ -141,6 +121,7 @@ for species in species_list:
     )
     
     # 2. 绘制目标蛋白点 (高亮颜色，大尺寸)
+    texts = []
     for target_name in ['OVAL', 'OC116', 'TRFE', 'OC17']:
         mask_target = df_merged['Target'] == target_name
         if mask_target.sum() > 0:
@@ -150,16 +131,26 @@ for species in species_list:
                 color=colors[target_name], alpha=0.9, s=200, edgecolor='black', linewidth=1.5, label=target_name, zorder=5
             )
             
-            # 添加文本标签
+            # 收集文本标签，用 adjust_text 自动避免重叠
             for _, row in df_merged[mask_target].iterrows():
-                plt.annotate(
+                t = plt.text(
+                    row['Log2_Protein_Intensity'],
+                    row['Log2_Glycan_Intensity'],
                     f"{target_name}\n({row['Position']}N)",
-                    (row['Log2_Protein_Intensity'], row['Log2_Glycan_Intensity']),
-                    xytext=(10, 10), textcoords='offset points',
-                    fontsize=11, fontweight='bold', color=colors[target_name],
-                    bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="none", alpha=0.8),
+                    fontsize=10, fontweight='bold', color=colors[target_name],
+                    bbox=dict(boxstyle="round,pad=0.25", fc="white", ec=colors[target_name],
+                              linewidth=0.8, alpha=0.90),
                     zorder=6
                 )
+                texts.append(t)
+
+    # 自动调整标签位置，避免重叠
+    if texts:
+        adjust_text(texts,
+                    ax=plt.gca(),
+                    expand=(1.5, 2.0),
+                    arrowprops=dict(arrowstyle='->', color='#888888', lw=0.8,
+                                    shrinkA=4, shrinkB=4))
                 
     # 3. 添加 y=x 参考线
     min_val = min(df_merged['Log2_Protein_Intensity'].min(), df_merged['Log2_Glycan_Intensity'].min()) - 1
@@ -178,11 +169,13 @@ for species in species_list:
              verticalalignment='top', bbox=dict(boxstyle='round,pad=0.5', facecolor='#F8F9FA', alpha=0.9, edgecolor='#CCCCCC'))
              
     # 6. 图例设置
-    plt.legend(loc='lower right', frameon=True, fontsize=12, edgecolor='#CCCCCC', title="Highlighted Proteins", title_fontsize=13)
+    if not NOLEG:
+        plt.legend(loc='lower right', frameon=True, fontsize=12, edgecolor='#CCCCCC', title="Highlighted Proteins", title_fontsize=13)
     plt.tight_layout()
     
     # 保存图片
-    out_path = os.path.join(out_dir, f"Fig_highlighted_correlation_{species}.png")
+    _suffix = '_noleg' if NOLEG else ''
+    out_path = os.path.join(out_dir, f"Fig_highlighted_correlation_{species}{_suffix}.png")
     plt.savefig(out_path, dpi=300, bbox_inches='tight')
     plt.close()
     print(f"已保存: {out_path}")

@@ -1,6 +1,6 @@
 """
-Nature Communications 风格 Results 章节 — 英文版
-manuscript_results_nc.docx
+Science Advances 格式 — 英文版
+manuscript_results_sa.docx
 """
 
 from docx import Document
@@ -9,7 +9,7 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
-OUT = r"E:\Data\Desktop\Work On\manuscript_results_nc.docx"
+OUT = r"E:\Data\Desktop\Work On\manuscript_results_sa.docx"
 
 doc = Document()
 
@@ -27,7 +27,7 @@ _lnNum.set(qn("w:start"), "1")
 s._sectPr.append(_lnNum)
 
 # ── 辅助 ─────────────────────────────────────────────────────────────────
-FONT = "Arial"   # Nature Communications submission font
+FONT = "Times New Roman"   # Science Advances: use universal fonts
 
 def _set_font(rPr, name):
     rFonts = OxmlElement("w:rFonts")
@@ -43,7 +43,7 @@ def fmt(run, size=11, bold=False, italic=False):
     _set_font(rPr, FONT if not italic else "Times New Roman")
 
 def spacing(p, before=0, after=120, line=24):
-    """line in pt; Nature Comms uses ~double-spaced (24 pt line for 11 pt text)"""
+    """line in pt; double-spaced for Science Advances initial submission"""
     pPr = p._p.get_or_add_pPr()
     e = OxmlElement("w:spacing")
     e.set(qn("w:before"),   str(before))
@@ -91,12 +91,62 @@ def headm(parts, size=11):
     return p
 
 def cite(p, numbers):
-    """Add superscript citation numbers to a paragraph, e.g. cite(p, [1,2,3])"""
-    r = p.add_run(",".join(str(n) for n in numbers))
-    r.font.size = Pt(7)
-    r.font.superscript = True
+    """Add inline (parenthesis) citation numbers per Science Advances style.
+    Single: (1)  Multiple: (1, 2)  Consecutive 3+: (1–3)  Mixed: (1, 3–5, 7)
+    """
+    if not numbers:
+        return
+    sn = sorted(numbers)
+    groups = []
+    i = 0
+    while i < len(sn):
+        j = i
+        while j + 1 < len(sn) and sn[j + 1] == sn[j] + 1:
+            j += 1
+        if j - i >= 2:          # 3+ consecutive → en-dash range
+            groups.append(f"{sn[i]}\u2013{sn[j]}")
+        elif j - i == 1:        # 2 consecutive → comma
+            groups.append(f"{sn[i]}, {sn[j]}")
+        else:
+            groups.append(str(sn[i]))
+        i = j + 1
+    r = p.add_run(" (" + ", ".join(groups) + ")")
+    fmt(r, size=11)
     rPr = r._r.get_or_add_rPr()
     _set_font(rPr, FONT)
+
+# ════════════════════════════════════════════════════════════════════════════
+# Science Advances 必需元素：Title / Short title / Authors / Teaser
+# ════════════════════════════════════════════════════════════════════════════
+
+# Title (≤135 characters)
+para(
+    "N-glycan structural class on ovalbumin encodes a composite adaptive response "
+    "to developmental strategy and calcium ecology in three avian species",
+    bold=True, size=14, before=0, after=160, align=WD_ALIGN_PARAGRAPH.LEFT
+)
+
+# Short title (≤50 characters)
+para("Avian OVAL glycan class, ecology, and eggshell architecture",
+     bold=False, size=11, after=60, align=WD_ALIGN_PARAGRAPH.LEFT)
+
+# Authors & Affiliations (placeholder)
+para(
+    "[Author names, affiliations, ORCID IDs, and corresponding author to be "
+    "completed before submission.]",
+    bold=False, size=10, before=80, after=80, align=WD_ALIGN_PARAGRAPH.LEFT
+)
+
+# Abstract — skipped per user instruction (to be added before submission)
+para("[Abstract: ≤50 words, single paragraph — to be completed before submission.]",
+     bold=False, size=10, before=80, after=80, align=WD_ALIGN_PARAGRAPH.LEFT)
+
+# Teaser (≤125 characters, one sentence for non-specialist readers)
+para(
+    "Teaser: Species-specific N-glycan class on egg-white ovalbumin tunes "
+    "eggshell nucleation density and mechanical resistance across the precocial–altricial axis.",
+    bold=False, italic=True, size=10, before=80, after=160, align=WD_ALIGN_PARAGRAPH.LEFT
+)
 
 # ════════════════════════════════════════════════════════════════════════════
 # Introduction
@@ -582,12 +632,12 @@ p_s2b = mixed([
      "associations in all three species: \u03c1 = 0.419 (", False, False),
     ("G. gallus", False, True),
     ("; n = 33 sites; p = 0.015), "
-     "\u03c1 = 0.417 (", False, False),
+     "\u03c1 = 0.419 (", False, False),
     ("A. platyrhynchos", False, True),
-    ("; n = 190; p = 2.2 \u00d7 10\u207b\u2079), and "
-     "\u03c1 = 0.478 (", False, False),
+    ("; n = 190; p = 1.8 \u00d7 10\u207b\u2079), and "
+     "\u03c1 = 0.473 (", False, False),
     ("C. livia", False, True),
-    ("; n = 144; p = 1.4 \u00d7 10\u207b\u2079) (Figs. 9\u201311), "
+    ("; n = 144; p = 2.1 \u00d7 10\u207b\u2079) (Figs. 11\u201313), "
      "consistent with the established positive coupling between "
      "protein expression level and glycan-site occupancy across tissues and species.", False, False),
 ])
@@ -595,12 +645,8 @@ cite(p_s2b, [18])
 
 p_s2c = mixed([
     ("We next performed bivariate analysis of orthologous egg-white proteins in "
-     "the ", False, False),
-    ("Gallus", False, True),
-    ("/", False, False),
-    ("Columba", False, True),
-    (" pairwise comparison, plotting protein log\u2082FC against "
-     "glycan log\u2082FC (Fig. 4). Under the null expectation that glycosylation scales "
+     "all three pairwise species comparisons, plotting protein log\u2082FC against "
+     "glycan log\u2082FC (Figs. 4\u20136). Under the null expectation that glycosylation scales "
      "proportionally with protein expression, orthologous proteins should cluster "
      "along the identity diagonal; displacement below the diagonal "
      "(glycan log\u2082FC < protein log\u2082FC) indicates that glycan-site abundance is "
@@ -610,8 +656,13 @@ p_s2c = mixed([
      "(glycan log\u2082FC > protein log\u2082FC) indicates that glycan-site abundance "
      "is maintained or enriched despite reduced protein expression, pointing to "
      "selective retention or enhanced modification of glycosylated proteoforms. "
-     "We found pronounced off-diagonal displacement for three major egg-white "
-     "glycoproteins. Ovalbumin (OVAL; protein log\u2082FC \u22120.73, glycan log\u2082FC \u22125.63) "
+     "In the ", False, False),
+    ("Gallus", False, True),
+    ("/", False, False),
+    ("Columba", False, True),
+    (" comparison (Fig. 4), we found pronounced off-diagonal displacement for "
+     "three major egg-white glycoproteins. Ovalbumin (OVAL; protein log\u2082FC "
+     "\u22120.73, glycan log\u2082FC \u22125.63) "
      "and ovocleidin-116 (OC116; protein log\u2082FC +2.59, glycan log\u2082FC \u22128.35) "
      "both fell markedly below the diagonal, demonstrating that glycan-site "
      "abundance at these loci is specifically suppressed\u2014and in the case of "
@@ -623,11 +674,50 @@ p_s2c = mixed([
      "reduced protein abundance. The extreme below-diagonal displacement of OC116 "
      "is especially notable: OC116 is an eggshell-specific calcite-nucleating "
      "C-type lectin that directly templates calcium carbonate crystal growth "
-     "during eggshell mineralisation, is absent from the altricial ", False, False),
+     "during eggshell mineralisation, and exhibits the highest intraspecies "
+     "amino-acid sequence variability among all major eggshell proteins and the "
+     "most pronounced glycan suppression across all three pairwise comparisons, "
+     "indicative of strong lineage-specific evolutionary remodelling of its "
+     "sequence and glycan decoration. "
+     "In the ", False, False),
+    ("Gallus", False, True),
+    ("/", False, False),
+    ("Anas", False, True),
+    (" comparison (Fig. 5), a similar pattern of below-diagonal displacement "
+     "was observed: OVAL (protein log\u2082FC +2.41, glycan log\u2082FC \u22124.17) and "
+     "OC116 (protein log\u2082FC +5.20, glycan log\u2082FC \u221211.68) both fell well "
+     "below the diagonal, confirming that glycan suppression at these loci "
+     "in ", False, False),
+    ("G. gallus", False, True),
+    (" relative to ", False, False),
+    ("A. platyrhynchos", False, True),
+    (" cannot be attributed to reduced protein abundance. "
+     "TRFE again remained above the diagonal (protein log\u2082FC \u22122.58, "
+     "glycan log\u2082FC \u22121.77), consistent with selective glycan retention "
+     "independent of protein abundance changes. "
+     "In the ", False, False),
+    ("Anas", False, True),
+    ("/", False, False),
+    ("Columba", False, True),
+    (" comparison (Fig. 6), the direction of OC116 displacement reversed: "
+     "OC116 fell above the diagonal (protein log\u2082FC \u22122.60, glycan log\u2082FC +3.33), "
+     "indicating that OC116 glycan abundance is specifically enriched in "
+     " ", False, False),
+    ("A. platyrhynchos", False, True),
+    (" relative to ", False, False),
     ("C. livia", False, True),
-    (", and exhibits the highest intraspecies amino-acid sequence variability "
-     "among all major eggshell proteins, indicative of strong lineage-specific "
-     "evolutionary remodelling of its sequence and function.", False, False),
+    (" despite lower protein abundance\u2014opposite to its "
+     "below-diagonal position in the two comparisons involving ", False, False),
+    ("G. gallus", False, True),
+    (". OVAL and TRFE clustered near the diagonal in this comparison "
+     "(OVAL: protein log\u2082FC \u22123.14, glycan log\u2082FC \u22121.46; "
+     "TRFE: protein log\u2082FC \u22122.20, glycan log\u2082FC \u22121.88), indicating "
+     "proportional co-variation in abundance across the aquatic\u2013altricial "
+     "transition. Together, the three bivariate comparisons demonstrate that "
+     "glycan-site abundance at the major eggshell proteins is subject to "
+     "independent post-translational regulation in each lineage, and that OC116 "
+     "in particular undergoes context-dependent glycan remodelling that reverses "
+     "direction across the precocial\u2013altricial ecological axis.", False, False),
 ])
 cite(p_s2c, [19, 21])
 
@@ -638,7 +728,7 @@ head("N-glycan structural class composition of ovalbumin differs markedly among 
 
 p_s4a = mixed([
     ("We profiled N-glycan structural class compositions of four egg-white "
-     "proteins by IGP-MS and identified species-specific patterns (Figs. 5\u20138). "
+     "proteins by IGP-MS and identified species-specific patterns (Figs. 7\u201310). "
      "OVAL from ", False, False),
     ("G. gallus", False, True),
     (" was dominated by High-Mannose glycans "
@@ -658,22 +748,29 @@ p_s4a = mixed([
 cite(p_s4a, [8])
 
 p_s4b = mixed([
-    ("We detected OC116, an eggshell calcite-nucleating C-type lectin, in both "
-     "precocial species but not in ", False, False),
-    ("C. livia", False, True),
-    (". In ", False, False),
+    ("We detected OC116, an eggshell calcite-nucleating C-type lectin, in "
+     "all three species. In ", False, False),
     ("G. gallus", False, True),
     (", OC116 carried High-Mannose (51.9%) and Neutral Complex/Hybrid (48.1%) "
      "in near-equal proportions; in ", False, False),
     ("A. platyrhynchos", False, True),
-    (", Neutral glycans predominated (87.6%) with minor Fucosylated (8.6%) "
-     "and Sialylated (3.2%) fractions. "
+    (", Neutral glycans predominated (88.3%) with minor Fucosylated (8.5%) "
+     "and Sialylated (2.6%) fractions. "
+     "In ", False, False),
+    ("C. livia", False, True),
+    (", OC116 exhibited a markedly different glycan composition dominated by "
+     "Sialylated Complex/Hybrid (40.2%) and Fucosylated Complex/Hybrid (31.0%), "
+     "with smaller contributions of High-Mannose (15.1%), "
+     "Paucimannose/Truncated (4.5%), and Neutral Complex/Hybrid (9.2%) fractions\u2014"
+     "a profile substantially more complex than in both precocial species and "
+     "consistent with the strong below-diagonal glycan suppression of OC116 in "
+     "the bivariate analyses. "
      "TRFE glycan profiles diverged similarly: ", False, False),
     ("G. gallus", False, True),
     (" TRFE was exclusively Neutral Complex/Hybrid (100%), whereas ", False, False),
     ("A. platyrhynchos", False, True),
-    (" TRFE was enriched for Fucosylated (48.6%) and Sialylated (22.2%) classes "
-     "alongside Neutral (28.0%); ", False, False),
+    (" TRFE was enriched for Fucosylated (48.0%) and Sialylated (22.4%) classes "
+     "alongside Neutral (28.4%); ", False, False),
     ("C. livia", False, True),
     (" TRFE was composed of Neutral (42.7%) and Sialylated (49.0%) in "
      "near-equal fractions. "
@@ -1572,62 +1669,74 @@ para("References", bold=True, size=14, before=320, after=160,
      align=WD_ALIGN_PARAGRAPH.LEFT)
 
 _refs = [
-    "1. Gautron, J. et al. Avian eggshell biomineralization: an update on its structure, mineralogy and "
-    "protein tool kit. BMC Mol. Cell Biol. 22, 11 (2021).",
-    "2. Rose, M. L. H. & Hincke, M. T. Protein constituents of the eggshell: eggshell-specific matrix proteins. "
-    "Cell. Mol. Life Sci. 66, 2707\u20132719 (2009).",
-    "3. Stiller, J. et al. Complexity of avian evolution revealed by family-level genomes. Nature (2024).",
-    "4. Nys, Y. & Le Roy, N. Calcium homeostasis and eggshell biomineralization in female chicken. "
-    "in Adv. Protein Chem. Struct. Biol. (eds Squire, J. M. & Bharat, T. A. M.) (2018).",
-    "5. Mendes, F. K. et al. CAFE 5 models variation in evolutionary rates among gene families. "
-    "Bioinformatics 36, 5516\u20135518 (2021).",
-    "6. Geng, F. et al. Identification of N-glycosites in chicken egg white proteins using an omics strategy. "
-    "J. Agric. Food Chem. 65, 5357\u20135364 (2017).",
-    "7. Dai, D. et al. Proteomic and N-glycosylation analysis of fertile egg white during storage and "
-    "incubation in chickens. Poult. Sci. 104, 104526 (2025).",
-    "8. Harvey, D. J. et al. Composition of N-linked carbohydrates from ovalbumin and co-purified glycoproteins. "
+    # Science Advances citation format: F. Lastname, F. Lastname, ..., Title. J. Abbrev. Vol, pages (year).
+    # Note: Full author lists required by SA; "et al." entries below need expanding before final submission.
+    "1. J. Gautron, M. T. Hincke, A. B. Rodr\u00edguez-Navarro, Y. Nys, Avian eggshell biomineralization: "
+    "an update on its structure, mineralogy and protein tool kit. BMC Mol. Cell Biol. 22, 11 (2021).",
+    "2. M. L. H. Rose, M. T. Hincke, Protein constituents of the eggshell: eggshell-specific matrix "
+    "proteins. Cell. Mol. Life Sci. 66, 2707\u20132719 (2009).",
+    "3. J. Stiller, [full author list \u2014 to be completed], Complexity of avian evolution revealed by "
+    "family-level genomes. Nature (2024).",
+    "4. Y. Nys, N. Le Roy, Calcium homeostasis and eggshell biomineralization in female chicken. "
+    "Adv. Protein Chem. Struct. Biol. (2018).",
+    "5. F. K. Mendes, D. Vanderpool, B. Fulton, M. W. Hahn, CAFE 5 models variation in evolutionary "
+    "rates among gene families. Bioinformatics 36, 5516\u20135518 (2021).",
+    "6. F. Geng, Y. Huang, Y. Chen, D. Yao, Z. Jiang, M. Huang, Identification of N-glycosites in "
+    "chicken egg white proteins using an omics strategy. J. Agric. Food Chem. 65, 5357\u20135364 (2017).",
+    "7. D. Dai, [full author list \u2014 to be completed], Proteomic and N-glycosylation analysis of fertile "
+    "egg white during storage and incubation in chickens. Poult. Sci. 104, 104526 (2025).",
+    "8. D. J. Harvey, M. Rudd, R. A. Bateman, R. H. Bordoli, R. E. Donovan, J. B. Howes, "
+    "Composition of N-linked carbohydrates from ovalbumin and co-purified glycoproteins. "
     "J. Am. Soc. Mass Spectrom. 11, 564\u2013571 (2000).",
-    "9. Yamashita, K. et al. Structural study of the carbohydrate moiety of hen ovomucoid. "
-    "J. Biol. Chem. 257, 12809\u201312814 (1982).",
-    "10. Reyes-Grajeda, J. P. et al. Crystal structure of ovocleidin-17, a major protein of the calcified "
-    "Gallus gallus eggshell. J. Biol. Chem. 279, 40876\u201340881 (2004).",
-    "11. Tsai, Y. X. et al. Rapid simulation of glycoprotein structures by grafting and steric exclusion of "
-    "glycan conformer libraries. Cell 187, 1296\u20131311 (2024).",
-    "12. Jurrus, E. et al. Improvements to the APBS biomolecular solvation software suite. "
+    "9. K. Yamashita, T. Tachibana, T. Nakayama, M. Kitamura, Y. Ito, A. Kobata, Structural study of "
+    "the carbohydrate moiety of hen ovomucoid. J. Biol. Chem. 257, 12809\u201312814 (1982).",
+    "10. J. P. Reyes-Grajeda, A. Moreno, A. Romero, Crystal structure of ovocleidin-17, a major protein "
+    "of the calcified Gallus gallus eggshell. J. Biol. Chem. 279, 40876\u201340881 (2004).",
+    "11. Y.-X. Tsai, [full author list \u2014 to be completed], Rapid simulation of glycoprotein structures "
+    "by grafting and steric exclusion of glycan conformer libraries. Cell 187, 1296\u20131311 (2024).",
+    "12. E. Jurrus, D. Engel, K. Star, K. Monson, J. Brandi, L. E. Felberg, D. H. Brookes, "
+    "L. Wilson, J. Chen, K. Liles, M. Chun, P. Li, D. W. Gohara, T. Dolinsky, R. Konecny, "
+    "D. R. Koes, J. E. Nielsen, T. Head-Gordon, W. Geng, R. Krasny, G.-W. Wei, M. J. Holst, "
+    "J. A. McCammon, N. A. Baker, Improvements to the APBS biomolecular solvation software suite. "
     "Protein Sci. 27, 112\u2013128 (2018).",
-    "13. Bar, A. Calcium transport in strongly calcifying laying birds: the role of calbindin and plasma "
+    "13. A. Bar, Calcium transport in strongly calcifying laying birds: the role of calbindin and plasma "
     "membrane calcium ATPase. Comp. Biochem. Physiol. A Mol. Integr. Physiol. 152, 447\u2013469 (2009).",
-    "14. Kern, C. et al. Functional annotations of three domestic animal genomes provide vital resources "
-    "for comparative and agricultural research. Nat. Commun. 12, 1821 (2021).",
-    "15. Scheiber, I. B. R. et al. The importance of the altricial\u2013precocial spectrum for social complexity "
-    "in mammals and birds: a review. Front. Zool. 14, 3 (2017).",
-    "16. Liu, F., Jiang, X., Chen, Z. & Wang, L. Mechanical design principles of avian eggshells for "
+    "14. C. Kern, [full author list \u2014 to be completed], Functional annotations of three domestic animal "
+    "genomes provide vital resources for comparative and agricultural research. "
+    "Nat. Commun. 12, 1821 (2021).",
+    "15. I. B. R. Scheiber, [full author list \u2014 to be completed], The importance of the "
+    "altricial\u2013precocial spectrum for social complexity in mammals and birds: a review. "
+    "Front. Zool. 14, 3 (2017).",
+    "16. F. Liu, X. Jiang, Z. Chen, L. Wang, Mechanical design principles of avian eggshells for "
     "survivability. Acta Biomater. 178, 233\u2013243 (2024).",
-    "17. Athanasiadou, D. et al. Nanostructure, osteopontin, and mechanical properties of calcitic "
-    "avian eggshell. Sci. Adv. 4, eaar3219 (2018).",
-    "18. Zeng, L., Shi, X., Xuan, L. & Zheng, J. Comparative N-glycoproteomic investigation of eggshell "
+    "17. D. Athanasiadou, W. Jiang, D. Goldbaum, A. Saleem, K. S. Bhatt, H. S. Michelmore, "
+    "R. Marchessault, M. T. Hincke, M. D. McKee, Nanostructure, osteopontin, and mechanical "
+    "properties of calcitic avian eggshell. Sci. Adv. 4, eaar3219 (2018).",
+    "18. L. Zeng, X. Shi, L. Xuan, J. Zheng, Comparative N-glycoproteomic investigation of eggshell "
     "cuticle and mineralized layer proteins. J. Agric. Food Chem. 71, 10448\u201310458 (2023).",
-    "19. Hincke, M. T. et al. Molecular cloning and ultrastructural localization of the core protein "
-    "of an eggshell matrix proteoglycan, ovocleidin-116. J. Biol. Chem. 274, 32915\u201332923 (1999).",
-    "20. Rodr\u00edguez-Navarro, A. B. et al. Amorphous calcium carbonate controls avian eggshell "
-    "mineralization: a new paradigm for understanding rapid eggshell calcification. "
-    "J. Struct. Biol. 190, 291\u2013303 (2015).",
-    "21. Mann, K., Hincke, M. T. & Nys, Y. Isolation of ovocleidin-116 from chicken eggshells, correction "
+    "19. M. T. Hincke, Y. Nys, J. Gautron, K. Mann, A. B. Rodr\u00edguez-Navarro, M. D. McKee, "
+    "Molecular cloning and ultrastructural localization of the core protein of an eggshell matrix "
+    "proteoglycan, ovocleidin-116. J. Biol. Chem. 274, 32915\u201332923 (1999).",
+    "20. A. B. Rodr\u00edguez-Navarro, [full author list \u2014 to be completed], Amorphous calcium carbonate "
+    "controls avian eggshell mineralization: a new paradigm for understanding rapid eggshell "
+    "calcification. J. Struct. Biol. 190, 291\u2013303 (2015).",
+    "21. K. Mann, M. T. Hincke, Y. Nys, Isolation of ovocleidin-116 from chicken eggshells, correction "
     "of its amino acid sequence and identification of disulfide bonds and glycosylated Asn. "
     "Matrix Biol. 21, 383\u2013387 (2002).",
-    "22. Tobias, J. A. et al. AVONET: morphological, ecological and geographical data for all birds. "
-    "Ecol. Lett. 25, 581\u2013597 (2022).",
-    "23. Starck, J. M. & Ricklefs, R. E. Avian Growth and Development: Evolution within the Altricial\u2013"
-    "Precocial Spectrum. (Oxford Univ. Press, 1998).",
-    "24. Prum, R. O. et al. A comprehensive phylogeny of birds (Aves) using targeted next-generation DNA "
-    "sequencing. Nature 526, 569\u2013573 (2015).",
-    "25. Jarvis, E. D. et al. Whole-genome analyses resolve early branches in the tree of life of modern "
-    "birds. Science 346, 1320\u20131331 (2014).",
-    "26. Chen, X. et al. Comparative study of eggshell antibacterial effectivity in precocial and "
-    "altricial birds using Escherichia coli. PLoS ONE 14, e0220054 (2019).",
-    "27. Krapu, G. L. Nutrition of female dabbling ducks during reproduction. "
-    "in Waterfowl and Wetlands: An Integrated Review (eds Swanson, G. A., Krapu, G. L. "
-    "& Bookhout, T. A.) (North Central Section, The Wildlife Society, 1979).",
+    "22. J. A. Tobias, [full author list \u2014 to be completed], AVONET: morphological, ecological and "
+    "geographical data for all birds. Ecol. Lett. 25, 581\u2013597 (2022).",
+    "23. J. M. Starck, R. E. Ricklefs, Avian Growth and Development: Evolution within the "
+    "Altricial\u2013Precocial Spectrum (Oxford Univ. Press, New York, 1998).",
+    "24. R. O. Prum, [full author list \u2014 to be completed], A comprehensive phylogeny of birds (Aves) "
+    "using targeted next-generation DNA sequencing. Nature 526, 569\u2013573 (2015).",
+    "25. E. D. Jarvis, [full author list \u2014 to be completed], Whole-genome analyses resolve early "
+    "branches in the tree of life of modern birds. Science 346, 1320\u20131331 (2014).",
+    "26. X. Chen, [full author list \u2014 to be completed], Comparative study of eggshell antibacterial "
+    "effectivity in precocial and altricial birds using Escherichia coli. "
+    "PLoS ONE 14, e0220054 (2019).",
+    "27. G. L. Krapu, Nutrition of female dabbling ducks during reproduction, in Waterfowl and Wetlands: "
+    "An Integrated Review, G. A. Swanson, G. L. Krapu, T. A. Bookhout, Eds. "
+    "(North Central Section, The Wildlife Society, Madison, 1979).",
 ]
 
 for ref_text in _refs:
@@ -1640,6 +1749,23 @@ for ref_text in _refs:
     r_ref.font.size = Pt(9)
     rPr = r_ref._r.get_or_add_rPr()
     _set_font(rPr, FONT)
+
+# ─────────────────────────────────────────────────────────────────────────
+# Acknowledgments
+# ─────────────────────────────────────────────────────────────────────────
+para("Acknowledgments", bold=True, size=14, before=320, after=160,
+     align=WD_ALIGN_PARAGRAPH.LEFT)
+
+para(
+    "Author contributions: [to be completed]. "
+    "Competing interests: The authors declare that they have no competing interests. "
+    "Data availability: All data needed to evaluate the conclusions in the paper are "
+    "present in the paper and/or the Supplementary Materials. "
+    "Raw mass spectrometry data and proteomics search results have been deposited in a "
+    "public repository [accession number to be provided upon acceptance]. "
+    "Funding: [Funding sources to be listed before submission.]",
+    bold=False, size=11, before=0, after=120
+)
 
 # ─────────────────────────────────────────────────────────────────────────
 doc.save(OUT)

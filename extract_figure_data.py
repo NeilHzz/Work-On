@@ -28,6 +28,7 @@ warnings.filterwarnings("ignore")
 
 BASE        = Path(r"E:\Data\Desktop\Work On")
 MS_DATA_DIR = BASE / "Raw_Data" / "MS_DATA"
+FASTA_DIR   = BASE / "Raw_Data" / "原始fasta"
 OUT_DIR     = BASE / "Figure_Data_Tables"
 OUT_DIR.mkdir(exist_ok=True)
 
@@ -52,37 +53,9 @@ def get_int_cols(df, prefix_list):
 
 
 INT_PREFIX = {
-    "Gallus":  ["Intensity J"],
+    "Gallus":  ["Intensity G"],
     "Anas":    ["Intensity A"],
     "Columba": ["Intensity C"],
-}
-
-# 物种对应的 MS 文件名（Gallus 使用新版）
-GLYCAN_FNAME = {
-    "Gallus":  "Glycan_MS_Gallus_New.xlsx",
-    "Anas":    "Glycan_MS_Anas.xlsx",
-    "Columba": "Glycan_MS_Columba.xlsx",
-}
-PROTEIN_FNAME = {
-    "Gallus":  "Protein_MS_Gallus_New.xlsx",
-    "Anas":    "Protein_MS_Anas.xlsx",
-    "Columba": "Protein_MS_Columba.xlsx",
-}
-# 物种对应的 sheet 名（Gallus 新版 sheet 名带 Normalized）
-GLYCAN_SHEET_IGP = {
-    "Gallus":  "IGP_quant Normalized",
-    "Anas":    "IGP_quant",
-    "Columba": "IGP_quant",
-}
-GLYCAN_SHEET_SITE = {
-    "Gallus":  "Site_quant Normalized",
-    "Anas":    "Site_quant",
-    "Columba": "Site_quant",
-}
-GLYCAN_SHEET_HEADER = {
-    "Gallus":  1,  # 新版 Gallus 文件首行为分组标题，第二行才是列名
-    "Anas":    0,
-    "Columba": 0,
 }
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -285,12 +258,12 @@ def classify_glycan_7(g):
 
 
 def fig3_glycan_network():
-    ortho_path = BASE / "三物种糖蛋白BlastP" / "Orthogroups.txt.gz.txt"
+    ortho_path = BASE / "同源糖型蛋白圆环大图" / "Orthogroups.txt.gz.txt"
 
     gly_ids = {
-        "Gallus":  load_gly_ids_fasta(BASE / "Raw_Data" / "原始fasta" / "GlyGallus_New.fasta"),
-        "Anas":    load_gly_ids_fasta(BASE / "Raw_Data" / "原始fasta" / "GlyAnas.fasta"),
-        "Columba": load_gly_ids_fasta(BASE / "Raw_Data" / "原始fasta" / "GlyColumba.fasta"),
+        "Gallus":  load_gly_ids_fasta(FASTA_DIR / "GlyGallus.fasta"),
+        "Anas":    load_gly_ids_fasta(FASTA_DIR / "GlyAnas.fasta"),
+        "Columba": load_gly_ids_fasta(FASTA_DIR / "GlyColumba.fasta"),
     }
 
     # 解析 orthogroups
@@ -340,9 +313,9 @@ def fig3_glycan_network():
     prot_to_gtypes = defaultdict(set)
     glycan_chain_rows = []
     acc_sp = {}
-    MS_FILES = {sp: MS_DATA_DIR / GLYCAN_FNAME[sp] for sp in ["Gallus","Anas","Columba"]}
+    MS_FILES = {sp: MS_DATA_DIR / f"Glycan_MS_{sp}.xlsx" for sp in ["Gallus","Anas","Columba"]}
     for sp, fp in MS_FILES.items():
-        df_igp = pd.read_excel(fp, sheet_name=GLYCAN_SHEET_IGP[sp], header=GLYCAN_SHEET_HEADER[sp])
+        df_igp = pd.read_excel(fp, sheet_name="IGP_quant")
         int_cols = get_int_cols(df_igp, INT_PREFIX[sp])
         for _, row in df_igp.iterrows():
             acc  = str(row["Protein accession"]).strip()
@@ -414,9 +387,8 @@ TARGET_ACCS = {acc for pair in TARGET_PAIRS.values() for acc in pair}
 
 
 def load_protein_mean(sp):
-    df = pd.read_excel(MS_DATA_DIR / PROTEIN_FNAME[sp], sheet_name="Protein_quant")
-    if "Number Comparable" in df.columns:
-        df = df[df["Number Comparable"] >= 2].copy()
+    df = pd.read_excel(MS_DATA_DIR / f"Protein_MS_{sp}.xlsx", sheet_name="Protein_quant")
+    df = df[df["Number Comparable"] >= 2].copy()
     ic = get_int_cols(df, INT_PREFIX[sp])
     df["prot_mean"] = df[ic].replace(0, np.nan).mean(axis=1)
     df = df[df["prot_mean"] > 0]
@@ -425,8 +397,7 @@ def load_protein_mean(sp):
 
 
 def load_glycan_mean_sum(sp):
-    df = pd.read_excel(MS_DATA_DIR / GLYCAN_FNAME[sp], sheet_name=GLYCAN_SHEET_SITE[sp],
-                       header=GLYCAN_SHEET_HEADER[sp])
+    df = pd.read_excel(MS_DATA_DIR / f"Glycan_MS_{sp}.xlsx", sheet_name="Site_quant")
     ic = get_int_cols(df, INT_PREFIX[sp])
     df["glyc_mean"] = df[ic].replace(0, np.nan).mean(axis=1)
     df = df[df["glyc_mean"] > 0]
@@ -455,7 +426,7 @@ def fig4_2d_enrichment():
     glyc_ref  = load_glycan_mean_sum("Gallus")
     glyc_comp = load_glycan_mean_sum("Columba")
 
-    raw = pd.read_csv(BASE / "Raw_Data" / "原始fasta" / "Result", sep="\t")
+    raw = pd.read_csv(FASTA_DIR / "Result", sep="\t")
     raw["col_acc"] = raw["QueryID"].apply(extract_acc)
     raw["gal_acc"] = raw["SubjectDefID"].apply(extract_acc)
 
@@ -484,7 +455,7 @@ def fig4_2d_enrichment():
     blastp_map = dict(zip(best["col_acc"], best["gal_acc"]))
 
     # 读取 gene name
-    pg = pd.read_excel(MS_DATA_DIR / PROTEIN_FNAME["Gallus"], sheet_name="Protein_quant")
+    pg = pd.read_excel(MS_DATA_DIR / "Protein_MS_Gallus.xlsx", sheet_name="Protein_quant")
     acc2gene = dict(zip(pg["Protein accession"], pg["Gene name"].fillna("")))
 
     records = []
@@ -581,9 +552,9 @@ def fig_glycan_profiling(protein: str, fig_num: int):
         accs = TARGET_MAPPING[sp].get(protein, [])
         if not accs:
             continue
-        fp = MS_DATA_DIR / GLYCAN_FNAME[sp]
+        fp = MS_DATA_DIR / f"Glycan_MS_{sp}.xlsx"
         try:
-            df = pd.read_excel(fp, sheet_name=GLYCAN_SHEET_IGP[sp], header=GLYCAN_SHEET_HEADER[sp])
+            df = pd.read_excel(fp, sheet_name="IGP_quant")
         except Exception:
             continue
         df_t = df[df["Protein accession"].isin(accs)].copy()
@@ -645,12 +616,11 @@ def fig_glycan_profiling(protein: str, fig_num: int):
 # Figs 9-11  Highlighted Correlation Scatter
 # ══════════════════════════════════════════════════════════════════════════
 def fig_correlation(species: str, fig_num: int):
-    prot_fp = MS_DATA_DIR / PROTEIN_FNAME[species]
-    glyc_fp = MS_DATA_DIR / GLYCAN_FNAME[species]
+    prot_fp = MS_DATA_DIR / f"Protein_MS_{species}.xlsx"
+    glyc_fp = MS_DATA_DIR / f"Glycan_MS_{species}.xlsx"
 
     df_prot = pd.read_excel(prot_fp, sheet_name="Protein_quant")
-    df_glyc = pd.read_excel(glyc_fp, sheet_name=GLYCAN_SHEET_SITE[species],
-                             header=GLYCAN_SHEET_HEADER[species])
+    df_glyc = pd.read_excel(glyc_fp, sheet_name="Site_quant")
 
     if "Number Comparable" in df_prot.columns:
         df_prot = df_prot[df_prot["Number Comparable"] >= 2]

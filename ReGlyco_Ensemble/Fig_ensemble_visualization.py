@@ -27,6 +27,9 @@ from matplotlib.collections import PatchCollection
 from matplotlib.colors import TwoSlopeNorm
 from matplotlib.lines import Line2D
 import matplotlib.ticker as ticker
+matplotlib.rcParams["font.family"] = "Times New Roman"
+matplotlib.rcParams["font.sans-serif"] = ["Times New Roman", "DejaVu Sans"]
+matplotlib.rcParams["mathtext.fontset"] = "stix"
 from scipy import stats
 
 # ─── 配置 ─────────────────────────────────────────────────────────────────
@@ -527,6 +530,14 @@ def draw_apbs_strip(ax, summary, csv_map):
 # ══════════════════════════════════════════════════════════
 # 主函数
 # ══════════════════════════════════════════════════════════
+def save_panel(fig, name):
+    """Save as PNG (300 dpi) and PDF to OUT_DIR."""
+    for ext in ('png', 'pdf'):
+        out = os.path.join(OUT_DIR, f'{name}.{ext}')
+        fig.savefig(out, dpi=DPI, bbox_inches='tight', facecolor='white')
+        print(f"已保存: {out}")
+
+
 def main():
     print("载入数据...")
     csv_map, summary = load_data()
@@ -540,65 +551,48 @@ def main():
 
     n_rows_strip = len(present_glyc) + len(present_apo)
     ROW_H  = 0.44
-    fig_h  = ROW_H * n_rows_strip + 9.0
-    fig_w  = 18
 
-    fig = plt.figure(figsize=(fig_w, fig_h), dpi=DPI)
-    fig.patch.set_facecolor('white')
-
-    def _f(inches):
-        return inches / fig_h
-
-    BOT_MARGIN = 0.60
-    BOT_H      = 5.20
-    MID_GAP    = 1.40
-    STRIP_XLAB = 0.45
-    STRIP_DATA = ROW_H * n_rows_strip
-
-    strip_bot = _f(BOT_MARGIN + BOT_H + MID_GAP)
-    strip_h   = _f(STRIP_DATA + STRIP_XLAB)
-    strip_top = strip_bot + strip_h
-
-    ax_strip = fig.add_axes([0.08, strip_bot, 0.86, strip_h])
-    ax_B     = fig.add_axes([0.07,  _f(BOT_MARGIN), 0.255, _f(BOT_H)])
-    ax_C     = fig.add_axes([0.385, _f(BOT_MARGIN), 0.255, _f(BOT_H)])
-    ax_D     = fig.add_axes([0.70,  _f(BOT_MARGIN), 0.255, _f(BOT_H)])
-
-    # Panel A
-    print("绘制 Panel A: Strip chart...")
+    # ── Panel A: Strip chart (full-width heatmap) ─────────────────────────
+    fig_h_strip = ROW_H * n_rows_strip + 1.0
+    fig_a = plt.figure(figsize=(18, fig_h_strip))
+    fig_a.patch.set_facecolor('white')
+    ax_strip = fig_a.add_axes([0.08, 0.35 / fig_h_strip,
+                                0.86, (ROW_H * n_rows_strip + 0.45) / fig_h_strip])
     draw_strip(ax_strip, csv_map)
+    fig_a.text(0.01, 1.0 - 0.05 / fig_h_strip, 'A',
+               fontsize=16, fontweight='bold', va='top')
+    save_panel(fig_a, 'Fig_ensemble_calcium_A')
+    plt.close(fig_a)
 
-    # Panel B
-    print("绘制 Panel B: 热点数...")
-    draw_hotspot(ax_B, summary)
+    # ── Panel B: Ca2+ hotspot residues ────────────────────────────────────
+    fig_b, ax_b = plt.subplots(figsize=(6, 5.5))
+    fig_b.patch.set_facecolor('white')
+    draw_hotspot(ax_b, summary)
+    fig_b.text(0.01, 0.98, 'B', transform=fig_b.transFigure,
+               fontsize=16, fontweight='bold', va='top')
+    fig_b.tight_layout()
+    save_panel(fig_b, 'Fig_ensemble_calcium_B')
+    plt.close(fig_b)
 
-    # Panel C
-    print("绘制 Panel C: Ca2+ SASA...")
-    draw_ca2_sasa(ax_C, csv_map)
+    # ── Panel C: Ca2+ SASA ────────────────────────────────────────────────
+    fig_c, ax_c = plt.subplots(figsize=(6, 5.5))
+    fig_c.patch.set_facecolor('white')
+    draw_ca2_sasa(ax_c, csv_map)
+    fig_c.text(0.01, 0.98, 'C', transform=fig_c.transFigure,
+               fontsize=16, fontweight='bold', va='top')
+    fig_c.tight_layout()
+    save_panel(fig_c, 'Fig_ensemble_calcium_C')
+    plt.close(fig_c)
 
-    # Panel D
-    print("绘制 Panel D: APBS 中位值...")
-    draw_apbs_strip(ax_D, summary, csv_map)
-
-    # 面板标签
-    suptitle_y = strip_top + _f(0.7)
-    panel_y    = strip_top + _f(0.25)
-    for lbl, xpos in zip(['A', 'B', 'C', 'D'],
-                          [0.01, 0.01, 0.32, 0.64]):
-        y = panel_y if lbl == 'A' else _f(BOT_MARGIN + BOT_H + 0.15)
-        fig.text(xpos if lbl != 'A' else 0.01, y, lbl,
-                 fontsize=16, fontweight='bold', va='bottom')
-
-    fig.suptitle(
-        'Ca2+ Binding Propensity: Glycosylated vs Deglyco Structures\n'
-        '(Re-Glyco Ensemble | 18 glycoproteins, 3 species)',
-        y=suptitle_y, fontsize=13, fontweight='bold'
-    )
-
-    out_path = os.path.join(OUT_DIR, "Fig_ensemble_calcium.png")
-    fig.savefig(out_path, dpi=DPI, bbox_inches='tight', facecolor='white')
-    print(f"\n图表已保存: {out_path}")
-    plt.close(fig)
+    # ── Panel D: APBS strip ───────────────────────────────────────────────
+    fig_d, ax_d = plt.subplots(figsize=(6, 5.5))
+    fig_d.patch.set_facecolor('white')
+    draw_apbs_strip(ax_d, summary, csv_map)
+    fig_d.text(0.01, 0.98, 'D', transform=fig_d.transFigure,
+               fontsize=16, fontweight='bold', va='top')
+    fig_d.tight_layout()
+    save_panel(fig_d, 'Fig_ensemble_calcium_D')
+    plt.close(fig_d)
 
 
 if __name__ == '__main__':

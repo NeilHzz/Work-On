@@ -33,8 +33,8 @@ warnings.filterwarnings("ignore")
 
 # ─── Nature Communications 全局样式 ─────────────────────────────────────────
 NC_STYLE = {
-    "font.family":           "sans-serif",
-    "font.sans-serif":       ["Arial", "Helvetica Neue", "Helvetica", "DejaVu Sans"],
+    "font.family": "Times New Roman",
+    "font.sans-serif":       ["Times New Roman", "DejaVu Sans"],
     "font.size":             8,
     "axes.titlesize":        9,
     "axes.labelsize":        8,
@@ -90,7 +90,7 @@ GROUP_LABEL = {
 
 # ─── 路径 ────────────────────────────────────────────────────────────────────
 ROOT     = Path(__file__).parent
-DATA_DIR = ROOT
+DATA_DIR = ROOT.parent
 OUT_DIR  = ROOT / "NC_Figures"
 OUT_DIR.mkdir(exist_ok=True)
 

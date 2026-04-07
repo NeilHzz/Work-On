@@ -41,7 +41,7 @@ Y_ROOT = (Y_N3 + Y["Columba"]) / 2       # 1.75
 
 # ── Figure ────────────────────────────────────────────────────────────────────
 matplotlib.rcParams.update({
-    "font.family":  "Arial",
+    "font.family": "Times New Roman",
     "font.size":    7,
     "pdf.fonttype": 42,
     "svg.fonttype": "none",
@@ -137,7 +137,7 @@ for sp, ypos in Y.items():
              f"+{exp_v} / -{con_v}",
              ha="left", va="center",
              fontsize=7, color="#333333",
-             fontfamily="Arial")
+             fontfamily="Times New Roman")
 
 # ── Legend ────────────────────────────────────────────────────────────────────
 leg_x = 0.60  # figure fraction

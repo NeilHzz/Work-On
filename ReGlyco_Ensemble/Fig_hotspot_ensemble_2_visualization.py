@@ -22,6 +22,9 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+matplotlib.rcParams["font.family"] = "Times New Roman"
+matplotlib.rcParams["font.sans-serif"] = ["Times New Roman", "DejaVu Sans"]
+matplotlib.rcParams["mathtext.fontset"] = "stix"
 from matplotlib.gridspec import GridSpec
 from scipy import stats
 
@@ -284,60 +287,53 @@ def draw_sasa_bar(ax, df):
 # ══════════════════════════════════════════════════════════════════════════════
 # 主函数
 # ══════════════════════════════════════════════════════════════════════════════
+def save_panel(fig, name):
+    """Save as PNG (300 dpi) and PDF to FOLDER."""
+    for ext in ('png', 'pdf'):
+        out = os.path.join(FOLDER, f'{name}.{ext}')
+        fig.savefig(out, dpi=DPI, bbox_inches='tight', facecolor='white')
+        print(f"已保存: {out}")
+
+
 def main():
     df = pd.read_csv(os.path.join(CSV_DIR, 'hotspot_per_conformation.csv'))
     df['net_accessible'] = df['n_hotspots'] - df['n_shielded_cands']
-
     g = {sp: df[df.species == sp] for sp in SPECIES_ORDER}
 
-    panels = [
-        (
-            {sp: g[sp]['iface_shielding'].dropna().values for sp in SPECIES_ORDER},
-            r'Interface Shielding by Glycan (Å$^2$)',
-            'Interface Shielding', 'A'
-        ),
-        (
-            {sp: g[sp]['hotspot_sasa_mean'].dropna().values for sp in SPECIES_ORDER},
-            r'Hotspot Residue Mean SASA (Å$^{-2}$)',
-            'Hotspot Residue SASA', 'B'
-        ),
-        (
-            {sp: g[sp]['hotspot_frac'].dropna().values for sp in SPECIES_ORDER},
-            'Hotspot Fraction\n(hotspots / candidates)',
-            'Hotspot Fraction', 'C'
-        ),
-        (
-            {sp: g[sp]['net_accessible'].dropna().values for sp in SPECIES_ORDER},
-            r'Net Accessible Ca$^{2+}$ Hotspots',
-            r'Net Accessible Ca$^{2+}$ Hotspots', 'D'
-        ),
+    panels_violin = [
+        ('A', {sp: g[sp]['iface_shielding'].dropna().values for sp in SPECIES_ORDER},
+         r'Interface Shielding by Glycan (Å$^2$)', 'Interface Shielding'),
+        ('B', {sp: g[sp]['hotspot_sasa_mean'].dropna().values for sp in SPECIES_ORDER},
+         r'Hotspot Residue Mean SASA (Å$^{-2}$)', 'Hotspot Residue SASA'),
+        ('C', {sp: g[sp]['hotspot_frac'].dropna().values for sp in SPECIES_ORDER},
+         'Hotspot Fraction\n(hotspots / candidates)', 'Hotspot Fraction'),
+        ('D', {sp: g[sp]['net_accessible'].dropna().values for sp in SPECIES_ORDER},
+         r'Net Accessible Ca$^{2+}$ Hotspots', r'Net Accessible Ca$^{2+}$ Hotspots'),
     ]
 
-    fig = plt.figure(figsize=(13, 17), dpi=DPI)
-    fig.patch.set_facecolor('white')
-
-    # ── 紧凑行间距 ────────────────────────────────────────────────────────────
-    gs = GridSpec(3, 2, figure=fig,
-                  height_ratios=[1.0, 1.0, 1.1],
-                  hspace=0.42,
-                  wspace=0.35)
-
-    axes_violin = [fig.add_subplot(gs[r, c])
-                   for r, c in [(0, 0), (0, 1), (1, 0), (1, 1)]]
-    ax_e = fig.add_subplot(gs[2, 0])
-    ax_f = fig.add_subplot(gs[2, 1])
-
-    for ax, (gd, ylabel, title, lbl) in zip(axes_violin, panels):
+    # Panels A-D: individual violin plots
+    for lbl, gd, ylabel, title in panels_violin:
+        fig, ax = plt.subplots(figsize=(5.5, 5.5))
+        fig.patch.set_facecolor('white')
         draw_violin_panel(ax, gd, ylabel, title, lbl)
+        fig.tight_layout()
+        save_panel(fig, f'Fig_hotspot_ensemble_2_{lbl}')
+        plt.close(fig)
 
-    draw_stacked_bar(ax_e, df)
-    draw_sasa_bar(ax_f, df)
+    # Panel E: stacked bar
+    fig, ax = plt.subplots(figsize=(5.5, 5.5))
+    fig.patch.set_facecolor('white')
+    draw_stacked_bar(ax, df)
+    fig.tight_layout()
+    save_panel(fig, 'Fig_hotspot_ensemble_2_E')
+    plt.close(fig)
 
-    fig.suptitle(r'Ca$^{2+}$ Hotspot Accessibility and Glycan Shielding Analysis',
-                 fontsize=14, fontweight='bold', y=0.98)
-
-    fig.savefig(OUT_PNG, dpi=DPI, bbox_inches='tight', facecolor='white')
-    print(f"已保存: {OUT_PNG}")
+    # Panel F: SASA bar
+    fig, ax = plt.subplots(figsize=(5.5, 5.5))
+    fig.patch.set_facecolor('white')
+    draw_sasa_bar(ax, df)
+    fig.tight_layout()
+    save_panel(fig, 'Fig_hotspot_ensemble_2_F')
     plt.close(fig)
 
 

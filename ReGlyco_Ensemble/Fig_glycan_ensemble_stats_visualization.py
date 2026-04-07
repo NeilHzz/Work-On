@@ -17,6 +17,9 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+matplotlib.rcParams["font.family"] = "Times New Roman"
+matplotlib.rcParams["font.sans-serif"] = ["Times New Roman", "DejaVu Sans"]
+matplotlib.rcParams["mathtext.fontset"] = "stix"
 from matplotlib.lines import Line2D
 from pathlib import Path
 from scipy import stats
@@ -138,32 +141,30 @@ def violin_one(ax, metric, ylabel):
     ax.spines['right'].set_visible(False)
 
 
-# ─── 创建图形 ────────────────────────────────────────────────────────────
+# ─── 保存工具函数 ────────────────────────────────────────────────────────
 
-fig = plt.figure(figsize=(14, 5))
-fig.patch.set_facecolor('white')
+DPI_OUT = 300
 
-# 4 个 violin (A-D)
-axes_violin = [fig.add_subplot(1, 4, i+1) for i in range(4)]
+def save_panel(fig, name):
+    """Save as PNG (300 dpi) and PDF to OUT_DIR."""
+    for ext in ('png', 'pdf'):
+        out = OUT_DIR / f'{name}.{ext}'
+        fig.savefig(out, dpi=DPI_OUT, bbox_inches='tight', facecolor='white')
+        print(f"已保存: {out}")
 
-metric_keys  = list(METRICS.keys())
+
+# ─── 逐面板独立输出 ───────────────────────────────────────────────────────
+
+metric_keys   = list(METRICS.keys())
 metric_labels = list(METRICS.values())
-panel_labels  = list('ABCDEF')
+panel_labels  = list('ABCD')
 
-# ── Panel A-D: Violin ──────────────────────────────────────────────────────
-for ax, mk, ml in zip(axes_violin, metric_keys, metric_labels):
+for mk, ml, lbl in zip(metric_keys, metric_labels, panel_labels):
+    fig, ax = plt.subplots(figsize=(5, 5))
+    fig.patch.set_facecolor('white')
     violin_one(ax, mk, ml)
-
-for ax, label in zip(axes_violin, panel_labels[:4]):
-    ax.text(-0.18, 1.05, label, transform=ax.transAxes,
+    ax.text(-0.18, 1.05, lbl, transform=ax.transAxes,
             fontsize=13, fontweight='bold', va='top')
-
-# ── 全图标题 ──────────────────────────────────────────────────────────────
-fig.suptitle('Glycan Conformational Diversity across 50 Ensemble Models',
-             fontsize=13, fontweight='bold', y=1.01)
-fig.tight_layout()
-
-out_path = OUT_DIR / 'Fig_glycan_ensemble_stats.png'
-fig.savefig(out_path, dpi=200, bbox_inches='tight', facecolor='white')
-print(f"图像已保存: {out_path}")
-plt.close()
+    fig.tight_layout()
+    save_panel(fig, f'Fig_glycan_ensemble_stats_{lbl}')
+    plt.close(fig)

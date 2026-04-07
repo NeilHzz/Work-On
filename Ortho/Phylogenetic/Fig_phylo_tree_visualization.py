@@ -15,8 +15,8 @@ import numpy as np
 
 # ── NC style ──────────────────────────────────────────────────────────────────
 plt.rcParams.update({
-    "font.family":      "sans-serif",
-    "font.sans-serif":  ["Arial", "Helvetica Neue", "DejaVu Sans"],
+    "font.family": "Times New Roman",
+    "font.sans-serif":  ["Times New Roman", "DejaVu Sans"],
     "font.size":        8,
     "figure.dpi":       300,
     "savefig.dpi":      300,
