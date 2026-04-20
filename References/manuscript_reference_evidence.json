@@ -1,0 +1,470 @@
+[
+  {
+    "ref_no": "1",
+    "manuscript_sentence": "The avian eggshell is a load-bearing mineralized organ whose mechanical performance is established at the level of the mammillary layer, where calcite growth is initiated on organic-matrix nucleation centers. Although the shell also regulates gas exchange, microbial defense, and embryonic calcium supply, its resistance to fracture depends disproportionately on how densely mammillae are packed and how effectively mineral is organized around them. The mammillary layer is therefore not simply the innermost shell compartment; it is the structural origin of whole-shell mechanics.",
+    "full_citation": "1. J. Gautron, L. Stapane, N. L. Roy, Y. Nys, A. B. Rodriguez-Navarro, M. T. Hincke, Avian eggshell biomineralization: an update on its structure, mineralogy and protein tool kit. BMC Molecular and Cell Biology 22, 11 (2021).",
+    "paper_title": "Avian eggshell biomineralization: an update on its structure, mineralogy and protein tool kit",
+    "doi": "10.1186/s12860-021-00350-0",
+    "supporting_sentence": "Background The avian eggshell is a natural protective envelope that relies on the phenomenon of biomineralization for its formation.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "2",
+    "manuscript_sentence": "Work over the past two decades has identified uterine matrix proteins as major regulators of mammillary nucleation, crystal growth orientation, and shell architecture, with ovalbumin (OVAL) and ovocleidin-116 (OC116) among the best-supported Ca²⁺-responsive factors. These proteins carry N-linked glycans that vary from compact High-Mannose to extended Sialylated Complex forms, and prior structural work has shown that glycan occupancy can alter conformation and the solvent exposure of acidic residues involved in Ca²⁺ coordination. In parallel, comparative morphometry and simulation studies have shown that eggshell mechanics diverge systematically across the precocial–altricial spectrum. What remains missing is a single cross-species framework connecting these observations. Specifically, it is not known whether species-level divergence in OVAL glycan class is translated into predictable differences in Ca²⁺ accessibility, mammillary packing, and shell mechanical performance.",
+    "full_citation": "2. M. L. H. Rose, M. T. Hincke, Protein constituents of the eggshell: eggshell-specific matrix proteins. Cellular and Molecular Life Sciences 66, 2707-2719 (2009).",
+    "paper_title": "Protein constituents of the eggshell: eggshell-specific matrix proteins",
+    "doi": "10.1007/s00018-009-0046-y",
+    "supporting_sentence": "In this article, we review the results of recent proteomic and genomic analyses of eggshell matrix proteins and draw attention to the impact of these data on current understanding of eggshell formation and function.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "3",
+    "manuscript_sentence": "Here, we test that cross-scale mechanism by integrating micro-CT morphometry, comparative eggshell matrix proteomics with gene-family evolution analysis, intact glycopeptide mass spectrometry, Re-Glyco structural ensemble modelling, and finite-element simulation in three species — Gallus gallus, Anas platyrhynchos, and Columba livia — representing, respectively, the precocial terrestrial ground-nesting, precocial semi-aquatic, and altricial elevated-nesting ecological guilds. By traversing from whole-shell morphology through proteome-wide orthogroup comparison and atomic-level electrostatic modeling to tissue-scale contact-stress simulation, we show that species-specific N-glycan class composition on OVAL tracks a gradient in Ca²⁺ accessibility, mammillary density, and shear resistance. These data support a model in which OVAL glycan class integrates developmental strategy with ecological calcium availability and links a post-translational molecular feature to tissue-scale eggshell biomechanics.",
+    "full_citation": "3. J. Stiller, S. Feng, A.-A. Chowdhury, I. Rivas-González, D. A. Duchêne, Q. Fang, Y. Deng, A. Kozlov, A. Stamatakis, S. Claramunt, J. M. T. Nguyen, S. Y. W. Ho, B. C. Faircloth, J. Haag, P. Houde, J. Cracraft, M. Balaban, U. Mai, G. Chen, R. Gao, C. Zhou, Y. Xie, Z. Huang, Z. Cao, Z. Yan, H. A. Ogilvie, L. Nakhleh, B. Lindow, B. Morel, J. Fjeldså, P. A. Hosner, R. R. da Fonseca, B. Petersen, J. A. Tobias, T. Székely, J. D. Kennedy, A. H. Reeve, A. Liker, M. Stervander, A. Antunes, D. T. Tietze, M. F. Bertelsen, F. Lei, C. Rahbek, G. R. Graves, M. H. Schierup, T. Warnow, E. L. Braun, M. T. P. Gilbert, E. D. Jarvis, S. Mirarab, G. Zhang, Complexity of avian evolution revealed by family-level genomes. Nature 629, 851-860 (2024).",
+    "paper_title": "Complexity of avian evolution revealed by family-level genomes",
+    "doi": "10.1038/s41586-024-07323-1",
+    "supporting_sentence": "Despite tremendous efforts in the past decades, relationships among main avian lineages remain heavily debated without a clear resolution.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "4",
+    "manuscript_sentence": "The avian eggshell is a load-bearing mineralized organ whose mechanical performance is established at the level of the mammillary layer, where calcite growth is initiated on organic-matrix nucleation centers. Although the shell also regulates gas exchange, microbial defense, and embryonic calcium supply, its resistance to fracture depends disproportionately on how densely mammillae are packed and how effectively mineral is organized around them. The mammillary layer is therefore not simply the innermost shell compartment; it is the structural origin of whole-shell mechanics.",
+    "full_citation": "4. L. Stapane, N. L. Roy, J. Ezagal, A. B. Rodriguez-Navarro, V. Labas, L. Combes-Soia, M. T. Hincke, J. Gautron, Avian eggshell formation reveals a new paradigm for vertebrate mineralization via vesicular amorphous calcium carbonate. Journal of Biological Chemistry 295, 15853-15869 (2020).",
+    "paper_title": "Avian eggshell formation reveals a new paradigm for vertebrate mineralization via vesicular amorphous calcium carbonate",
+    "doi": "10.1074/jbc.ra120.014542",
+    "supporting_sentence": "Amorphous calcium carbonate (ACC) is an unstable mineral phase, which is progressively transformed into aragonite or calcite in biomineralization of marine invertebrate shells or avian eggshells, respectively.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "5",
+    "manuscript_sentence": "Protein sequences from all three species were assigned to orthogroups using OrthoFinder (all-versus-all BlastP; E-value threshold 1 × 10⁻¹⁰; MCL inflation parameter 2.0), yielding a 3,250-orthogroup background set for all downstream enrichment analyses. Divergence times were taken from published timetrees: G. gallus–A. platyrhynchos 83.37 Mya and G. gallus–C. livia 90.84 Mya. Gene-family expansion and contraction rates were inferred with CAFE5 using the time-calibrated phylogeny. GO enrichment of pairwise-shared, species-exclusive, expanding, and contracting orthogroup sets was performed using the OrthoVenn3 web platform (https://orthovenn3.bioinfotoolkits.net) against the 3,250-orthogroup background; terms with adjusted p < 0.05 were considered significant.",
+    "full_citation": "5. F. K. Mendes, D. Vanderpool, B. Fulton, M. W. Hahn, CAFE 5 models variation in evolutionary rates among gene families. Bioinformatics 36, 5516-5518 (2021).",
+    "paper_title": "CAFE 5 models variation in evolutionary rates among gene families",
+    "doi": "10.1093/bioinformatics/btaa1022",
+    "supporting_sentence": "Motivation Genome sequencing projects have revealed frequent gains and losses of genes between species.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "6",
+    "manuscript_sentence": "Work over the past two decades has identified uterine matrix proteins as major regulators of mammillary nucleation, crystal growth orientation, and shell architecture, with ovalbumin (OVAL) and ovocleidin-116 (OC116) among the best-supported Ca²⁺-responsive factors. These proteins carry N-linked glycans that vary from compact High-Mannose to extended Sialylated Complex forms, and prior structural work has shown that glycan occupancy can alter conformation and the solvent exposure of acidic residues involved in Ca²⁺ coordination. In parallel, comparative morphometry and simulation studies have shown that eggshell mechanics diverge systematically across the precocial–altricial spectrum. What remains missing is a single cross-species framework connecting these observations. Specifically, it is not known whether species-level divergence in OVAL glycan class is translated into predictable differences in Ca²⁺ accessibility, mammillary packing, and shell mechanical performance.",
+    "full_citation": "6. F. Geng, Y. Huang, Y. Chen, D. Yao, Z. Jiang, M. Huang, Identification of N-glycosites in chicken egg white proteins using an omics strategy. Journal of Agricultural and Food Chemistry 65, 5357-5364 (2017).",
+    "paper_title": "Identification of N -Glycosites in Chicken Egg White Proteins Using an Omics Strategy",
+    "doi": "10.1021/acs.jafc.7b01706",
+    "supporting_sentence": "Chicken egg white (CEW) is a perfect source of natural proteins that possesses outstanding functional properties and various bioactivities.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "7",
+    "manuscript_sentence": "Work over the past two decades has identified uterine matrix proteins as major regulators of mammillary nucleation, crystal growth orientation, and shell architecture, with ovalbumin (OVAL) and ovocleidin-116 (OC116) among the best-supported Ca²⁺-responsive factors. These proteins carry N-linked glycans that vary from compact High-Mannose to extended Sialylated Complex forms, and prior structural work has shown that glycan occupancy can alter conformation and the solvent exposure of acidic residues involved in Ca²⁺ coordination. In parallel, comparative morphometry and simulation studies have shown that eggshell mechanics diverge systematically across the precocial–altricial spectrum. What remains missing is a single cross-species framework connecting these observations. Specifically, it is not known whether species-level divergence in OVAL glycan class is translated into predictable differences in Ca²⁺ accessibility, mammillary packing, and shell mechanical performance.",
+    "full_citation": "7. D. Dai, X. Wang, K. Wu, F. Lan, J. Jin, W. Zhang, C. Wen, J. Li, N. Yang, C. Sun, Proteomic and N-glycosylation analysis of fertile egg white during storage and incubation in chickens. Poultry Science 104, 104526 (2025).",
+    "paper_title": "Proteomic and N-glycosylation analysis of fertile egg white during storage and incubation in chickens",
+    "doi": "10.1016/j.psj.2024.104526",
+    "supporting_sentence": "Proteins in egg whites play vital roles in embryonic development.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "8",
+    "manuscript_sentence": "Work over the past two decades has identified uterine matrix proteins as major regulators of mammillary nucleation, crystal growth orientation, and shell architecture, with ovalbumin (OVAL) and ovocleidin-116 (OC116) among the best-supported Ca²⁺-responsive factors. These proteins carry N-linked glycans that vary from compact High-Mannose to extended Sialylated Complex forms, and prior structural work has shown that glycan occupancy can alter conformation and the solvent exposure of acidic residues involved in Ca²⁺ coordination. In parallel, comparative morphometry and simulation studies have shown that eggshell mechanics diverge systematically across the precocial–altricial spectrum. What remains missing is a single cross-species framework connecting these observations. Specifically, it is not known whether species-level divergence in OVAL glycan class is translated into predictable differences in Ca²⁺ accessibility, mammillary packing, and shell mechanical performance.",
+    "full_citation": "8. D. J. Harvey, M. Rudd, R. A. Bateman, R. H. Bordoli, R. E. Donovan, J. B. Howes, Composition of N-linked carbohydrates from ovalbumin and co-purified glycoproteins. Journal of the American Society for Mass Spectrometry 11, 564-571 (2000).",
+    "paper_title": "Composition of N-linked carbohydrates from ovalbumin and co-purified glycoproteins",
+    "doi": "10.1016/s1044-0305(00)00122-7",
+    "supporting_sentence": "Analysis of commercial samples of chicken ovalbumin by reversed-phase high performance liquid chromatography and matrix-assisted laser desorption/ionization mass spectrometry (MALDI-MS) showed the presence of several other co-purifying glycoproteins.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "9",
+    "manuscript_sentence": "Work over the past two decades has identified uterine matrix proteins as major regulators of mammillary nucleation, crystal growth orientation, and shell architecture, with ovalbumin (OVAL) and ovocleidin-116 (OC116) among the best-supported Ca²⁺-responsive factors. These proteins carry N-linked glycans that vary from compact High-Mannose to extended Sialylated Complex forms, and prior structural work has shown that glycan occupancy can alter conformation and the solvent exposure of acidic residues involved in Ca²⁺ coordination. In parallel, comparative morphometry and simulation studies have shown that eggshell mechanics diverge systematically across the precocial–altricial spectrum. What remains missing is a single cross-species framework connecting these observations. Specifically, it is not known whether species-level divergence in OVAL glycan class is translated into predictable differences in Ca²⁺ accessibility, mammillary packing, and shell mechanical performance.",
+    "full_citation": "9. K. Yamashita, T. Tachibana, T. Nakayama, M. Kitamura, Y. Ito, A. Kobata, Structural study of the carbohydrate moiety of hen ovomucoid. Journal of Biological Chemistry 257, 12809-12814 (1982).",
+    "paper_title": "Structural study of the carbohydrate moiety of hen ovomucoid. Occurrence of a series of pentaantennary complex-type asparagine-linked sugar chains.",
+    "doi": "10.1016/s0021-9258(18)33585-3",
+    "supporting_sentence": "Hen ovomucoid contains a series of novel pentaantennary complex-type asparagine-linked sugar chains which can be classified into three groups, N-1, N-2, and N-3b, N-3b, the structure of which is found as a common (formula, see text) structure in all pentaantennary sugar chains.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "10",
+    "manuscript_sentence": "Work over the past two decades has identified uterine matrix proteins as major regulators of mammillary nucleation, crystal growth orientation, and shell architecture, with ovalbumin (OVAL) and ovocleidin-116 (OC116) among the best-supported Ca²⁺-responsive factors. These proteins carry N-linked glycans that vary from compact High-Mannose to extended Sialylated Complex forms, and prior structural work has shown that glycan occupancy can alter conformation and the solvent exposure of acidic residues involved in Ca²⁺ coordination. In parallel, comparative morphometry and simulation studies have shown that eggshell mechanics diverge systematically across the precocial–altricial spectrum. What remains missing is a single cross-species framework connecting these observations. Specifically, it is not known whether species-level divergence in OVAL glycan class is translated into predictable differences in Ca²⁺ accessibility, mammillary packing, and shell mechanical performance.",
+    "full_citation": "10. J. P. Reyes-Grajeda, A. Moreno, A. Romero, Crystal structure of ovocleidin-17, a major protein of the calcified Gallus gallus eggshell. Journal of Biological Chemistry 279, 40876-40881 (2004).",
+    "paper_title": "Crystal Structure of Ovocleidin-17, a Major Protein of the Calcified Gallus gallus Eggshell",
+    "doi": "10.1074/jbc.m406033200",
+    "supporting_sentence": "Ovocleidin-17 (OC17) from Gallus gallus is one of the best candidates to control and regulate the deposition of calcium carbonate in the calcified eggshell layer.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "11",
+    "manuscript_sentence": "Here, we test that cross-scale mechanism by integrating micro-CT morphometry, comparative eggshell matrix proteomics with gene-family evolution analysis, intact glycopeptide mass spectrometry, Re-Glyco structural ensemble modelling, and finite-element simulation in three species — Gallus gallus, Anas platyrhynchos, and Columba livia — representing, respectively, the precocial terrestrial ground-nesting, precocial semi-aquatic, and altricial elevated-nesting ecological guilds. By traversing from whole-shell morphology through proteome-wide orthogroup comparison and atomic-level electrostatic modeling to tissue-scale contact-stress simulation, we show that species-specific N-glycan class composition on OVAL tracks a gradient in Ca²⁺ accessibility, mammillary density, and shear resistance. These data support a model in which OVAL glycan class integrates developmental strategy with ecological calcium availability and links a post-translational molecular feature to tissue-scale eggshell biomechanics.",
+    "full_citation": "11. Y.-X. Tsai, N.-E. Chang, K. Reuter, H.-T. Chang, T.-J. Yang, S. von Bülow, V. Sehrawat, N. Zerrouki, M. Tuffery, M. Gecht, I. L. Grothaus, L. C. Ciacchi, Y.-S. Wang, M.-F. Hsu, K.-H. Khoo, G. Hummer, S.-T. D. Hsu, C. Hanus, M. Sikora, Rapid simulation of glycoprotein structures by grafting and steric exclusion of glycan conformer libraries. Cell 187, 1296-1311.e26 (2024).",
+    "paper_title": "Rapid simulation of glycoprotein structures by grafting and steric exclusion of glycan conformer libraries",
+    "doi": "10.1016/j.cell.2024.01.034",
+    "supporting_sentence": "Most membrane proteins are modified by covalent addition of complex sugars through N- and O-glycosylation.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "12",
+    "manuscript_sentence": "Here, we test that cross-scale mechanism by integrating micro-CT morphometry, comparative eggshell matrix proteomics with gene-family evolution analysis, intact glycopeptide mass spectrometry, Re-Glyco structural ensemble modelling, and finite-element simulation in three species — Gallus gallus, Anas platyrhynchos, and Columba livia — representing, respectively, the precocial terrestrial ground-nesting, precocial semi-aquatic, and altricial elevated-nesting ecological guilds. By traversing from whole-shell morphology through proteome-wide orthogroup comparison and atomic-level electrostatic modeling to tissue-scale contact-stress simulation, we show that species-specific N-glycan class composition on OVAL tracks a gradient in Ca²⁺ accessibility, mammillary density, and shear resistance. These data support a model in which OVAL glycan class integrates developmental strategy with ecological calcium availability and links a post-translational molecular feature to tissue-scale eggshell biomechanics.",
+    "full_citation": "12. E. Jurrus, D. Engel, K. Star, K. Monson, J. Brandi, L. E. Felberg, D. H. Brookes, L. Wilson, J. Chen, K. Liles, M. Chun, P. Li, D. W. Gohara, T. Dolinsky, R. Konecny, D. R. Koes, J. E. Nielsen, T. Head-Gordon, W. Geng, R. Krasny, G.-W. Wei, M. J. Holst, J. A. McCammon, N. A. Baker, Improvements to the APBS biomolecular solvation software suite. Protein Science 27, 112-128 (2018).",
+    "paper_title": "Improvements to the APBS biomolecular solvation software suite",
+    "doi": "10.1002/pro.3280",
+    "supporting_sentence": "The Adaptive Poisson-Boltzmann Solver (APBS) software was developed to solve the equations of continuum electrostatics for large biomolecular assemblages that have provided impact in the study of a broad range of chemical, biological, and biomedical applications.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "13",
+    "manuscript_sentence": "Calcium ecology adds a second layer of constraint. Terrestrial species rely largely on diet, medullary bone mobilization, and incidental mineral supplementation from substrate, whereas aquatic and semi-aquatic species can access calcium-rich prey more continuously during shell formation. This means that species can differ not only in how much shell protection they require, but also in how calcium is provisioned during the narrow window of uterine mineralization. A mechanistic explanation for eggshell diversity must therefore accommodate both developmental strategy and calcium availability.",
+    "full_citation": "13. A. Bar, Calcium transport in strongly calcifying laying birds: the role of calbindin and plasma membrane calcium ATPase. Comparative Biochemistry and Physiology Part A: Molecular & Integrative Physiology 152, 447-469 (2009).",
+    "paper_title": "Calcium transport in strongly calcifying laying birds: Mechanisms and regulation",
+    "doi": "10.1016/j.cbpa.2008.11.020",
+    "supporting_sentence": "Birds that lay long clutches (series of eggs laid sequentially before a \"pause day\"), among them the high-producing, strongly-calcifying Gallus gallus domesticus (domestic hen) and Coturnix coturnix japonica (Japanese quail), transfer about 10% of their total body calcium daily.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "14",
+    "manuscript_sentence": "Gene-family evolution was strongly asymmetric across the three lineages, despite recovery of the expected Galloanserae phylogeny. G. gallus and A. platyrhynchos formed the sister pair and C. livia the outgroup. Within that framework, CAFE5 revealed that chicken showed net contraction, duck was intermediate, and pigeon showed net expansion (Fig. 4a,b). The contracted chicken families were enriched for immune functions, whereas expanded pigeon families were enriched for transmembrane transport, Rho signaling, and synapse-associated processes. These genomic trends establish that the three shell-forming systems are evolutionarily distinct, but they also frame an important point for the present study: lineage divergence is broad, whereas the shell phenotype we seek to explain is sharply ordered.",
+    "full_citation": "14. C. Kern, Y. Wang, X. Xu, Z. Pan, M. Halstead, G. Chanthavixay, P. Saelao, S. Waters, R. Xiang, A. Chamberlain, I. Korf, M. E. Delany, H. H. Cheng, J. F. Medrano, A. L. V. Eenennaam, C. K. Tuggle, C. Ernst, P. Flicek, G. Quon, P. Ross, H. Zhou, Functional annotations of three domestic animal genomes provide vital resources for comparative and agricultural research. Nature Communications 12, 1821 (2021).",
+    "paper_title": "Functional annotations of three domestic animal genomes provide vital resources for comparative and agricultural research",
+    "doi": "10.1038/s41467-021-22100-8",
+    "supporting_sentence": "Gene regulatory elements are central drivers of phenotypic variation and thus of critical importance towards understanding the genetics of complex traits.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "15",
+    "manuscript_sentence": "Across birds, reproductive strategy and nesting ecology impose different constraints on how much mineralized protection the egg must provide. Precocial lineages generally produce shells that tolerate greater environmental and hatch-related mechanical demands, whereas altricial lineages often operate under reduced structural requirements associated with elevated or otherwise protected nests. These life-history differences imply that mammillary architecture should be an adaptive trait, but they do not by themselves explain what molecular mechanism tunes one shell system toward dense nucleation and another toward a more weakly mineralized state.",
+    "full_citation": "15. I. B. R. Scheiber, B. M. Weiß, S. A. Kingma, J. Komdeur, The importance of the altricial – precocial spectrum for social complexity in mammals and birds – a review. Frontiers in Zoology 14, 3 (2017).",
+    "paper_title": "The importance of the altricial – precocial spectrum for social complexity in mammals and birds – a review",
+    "doi": "10.1186/s12983-016-0185-6",
+    "supporting_sentence": "Various types of long-term stable relationships that individuals uphold, including cooperation and competition between group members, define social complexity in vertebrates.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "16",
+    "manuscript_sentence": "Across birds, reproductive strategy and nesting ecology impose different constraints on how much mineralized protection the egg must provide. Precocial lineages generally produce shells that tolerate greater environmental and hatch-related mechanical demands, whereas altricial lineages often operate under reduced structural requirements associated with elevated or otherwise protected nests. These life-history differences imply that mammillary architecture should be an adaptive trait, but they do not by themselves explain what molecular mechanism tunes one shell system toward dense nucleation and another toward a more weakly mineralized state.",
+    "full_citation": "16. F. Liu, X. Jiang, Z. Chen, L. Wang, Mechanical design principles of avian eggshells for survivability. Acta Biomaterialia 178, 233-243 (2024).",
+    "paper_title": "Mechanical design principles of avian eggshells for survivability",
+    "doi": "10.1016/j.actbio.2024.02.036",
+    "supporting_sentence": "Biological materials exhibit complex structure-property relationships which are designed by nature's evolution over millions of years.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "17",
+    "manuscript_sentence": "Work over the past two decades has identified uterine matrix proteins as major regulators of mammillary nucleation, crystal growth orientation, and shell architecture, with ovalbumin (OVAL) and ovocleidin-116 (OC116) among the best-supported Ca²⁺-responsive factors. These proteins carry N-linked glycans that vary from compact High-Mannose to extended Sialylated Complex forms, and prior structural work has shown that glycan occupancy can alter conformation and the solvent exposure of acidic residues involved in Ca²⁺ coordination. In parallel, comparative morphometry and simulation studies have shown that eggshell mechanics diverge systematically across the precocial–altricial spectrum. What remains missing is a single cross-species framework connecting these observations. Specifically, it is not known whether species-level divergence in OVAL glycan class is translated into predictable differences in Ca²⁺ accessibility, mammillary packing, and shell mechanical performance.",
+    "full_citation": "17. D. Athanasiadou, W. Jiang, D. Goldbaum, A. Saleem, K. S. Bhatt, H. S. Michelmore, R. Marchessault, M. T. Hincke, M. D. McKee, Nanostructure, osteopontin, and mechanical properties of calcitic avian eggshell. Science Advances 4, eaar3219 (2018).",
+    "paper_title": "Nanostructure, osteopontin, and mechanical properties of calcitic avian eggshell",
+    "doi": "10.1126/sciadv.aar3219",
+    "supporting_sentence": "Avian (and formerly dinosaur) eggshells form a hard, protective biomineralized chamber for embryonic growth-an evolutionary strategy that has existed for hundreds of millions of years.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "18",
+    "manuscript_sentence": "OVAL itself resolved into a striking three-state glycan progression: chicken was dominated by compact High-Mannose structures, duck by exclusively neutral complex glycans, and pigeon by more extended Sialylated Complex/Hybrid glycans (Fig. 5). Because these glycan classes differ strongly in steric bulk and charge distribution, this result pointed to OVAL surface accessibility rather than OVAL abundance alone as the most plausible molecular variable governing shell mineralization output.",
+    "full_citation": "18. L. Zeng, X. Shi, L. Xuan, J. Zheng, Comparative N-glycoproteomic investigation of eggshell cuticle and mineralized layer proteins. Journal of Agricultural and Food Chemistry 71, 10448-10458 (2023).",
+    "paper_title": "Comparative N -Glycoproteomic Investigation of Eggshell Cuticle and Mineralized Layer Proteins",
+    "doi": "10.1021/acs.jafc.3c00708",
+    "supporting_sentence": "The eggshell cuticle layer (ECL) and eggshell mineralized layer (EML) contain amounts of glycoproteins and proteoglycans.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "19",
+    "manuscript_sentence": "Work over the past two decades has identified uterine matrix proteins as major regulators of mammillary nucleation, crystal growth orientation, and shell architecture, with ovalbumin (OVAL) and ovocleidin-116 (OC116) among the best-supported Ca²⁺-responsive factors. These proteins carry N-linked glycans that vary from compact High-Mannose to extended Sialylated Complex forms, and prior structural work has shown that glycan occupancy can alter conformation and the solvent exposure of acidic residues involved in Ca²⁺ coordination. In parallel, comparative morphometry and simulation studies have shown that eggshell mechanics diverge systematically across the precocial–altricial spectrum. What remains missing is a single cross-species framework connecting these observations. Specifically, it is not known whether species-level divergence in OVAL glycan class is translated into predictable differences in Ca²⁺ accessibility, mammillary packing, and shell mechanical performance.",
+    "full_citation": "19. M. T. Hincke, Y. Nys, J. Gautron, K. Mann, A. B. Rodríguez-Navarro, M. D. McKee, Molecular cloning and ultrastructural localization of the core protein of an eggshell matrix proteoglycan, ovocleidin-116. Journal of Biological Chemistry 274, 32915-32923 (1999).",
+    "paper_title": "Molecular Cloning and Ultrastructural Localization of the Core Protein of an Eggshell Matrix Proteoglycan, Ovocleidin-116",
+    "doi": "10.1074/jbc.274.46.32915",
+    "supporting_sentence": "The role of avian eggshell matrix proteins in shell formation is poorly understood.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "20",
+    "manuscript_sentence": "Work over the past two decades has identified uterine matrix proteins as major regulators of mammillary nucleation, crystal growth orientation, and shell architecture, with ovalbumin (OVAL) and ovocleidin-116 (OC116) among the best-supported Ca²⁺-responsive factors. These proteins carry N-linked glycans that vary from compact High-Mannose to extended Sialylated Complex forms, and prior structural work has shown that glycan occupancy can alter conformation and the solvent exposure of acidic residues involved in Ca²⁺ coordination. In parallel, comparative morphometry and simulation studies have shown that eggshell mechanics diverge systematically across the precocial–altricial spectrum. What remains missing is a single cross-species framework connecting these observations. Specifically, it is not known whether species-level divergence in OVAL glycan class is translated into predictable differences in Ca²⁺ accessibility, mammillary packing, and shell mechanical performance.",
+    "full_citation": "20. A. B. Rodríguez-Navarro, P. Marie, Y. Nys, M. T. Hincke, J. Gautron, Amorphous calcium carbonate controls avian eggshell mineralization: A new paradigm for understanding rapid eggshell calcification. Journal of Structural Biology 190, 291-303 (2015).",
+    "paper_title": "Amorphous calcium carbonate controls avian eggshell mineralization: A new paradigm for understanding rapid eggshell calcification",
+    "doi": "10.1016/j.jsb.2015.04.014",
+    "supporting_sentence": "Avian eggshell mineralization is the fastest biogenic calcification process known in nature.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "21",
+    "manuscript_sentence": "Work over the past two decades has identified uterine matrix proteins as major regulators of mammillary nucleation, crystal growth orientation, and shell architecture, with ovalbumin (OVAL) and ovocleidin-116 (OC116) among the best-supported Ca²⁺-responsive factors. These proteins carry N-linked glycans that vary from compact High-Mannose to extended Sialylated Complex forms, and prior structural work has shown that glycan occupancy can alter conformation and the solvent exposure of acidic residues involved in Ca²⁺ coordination. In parallel, comparative morphometry and simulation studies have shown that eggshell mechanics diverge systematically across the precocial–altricial spectrum. What remains missing is a single cross-species framework connecting these observations. Specifically, it is not known whether species-level divergence in OVAL glycan class is translated into predictable differences in Ca²⁺ accessibility, mammillary packing, and shell mechanical performance.",
+    "full_citation": "21. K. Mann, M. T. Hincke, Y. Nys, Isolation of ovocleidin-116 from chicken eggshells, correction of its amino acid sequence and identification of disulfide bonds and glycosylated Asn. Matrix Biology 21, 383-387 (2002).",
+    "paper_title": "Isolation of ovocleidin-116 from chicken eggshells, correction of its amino acid sequence and identification of disulfide bonds and glycosylated Asn",
+    "doi": "10.1016/s0945-053x(02)00031-8",
+    "supporting_sentence": "Fractionation of the soluble chicken eggshell matrix by chromatographic methods yielded 13 endogenous proteolytic fragments of the eggshell-specific proteoglycan core protein ovocleidin-116.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "22",
+    "manuscript_sentence": "Here, we test that cross-scale mechanism by integrating micro-CT morphometry, comparative eggshell matrix proteomics with gene-family evolution analysis, intact glycopeptide mass spectrometry, Re-Glyco structural ensemble modelling, and finite-element simulation in three species — Gallus gallus, Anas platyrhynchos, and Columba livia — representing, respectively, the precocial terrestrial ground-nesting, precocial semi-aquatic, and altricial elevated-nesting ecological guilds. By traversing from whole-shell morphology through proteome-wide orthogroup comparison and atomic-level electrostatic modeling to tissue-scale contact-stress simulation, we show that species-specific N-glycan class composition on OVAL tracks a gradient in Ca²⁺ accessibility, mammillary density, and shear resistance. These data support a model in which OVAL glycan class integrates developmental strategy with ecological calcium availability and links a post-translational molecular feature to tissue-scale eggshell biomechanics.",
+    "full_citation": "22. J. A. Tobias, C. Sheard, A. L. Pigot, A. J. M. Devenish, J. Yang, F. Sayol, M. H. C. Neate-Clegg, N. Alioravainen, T. L. Weeks, R. A. Barber, P. A. Walkden, H. E. A. MacGregor, S. E. I. Jones, C. Vincent, A. G. Phillips, N. M. Marples, F. A. Montaño-Centellas, V. Leandro-Silva, S. Claramunt, B. Darski, B. G. Freeman, T. P. Bregman, C. R. Cooney, E. C. Hughes, E. J. R. Capp, Z. K. Varley, N. R. Friedman, H. Korntheuer, A. Corrales-Vargas, C. H. Trisos, B. C. Weeks, D. M. Hanz, T. Töpfer, G. A. Bravo, V. Remeš, L. Nowak, L. S. Carneiro, A. J. M. R., B. Matysioková, D. T. Baldassarre, A. Martínez-Salinas, J. D. Wolfe, P. M. Chapman, B. G. Daly, M. C. Sorensen, A. Neu, M. A. Ford, R. J. Mayhew, L. F. Silveira, D. J. Kelly, N. N. D. Annorbah, H. S. Pollock, A. M. Grabowska-Zhang, J. P. McEntee, J. C. T. Gonzalez, C. G. Meneses, M. C. Muñoz, L. L. Powell, G. A. Jamie, T. J. Matthews, O. Johnson, G. R. R. Brito, K. Zyskowski, R. Crates, M. G. Harvey, M. J. Zevallos, P. A. Hosner, T. Bradfer-Lawrence, J. M. Maley, F. G. Stiles, H. S. Lima, K. L. Provost, M. Chibesa, M. Mashao, J. T. Howard, E. Mlamba, M. A. H. Chua, B. Li, M. I. Gómez, N. C. García, M. Päckert, J. Fuchs, J. R. Ali, E. P. Derryberry, M. L. Carlson, R. C. Urriza, K. E. Brzeski, D. M. Prawiradilaga, M. J. Rayner, E. T. Miller, R. C. K. Bowie, R.-M. Lafontaine, R. P. Scofield, Y. Lou, L. Somarathna, D. Lepage, M. Illif, E. L. Neuschulz, M. Templin, D. M. Dehling, J. C. Cooper, O. S. G. Pauwels, K. Analuddin, J. Fjeldså, N. Seddon, P. R. Sweet, F. A. J. DeClerck, L. N. Naka, J. D. Brawn, A. Aleixo, K. Böhning-Gaese, C. Rahbek, S. A. Fritz, G. H. Thomas, M. Schleuning, AVONET: morphological, ecological and geographical data for all birds. Ecology Letters 25, 581-597 (2022).",
+    "paper_title": "AVONET: morphological, ecological and geographical data for all birds",
+    "doi": "10.1111/ele.13898",
+    "supporting_sentence": "Functional traits offer a rich quantitative framework for developing and testing theories in evolutionary biology, ecology and ecosystem science.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "23",
+    "manuscript_sentence": "Across birds, reproductive strategy and nesting ecology impose different constraints on how much mineralized protection the egg must provide. Precocial lineages generally produce shells that tolerate greater environmental and hatch-related mechanical demands, whereas altricial lineages often operate under reduced structural requirements associated with elevated or otherwise protected nests. These life-history differences imply that mammillary architecture should be an adaptive trait, but they do not by themselves explain what molecular mechanism tunes one shell system toward dense nucleation and another toward a more weakly mineralized state.",
+    "full_citation": "23. M. C. Mainwaring, I. Medina, B. W. Tobalske, I. R. Hartley, D. J. Varricchio, M. E. Hauber, The evolution of nest site use and nest architecture in modern birds and their ancestors. Philosophical Transactions of the Royal Society B: Biological Sciences 378, 20220143 (2023).",
+    "paper_title": "The evolution of nest site use and nest architecture in modern birds and their ancestors",
+    "doi": "10.1098/rstb.2022.0143",
+    "supporting_sentence": "The evolution of nest site use and nest architecture in the non-avian ancestors of birds remains poorly understood because nest structures do not preserve well as fossils.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "24",
+    "manuscript_sentence": "Here, we test that cross-scale mechanism by integrating micro-CT morphometry, comparative eggshell matrix proteomics with gene-family evolution analysis, intact glycopeptide mass spectrometry, Re-Glyco structural ensemble modelling, and finite-element simulation in three species — Gallus gallus, Anas platyrhynchos, and Columba livia — representing, respectively, the precocial terrestrial ground-nesting, precocial semi-aquatic, and altricial elevated-nesting ecological guilds. By traversing from whole-shell morphology through proteome-wide orthogroup comparison and atomic-level electrostatic modeling to tissue-scale contact-stress simulation, we show that species-specific N-glycan class composition on OVAL tracks a gradient in Ca²⁺ accessibility, mammillary density, and shear resistance. These data support a model in which OVAL glycan class integrates developmental strategy with ecological calcium availability and links a post-translational molecular feature to tissue-scale eggshell biomechanics.",
+    "full_citation": "24. R. O. Prum, J. S. Berv, A. Dornburg, D. J. Field, J. P. Townsend, E. M. Lemmon, A. R. Lemmon, A comprehensive phylogeny of birds (Aves) using targeted next-generation DNA sequencing. Nature 526, 569-573 (2015).",
+    "paper_title": "A comprehensive phylogeny of birds (Aves) using targeted next-generation DNA sequencing",
+    "doi": "10.1038/nature15697",
+    "supporting_sentence": "Although reconstruction of the phylogeny of living birds has progressed tremendously in the last decade, the evolutionary history of Neoaves--a clade that encompasses nearly all living bird species--remains the greatest unresolved challenge in dinosaur systematics.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "25",
+    "manuscript_sentence": "Here, we test that cross-scale mechanism by integrating micro-CT morphometry, comparative eggshell matrix proteomics with gene-family evolution analysis, intact glycopeptide mass spectrometry, Re-Glyco structural ensemble modelling, and finite-element simulation in three species — Gallus gallus, Anas platyrhynchos, and Columba livia — representing, respectively, the precocial terrestrial ground-nesting, precocial semi-aquatic, and altricial elevated-nesting ecological guilds. By traversing from whole-shell morphology through proteome-wide orthogroup comparison and atomic-level electrostatic modeling to tissue-scale contact-stress simulation, we show that species-specific N-glycan class composition on OVAL tracks a gradient in Ca²⁺ accessibility, mammillary density, and shear resistance. These data support a model in which OVAL glycan class integrates developmental strategy with ecological calcium availability and links a post-translational molecular feature to tissue-scale eggshell biomechanics.",
+    "full_citation": "25. E. D. Jarvis, S. Mirarab, A. J. Aberer, B. Li, P. Houde, C. Li, S. Y. W. Ho, B. C. Faircloth, B. Nabholz, J. T. Howard, A. Suh, C. C. Weber, R. R. da Fonseca, J. Li, F. Zhang, H. Li, L. Zhou, N. Narula, L. Liu, G. Ganapathy, B. Boussau, M. S. Bayzid, V. Zavidovych, S. Subramanian, T. Gabaldón, S. Capella-Gutiérrez, J. Huerta-Cepas, B. Rekepalli, K. Munch, M. Schierup, B. Lindow, W. C. Warren, D. Ray, R. E. Green, M. W. Bruford, X. Zhan, A. Dixon, S. Li, N. Li, Y. Huang, E. P. Derryberry, M. F. Bertelsen, F. H. Sheldon, R. T. Brumfield, C. V. Mello, P. V. Lovell, M. Wirthlin, M. P. C. Schneider, F. Prosdocimi, J. A. Samaniego, A. M. V. Velazquez, A. Alfaro-Núñez, P. F. Campos, B. Petersen, T. Sicheritz-Ponten, A. Pas, T. Bailey, P. Scofield, M. Bunce, D. M. Lambert, Q. Zhou, P. Perelman, A. C. Driskell, B. Shapiro, Z. Xiong, Y. Zeng, S. Liu, Z. Li, B. Liu, K. Wu, J. Xiao, X. Yinqi, Q. Zheng, Y. Zhang, H. Yang, J. Wang, L. Smeds, F. E. Rheindt, M. Braun, J. Fjeldsa, L. Orlando, F. K. Barker, K. A. Jønsson, W. Johnson, K.-P. Koepfli, S. O’Brien, D. Haussler, O. A. Ryder, C. Rahbek, E. Willerslev, G. R. Graves, T. C. Glenn, J. McCormack, D. Burt, H. Ellegren, P. Alström, S. V. Edwards, A. Stamatakis, D. P. Mindell, J. Cracraft, E. L. Braun, T. Warnow, W. Jun, M. T. P. Gilbert, G. Zhang, Whole-genome analyses resolve early branches in the tree of life of modern birds. Science 346, 1320-1331 (2014).",
+    "paper_title": "Whole-genome analyses resolve early branches in the tree of life of modern birds",
+    "doi": "10.1126/science.1253451",
+    "supporting_sentence": "To better determine the history of modern birds, we performed a genome-scale phylogenetic analysis of 48 species representing all orders of Neoaves using phylogenomic methods created to handle genome-scale data.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "26",
+    "manuscript_sentence": "Across birds, reproductive strategy and nesting ecology impose different constraints on how much mineralized protection the egg must provide. Precocial lineages generally produce shells that tolerate greater environmental and hatch-related mechanical demands, whereas altricial lineages often operate under reduced structural requirements associated with elevated or otherwise protected nests. These life-history differences imply that mammillary architecture should be an adaptive trait, but they do not by themselves explain what molecular mechanism tunes one shell system toward dense nucleation and another toward a more weakly mineralized state.",
+    "full_citation": "26. X. Chen, X. Li, Z. He, Z. Hou, G. Xu, N. Yang, J. Zheng, Comparative study of eggshell antibacterial effectivity in precocial and altricial birds using Escherichia coli. PLOS ONE 14, e0220054 (2019).",
+    "paper_title": "Comparative study of eggshell antibacterial effectivity in precocial and altricial birds using Escherichia coli",
+    "doi": "10.1371/journal.pone.0220054",
+    "supporting_sentence": "In this study, we compared the antibacterial effectivity of the eggs of six precocial and four altricial bird species using Escherichia coli, based on their eggshell traits.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "27",
+    "manuscript_sentence": "Calcium ecology adds a second layer of constraint. Terrestrial species rely largely on diet, medullary bone mobilization, and incidental mineral supplementation from substrate, whereas aquatic and semi-aquatic species can access calcium-rich prey more continuously during shell formation. This means that species can differ not only in how much shell protection they require, but also in how calcium is provisioned during the narrow window of uterine mineralization. A mechanistic explanation for eggshell diversity must therefore accommodate both developmental strategy and calcium availability.",
+    "full_citation": "27. Y. Zhang, H. Xia, S. Wang, W. Xia, C. Jin, X. Huang, K. Li, S. Wang, C. Zhang, C. Zheng, W. Chen, Dietary cholecalciferol and 25-hydroxyvitamin D3 supplementation improved eggshell and bone quality of laying ducks during 60 to 76 weeks of age. Animal Nutrition 22, 414-425 (2025).",
+    "paper_title": "Dietary cholecalciferol and 25-hydroxyvitamin D3 supplementation improved eggshell and bone quality of laying ducks during 60 to 76 weeks of age",
+    "doi": "10.1016/j.aninu.2025.02.011",
+    "supporting_sentence": "This study aimed to evaluate the effects of cholecalciferol (vitamin D 3 , VD 3 ) or 25-hydroxyvitamin D 3 (25(OH)D 3 ) supplementation in the diet of aged laying ducks on eggshell and bone quality.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "28",
+    "manuscript_sentence": "The avian eggshell is a load-bearing mineralized organ whose mechanical performance is established at the level of the mammillary layer, where calcite growth is initiated on organic-matrix nucleation centers. Although the shell also regulates gas exchange, microbial defense, and embryonic calcium supply, its resistance to fracture depends disproportionately on how densely mammillae are packed and how effectively mineral is organized around them. The mammillary layer is therefore not simply the innermost shell compartment; it is the structural origin of whole-shell mechanics.",
+    "full_citation": "28. D. J. Buss, N. Reznikov, M. D. McKee, Attaching organic fibers to mineral: The case of the avian eggshell. iScience 26, 108425 (2023).",
+    "paper_title": "Attaching organic fibers to mineral: The case of the avian eggshell",
+    "doi": "10.1016/j.isci.2023.108425",
+    "supporting_sentence": "Bird eggs possess a mineralized eggshell with a soft underlying fibrous membrane.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "29",
+    "manuscript_sentence": "Shotgun proteomics showed that eggshell matrix composition is built on a large conserved core, with lineage-restricted innovation strongest in pigeon. OrthoFinder identified 2620, 2921, and 3219 protein orthogroups in G. gallus, A. platyrhynchos, and C. livia respectively (Fig. 2a). Of these, 1997 orthogroups were conserved across all three species, constituting the core eggshell matrix proteome independent of developmental strategy or nesting ecology. Pairwise-only orthogroups numbered 180 (G. gallus–A. platyrhynchos), 434 (G. gallus–C. livia), and 716 (A. platyrhynchos–C. livia). Species-exclusive orthogroups were most numerous in C. livia (72), followed by A. platyrhynchos (28) and G. gallus (9), indicating that the pigeon eggshell harbours the broadest lineage-restricted protein complement.",
+    "full_citation": "29. T. Moreau, J. Gautron, M. T. Hincke, P. Monget, S. Réhault-Godbert, N. Guyot, Antimicrobial Proteins and Peptides in Avian Eggshell: Structural Diversity and Potential Roles in Biomineralization. Frontiers in Immunology 13, 946428 (2022).",
+    "paper_title": "Antimicrobial Proteins and Peptides in Avian Eggshell: Structural Diversity and Potential Roles in Biomineralization",
+    "doi": "10.3389/fimmu.2022.946428",
+    "supporting_sentence": "The calcitic avian eggshell provides physical protection for the embryo during its development, but also regulates water and gaseous exchange, and is a calcium source for bone mineralization.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "30",
+    "manuscript_sentence": "Quantification confirmed a clear hierarchy in mammillary packing and matrix allocation across the three species (Fig. 1d–f). Mammilla density was highest in G. gallus (171.36 ± 5.63 per mm²), significantly exceeding both A. platyrhynchos (155.22 ± 8.63 per mm²) and C. livia (158.27 ± 11.39 per mm²; Tukey HSD, both p < 0.05), whereas duck and pigeon densities were not significantly different from each other (Fig. 1d). Column unit volume followed an inverse rank: A. platyrhynchos mammillae were the largest (5.04 ± 0.28 × 10⁻³ mm³), followed by G. gallus (4.06 ± 0.13 × 10⁻³ mm³) and C. livia (2.54 ± 0.19 × 10⁻³ mm³; Fig. 1e). Unit volume ratio—the fraction of the mammillary column volume attributable to its organic matrix core relative to total column volume—was highest in C. livia (0.5321 ± 0.0389), intermediate in A. platyrhynchos (0.4413 ± 0.0249), and lowest in G. gallus (0.3975 ± 0.0127; Fig. 1f). Our data indicate that chicken mammillae are numerous and compact with the smallest per-mammilla organic matrix proportion, duck mammillae are fewer but volumetrically the largest, and pigeon mammillae are conical with the highest organic matrix ratio—consistent with a gradient of decreasing mineral deposition efficiency from precocial ground-nesting through semi-aquatic to altricial elevated-nesting species. Because mammillary architecture is directly templated by uterine eggshell matrix proteins, these phenotypic differences prompted a systematic comparative proteomics investigation.",
+    "full_citation": "30. Y.-T. Wang, Y.-F. Chen, J.-J. Zhang, Q. Zhang, X.-Y. Zhao, R.-Y. Zhou, H. Chen, D.-H. Wang, Comparative Analysis of the Ultrastructure, Bubble Pores, and Composition of Eggshells of Dwarf Layer-White and Guinea Fowl. Animals 14, 1496 (2024).",
+    "paper_title": "Comparative Analysis of the Ultrastructure, Bubble Pores, and Composition of Eggshells of Dwarf Layer-White and Guinea Fowl",
+    "doi": "10.3390/ani14101496",
+    "supporting_sentence": "The decrease in eggshell quality seriously affects production efficiency.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "31",
+    "manuscript_sentence": "Shotgun proteomics showed that eggshell matrix composition is built on a large conserved core, with lineage-restricted innovation strongest in pigeon. OrthoFinder identified 2620, 2921, and 3219 protein orthogroups in G. gallus, A. platyrhynchos, and C. livia respectively (Fig. 2a). Of these, 1997 orthogroups were conserved across all three species, constituting the core eggshell matrix proteome independent of developmental strategy or nesting ecology. Pairwise-only orthogroups numbered 180 (G. gallus–A. platyrhynchos), 434 (G. gallus–C. livia), and 716 (A. platyrhynchos–C. livia). Species-exclusive orthogroups were most numerous in C. livia (72), followed by A. platyrhynchos (28) and G. gallus (9), indicating that the pigeon eggshell harbours the broadest lineage-restricted protein complement.",
+    "full_citation": "31. D.-r. Zhao, L.-b. Gao, F. Gong, J. Feng, H.-j. Zhang, S.-g. Wu, J. Wang, Y.-n. Min, TMT-based quantitative proteomic analysis reveals eggshell matrix protein changes correlated with eggshell quality in Jing Tint 6 laying hens of different ages. Poultry Science 103, 103463 (2024).",
+    "paper_title": "TMT-based quantitative proteomic analysis reveals eggshell matrix protein changes correlated with eggshell quality in Jing Tint 6 laying hens of different ages",
+    "doi": "10.1016/j.psj.2024.103463",
+    "supporting_sentence": "The decline in eggshell quality resulting from aging hens poses a threat to the financial benefits of the egg industry.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "32",
+    "manuscript_sentence": "Shotgun proteomics showed that eggshell matrix composition is built on a large conserved core, with lineage-restricted innovation strongest in pigeon. OrthoFinder identified 2620, 2921, and 3219 protein orthogroups in G. gallus, A. platyrhynchos, and C. livia respectively (Fig. 2a). Of these, 1997 orthogroups were conserved across all three species, constituting the core eggshell matrix proteome independent of developmental strategy or nesting ecology. Pairwise-only orthogroups numbered 180 (G. gallus–A. platyrhynchos), 434 (G. gallus–C. livia), and 716 (A. platyrhynchos–C. livia). Species-exclusive orthogroups were most numerous in C. livia (72), followed by A. platyrhynchos (28) and G. gallus (9), indicating that the pigeon eggshell harbours the broadest lineage-restricted protein complement.",
+    "full_citation": "32. Y. Fu, D.-r. Zhao, L.-b. Gao, H.-j. Zhang, J. Feng, Y.-n. Min, G.-h. Qi, J. Wang, TMT-Based quantitative proteomic analysis reveals age-related changes in eggshell matrix proteins and their correlation with eggshell quality in Xinyang blue-shelled laying hens. Poultry Science 104, 104661 (2025).",
+    "paper_title": "TMT-Based quantitative proteomic analysis reveals age-related changes in eggshell matrix proteins and their correlation with eggshell quality in Xinyang blue-shelled laying hens",
+    "doi": "10.1016/j.psj.2024.104661",
+    "supporting_sentence": "The decline in eggshell quality with increasing hen age may be related to changes in ultrastructure and chemical composition, with matrix proteins playing key roles in these changes.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "33",
+    "manuscript_sentence": "Shotgun proteomics showed that eggshell matrix composition is built on a large conserved core, with lineage-restricted innovation strongest in pigeon. OrthoFinder identified 2620, 2921, and 3219 protein orthogroups in G. gallus, A. platyrhynchos, and C. livia respectively (Fig. 2a). Of these, 1997 orthogroups were conserved across all three species, constituting the core eggshell matrix proteome independent of developmental strategy or nesting ecology. Pairwise-only orthogroups numbered 180 (G. gallus–A. platyrhynchos), 434 (G. gallus–C. livia), and 716 (A. platyrhynchos–C. livia). Species-exclusive orthogroups were most numerous in C. livia (72), followed by A. platyrhynchos (28) and G. gallus (9), indicating that the pigeon eggshell harbours the broadest lineage-restricted protein complement.",
+    "full_citation": "33. L.-b. Gao, Y. Fu, Y.-t. Guo, H.-j. Zhang, G.-h. Qi, J. Wang, Proteomic changes in extracellular vesicle and uterine fluid proteins correlated with eggshell quality in aged laying hens. Poultry Science 104, 105939 (2025).",
+    "paper_title": "Proteomic changes in extracellular vesicle and uterine fluid proteins correlated with eggshell quality in aged laying hens",
+    "doi": "10.1016/j.psj.2025.105939",
+    "supporting_sentence": "Extracellular vesicles (EVs) in uterine fluid (UF) are thought to regulate eggshell calcification, yet their composition and functions remain unclear.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "34",
+    "manuscript_sentence": "Mechanical simulation confirmed that the microstructural hierarchy is functionally meaningful. Finite-element analysis showed that maximum force and peak contact shear stress captured different aspects of shell performance. The higher raw force required to breach A. platyrhynchos relative to C. livia was largely attributable to shell thickness, whereas τ_max isolated the material-level resistance of the cone-contact interface. By that criterion, G. gallus formed a distinct high-resistance group, while duck and pigeon clustered together at lower values. This grouping exactly reproduced the mammilla-density hierarchy from micro-CT and therefore closed the experimental chain from shell morphology to functional consequence (Fig. 7).",
+    "full_citation": "34. Y.-y. Yang, D. Dai, H.-j. Zhang, S.-g. Wu, G.-h. Qi, J. Wang, The characterization of uterine calcium transport and metabolism during eggshell calcification of hens laying high or low breaking strength eggshell. Poultry Science 104, 105111 (2025).",
+    "paper_title": "The characterization of uterine calcium transport and metabolism during eggshell calcification of hens laying high or low breaking strength eggshell",
+    "doi": "10.1016/j.psj.2025.105111",
+    "supporting_sentence": "This study investigated the differences of calcium transport-related proteins and metabolites in the uterus of hens with different breaking strength eggshell during the eggshell calcification.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "35",
+    "manuscript_sentence": "Mechanical simulation confirmed that the microstructural hierarchy is functionally meaningful. Finite-element analysis showed that maximum force and peak contact shear stress captured different aspects of shell performance. The higher raw force required to breach A. platyrhynchos relative to C. livia was largely attributable to shell thickness, whereas τ_max isolated the material-level resistance of the cone-contact interface. By that criterion, G. gallus formed a distinct high-resistance group, while duck and pigeon clustered together at lower values. This grouping exactly reproduced the mammilla-density hierarchy from micro-CT and therefore closed the experimental chain from shell morphology to functional consequence (Fig. 7).",
+    "full_citation": "35. L. Wang, H. Liu, S. Yu, M. Lu, Y. Zhang, S. Wang, S. Hou, Transcriptome-based analysis reveals relationship between duck eggshell color and eggshell strength. BMC Genomics 26, 410 (2025).",
+    "paper_title": "Transcriptome-based analysis reveals relationship between duck eggshell color and eggshell strength",
+    "doi": "10.1186/s12864-025-11452-w",
+    "supporting_sentence": "Background The strength of duck eggshells is essential for their storage, transportation, and processing, with various studies indicating a correlation between eggshell color and strength.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "36",
+    "manuscript_sentence": "Quantification confirmed a clear hierarchy in mammillary packing and matrix allocation across the three species (Fig. 1d–f). Mammilla density was highest in G. gallus (171.36 ± 5.63 per mm²), significantly exceeding both A. platyrhynchos (155.22 ± 8.63 per mm²) and C. livia (158.27 ± 11.39 per mm²; Tukey HSD, both p < 0.05), whereas duck and pigeon densities were not significantly different from each other (Fig. 1d). Column unit volume followed an inverse rank: A. platyrhynchos mammillae were the largest (5.04 ± 0.28 × 10⁻³ mm³), followed by G. gallus (4.06 ± 0.13 × 10⁻³ mm³) and C. livia (2.54 ± 0.19 × 10⁻³ mm³; Fig. 1e). Unit volume ratio—the fraction of the mammillary column volume attributable to its organic matrix core relative to total column volume—was highest in C. livia (0.5321 ± 0.0389), intermediate in A. platyrhynchos (0.4413 ± 0.0249), and lowest in G. gallus (0.3975 ± 0.0127; Fig. 1f). Our data indicate that chicken mammillae are numerous and compact with the smallest per-mammilla organic matrix proportion, duck mammillae are fewer but volumetrically the largest, and pigeon mammillae are conical with the highest organic matrix ratio—consistent with a gradient of decreasing mineral deposition efficiency from precocial ground-nesting through semi-aquatic to altricial elevated-nesting species. Because mammillary architecture is directly templated by uterine eggshell matrix proteins, these phenotypic differences prompted a systematic comparative proteomics investigation.",
+    "full_citation": "36. Z. Li, H. Wu, J. Fu, M. Mushtaq, M. Khan, Y. Liu, Z. Azeem, H. Shi, Y. He, R. Zhang, M. A. U. Rahman, J. Kang, C. Ge, K. Wang, Eggshell Quality Traits and Transcriptome Gene Screening Between Yunnong and Jingfen Chicken Breeds. Biology 13, 1048 (2024).",
+    "paper_title": "Eggshell Quality Traits and Transcriptome Gene Screening Between Yunnong and Jingfen Chicken Breeds",
+    "doi": "10.3390/biology13121048",
+    "supporting_sentence": "The eggshell quality traits in avian species, including Yunnong chickens (YN), are crucial for commercial and breeding purposes.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "37",
+    "manuscript_sentence": "Mechanical simulation confirmed that the microstructural hierarchy is functionally meaningful. Finite-element analysis showed that maximum force and peak contact shear stress captured different aspects of shell performance. The higher raw force required to breach A. platyrhynchos relative to C. livia was largely attributable to shell thickness, whereas τ_max isolated the material-level resistance of the cone-contact interface. By that criterion, G. gallus formed a distinct high-resistance group, while duck and pigeon clustered together at lower values. This grouping exactly reproduced the mammilla-density hierarchy from micro-CT and therefore closed the experimental chain from shell morphology to functional consequence (Fig. 7).",
+    "full_citation": "37. G. Rayan, M. Fathi, Ultrastructural changes in eggshell during incubation: mechanisms and implications. Poultry Science 105, 106314 (2026).",
+    "paper_title": "Ultrastructural changes in eggshell during incubation: mechanisms and implications",
+    "doi": "10.1016/j.psj.2025.106314",
+    "supporting_sentence": "The avian eggshell is a complex, multi-layered bioceramic structure that performs mechanical, physiological, and biochemical functions essential for embryo survival.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "38",
+    "manuscript_sentence": "The avian eggshell is a load-bearing mineralized organ whose mechanical performance is established at the level of the mammillary layer, where calcite growth is initiated on organic-matrix nucleation centers. Although the shell also regulates gas exchange, microbial defense, and embryonic calcium supply, its resistance to fracture depends disproportionately on how densely mammillae are packed and how effectively mineral is organized around them. The mammillary layer is therefore not simply the innermost shell compartment; it is the structural origin of whole-shell mechanics.",
+    "full_citation": "38. E. N. Hahn, V. R. Sherman, A. Pissarenko, S. D. Rohrbach, D. J. Fernandes, M. A. Meyers, Nature's technical ceramic: the avian eggshell. Journal of The Royal Society Interface 14, 20160804 (2017).",
+    "paper_title": "Nature's technical ceramic: the avian eggshell",
+    "doi": "10.1098/rsif.2016.0804",
+    "supporting_sentence": "Avian eggshells may break easily when impacted at a localized point; however, they exhibit impressive resistance when subjected to a well-distributed compressive load.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "39",
+    "manuscript_sentence": "Calcium ecology adds a second layer of constraint. Terrestrial species rely largely on diet, medullary bone mobilization, and incidental mineral supplementation from substrate, whereas aquatic and semi-aquatic species can access calcium-rich prey more continuously during shell formation. This means that species can differ not only in how much shell protection they require, but also in how calcium is provisioned during the narrow window of uterine mineralization. A mechanistic explanation for eggshell diversity must therefore accommodate both developmental strategy and calcium availability.",
+    "full_citation": "39. M. R. G. Attard, S. J. Portugal, Climate variability and parent nesting strategies influence gas exchange across avian eggshells. Proceedings of the Royal Society B: Biological Sciences 288, 20210823 (2021).",
+    "paper_title": "Climate variability and parent nesting strategies influence gas exchange across avian eggshells",
+    "doi": "10.1098/rspb.2021.0823",
+    "supporting_sentence": "Embryo survival in birds depends on a controlled transfer of water vapour and respiratory gases through the eggshell, and this exchange is critically sensitive to the surrounding physical environment.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "40",
+    "manuscript_sentence": "Across birds, reproductive strategy and nesting ecology impose different constraints on how much mineralized protection the egg must provide. Precocial lineages generally produce shells that tolerate greater environmental and hatch-related mechanical demands, whereas altricial lineages often operate under reduced structural requirements associated with elevated or otherwise protected nests. These life-history differences imply that mammillary architecture should be an adaptive trait, but they do not by themselves explain what molecular mechanism tunes one shell system toward dense nucleation and another toward a more weakly mineralized state.",
+    "full_citation": "40. D. Vieco-Galvez, I. Castro, P. C. H. Morel, W. H. Chua, M. Loh, The eggshell structure in apteryx; form, function, and adaptation. Ecology and Evolution 11, 3184-3202 (2021).",
+    "paper_title": "The eggshell structure in apteryx ; form, function, and adaptation",
+    "doi": "10.1002/ece3.7266",
+    "supporting_sentence": "Apteryx is a genus of flightless birds endemic to New Zealand known to lay very large eggs in proportion to body weight.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "41",
+    "manuscript_sentence": "Across birds, reproductive strategy and nesting ecology impose different constraints on how much mineralized protection the egg must provide. Precocial lineages generally produce shells that tolerate greater environmental and hatch-related mechanical demands, whereas altricial lineages often operate under reduced structural requirements associated with elevated or otherwise protected nests. These life-history differences imply that mammillary architecture should be an adaptive trait, but they do not by themselves explain what molecular mechanism tunes one shell system toward dense nucleation and another toward a more weakly mineralized state.",
+    "full_citation": "41. M. R. G. Attard, J. Bowen, S. J. Portugal, Scratching beyond the surface: examining macroecological patterns in avian eggshell texture. Journal of The Royal Society Interface 22, 20240527 (2025).",
+    "paper_title": "Scratching beyond the surface: examining macroecological patterns in avian eggshell texture",
+    "doi": "10.1098/rsif.2024.0527",
+    "supporting_sentence": "The surface texture of bird eggshells differs remarkably between species and is thought to play a substantial role in providing physical and microbial protection for the developing embryo.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "42",
+    "manuscript_sentence": "Structural modeling converted the glycan-class difference into a concrete Ca²⁺-accessibility hierarchy. Re-Glyco ensemble modeling and APBS electrostatics converged on the same ranking observed in the glycoproteomics data. High-Mannose glycans on chicken OVAL left Ca²⁺-coordinating Asp/Glu-rich surface patches comparatively exposed, duck occupied an intermediate state, and pigeon showed the strongest reduction in hotspot number, carboxylate solvent-accessible surface area, and favorable electrostatic potential around the same regions (Fig. 6). The agreement between glycan class and computed Ca²⁺ accessibility nominates OVAL glycan architecture as a mechanistically interpretable control point for mammillary nucleation.",
+    "full_citation": "42. D. Wang, Z. Zhang, J. Baudys, C. Haynes, S. H. Osman, B. Zhou, J. R. Barr, J. C. Gumbart, Enhanced Surface Accessibility of SARS-CoV-2 Omicron Spike Protein Due to an Altered Glycosylation Profile. ACS Infectious Diseases 10, 2032-2046 (2024).",
+    "paper_title": "Enhanced Surface Accessibility of SARS-CoV-2 Omicron Spike Protein Due to an Altered Glycosylation Profile",
+    "doi": "10.1021/acsinfecdis.4c00015",
+    "supporting_sentence": "SARS-CoV-2 spike (S) proteins undergo extensive glycosylation, aiding in proper folding, enhancing stability, and evading host immune surveillance.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "43",
+    "manuscript_sentence": "Structural modeling converted the glycan-class difference into a concrete Ca²⁺-accessibility hierarchy. Re-Glyco ensemble modeling and APBS electrostatics converged on the same ranking observed in the glycoproteomics data. High-Mannose glycans on chicken OVAL left Ca²⁺-coordinating Asp/Glu-rich surface patches comparatively exposed, duck occupied an intermediate state, and pigeon showed the strongest reduction in hotspot number, carboxylate solvent-accessible surface area, and favorable electrostatic potential around the same regions (Fig. 6). The agreement between glycan class and computed Ca²⁺ accessibility nominates OVAL glycan architecture as a mechanistically interpretable control point for mammillary nucleation.",
+    "full_citation": "43. M. Blazhynska, L. Lagardère, C. Liu, O. Adjoua, P. Ren, J.-P. Piquemal, Water–glycan interactions drive the SARS-CoV-2 spike dynamics: insights into glycan-gate control and camouflage mechanisms. Chemical Science 15, 14177-14187 (2024).",
+    "paper_title": "Water–glycan interactions drive the SARS-CoV-2 spike dynamics: insights into glycan-gate control and camouflage mechanisms",
+    "doi": "10.1039/d4sc04364b",
+    "supporting_sentence": "To develop therapeutic strategies against COVID-19, we introduce a high-resolution all-atom polarizable model capturing many-body effects of protein, glycan, solvent, and membrane components in SARS-CoV-2 spike protein open and closed states.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "44",
+    "manuscript_sentence": "Structural modeling converted the glycan-class difference into a concrete Ca²⁺-accessibility hierarchy. Re-Glyco ensemble modeling and APBS electrostatics converged on the same ranking observed in the glycoproteomics data. High-Mannose glycans on chicken OVAL left Ca²⁺-coordinating Asp/Glu-rich surface patches comparatively exposed, duck occupied an intermediate state, and pigeon showed the strongest reduction in hotspot number, carboxylate solvent-accessible surface area, and favorable electrostatic potential around the same regions (Fig. 6). The agreement between glycan class and computed Ca²⁺ accessibility nominates OVAL glycan architecture as a mechanistically interpretable control point for mammillary nucleation.",
+    "full_citation": "44. L. Casalino, Z. Gaieb, J. A. Goldsmith, C. K. Hjorth, A. C. Dommer, A. M. Harbison, C. A. Fogarty, E. P. Barros, B. C. Taylor, J. S. McLellan, E. Fadda, R. E. Amaro, Beyond Shielding: The Roles of Glycans in the SARS-CoV-2 Spike Protein. ACS Central Science 6, 1722-1734 (2020).",
+    "paper_title": "Beyond Shielding: The Roles of Glycans in the SARS-CoV-2 Spike Protein",
+    "doi": "10.1021/acscentsci.0c01056",
+    "supporting_sentence": "The ongoing COVID-19 pandemic caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) has resulted in more than 28,000,000 infections and 900,000 deaths worldwide to date.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "45",
+    "manuscript_sentence": "Structural modeling converted the glycan-class difference into a concrete Ca²⁺-accessibility hierarchy. Re-Glyco ensemble modeling and APBS electrostatics converged on the same ranking observed in the glycoproteomics data. High-Mannose glycans on chicken OVAL left Ca²⁺-coordinating Asp/Glu-rich surface patches comparatively exposed, duck occupied an intermediate state, and pigeon showed the strongest reduction in hotspot number, carboxylate solvent-accessible surface area, and favorable electrostatic potential around the same regions (Fig. 6). The agreement between glycan class and computed Ca²⁺ accessibility nominates OVAL glycan architecture as a mechanistically interpretable control point for mammillary nucleation.",
+    "full_citation": "45. O. C. Grant, D. Montgomery, K. Ito, R. J. Woods, Analysis of the SARS-CoV-2 spike protein glycan shield reveals implications for immune recognition. Scientific Reports 10, 14991 (2020).",
+    "paper_title": "Analysis of the SARS-CoV-2 spike protein glycan shield reveals implications for immune recognition",
+    "doi": "10.1038/s41598-020-71748-7",
+    "supporting_sentence": "Here we have generated 3D structures of glycoforms of the spike (S) glycoprotein from SARS-CoV-2, based on reported 3D structures and glycomics data for the protein produced in HEK293 cells.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "46",
+    "manuscript_sentence": "Structural modeling converted the glycan-class difference into a concrete Ca²⁺-accessibility hierarchy. Re-Glyco ensemble modeling and APBS electrostatics converged on the same ranking observed in the glycoproteomics data. High-Mannose glycans on chicken OVAL left Ca²⁺-coordinating Asp/Glu-rich surface patches comparatively exposed, duck occupied an intermediate state, and pigeon showed the strongest reduction in hotspot number, carboxylate solvent-accessible surface area, and favorable electrostatic potential around the same regions (Fig. 6). The agreement between glycan class and computed Ca²⁺ accessibility nominates OVAL glycan architecture as a mechanistically interpretable control point for mammillary nucleation.",
+    "full_citation": "46. Y. Watanabe, Z. T. Berndsen, J. Raghwani, G. E. Seabright, J. D. Allen, O. G. Pybus, J. S. McLellan, I. A. Wilson, T. A. Bowden, A. B. Ward, M. Crispin, Vulnerabilities in coronavirus glycan shields despite extensive glycosylation. Nature Communications 11, 2688 (2020).",
+    "paper_title": "Vulnerabilities in coronavirus glycan shields despite extensive glycosylation",
+    "doi": "10.1038/s41467-020-16567-0",
+    "supporting_sentence": "Severe acute respiratory syndrome (SARS) and Middle East respiratory syndrome (MERS) coronaviruses (CoVs) are zoonotic pathogens with high fatality rates and pandemic potential.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "47",
+    "manuscript_sentence": "OVAL itself resolved into a striking three-state glycan progression: chicken was dominated by compact High-Mannose structures, duck by exclusively neutral complex glycans, and pigeon by more extended Sialylated Complex/Hybrid glycans (Fig. 5). Because these glycan classes differ strongly in steric bulk and charge distribution, this result pointed to OVAL surface accessibility rather than OVAL abundance alone as the most plausible molecular variable governing shell mineralization output.",
+    "full_citation": "47. J. Pu, J. Hu, J. Xiao, S. Li, B. Wang, J. Wang, F. Geng, Integrated landscape of chicken egg chalaza proteomics. Poultry Science 103, 103629 (2024).",
+    "paper_title": "Integrated landscape of chicken egg chalaza proteomics",
+    "doi": "10.1016/j.psj.2024.103629",
+    "supporting_sentence": "Chicken egg chalaza (CLZ) is a natural colloidal structure in eggs that exists as an egg yolk stabilizer and is similar in composition to egg white.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "48",
+    "manuscript_sentence": "OVAL itself resolved into a striking three-state glycan progression: chicken was dominated by compact High-Mannose structures, duck by exclusively neutral complex glycans, and pigeon by more extended Sialylated Complex/Hybrid glycans (Fig. 5). Because these glycan classes differ strongly in steric bulk and charge distribution, this result pointed to OVAL surface accessibility rather than OVAL abundance alone as the most plausible molecular variable governing shell mineralization output.",
+    "full_citation": "48. J. Xiao, J. Wang, L. Cheng, S. Gao, S. Li, N. Qiu, H. Li, L. Peng, F. Geng, A puzzle piece of protein N-glycosylation in chicken egg: N-glycoproteome of chicken egg vitelline membrane. International Journal of Biological Macromolecules 164, 3125-3132 (2020).",
+    "paper_title": "A puzzle piece of protein N-glycosylation in chicken egg: N-glycoproteome of chicken egg vitelline membrane",
+    "doi": "10.1016/j.ijbiomac.2020.08.193",
+    "supporting_sentence": "The chicken egg vitelline membrane (CEVM) is an important structure for the transmembrane transport of egg yolk components, protection of the blastodisc, and separation of egg white and egg yolk.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "49",
+    "manuscript_sentence": "Work over the past two decades has identified uterine matrix proteins as major regulators of mammillary nucleation, crystal growth orientation, and shell architecture, with ovalbumin (OVAL) and ovocleidin-116 (OC116) among the best-supported Ca²⁺-responsive factors. These proteins carry N-linked glycans that vary from compact High-Mannose to extended Sialylated Complex forms, and prior structural work has shown that glycan occupancy can alter conformation and the solvent exposure of acidic residues involved in Ca²⁺ coordination. In parallel, comparative morphometry and simulation studies have shown that eggshell mechanics diverge systematically across the precocial–altricial spectrum. What remains missing is a single cross-species framework connecting these observations. Specifically, it is not known whether species-level divergence in OVAL glycan class is translated into predictable differences in Ca²⁺ accessibility, mammillary packing, and shell mechanical performance.",
+    "full_citation": "49. A. Yu, J. Zhao, W. Peng, A. Banazadeh, S. D. Williamson, M. Goli, Y. Huang, Y. Mechref, Advances in mass spectrometry‐based glycoproteomics. ELECTROPHORESIS 39, 3104-3122 (2018).",
+    "paper_title": "Advances in mass spectrometry‐based glycoproteomics",
+    "doi": "10.1002/elps.201800272",
+    "supporting_sentence": "Protein glycosylation, an important PTM, plays an essential role in a wide range of biological processes such as immune response, intercellular signaling, inflammation, and host-pathogen interaction.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "50",
+    "manuscript_sentence": "Work over the past two decades has identified uterine matrix proteins as major regulators of mammillary nucleation, crystal growth orientation, and shell architecture, with ovalbumin (OVAL) and ovocleidin-116 (OC116) among the best-supported Ca²⁺-responsive factors. These proteins carry N-linked glycans that vary from compact High-Mannose to extended Sialylated Complex forms, and prior structural work has shown that glycan occupancy can alter conformation and the solvent exposure of acidic residues involved in Ca²⁺ coordination. In parallel, comparative morphometry and simulation studies have shown that eggshell mechanics diverge systematically across the precocial–altricial spectrum. What remains missing is a single cross-species framework connecting these observations. Specifically, it is not known whether species-level divergence in OVAL glycan class is translated into predictable differences in Ca²⁺ accessibility, mammillary packing, and shell mechanical performance.",
+    "full_citation": "50. A. Banazadeh, L. Veillon, K. M. Wooding, M. Zabet-moghaddam, Y. Mechref, Recent advances in mass spectrometric analysis of glycoproteins. ELECTROPHORESIS 38, 162-189 (2017).",
+    "paper_title": "Recent advances in mass spectrometric analysis of glycoproteins",
+    "doi": "10.1002/elps.201600357",
+    "supporting_sentence": "Glycosylation is one of the most common posttranslational modifications of proteins that plays essential roles in various biological processes, including protein folding, host-pathogen interaction, immune response, and inflammation and aberrant protein glycosylation is a well-known event in various disease states including cancer.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "51",
+    "manuscript_sentence": "OVAL ortholog protein structures (AlphaFold2-predicted models) were accessed through the GlycoShape platform (glycoshape.org) via UniProt accession identifiers. Experimentally detected N-glycan compositions from IGP-MS were mapped to the GlycoShape glycan library by monoisotopic mass matching (tolerance ±0.5 Da), using per-residue masses of 203.0794 Da (HexNAc), 162.0528 Da (Hex), 291.0954 Da (NeuAc), 146.0579 Da (dHex), and 132.0423 Da (Pen) with an 18.0106 Da water correction; matched entries were retrieved as GlyTouCan accession identifiers. Full conformational ensembles were then generated with the GlycoShape Re-Glyco Ensemble tool (glycoshape.org/ensemble), which restores missing glycans by aligning them to torsion angles from Privateer crystallographic standards and sampling conformations from the GlycoShape molecular-dynamics ensemble library. For each protein, a session was created via the GlycoShape API to identify available N-glycosylation sequons in the structural model; each matched glycan was then submitted as an independent modelling job and attached to the target sequon — G. gallus N293 and A. platyrhynchos / C. livia N97 — with ensemble size 50, random seed 42, and PDB output format. This procedure yielded 50 glycoprotein models for G. gallus (1 matched glycan type), 150 for A. platyrhynchos (3 types), and 700 for C. livia (14 types, including four NeuAc positional isomers resolved from the GlycoShape library). Ensemble geometric descriptors were calculated for each model from atomic coordinates using BioPython: the radius of gyration (Rg) of all glycan heavy atoms, the end-to-end distance of the glycan chain, and the minimum distance between any glycan heavy atom and protein Cα atoms (minimum Cα contact distance). Per-structure summary statistics (mean ± s.d.) and pairwise species comparisons (Mann–Whitney U test, two-tailed) were performed for each descriptor.",
+    "full_citation": "51. W. Cao, J. Huang, B. Jiang, X. Gao, P. Yang, Highly Selective Enrichment of Glycopeptides Based on Zwitterionically Functionalized Soluble Nanopolymers. Scientific Reports 6, 29776 (2016).",
+    "paper_title": "Highly Selective Enrichment of Glycopeptides Based on Zwitterionically Functionalized Soluble Nanopolymers",
+    "doi": "10.1038/srep29776",
+    "supporting_sentence": "Efficient glycopeptides enrichment prior to mass spectrometry analysis is essential for glycoproteome study.",
+    "evidence_source": "Europe PMC abstract"
+  },
+  {
+    "ref_no": "52",
+    "manuscript_sentence": "Work over the past two decades has identified uterine matrix proteins as major regulators of mammillary nucleation, crystal growth orientation, and shell architecture, with ovalbumin (OVAL) and ovocleidin-116 (OC116) among the best-supported Ca²⁺-responsive factors. These proteins carry N-linked glycans that vary from compact High-Mannose to extended Sialylated Complex forms, and prior structural work has shown that glycan occupancy can alter conformation and the solvent exposure of acidic residues involved in Ca²⁺ coordination. In parallel, comparative morphometry and simulation studies have shown that eggshell mechanics diverge systematically across the precocial–altricial spectrum. What remains missing is a single cross-species framework connecting these observations. Specifically, it is not known whether species-level divergence in OVAL glycan class is translated into predictable differences in Ca²⁺ accessibility, mammillary packing, and shell mechanical performance.",
+    "full_citation": "52. L. Yang, Y. Yang, Y. Jing, M. Zhang, M. Zhang, S. Zhang, C. Qi, W. Ma, M. Z. Khan, M. Zhu, Research Progress on Genetic Factors of Poultry Egg Quality: A Review. Animals 15, 3652 (2025).",
+    "paper_title": "Research Progress on Genetic Factors of Poultry Egg Quality: A Review",
+    "doi": "10.3390/ani15243652",
+    "supporting_sentence": "Egg quality is a critical economic trait in poultry production, influencing consumer preference and production efficiency.",
+    "evidence_source": "Europe PMC abstract"
+  }
+]

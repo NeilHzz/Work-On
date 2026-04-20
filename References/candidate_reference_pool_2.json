@@ -1,0 +1,274 @@
+{
+  "oval_eggshell": [
+    {
+      "title": "Research Progress on Genetic Factors of Poultry Egg Quality: A Review.",
+      "authorString": "Yang L, Yang Y, Jing Y, Zhang M, Zhang M, Zhang S, Qi C, Ma W, Khan MZ, Zhu M.",
+      "journalTitle": null,
+      "pubYear": "2025",
+      "doi": "10.3390/ani15243652",
+      "abstractText": "Egg quality is a critical economic trait in poultry production, influencing consumer preference and production efficiency. The genetic and epigenetic regulation of egg quality involves complex biological pathways across various traits such as shell quality, albumen composition, and yolk biochemistry. This review synthesizes recent advances in the genetic, molecular, and epigenetic mechanisms that determine poultry egg quality. Specifically, it focuses on external traits such as eggshell strength, color, and thickness, and internal traits including albumen height, yolk composition, and the Haugh unit. Through genome-wide association studies (GWAS), quantitative trait loci (QTL) mapping, whole-genome sequencing (WGS), and multi-omics approaches, key candidate genes such as <i>OC-116</i>, <i>CALB1</i>, <i>CA2</i> (shell formation), <i>OVAL</i>, <i>SPINK5</i>, <i>SERPINB14</i> (albumen quality), and <i>FGF9</i>, <i>PIAS1</i>, <i>NOX5</i> (lipid metabolism) have been identified. These genes play a pivotal role in shell biomineralization, albumen protein regulation, and yolk lipid transport. This review also explores the heritability of these traits, emphasizing the challenges posed by polygenic architecture and the influence of environmental factors. Furthermore, it addresses the dynamic spatiotemporal regulation of egg quality traits, including epigenetic layers such as DNA methylation, histone modifications, RNA methylation, and post-translational protein modifications. This paper highlights the application of these findings to breeding programs via genomic selection, marker-assisted breeding, and epigenetic engineering approaches. Future directions for precision breeding and the development of functional eggs with enhanced quality are also discussed."
+    },
+    {
+      "title": "Evolution of the Chick Embryo Chorioallantoic Membrane Proteome during Early Development.",
+      "authorString": "Ali S, Ahmed TAE, Shrestha A, Hincke MT.",
+      "journalTitle": null,
+      "pubYear": "2026",
+      "doi": "10.1021/acsomega.5c10968",
+      "abstractText": "In avian species, the chorioallantoic membrane (CAM) is a vital, highly vascularized extraembryonic structure that supports embryonic respiration, calcium transport, and innate immune defense. In this study, we applied LC/MS/MS-based proteomics to CAM tissue harvested at embryonic days (ED) 6, 8, 10, and 12 to characterize its protein profile during the expression of different CAM functionalities during embryonic development and gain insight into possible sex-based distinctions. A total of 2688 proteins were identified, with 2347, 2265, 2351, and 1267 proteins detected at ED 6, 8, 10, and 12, respectively. Notably, 1191 common proteins were identified across all stages, while 124, 47, 86, and 2 proteins were uniquely expressed at ED 6, 8, 10, and 12, respectively. Functional annotation revealed correlations with abundant CAM protein constituents (as per their emPAI); for example: calcium mobilization - v-type proton ATPase subunit E1 (ATP6V1E1) and G1 (ATP6V1G1); intracellular transport-calcium-binding protein 39 (CAB39); vascular system and gaseous exchange - annexin A2 (ANXA2); lymphatics-actin, gamma 1 (ACTG1); blood elements-hemoglobin subunit alpha-1 (HBA1); immune defense-cathelicidin-1 (CATH1), cathelicidin-2 (CATH2); and protection against luminal toxic contents-thioredoxin (TXN). Notably, a sex-specific analysis identified 614, 320, 314, and 212 proteins that were uniquely expressed in female embryos, and 212, 273, 144, and 56 proteins only in male embryos at ED 6, 8, 10, and 12, respectively. The identification of sex-linked proteins during early CAM development may provide insight into their functional roles and highlight the CAM's potential as a target for the development of <i>in-ovo</i> sex identification technology."
+    },
+    {
+      "title": "Advances in Genomics and Postgenomics in Poultry Science: Current Achievements and Future Directions.",
+      "authorString": "Gilyazova I, Korytina G, Kochetova O, Savelieva O, Mikhaylova E, Vershinina Z, Chumakova A, Markelov V, Abdeeva G, Karunas A, Khusnutdinova E, Gusev O.",
+      "journalTitle": null,
+      "pubYear": "2025",
+      "doi": "10.3390/ijms26178285",
+      "abstractText": "The poultry industry, a globally fast growing agricultural sector, provides affordable animal protein due to high efficiency. <i>Gallus gallus domesticus</i> are the most common domestic birds. Hybrid chicken breeds (crosses) are widely used to achieve high productivity. Maintaining industry competitiveness requires constant genetic selection of parent stock to improve performance traits. Genetic studies, which are essential in modern breeding programs, help identify genome variants linked to economically important traits and preserve population health. Next-generation sequencing (NGS) has identified millions of single nucleotide polymorphisms (SNPs) and insertions/deletions (INDELs), enabling detection of genome-wide regions associated with selection traits. Recent studies have pinpointed such regions using broiler lines, laying hen lines, or pooled genomic data. This review discusses advances in chicken genomic and transcriptomic research focused on traits enhancing meat breed performance and reproductive abilities. Special attention is given to transcriptome studies revealing regulatory mechanisms and key signaling pathways involved in artificial molting, as well as metagenome studies investigating resistance to infectious diseases and climate adaptation. Finally, a dedicated section highlights CRISPR/Cas genomic editing techniques for targeted genome modification in chicken genomics."
+    },
+    {
+      "title": "Screening of functional genes affecting the quality of translucent eggshell membranes based on RNA-seq analysis and DIA proteomics.",
+      "authorString": "Han CH, Zhao XY, Wang CW, Xu LJ, Liu HG, Chen H, Zhou RY, Wang DH.",
+      "journalTitle": null,
+      "pubYear": "2025",
+      "doi": "10.3389/fvets.2025.1583291",
+      "abstractText": "The quality of eggshells holds substantial economic significance and serves as a critical selection criterion in poultry breeding. Eggshell translucency significantly impairs their aesthetic quality, which is structurally attributed to the thinning of the eggshell membrane or reduced tensile strength. In this study, 836 dwarf white hens were selected, with 45 hens each assigned to the opaque group and the translucent group. Grading for eggshell translucency was conducted at 75, 80, and 85 weeks of age. Based on the results from these three gradings, 35 hens that consistently produced translucent eggs and 35 hens that consistently produced opaque eggs were reclassified into the translucent group and the opaque group, respectively. The thickness of the eggshell membrane, latitudinal and longitudinal tensile force and length, and other indicators related to eggshell membrane quality were measured. Correlation analysis was performed using RNA-seq genomics and DIA proteomics based on the relationships among these indicators. Transcriptome analysis revealed 179 significantly differentially expressed genes, indicating that the causes of translucent eggshells are associated with metabolism, signal transduction, the immune system, molecular binding, transport, and catabolism. Seven potential candidate genes, including <i>CACNA2D2</i> and <i>KIF26A</i>, were identified. Proteomics analysis identified 565 differentially expressed proteins, suggesting that the expression of eggshell membrane proteins in translucent eggs is linked to protein metabolism, amino acid synthesis, immune regulation, metabolism and oxidative stress, catalytic activity, and molecular transport. Candidate proteins such as <i>SLC4A1</i>, <i>APOA1</i>, and <i>APOA4</i> were also identified. Combined proteomics and transcriptomics analysis identified 42 differentially expressed proteins and genes, including candidate genes such as <i>CA2</i>, <i>LUZP2</i>, <i>OVA</i>, <i>OVALY</i>, <i>OVST</i>, and <i>AVBD11</i>. This study provides a foundation for elucidating the genetic regulatory mechanisms underlying eggshell membrane quality and offers valuable references and directions for further enhancing eggshell quality."
+    },
+    {
+      "title": "Amyloid-induced mineralization: From biological systems to biomimetic materials.",
+      "authorString": "Zhang C, Zhang Y, Zhu M, Zhang C, Lu D, Jiang J, Wang Z, Deng P, Qian Y, Shen M, Chen Q.",
+      "journalTitle": null,
+      "pubYear": "2025",
+      "doi": "10.1016/j.bioactmat.2025.04.036",
+      "abstractText": "Amyloid deposits are widely presented in ectopic calcification associated with many degenerative diseases, such as calcific aortic valve disease and Alzheimer's disease. Recently, amyloid-like secondary structures have also been observed in matrix proteins during physiological mineralization processes. With advancing observational apparatus, the mineral-templating role of amyloid has been increasingly investigated; nevertheless, it is still challenging to elucidate the explicit contribution of amyloid-like proteins in both pathological and physiological calcification. In this review, we discuss the potential roles of amyloid-forming proteins in both pathological and physiological mineralization, the nature of the interactions between the amyloid-like structure and the mineral ions, as well as the mechanisms underlying hierarchical mineralization templated by amyloid proteins. Taking inspiration from nature's book, we summarize the cutting-edge developments in amyloid-based materials for hard tissue repair. Spanning from mechanisms to applications, this review provides valuable insights for further interdisciplinary research."
+    },
+    {
+      "title": "TMT-Based quantitative proteomic analysis reveals age-related changes in eggshell matrix proteins and their correlation with eggshell quality in Xinyang blue-shelled laying hens.",
+      "authorString": "Fu Y, Zhao DR, Gao LB, Zhang HJ, Feng J, Min YN, Qi GH, Wang J, Wang J.",
+      "journalTitle": null,
+      "pubYear": "2025",
+      "doi": "10.1016/j.psj.2024.104661",
+      "abstractText": "The decline in eggshell quality with increasing hen age may be related to changes in ultrastructure and chemical composition, with matrix proteins playing key roles in these changes. However, research on blue-shelled eggs remains limited. This study investigated the effects of hen age (35, 55, 75, and 85 weeks) on the physical, mechanical, and chemical properties of eggshells in the Xinyang blue-shelled laying hens, as well as their ultrastructural and nanostructural characteristics. Subsequently, a comparative proteomic analysis was performed to elucidate the differential protein profiles in eggshells from hens at 35 and 85 weeks of age. Results showed that egg weight, eggshell weight, and eggshell surface area increased with hen age, whereas eggshell stiffness decreased (p < 0.05). As the age advanced, the eggshell organic matter content declined (p < 0.05). The effective layer ratio, mammillae density, as well as the porosity and total pore area in the mammillary layer also decreased with age, whereas the ratio of the mammillary layer increased (p < 0.05). Compared to eggshells collected from 35-week-old hens, those from 85-week-old hens showed increases in egg weight, eggshell weight, surface area, and both the ratio and thickness of the mammillary layer (p < 0.05). However, significant decreases were observed in eggshell stiffness, organic matter content, phosphorus content, effective layer ratio, mammillae density, as well as the porosity and total pore area in the mammillary layer (p < 0.05). Additionally, eggshell stiffness, phosphorus content, and organic matter content were significantly correlated with each other (p < 0.05). Proteomic analysis identified 37 downregulated and 68 upregulated differentially expressed proteins (DEPs, FC > 1.2 or < 0.83, with a p-value < 0.05) in eggshells from 85-week-old hens compared to those from 35-week-old hens. These DEPs are associated with functions such as biomineralization, calcium transport, immunity, and proteases and protease inhibitors. Mantel and Pearson correlations suggest that these functions may be involved in regulating eggshell stiffness, phosphorus content, and organic matter content. Overall, the eggshell stiffness decreased from 35 to 85 weeks of age, which may be attributed to the reductions in eggshell organic matter and phosphorus contents, as well as the deteriorations in eggshell ultrastructure. The proteins associated with biomineralization, calcium transport, immunity, and proteases and protease inhibitors may contribute to these changes."
+    },
+    {
+      "title": "Modular design of biomimetic electrospun keratin composites for tunable gaseous sorption inspired by reptile eggshells.",
+      "authorString": "Maudens Y, Debruyn G, Loccufier E, Daelemans L, Savino E, Tonetti C, Vineis C, Varesano A, Shawkey MD, D'Alba L, De Clerck K.",
+      "journalTitle": null,
+      "pubYear": "2025",
+      "doi": "10.1016/j.mtbio.2025.102032",
+      "abstractText": "Biomimicry, the replication of natural structures, is an emerging strategy in materials engineering for developing advanced functional materials. Reptile eggshells serve as compelling models for tunable bioinspired material design due to their diversity in forms and functions. This study presents a modular approach to designing keratin-based composites with customizable vapor sorption behavior. Inspired by reptile eggshells, four key biomimetic components were reconstructed: (1) electrospun keratin membranes resembling the fibrous shell membrane, (2) an egg protein matrix replicating the proteinaceous eggshell matrix, (3) calcium carbonate (CaCO<sub>3</sub>) particles introducing mineralization, and (4) a paraffin coating representing the lipid-rich cuticle layer. The modular accuracy of these biomimetic models was validated by comparison with representative reptile eggshells through Scanning Electron Microscopy analysis and Fourier-Transform Infrared Spectroscopy. Dynamic Vapor Sorption (DVS) analysis confirmed that varying the CaCO<sub>3</sub> content allows precise control over the absorption profiles, ranging from low to high sorption values. Additionally, integrating the organic matrix and lipid coating enabled fine-tuning of the sorption properties. The resulting biomimetic composites exhibited sorption characteristics comparable to those of natural eggshells, including <i>Caiman crocodilus</i> (low absorption) and <i>Pantherophis guttatus</i> (high absorption), demonstrating the effectiveness of the modular design strategy. These findings establish a foundation for engineering advanced biocompatible materials with adaptable sorption behavior, offering potential applications in moisture-regulating wound dressings, tissue engineering scaffolds, sustainable packaging, and filtration systems."
+    },
+    {
+      "title": "TMT-based quantitative proteomic analysis reveals eggshell matrix protein changes correlated with eggshell quality in Jing Tint 6 laying hens of different ages.",
+      "authorString": "Zhao DR, Gao LB, Gong F, Feng J, Zhang HJ, Wu SG, Wang J, Wang J, Min YN.",
+      "journalTitle": null,
+      "pubYear": "2024",
+      "doi": "10.1016/j.psj.2024.103463",
+      "abstractText": "The decline in eggshell quality resulting from aging hens poses a threat to the financial benefits of the egg industry. The deterioration of eggshell quality with age can be attributed to changes in its ultrastructure and chemical composition. Specific matrix proteins in eggshells have a role in controlling crystal growth and regulating structural organization. However, the variations in ultrastructure and organic matrix of eggshells in aging hens remain poorly understood. This study assessed the physical traits, mechanical quality, chemical content, as well as the microstructural and nanostructural properties of eggs from Jing Tint 6 hens at 38, 58, 78, and 108 wk of age. Subsequently, a quantitative proteomic analysis was conducted to identify differences in protein abundance in eggshells between the ages of 38 and 108 wk. The results indicated a notable decline in shell thickness, breaking strength, index, fracture toughness, and stiffness in the 108-wk-age group compared to the other groups (P < 0.05). The ultrastructure variations primarily involved an increased ratio of the mammillary layer and a reduced thickness of the effective layer of eggshell in the 108-wk-age group (P < 0.05). However, no significant differences in eggshell compositions were observed among the various age groups (P > 0.05). Proteomic analysis revealed the identification of 76 differentially expressed proteins (DEPs) in the eggshells of the 38-wk-age group and 108-wk-age group, which comprised proteins associated with biomineralization, calcium ion binding, immunity, as well as protein synthesis and folding. The downregulation of ovocleidin-116, osteopontin, and calcium-ion-related proteins, together with the upregulation of ovalbumin, lysozyme C, and antimicrobial proteins, has the potential to influence the structural organization of the eggshell. Therefore, the deterioration of eggshell quality with age may be attributed to the alterations in ultrastructure and the abundance of matrix proteins."
+    },
+    {
+      "title": "Comparative Analysis of the Ultrastructure, Bubble Pores, and Composition of Eggshells of Dwarf Layer-White and Guinea Fowl.",
+      "authorString": "Wang YT, Chen YF, Zhang JJ, Zhang Q, Zhao XY, Zhou RY, Chen H, Wang DH.",
+      "journalTitle": null,
+      "pubYear": "2024",
+      "doi": "10.3390/ani14101496",
+      "abstractText": "The decrease in eggshell quality seriously affects production efficiency. Guinea fowl (GF) eggs possess strong eggshells because of their unique crystal structure, and few systematic studies have compared laying hen and GF eggs. Sixty eggs were collected from both 40-week-old Dwarf Layer-White (DWL-White) laying hens and GF, and the eggshell quality, ultrastructure, bubble pores, and composition were measured. The results showed that the DWL-White eggs had a higher egg weight and a lower eggshell strength, strength per unit weight, thickness, and ratio than the GF eggs (<i>p</i> < 0.01). There were differences in the mammillary layer thickness ratio, the effective layer thickness ratio, the quantity of bubble pores (QBPs), the ratio of the sum of the area of bubble pores to the area of the eggshell in each image (ARBE), and the average area of bubble pores (AABPs) between the DWL-White and GF eggs (<i>p</i> < 0.01). The composition analysis demonstrated that there were differences in the organic matter, inorganic matter, calcium, and phosphorus between the DWL-White and GF eggs (<i>p</i> < 0.01). There were positive associations between the mammillary knob number in the image and the QBPs and ARBE and a negative correlation with the AABPs in the DWL-White eggs (<i>p</i> < 0.01). This study observed distinctions that offer new insights into enhancing eggshell quality."
+    },
+    {
+      "title": "The Chicken Egg: An Advanced Material for Tissue Engineering.",
+      "authorString": "Zhang Y, Pham HM, Tran SD.",
+      "journalTitle": null,
+      "pubYear": "2024",
+      "doi": "10.3390/biom14040439",
+      "abstractText": "The chicken egg, an excellent natural source of proteins, has been an overlooked native biomaterial with remarkable physicochemical, structural, and biological properties. Recently, with significant advances in biomedical engineering, particularly in the development of 3D in vitro platforms, chicken egg materials have increasingly been investigated as biomaterials due to their distinct advantages such as their low cost, availability, easy handling, gelling ability, bioactivity, and provision of a developmentally stimulating environment for cells. In addition, the chicken egg and its by-products can improve tissue engraftment and stimulate angiogenesis, making it particularly attractive for wound healing and tissue engineering applications. Evidence suggests that the egg white (EW), egg yolk (EY), and eggshell membrane (ESM) are great biomaterial candidates for tissue engineering, as their protein composition resembles mammalian extracellular matrix proteins, ideal for cellular attachment, cellular differentiation, proliferation, and survivability. Moreover, eggshell (ES) is considered an excellent calcium resource for generating hydroxyapatite (HA), making it a promising biomaterial for bone regeneration. This review will provide researchers with a concise yet comprehensive understanding of the chicken egg structure, composition, and associated bioactive molecules in each component and introduce up-to-date tissue engineering applications of chicken eggs as biomaterials."
+    }
+  ],
+  "egg_white_glycoproteome": [
+    {
+      "title": "Integrated landscape of chicken egg chalaza proteomics.",
+      "authorString": "Pu J, Hu J, Xiao J, Li S, Wang B, Wang J, Geng F.",
+      "journalTitle": null,
+      "pubYear": "2024",
+      "doi": "10.1016/j.psj.2024.103629",
+      "abstractText": "Chicken egg chalaza (CLZ) is a natural colloidal structure in eggs that exists as an egg yolk stabilizer and is similar in composition to egg white. In this study, the proteome, phosphoproteome, and N-glycoproteome of CLZ were characterized in depth. We hydrolyzed the CLZ proteins and enriched the phosphopeptides and glycopeptides. We identified 45 phosphoproteins and 80 N-glycoproteins, containing 59 phosphosites and 203 N-glycosylation sites, respectively. Typically, the ovalbumin in CLZ was both phosphorylated and N-glycosylated, with 4 phosphosites and 4 N-glycosylation sites. Moreover, we identified 2 N-glycosylated subunits of ovomucin, mucin-5B and mucin-6, with 32 and nine N- glycosylation sites, respectively. Analysis of the phosphorylation and N-glycosylation status of CLZ proteins could provide novel insights into the structural and functional characteristics of CLZ."
+    },
+    {
+      "title": "<i>N</i>-glycoproteomic profiling reveals structural and functional alterations in yellow primary preserved egg white under saline-alkali treatment.",
+      "authorString": "Qi Q, Shi D, Su W, Mu Y.",
+      "journalTitle": null,
+      "pubYear": "2024",
+      "doi": "10.1016/j.fochx.2024.101244",
+      "abstractText": "The posttranslational <i>N</i>-glycosylation of food proteins is important to their structure and function. However, the <i>N</i>-glycoproteomics of yellow preserved egg white were rarely reported. This study explored the changes of <i>N</i>-glycoproteome in yellow preserved eggs white after salt and alkali treatment. A total of 213 <i>N</i>-glycosites were identified on 102 glycoproteins, revealing prevalent glycosylation motifs and multiple <i>N</i>-glycosites within proteins. Salt and alkali treatment significantly altered the glycosylation patterns, impacting major proteins differently. GO analysis indicated the roles of differentially expressed glycoproteins in responding to stimuli and biological regulation. KEGG analysis emphasized the importance of salivary secretion pathway in enzyme secretion and peptide generation. Protein domain analysis highlighted the downregulation of Serpin. Protein-protein interaction networks revealed Apolipoprotein B as central players. This study provides essential structural information on the glycosylation modifications of egg white proteins, contributing to our understanding of the mechanisms behind the functional properties of preserved eggs."
+    },
+    {
+      "title": "A puzzle piece of protein N-glycosylation in chicken egg: N-glycoproteome of chicken egg vitelline membrane.",
+      "authorString": "Xiao J, Wang J, Cheng L, Gao S, Li S, Qiu N, Li H, Peng L, Geng F.",
+      "journalTitle": null,
+      "pubYear": "2020",
+      "doi": "10.1016/j.ijbiomac.2020.08.193",
+      "abstractText": "The chicken egg vitelline membrane (CEVM) is an important structure for the transmembrane transport of egg yolk components, protection of the blastodisc, and separation of egg white and egg yolk. In this study, the N-glycoproteome of the CEVM was mapped and analyzed in depth. Total protein of the CEVM was digested, and the glycopeptides were enriched by a hydrophilic interaction liquid chromatography microcolumn and identified by nano liquid chromatography/tandem mass spectrometry. A total of 435 N-glycosylation sites on 208 N-glycoproteins were identified in CEVM. Gene Ontology enrichment analysis showed that CEVM N-glycoproteins are mainly involved in the regulation of proteinases/inhibitors and transmembrane transport of lipids. Mucin-5B is the primary N-glycoprotein in the CEVM. Comparison of the main N-glycoproteins between the CEVM and other egg parts revealed the tissue specificity of N-glycosylation of egg proteins. The results provide insights into protein N-glycosylation in the chicken egg, CEVM functions and underlying mechanisms."
+    },
+    {
+      "title": "Synthesis of glycopeptides and glycopeptide conjugates.",
+      "authorString": "Doelman W, van Kasteren SI.",
+      "journalTitle": null,
+      "pubYear": "2022",
+      "doi": "10.1039/d2ob00829g",
+      "abstractText": "Protein glycosylation is a key post-translational modification important to many facets of biology. Glycosylation can have critical effects on protein conformation, uptake and intracellular routing. In immunology, glycosylation of antigens has been shown to play a role in self/non-self distinction and the effective uptake of antigens. Improperly glycosylated proteins and peptide fragments, for instance those produced by cancerous cells, are also prime candidates for vaccine design. To study these processes, access to peptides bearing well-defined glycans is of critical importance. In this review, the key approaches towards synthetic, well-defined glycopeptides, are described, with a focus on peptides useful for and used in immunological studies. Special attention is given to the glycoconjugation approaches that have been developed in recent years, as these enable rapid synthesis of various (unnatural) glycopeptides, enabling powerful carbohydrate structure/activity studies. These techniques, combined with more traditional total synthesis and chemoenzymatic methods for the production of glycopeptides, should help unravel some of the complexities of glycobiology in the near future."
+    },
+    {
+      "title": "Analysis of carbohydrates and glycoconjugates by matrix-assisted laser desorption/ionization mass spectrometry: An update for 2021-2022.",
+      "authorString": "Harvey DJ.",
+      "journalTitle": null,
+      "pubYear": "2025",
+      "doi": "10.1002/mas.21873",
+      "abstractText": "The use of matrix-assisted laser desorption/ionization (MALDI) mass spectrometry for the analysis of carbohydrates and glycoconjugates is a well-established technique and this review is the 12<sup>th</sup> update of the original article published in 1999 and brings coverage of the literature to the end of 2022. As with previous review, this review also includes a few papers that describe methods appropriate to analysis by MALDI, such as sample preparation, even though the ionization method is not MALDI. The review follows the same format as previous reviews. It is divided into three sections: (1) general aspects such as theory of the MALDI process, matrices, derivatization, MALDI imaging, fragmentation, quantification and the use of computer software for structural identification. (2) Applications to various structural types such as oligo- and polysaccharides, glycoproteins, glycolipids, glycosides and biopharmaceuticals, and (3) other general areas such as medicine, industrial processes, natural products and glycan synthesis where MALDI is extensively used. Much of the material relating to applications is presented in tabular form. MALDI is still an ideal technique for carbohydrate analysis, particularly in its ability to produce single ions from each analyte and advancements in the technique and range of applications show little sign of diminishing."
+    },
+    {
+      "title": "Highly Selective Enrichment of Glycopeptides Based on Zwitterionically Functionalized Soluble Nanopolymers.",
+      "authorString": "Cao W, Huang J, Jiang B, Gao X, Yang P.",
+      "journalTitle": null,
+      "pubYear": "2016",
+      "doi": "10.1038/srep29776",
+      "abstractText": "Efficient glycopeptides enrichment prior to mass spectrometry analysis is essential for glycoproteome study. ZIC-HILIC (zwitterionic hydrophilic interaction liquid chromatography) based glycopeptides enrichment approaches have been attracting more attention for several benefits like easy operating, high enrichment specificity and intact glycopeptide retained. In this study, Poly (amidoamine) dendrimer (PAMAM) was adopted for the synthesis of zwitterionically functionalized (ZICF) materials for glycopeptide enrichment. The multiple branched structure and good solubility of ZICF-PAMAM enables a sufficient interaction with glycopeptides. The ZICF-PAMAM combined with the FASP-mode enrichment strategy exhibits more superior performance compared with the existing methods. It has the minimum detectable concentration of femtomolar level and high recovery rate of over 90.01%, and can efficiently enrich glycopeptides from complex biological samples even for merely 0.1 μL human serum. The remarkable glycopeptides enrichment capacity of ZICF-PAMAM highlights the potential application in in-depth glycoproteome research, which may open up new opportunities for the development of glycoproteomics."
+    },
+    {
+      "title": "Advances in mass spectrometry-based glycoproteomics.",
+      "authorString": "Yu A, Zhao J, Peng W, Banazadeh A, Williamson SD, Goli M, Huang Y, Mechref Y.",
+      "journalTitle": null,
+      "pubYear": "2018",
+      "doi": "10.1002/elps.201800272",
+      "abstractText": "Protein glycosylation, an important PTM, plays an essential role in a wide range of biological processes such as immune response, intercellular signaling, inflammation, and host-pathogen interaction. Aberrant glycosylation has been correlated with various diseases. However, studying protein glycosylation remains challenging because of low abundance, microheterogeneities of glycosylation sites, and poor ionization efficiency of glycopeptides. Therefore, the development of sensitive and accurate approaches to characterize protein glycosylation is crucial. The identification and characterization of protein glycosylation by MS is referred to as the field of glycoproteomics. Methods such as enrichment, metabolic labeling, and derivatization of glycopeptides in conjunction with different MS techniques and bioinformatics tools, have been developed to achieve an unequivocal quantitative and qualitative characterization of glycoproteins. This review summarizes the recent developments in the field of glycoproteomics over the past 6 years (2012 to 2018)."
+    },
+    {
+      "title": "Recent advances in mass spectrometric analysis of glycoproteins.",
+      "authorString": "Banazadeh A, Veillon L, Wooding KM, Zabet-Moghaddam M, Mechref Y.",
+      "journalTitle": null,
+      "pubYear": "2017",
+      "doi": "10.1002/elps.201600357",
+      "abstractText": "Glycosylation is one of the most common posttranslational modifications of proteins that plays essential roles in various biological processes, including protein folding, host-pathogen interaction, immune response, and inflammation and aberrant protein glycosylation is a well-known event in various disease states including cancer. As a result, it is critical to develop rapid and sensitive methods for the analysis of abnormal glycoproteins associated with diseases. Mass spectrometry (MS) in conjunction with different separation methods, such as capillary electrophoresis (CE), ion mobility (IM), and high performance liquid chromatography (HPLC) has become a popular tool for glycoprotein analysis, providing highly informative fragments for structural identification of glycoproteins. This review provides an overview of the developments and accomplishments in the field of glycomics and glycoproteomics reported between 2014 and 2016."
+    },
+    {
+      "title": "High-sensitivity analytical approaches for the structural characterization of glycoproteins.",
+      "authorString": "Alley WR, Mann BF, Novotny MV.",
+      "journalTitle": null,
+      "pubYear": "2013",
+      "doi": "10.1021/cr3003714",
+      "abstractText": null
+    },
+    {
+      "title": "Program and Abstracts for the 2007 Meeting of the Society for Glycobiology",
+      "authorString": null,
+      "journalTitle": null,
+      "pubYear": "2007",
+      "doi": null,
+      "abstractText": null
+    }
+  ],
+  "glycan_shield": [
+    {
+      "title": "Host Glycan-Lectin Interplay in SARS-CoV-2 Infection.",
+      "authorString": "Oh H, Thi Thuy Tien V, Ahmed S, Choi J, Ryu KJ, Yang J.",
+      "journalTitle": null,
+      "pubYear": "2026",
+      "doi": "10.3390/ijms27031608",
+      "abstractText": "Glycan-mediated processes can be critical determinants of viral attachment and entry, yet for enveloped RNA viruses, including SARS-CoV-2, their mechanistic roles remain incompletely defined. This review synthesizes current structural and functional evidence for glycan engagement during SARS-CoV-2 attachment and entry. We describe the general viral entry pathways and their reliance on glycan recognition, followed by the interactions of the SARS-CoV-2 spike glycoprotein with host glycans, including ABO(H) blood group antigens, sialylated glycans, and endogenous lectins. Based on structural biology, glycobiology, and virology, we focus on how the spike protein exploits both glycan motifs and lectin receptors to enhance attachment, promote cellular uptake, or modulate host tropism. We contextualize these mechanisms by comparing glycan dependencies across other human viruses, including the influenza virus, HIV, and norovirus. Finally, we provide a comparative virological perspective to derive broad evolutionary insights into how enveloped viruses exploit the host glycans."
+    },
+    {
+      "title": "Interaction Between Heparan Sulfate Oligosaccharide and the Receptor-Binding Domain of the Wild-Type and Omicron Variant of the SARS-CoV-2 Spike Protein.",
+      "authorString": "Mandalari M, Parafioriti M, Ni M, Benevelli F, Civera M, Elli S, Guerrini M.",
+      "journalTitle": null,
+      "pubYear": "2025",
+      "doi": "10.3390/biom15091343",
+      "abstractText": "Heparan sulfate proteoglycans serve as initial attachment sites for several viruses and bacteria. Recent studies suggest that SARS-CoV-2 similarly exploits these glycosaminoglycans, facilitating conformational changes in the spike protein that promote the interaction between the receptor-binding domain (S1-RBD) and the cellular angiotensin-converting enzyme 2 receptor (ACE2), thereby triggering the virus internalization process. The molecular details that drive this process, particularly the co-receptor role of heparan sulfate (HS), remain incompletely understood. The interaction between an HS hexasaccharide (hexa) and the N343 glycosylated S1-RBD of the wild-type (WT) and Omicron variant of SARS-CoV-2 was investigated. The conformational properties of hexa with these S1-RBDs in unbound and bound states are explored using multiple independent MD simulations; the protein binding epitope of hexa, as well as the details of its interaction with S1-RBD of the Omicron variant, are characterized by comparing experimental and theoretical <sup>1</sup>H STD NMR signals. This investigation identifies the role played by the glycosyl moiety at N343 in potentially affecting this interaction in both WT and Omicron S1-RBD, explaining the observed low specificity and multi-modal nature of the interaction between HS oligosaccharides and these S1-RBDs."
+    },
+    {
+      "title": "Water-Glycan Interactions Drive the SARS-CoV-2 Spike Dynamics: Insights into Glycan-Gate Control and Camouflage Mechanisms",
+      "authorString": "Blazhynska M, Lagardère L, Liu C, Adjoua O, Ren P, Piquemal J.",
+      "journalTitle": null,
+      "pubYear": "2024",
+      "doi": "10.1101/2024.06.04.597396",
+      "abstractText": "To develop therapeutic strategies against COVID-19, we introduce a high-resolution all-atom polarizable model capturing many-body effects of protein, glycans, solvent, and membrane components in SARS-CoV-2 spike protein open and closed states. Employing μ s-long molecular dynamics simulations powered by high-performance cloud-computing and unsupervised density-driven adaptive sampling, we investigated the differences in bulk-solvent-glycan and protein-solvent-glycan interfaces between these states. We unraveled a sophisticated solvent-glycan polarization interaction network involving the N165/N343 residues that provide structural support for the open state and identified key water molecules that could potentially be targeted to destabilize this configuration. In the closed state, the reduced solvent polarization diminishes the overall N165/N343 dipoles, yet internal interactions and a reorganized sugar coat stabilize this state. Despite variations, our glycan-solvent accessibility analysis reveals the glycan shield capability to conserve constant interactions with the solvent, effectively camouflaging the virus from immune detection in both states. The presented insights advance our comprehension of viral pathogenesis at an atomic level, offering potential to combat COVID-19."
+    },
+    {
+      "title": "Mitigating Mucoadhesion of β-Cyclodextrins via PEGylation: Insights from &lt;sup&gt;19&lt;/sup&gt;F Diffusion NMR Analysis.",
+      "authorString": "Nguyen KTH, Ba Y.",
+      "journalTitle": null,
+      "pubYear": "2025",
+      "doi": "10.3390/ijms262311690",
+      "abstractText": "β-Cyclodextrin (β-CD)-based materials are widely used in drug delivery, yet their interactions with mucosal barriers remain insufficiently understood. Because the mucus layer coating epithelial surfaces can hinder drug transport, elucidating β-CD-mucin interactions is critical for optimizing cyclodextrin-based carriers. In this study, we examined whether PEGylation can attenuate the mucoadhesive behavior of β-CD. Monomethoxy poly(ethylene glycol)-modified β-CDs (MPEG-β-CDs) were evaluated using <sup>19</sup>F self-diffusion NMR spectroscopy coupled with a kinetic diffusion model describing reversible binding to stationary substrates. Mucin hydrogels were prepared from bovine submaxillary mucin and served as a model mucus environment. Diffusion coefficients were extracted from the <sup>19</sup>F NMR signals of 1-fluoroadamantane (1FA) molecules encapsulated within HP-β-CD or MPEG-β-CD cavities. The results demonstrate that PEGylation substantially reduces β-CD-mucin adhesion, with longer PEG chains (2000 Da) providing more effective steric shielding than shorter chains (500 Da). These findings indicate that PEGylation can protect β-CD-included drugs during transport across mucosal barriers by minimizing unwanted β-CD-mucin interactions."
+    },
+    {
+      "title": "Computational Design and Glycoengineering of Interferon-Lambda for Nasal Prophylaxis Against Respiratory Viruses.",
+      "authorString": "Yun J, Yang S, Kwon JH, Vecchietti LF, Choi JH, Choi MR, Ku KB, Ro HJ, Kim KD, Cha M, Chung HJ, Oh JE, Kim HM.",
+      "journalTitle": null,
+      "pubYear": "2026",
+      "doi": "10.1002/advs.202506764",
+      "abstractText": "Interferon-λ (IFN-λ), a type III interferon that selectively targets epithelial cells, holds strong potential as an intranasal antiviral due to its ability to suppress respiratory virus replication without inducing systemic inflammation. However, clinical translation of human IFN-λ3 (hIFN-λ3) is hindered by limited thermostability, protease susceptibility, and rapid mucosal clearance. In this study, instability-prone elements in hIFN-λ3 are eliminated through artificial intelligence (AI)-based backbone remodeling and targeted surface hydrophobic patch engineering. A protease-sensitive loop is replaced with a de novo α-helix, which shields neighboring hydrophobic patches and forms a new hydrophobic core, yielding an engineered variant (hIFN-λ3-DE1) with enhanced thermostability (Tm > 90 °C), protease resistance, and preserved antiviral activity and structural integrity even after extended heat stress (two weeks at 50 °C). Further glyco-engineering introduces an N-linked glycan at a site distant from receptor-binding interfaces, improving solubility, production yield, and diffusion through synthetic nasal mucus. Intranasal administration of the resulting variant (G-hIFN-λ3-DE1) enables effective mucosal penetration and provides a more rapid onset of in vivo prophylactic protection against influenza A virus. These findings highlight a robust and versatile strategy that combines AI-driven structural design with glyco-engineering to develop scalable, bioavailable, and functionally enhanced nasal biologics for respiratory virus prophylaxis."
+    },
+    {
+      "title": "Structure, function, and implications of fucosyltransferases in health and disease.",
+      "authorString": "Ghirardello M, Yruela I, Merino P, Sackstein R, Sanz-Martínez I, Hurtado-Guerrero R.",
+      "journalTitle": null,
+      "pubYear": "2025",
+      "doi": "10.1038/s41467-025-66871-w",
+      "abstractText": "Fucosylation is a ubiquitous glycosylation event that shapes cellular communication and immunity. Catalyzed by fucosyltransferases (FUTs), this reaction encompasses diverse substrates, mechanisms, and biologic consequences. In this Review, we explore the structural and functional landscape of FUTs primarily from higher eukaryotes, with focus on the mechanistic determinants of regioselectivity, donor/acceptor coordination, and domain modularity. We highlight advances in structural biology, modeling, and enzyme engineering that clarify how FUTs decode glycan topology and specificity. Phylogenetic and structural analyses reveal two major clades of human FUTs that differ in GDP-Fuc recognition and conformational flexibility, providing a molecular rationale for their mechanistic divergence. Drawing from mammalian FUT studies, we propose a conceptual framework in which distinct family members exploit strategies including donor-induced conformational changes, exosite interactions, or local peptide cues to achieve specificity and catalytic efficiency. We also examine their roles in physiology, inflammation, immune regulation, and cancer, and summarize current FUT inhibitors and enzyme-based therapeutic strategies."
+    },
+    {
+      "title": "Water-glycan interactions drive the SARS-CoV-2 spike dynamics: insights into glycan-gate control and camouflage mechanisms.",
+      "authorString": "Blazhynska M, Lagardère L, Liu C, Adjoua O, Ren P, Piquemal JP.",
+      "journalTitle": null,
+      "pubYear": "2024",
+      "doi": "10.1039/d4sc04364b",
+      "abstractText": "To develop therapeutic strategies against COVID-19, we introduce a high-resolution all-atom polarizable model capturing many-body effects of protein, glycan, solvent, and membrane components in SARS-CoV-2 spike protein open and closed states. Employing μs-long molecular dynamics simulations powered by high-performance cloud-computing and unsupervised density-driven adaptive sampling, we investigated the differences in bulk-solvent-glycan and protein-solvent-glycan interfaces between these states. We unraveled a sophisticated solvent-glycan polarization interaction network involving the N165/N343 glycan-gate patterns that provide structural support for the open state and identified key water molecules that could potentially be targeted to destabilize this configuration. In the closed state, the reduced solvent polarization diminishes the overall N165/N343 dipoles, yet internal interactions and a reorganized sugar coat stabilize this state. Despite variations, our glycan-solvent accessibility analysis reveals the glycan shield capability to conserve constant interactions with the solvent, effectively camouflaging the virus from immune detection in both states. The presented insights advance our comprehension of viral pathogenesis at an atomic level, offering potential to combat COVID-19."
+    },
+    {
+      "title": "The Binding of Brazilin from &lt;i&gt;C. sappan&lt;/i&gt; to the Full-Length SARS-CoV-2 Spike Proteins.",
+      "authorString": "Bamrung P, Toviwek B, Samsudin F, Chairatana P, Bond PJ, Pongprayoon P.",
+      "journalTitle": null,
+      "pubYear": "2025",
+      "doi": "10.3390/ijms26094100",
+      "abstractText": "The emergence of coronavirus disease (COVID-19) caused by severe acute respiratory syndrome coronavirus-2 (SARS-CoV-2) has become a global issue since 2019. The prominent characteristic of SARS-CoV-2 is the presence of the spike (S) protein protruding from the virus particle envelope. The S protein is a major drug and vaccine target because it initiates the key step in infection. Medicinal herbs are a potential treatment option to enhance immunity to fight viral infections. <i>Caesalpinia sappan</i> L. has been reported to display promising anti-viral activities. Specifically, brazilin (BRA), a major bioactive compound in <i>C. sappan</i>, was reported to play a role in inhibiting viral infection. Thus, the ability of BRA as a COVID-19 treatment was tested. The S protein was used as the BRA target of this work. Understanding the binding mechanism of BRA to the S protein is crucial for future utilisation of <i>C. sappan</i> as a COVID-19 treatment or other coronavirus-caused pandemics. Here, we performed molecular docking of BRA onto the S protein receptor binding domain (RBD) and multimerisation (MM) pockets. Molecular dynamics (MD) simulations were conducted to study the stability of binding to glycosylated and non-glycosylated S protein constructs. BRA can bind to the Receptor-binding motif (RBM) on an RBD surface stably; however, it is too large to fit into the MM pocket, resulting in dissociation. Nonetheless, BRA is bound by residues near the S1/S2 interface. We found that glycosylation has no effect on BRA binding, as the proposed binding site is far from any glycans. Our results thus indicate that <i>C. sappan</i> may act as a promising preventive and therapeutic alternative for COVID-19 treatment."
+    },
+    {
+      "title": "Structure of the complete 14-subunit botulinum neurotoxin B complex reveals a unique anchoring through the narrow central pore of HA70.",
+      "authorString": "Krč A, Košenina SP, Nowakowska MB, Masuyer G, Stenmark P.",
+      "journalTitle": null,
+      "pubYear": "2025",
+      "doi": "10.1126/sciadv.adx5058",
+      "abstractText": "Botulinum neurotoxin serotype B1 (BoNT/B) is a highly potent neurotoxin and therapeutic agent. Here, we present the structure of the complete 14-subunit (780 kDa) progenitor toxin complex (L-PTC) and of five subcomplexes. The structures show how the toxin interacts with its associated components in their role to protect and deliver BoNT/B across epithelial barriers. Each subcomplex, including the M-PTC, M-PTC-HA70, NTNH-HA70, and HA70 trimer, provides detailed understanding of the assembly mechanism, in which the NTNH-nLoop adopts a unique fold that locks the M-PTC into a central pore formed by HA70. The HA subcomplex presents a tripod architecture with flexible legs that may adapt to the rugged cell surface. Mass photometry reveals the pH dependence of BoNT/B release from the complex which is unexpectedly influenced by the presence of HA70. This study provides the complete L-PTC structure, offering insights into its assemblage and supporting the development of countermeasures and therapeutic applications."
+    },
+    {
+      "title": "Enhanced Surface Accessibility of SARS-CoV-2 Omicron Spike Protein Due to an Altered Glycosylation Profile.",
+      "authorString": "Wang D, Zhang Z, Baudys J, Haynes C, Osman SH, Zhou B, Barr JR, Gumbart JC.",
+      "journalTitle": null,
+      "pubYear": "2024",
+      "doi": "10.1021/acsinfecdis.4c00015",
+      "abstractText": "SARS-CoV-2 spike (S) proteins undergo extensive glycosylation, aiding in proper folding, enhancing stability, and evading host immune surveillance. In this study, we used mass spectrometric analysis to elucidate the N-glycosylation characteristics and disulfide bonding of recombinant spike proteins derived from the SARS-CoV-2 Omicron variant (B.1.1.529) in comparison with the D614G spike variant. Furthermore, we conducted microsecond-long molecular dynamics simulations on spike proteins to resolve how the different N-glycans impact spike conformational sampling in the two variants. Our findings reveal that the Omicron spike protein maintains an overall resemblance to the D614G spike variant in terms of site-specific glycan processing and disulfide bond formation. Nonetheless, alterations in glycans were observed at certain N-glycosylation sites. These changes, in synergy with mutations within the Omicron spike protein, result in increased surface accessibility of the macromolecule, including the ectodomain, receptor-binding domain, and N-terminal domain. Additionally, mutagenesis and pull-down assays reveal the role of glycosylation of a specific sequon (N149); furthermore, the correlation of MD simulation and HDX-MS identified several high-dynamic areas of the spike proteins. These insights contribute to our understanding of the interplay between structure and function, thereby advancing effective vaccination and therapeutic strategies."
+    }
+  ],
+  "mammillary_layer": [
+    {
+      "title": "Nature's technical ceramic: the avian eggshell.",
+      "authorString": "Hahn EN, Sherman VR, Pissarenko A, Rohrbach SD, Fernandes DJ, Meyers MA.",
+      "journalTitle": null,
+      "pubYear": "2017",
+      "doi": "10.1098/rsif.2016.0804",
+      "abstractText": "Avian eggshells may break easily when impacted at a localized point; however, they exhibit impressive resistance when subjected to a well-distributed compressive load. For example, a common demonstration of material strength is firmly squeezing a chicken egg along its major axis between one's hands without breaking it. This research provides insight into the underlying mechanics by evaluating both macroscopic and microstructural features. Eggs of different size, varying from quail (30 mm) to ostrich (150 mm), are investigated. Compression experiments were conducted along the major axis of the egg using force-distributing rubber cushions between steel plates and the egg. The force at failure increases with egg size, reaching loads upwards of 5000 N for ostrich eggs. The corresponding strength, however, decreases with increasing shell thickness (intimately related to egg size); this is rationalized by a micro-defects model. Failure occurs by axial splitting parallel to the loading direction-the result of hoop tensile stresses due to the applied compressive load. Finite-element analysis is successfully employed to correlate the applied compressive force to tensile breaking strength for the eggs, and the influence of geometric ratio and microstructural heterogeneities on the shell's strength and fracture toughness is established."
+    },
+    {
+      "title": "Wednesday: Poster Sessions, Pt.II",
+      "authorString": null,
+      "journalTitle": null,
+      "pubYear": "1996",
+      "doi": null,
+      "abstractText": null
+    },
+    {
+      "title": "SUBJECT INDEX : A-L",
+      "authorString": null,
+      "journalTitle": null,
+      "pubYear": "1988",
+      "doi": null,
+      "abstractText": null
+    }
+  ]
+}

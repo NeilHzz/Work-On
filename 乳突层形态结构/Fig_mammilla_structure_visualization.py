@@ -23,8 +23,8 @@ plt.rcParams['axes.unicode_minus'] = False
 sns.set_theme(style="ticks", font="Times New Roman")
 
 # ─── 数据路径 ──────────────────────────────────────────────────────────────
-FILE_PATH = r'e:\Data\Desktop\Work On\乳突层形态结构\specie.xlsx'
-OUT_DIR   = r'e:\Data\Desktop\Work On\乳突层形态结构'
+FILE_PATH = r'D:\system_folder\Desktop\Work On\乳突层形态结构\specie.xlsx'
+OUT_DIR   = r'D:\system_folder\Desktop\Work On\Figure\png'
 os.makedirs(OUT_DIR, exist_ok=True)
 
 # ─── NPG 配色 ──────────────────────────────────────────────────────────────
