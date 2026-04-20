@@ -1,0 +1,7 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# LS-DYNA 仿真原始数据 (~162GB, 不适合 git 管理)
+01_数据与计算/LS-DYNA_原始模型/
