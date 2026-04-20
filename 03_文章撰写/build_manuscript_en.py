@@ -12,7 +12,7 @@ from pathlib import Path
 import re
 from shared_references import REFS
 
-OUT = str(Path(__file__).with_name("manuscript260420v1.docx"))
+OUT = str(Path(__file__).with_name("manuscript0420v2.docx"))
 
 REF_TEXTS = {}
 for ref_text in REFS:
@@ -169,12 +169,12 @@ def cite(p, numbers):
 
 # Title (≤135 characters)
 para(
-    "Glycosylation states link ecological and evolutionary variation to avian eggshell structure",
+    "Glycan-state divergence in matrix proteins links to avian eggshell structure and biomineralization",
     bold=True, size=14, before=0, after=160, align=WD_ALIGN_PARAGRAPH.LEFT
 )
 
 # Short title (≤50 characters)
-para("Glycosylation links eggshell structure",
+para("Glycan states link eggshell biomineralization",
      bold=False, size=11, after=60, align=WD_ALIGN_PARAGRAPH.LEFT)
 
 # Authors & Affiliations (placeholder)
@@ -187,23 +187,17 @@ para("Abstract", bold=True, size=11, before=80, after=40,
      align=WD_ALIGN_PARAGRAPH.LEFT)
 
 para(
-    "A mechanistic explanation for cross-species divergence in avian eggshell structure remains lacking. "
-    "Here, we integrated micro-CT morphometry, eggshell-matrix proteomics, glycopeptide mass spectrometry, structural ensemble "
-    "modeling, and finite-element simulation in three species—chicken, duck, and pigeon—chosen to span major developmental "
-    "and ecological contrasts. We present the first comparative description of branched N-glycan classes in avian eggshell "
-    "glycoproteins, showing that ovalbumin (OVAL) carries a species-ordered series: high-mannose in Gallus gallus, neutral "
-    "complex/hybrid in Anas platyrhynchos, and sialylated complex/hybrid in "
-    "Columba livia. The same ordering was recapitulated in computed Ca²⁺-accessible surface exposure, quantified mammillary-layer "
-    "mineralization mode, and simulated local shear resistance. Taken together, these aligned shifts place glycan-state variation within a "
-    "cross-scale framework linking ecological and evolutionary divergence to avian eggshell structure and mechanics. Within that framework, "
-    "OVAL provides the most consistently ordered molecular readout in the present comparison and helps connect matrix chemistry to structural "
-    "and mechanical divergence across species.",
+    "Comparative biomineralization studies often reveal lineage differences but less often identify the molecular layer most proximate to ordered phenotype. "
+    "Here, integrating micro-CT morphometry, eggshell-matrix proteomics, glycopeptide mass spectrometry, structural ensemble modeling, and finite-element simulation across chicken, duck, and pigeon, we found that a hatching-relevant local contact shear-stress readout under simulated chick escape loading recapitulated the mammillary hierarchy, separating chicken from duck and pigeon. "
+    "Comparative glycoproteomics then identified a species-ordered shift in matrix-protein glycan states, most clearly on ovalbumin, from high-mannose in chicken to neutral complex-hybrid in duck and sialylated complex-hybrid in pigeon. "
+    "Re-Glyco and electrostatic analyses linked this shift to progressively reduced Ca²⁺-accessible surface exposure, matching the ordering in mineralization mode and mechanics. "
+    "These results identify matrix-protein glycan-state divergence as a mechanistically informative layer linking comparative molecular divergence to avian eggshell structure, biomineralization, and function.",
     bold=False, size=10, before=0, after=80, align=WD_ALIGN_PARAGRAPH.JUSTIFY
 )
 
 # Teaser (≤125 characters, one sentence for non-specialist readers)
 para(
-    "Teaser: Glycosylation states track ecological and evolutionary divergence in avian eggshell structure and mechanics.",
+    "Teaser: Matrix-protein glycan-state divergence links avian eggshell biomineralization to a hatching-relevant local contact-stress readout.",
     bold=False, italic=True, size=10, before=80, after=160, align=WD_ALIGN_PARAGRAPH.LEFT
 )
 

@@ -12,7 +12,7 @@ from pathlib import Path
 import re
 from shared_references import REFS
 
-OUT = str(Path(__file__).with_name("manuscript260420v1_cn.docx"))
+OUT = str(Path(__file__).with_name("manuscript0420v2_cn.docx"))
 
 REF_TEXTS = {}
 for ref_text in REFS:
@@ -173,13 +173,13 @@ def cite(p, numbers):
 # 封面信息 (Science Advances)
 # ════════════════════════════════════════════════════════════════════════════
 para(
-    "糖基化状态将生态与演化变异联系到鸟类蛋壳结构",
+    "基质蛋白糖链状态分化联系鸟类蛋壳结构与生物矿化",
     bold=True, size=14, before=0, after=160,
     align=WD_ALIGN_PARAGRAPH.LEFT
 )
 
 para(
-    "Short title: 糖基化与蛋壳结构变异",
+    "Short title: 糖链状态与蛋壳生物矿化",
     bold=False, size=11, before=0, after=60,
     align=WD_ALIGN_PARAGRAPH.LEFT
 )
@@ -194,17 +194,16 @@ para("摘要", bold=True, size=11, before=80, after=40,
      align=WD_ALIGN_PARAGRAPH.LEFT, heading=True)
 
 para(
-    "鸟类蛋壳跨物种结构分化目前仍缺乏可进入机制检验的分子解释。"
-    "本研究整合显微CT形态测量、蛋壳基质蛋白组学、完整糖肽质谱、Re-Glyco结构系综建模和有限元分析，比较鸡、鸭和鸽这三个覆盖关键发育与生态对比的代表性物种。"
-    "据我们所知，本文首次对鸟类蛋壳基质糖蛋白的支链型N-糖链类别进行了比较描述，并显示卵白蛋白（OVAL）在三物种中分别以高甘露糖型、中性复合/杂合型和唾液酸化复合/杂合型N-糖链为主，构成稳定的物种排序。"
-    "同样的排序也再现于计算得到的Ca²⁺可及表面、定量乳突层成矿方式以及模拟局部抗剪切能力。"
-    "综合来看，这些彼此对齐的变化把糖链状态纳入了一条跨尺度解释框架：生态与演化差异如何被转译为鸟类蛋壳结构与力学差异。"
-    "在这一框架下，OVAL糖链状态是当前比较中排序最稳定的分子读数之一，并为把基质化学与结构、力学分化联系起来提供了可继续检验的切入点。",
+    "比较生物矿化研究常能揭示谱系间差异，却较少明确哪一层分子变化最接近有序表型本身。"
+    "本文整合显微CT形态测量、蛋壳基质蛋白组学、完整糖肽质谱、结构系综建模和有限元分析，对鸡、鸭和鸽进行比较，发现一个在模拟雏鸟出壳加载下得到的局部接触剪应力读数重现了乳突层级排序：鸡形成高水平状态，而鸭和鸽处于较低水平。"
+    "进一步的比较糖蛋白组学表明，基质蛋白糖链状态存在稳定的物种排序，其中以卵白蛋白最为清晰：鸡以高甘露糖型为主，鸭转向中性复合/杂合型，鸽进一步转向唾液酸化复合/杂合型。"
+    "Re-Glyco与静电分析进一步表明，这一变化对应Ca²⁺可及表面的逐步降低，并与成矿方式和力学结果的排序一致。"
+    "上述结果表明，基质蛋白糖链状态分化可作为一个具有机制意义的解释层，用于连接比较分子差异与鸟类蛋壳的结构、生物矿化和功能。",
     bold=False, size=10, before=0, after=80, align=WD_ALIGN_PARAGRAPH.JUSTIFY
 )
 
 para(
-    "Teaser: 糖基化状态追踪鸟类蛋壳结构与力学中的生态和演化分化。",
+    "Teaser: 基质蛋白糖链状态分化将鸟类蛋壳生物矿化联系到模拟出壳过程的局部接触应力读数。",
     bold=False, italic=True, size=10, before=80, after=160,
     align=WD_ALIGN_PARAGRAPH.LEFT
 )
