@@ -1,0 +1,40 @@
+# Python virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# LS-DYNA simulation result & data directories (large binary files, 160+ GB)
+LS-DYNA/chicken_results/
+LS-DYNA/duck_results/
+LS-DYNA/pigeon_results/
+LS-DYNA/chicken260122_files/
+LS-DYNA/Duck2_20260324_files/
+LS-DYNA/Pigeon260126_files/
+LS-DYNA/.Duck2_20260324_files.backup/
+LS-DYNA/chicken_parametric/
+LS-DYNA/duck_parametric/
+LS-DYNA/pigeon_parametric/
+
+# Large binary/data files
+*.k
+*.x_t
+*.db
+*.binout
+*.d3plot
+*.ptf
+*.lsda
+
+# Jupyter
+.ipynb_checkpoints/
