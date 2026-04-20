@@ -328,12 +328,13 @@ p_sprot_bg = spara([
 ])
 
 p_sprot_go = spara([
-    ("GO enrichment and gene-family turnover reinforced the same point: the three lineages differed broadly in developmental, immune, and secretory background, yet those signals remained too diffuse to explain the mammillary ordering on their own (Supplementary Fig. 1C-H).", [3, 5, 14, 15, 24, 25, 26, 29, 52]),
+    ("GO enrichment and gene-family turnover further indicated stable divergence among the three lineages in immune and defense-related background (Supplementary Fig. 1C-H).", [3, 5, 14, 15, 24, 25, 26, 29, 52]),
+    (" Functionally, this pattern was also biologically interpretable: in G. gallus and A. platyrhynchos, antimicrobial defense appeared to remain more strongly associated with the eggshell and its surface barrier, whereas in C. livia it appeared to shift more toward the egg-white system; the more evident immune-related expansion in duck may further relate to greater pathogen exposure in an aquatic setting.", []),
 ])
 
 p_sprot_focus = spara([
-    ("Among the lineage-restricted signals, the most relevant result for the present study was that the G. gallus-exclusive set was enriched for protein N-linked glycosylation (BP; Supplementary Fig. 1F).", []),
-    (" Together with prior evidence that the same eggshell proteins can be deployed differently depending on glycosylation state and compartment, that pattern narrowed the mechanistic focus from broad proteome background to comparative glycoproteomics.", [8, 18, 19, 21]),
+    (" At the same time, the G. gallus-exclusive set was significantly enriched for protein N-linked glycosylation (BP; Supplementary Fig. 1F), further indicating that the differences worth pursuing across the three species were present not only in defense background but also at the level of modification on shared eggshell matrix proteins.", []),
+    (" Together with prior evidence that the same eggshell proteins can assume different functions according to glycosylation state and eggshell compartment, this signal further narrowed our analysis from broad proteome background to comparative glycoproteomics, and specifically to how N-linked glycosylation states on shared key matrix proteins were reconfigured across the three species.", [8, 18, 19, 21]),
 ])
 
 head("Matrix-protein glycan states identify the leading shared candidate")
