@@ -12,7 +12,8 @@ from pathlib import Path
 import re
 from shared_references import REFS
 
-OUT = str(Path(__file__).with_name("manuscript0420v2.docx"))
+OUT = str(Path(__file__).with_name("manuscript260421v1.docx"))
+FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
 
 REF_TEXTS = {}
 for ref_text in REFS:
@@ -162,6 +163,27 @@ def smixed(sentences, before=0, after=120, align=WD_ALIGN_PARAGRAPH.JUSTIFY):
 
 def cite(p, numbers):
     _add_citation_run(p, numbers)
+
+def add_centered_figure(image_name, width_cm, before=120, after=60):
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    spacing(p, before=before, after=after, line=12)
+    r = p.add_run()
+    r.add_picture(str(FIG_BASE / image_name), width=Cm(width_cm))
+    return p
+
+def add_main_figure_legend(label, title, caption_parts, before=0, after=160):
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    spacing(p, before=before, after=after)
+    r = p.add_run(label + " ")
+    fmt(r, bold=True)
+    r = p.add_run(title + " ")
+    fmt(r, bold=True)
+    for text, bold, italic in caption_parts:
+        r = p.add_run(text)
+        fmt(r, bold=bold, italic=italic)
+    return p
 
 # ════════════════════════════════════════════════════════════════════════════
 # Science Advances 必需元素：Title / Short title / Authors / Teaser
@@ -317,6 +339,25 @@ p_s0b = mixed([
 cite(p_s0b, [1, 2, 28, 30, 36, 38])
 cite(p_s0b, [53, 54, 57])
 
+doc.add_page_break()
+add_centered_figure("Fig1.jpg", width_cm=10.1, before=0, after=20)
+add_main_figure_legend(
+    "Fig. 1.",
+    "Comparative framework and mammillary-layer morphology of the three focal avian species.",
+    [
+        ("(A) Three-dimensional AVONET comparison space built from 10,993 species records, with axes summarizing aquatic association, lifestyle-habitat discordance, and developmental mode. Colors denote avian orders; gray boxes highlight the deliberately separated regions occupied by the three focal species, and open circles mark ", False, False),
+        ("Gallus gallus", False, True),
+        (", ", False, False),
+        ("Anas platyrhynchos", False, True),
+        (", and ", False, False),
+        ("Columba livia", False, True),
+        (". (B) Phylogenetic relationship of representative avian taxa together with heatmap tracks for aquatic association (X), developmental mode (Z), and lifestyle-habitat discordance (Y); the three focal species are highlighted within this broader comparative frame. (C) Representative micro-CT sections and three-dimensional inner-surface reconstructions of the mammillary layer. Chicken shows smoother rounded mammillae, duck more ridged and angular mammillae, and pigeon discrete triangular-conical mammillae. Scale bars, 100 μm. (D) Boxplots of mammillary density and unit volume ratio across species. Points denote individual measurements; P values from one-way ANOVA are shown above the plots, and different letters indicate Duncan's multiple range test groupings.", False, False),
+    ],
+    before=20,
+    after=80,
+)
+doc.add_page_break()
+
 # ════════════════════════════════════════════════════════════════════════════
 # S_prot  Eggshell matrix proteome orthogroup analysis
 # ════════════════════════════════════════════════════════════════════════════
@@ -324,6 +365,7 @@ head("Proteome background narrows toward a glycan-centered explanation")
 
 p_sprot_bg = spara([
     ("Across the eggshell matrix proteomes of the three species, orthogroup analysis identified a large shared core together with pairwise-shared and lineage-restricted complements (Supplementary Fig. 1A).", [11, 20, 52, 53, 54]),
+    (" At the overall level, this eggshell matrix-protein layer still preserved the comparative framework defined by phylogenetic relatedness (Supplementary Fig. 1B).", []),
     (" This indicated that the comparison was shaped not by wholesale replacement of the eggshell matrix-protein toolkit, but by differential deployment within a common protein repertoire.", []),
 ])
 
@@ -343,8 +385,17 @@ p_s2a = mixed([
     ("We therefore turned to intact glycopeptides to ask which molecular layer most closely tracked the ordered eggshell phenotype. The glycoprotein network in Fig. 2 first defines the overall architecture of the dataset: a three-species conserved core at the center, pairwise-shared sectors surrounding it, and lineage-restricted peripheral repertoires linked outward to seven glycan classes. Among 516 quantitatively compared nodes, only 129 belonged to the three-species core, whereas the duck-pigeon shared sector was by far the largest peripheral block and the single-species sectors were dominated by duck and then pigeon. The network therefore indicated that glycoproteomic similarity does not simply recapitulate the classical species tree, but instead combines conserved, pairwise-shared, and lineage-restricted layers in the same architecture. The glycan layer carried the same message. High Mannose and Complex-Fucosylated glycans were broadly reused across multiple protein families, indicating that they contribute to a widespread background rather than to a small number of exceptional lineage-specific proteins. By contrast, more extended sialylated classes were less globally frequent but disproportionately associated with peripheral difference nodes, making them more useful as indicators of finer candidate-protein redeployment. The main value of the network, therefore, was not to identify the most abundant glycan class globally, but to show that core conservation, peripheral redeployment, and glycan reuse coexist in the same dataset and naturally narrow the candidate space toward a smaller set of proteins suitable for stricter ortholog and structural comparison.", False, False),
 ])
 
+add_centered_figure("Fig2.jpg", width_cm=14.6)
+add_main_figure_legend(
+    "Fig. 2.",
+    "Cross-species glycoprotein network architecture.",
+    [
+        ("Circular network linking orthologous eggshell glycoproteins to seven glycan classes across chicken, duck, and pigeon. The innermost concentric region represents the three-species conserved glycoprotein core; surrounding sectors partition pairwise-shared and lineage-restricted repertoires; and the outer glycan-class nodes summarize connections to High Mannose, Paucimannose, Hybrid, Complex-Plain, Complex-Fucosylated, Complex-Sialylated, and Other glycans. Curved links connect protein nodes to glycan classes, and the outer callouts report the number of proteins assigned to each class. Together, the network shows that a conserved glycoprotein core is retained across species while glycan usage and peripheral redeployment remain strongly asymmetric.", False, False),
+    ],
+)
+
 p_s2b = mixed([
-    ("To determine whether those glycan differences reflected biologically comparable proteins rather than broad lineage replacement, we next applied a stricter BlastP-based ortholog screen to the key targets (Fig. 3A). Using ", False, False),
+    ("To determine whether those glycan differences reflected biologically comparable proteins rather than broad lineage replacement, we next focused on the orthologous glycoprotein subset retained after a stricter BlastP-based filter and summarized that shared candidate space in Fig. 3A. Using ", False, False),
     ("G. gallus", False, True),
     (" as the reference, non-reference candidates were retained only when the mean E-value was below 1 × 10⁻⁵ and either average sequence identity reached at least 40% for structurally concordant HSP sets or maximum identity reached at least 40% when HSP counts were discordant. This step was intended to keep the downstream comparison focused on high-confidence orthologs with stronger functional comparability. That filter is important for interpretation, because without it the glycan signal could be explained by wholesale lineage replacement rather than by differential deployment of biologically comparable proteins. Under that stricter mapping, OC17 was glycosylated only in chicken, consistent with its established association with early crystal mineralization and calcite habit control, and therefore more suggestive of a chicken-specific proximal mineralization program. By contrast, OC116, TRFE, and OVAL all retained glycosylation signals across the three species, making them more suitable shared anchors for cross-species comparison. Among these, OC116 remained closest to matrix organization and mineral deposition, TRFE combined ion-binding and antimicrobial functions, and OVAL showed the most consistent species-ordered glycan reconfiguration. That combination of cross-species retention plus ordered glycan-state divergence is precisely why the subsequent structural analysis focused on OVAL.", False, False),
 ])
@@ -361,6 +412,15 @@ p_s2d = spara([
     (" Once abundance is no longer treated as the sole explanatory variable, the relevant question becomes how glycan state changes the chemical surface available to participate in early mineralization events. The mechanism therefore narrows from 'which protein is present' to 'which chemically relevant surface remains exposed,' a question that can be tested directly by structural ensembles and electrostatic calculations rather than inferred only from abundance matrices.", [1, 4, 6, 7, 8, 18, 42, 47, 48]),
 ])
 
+add_centered_figure("Fig3.jpg", width_cm=15.5)
+add_main_figure_legend(
+    "Fig. 3.",
+    "Ortholog screening and abundance-decoupled glycoprotein prioritization.",
+    [
+        ("(A) Circos-style summary of the orthologous glycoprotein subset retained after stringent BlastP filtering, highlighting shared candidate proteins across chicken, duck, and pigeon. Species are color-coded, and gray labels indicate chicken proteins without retained non-chicken orthologs under the final comparison criteria. OVAL, OC116, TRFE, and OC17 are emphasized as the key interpretable targets. (B to D) Proteotype coevolution plots comparing log2-transformed protein abundance and glycan abundance within chicken, duck, and pigeon, respectively; inset values show Spearman's ρ and two-sided P. Highlighted proteins identify cases where glycan investment diverges from protein abundance. (E to G) Pairwise two-dimensional glycan-protein enrichment plots for Gallus versus Anas, Gallus versus Columba, and Anas versus Columba. OVAL shows the most consistent species-ordered shift away from abundance matching and was therefore prioritized for structural interpretation.", False, False),
+    ],
+)
+
 head("Re-Glyco links glycan-state divergence to biophysical accessibility")
 
 p_s3a = spara([
@@ -369,6 +429,19 @@ p_s3a = spara([
     ("The glycan-layer geometry clarified the basis of this separation. The rebuilt pigeon glycans occupied the largest conformational space, with greater extension away from the sequon while also maintaining closer transient surface contact, whereas chicken and duck remained more compact. Geometric difference was therefore translated into surface shielding rather than glycan size alone. The pigeon state represented both a larger glycan envelope and a more persistent occupation of protein-surface territory that would otherwise remain available to acidic hotspot exposure. Chicken occupied the opposite extreme, retaining the smallest and least shielding glycan state, while duck consistently remained intermediate. The three species therefore differed not only in glycan identity, but also in how much of the acidic OVAL interface remained available to local ion approach during early mineralization (Fig. 4D-G).", [11, 12, 42, 43, 44, 45, 46]),
     ("That geometric ordering propagated directly into the accessibility readout. Interface shielding increased from chicken to duck to pigeon (Fig. 4H), while the fraction of candidate acidic residues retained as accessible Ca²⁺ hotspots declined in the opposite direction (Fig. 4J). At that stage, however, two related but non-identical summaries become useful. Panel L partitions hotspot accessibility by residue count, asking how many candidate Ca²⁺-relevant sites remain net accessible after glycan shielding. Panel M instead partitions hotspot-residue SASA, asking how much exposed surface area remains on those chemically relevant residues. Those two readouts need not rank species identically in every detail, because shielding more residues is not equivalent to removing the same amount of exposed area from each residue. That distinction explains why duck and pigeon can converge more strongly in accessible hotspot counts while still differing in how shielding is distributed across surface area. The hotspot metric used here therefore captures the exposure of surface Asp/Glu positions that satisfy a Ca²⁺-relevant accessibility definition rather than whole-protein solvent exposure, and Figure 4 links glycan geometry, surface shielding, hotspot number, and hotspot-area suppression on OVAL within the same structural framework. In practical terms, chicken retained the highest OVAL Ca²⁺ accessibility, duck was intermediate or converged downward depending on whether count or area was being summarized, and pigeon remained the most shielded state overall. That ordering helps close the mechanistic loop: higher Ca²⁺ accessibility should make chicken OVAL more permissive to the partial unfolding linked previously to early mineralization, thereby allowing faster mineralization onset and ultimately contributing to the higher mammillary-knob density seen in chicken.", [11, 12, 42, 43, 44, 45, 46, 49, 50, 51]),
 ])
+
+doc.add_page_break()
+add_centered_figure("Fig4.jpg", width_cm=15.2, before=0, after=20)
+add_main_figure_legend(
+    "Fig. 4.",
+    "Re-Glyco and APBS analyses define an OVAL accessibility gradient across species.",
+    [
+        ("(A) Number of Ca²⁺ hotspot residues, defined as surface Asp/Glu positions with APBS potential below −5 kT/e, in glycosylated and matched deglycosylated OVAL ensembles. (B) Carboxylate surface accessibility. (C) Surface electrostatic potential distributions for glycosylated versus deglycosylated structures. (D to G) Ensemble geometric descriptors of the rebuilt glycans, including radius of gyration, end-to-end distance, glycan-protein distance, and minimum glycan-backbone distance. (H) Glycan-mediated interface shielding. (I) Mean solvent-accessible surface area (SASA) of hotspot residues. (J) Hotspot fraction among candidate acidic residues. (K) Net accessible Ca²⁺ hotspots. (L) Partition of hotspot accessibility into net accessible and glycan-shielded components. (M) Partition of hotspot-residue SASA into net accessible and glycan-shielded components. Species-specific ensemble sizes are indicated beneath the violins. Species comparisons in panels D to M used one-way ANOVA followed by Duncan's multiple range test; glycosylated-versus-apo contrasts in panels A to C were evaluated against the apo reference by one-sample t test, with significance annotations shown above the brackets. Across these metrics, chicken retained the most exposed Ca²⁺-relevant surface, pigeon showed the strongest glycan-mediated shielding, and duck remained intermediate.", False, False),
+    ],
+    before=20,
+    after=80,
+)
+doc.add_page_break()
 
 head("Local mechanics preserves the ordered biomineralization signal")
 
@@ -432,6 +505,21 @@ mixed([
     (" clustered together at lower values. That grouping reproduced the mammilla-density hierarchy from micro-CT and provided the functional endpoint of the preceding molecular-to-structural argument: the glycosylation-associated differences identified above are not only compatible with altered mammillary organization, but are propagated into a simulated hatching-relevant mechanical consequence across the three model species.", False, False),
 ])
 cite(p_s4a, [16, 17, 34, 35, 37, 38])
+
+add_centered_figure("Fig6.jpg", width_cm=15.5)
+add_main_figure_legend(
+    "Fig. 6.",
+    "Hatching-relevant force and shear-stress readouts across species.",
+    [
+        ("(A) Mean contact-force time courses across nine impact positions for ", False, False),
+        ("Gallus", False, True),
+        (", ", False, False),
+        ("Anas", False, True),
+        (", and ", False, False),
+        ("Columba", False, True),
+        (", shown with shaded ±1σ envelopes, together with boxplots of peak contact force (Fmax). (B) Mean contact shear-stress time courses for the same nine positions together with boxplots of peak shear stress (τmax). Symbols on the curves mark the species mean peak value; points in the boxplots denote individual impact positions (n = 9 per species). P values from one-way ANOVA are shown above the boxplots, and different letters indicate Duncan's multiple range test groupings. Fmax preserves a three-level hierarchy, whereas τmax separates chicken from the lower-τmax duck and pigeon group, indicating that the localized mammillary-interface readout most closely tracks the structural ordering inferred from morphology and OVAL accessibility.", False, False),
+    ],
+)
 
 # ════════════════════════════════════════════════════════════════════════════
 # Discussion
@@ -574,24 +662,23 @@ mixed([
 
 head("Micro-CT imaging and mammillary morphometry")
 
-para(
+p_m_ct = para(
     "Two eggshell fragments (each approximately 4\u20135 mm\u00b2) were excised from the "
     "equatorial region of each species and scanned with a Phoenix V|tome|x\u00a0M "
     "microfocus CT system (GE Sensing and Inspection Technologies GmbH, Wunstorf, "
     "Germany) at 85 kV and 160 \u03bcA with no beam filter; scan settings were held "
     "constant across all specimens. Three-dimensional reconstructions were generated "
-    "in 3D Slicer by threshold-based segmentation restricted to a cylindrical region "
-    "of interest of 1 mm radius. Acquisition noise was suppressed by a 5 \u00d7 5 \u00d7 5 "
+    "in 3D Slicer by threshold-based segmentation. Acquisition noise was suppressed by a 5 \u00d7 5 \u00d7 5 "
     "median filter, followed by largest-island isolation and 9 \u00d7 9 \u00d7 9 hole-filling. "
-    "Surface models were exported as STL files and reverse-engineered in Geomagic "
-    "Wrap by sequential de-noising (strength 2), triangle simplification to "
-    "approximately 300,000 faces, mesh re-gridding at 0.01 mm, iterative defect "
-    "correction to zero residual faults, and organic parametric surface fitting at "
-    "minimum tolerance. Three morphometric parameters were quantified per specimen: "
-    "mammilla density (count per mm\u00b2), column unit volume (mm\u00b3), and unit volume "
-    "ratio (organic matrix core volume relative to total column volume; "
-    "n\u202f=\u202f2 fragments per species)."
+    "Within the same region of interest, three morphometric parameters were then calculated from the labelmap. "
+    "The segmented shell model was first duplicated as a single-copy volume and solid-filled with the Fill Holes operation; "
+    "subtraction of the original shell model from the filled solid yielded the mammillary interspace layer, and closed voids appearing in that interspace plane were defined as mammillary knobs. "
+    "Mammilla density was calculated as mammilla count divided by ROI area. "
+    "Total eggshell volume in the same ROI was obtained directly from the labelmap, and mean column-unit volume was defined as total shell volume divided by mammilla count; "
+    "column-unit volume fraction was then calculated as mean column-unit volume divided by the total eggshell volume of the corresponding ROI. "
+    "Because the columnar units initiated by mammillae are arranged as repetitive and approximately even planar units in normal avian eggshell microstructure, these parameters were treated as local average representatives of whole-shell organization (n\u202f=\u202f2 fragments per species)."
 )
+cite(p_m_ct, [1, 38])
 
 head("Shotgun proteomics of eggshell matrix proteins")
 
@@ -762,7 +849,8 @@ cite(p_m_apbs, [12, 42, 43])
 head("Finite-element analysis")
 
 p_m_fea = mixed([
-    ("Eggshell surface models derived from micro-CT were imported into LS-DYNA "
+    ("The region of interest used for downstream finite-element analysis was defined as a cylindrical volume of 1 mm radius during micro-CT reconstruction. ", False, False),
+    ("Surface models derived from micro-CT were first exported as STL files and reverse-engineered in Geomagic Wrap for finite-element pre-processing by sequential de-noising (strength 2), triangle simplification to approximately 300,000 faces, mesh re-gridding at 0.01 mm, iterative defect correction to zero residual faults, and organic parametric surface fitting at minimum tolerance. The resulting eggshell surface models were then imported into LS-DYNA "
      "(Ansys) for explicit dynamic finite-element analysis (unit system: "
      "mm/kg/N/s). The eggshell was assigned elasto-plastic material properties "
      "(Young's modulus E\u202f=\u202f3.0 \u00d7 10\u00b9\u2070 Pa; yield strength \u03c3y\u202f=\u202f1.5 \u00d7 10\u2077 Pa; "

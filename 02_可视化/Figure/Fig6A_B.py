@@ -174,27 +174,9 @@ def plot_dmrt(ax, res, data_orig, metric_label, unit):
                    color=color, edgecolors="k",
                    linewidths=0.5, zorder=4, alpha=0.90)
 
-    # Significance brackets
+    # Duncan letter labels only
     y_top = orig_means + orig_stds
     y_max = float(y_top.max())
-    def sp_idx(name): return SPECIES.index(name)
-    k_s = len(res['s_names'])
-    bracket_y = y_max * 1.08
-    for i in range(k_s):
-        for j in range(i+1, k_s):
-            if res['sig'][i, j]:
-                xi = sp_idx(res['s_names'][i])
-                xj = sp_idx(res['s_names'][j])
-                x_lo, x_hi = sorted([xi, xj])
-                by = bracket_y
-                ax.plot([x_lo, x_lo, x_hi, x_hi],
-                        [by - y_max*0.01, by, by, by - y_max*0.01],
-                        color="k", linewidth=1.1, zorder=5)
-                ax.text((x_lo + x_hi)/2, by + y_max*0.01, "***",
-                        ha="center", va="bottom", fontsize=13, color="k")
-                bracket_y += y_max * 0.09
-
-    # Duncan letter labels
     for i, sp in enumerate(SPECIES):
         ltr = res['letters'].get(sp, '')
         ht = orig_means[i] + orig_stds[i]
@@ -204,7 +186,7 @@ def plot_dmrt(ax, res, data_orig, metric_label, unit):
     ax.set_xticks(x)
     ax.set_xticklabels([f'$\\it{{{sp}}}$' for sp in SPECIES], fontsize=12)
     ax.set_ylabel(f"{metric_label} ({unit})", fontsize=13)
-    ax.set_ylim(0, bracket_y * 1.15)
+    ax.set_ylim(0, y_max * 1.30)
     ax.yaxis.set_minor_locator(ticker.AutoMinorLocator(2))
     ax.grid(axis="y", linestyle="--", linewidth=0.6, alpha=0.5, zorder=0)
     ax.set_title(
@@ -232,6 +214,11 @@ if ts_data:
         t_s = np.linspace(t[0], t[-1], len(t)*5)
         return t_s, PchipInterpolator(t, y)(t_s)
 
+    def _is_sig(sp_name, res):
+        ltr = res['letters'].get(sp_name, '')
+        return any(res['letters'].get(s, '') != ltr for s in SPECIES if s != sp_name)
+
+    tau_merge_peaks = {}   # sp -> (tx, ty) for Columba & Anas merged dot
     for sp, color, T_mm in zip(SPECIES, COLORS, T_MMS):
         if sp not in ts_data:
             continue
@@ -247,10 +234,6 @@ if ts_data:
         ax_f.plot(ts_s, ms_f, color=color, lw=2.2,
                   label=f'$\\it{{{sp}}}$ (n={mat.shape[0]})')
         # Peak marker: ⭐ if significantly different from any other species, else •
-        def _is_sig(sp_name, res):
-            ltr = res['letters'].get(sp_name, '')
-            return any(res['letters'].get(s, '') != ltr for s in SPECIES if s != sp_name)
-
         pk_f = np.argmax(ms_f)
         marker_f = '⭐' if _is_sig(sp, res_F) else '•'
         ax_f.text(ts_s[pk_f], ms_f[pk_f], marker_f,
@@ -264,12 +247,24 @@ if ts_data:
         ax_tau.fill_between(ts_s2, lo_tau, hi_tau, color=color, alpha=0.15)
         ax_tau.plot(ts_s2, ms_tau, color=color, lw=2.2,
                     label=f'$\\it{{{sp}}}$ (n={mat.shape[0]})')
-        # Peak marker: ⭐ if significantly different from any other species, else •
         pk_tau = np.argmax(ms_tau)
-        marker_tau = '⭐' if _is_sig(sp, res_tau) else '•'
-        ax_tau.text(ts_s2[pk_tau], ms_tau[pk_tau], marker_tau,
-                    color=color, ha='center', va='bottom', fontsize=13, zorder=10,
-                    fontfamily='Segoe UI Emoji')
+        if sp in ('Columba', 'Anas'):
+            # Collect peaks for merged single dot
+            tau_merge_peaks[sp] = (ts_s2[pk_tau], ms_tau[pk_tau])
+        else:
+            # Peak marker: ⭐ if significantly different from any other species, else •
+            marker_tau = '⭐' if _is_sig(sp, res_tau) else '•'
+            ax_tau.text(ts_s2[pk_tau], ms_tau[pk_tau], marker_tau,
+                        color=color, ha='center', va='bottom', fontsize=13, zorder=10,
+                        fontfamily='Segoe UI Emoji')
+
+    # Draw a single merged dot for Columba + Anas in τ
+    if tau_merge_peaks:
+        merged_x = np.mean([v[0] for v in tau_merge_peaks.values()])
+        merged_y = np.mean([v[1] for v in tau_merge_peaks.values()])
+        ax_tau.plot(merged_x, merged_y, marker='o', markersize=9,
+                    color='#888888', markeredgecolor='white', markeredgewidth=1.2,
+                    zorder=10, linestyle='none')
 
     for ax, ylabel in [(ax_f, "Contact force F (N)"),
                        (ax_tau, "Shear stress τ (MPa)")]:

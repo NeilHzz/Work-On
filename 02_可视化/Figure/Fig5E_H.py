@@ -96,7 +96,7 @@ def significance_label(p: float) -> str:
     return 'ns'
 
 
-def violin_one(ax, metric, ylabel):
+def violin_one(ax, metric, ylabel, subtitle=''):
     data = [detail.loc[detail.species==sp, metric].dropna().values
             for sp in SPECIES_ORDER]
     colors = [SPECIES_COLORS[sp] for sp in SPECIES_ORDER]
@@ -136,8 +136,10 @@ def violin_one(ax, metric, ylabel):
         ax.text(xi, letter_y, ltr, ha='center', va='bottom',
                 fontsize=11, fontweight='bold', color='#333')
     ax.set_ylim(top=letter_y + span * 0.15)
-    ax.set_title(f"ANOVA: F={res['f_stat']:.2f}, p={res['p_anova']:.2e}",
-                 fontsize=7.5, color='#555', pad=2)
+    title_str = (f"{subtitle}\nANOVA: F={res['f_stat']:.2f}, p={res['p_anova']:.2e}"
+                if subtitle else
+                f"ANOVA: F={res['f_stat']:.2f}, p={res['p_anova']:.2e}")
+    ax.set_title(title_str, fontsize=7.5, color='black', pad=2)
 
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
@@ -154,6 +156,13 @@ def save_panel(fig, name):
 
 # ─── 逐面板独立输出 ───────────────────────────────────────────────────────
 
+SUBTITLES = {
+    'glycan_rg':             'Glycan Radius of Gyration',
+    'glycan_end2end':        'Glycan End-to-End Distance',
+    'glycan_dist':           'Glycan–Protein Distance',
+    'glycan_min_dist_to_ca': 'Glycan–Backbone Proximity',
+}
+
 metric_keys   = list(METRICS.keys())
 metric_labels = list(METRICS.values())
 panel_labels  = list('ABCD')
@@ -161,9 +170,7 @@ panel_labels  = list('ABCD')
 for mk, ml, lbl in zip(metric_keys, metric_labels, panel_labels):
     fig, ax = plt.subplots(figsize=(5, 5))
     fig.patch.set_facecolor('white')
-    violin_one(ax, mk, ml)
-    ax.text(-0.18, 1.05, lbl, transform=ax.transAxes,
-            fontsize=13, fontweight='bold', va='top')
+    violin_one(ax, mk, ml, subtitle=SUBTITLES.get(mk, ''))
     fig.tight_layout()
     save_panel(fig, f'Fig5{chr(ord("E") + ord(lbl) - ord("A"))}')
     plt.close(fig)

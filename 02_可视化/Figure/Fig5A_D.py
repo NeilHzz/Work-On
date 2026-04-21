@@ -410,12 +410,6 @@ def draw_ca2_sasa(ax, csv_map):
                  fontsize=9, pad=8)
     ax.set_ylim(1000, max(max_y + 10, 3700))
 
-    legend_els = [
-        mpatches.Patch(facecolor='#888', alpha=0.80, label='Glycosylated'),
-        mpatches.Patch(facecolor='#888', alpha=0.40, hatch='///',
-                       edgecolor='gray', label='Deglyco (no glycan)'),
-    ]
-    ax.legend(handles=legend_els, fontsize=7.5, framealpha=0.6)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
 
@@ -517,14 +511,6 @@ def draw_apbs_strip(ax, summary, csv_map):
     if all_vals:
         ax.set_ylim(min(all_vals) - 1, max(all_vals) * 1.3 + 1)
 
-    legend_els = [
-        mpatches.Patch(facecolor='#888', alpha=0.60, label='Glycosylated'),
-        mpatches.Patch(facecolor='#888', alpha=0.28,
-                       edgecolor='#888', linewidth=1, label='Deglyco (no glycan)'),
-        Line2D([0], [0], color='#e53935', lw=1.2, ls='--', alpha=0.8,
-               label='-5 kT/e'),
-    ]
-    ax.legend(handles=legend_els, fontsize=7.5, framealpha=0.6, loc='upper right')
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
 
