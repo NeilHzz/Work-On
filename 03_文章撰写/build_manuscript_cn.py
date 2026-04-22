@@ -12,7 +12,8 @@ from pathlib import Path
 import re
 from shared_references import REFS
 
-OUT = str(Path(__file__).with_name("manuscript260421v1_cn.docx"))
+OUT = str(Path(__file__).with_name("manuscript260422v1_cn.docx"))
+FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
 
 REF_TEXTS = {}
 for ref_text in REFS:
@@ -165,6 +166,29 @@ def cite(p, numbers):
     if not numbers:
         return
     _add_citation_run(p, numbers)
+
+
+def add_centered_figure(image_name, width_cm, before=120, after=60):
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    spacing(p, before=before, after=after, line=12)
+    r = p.add_run()
+    r.add_picture(str(FIG_BASE / image_name), width=Cm(width_cm))
+    return p
+
+
+def add_main_figure_legend(label, title, caption_parts, before=0, after=160):
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    spacing(p, before=before, after=after)
+    r = p.add_run(label + " ")
+    fmt(r, bold=True)
+    r = p.add_run(title + " ")
+    fmt(r, bold=True)
+    for text, bold, italic in caption_parts:
+        r = p.add_run(text)
+        fmt(r, bold=bold, italic=italic)
+    return p
 
 # ════════════════════════════════════════════════════════════════════════════
 # 引言
@@ -388,6 +412,25 @@ p_s4a_cn = mixed([
 ])
 
 cite(p_s4a_cn, [16, 17, 34, 35, 37, 38])
+
+doc.add_page_break()
+add_centered_figure("Fig5.jpg", width_cm=13.8, before=0, after=20)
+add_main_figure_legend(
+    "图5.",
+    "出壳相关加载设计与物种特异性的有限元建模框架。",
+    [
+        ("(A) 胚胎出壳过程中卵齿由壳内侧局部顶压蛋壳的示意图。(B至D) ", False, False),
+        ("Gallus gallus", False, True),
+        ("、", False, False),
+        ("Anas platyrhynchos", False, True),
+        (" 和 ", False, False),
+        ("Columba livia", False, True),
+        (" 的物种特异性卵齿照片及代表性有限元模型。左侧为用于约束压头几何的卵齿或喙尖外部形态，右侧为基于micro-CT重建的蛋壳碎片网格、相应锥形压头以及接触时的代表性von Mises应力场。这些面板共同定义了与出壳相关的加载背景，并说明模拟直接建立在实测重建壳体几何而非理想化壳体之上。", False, False),
+    ],
+    before=20,
+    after=80,
+)
+doc.add_page_break()
 
 mixed([
     ("对9个偏移位置的F_max进行单因素方差分析（ANOVA），"

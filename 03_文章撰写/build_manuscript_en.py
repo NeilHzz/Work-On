@@ -12,7 +12,7 @@ from pathlib import Path
 import re
 from shared_references import REFS
 
-OUT = str(Path(__file__).with_name("manuscript260421v1.docx"))
+OUT = str(Path(__file__).with_name("manuscript260422v1.docx"))
 FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
 
 REF_TEXTS = {}
@@ -455,6 +455,25 @@ p_s4a = mixed([
     (" 0.19 mm).", False, False),
 ])
 
+doc.add_page_break()
+add_centered_figure("Fig5.jpg", width_cm=13.8, before=0, after=20)
+add_main_figure_legend(
+    "Fig. 5.",
+    "Hatching-relevant loading design and species-specific finite-element setup.",
+    [
+        ("(A) Schematic of the egg tooth pressing the eggshell from the inner side during hatching. (B to D) Species-specific egg-tooth photographs and representative finite-element setups for ", False, False),
+        ("Gallus gallus", False, True),
+        (", ", False, False),
+        ("Anas platyrhynchos", False, True),
+        (", and ", False, False),
+        ("Columba livia", False, True),
+        (", respectively. Left, external morphology of the egg tooth or beak tip used to motivate the impactor geometry. Right, micro-CT-derived eggshell-fragment meshes with the corresponding conical impactor and representative von Mises stress field at contact. These panels define the hatching-relevant loading background and show that the simulations were built from reconstructed shell geometry rather than idealized shells.", False, False),
+    ],
+    before=20,
+    after=80,
+)
+doc.add_page_break()
+
 mixed([
     ("One-way ANOVA of F_max across the nine offset positions revealed a significant three-level hierarchy (F₂,₂₄ = 127.52, p < 1.0 × 10⁻¹²; Duncan's multiple range test, DMRT, α = 0.05): ", False, False),
     ("G. gallus", False, True),
@@ -504,8 +523,6 @@ mixed([
     ("C. livia", False, True),
     (" clustered together at lower values. That grouping reproduced the mammilla-density hierarchy from micro-CT and provided the functional endpoint of the preceding molecular-to-structural argument: the glycosylation-associated differences identified above are not only compatible with altered mammillary organization, but are propagated into a simulated hatching-relevant mechanical consequence across the three model species.", False, False),
 ])
-cite(p_s4a, [16, 17, 34, 35, 37, 38])
-
 add_centered_figure("Fig6.jpg", width_cm=15.5)
 add_main_figure_legend(
     "Fig. 6.",
@@ -520,6 +537,8 @@ add_main_figure_legend(
         (", shown with shaded ±1σ envelopes, together with boxplots of peak contact force (Fmax). (B) Mean contact shear-stress time courses for the same nine positions together with boxplots of peak shear stress (τmax). Symbols on the curves mark the species mean peak value; points in the boxplots denote individual impact positions (n = 9 per species). P values from one-way ANOVA are shown above the boxplots, and different letters indicate Duncan's multiple range test groupings. Fmax preserves a three-level hierarchy, whereas τmax separates chicken from the lower-τmax duck and pigeon group, indicating that the localized mammillary-interface readout most closely tracks the structural ordering inferred from morphology and OVAL accessibility.", False, False),
     ],
 )
+
+cite(p_s4a, [16, 17, 34, 35, 37, 38])
 
 # ════════════════════════════════════════════════════════════════════════════
 # Discussion
