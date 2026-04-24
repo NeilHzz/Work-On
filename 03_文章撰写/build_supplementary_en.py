@@ -137,8 +137,8 @@ para("Supplementary Materials for", bold=False, size=11,
      before=0, after=40, align=WD_ALIGN_PARAGRAPH.CENTER)
 
 para(
-    "Eggshell matrix glycoproteomics reveals species-specific N-glycan remodeling "
-    "on ovalbumin underlies divergent mammillary-layer mechanics across three avian lineages",
+    "Glycan-state divergence in matrix proteins links to avian eggshell structure "
+    "and biomineralization",
     bold=True, size=12, before=0, after=160, align=WD_ALIGN_PARAGRAPH.CENTER
 )
 
@@ -208,14 +208,15 @@ mpara([
 st_head("Supplementary Text 2. Eggshell matrix proteome orthogroup analysis.")
 
 mpara([
-    ("Shotgun proteomics of isolated eggshell matrix fractions identified 2,620, 2,921, and "
-     "3,219 protein orthogroups in ", False, False),
+    ("Proteomics-identified eggshell matrix proteins were organized with an "
+     "OrthoFinder-based orthology workflow into 2,620, 2,921, and 3,219 orthogroups in ", False, False),
     ("G. gallus", False, True),
     (", ", False, False),
     ("A. platyrhynchos", False, True),
     (", and ", False, False),
     ("C. livia", False, True),
-    (", respectively. OrthoFinder analysis partitioned these into a conserved three-species "
+    (", respectively. Using all-versus-all protein similarity relationships and graph-based "
+     "clustering, the workflow partitioned these into a conserved three-species "
      "shared core of 1,997 orthogroups (Fig. S2), pairwise-shared but not universally shared "
      "complements of 180 (", False, False),
     ("G. gallus", False, True),
@@ -563,6 +564,11 @@ def spacing(p, before=0, after=120, line=24):
     e.set(qn("w:lineRule"), "auto")
     pPr.append(e)
 
+def keep_with_next(p):
+    pPr = p._p.get_or_add_pPr()
+    e = OxmlElement("w:keepNext")
+    pPr.append(e)
+
 def para(text, bold=False, italic=False, size=11,
          before=0, after=120, align=WD_ALIGN_PARAGRAPH.JUSTIFY):
     p = doc.add_paragraph()
@@ -580,6 +586,7 @@ def fig_legend(label, title):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
     spacing(p, before=200, after=120)
+    keep_with_next(p)
     # Label + title — all bold
     r_label = p.add_run(label + " ")
     fmt(r_label, bold=True)
@@ -625,8 +632,8 @@ para("Supplementary Materials", bold=True, size=14,
      before=0, after=240, align=WD_ALIGN_PARAGRAPH.CENTER)
 
 para(
-    "Eggshell matrix glycoproteomics reveals species-specific N-glycan remodeling "
-    "on ovalbumin underlies divergent mammillary-layer mechanics across three avian lineages",
+    "Glycan-state divergence in matrix proteins links to avian eggshell structure "
+    "and biomineralization",
     bold=False, italic=True, size=11, before=0, after=360,
     align=WD_ALIGN_PARAGRAPH.CENTER
 )
@@ -688,13 +695,15 @@ para("Supplementary Text 2. Eggshell matrix proteome orthogroup analysis.",
      bold=True, size=11, before=240, after=60, align=WD_ALIGN_PARAGRAPH.LEFT)
 
 fig_caption([
-    ("Shotgun proteomics identified 2,620, 2,921, and 3,219 protein orthogroups in ", False, False),
+    ("Proteomics-identified eggshell matrix proteins were organized with an OrthoFinder-based "
+     "orthology workflow into 2,620, 2,921, and 3,219 orthogroups in ", False, False),
     ("G. gallus", False, True),
     (", ", False, False),
     ("A. platyrhynchos", False, True),
     (", and ", False, False),
     ("C. livia", False, True),
-    (", respectively (Fig. S2). Of these, 1,997 orthogroups were shared across all three "
+    (", respectively (Fig. S2). Using all-versus-all protein similarity relationships and "
+     "graph-based clustering, the workflow resolved 1,997 orthogroups shared across all three "
      "species and constituted the conserved eggshell matrix-protein core. Pairwise-shared "
      "but not universally shared orthogroup counts were 180 (", False, False),
     ("G. gallus", False, True),
@@ -755,7 +764,8 @@ fig_caption([
 ])
 
 fig_caption([
-    ("Gene-family expansion and contraction analysis (CAFE5) further indicated asymmetric "
+    ("Gene-family expansion and contraction analysis (CAFE5), applied to orthogroup family sizes "
+     "together with the species divergence-time tree, further indicated asymmetric "
      "lineage divergence: ", False, False),
     ("G. gallus", False, True),
     (" showed net family contraction overall, ", False, False),
@@ -797,14 +807,16 @@ fig_caption([
 # ════════════════════════════════════════════════════════════════════
 # Fig. S2
 # ════════════════════════════════════════════════════════════════════
+doc.add_page_break()
 fig_legend(
     "Fig. S2.",
     "Three-species Venn diagram of shared and lineage-restricted eggshell matrix orthogroups."
 )
 add_image(FIG_BASE / "SuppFig2_Venn_Orthogroups" / "Fig_venn_orthogroups.png", width_cm=12.0)
 fig_caption([
-    ("OrthoFinder-based orthogroup analysis of the three eggshell matrix proteomes. "
-     "The diagram partitions detected orthogroups into a large three-species shared core, "
+    ("OrthoFinder-based orthogroup clustering of the detected eggshell matrix proteomes. "
+     "Following all-versus-all protein similarity comparison and graph-based clustering, "
+     "the diagram partitions detected orthogroups into a large three-species shared core, "
      "three pairwise-shared sectors, and three lineage-restricted sectors. Numbers indicate "
      "orthogroup counts in each sector. This partition is the basis for the comparative "
      "framing described in the main text.", False, False),
@@ -813,15 +825,17 @@ fig_caption([
 # ════════════════════════════════════════════════════════════════════
 # Fig. S3
 # ════════════════════════════════════════════════════════════════════
+doc.add_page_break()
 fig_legend(
     "Fig. S3.",
     "Maximum-likelihood phylogenetic tree of the three focal species reconstructed from single-copy orthologs."
 )
 add_image(FIG_BASE / "SuppFig3_Phylo_Tree" / "Fig_phylo_tree.png", width_cm=14.0)
 fig_caption([
-    ("Phylogenetic tree inferred by IQ-TREE from a concatenated alignment of single-copy "
-     "orthologous protein sequences. Branch lengths reflect substitutions per site. Node "
-     "support values (ultrafast bootstrap, 1000 replicates) are indicated at internal nodes. "
+    ("Maximum-likelihood species tree reconstructed from the single-copy ortholog set returned "
+     "by the orthology workflow. Single-copy orthologous protein sequences were aligned and "
+     "used to infer the species relationships shown here. Branch lengths reflect substitutions "
+     "per site. Node support values (1000 replicates) are indicated at internal nodes. "
      "The tree topology is consistent with published avian phylogenies and confirms the "
      "expected relatedness ordering (Galliformes and Anseriformes as sister clades within "
      "Galloanseres, Columbiformes as the more distant outgroup) used to frame the comparative "
@@ -831,6 +845,7 @@ fig_caption([
 # ════════════════════════════════════════════════════════════════════
 # Fig. S4
 # ════════════════════════════════════════════════════════════════════
+doc.add_page_break()
 fig_legend(
     "Fig. S4.",
     "GO enrichment and gene-family turnover across species-specific and pairwise eggshell matrix protein sets."
@@ -857,17 +872,15 @@ fig_caption([
     ("G. gallus", False, True),
     ("-exclusive set was significantly enriched for protein N-linked glycosylation (BP), "
      "providing the direct motivation for cross-species glycoproteomics. Immune and "
-     "defense-related GO terms were differentially distributed across lineages. GO enrichment "
-     "was performed with the R package ", False, False),
-    ("clusterProfiler", False, True),
-    (" (v4.x); ", False, False),
-    ("p", False, True),
-    ("-values were corrected by the Benjamini–Hochberg method.", False, False),
+     "defense-related GO terms were differentially distributed across lineages. GO terms from "
+     "the lineage-restricted and pairwise-shared orthogroup sectors were summarized as the "
+     "heatmap and bubble plots shown here.", False, False),
 ])
 
 # ════════════════════════════════════════════════════════════════════
 # Fig. S5
 # ════════════════════════════════════════════════════════════════════
+doc.add_page_break()
 fig_legend(
     "Fig. S5.",
     "CAFE5 gene-family expansion and contraction across the three species."
@@ -889,6 +902,7 @@ fig_caption([
 # ════════════════════════════════════════════════════════════════════
 # Fig. S6
 # ════════════════════════════════════════════════════════════════════
+doc.add_page_break()
 fig_legend(
     "Fig. S6.",
     "Micro-CT cross-sectional and top-view panels of the mammillary layer in the three focal species."
@@ -912,6 +926,7 @@ fig_caption([
 # ════════════════════════════════════════════════════════════════════
 # Fig. S7
 # ════════════════════════════════════════════════════════════════════
+doc.add_page_break()
 fig_legend(
     "Fig. S7.",
     "Re-Glyco ensemble analysis of OVAL glycan geometry and apo-versus-glycosylated comparison."
@@ -950,6 +965,7 @@ fig_caption([
 # ════════════════════════════════════════════════════════════════════
 # Fig. S8
 # ════════════════════════════════════════════════════════════════════
+doc.add_page_break()
 fig_legend(
     "Fig. S8.",
     "Per-species finite-element reaction-force time courses across all nine offset positions."

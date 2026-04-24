@@ -54,6 +54,12 @@ def spacing(p, before=0, after=120, line=24):
     pPr.append(e)
 
 
+def keep_with_next(p):
+    pPr = p._p.get_or_add_pPr()
+    e = OxmlElement("w:keepNext")
+    pPr.append(e)
+
+
 def para(text, bold=False, italic=False, size=11, before=0, after=120,
          align=WD_ALIGN_PARAGRAPH.JUSTIFY):
     p = doc.add_paragraph()
@@ -68,6 +74,7 @@ def fig_title(label, title):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
     spacing(p, before=200, after=120)
+    keep_with_next(p)
     r_label = p.add_run(label + " ")
     fmt(r_label, bold=True)
     r_title = p.add_run(title)
@@ -108,7 +115,7 @@ para("补充材料", bold=True, size=14,
      before=0, after=240, align=WD_ALIGN_PARAGRAPH.CENTER)
 
 para(
-    "蛋壳基质糖蛋白组学揭示卵清蛋白上的物种特异性 N-糖链重塑如何导致三条鸟类谱系间分化的乳突层力学",
+    "基质蛋白糖链状态分化联系鸟类蛋壳结构与生物矿化",
     italic=False, size=11, before=0, after=360,
     align=WD_ALIGN_PARAGRAPH.CENTER,
 )
@@ -149,7 +156,7 @@ para("补充文本 2. 蛋壳基质蛋白组正交组分析。",
      bold=True, size=11, before=240, after=60, align=WD_ALIGN_PARAGRAPH.LEFT)
 
 fig_caption(
-    "Shotgun 蛋白质组学在 G. gallus、A. platyrhynchos 和 C. livia 中分别鉴定到 2,620、2,921 和 3,219 个蛋白正交组（图S2）。其中，1,997 个正交组为三物种共享，构成了保守的蛋壳基质蛋白核心。两两共享但并非三物种共同共享的正交组数量分别为 180（G. gallus–A. platyrhynchos）、434（G. gallus–C. livia）和 716（A. platyrhynchos–C. livia）。谱系限制性（物种特异）集合则分别包括鸡、鸭和鸽的 9、28 和 72 个正交组。"
+    "基于蛋白组学鉴定到的蛋壳基质蛋白，经 OrthoFinder 正交分析流程整理后，在 G. gallus、A. platyrhynchos 和 C. livia 中分别得到 2,620、2,921 和 3,219 个正交组（图S2）。该流程基于全对全蛋白相似性关系及图聚类来划分正交组。其中，1,997 个正交组为三物种共享，构成了保守的蛋壳基质蛋白核心。两两共享但并非三物种共同共享的正交组数量分别为 180（G. gallus–A. platyrhynchos）、434（G. gallus–C. livia）和 716（A. platyrhynchos–C. livia）。谱系限制性（物种特异）集合则分别包括鸡、鸭和鸽的 9、28 和 72 个正交组。"
 )
 
 fig_caption(
@@ -161,7 +168,7 @@ fig_caption(
 )
 
 fig_caption(
-    "基因家族扩张与收缩分析（CAFE5）进一步表明这种谱系分化具有明显不对称性：G. gallus 总体表现为净家族收缩，A. platyrhynchos 居中，而 C. livia 表现为净扩张（图S5）。鸡中收缩的家族富集于免疫相关功能；鸽中扩张的家族则富集于跨膜转运、Rho 信号和突触相关过程。总体而言，这些蛋白组层面的模式证实了三种蛋壳形成系统之间存在广泛的进化分化，同时也表明共享核心工具箱仍被保留，而 N-连接糖基化是鸡中的一种特异性扩展，这一观察使后续比较分析聚焦于修饰层面的糖链状态差异，而非蛋白是否存在本身。"
+    "基因家族扩张与收缩分析（CAFE5）结合正交组家族大小和物种分化时间树后，进一步表明这种谱系分化具有明显不对称性：G. gallus 总体表现为净家族收缩，A. platyrhynchos 居中，而 C. livia 表现为净扩张（图S5）。鸡中收缩的家族富集于免疫相关功能；鸽中扩张的家族则富集于跨膜转运、Rho 信号和突触相关过程。总体而言，这些蛋白组层面的模式证实了三种蛋壳形成系统之间存在广泛的进化分化，同时也表明共享核心工具箱仍被保留，而 N-连接糖基化是鸡中的一种特异性扩展，这一观察使后续比较分析聚焦于修饰层面的糖链状态差异，而非蛋白是否存在本身。"
 )
 
 doc.add_page_break()
@@ -176,32 +183,36 @@ fig_caption(
 
 
 # 图S2
+doc.add_page_break()
 fig_title("图S2.", "三物种共享与谱系限制性蛋壳基质正交组的 Venn 图。")
 add_image(FIG_BASE / "SuppFig2_Venn_Orthogroups" / "Fig_venn_orthogroups.png", width_cm=12.0)
 fig_caption(
-    "三种蛋壳基质蛋白组的 OrthoFinder 正交组分析。该图将检测到的正交组划分为一个大的三物种共享核心、三个两两共享区域以及三个谱系限制性区域。数字表示各区域中的正交组数量。这一划分构成了正文所述比较框架的基础。"
+    "三种蛋壳基质蛋白组的 OrthoFinder 正交组聚类结果。基于全对全蛋白相似性比较及图聚类，该图将检测到的正交组划分为一个大的三物种共享核心、三个两两共享区域以及三个谱系限制性区域。数字表示各区域中的正交组数量。这一划分构成了正文所述比较框架的基础。"
 )
 
 
 # 图S3
+doc.add_page_break()
 fig_title("图S3.", "基于单拷贝直系同源物重建的三个目标物种的最大似然系统发育树。")
 add_image(FIG_BASE / "SuppFig3_Phylo_Tree" / "Fig_phylo_tree.png", width_cm=14.0)
 fig_caption(
-    "系统发育树由 IQ-TREE 基于单拷贝直系同源蛋白序列拼接比对推断得到。分支长度表示每个位点的替换数；内部节点给出了支持度数值（ultrafast bootstrap，1000 次重复）。树拓扑与已发表的鸟类系统发育关系一致，并确认了预期的亲缘顺序，即鸡形目和雁形目在鸡雁类中互为姐妹群，而鸽形目为更远的外群；这一顺序用于构建正文中的比较分析框架。"
+    "该最大似然物种树基于正交分析流程返回的单拷贝直系同源集合重建。单拷贝直系同源蛋白序列经过比对后用于推断此处展示的物种关系。分支长度表示每个位点的替换数；内部节点给出了支持度数值（1000 次重复）。树拓扑与已发表的鸟类系统发育关系一致，并确认了预期的亲缘顺序，即鸡形目和雁形目在鸡雁类中互为姐妹群，而鸽形目为更远的外群；这一顺序用于构建正文中的比较分析框架。"
 )
 
 
 # 图S4
+doc.add_page_break()
 fig_title("图S4.", "物种特异与成对共享蛋壳基质蛋白集合的 GO 富集与基因家族周转。")
 add_image(FIG_BASE / "SuppFig4_GO_Enrichment" / "Fig_GO_heatmap_single_species.png", width_cm=15.5)
 add_image(FIG_BASE / "SuppFig4_GO_Enrichment" / "Fig_GO_bubble_pairwise_combined.png", width_cm=15.5)
 add_image(FIG_BASE / "SuppFig4_GO_Enrichment" / "Legend_GO_Category.png", width_cm=10.0)
 fig_caption(
-    "(A–C) 三个谱系限制性蛋白集合（G. gallus、A. platyrhynchos、C. livia）的生物过程（BP）和分子功能（MF）类别的 Gene Ontology（GO）富集热图。颜色强度表示 −log₁₀（校正后 p 值）；仅显示校正后 p < 0.05 的条目。(D–F) 三个两两共享区域（Gallus–Anas、Gallus–Columba、Anas–Columba）的 GO 气泡图，气泡面积与条目中的蛋白数量成正比，颜色表示统计显著性。G. gallus 特异集合显著富集于蛋白 N-连接糖基化（BP），这直接构成了跨物种糖蛋白组比较的动机。免疫和防御相关的 GO 条目在各谱系之间呈现差异化分布。GO 富集使用 R 包 clusterProfiler（v4.x）完成，p 值采用 Benjamini–Hochberg 方法校正。"
+    "(A–C) 三个谱系限制性蛋白集合（G. gallus、A. platyrhynchos、C. livia）的生物过程（BP）和分子功能（MF）类别的 Gene Ontology（GO）富集热图。颜色强度表示 −log₁₀（校正后 p 值）；仅显示校正后 p < 0.05 的条目。(D–F) 三个两两共享区域（Gallus–Anas、Gallus–Columba、Anas–Columba）的 GO 气泡图，气泡面积与条目中的蛋白数量成正比，颜色表示统计显著性。G. gallus 特异集合显著富集于蛋白 N-连接糖基化（BP），这直接构成了跨物种糖蛋白组比较的动机。免疫和防御相关的 GO 条目在各谱系之间呈现差异化分布。这里展示的是对谱系限制性和两两共享正交组区域的 GO 结果汇总。"
 )
 
 
 # 图S5
+doc.add_page_break()
 fig_title("图S5.", "三个物种的 CAFE5 基因家族扩张与收缩。")
 add_image(FIG_BASE / "SuppFig5_CAFE5_Gene_Family_Turnover" / "Fig_cafe5_expansion_contraction.png", width_cm=14.0)
 fig_caption(
@@ -210,6 +221,7 @@ fig_caption(
 
 
 # 图S6
+doc.add_page_break()
 fig_title("图S6.", "三个目标物种乳突层的 micro-CT 横截面与顶视图面板。")
 add_image(FIG_BASE / "SuppFig6_Mammilla_Microstructure" / "Fig_mammilla_microstructure_panels.png", width_cm=15.5)
 fig_caption(
@@ -218,6 +230,7 @@ fig_caption(
 
 
 # 图S7
+doc.add_page_break()
 fig_title("图S7.", "OVAL 糖链几何及 apo/糖基化对照的 Re-Glyco 系综分析。")
 add_image(FIG_BASE / "SuppFig7_Glycosylation_Hotspot" / "Fig_hotspot_ensemble_1.png", width_cm=15.5)
 fig_caption(
@@ -226,6 +239,7 @@ fig_caption(
 
 
 # 图S8
+doc.add_page_break()
 fig_title("图S8.", "各物种九个偏移位置的有限元反力时间历程。")
 add_images_row([
     FIG_BASE / "SuppFig8_FEA_Force_Analysis" / "chicken_rcforc_3x3.png",
