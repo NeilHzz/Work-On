@@ -415,32 +415,9 @@ fig_caption([
 doc.add_page_break()
 
 # ── Fig. S6 ───────────────────────────────────────────────────────────
-add_image(FIG_BASE / "SuppFig6_Mammilla_Microstructure" / "Fig_mammilla_microstructure_panels.png",
-          width_cm=15.5)
-fig_title("Fig. S6.",
-          "Micro-CT cross-sectional and top-view panels of the mammillary layer "
-          "in the three focal species.")
-fig_caption([
-    ("Representative micro-CT images of eggshell sections from ", False, False),
-    ("G. gallus", False, True),
-    (" (chicken), ", False, False),
-    ("A. platyrhynchos", False, True),
-    (" (duck), and ", False, False),
-    ("C. livia", False, True),
-    (" (pigeon). Top row: transverse cross-sections showing the full mammillary-layer "
-     "thickness. Bottom row: en face (inner-surface) reconstructions showing the "
-     "spatial arrangement of mammillary knobs. Scale bars are indicated in each panel. "
-     "Images were acquired at 10-µm isotropic voxel resolution. 3D reconstructions were "
-     "produced in 3D Slicer using threshold segmentation, 5 × 5 × 5 median filtering, "
-     "and largest-island retention.", False, False),
-])
-
-doc.add_page_break()
-
-# ── Fig. S7 ───────────────────────────────────────────────────────────
 add_image(FIG_BASE / "SuppFig7_Glycosylation_Hotspot" / "Fig_hotspot_ensemble_1.png",
           width_cm=15.5)
-fig_title("Fig. S7.",
+fig_title("Fig. S6.",
           "Re-Glyco ensemble analysis of OVAL glycan geometry and "
           "apo-versus-glycosylated comparison.")
 fig_caption([
@@ -474,7 +451,7 @@ fig_caption([
 
 doc.add_page_break()
 
-# ── Fig. S8 ───────────────────────────────────────────────────────────
+# ── Fig. S7 ───────────────────────────────────────────────────────────
 add_images_row([
     FIG_BASE / "SuppFig8_FEA_Force_Analysis" / "chicken_rcforc_3x3.png",
     FIG_BASE / "SuppFig8_FEA_Force_Analysis" / "chicken_rcforc_yforce.png",
@@ -487,7 +464,7 @@ add_images_row([
     FIG_BASE / "SuppFig8_FEA_Force_Analysis" / "pigeon_rcforc_3x3.png",
     FIG_BASE / "SuppFig8_FEA_Force_Analysis" / "pigeon_rcforc_yforce.png",
 ], width_cm=7.5)
-fig_title("Fig. S8.",
+fig_title("Fig. S7.",
           "Per-species finite-element reaction-force time courses across all nine "
           "offset positions.")
 fig_caption([
@@ -649,9 +626,8 @@ for line in [
     "Fig. S3.  Maximum-likelihood phylogenetic tree of the three focal species",
     "Fig. S4.  GO enrichment and gene-family turnover across species-specific and pairwise eggshell matrix protein sets",
     "Fig. S5.  CAFE5 gene-family expansion and contraction across the three species",
-    "Fig. S6.  Micro-CT cross-sectional and top-view panels of the mammillary layer",
-    "Fig. S7.  Re-Glyco ensemble analysis of OVAL glycan geometry and apo-versus-glycosylated comparison",
-    "Fig. S8.  Per-species finite-element reaction-force time courses across all nine offset positions",
+    "Fig. S6.  Re-Glyco ensemble analysis of OVAL glycan geometry and apo-versus-glycosylated comparison",
+    "Fig. S7.  Per-species finite-element reaction-force time courses across all nine offset positions",
 ]:
     para(line, bold=False, size=11, before=0, after=40, align=WD_ALIGN_PARAGRAPH.LEFT)
 
@@ -900,35 +876,12 @@ fig_caption([
 ])
 
 # ════════════════════════════════════════════════════════════════════
+# ════════════════════════════════════════════════════════════════════
 # Fig. S6
 # ════════════════════════════════════════════════════════════════════
 doc.add_page_break()
 fig_legend(
     "Fig. S6.",
-    "Micro-CT cross-sectional and top-view panels of the mammillary layer in the three focal species."
-)
-add_image(FIG_BASE / "SuppFig6_Mammilla_Microstructure" / "Fig_mammilla_microstructure_panels.png", width_cm=15.5)
-fig_caption([
-    ("Representative micro-CT images of eggshell sections from ", False, False),
-    ("G. gallus", False, True),
-    (" (chicken), ", False, False),
-    ("A. platyrhynchos", False, True),
-    (" (duck), and ", False, False),
-    ("C. livia", False, True),
-    (" (pigeon). Top row: cross-sectional views showing the full thickness of the "
-     "mammillary layer. Bottom row: top-view (inner-surface) reconstructions showing the "
-     "spatial arrangement of mammillary knobs. Scale bars are indicated in each panel. "
-     "Images were acquired at 10-µm isotropic voxel resolution; 3D reconstruction was "
-     "performed in 3D Slicer with threshold segmentation, median filtering (5 × 5 × 5 "
-     "kernel), and largest-island retention.", False, False),
-])
-
-# ════════════════════════════════════════════════════════════════════
-# Fig. S7
-# ════════════════════════════════════════════════════════════════════
-doc.add_page_break()
-fig_legend(
-    "Fig. S7.",
     "Re-Glyco ensemble analysis of OVAL glycan geometry and apo-versus-glycosylated comparison."
 )
 add_image(FIG_BASE / "SuppFig7_Glycosylation_Hotspot" / "Fig_hotspot_ensemble_1.png", width_cm=15.5)
@@ -963,11 +916,11 @@ fig_caption([
 ])
 
 # ════════════════════════════════════════════════════════════════════
-# Fig. S8
+# Fig. S7
 # ════════════════════════════════════════════════════════════════════
 doc.add_page_break()
 fig_legend(
-    "Fig. S8.",
+    "Fig. S7.",
     "Per-species finite-element reaction-force time courses across all nine offset positions."
 )
 add_images_row([
