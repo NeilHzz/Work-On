@@ -12,7 +12,7 @@ from pathlib import Path
 import re
 from shared_references import REFS
 
-OUT = str(Path(__file__).with_name("manuscript260424v1.docx"))
+OUT = str(Path(__file__).with_name("manuscript260424v2.docx"))
 FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
 
 REF_TEXTS = {}
@@ -199,18 +199,12 @@ para(
 para("Glycan states link eggshell biomineralization",
      bold=False, size=11, after=60, align=WD_ALIGN_PARAGRAPH.LEFT)
 
-# Authors & Affiliations (placeholder)
-para(
-    "[Insert full author names, affiliations, ORCID IDs, equal-contribution notes, and corresponding author information before submission.]",
-    bold=False, size=10, before=80, after=80, align=WD_ALIGN_PARAGRAPH.LEFT
-)
-
 para("Abstract", bold=True, size=11, before=80, after=40,
      align=WD_ALIGN_PARAGRAPH.LEFT)
 
 para(
     "Comparative biomineralization studies often reveal lineage differences but less often identify the molecular layer most proximate to ordered phenotype. "
-    "Here, integrating micro-CT morphometry, eggshell-matrix proteomics, glycopeptide mass spectrometry, structural ensemble modeling, and finite-element simulation across chicken, duck, and pigeon, we found that a hatching-relevant local contact shear-stress readout under simulated chick escape loading recapitulated the mammillary hierarchy, separating chicken from duck and pigeon. "
+    "Here, integrating micro-CT morphometry, eggshell-matrix proteomics, glycopeptide mass spectrometry, structural ensemble modeling, and finite-element simulation across chicken, duck, and pigeon, we found that local hatching resistance under simulated chick escape loading recapitulated the mammillary hierarchy, separating chicken from duck and pigeon. "
     "Comparative glycoproteomics then identified a species-ordered shift in matrix-protein glycan states, most clearly on ovalbumin, from high-mannose in chicken to neutral complex-hybrid in duck and sialylated complex-hybrid in pigeon. "
     "Re-Glyco and electrostatic analyses linked this shift to progressively reduced Ca²⁺-accessible surface exposure, matching the ordering in mineralization mode and mechanics. "
     "These results identify matrix-protein glycan-state divergence as a mechanistically informative layer linking comparative molecular divergence to avian eggshell structure, biomineralization, and function.",
@@ -219,7 +213,7 @@ para(
 
 # Teaser (≤125 characters, one sentence for non-specialist readers)
 para(
-    "Teaser: Matrix-protein glycan-state divergence links avian eggshell biomineralization to a hatching-relevant local contact-stress readout.",
+    "Teaser: Matrix-protein glycan-state divergence links avian eggshell biomineralization to local hatching resistance.",
     bold=False, italic=True, size=10, before=80, after=160, align=WD_ALIGN_PARAGRAPH.LEFT
 )
 
@@ -279,8 +273,8 @@ p_intro4 = smixed([
             ("Anas platyrhynchos", False, True),
             (", and ", False, False),
             ("Columba livia", False, True),
-            (" \u2014 representing, respectively, a terrestrial precocial model, an aquatic-associated precocial model, and a terrestrial altricial model \u2014 to test whether matrix-protein glycan-state divergence can connect the ordered eggshell phenotype to a more immediate biophysical layer: Ca²⁺ accessibility and local contact-stress readout.", False, False)], [3, 22, 24, 25]),
-        ([(" In the present data, that glycan-state ordering ultimately resolves most clearly on OVAL, where species-specific N-glycan class composition aligns with computed Ca²⁺ accessibility, mammillary density, and the simulated local contact-stress readout.", False, False)], [11, 12, 16]),
+            (" \u2014 representing, respectively, a terrestrial precocial model, an aquatic-associated precocial model, and a terrestrial altricial model \u2014 to test whether matrix-protein glycan-state divergence can connect the ordered eggshell phenotype to a more immediate biophysical layer: Ca²⁺ accessibility and local hatching resistance.", False, False)], [3, 22, 24, 25]),
+        ([(" In the present data, that glycan-state ordering ultimately resolves most clearly on OVAL, where species-specific N-glycan class composition aligns with computed Ca²⁺ accessibility, mammillary density, and simulated local hatching resistance.", False, False)], [11, 12, 16]),
         ([(" These findings provide mechanistic insight into how N-glycan-state divergence in eggshell matrix proteins shapes ordered avian eggshell biomineralization and establish a glycosylation-centered comparative framework for linking matrix chemistry to structure and hatching-relevant function, thereby offering a new perspective for understanding biomineralization.", False, False)], [4, 11, 12, 16, 42]),
 ])
 
@@ -446,7 +440,7 @@ doc.add_page_break()
 head("Local mechanics preserves the ordered biomineralization signal")
 
 p_s4a = mixed([
-    ("The glycoproteomic, structural-ensemble, and electrostatic results together indicated that glycan-dependent matrix chemistry can reshape mammillary-layer mineralization mode. The remaining question was whether those mammillary differences translated into a biologically relevant functional consequence. Because the three model species span precocial versus altricial as well as terrestrial versus semi-aquatic comparison axes, the hatching scenario in which the egg tooth locally presses the shell from the inner side was simulated next. Previous studies have effectively measured whole-eggshell strength under outside loading, but the relevant readout here was the local response of the mammillary interface during escape, and a different loading logic was therefore adopted. Figure 5A summarizes the hatching-relevant loading background, whereas Fig. 5B-D show species-specific egg-tooth geometry together with the corresponding micro-CT-derived finite-element setups. This distinction matters because the biological question here is not generalized shell strength, but whether local resistance at the mammillary contact interface remains aligned with the molecular and structural ordering recovered above. Using a conical indenter to approximate the egg tooth, impact loading was applied to circular eggshell fragments (model diameter D = 2.0 mm) at nine parameterized lateral-offset positions on a 3 × 3 grid (0.5 mm spacing), yielding n = 9 independent contact shear-stress time courses per species. To minimize the influence of sampling-model size, gross geometry, and especially eggshell thickness, not only raw peak contact force (F_max) but also peak contact shear stress (τ_max) was recorded, a metric that falls more directly on the local contact interface and therefore more closely approximates the intrinsic resistance of the mammillary-interface material. Peak τ_max was extracted directly from the finite-element output at each offset position and species means ± s.d. were then calculated across the nine positions (Fig. S8A-F; eggshell thicknesses: ", False, False),
+    ("The glycoproteomic, structural-ensemble, and electrostatic results together indicated that glycan-dependent matrix chemistry can reshape mammillary-layer mineralization mode. The remaining question was whether those mammillary differences translated into a biologically relevant functional consequence. Because the three model species span precocial versus altricial as well as terrestrial versus semi-aquatic comparison axes, the hatching scenario in which the egg tooth locally presses the shell from the inner side was simulated next. Previous studies have effectively measured whole-eggshell strength under outside loading, but the relevant readout here was the local response of the mammillary interface during escape, and a different loading logic was therefore adopted. Figure 5A summarizes the hatching-relevant loading background, whereas Fig. 5B-D show species-specific egg-tooth geometry together with the corresponding micro-CT-derived finite-element setups. This distinction matters because the biological question here is not generalized shell strength, but whether local resistance at the mammillary contact interface remains aligned with the molecular and structural ordering recovered above. Using a conical indenter to approximate the egg tooth, impact loading was applied to circular eggshell fragments (model diameter D = 2.0 mm) at nine parameterized lateral-offset positions on a 3 × 3 grid (0.5 mm spacing), yielding n = 9 independent contact shear-stress time courses per species. To minimize the influence of sampling-model size, gross geometry, and especially eggshell thickness, both raw peak contact force (F_max) and peak contact shear stress (τ_max) were recorded. Here, τ_max is used as a metric of local hatching resistance and, because it is evaluated at the mammillary contact interface, as an operational readout of mammillary-interface resistance during hatching. Peak τ_max was extracted directly from the finite-element output at each offset position and species means ± s.d. were then calculated across the nine positions (Fig. S8A-F; eggshell thicknesses: ", False, False),
     ("G. gallus", False, True),
     (" 0.29 mm, ", False, False),
     ("A. platyrhynchos", False, True),
@@ -493,7 +487,7 @@ mixed([
 mixed([
     ("The divergence between F_max and τ_max rankings showed that duck's higher raw contact force was driven mainly by its greater shell thickness (0.35 mm versus 0.19 mm in pigeon), rather than by superior unit-area material resistance. By contrast, ", False, False),
     ("G. gallus", False, True),
-    (" exhibited a 36-40% increase in τ_max relative to the two non-precocial species, indicating an intrinsic contact-interface property independent of shell thickness. The τ_max grouping, with ", False, False),
+    (" exhibited a 36-40% increase in τ_max relative to the two non-precocial species, indicating higher local hatching resistance independent of shell thickness. The τ_max grouping, with ", False, False),
     ("G. gallus", False, True),
     (" alone in the high group and ", False, False),
     ("A. platyrhynchos", False, True),
@@ -503,15 +497,15 @@ mixed([
 ])
 
 mixed([
-    ("Whole-shell fracture force alone could make duck appear mechanically superior to chicken because of its greater shell thickness, despite the absence of the same high-density mammillary state. By focusing on the local contact response preserved at the micro-CT-derived mammillary interface, τ_max removes that ambiguity and recovers the structural ordering predicted from glycoproteomics and Re-Glyco modeling.", False, False),
+    ("Whole-shell fracture force alone could make duck appear mechanically superior to chicken because of its greater shell thickness, despite the absence of the same high-density mammillary state. By focusing on local hatching resistance at the micro-CT-derived mammillary interface, τ_max removes that ambiguity and recovers the structural ordering predicted from glycoproteomics and Re-Glyco modeling.", False, False),
 ])
 
 mixed([
-    ("The mechanical analysis therefore asks whether the same ordering inferred from glycan class, OVAL surface accessibility, and mammillary microstructure remains visible under hatching-relevant loading. Not every coarse-grained mechanical metric reproduced that molecular signal, but the metric most directly tied to the local mammillary contact interface did. Structural information was therefore retained specifically at the level of local contact resistance.", False, False),
+    ("The mechanical analysis therefore asks whether the same ordering inferred from glycan class, OVAL surface accessibility, and mammillary microstructure remains visible under hatching-relevant loading. Not every coarse-grained mechanical metric reproduced that molecular signal, but the metric most directly tied to the local mammillary contact interface did. Structural information was therefore retained specifically at the level of local hatching resistance.", False, False),
 ])
 
 mixed([
-    ("The finite-element analysis therefore does more than add a general mechanical description: it tests whether the ordering inferred from glycoproteomics and structural modeling remains valid when the eggshell is treated as a hatching-relevant mechanical system. Preservation of the chicken-high versus duck/pigeon-lower grouping at the τ_max level shows that this ordering is indeed retained through to the functional endpoint of local contact resistance.", False, False),
+    ("The finite-element analysis therefore does more than add a general mechanical description: it tests whether the ordering inferred from glycoproteomics and structural modeling remains valid when the eggshell is treated as a hatching-relevant mechanical system. Preservation of the chicken-high versus duck/pigeon-lower grouping at the τ_max level shows that this ordering is indeed retained through to the functional endpoint of local hatching resistance.", False, False),
 ])
 
 mixed([
@@ -521,12 +515,12 @@ mixed([
     ("A. platyrhynchos", False, True),
     (" and ", False, False),
     ("C. livia", False, True),
-    (" clustered together at lower values. That grouping reproduced the mammilla-density hierarchy from micro-CT and provided the functional endpoint of the preceding molecular-to-structural argument: the glycosylation-associated differences identified above are not only compatible with altered mammillary organization, but are propagated into a simulated hatching-relevant mechanical consequence across the three model species.", False, False),
+    (" clustered together at lower values. That grouping reproduced the mammilla-density hierarchy from micro-CT and provided the functional endpoint of the preceding molecular-to-structural argument: the glycosylation-associated differences identified above are not only compatible with altered mammillary organization, but are propagated into a simulated difference in local hatching resistance across the three model species.", False, False),
 ])
 add_centered_figure("Fig6.jpg", width_cm=15.5)
 add_main_figure_legend(
     "Fig. 6.",
-    "Hatching-relevant force and shear-stress readouts across species.",
+    "Force and local hatching resistance across species.",
     [
         ("(A) Mean contact-force time courses across nine impact positions for ", False, False),
         ("Gallus", False, True),
@@ -534,7 +528,7 @@ add_main_figure_legend(
         ("Anas", False, True),
         (", and ", False, False),
         ("Columba", False, True),
-        (", shown with shaded ±1σ envelopes, together with boxplots of peak contact force (Fmax). (B) Mean contact shear-stress time courses for the same nine positions together with boxplots of peak shear stress (τmax). Symbols on the curves mark the species mean peak value; points in the boxplots denote individual impact positions (n = 9 per species). P values from one-way ANOVA are shown above the boxplots, and different letters indicate Duncan's multiple range test groupings. Fmax preserves a three-level hierarchy, whereas τmax separates chicken from the lower-τmax duck and pigeon group, indicating that the localized mammillary-interface readout most closely tracks the structural ordering inferred from morphology and OVAL accessibility.", False, False),
+        (", shown with shaded ±1σ envelopes, together with boxplots of peak contact force (Fmax). (B) Mean contact shear-stress time courses for the same nine positions together with boxplots of peak shear stress (τmax). Symbols on the curves mark the species mean peak value; points in the boxplots denote individual impact positions (n = 9 per species). P values from one-way ANOVA are shown above the boxplots, and different letters indicate Duncan's multiple range test groupings. Fmax preserves a three-level hierarchy, whereas τmax separates chicken from the lower-τmax duck and pigeon group, indicating that local hatching resistance at the mammillary interface most closely tracks the structural ordering inferred from morphology and OVAL accessibility.", False, False),
     ],
 )
 
@@ -547,7 +541,7 @@ para("Discussion", bold=True, size=14, before=320, after=160,
     align=WD_ALIGN_PARAGRAPH.LEFT)
 
 p_disc_mam1 = smixed([
-    ([('Across chicken, duck, and pigeon, ecological divergence and developmental strategy correspond to distinct eggshell-building programs. Within that comparative frame, mammillary-layer mineralization mode, OVAL glycan class, computed Ca²⁺ accessibility, and the simulated local contact-stress readout converge on the same axis. ', False, False),
+    ([('Across chicken, duck, and pigeon, ecological divergence and developmental strategy correspond to distinct eggshell-building programs. Within that comparative frame, mammillary-layer mineralization mode, OVAL glycan class, computed Ca²⁺ accessibility, and simulated local hatching resistance converge on the same axis. ', False, False),
             ("G. gallus", False, True),
             (" defines a high-density, high-resistance state; ", False, False),
             ("A. platyrhynchos", False, True),
@@ -601,8 +595,8 @@ p_disc_discriminate = spara([
 p_disc_mech = spara([
     ("The mechanical analysis extends the same pattern to an organism-level functional context.", [16, 17, 38]),
     (" τ_max rather than raw fracture force tracks the mammillary hierarchy.", [16, 17, 34, 35, 37, 38]),
-    (" Absolute failure load remains sensitive to eggshell thickness and whole-eggshell geometry, whereas τ_max more directly isolates localized resistance under hatching-relevant shear at the contact site.", [16, 17, 34, 35, 37, 38]),
-    (" The convergence of duck and pigeon in τ_max despite their different overall mammillary geometries suggests that once the high-density chicken state is lost, downstream shape variation alone does not restore the same local resistance. This extends the molecular-to-structural signal into a functional readout rather than leaving it as a descriptive correlation.", [1, 2, 16, 17, 38]),
+    (" Absolute failure load remains sensitive to eggshell thickness and whole-eggshell geometry, whereas τ_max provides a more direct readout of local hatching resistance at the mammillary interface under hatching-relevant loading.", [16, 17, 34, 35, 37, 38]),
+    (" The convergence of duck and pigeon in τ_max despite their different overall mammillary geometries suggests that once the high-density chicken state is lost, downstream shape variation alone does not restore the same mammillary-interface resistance. This extends the molecular-to-structural signal into a functional readout rather than leaving it as a descriptive correlation.", [1, 2, 16, 17, 38]),
 ])
 
 p_disc_evo = para(
@@ -630,7 +624,7 @@ p_disc_future = para(
 cite(p_disc_future, [4, 11, 12, 20, 21, 42, 49, 50, 51, 52, 57, 70, 76])
 
 p_disc_close = para(
-    "Taken together, these results identify a chemically specific post-translational feature that organizes an otherwise heterogeneous comparative landscape. Comparative ecology and development separate chicken, duck, and pigeon as distinct life-history states; micro-CT resolves a corresponding hierarchy in mammillary-layer organization; glycoproteomics narrows the shared candidate space to OVAL, with OC116, TRFE, and lineage-restricted OC17 providing informative contrasts; structural ensemble modeling and electrostatics show that OVAL glycan state reorders Ca²⁺-relevant accessibility from the high-accessibility chicken state through duck to the more shielded pigeon state; and finite-element analysis shows that this molecular-to-structural ordering persists in a hatching-relevant mechanical readout. Chicken therefore represents a high-density, high-accessibility, high-resistance endpoint, duck an intermediate and partially compensated state, and pigeon a lower-accessibility, lower-resistance endpoint. Other matrix features may also contribute, but the chemically specific surface state of an abundant matrix protein remains the most experimentally tractable explanatory layer in the present dataset."
+    "Taken together, these results identify a chemically specific post-translational feature that organizes an otherwise heterogeneous comparative landscape. Comparative ecology and development separate chicken, duck, and pigeon as distinct life-history states; micro-CT resolves a corresponding hierarchy in mammillary-layer organization; glycoproteomics narrows the shared candidate space to OVAL, with OC116, TRFE, and lineage-restricted OC17 providing informative contrasts; structural ensemble modeling and electrostatics show that OVAL glycan state reorders Ca²⁺-relevant accessibility from the high-accessibility chicken state through duck to the more shielded pigeon state; and finite-element analysis shows that this molecular-to-structural ordering persists in local hatching resistance. Chicken therefore represents a high-density, high-accessibility, high-resistance endpoint, duck an intermediate and partially compensated state, and pigeon a lower-accessibility, lower-resistance endpoint. Other matrix features may also contribute, but the chemically specific surface state of an abundant matrix protein remains the most experimentally tractable explanatory layer in the present dataset."
 )
 
 cite(p_disc_close, [6, 7, 18, 20, 21, 42, 44, 45, 46, 49, 50, 72, 78, 80])
@@ -939,23 +933,6 @@ for source_number in CITATION_ORDER:
     r_ref.font.size = Pt(9)
     rPr = r_ref._r.get_or_add_rPr()
     _set_font(rPr, FONT)
-
-# ─────────────────────────────────────────────────────────────────────────
-# Acknowledgments
-# ─────────────────────────────────────────────────────────────────────────
-para("Acknowledgments", bold=True, size=14, before=320, after=160,
-     align=WD_ALIGN_PARAGRAPH.LEFT)
-
-para(
-    "Funding: [Insert all funding sources; if none, replace with 'The authors acknowledge that they received no funding in support for this research.']. "
-    "Author contributions: [Insert each author's contributions using author initials and CRediT-style roles]. "
-    "Competing interests: The authors declare that they have no competing interests. "
-    "Data and materials availability: All data needed to evaluate the conclusions in the paper are "
-    "present in the paper and/or the Supplementary Materials. "
-    "Raw mass spectrometry data and proteomics search results have been deposited in a "
-    "public repository [accession number to be inserted before submission].",
-    bold=False, size=11, before=0, after=120
-)
 
 doc.save(OUT)
 print(f"[OK]  {OUT}")
