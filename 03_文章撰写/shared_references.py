@@ -80,4 +80,8 @@ REFS = [
     "79. K. T. H. Nguyen, Y. Ba, Mitigating Mucoadhesion of β–Cyclodextrins via PEGylation: Insights from 19F Diffusion NMR Analysis. International Journal of Molecular Sciences 26, 11690 (2025).",
     "80. R. Ojha, V. K. Prajapati, Cognizance of posttranslational modifications in vaccines: A way to enhanced immunogenicity. Journal of Cellular Physiology 236, 8020-8034 (2021).",
     "81. Y. Xia, Z. Ma, M. Qiu, B. Guo, Q. Zhang, H. Jiang, B. Zhang, Y. Lin, M. Xuan, L. Sun, H. Shu, J. Xiao, W. Ye, Y. Wang, Y. Wang, S. Dong, B. M. Tyler, Y. Wang, N-glycosylation shields Phytophthora sojae apoplastic effector PsXEG1 from a specific host aspartic protease. Proceedings of the National Academy of Sciences 117, 27685-27693 (2020).",
+    "82. T. Davit-Béal, A. S. Tucker, J.-Y. Sire, Loss of teeth and enamel in tetrapods: fossil record, genetic data and morphological adaptations. Journal of Anatomy 214, 477-501 (2009).",
+    "83. J. C. Fenelon, A. Bennetts, N. Anthwal, et al., Getting out of a mammalian egg: the egg tooth and caruncle of the echidna. Developmental Biology 493 (2023).",
+    "84. R. A. García, An 'egg-tooth'-like structure in titanosaurian sauropod embryos. Journal of Vertebrate Paleontology 27, 247-252 (2007).",
+    "85. M. Hermyt, B. Metscher, W. Rupik, Do all geckos hatch in the same way? Histological and 3D studies of egg tooth morphogenesis in the geckos Eublepharis macularius and Lepidodactylus lugubris. Journal of Morphology 281 (2020).",
 ]
