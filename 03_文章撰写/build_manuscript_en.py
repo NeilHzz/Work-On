@@ -191,30 +191,30 @@ def add_main_figure_legend(label, title, caption_parts, before=0, after=160):
 
 # Title (≤135 characters)
 para(
-    "Glycan-state divergence in matrix proteins links to avian eggshell structure and biomineralization",
+    "Glycan-state divergence in matrix proteins links avian eggshell biomineralization to local hatching function",
     bold=True, size=14, before=0, after=160, align=WD_ALIGN_PARAGRAPH.LEFT
 )
 
 # Short title (≤50 characters)
-para("Glycan states tune avian eggshell mineralization",
+para("Glycan states link mineralization and hatching",
      bold=False, size=11, after=60, align=WD_ALIGN_PARAGRAPH.LEFT)
 
 para("Abstract", bold=True, size=11, before=80, after=40,
      align=WD_ALIGN_PARAGRAPH.LEFT)
 
 para(
-    "Across oviparous amniotes, hatching relies on specialized shell-breaking structures that differ in form but converge mechanically on a localized hatching interface. "
-    "In birds, the egg tooth creates that interface from inside the shell, providing a tractable system for testing how ordered eggshell phenotypes emerge. "
-    "Integrating micro-CT morphometry, eggshell-matrix proteomics, glycopeptide mass spectrometry, structural ensemble modeling, and finite-element simulation across chicken, duck, and pigeon, we found that simulated local hatching resistance separated chicken from duck and pigeon, matching the mammillary pattern. "
-    "Comparative glycoproteomics then identified a species-ordered shift in matrix-protein glycan states, most clearly on ovalbumin, from high-mannose in chicken to neutral complex-hybrid in duck and sialylated complex-hybrid in pigeon. "
-    "Re-Glyco and electrostatic analyses linked this shift to progressively reduced Ca²⁺-accessible surface exposure, consistent with the broader structural and mechanical pattern. "
-    "Taken together, these results identify matrix-protein glycan-state divergence as a chemically specific comparative layer linking molecular divergence to avian eggshell structure, mineralization, and local function.",
+    "Across oviparous amniotes, shell-breaking structures vary in form but converge mechanically on a localized hatching interface; in birds, the egg tooth defines that interface from inside the shell. "
+    "Comparative biomineralization studies often reveal lineage differences more readily than the chemically specific layer most proximate to ordered phenotype. "
+    "Here, integrating micro-CT morphometry, eggshell-matrix proteomics, glycopeptide mass spectrometry, structural ensemble modeling, and finite-element simulation across chicken, duck, and pigeon, we found that local hatching resistance under simulated egg-tooth loading recapitulated the mammillary hierarchy, separating chicken from duck and pigeon. "
+    "Comparative glycoproteomics identified a species-ordered shift in matrix-protein glycan states, most clearly on ovalbumin, from high-mannose in chicken to neutral complex-hybrid in duck and sialylated complex-hybrid in pigeon. "
+    "Re-Glyco and electrostatic analyses linked this shift to progressively reduced Ca²⁺-accessible surface exposure, consistent with the broader ordering in mineralization mode and local mechanics. "
+    "Together, these results identify matrix-protein glycan-state divergence as a chemically specific comparative layer linking molecular divergence to avian eggshell structure, biomineralization, and local hatching function.",
     bold=False, size=10, before=0, after=80, align=WD_ALIGN_PARAGRAPH.JUSTIFY
 )
 
 # Teaser (≤125 characters, one sentence for non-specialist readers)
 para(
-    "Teaser: A shared egg-tooth interface reveals how eggshell glycosylation aligns with local hatching resistance.",
+    "Teaser: Egg-tooth loading links eggshell glycosylation to local hatching resistance.",
     bold=False, italic=True, size=10, before=80, after=160, align=WD_ALIGN_PARAGRAPH.LEFT
 )
 
