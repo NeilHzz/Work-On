@@ -84,4 +84,5 @@ REFS = [
     "83. J. C. Fenelon, A. Bennetts, N. Anthwal, et al., Getting out of a mammalian egg: the egg tooth and caruncle of the echidna. Developmental Biology 493 (2023).",
     "84. R. A. García, An 'egg-tooth'-like structure in titanosaurian sauropod embryos. Journal of Vertebrate Paleontology 27, 247-252 (2007).",
     "85. M. Hermyt, B. Metscher, W. Rupik, Do all geckos hatch in the same way? Histological and 3D studies of egg tooth morphogenesis in the geckos Eublepharis macularius and Lepidodactylus lugubris. Journal of Morphology 281 (2020).",
+    "86. G. A. Clark, Jr., Occurrence and Timing of Egg Teeth in Birds. Wilson Bulletin 73, 268-278 (1961).",
 ]
