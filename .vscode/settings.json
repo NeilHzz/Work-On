@@ -1,0 +1,8 @@
+{
+  "gitdoc.enabled": true,
+  "gitdoc.autoPush": "afterDelay",
+  "gitdoc.autoPull": "afterDelay",
+  "gitdoc.autoPullDelay": 30000,
+  "gitdoc.commitMessageFormat": "Auto-sync: {{date}}",
+  "gitdoc.filePattern": "**/*"
+}

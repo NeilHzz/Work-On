@@ -1,0 +1,14 @@
+{
+  "servers": {
+    "zotero": {
+      "type": "stdio",
+      "command": "C:\\Users\\Admin\\.local\\bin\\uvx.exe",
+      "args": ["--upgrade", "zotero-mcp"],
+      "env": {
+        "ZOTERO_LOCAL": "true",
+        "ZOTERO_API_KEY": "",
+        "ZOTERO_LIBRARY_ID": ""
+      }
+    }
+  }
+}
