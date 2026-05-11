@@ -1,0 +1,17 @@
+#!/bin/sh
+# 自动追加更新日志到 log.txt
+# 如果本次提交只修改了 log.txt，跳过（防止无限循环）
+
+REPO_ROOT=$(git rev-parse --show-toplevel)
+LOG_FILE="$REPO_ROOT/log.txt"
+
+CHANGED=$(git diff-tree --no-commit-id -r --name-only HEAD)
+if [ "$CHANGED" = "log.txt" ]; then
+    exit 0
+fi
+
+DATE=$(git log -1 --pretty="%ad" --date=format:"%Y-%m-%d")
+HASH=$(git log -1 --pretty="%h")
+MSG=$(git log -1 --pretty="%s")
+
+echo "$DATE  $HASH  $MSG" >> "$LOG_FILE"
