@@ -15,6 +15,12 @@
 7. `%APPDATA%\Code\User\chatLanguageModels.json`
 8. `%APPDATA%\Code\User\prompts`，如果这个目录存在
 
+另外，脚本在每次同步后还会把 transcript 自动整理成可读 Markdown：
+
+1. 每个聊天一个 md 文件
+2. 按日期存到 `vscode-copilot-sync/chat-markdown/<WorkspaceName>/YYYY-MM-DD/`
+3. 每天自动生成一个 `README.md` 索引
+
 ## 重要限制
 
 1. 这不是官方保证兼容的同步接口，因为 Copilot Chat 的本地存储格式未来可能变化。

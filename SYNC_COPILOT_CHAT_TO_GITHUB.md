@@ -19,6 +19,17 @@
 
 1. `vscode-copilot-sync/workspaces/...`
 2. `vscode-copilot-sync/user/...`
+3. `vscode-copilot-sync/chat-markdown/...`
+
+## 按天整理的 Markdown 聊天归档
+
+现在每次同步还会额外生成一套可读版本：
+
+1. 每个聊天会单独导出成一个 Markdown 文件。
+2. 文件会按日期整理到 `vscode-copilot-sync/chat-markdown/<WorkspaceName>/YYYY-MM-DD/`。
+3. 每天目录里还会生成一个 `README.md`，列出当天所有聊天，方便另一台工作站直接阅读并继续接着聊。
+
+这样另一台机器不需要去看原始 `jsonl`，只要打开这些 md 就能快速理解之前聊了什么。
 
 ## 一次性准备
 

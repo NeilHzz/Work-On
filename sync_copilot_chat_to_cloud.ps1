@@ -21,6 +21,27 @@ function Write-Step {
     Write-Host "[sync] $Message"
 }
 
+function Get-PythonInvocation {
+    param([string]$ScriptRoot)
+
+    $venvPython = Join-Path $ScriptRoot ".venv\Scripts\python.exe"
+    if (Test-Path -LiteralPath $venvPython) {
+        return @($venvPython)
+    }
+
+    $pythonCommand = Get-Command python.exe -ErrorAction SilentlyContinue
+    if ($pythonCommand) {
+        return @($pythonCommand.Source)
+    }
+
+    $pyLauncher = Get-Command py.exe -ErrorAction SilentlyContinue
+    if ($pyLauncher) {
+        return @($pyLauncher.Source, "-3")
+    }
+
+    throw "No Python interpreter was found. Install Python or create .venv before running this sync script."
+}
+
 function Ensure-Directory {
     param([string]$Path)
     if (-not (Test-Path -LiteralPath $Path)) {
@@ -301,6 +322,9 @@ $cloudRootResolved = [System.IO.Path]::GetFullPath($CloudRoot)
 $cloudBase = Join-Path $cloudRootResolved "vscode-copilot-sync"
 $cloudWorkspace = Join-Path $cloudBase (Join-Path "workspaces" $workspaceKey)
 $cloudUser = Join-Path $cloudBase "user"
+$markdownExportRoot = Join-Path $cloudBase (Join-Path "chat-markdown" $workspaceKey)
+$chatMarkdownScript = Join-Path $PSScriptRoot "export_copilot_chat_to_markdown.py"
+[string[]]$pythonInvocation = @(Get-PythonInvocation -ScriptRoot $PSScriptRoot)
 
 Ensure-Directory -Path $cloudWorkspace
 Ensure-Directory -Path $cloudUser
@@ -344,6 +368,24 @@ Write-Step "Close VS Code before syncing to avoid active session database writes
 
 foreach ($pair in $pairs) {
     Invoke-SyncPair -LocalPath $pair.Local -CloudPath $pair.Cloud -Kind $pair.Kind -Mode $Mode
+}
+
+$cloudTranscriptRoot = Join-Path $cloudWorkspace "workspaceStorage\GitHub.copilot-chat\transcripts"
+if (Test-Path -LiteralPath $chatMarkdownScript) {
+    Ensure-Directory -Path $markdownExportRoot
+    Write-Step "export chat transcripts to daily markdown: $markdownExportRoot"
+    $pythonExecutable = $pythonInvocation[0]
+    $pythonArguments = @()
+    if ($pythonInvocation.Count -gt 1) {
+        $pythonArguments = $pythonInvocation[1..($pythonInvocation.Count - 1)]
+    }
+    & $pythonExecutable @pythonArguments $chatMarkdownScript --transcripts-dir $cloudTranscriptRoot --output-dir $markdownExportRoot --workspace-name $workspaceKey --machine $env:COMPUTERNAME
+    if ($LASTEXITCODE -ne 0) {
+        throw "Markdown export script failed with exit code $LASTEXITCODE"
+    }
+}
+else {
+    Write-Step "skip markdown export because script was not found: $chatMarkdownScript"
 }
 
 if ($Mode -eq "pull") {
