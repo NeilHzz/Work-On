@@ -50,6 +50,53 @@
 \sync_copilot_chat_to_cloud.ps1 -CloudRoot "D:\Cloud\VSCodeState" -WorkspacePath "E:\Projects\Work On" -WorkspaceName "Work_On" -Mode pull
 ```
 
+## 自动模式
+
+主脚本现在支持 `auto` 模式。
+
+它的行为是：
+
+1. 每个同步项单独判断本地和云端哪一侧更新时间更晚。
+2. 如果只有一侧存在，就从存在的一侧补到另一侧。
+3. 如果两侧都存在，就按较新的那一侧作为本次主方向。
+4. 目录同步时会尽量保留目标端中更新的文件，不会因为一次方向判断就粗暴覆盖整个目录。
+
+手动执行自动模式：
+
+```powershell
+.\sync_copilot_chat_to_cloud.ps1 -CloudRoot "D:\Cloud\VSCodeState" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On" -Mode auto
+```
+
+## 每天零点后自动更新
+
+如果你想按“天”为单位更新，并在零点后自动执行，可以注册一个 Windows 计划任务。默认时间是每天 `00:05`。
+
+先预览任务内容：
+
+```powershell
+.\register_daily_copilot_chat_sync_task.ps1 -CloudRoot "D:\Cloud\VSCodeState" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On" -PreviewOnly
+```
+
+正式注册计划任务：
+
+```powershell
+.\register_daily_copilot_chat_sync_task.ps1 -CloudRoot "D:\Cloud\VSCodeState" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On"
+```
+
+如果你想把时间改成零点后 10 分钟：
+
+```powershell
+.\register_daily_copilot_chat_sync_task.ps1 -CloudRoot "D:\Cloud\VSCodeState" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On" -DailyTime "00:10"
+```
+
+计划任务实际调用的是：
+
+```powershell
+.\sync_copilot_chat_to_cloud.ps1 ... -Mode auto
+```
+
+所以你只需要注册一次，之后每天零点后会自动尝试同步。
+
 ## 推荐操作顺序
 
 1. 当前工作站关闭 VS Code。
@@ -58,6 +105,12 @@
 4. 新工作站先打开一次对应工作区，再关闭 VS Code。
 5. 运行 `pull`。
 6. 重新打开 VS Code，继续工作。
+
+如果使用计划任务：
+
+1. 每台工作站都可以各自注册一个每日自动任务。
+2. 建议把时间错开 5 到 15 分钟，降低两台机器同时写同一份状态的概率。
+3. 如果你晚上经常不关机，这个方式最省事。
 
 ## 建议搭配
 

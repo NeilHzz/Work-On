@@ -9,7 +9,7 @@ param(
     [string]$WorkspaceName,
 
     [Parameter(Mandatory = $false)]
-    [ValidateSet("push", "pull")]
+    [ValidateSet("push", "pull", "auto")]
     [string]$Mode = "push"
 )
 
@@ -111,7 +111,8 @@ function Get-WorkspaceStorageEntry {
 function Copy-DirectorySafe {
     param(
         [string]$Source,
-        [string]$Destination
+        [string]$Destination,
+        [switch]$MergeOnly
     )
 
     if (-not (Test-Path -LiteralPath $Source)) {
@@ -133,6 +134,10 @@ function Copy-DirectorySafe {
         "/NP"
     )
 
+    if ($MergeOnly) {
+        $robocopyArgs += "/XO"
+    }
+
     & robocopy @robocopyArgs | Out-Null
     if ($LASTEXITCODE -gt 7) {
         throw "robocopy failed for $Source -> $Destination with exit code $LASTEXITCODE"
@@ -142,7 +147,8 @@ function Copy-DirectorySafe {
 function Copy-FileSafe {
     param(
         [string]$Source,
-        [string]$Destination
+        [string]$Destination,
+        [switch]$MergeOnly
     )
 
     if (-not (Test-Path -LiteralPath $Source)) {
@@ -152,7 +158,89 @@ function Copy-FileSafe {
 
     $destinationDir = Split-Path -Parent $Destination
     Ensure-Directory -Path $destinationDir
+
+    if ($MergeOnly -and (Test-Path -LiteralPath $Destination)) {
+        $sourceTime = (Get-Item -LiteralPath $Source).LastWriteTimeUtc
+        $destinationTime = (Get-Item -LiteralPath $Destination).LastWriteTimeUtc
+        if ($destinationTime -gt $sourceTime) {
+            Write-Step "skip older file during merge: $Source"
+            return
+        }
+    }
+
     Copy-Item -LiteralPath $Source -Destination $Destination -Force
+}
+
+function Get-PathLastWriteTimeUtc {
+    param(
+        [string]$Path,
+        [ValidateSet("file", "directory")]
+        [string]$Kind
+    )
+
+    if (-not (Test-Path -LiteralPath $Path)) {
+        return $null
+    }
+
+    if ($Kind -eq "file") {
+        return (Get-Item -LiteralPath $Path).LastWriteTimeUtc
+    }
+
+    $latest = (Get-Item -LiteralPath $Path).LastWriteTimeUtc
+    Get-ChildItem -LiteralPath $Path -Recurse -Force -ErrorAction SilentlyContinue | ForEach-Object {
+        if ($_.LastWriteTimeUtc -gt $latest) {
+            $latest = $_.LastWriteTimeUtc
+        }
+    }
+
+    return $latest
+}
+
+function Resolve-SyncDirection {
+    param(
+        [string]$LocalPath,
+        [string]$CloudPath,
+        [ValidateSet("file", "directory")]
+        [string]$Kind,
+        [ValidateSet("push", "pull", "auto")]
+        [string]$RequestedMode
+    )
+
+    if ($RequestedMode -ne "auto") {
+        return $RequestedMode
+    }
+
+    $localExists = Test-Path -LiteralPath $LocalPath
+    $cloudExists = Test-Path -LiteralPath $CloudPath
+
+    if ($localExists -and -not $cloudExists) {
+        return "push"
+    }
+
+    if ($cloudExists -and -not $localExists) {
+        return "pull"
+    }
+
+    if (-not $localExists -and -not $cloudExists) {
+        return $null
+    }
+
+    $localTime = Get-PathLastWriteTimeUtc -Path $LocalPath -Kind $Kind
+    $cloudTime = Get-PathLastWriteTimeUtc -Path $CloudPath -Kind $Kind
+
+    if ($null -eq $cloudTime) {
+        return "push"
+    }
+
+    if ($null -eq $localTime) {
+        return "pull"
+    }
+
+    if ($cloudTime -gt $localTime) {
+        return "pull"
+    }
+
+    return "push"
 }
 
 function Invoke-SyncPair {
@@ -161,11 +249,17 @@ function Invoke-SyncPair {
         [string]$CloudPath,
         [ValidateSet("file", "directory")]
         [string]$Kind,
-        [ValidateSet("push", "pull")]
+        [ValidateSet("push", "pull", "auto")]
         [string]$Mode
     )
 
-    if ($Mode -eq "push") {
+    $effectiveMode = Resolve-SyncDirection -LocalPath $LocalPath -CloudPath $CloudPath -Kind $Kind -RequestedMode $Mode
+    if (-not $effectiveMode) {
+        Write-Step "skip missing on both sides: $LocalPath"
+        return
+    }
+
+    if ($effectiveMode -eq "push") {
         $source = $LocalPath
         $destination = $CloudPath
     }
@@ -174,11 +268,13 @@ function Invoke-SyncPair {
         $destination = $LocalPath
     }
 
+    Write-Step "$effectiveMode $Kind :: $source -> $destination"
+
     if ($Kind -eq "directory") {
-        Copy-DirectorySafe -Source $source -Destination $destination
+        Copy-DirectorySafe -Source $source -Destination $destination -MergeOnly:($Mode -eq "auto")
     }
     else {
-        Copy-FileSafe -Source $source -Destination $destination
+        Copy-FileSafe -Source $source -Destination $destination -MergeOnly:($Mode -eq "auto")
     }
 }
 
