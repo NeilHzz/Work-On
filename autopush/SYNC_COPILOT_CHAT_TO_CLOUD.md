@@ -2,6 +2,8 @@
 
 这个方案的目标不是只备份 transcript，而是尽量把“能影响聊天连续性”的本地状态一起同步到云盘目录。
 
+下面的命令默认从工作区根目录执行，所以脚本路径都写成 `./autopush/...`。
+
 ## 同步内容
 
 脚本会同步这些位置：
@@ -38,22 +40,19 @@
 当前机器推送到云端：
 
 ```powershell
-.
-\sync_copilot_chat_to_cloud.ps1 -CloudRoot "D:\Cloud\VSCodeState" -WorkspacePath "D:\system_folder\Desktop\Work On" -Mode push
+.\autopush\sync_copilot_chat_to_cloud.ps1 -CloudRoot "D:\Cloud\VSCodeState" -WorkspacePath "D:\system_folder\Desktop\Work On" -Mode push
 ```
 
 另一台机器拉取到本地：
 
 ```powershell
-.
-\sync_copilot_chat_to_cloud.ps1 -CloudRoot "D:\Cloud\VSCodeState" -WorkspacePath "D:\system_folder\Desktop\Work On" -Mode pull
+.\autopush\sync_copilot_chat_to_cloud.ps1 -CloudRoot "D:\Cloud\VSCodeState" -WorkspacePath "D:\system_folder\Desktop\Work On" -Mode pull
 ```
 
 如果两台机器上工作区路径不同，可以额外固定一个名字：
 
 ```powershell
-.
-\sync_copilot_chat_to_cloud.ps1 -CloudRoot "D:\Cloud\VSCodeState" -WorkspacePath "E:\Projects\Work On" -WorkspaceName "Work_On" -Mode pull
+.\autopush\sync_copilot_chat_to_cloud.ps1 -CloudRoot "D:\Cloud\VSCodeState" -WorkspacePath "E:\Projects\Work On" -WorkspaceName "Work_On" -Mode pull
 ```
 
 ## 自动模式
@@ -70,7 +69,7 @@
 手动执行自动模式：
 
 ```powershell
-.\sync_copilot_chat_to_cloud.ps1 -CloudRoot "D:\Cloud\VSCodeState" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On" -Mode auto
+.\autopush\sync_copilot_chat_to_cloud.ps1 -CloudRoot "D:\Cloud\VSCodeState" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On" -Mode auto
 ```
 
 ## 每天零点后自动更新
@@ -80,25 +79,25 @@
 先预览任务内容：
 
 ```powershell
-.\register_daily_copilot_chat_sync_task.ps1 -CloudRoot "D:\Cloud\VSCodeState" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On" -PreviewOnly
+.\autopush\register_daily_copilot_chat_sync_task.ps1 -CloudRoot "D:\Cloud\VSCodeState" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On" -PreviewOnly
 ```
 
 正式注册计划任务：
 
 ```powershell
-.\register_daily_copilot_chat_sync_task.ps1 -CloudRoot "D:\Cloud\VSCodeState" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On"
+.\autopush\register_daily_copilot_chat_sync_task.ps1 -CloudRoot "D:\Cloud\VSCodeState" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On"
 ```
 
 如果你想把时间改成零点后 10 分钟：
 
 ```powershell
-.\register_daily_copilot_chat_sync_task.ps1 -CloudRoot "D:\Cloud\VSCodeState" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On" -DailyTime "00:10"
+.\autopush\register_daily_copilot_chat_sync_task.ps1 -CloudRoot "D:\Cloud\VSCodeState" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On" -DailyTime "00:10"
 ```
 
 计划任务实际调用的是：
 
 ```powershell
-.\sync_copilot_chat_to_cloud.ps1 ... -Mode auto
+.\autopush\sync_copilot_chat_to_cloud.ps1 ... -Mode auto
 ```
 
 所以你只需要注册一次，之后每天零点后会自动尝试同步。

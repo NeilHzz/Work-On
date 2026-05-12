@@ -7,6 +7,8 @@
 3. 用本目录下的 GitHub 同步脚本，把 Copilot Chat 本地状态导出到这个私有仓库里。
 4. 由脚本负责 pull、commit、push。
 
+下面的命令默认从工作区根目录执行，所以脚本路径都写成 `./autopush/...`。
+
 ## 为什么不建议直接用当前项目仓库
 
 当前工作区已经连着一个项目远程仓库。直接把聊天状态同步进这个项目仓库，会把个人聊天状态和项目历史混在一起，后面很难维护。
@@ -54,19 +56,19 @@ git clone https://github.com/<your-account>/copilot-chat-sync-private.git D:\Git
 示例命令：
 
 ```powershell
-.\sync_copilot_chat_to_github.ps1 -RepoPath "D:\GitHub\copilot-chat-sync-private" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On" -Mode auto
+.\autopush\sync_copilot_chat_to_github.ps1 -RepoPath "D:\GitHub\copilot-chat-sync-private" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On" -Mode auto
 ```
 
 如果你只想把 GitHub 最新内容拉到本机：
 
 ```powershell
-.\sync_copilot_chat_to_github.ps1 -RepoPath "D:\GitHub\copilot-chat-sync-private" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On" -Mode pull
+.\autopush\sync_copilot_chat_to_github.ps1 -RepoPath "D:\GitHub\copilot-chat-sync-private" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On" -Mode pull
 ```
 
 如果你只想把本机当前状态推上去：
 
 ```powershell
-.\sync_copilot_chat_to_github.ps1 -RepoPath "D:\GitHub\copilot-chat-sync-private" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On" -Mode push
+.\autopush\sync_copilot_chat_to_github.ps1 -RepoPath "D:\GitHub\copilot-chat-sync-private" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On" -Mode push
 ```
 
 ## 每天零点后自动同步
@@ -76,13 +78,13 @@ git clone https://github.com/<your-account>/copilot-chat-sync-private.git D:\Git
 先预览，不实际注册：
 
 ```powershell
-.\register_daily_copilot_chat_github_sync_task.ps1 -RepoPath "D:\GitHub\copilot-chat-sync-private" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On" -DailyTime "00:05" -PreviewOnly
+.\autopush\register_daily_copilot_chat_github_sync_task.ps1 -RepoPath "D:\GitHub\copilot-chat-sync-private" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On" -DailyTime "00:05" -PreviewOnly
 ```
 
 正式注册：
 
 ```powershell
-.\register_daily_copilot_chat_github_sync_task.ps1 -RepoPath "D:\GitHub\copilot-chat-sync-private" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On" -DailyTime "00:05"
+.\autopush\register_daily_copilot_chat_github_sync_task.ps1 -RepoPath "D:\GitHub\copilot-chat-sync-private" -WorkspacePath "D:\system_folder\Desktop\Work On" -WorkspaceName "Work_On" -DailyTime "00:05"
 ```
 
 ## 多工作站建议
