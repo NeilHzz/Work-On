@@ -1,3 +1,5 @@
+# log.txt 使用 union 合并策略：双机同时追加时自动合并，不产生冲突
+log.txt merge=union
 00_原始材料/Gallus-Prot.zip filter=lfs diff=lfs merge=lfs -text
 00_原始材料/Gallus-Glycan.zip filter=lfs diff=lfs merge=lfs -text
 00_原始材料/鸡cloud_report_170746/report.html filter=lfs diff=lfs merge=lfs -text
