@@ -234,8 +234,8 @@ p_s1a = spara([
 ])
 
 p_s1b = spara([
-    (" We therefore treated mammillary organization as the core comparative phenotype and used chicken, duck, and pigeon to span two deliberately crossed contrasts: precocial versus altricial development, and terrestrial versus aquatic-associated reproduction.", [4, 13, 15, 16, 23, 26, 39, 41]),
-    (" This design does not assume that ecology is the explanation; instead, it creates a comparison space in which a common hatching interface can be held constant while eggshell biology varies.", [4, 13, 15, 23, 39, 41]),
+    (" That makes mammillary organization the first phenotype to examine, because it is the earliest ordered eggshell layer at which structural divergence can plausibly translate into mechanical divergence.", [1, 4, 16, 28, 38]),
+    (" Once the comparison is shifted from the conserved shell-breaking tool to this mechanically relevant eggshell layer, the next explanatory step is to identify which molecular regulators organize that layer and how their states differ across species.", [1, 2, 4, 20, 21, 28, 38]),
 ])
 
 # §2 — Prior work and its limits
@@ -243,18 +243,19 @@ p_intro2 = spara([
     (" Eggshell matrix proteins are already known to regulate mammillary-layer mineralization, crystal growth orientation, and mature eggshell architecture, with ovocleidin-17 (OC17), ovocleidin-116 (OC116), ovotransferrin (TRFE), and ovalbumin (OVAL) among the best-characterized examples.", [1, 2, 4, 6, 7, 8, 9, 10, 19, 20, 21, 29]),
     (" Those proteins do not act only through abundance. Different glycosylation states can change the biological behavior of the same matrix protein, suggesting a plausible route by which a shared protein toolkit could still generate divergent eggshell phenotypes.", [18, 20, 21, 49, 50, 52]),
     (" Yet avian eggshell studies have rarely resolved which specific N-glycan forms are carried by shared matrix proteins across species, leaving a gap between comparative eggshell phenotype and protein-level mechanism.", [18, 20, 21]),
+    (" In other words, the missing layer is not whether matrix proteins matter, but whether glycosylation on shared matrix proteins can explain how a common protein toolkit yields different eggshell structures.", [2, 4, 18, 20, 21]),
 ])
 
 p_intro_sig = spara([
-    (" That gap matters because the eggshell preserves developmental timing, matrix chemistry, microstructure, and hatching-relevant mechanics within the same biomineralized structure.", [1, 2, 4, 16, 20, 21, 38, 42]),
-    (" The key question is therefore not whether bird eggshells differ, but whether a chemically interpretable protein modification can explain how those differences emerge from a largely shared matrix system.", [2, 16, 20, 21, 38, 42, 57, 69]),
+    (" That gap matters because once glycan state is identified as the candidate explanatory layer, the next step is to ask whether it can be translated into a structural-functional interpretation.", [1, 2, 4, 16, 20, 21, 38, 42]),
+    (" Specifically, if different glycan states reshape the exposed surface of the same matrix protein, then structural modeling should reveal how those states alter Ca²⁺-relevant accessibility under mineralization-relevant conditions.", [11, 12, 18, 42, 43, 49, 50, 51]),
+    (" If that structural ordering is biologically meaningful, it should then remain detectable at the hatching-relevant mechanical end point, namely local resistance at the mammillary interface under egg-tooth-like loading.", [16, 17, 34, 35, 37, 38]),
 ])
 
 # §3 — Core gap
 p_intro_gap = spara([
-    (" We therefore asked whether cross-species glycan-state differences on shared eggshell matrix proteins align with mammillary-layer organization when the comparison is anchored to the conserved egg-tooth interface.", [55, 58, 59, 60, 65]),
-    (" We further asked whether the same ordering remains visible in computed Ca²⁺ accessibility and in simulated local hatching resistance.", [55, 58, 59, 60, 65]),
-    (" Chicken, duck, and pigeon were selected because together they occupy distinct positions in the crossed developmental and ecological comparison space used here.", [4, 13, 27, 39]),
+    (" We therefore asked a stepwise question: when the comparison is anchored to a conserved egg-tooth interface, do species differences first emerge in mammillary organization, do shared matrix proteins then resolve those differences at the glycan-state level, and can that glycan ordering be interpreted structurally through protein-surface accessibility and functionally through local hatching resistance?", [55, 58, 59, 60, 65]),
+    (" This framing allowed the manuscript logic to follow the same causal chain from conserved hatching tool to eggshell structure, matrix regulation, glycosylation, structural inference, and finite-element validation.", [4, 11, 12, 16, 42, 57, 69]),
 ])
 
 # §4 — This study
@@ -265,10 +266,10 @@ p_intro4 = smixed([
             ("Anas platyrhynchos", False, True),
             (", and ", False, False),
             ("Columba livia", False, True),
-            (" as terrestrial precocial, aquatic-associated precocial, and terrestrial altricial models, respectively.", False, False)], [3, 22, 24, 25, 82, 83]),
-        ([(" We integrated micro-CT morphometry, comparative eggshell-matrix proteomics, intact glycopeptide mass spectrometry, ortholog filtering, Re-Glyco structural modeling, electrostatic analysis, and finite-element simulation to test whether glycan-state divergence on shared proteins could explain eggshell structure and hatching-relevant mechanics.", False, False)], [3, 22, 24, 25]),
-        ([(" We found that the clearest ordered molecular signal was carried by OVAL glycan state and that this same ordering aligned with mammillary density, Ca²⁺-relevant surface accessibility, and local hatching resistance.", False, False)], [11, 12, 16]),
-        ([(" The resulting framework places matrix-protein glycan state between a conserved shell-breaking interface and the eggshell phenotypes that matter for hatching.", False, False)], [4, 11, 12, 16, 42]),
+            (" as terrestrial precocial, aquatic-associated precocial, and terrestrial altricial models, respectively, thereby spanning crossed developmental and ecological contrasts within a common hatching framework.", False, False)], [3, 22, 24, 25, 82, 83]),
+        ([(" We integrated micro-CT morphometry to define mammillary organization, comparative eggshell-matrix proteomics and intact glycopeptide mass spectrometry to resolve shared matrix proteins and their glycan states, Re-Glyco structural modeling and electrostatic analysis to infer protein-surface consequences, and finite-element simulation to test whether the same ordering remained detectable in local hatching resistance.", False, False)], [3, 22, 24, 25]),
+        ([(" In the present dataset, that chain was clearest for OVAL, whose glycan states aligned with mammillary density, Ca²⁺-relevant surface accessibility, and local hatching resistance.", False, False)], [11, 12, 16]),
+        ([(" The resulting Introduction therefore leads into the Results with the same causal sequence used by the manuscript as a whole: conserved egg-tooth function, eggshell focus, mammillary organization, matrix proteins, glycosylation, structural inference, and finite-element validation.", False, False)], [4, 11, 12, 16, 42]),
 ])
 
 # ═══════════════════════════════════════════════════════════════════════════
