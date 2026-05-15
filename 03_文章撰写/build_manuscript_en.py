@@ -12,7 +12,7 @@ from pathlib import Path
 import re
 from shared_references import REFS
 
-OUT = str(Path(__file__).with_name("manuscript20260513.docx"))
+OUT = str(Path(__file__).with_name("manuscript260515.docx"))
 FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
 
 REF_TEXTS = {}
@@ -230,6 +230,9 @@ p_s1a = spara([
     (" Bird hatching begins with a simple mechanical problem: the embryo must focus force on one small shell-breaking site.", [16, 17, 38, 82, 86]),
     (" In birds, that site is defined by the egg tooth, a transient structure that presses the inner eggshell surface during escape.", [16, 17, 38, 82, 86]),
     (" If egg-tooth function is broadly conserved across species, then meaningful hatching differences are more likely to lie in the eggshell than in the shell-breaking tool itself.", [16, 17, 38, 82, 86]),
+    (" That shift in emphasis is biologically plausible because avian eggshells already vary with incubation environment and life-history strategy rather than presenting one uniform solution across birds.", [15, 39, 87, 88]),
+    (" Nesting habitat can alter the balance among water loss, gas exchange, and microbial exposure, so terrestrial and aquatic-associated birds need not build identical shell barriers or pore systems.", [39, 87, 88]),
+    (" Developmental mode adds a second axis: precocial and altricial birds differ in offspring independence and parental buffering, and comparative work has linked that contrast to differences in cuticle deployment and eggshell antibacterial performance.", [15, 26]),
     (" The mammillary layer is the strongest place to start because it is the first eggshell layer to shape mechanics, and its mammillary knobs mark where calcite growth begins under the control of eggshell matrix proteins.", [1, 4, 28, 38]),
     (" The eggshell therefore lets us read matrix chemistry, microstructure, and hatching-relevant mechanics within one structure.", [1, 4, 16, 20, 21, 38, 42]),
     (" Because later shell layers inherit that early mineralization context, mammillary organization is also the point at which local matrix differences are most likely to scale into mature shell behavior.", [1, 4, 28, 38, 42]),
