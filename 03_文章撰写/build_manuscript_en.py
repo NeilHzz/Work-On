@@ -309,7 +309,7 @@ p_ss1 = smixed([
     ([(' This functional grouping only partly overlaps with phylogeny: chicken and duck remain closely related precocial taxa but separate along the habitat axis, whereas pigeon anchors the altricial end of the comparison (Fig. S2).', False, False)], [15, 23, 24, 25]),
     ([(' The comparison was therefore structured to retain shared ancestry in view while still forcing clear life-history separation into the same analytical frame.', False, False)], [15, 23, 24, 25, 41]),
     ([(' The focal species differed in beak-tip geometry, but the egg tooth itself remained a similarly localized dorsal breaker in all three species and pointed to the same inside-out shell-breaking event during hatching (Fig. 1B).', False, False)], [16, 17, 22, 38, 82, 86]),
-    ([(' Within this contrast set, the story therefore proceeds from egg-tooth conservation to eggshell divergence: once the interface is held constant, the relevant question becomes which eggshell layer first separates the species.', False, False)], []),
+    ([(' Within this contrast set, the comparison therefore moves from egg-tooth conservation to eggshell divergence: once the interface is held constant, the relevant question becomes which eggshell layer first separates the species.', False, False)], []),
 ])
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -538,9 +538,9 @@ para("Discussion", bold=True, size=14, before=320, after=160,
     align=WD_ALIGN_PARAGRAPH.LEFT)
 
 p_disc_mam1 = smixed([
-    ([('The central narrative is straightforward. Because egg-tooth function remained conserved across the three birds, the most informative differences had to be sought in the eggshell. The first mechanically relevant difference appeared in the mammillary layer, and the shared matrix toolkit then focused the comparison on glycosylation rather than wholesale protein replacement. ', False, False),
+    ([('The central interpretation is direct. Because egg-tooth function remained conserved across the three birds, the most informative differences had to be sought in the eggshell. The first mechanically relevant difference appeared in the mammillary layer, and the shared matrix toolkit then focused the comparison on glycosylation rather than wholesale protein replacement. ', False, False),
             ('Within that chain, OVAL glycan state provided the clearest link from molecular variation to surface accessibility and local hatching resistance.', False, False)], [1, 2, 4, 15, 16, 17, 20, 21, 22, 23, 38, 39, 41, 42, 82, 86]),
-    ([(' The mammillary layer remains central because it is the earliest level at which matrix chemistry, crystal initiation, and eggshell mechanics meet in the same material context. That sequence matters because the argument does not begin from a favored molecule; it narrows to one through successive structural levels.', False, False)], [1, 2, 20, 28, 30, 36, 38, 53, 54]),
+    ([(' The mammillary layer remains central because it is the earliest level at which matrix chemistry, crystal initiation, and eggshell mechanics meet in the same material context. That sequence matters because the analysis does not begin from a favored molecule; it narrows to one through successive structural levels.', False, False)], [1, 2, 20, 28, 30, 36, 38, 53, 54]),
 ])
 
 p_disc_mam2 = spara([
