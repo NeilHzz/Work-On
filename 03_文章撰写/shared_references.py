@@ -85,4 +85,6 @@ REFS = [
     "84. R. A. García, An 'egg-tooth'-like structure in titanosaurian sauropod embryos. Journal of Vertebrate Paleontology 27, 247-252 (2007).",
     "85. M. Hermyt, B. Metscher, W. Rupik, Do all geckos hatch in the same way? Histological and 3D studies of egg tooth morphogenesis in the geckos Eublepharis macularius and Lepidodactylus lugubris. Journal of Morphology 281 (2020).",
     "86. G. A. Clark, Jr., Occurrence and Timing of Egg Teeth in Birds. Wilson Bulletin 73, 268-278 (1961).",
+    "87. L. D'Alba, R. Maia, M. E. Hauber, M. D. Shawkey, The evolution of eggshell cuticle in relation to nesting ecology. Proceedings of the Royal Society B: Biological Sciences 283, 20160687 (2016).",
+    "88. N. P. Horrocks, K. Hine, A. Hegemann, H. K. Ndithia, M. Shobrak, S. Ostrowski, et al., Are antimicrobial defences in bird eggs related to climatic conditions associated with risk of trans-shell microbial infection? Frontiers in Zoology 11, 49 (2014).",
 ]
