@@ -338,7 +338,7 @@ p_s0b = mixed([
     ("A. platyrhynchos", False, True),
     (" (0.4413 ± 0.0249), and lowest in ", False, False),
     ("G. gallus", False, True),
-    (" (0.3975 ± 0.0127). In simple terms, chicken showed the densest early mineralization pattern, pigeon devoted the largest share of shell volume to crystal units grown from individual mammillary knobs, and duck remained intermediate in crystal-unit proportion while resembling pigeon in density. The two metrics therefore did not collapse into one simple monotonic ranking, but they agreed that mammillary organization had already diverged in measurable ways before later shell traits were considered. Because mammillary organization is the earliest structural layer governing eggshell mechanics and is controlled by eggshell matrix proteins, the next question was whether this cross-species morphology reflected wholesale toolkit replacement or different use of a largely shared system.", False, False),
+    (" (0.3975 ± 0.0127). Quantitatively, chicken showed the densest early mineralization pattern, pigeon devoted the largest share of shell volume to crystal units grown from individual mammillary knobs, and duck remained intermediate in crystal-unit proportion while resembling pigeon in density. The two metrics therefore did not collapse into one simple monotonic ranking, but they agreed that mammillary organization had already diverged in measurable ways before later shell traits were considered. Because mammillary organization is the earliest structural layer governing eggshell mechanics and is controlled by eggshell matrix proteins, the next question was whether this cross-species morphology reflected wholesale toolkit replacement or different use of a largely shared system.", False, False),
 ])
 cite(p_s0b, [1, 2, 28, 30, 36, 38, 53, 54, 57])
 
@@ -406,7 +406,7 @@ p_s2b = mixed([
 cite(p_s2b, [6, 7, 8, 9, 10, 19, 21, 29])
 
 p_s2c = spara([
-    ("Integrating protein abundance and glycan abundance into the same analytical frame then clarified why OVAL, rather than OC116 or TRFE, best tracked the cross-species eggshell differences (Fig. 3B-D). Across the full dataset, protein-glycan coupling was weak in chicken but clearly positive in duck and pigeon. The three lineages therefore differed not only in glycan identity, but also in how glycosylation scaled with protein output.", []),
+    ("Integrating protein abundance and glycan abundance into the same analytical frame then clarified why OVAL, rather than OC116 or TRFE, best tracked the cross-species eggshell differences (Fig. 3B-D). Across the full dataset, protein-glycan coupling was weak in chicken but consistently positive in duck and pigeon. The three lineages therefore differed not only in glycan identity, but also in how glycosylation scaled with protein output.", []),
     (" Yet the highlighted eggshell-matrix proteins showed that high abundance and high glycan output were not the same thing. OVAL remained abundant in all three species, but its glycan burden changed sharply across them: relatively modest in chicken, stronger in duck, and strongest in pigeon. OVAL therefore stayed cross-species comparable while also escaping simple abundance matching.", []),
     (" By comparison, OC116 and TRFE remained informative shared proteins but did not separate bulk protein abundance from glycan output as consistently as OVAL did in the same analytical space.", [1, 4, 6, 7, 8, 18, 47, 48]),
     (" The pairwise enrichment plots in Fig. 3E-G sharpened the same point. Intact-glycopeptide assignments identified OVAL as the clearest cross-species contrast, from compact high-mannose glycans in chicken to neutral complex-hybrid glycans in duck and more extended sialylated complex-hybrid glycans in pigeon. Figure 3B-G therefore identified OVAL as the shared protein whose glycosylation changed in the clearest phenotype-relevant way.", [1, 4, 6, 7, 8, 18, 47, 48]),
@@ -538,7 +538,7 @@ para("Discussion", bold=True, size=14, before=320, after=160,
     align=WD_ALIGN_PARAGRAPH.LEFT)
 
 p_disc_mam1 = smixed([
-    ([('The central interpretation is direct. Because egg-tooth function remained conserved across the three birds, the most informative differences had to be sought in the eggshell. The first mechanically relevant difference appeared in the mammillary layer, and the shared matrix toolkit then focused the comparison on glycosylation rather than wholesale protein replacement. ', False, False),
+    ([('Taken together, the results define a consistent comparative sequence. Because egg-tooth function remained conserved across the three birds, the most informative differences had to be sought in the eggshell. The first mechanically relevant difference appeared in the mammillary layer, and the shared matrix toolkit then focused the comparison on glycosylation rather than wholesale protein replacement. ', False, False),
             ('Within that chain, OVAL glycan state provided the clearest link from molecular variation to surface accessibility and local hatching resistance.', False, False)], [1, 2, 4, 15, 16, 17, 20, 21, 22, 23, 38, 39, 41, 42, 82, 86]),
     ([(' The mammillary layer remains central because it is the earliest level at which matrix chemistry, crystal initiation, and eggshell mechanics meet in the same material context. That sequence matters because the analysis does not begin from a favored molecule; it narrows to one through successive structural levels.', False, False)], [1, 2, 20, 28, 30, 36, 38, 53, 54]),
 ])
@@ -552,7 +552,7 @@ p_disc_mam2 = spara([
 ])
 
 p_disc_other = para(
-    "The non-OVAL signals still matter. OC116 and TRFE remained informative shared proteins, whereas OC17 appeared glycosylated only in chicken and may therefore represent a more lineage-restricted mineralization program. The broader point is that the shared toolkit remains multicomponent even if one component offers the most experimentally tractable explanatory handle. The point is not that one protein explains the entire eggshell, but that OVAL provides a particularly clear path from matrix modification to structure and function in the present dataset."
+    "The non-OVAL signals still matter. OC116 and TRFE remained informative shared proteins, whereas OC17 appeared glycosylated only in chicken and may therefore represent a more lineage-restricted mineralization program. The shared toolkit therefore remains multicomponent even if one component offers the most experimentally tractable explanatory handle. These findings do not imply that one protein explains the entire eggshell; rather, OVAL provides a particularly clear path from matrix modification to structure and function in the present dataset."
 )
 
 cite(p_disc_other, [10, 19, 21, 29, 42, 44, 45, 46, 66, 81])
