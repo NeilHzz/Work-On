@@ -297,7 +297,7 @@ para("Results", bold=True, size=14, before=320, after=160,
 head("Conserved egg-tooth function focuses the analysis on the eggshell")
 
 p_ss1 = smixed([
-    ([(' With shell-breaking tool functionally conserved, hatching-related differences had to be sought in the eggshell. We therefore placed extant birds into a comparative space using 10,993 AVONET species records and selected three deliberately separated model species from it (Fig. 1A).', False, False)], [15, 16, 22, 23, 24, 25, 41]),
+    ([(' With shell-breaking tool functionally conserved, hatching-related differences had to be sought in the eggshell. We therefore placed extant birds into a comparative space using 10,993 AVONET species records and selected three deliberately separated model species from this comparative space (Fig. 1A).', False, False)], [15, 16, 22, 23, 24, 25, 41]),
     ([(' This broader mapping showed that the three focal taxa were not arbitrary case studies, but deliberately spaced points in avian ecological-developmental space.', False, False)], [15, 16, 22, 23, 24, 25, 41]),
         ([(' Within this comparison space, ', False, False),
             ('Gallus gallus', False, True),
@@ -456,7 +456,7 @@ add_main_figure_legend(
     "Fig. 4.",
     "Re-Glyco and APBS analyses define an OVAL accessibility gradient across species.",
     [
-        ("(A) Number of Ca²⁺ hotspot residues, defined as surface Asp/Glu positions with APBS potential below −5 kT/e, in glycosylated and matched deglycosylated OVAL ensembles. (B) Carboxylate surface accessibility. (C) Surface electrostatic potential distributions for glycosylated versus deglycosylated structures. (D to G) Ensemble geometric descriptors of the rebuilt glycans, including radius of gyration, end-to-end distance, glycan-protein distance, and minimum glycan-backbone distance. (H) Glycan-mediated interface shielding. (I) Mean solvent-accessible surface area (SASA) of hotspot residues. (J) Hotspot fraction among candidate acidic residues. (K) Net accessible Ca²⁺ hotspots. (L) Partition of hotspot accessibility into net accessible and glycan-shielded components. (M) Partition of hotspot-residue SASA into net accessible and glycan-shielded components. Species-specific ensemble sizes are indicated beneath the violins. Species comparisons in panels D to M used one-way ANOVA followed by Duncan's multiple range test; glycosylated-versus-apo contrasts in panels A to C were evaluated against the apo reference by one-sample t test, with significance annotations shown above the brackets. Across these metrics, chicken retained the most exposed Ca²⁺-relevant surface, pigeon showed the strongest glycan-mediated shielding, and duck remained intermediate.", False, False),
+        ("(A) Number of Ca²⁺ hotspot residues, defined as surface Asp/Glu positions with APBS potential below −5 kT/e, in glycosylated and matched deglycosylated OVAL ensembles. (B) Carboxylate surface accessibility. (C) Surface electrostatic potential distributions for glycosylated versus deglycosylated structures. (D to G) Ensemble geometric descriptors of the rebuilt glycans, including radius of gyration, end-to-end distance, glycan-protein distance, and minimum glycan-backbone distance. (H) Glycan-mediated interface shielding. (I) Mean solvent-accessible surface area (SASA) of hotspot residues. (J) Hotspot fraction among candidate acidic residues. (K) Net accessible Ca²⁺ hotspots. (L) Partition of hotspot accessibility into net accessible and glycan-shielded components. (M) Partition of hotspot-residue SASA into net accessible and glycan-shielded components. Species-specific ensemble sizes are indicated beneath the violins. Species comparisons in Fig. 4D-M used one-way ANOVA followed by Duncan's multiple range test; glycosylated-versus-apo contrasts in Fig. 4A-C were evaluated against the apo reference by one-sample t test, with significance annotations shown above the brackets. Across these metrics, chicken retained the most exposed Ca²⁺-relevant surface, pigeon showed the strongest glycan-mediated shielding, and duck remained intermediate.", False, False),
     ],
     before=20,
     after=80,
@@ -604,7 +604,7 @@ p_disc_mech = spara([
 ])
 
 p_disc_evo = para(
-    "Duck sharpens the interpretation because it separates developmental mode from the rest of the chain. It did not remain chicken-like across the molecular, structural, and mechanical analyses, showing that a shared hatching problem can be resolved through different matrix-state configurations. In practical terms, duck indicates that thickness can buffer whole-shell loading more readily than it can recreate the same local interface resistance. Shell thickness may buffer whole-shell loading, but it did not erase the local τ_max differences recovered at the mammillary interface."
+    "Duck sharpens the interpretation because it separates developmental mode from the rest of the chain. It did not remain chicken-like across the molecular, structural, and mechanical analyses, showing that a shared hatching problem can be resolved through different matrix-state configurations. In practical terms, duck indicates that thickness can buffer whole-shell loading more readily than it can recreate the same local interface resistance, yet it did not erase the local τ_max differences recovered at the mammillary interface."
 )
 
 cite(p_disc_evo, [3, 15, 16, 17, 37, 38, 39, 41, 57])
@@ -709,7 +709,7 @@ para(
     "\u221220\u00b0C, 2 h), washed twice with acetone, and redissolved in 200 mM TEAB. "
     "Disulfide bonds were reduced with 5 mM dithiothreitol (56\u00b0C, 30 min) and "
     "alkylated with 11 mM iodoacetamide (room temperature, 15 min, dark). Proteins "
-    " were pooled at the two-egg level to reduce idiosyncratic egg-to-egg variation while preserving the dominant species-level signal. "
+    " were pooled at the two-egg level to reduce idiosyncratic egg-to-egg variation while preserving the dominant species-level signal. They "
     "were digested overnight with sequencing-grade trypsin (enzyme:protein ratio "
     "1:50) and desalted with Strata X SPE columns."
 )
