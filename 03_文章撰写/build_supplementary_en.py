@@ -134,10 +134,8 @@ para(
     "Eggshell glycan states covary with mammillary organization and local hatching resistance across three bird species",
     bold=True, size=12, before=0, after=160, align=WD_ALIGN_PARAGRAPH.CENTER,
 )
-para("[Author 1], [Author 2], [Author 3], [Corresponding Author]*",
-     size=10, before=0, after=40, align=WD_ALIGN_PARAGRAPH.CENTER)
-para("*Corresponding author. Email: [corresponding@email.edu]",
-     italic=True, size=10, before=0, after=360, align=WD_ALIGN_PARAGRAPH.CENTER)
+para("",
+    size=10, before=0, after=300, align=WD_ALIGN_PARAGRAPH.CENTER)
 
 para("This PDF file includes:", bold=True, size=11, before=0, after=60,
      align=WD_ALIGN_PARAGRAPH.LEFT)

@@ -203,9 +203,9 @@ para("Abstract", bold=True, size=11, before=80, after=40,
      align=WD_ALIGN_PARAGRAPH.LEFT)
 
 para(
-    "Birds hatch with a broadly conserved egg tooth, shifting unresolved mechanical differences to the eggshell. "
-    "We asked whether, within this three-species comparison, the first clear eggshell divergence we could resolve appeared in the mammillary layer, where matrix proteins regulate early mineralization. "
-    "Across chicken, duck, and pigeon, micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco modeling, electrostatic analysis, and finite-element simulation resolved mammillary organization as the first clear eggshell difference while the matrix-protein toolkit remained largely shared. "
+    "Birds hatch with a conserved egg tooth, shifting unresolved mechanical differences to the eggshell. "
+    "We asked whether the first clear eggshell divergence in this three-species comparison appeared in the mammillary layer, where matrix proteins regulate early mineralization. "
+    "Across chicken, duck, and pigeon, micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco modeling, electrostatic analysis, and finite-element simulation resolved mammillary organization as the first clear eggshell difference while the matrix-protein toolkit remained shared. "
     "Among shared proteins, ovalbumin (OVAL) showed a glycan-state contrast spanning high-mannose-dominant chicken, neutral complex-hybrid-dominant duck, and sialylated complex-hybrid-dominant pigeon. "
     "Structural modeling associated those states with lower Ca²⁺-relevant surface accessibility from chicken to pigeon, and finite-element analysis recovered the same chicken-versus-duck/pigeon mechanical contrast in simulated local hatching resistance. "
     "Together, these observations position matrix-protein glycan state as a chemically interpretable comparative layer that covaries with mammillary organization and simulated local hatching resistance in this three-species dataset.",
