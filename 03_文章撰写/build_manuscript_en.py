@@ -302,18 +302,18 @@ para("Results", bold=True, size=14, before=320, after=160,
 head("Conserved egg-tooth function focuses the analysis on the eggshell")
 
 p_ss1 = smixed([
-    ([(' With shell-breaking tool functionally conserved, hatching-related differences had to be sought in the eggshell. We therefore placed extant birds into a comparative space using 10,993 AVONET species records and selected three deliberately separated model species from this comparative space (Fig. 1A).', False, False)], [15, 16, 22, 23, 24, 25, 41]),
-    ([(' This broader mapping was used to prioritize the two egg-relevant axes least likely to be secondary: nesting environment, which covaries strongly with terrestrial-to-aquatic habitat use, and offspring developmental state, which spans a continuum from more precocial to more altricial young.', False, False)], [15, 16, 22, 23, 24, 25, 41]),
+    ([(' With shell-breaking tool functionally conserved, hatching-related differences had to be sought in the eggshell. We therefore placed extant birds into a comparative space using 10,993 AVONET species records and selected three deliberately separated model species from this comparative space (Fig. 1A).', False, False)], [16, 22, 24, 41]),
+    ([(' This broader mapping was used to prioritize the two egg-relevant axes least likely to be secondary: nesting environment, which covaries strongly with terrestrial-to-aquatic habitat use, and offspring developmental state, which spans a continuum from more precocial to more altricial young.', False, False)], [15, 23, 24]),
         ([(' Within this comparison space, ', False, False),
             ('Gallus gallus', False, True),
             (', ', False, False),
             ('Anas platyrhynchos', False, True),
             (', and ', False, False),
             ('Columba livia', False, True),
-            (' were therefore chosen as deliberately separated species near contrasting regions of those continuous ecological-developmental gradients, so that downstream comparison would be less blurred by intermediate combinations.', False, False)], [15, 22, 23, 24, 25, 41]),
-    ([(' This functional grouping only partly overlaps with phylogeny: chicken and duck remain closely related precocial taxa but separate along the habitat axis, whereas pigeon anchors the altricial end of the comparison (Fig. S2).', False, False)], [15, 23, 24, 25]),
-    ([(' The comparison was therefore structured to retain shared ancestry in view while still forcing clear life-history separation into the same analytical frame.', False, False)], [15, 23, 24, 25, 41]),
-    ([(' The focal species differed in beak-tip geometry, but the egg tooth itself remained a similarly localized dorsal breaker in all three species and pointed to the same inside-out shell-breaking event during hatching (Fig. 1B).', False, False)], [16, 17, 22, 38, 82, 86]),
+            (' were therefore chosen as deliberately separated species near contrasting regions of those continuous ecological-developmental gradients, so that downstream comparison would be less blurred by intermediate combinations.', False, False)], [22, 23, 25, 41]),
+    ([(' This functional grouping only partly overlaps with phylogeny: chicken and duck remain closely related precocial taxa but separate along the habitat axis, whereas pigeon anchors the altricial end of the comparison (Fig. S2).', False, False)], [3, 24, 25]),
+    ([(' The comparison was therefore structured to retain shared ancestry in view while still forcing clear life-history separation into the same analytical frame.', False, False)], [15, 24, 41]),
+    ([(' The focal species differed in beak-tip geometry, but the egg tooth itself remained a similarly localized dorsal breaker in all three species and pointed to the same inside-out shell-breaking event during hatching (Fig. 1B).', False, False)], [16, 17, 82, 86]),
     ([(' Within this contrast set, the comparison therefore moves from egg-tooth conservation to eggshell divergence: once the interface is held constant, the relevant question becomes which eggshell layer first separates the species.', False, False)], []),
 ])
 
