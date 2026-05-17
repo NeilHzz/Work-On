@@ -12,7 +12,7 @@ from pathlib import Path
 import re
 from shared_references import REFS
 
-OUT = str(Path(__file__).with_name("manuscript260516.docx"))
+OUT = str(Path(__file__).with_name("manuscript260517.docx"))
 FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
 
 REF_TEXTS = {}
@@ -379,7 +379,7 @@ p_sprot_go = spara([
 p_sprot_focus = spara([
     (" At the same time, the G. gallus-exclusive set was significantly enriched for protein N-linked glycosylation (BP; Fig. S5), indicating that the most informative differences lay not only in proteome background but also in post-translational state.", []),
     (" Because glycosylation can change what the same matrix protein does, this result narrowed the analysis from broad proteome background to comparative glycoproteomics and, specifically, to how N-linked glycosylation on shared proteins differed across the three species.", [8, 18, 19, 21]),
-    (" The comparison therefore no longer asked only which matrix proteins were present, but which chemical states on those proteins were preferentially deployed in each lineage.", [8, 18, 19, 21]),
+    (" We therefore no longer asked only which matrix proteins were present, but which chemical states were preferentially deployed on those proteins in each lineage.", [8, 18, 19, 21]),
 ])
 
 head("OVAL glycosylation marks the clearest cross-species difference")
