@@ -214,7 +214,7 @@ para(
 
 # Teaser (≤125 characters, one sentence for non-specialist readers)
 para(
-    "Teaser: Across three bird species, shared eggshell proteins are redeployed through glycan state alongside local hatching resistance.",
+    "Teaser: Eggshell glycan states covary with mammillary structure and simulated shell-breaking resistance across three birds.",
     bold=False, italic=True, size=10, before=80, after=160, align=WD_ALIGN_PARAGRAPH.LEFT
 )
 
@@ -280,7 +280,7 @@ p_intro4 = smixed([
     ([(" This design prevented the comparison from collapsing into either a simple phylogenetic pairing or a single precocial-versus-altricial contrast.", False, False)], [22, 24, 25]),
     ([(" We integrated micro-CT morphometry to define mammillary organization, comparative eggshell-matrix proteomics and intact glycopeptide mass spectrometry to resolve shared matrix proteins and their glycan states, Re-Glyco structural modeling and electrostatic analysis to infer protein-surface consequences, and finite-element simulation to test whether the same cross-species contrast remained detectable in local hatching resistance.", False, False)], []),
     ([(" Each level was therefore used to constrain the next, so that molecular interpretation remained tied to shell structure rather than floating free of the material context.", False, False)], []),
-        ([(" In the present dataset, that chain was clearest for OVAL, whose glycan states aligned with mammillary density, Ca²⁺-relevant surface accessibility, and local hatching resistance.", False, False)], []),
+        ([(" In the present dataset, that chain was most interpretable for OVAL, whose glycan states aligned with mammillary density, Ca²⁺-relevant surface accessibility, and local hatching resistance.", False, False)], []),
     ([(" OVAL was therefore not introduced as a preferred candidate in advance; it emerged as the shared protein on which the full comparison became most legible.", False, False)], [18]),
         ([(" The resulting Introduction therefore leads into the Results with the same causal sequence used by the manuscript as a whole: conserved egg-tooth function, eggshell focus, mammillary organization, matrix proteins, glycosylation, structural inference, and finite-element validation.", False, False)], []),
 ])
@@ -312,7 +312,7 @@ p_ss1 = smixed([
 ])
 
 # ════════════════════════════════════════════════════════════════════════════
-head("Mammillary organization marks the first eggshell difference")
+head("Mammillary organization provides the first clear eggshell difference")
 
 mixed([
     ("Viewed through that shared hatching context, the first eggshell level to separate the three species was mammillary-layer morphology (Fig. 1C). In ", False, False),
@@ -382,7 +382,7 @@ p_sprot_focus = spara([
     (" We therefore no longer asked only which matrix proteins were present, but which chemical states were preferentially deployed on those proteins in each lineage.", []),
 ])
 
-head("OVAL glycosylation marks the clearest cross-species difference")
+head("OVAL glycosylation provides the most interpretable cross-species contrast")
 
 p_s2a = mixed([
     ("With wholesale replacement of the eggshell-matrix toolkit excluded, the next question was which shared glycoprotein differences tracked that phenotype most closely. Intact glycopeptides gave a direct cross-species view of specific glycoforms on avian eggshell matrix proteins. The glycoprotein network in Fig. 2 showed a conserved three-species core together with pairwise-shared and lineage-restricted sectors. High-Mannose and Complex-Fucosylated glycans formed a broad background across many protein families, whereas more extended sialylated classes were concentrated in the peripheral difference nodes. That network-level asymmetry pointed away from species-exclusive proteins and toward shared glycoproteins whose states could still diverge strongly. The comparison therefore narrowed from many glycoprotein differences to a smaller group of shared candidates suitable for ortholog and structural analysis.", False, False),
@@ -400,13 +400,13 @@ add_main_figure_legend(
 p_s2b = mixed([
     ("To determine whether those glycan differences reflected biologically comparable proteins rather than broad lineage replacement, we next focused on the orthologous glycoprotein subset retained after a stricter BlastP-based filter and summarized that shared candidate space in Fig. 3A. Using ", False, False),
     ("G. gallus", False, True),
-    (" as the reference, non-reference candidates were retained only when the mean E-value was below 1 × 10⁻⁵ and sequence identity met the final comparability thresholds. This filtering restricted the downstream comparison to high-confidence orthologs. The restriction was important because the structural interpretation below required comparing like with like rather than merely different members of a broad protein family. Under that stricter mapping, OC17 was glycosylated only in chicken, whereas OC116, TRFE, and OVAL all retained glycosylation signals across the three species and therefore served as shared anchors. Among them, OVAL showed the clearest cross-species glycan differences and became the priority target for subsequent structural analysis.", False, False),
+    (" as the reference, non-reference candidates were retained only when the mean E-value was below 1 × 10⁻⁵ and sequence identity met the final comparability thresholds. This filtering restricted the downstream comparison to high-confidence orthologs. The restriction was important because the structural interpretation below required comparing like with like rather than merely different members of a broad protein family. Under that stricter mapping, OC17 was glycosylated only in chicken, whereas OC116, TRFE, and OVAL all retained glycosylation signals across the three species and therefore served as shared anchors. Among them, OVAL showed the most interpretable cross-species glycan differences and became the main target for subsequent structural analysis.", False, False),
 ])
 p_s2c = spara([
     ("Integrating protein abundance and glycan abundance into the same analytical frame then clarified why OVAL, rather than OC116 or TRFE, best tracked the cross-species eggshell differences (Fig. 3B-D). Across the full dataset, protein-glycan coupling was weak in chicken but consistently positive in duck and pigeon. The three lineages therefore differed not only in glycan identity, but also in how glycosylation scaled with protein output.", []),
     (" Yet the highlighted eggshell-matrix proteins showed that high abundance and high glycan output were not the same thing. OVAL remained abundant in all three species, but its glycan burden changed sharply across them: relatively modest in chicken, stronger in duck, and strongest in pigeon. OVAL therefore stayed cross-species comparable while also escaping simple abundance matching.", []),
     (" By comparison, OC116 and TRFE remained informative shared proteins but did not separate bulk protein abundance from glycan output as consistently as OVAL did in the same analytical space.", []),
-    (" The pairwise enrichment plots in Fig. 3E-G sharpened the same point. Intact-glycopeptide assignments identified OVAL as the clearest cross-species contrast, from compact high-mannose glycans in chicken to neutral complex-hybrid glycans in duck and more extended sialylated complex-hybrid glycans in pigeon. Fig. 3B-G therefore identified OVAL as the shared protein whose glycosylation changed in the most consistently phenotype-relevant way.", []),
+    (" The pairwise enrichment plots in Fig. 3E-G sharpened the same point. Intact-glycopeptide assignments identified OVAL as the most interpretable cross-species contrast, from compact high-mannose glycans in chicken to neutral complex-hybrid glycans in duck and more extended sialylated complex-hybrid glycans in pigeon. Fig. 3B-G therefore identified OVAL as the shared protein whose glycosylation changed in the most consistently phenotype-relevant way.", []),
 ])
 
 p_s2d = spara([
@@ -460,7 +460,7 @@ add_main_figure_legend(
 )
 doc.add_page_break()
 
-head("Finite-element modeling links the same contrast to local hatching resistance")
+head("Finite-element modeling recovers the same contrast in local hatching resistance")
 
 p_s4a = mixed([
     ("The common egg-tooth interface introduced at the start of the Results section was then translated into an explicit loading design for finite-element testing. Fig. 5A summarized that hatching-relevant loading background, whereas Fig. 5B-D paired species-specific dorsal beak views, with dashed boxes marking the egg-tooth position, and the corresponding micro-CT-derived finite-element setups built from the beak-tip geometry summarized in Fig. 1B. Because the meshes preserved species-specific shell geometry derived from micro-CT, the mechanical test remained anchored to the same mammillary context identified morphologically rather than substituting an idealized shell wall. Previous studies have often measured whole-eggshell strength under outside loading, but our question here was narrower: did the same cross-species contrast remain visible at the mammillary interface during hatching? In that sense, the finite-element analysis served as a scale-bridging test of whether the contrast inferred from OVAL accessibility and mammillary organization remained detectable at the mechanical interface experienced during shell breaking. Using a conical indenter to approximate the egg tooth, impact loading was applied to circular eggshell fragments (model diameter D = 2.0 mm) at nine parameterized lateral-offset positions on a 3 × 3 grid (0.5 mm spacing), yielding n = 9 independent contact shear-stress time courses per species. To reduce the influence of model size, gross geometry, and especially eggshell thickness, both raw peak contact force (F_max) and peak contact shear stress (τ_max) were recorded. Here, τ_max was treated as the direct readout of local hatching resistance at the mammillary contact interface because raw force thresholds alone could be elevated by thickness without preserving the same local interface behavior. Peak τ_max was extracted directly from the finite-element output at each offset position and species means ± s.d. were then calculated across the nine positions (Fig. S8A-F; eggshell thicknesses: ", False, False),
@@ -520,7 +520,7 @@ mixed([
 ])
 
 mixed([
-    ("Whole-shell fracture force alone could make duck appear mechanically superior to chicken because of its greater shell thickness, despite the absence of the same high-density mammillary state. By focusing instead on local hatching resistance at the micro-CT-derived mammillary interface, τ_max removes that ambiguity and shows that the high-density chicken state remains functionally distinct, whereas duck and pigeon converge at lower resistance. The functional readout therefore preserved the same asymmetry already visible in earlier sections: chicken occupied the high-resistance end, whereas duck and pigeon converged on the lower-resistance side. The finite-element analysis therefore extends the molecular-to-structural argument to a functional endpoint: the glycosylation-associated differences identified above are not only compatible with altered mammillary organization, but are also mirrored by a simulated difference in local hatching resistance across the three model species.", False, False),
+    ("Whole-shell fracture force alone could make duck appear mechanically superior to chicken because of its greater shell thickness, despite the absence of the same high-density mammillary state. By focusing instead on local hatching resistance at the micro-CT-derived mammillary interface, τ_max removes that ambiguity and shows that the high-density chicken state remains distinct, whereas duck and pigeon converge at lower resistance. The functional readout therefore preserved the same asymmetry already visible in earlier sections: chicken occupied the high-resistance end, whereas duck and pigeon converged on the lower-resistance side. The finite-element analysis therefore carries the molecular-to-structural argument to a functional endpoint: the glycosylation-associated differences identified above are not only compatible with altered mammillary organization, but are also mirrored by a simulated difference in local hatching resistance across the three model species.", False, False),
 ])
 add_centered_figure("Fig6.jpg", width_cm=15.5)
 add_main_figure_legend(
