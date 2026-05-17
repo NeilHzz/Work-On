@@ -191,12 +191,12 @@ def add_main_figure_legend(label, title, caption_parts, before=0, after=160):
 
 # Title (≤135 characters)
 para(
-    "Eggshell glycan states link avian biomineralization to local hatching resistance",
+    "Eggshell glycan states track mammillary organization and local hatching resistance in birds",
     bold=True, size=14, before=0, after=160, align=WD_ALIGN_PARAGRAPH.LEFT
 )
 
 # Short title (≤50 characters)
-para("Eggshell glycans and hatching resistance",
+para("Eggshell glycans and hatching mechanics",
      bold=False, size=11, after=60, align=WD_ALIGN_PARAGRAPH.LEFT)
 
 para("Abstract", bold=True, size=11, before=80, after=40,
@@ -204,17 +204,17 @@ para("Abstract", bold=True, size=11, before=80, after=40,
 
 para(
     "Birds hatch with a broadly conserved egg tooth, shifting unresolved mechanical differences to the eggshell. "
-    "We tested whether the first species-level divergence arises in the mammillary layer, where matrix proteins regulate early mineralization. "
+    "We asked whether the first species-level divergence arises in the mammillary layer, where matrix proteins regulate early mineralization. "
     "Across chicken, duck, and pigeon, micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco modeling, electrostatic analysis, and finite-element simulation showed that mammillary organization provided the first clear eggshell difference while the matrix-protein toolkit remained largely shared. "
     "Among shared proteins, ovalbumin (OVAL) showed an ordered glycan shift from high-mannose in chicken to neutral complex-hybrid in duck and sialylated complex-hybrid in pigeon. "
     "Structural modeling linked those states to lower Ca²⁺-relevant surface accessibility from chicken to pigeon, and finite-element analysis recovered the same ordering in local hatching resistance. "
-    "Matrix-protein glycan state thus links shared eggshell biology to mammillary organization and local hatching performance.",
+    "These data identify matrix-protein glycan state as a chemically interpretable comparative layer linking shared eggshell biology to mammillary organization and local hatching performance.",
     bold=False, size=10, before=0, after=80, align=WD_ALIGN_PARAGRAPH.JUSTIFY
 )
 
 # Teaser (≤125 characters, one sentence for non-specialist readers)
 para(
-    "Teaser: Eggshell glycan states track how birds differ in local hatching resistance.",
+    "Teaser: Shared eggshell proteins are redeployed through glycan state to shape local hatching resistance.",
     bold=False, italic=True, size=10, before=80, after=160, align=WD_ALIGN_PARAGRAPH.LEFT
 )
 
@@ -627,7 +627,7 @@ p_disc_future = para(
 cite(p_disc_future, [4, 11, 12, 20, 21, 42, 49, 50, 51, 52, 57, 70, 76])
 
 p_disc_close = para(
-    "Within those limits, the present three-species comparison still supports one continuous interpretation. Conserved egg-tooth function shifts the analysis to the eggshell, the first clear difference appears in the mammillary layer, and the shared matrix toolkit focuses attention on glycosylation rather than wholesale protein replacement. Within that chain, OVAL glycan state provides the clearest structurally interpretable link between mammillary organization and local hatching resistance. The main claim is therefore deliberately limited: matrix-protein glycan state is not the only explanatory layer, but it is one that remains legible from chemistry to local mechanical consequence in the present dataset. Matrix-protein glycan state is therefore best viewed here as a chemically interpretable comparative layer, not as the sole determinant of eggshell performance."
+    "Within those limits, the present three-species comparison still supports a continuous interpretation. Conserved egg-tooth function shifts the analysis to the eggshell, the first clear divergence appears in the mammillary layer, and the shared matrix toolkit focuses attention on glycosylation rather than wholesale protein replacement. Within that sequence, OVAL glycan state provides a structurally interpretable link between mammillary organization and local hatching resistance. Matrix-protein glycan state is therefore best viewed here as a chemically interpretable comparative layer rather than as the sole determinant of eggshell performance."
 )
 
 cite(p_disc_close, [6, 7, 18, 20, 21, 42, 44, 45, 46, 49, 50, 72, 78, 80])
