@@ -297,14 +297,14 @@ head("Conserved egg-tooth function focuses the analysis on the eggshell")
 
 p_ss1 = smixed([
     ([(' With shell-breaking tool functionally conserved, hatching-related differences had to be sought in the eggshell. We therefore placed extant birds into a comparative space using 10,993 AVONET species records and selected three deliberately separated model species from this comparative space (Fig. 1A).', False, False)], [15, 16, 22, 23, 24, 25, 41]),
-    ([(' This broader mapping showed that the three focal taxa were not arbitrary case studies, but deliberately spaced points in avian ecological-developmental space.', False, False)], [15, 16, 22, 23, 24, 25, 41]),
+    ([(' This broader mapping was used to prioritize the two egg-relevant axes least likely to be secondary: nesting environment, which covaries strongly with terrestrial-to-aquatic habitat use, and offspring developmental state, which spans a continuum from more precocial to more altricial young.', False, False)], [15, 16, 22, 23, 24, 25, 41]),
         ([(' Within this comparison space, ', False, False),
             ('Gallus gallus', False, True),
             (', ', False, False),
             ('Anas platyrhynchos', False, True),
             (', and ', False, False),
             ('Columba livia', False, True),
-            (' occupy representative positions for terrestrial precocial, aquatic-associated precocial, and terrestrial altricial strategies, respectively, and were therefore chosen for downstream comparison.', False, False)], [15, 22, 23, 24, 25, 41]),
+            (' were therefore chosen as deliberately separated species near contrasting regions of those continuous ecological-developmental gradients, so that downstream comparison would be less blurred by intermediate combinations.', False, False)], [15, 22, 23, 24, 25, 41]),
     ([(' This functional grouping only partly overlaps with phylogeny: chicken and duck remain closely related precocial taxa but separate along the habitat axis, whereas pigeon anchors the altricial end of the comparison (Fig. S2).', False, False)], [15, 23, 24, 25]),
     ([(' The comparison was therefore structured to retain shared ancestry in view while still forcing clear life-history separation into the same analytical frame.', False, False)], [15, 23, 24, 25, 41]),
     ([(' The focal species differed in beak-tip geometry, but the egg tooth itself remained a similarly localized dorsal breaker in all three species and pointed to the same inside-out shell-breaking event during hatching (Fig. 1B).', False, False)], [16, 17, 22, 38, 82, 86]),
@@ -550,7 +550,20 @@ para("Discussion", bold=True, size=14, before=320, after=160,
 p_disc_mam1 = smixed([
     ([('The results define a consistent comparative sequence. Because egg-tooth function remained conserved across the three birds, the most informative differences had to be sought in the eggshell. The first mechanically relevant difference appeared in the mammillary layer, and the shared matrix toolkit then focused the comparison on glycosylation rather than wholesale protein replacement. ', False, False),
             ('Within that chain, OVAL glycan state provided the clearest comparative correspondence between molecular variation, surface accessibility, and local hatching resistance.', False, False)], [1, 2, 4, 15, 16, 17, 20, 21, 22, 23, 38, 39, 41, 42, 82, 86]),
-    ([(' The mammillary layer remains central because it is the earliest level at which matrix chemistry, crystal initiation, and eggshell mechanics meet in the same material context. That sequence matters because the analysis does not begin from a favored molecule; it narrows to one through successive structural levels.', False, False)], [1, 2, 20, 28, 30, 36, 38, 53, 54]),
+])
+
+p_disc_regulator = spara([
+    ("The comparative design matters for the interpretation because egg traits are shaped most directly by the problem of successful reproduction rather than by a single binary label.", [4, 15, 23, 27, 39, 41]),
+    (" Nesting environment tracks a terrestrial-to-aquatic gradient, offspring condition spans a continuum from more precocial to more altricial young, and neither axis is well represented by a simple yes-or-no partition.", [15, 23, 24, 25, 39, 41]),
+    (" Duck therefore prevents the comparison from collapsing into a simple precocial-versus-altricial contrast: it retains a broadly precocial developmental condition while shifting toward an intermediate OVAL glycan state and accessibility profile, with a τ_max outcome that converges with pigeon rather than with chicken.", [4, 12, 15, 16, 17, 23, 27, 39, 41]),
+    (" In that sense, the three-species design is informative not because it creates neat categories, but because it samples deliberately separated regions of a continuous ecological-developmental space while keeping the hatching interface itself comparable.", [15, 16, 22, 23, 24, 25, 41]),
+])
+
+p_disc_axis = spara([
+    ("Mammillary-layer mineralization mode remains the central structural level in the interpretation.", [1, 2, 20, 28, 38]),
+    (" Once early calcite crystal units are established, later eggshell regions inherit the spacing logic created in that first mineralization window, so a dense mammillary field changes matrix retention, mineral continuity, and local stress redistribution as well as morphology.", [1, 2, 28, 30, 36, 38]),
+    (" For that reason, mammillary organization is not merely another shell trait, but the earliest material context in which matrix chemistry can plausibly bias later mechanical outcome.", [1, 2, 20, 28, 30, 36, 38]),
+    (" That structural position is why the mammillary layer remains the first place where a cross-species difference can be read as potentially consequential rather than merely descriptive.", [1, 2, 20, 28, 30, 36, 38]),
 ])
 
 p_disc_mam2 = spara([
@@ -573,28 +586,6 @@ p_disc_oval = para(
 
 cite(p_disc_oval, [4, 11, 12, 42, 44, 45, 46, 49, 50, 51, 52, 55, 65])
 
-p_disc_axis = spara([
-    ("Mammillary-layer mineralization mode remains the central structural level in the interpretation.", [1, 2, 20, 28, 38]),
-    (" Once early calcite crystal units are established, later eggshell regions inherit the spacing logic created in that first mineralization window, so a dense mammillary field changes matrix retention, mineral continuity, and local stress redistribution as well as morphology.", [1, 2, 28, 30, 36, 38]),
-    (" For that reason, mammillary organization is not merely another shell trait, but the earliest material context in which matrix chemistry can plausibly bias later mechanical outcome.", [1, 2, 20, 28, 30, 36, 38]),
-])
-
-p_disc_regulator = spara([
-    ("Duck prevents the comparison from collapsing into a simple precocial-versus-altricial contrast.", [4, 15, 23, 27, 39, 41]),
-    (" If developmental mode alone dictated eggshell-building chemistry, duck should cluster with chicken throughout the molecular and mechanical analyses.", [15, 23, 27]),
-    (" It does not: duck retains the broad life-history condition of precocial development while shifting toward an intermediate OVAL glycan state and accessibility profile, with a τ_max outcome that converges with pigeon rather than with chicken.", [4, 12, 16, 17, 39, 41]),
-    (" Duck therefore shows that developmental category alone is insufficient to predict the molecular state ultimately associated with local shell performance.", [4, 12, 15, 23, 27, 39, 41]),
-    (" Duck therefore reinforces the main argument that a shared hatching problem can be solved through different matrix-state configurations.", [4, 12, 15, 23, 27, 39, 41]),
-])
-
-p_disc_discriminate = spara([
-    ("Several plausible background variables can be separated from the features that repeatedly recover the same cross-species pattern.", []),
-    (" Eggshell thickness, body size, and broad reproductive ecology may all contribute background variation, and lineage history undoubtedly matters.", [2, 14, 16, 17, 24, 25]),
-    (" But thickness-based explanations do not account for the τ_max differences, and diffuse lineage-divergence explanations do not explain why the same contrast recurs in glycan class, electrostatic accessibility, and mammillary-layer organization.", [4, 16, 17, 20, 21, 38, 42]),
-    (" What recurs across the dataset is therefore not a generic species ranking, but a repeated alignment between glycan state, surface shielding, mammillary organization, and τ_max grouping.", [4, 16, 17, 20, 21, 38, 42]),
-    (" Ecology and phylogeny establish the design space, whereas matrix-protein glycan state offers the most proximate chemically readable layer recovered in this three-species dataset, rather than serving as a passive background descriptor alone.", [1, 2, 4, 20, 21, 38, 42, 57, 70]),
-])
-
 p_disc_mech = spara([
     ("The mechanical analysis extends the same pattern to an organism-level functional context.", [16, 17, 38]),
     (" τ_max rather than raw fracture force best captures the mammillary-level mechanical difference.", [16, 17, 34, 35, 37, 38]),
@@ -607,6 +598,14 @@ p_disc_evo = para(
 )
 
 cite(p_disc_evo, [3, 15, 16, 17, 37, 38, 39, 41, 57])
+
+p_disc_discriminate = spara([
+    ("Several plausible background variables can be separated from the features that repeatedly recover the same cross-species pattern.", []),
+    (" Eggshell thickness, body size, and broad reproductive ecology may all contribute background variation, and lineage history undoubtedly matters.", [2, 14, 16, 17, 24, 25]),
+    (" But thickness-based explanations do not account for the τ_max differences, and diffuse lineage-divergence explanations do not explain why the same contrast recurs in glycan class, electrostatic accessibility, and mammillary-layer organization.", [4, 16, 17, 20, 21, 38, 42]),
+    (" What recurs across the dataset is therefore not a generic species ranking, but a repeated alignment between glycan state, surface shielding, mammillary organization, and τ_max grouping.", [4, 16, 17, 20, 21, 38, 42]),
+    (" Ecology and phylogeny establish the design space, whereas matrix-protein glycan state offers the most proximate chemically readable layer recovered in this three-species dataset, rather than serving as a passive background descriptor alone.", [1, 2, 4, 20, 21, 38, 42, 57, 70]),
+])
 
 p_disc_function = para(
     "The broader implication is methodological within comparative biomineralization as much as biological. A chemically specific post-translational state on a shared matrix protein can help fill the missing layer between eggshell structure and local function in a tractable comparative dataset. This intermediate layer is especially valuable in biomineralization systems, where broad proteome turnover is often easier to detect than the chemical states that bias crystal growth. Similar logic should be tested beyond avian eggshells rather than assumed, because many mineralized systems rely on abundant matrix proteins whose post-translational states can shift without wholesale replacement of the underlying repertoire. In that narrower sense, the present study shows how a conserved protein toolkit can be differentially redeployed through glycan state in a three-species eggshell comparison."
