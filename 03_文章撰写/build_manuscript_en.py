@@ -206,8 +206,8 @@ para(
     "Birds hatch with a broadly conserved egg tooth, shifting unresolved mechanical differences to the eggshell. "
     "We asked whether, within this three-species comparison, the first eggshell divergence appeared in the mammillary layer, where matrix proteins regulate early mineralization. "
     "Across chicken, duck, and pigeon, micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco modeling, electrostatic analysis, and finite-element simulation showed that mammillary organization provided the first clear eggshell difference while the matrix-protein toolkit remained largely shared. "
-    "Among shared proteins, ovalbumin (OVAL) showed an ordered glycan shift from high-mannose in chicken to neutral complex-hybrid in duck and sialylated complex-hybrid in pigeon. "
-    "Structural modeling associated those states with lower Ca²⁺-relevant surface accessibility from chicken to pigeon, and finite-element analysis recovered the same ordering in simulated local hatching resistance. "
+    "Among shared proteins, ovalbumin (OVAL) showed a glycan-state contrast spanning high-mannose-dominant chicken, neutral complex-hybrid-dominant duck, and sialylated complex-hybrid-dominant pigeon. "
+    "Structural modeling associated those states with lower Ca²⁺-relevant surface accessibility from chicken to pigeon, and finite-element analysis recovered the same chicken-versus-duck/pigeon mechanical contrast in simulated local hatching resistance. "
     "Together, these observations position matrix-protein glycan state as a chemically interpretable comparative layer that covaries with mammillary organization and local hatching performance in this three-species dataset.",
     bold=False, size=10, before=0, after=80, align=WD_ALIGN_PARAGRAPH.JUSTIFY
 )
@@ -226,46 +226,46 @@ para("Introduction", bold=True, size=14, before=0, after=160,
 
 # §1 — Background value
 p_s1a = spara([
-    (" Bird hatching begins with a simple mechanical problem: the embryo must focus force on one small shell-breaking site.", [16, 17, 38, 82, 86]),
-    (" In birds, that site is defined by the egg tooth, a transient structure that presses the inner eggshell surface during escape.", [16, 17, 38, 82, 86]),
-    (" If egg-tooth function is broadly conserved across species, then meaningful hatching differences are more likely to lie in the eggshell than in the shell-breaking tool itself.", [16, 17, 38, 82, 86]),
-    (" Avian eggshells already vary with incubation environment and life-history strategy rather than presenting one uniform solution across birds.", [15, 39, 87, 88]),
+    (" Bird hatching begins with a simple mechanical problem: the embryo must focus force on one small shell-breaking site.", [16, 38, 86]),
+    (" In birds, that site is defined by the egg tooth, a transient structure that presses the inner eggshell surface during escape.", [16, 38, 86]),
+    (" If egg-tooth function is broadly conserved across species, then meaningful hatching differences are more likely to lie in the eggshell than in the shell-breaking tool itself.", [16, 38, 86]),
+    (" Avian eggshells already vary with incubation environment and life-history strategy rather than presenting one uniform solution across birds.", [15, 39, 87]),
     (" Nesting habitat can alter the balance among water loss, gas exchange, and microbial exposure, so terrestrial and aquatic-associated birds need not build identical shell barriers or pore systems.", [39, 87, 88]),
     (" Developmental mode adds a second axis: precocial and altricial birds differ in offspring independence and parental buffering, and comparative work has linked that contrast to differences in cuticle deployment and eggshell antibacterial performance.", [15, 26]),
-    (" The mammillary layer is the strongest place to start because it is the first eggshell layer to shape mechanics, and its mammillary knobs mark where calcite growth begins under the control of eggshell matrix proteins.", [1, 4, 28, 38]),
-    (" The eggshell therefore lets us read matrix chemistry, microstructure, and hatching-relevant mechanics within one structure.", [1, 4, 16, 20, 21, 38, 42]),
-    (" Because later shell layers inherit that early mineralization context, mammillary organization is also the point at which local matrix differences are most likely to scale into mature shell behavior.", [1, 4, 28, 38, 42]),
+    (" The mammillary layer is the strongest place to start because it is the first eggshell layer to shape mechanics, and its mammillary knobs mark where calcite growth begins under the control of eggshell matrix proteins.", [1, 4, 28]),
+    (" The eggshell therefore lets us read matrix chemistry, microstructure, and hatching-relevant mechanics within one structure.", [1, 16, 38]),
+    (" Because later shell layers inherit that early mineralization context, mammillary organization is also the point at which local matrix differences are most likely to scale into mature shell behavior.", [1, 4, 28]),
 ])
 
 p_s1b = spara([
-    (" That makes mammillary organization the first phenotype to examine, because it is the earliest eggshell layer where structural differences can plausibly become mechanical differences.", [1, 4, 16, 28, 38]),
-    (" Once attention moves from the conserved hatching tool to this mechanically important eggshell layer, the next question is which molecular regulators organize that layer and how they differ across species.", [1, 2, 4, 20, 21, 28, 38]),
-    (" The comparison therefore becomes mechanistic rather than descriptive: once the interface is fixed, a shared shell-building system can be tuned differently across species.", [1, 2, 4, 20, 21, 28, 38]),
+    (" That makes mammillary organization the first phenotype to examine, because it is the earliest eggshell layer where structural differences can plausibly become mechanical differences.", [1, 16, 28]),
+    (" Once attention moves from the conserved hatching tool to this mechanically important eggshell layer, the next question is which molecular regulators organize that layer and how they differ across species.", [1, 2, 4]),
+    (" The comparison therefore becomes mechanistic rather than descriptive: once the interface is fixed, a shared shell-building system can be tuned differently across species.", [1, 2, 4]),
 ])
 
 # §2 — Prior work and its limits
 p_intro2 = spara([
-    (" Eggshell matrix proteins are already known to regulate mammillary-layer mineralization, crystal growth, and mature eggshell architecture. Well-studied examples include ovocleidin-17 (OC17), a calcite-associated eggshell protein; ovocleidin-116 (OC116), a glycosylated eggshell-matrix proteoglycan; ovotransferrin (TRFE), a recurrent iron-binding matrix glycoprotein; and ovalbumin (OVAL), an abundant glycoprotein that has also remained a functional candidate in in vitro mineralization-related work.", [1, 2, 4, 6, 7, 8, 9, 10, 19, 20, 21, 29]),
-    (" Because these proteins recur across avian eggshell studies, they offer a natural comparative anchor for asking how a shared mineralization toolkit is reused in different shell contexts.", [1, 2, 4, 20, 21]),
-    (" But these proteins do not act only through abundance. As highlighted by Zeng et al., the same eggshell-matrix proteins can appear in distinct N-glycosylation states, implying that differences in glycosylation extent can change biological function without wholesale protein replacement.", [18, 20, 21, 49, 50, 52]),
-    (" Avian eggshell studies, however, have rarely resolved which specific N-glycan forms are carried by shared matrix proteins across species.", [18, 20, 21]),
-    (" That absence is limiting because comparative eggshell work has often had to infer mechanism from protein identity or abundance without directly observing the glycan forms carried by those same shared proteins.", [18, 20, 21]),
-    (" The missing layer is therefore not whether matrix proteins matter, but whether glycosylation on shared matrix proteins can explain why similar protein toolkits yield different eggshell structures.", [2, 4, 18, 20, 21]),
+    (" Eggshell matrix proteins are already known to regulate mammillary-layer mineralization, crystal growth, and mature eggshell architecture.", [1, 2, 4]),
+    (" Well-studied examples include ovocleidin-17 (OC17), ovocleidin-116 (OC116), ovotransferrin (TRFE), and ovalbumin (OVAL).", [10, 19, 21, 29]),
+    (" Because these proteins recur across avian eggshell studies, they offer a natural comparative anchor for asking how a shared mineralization toolkit is reused in different shell contexts.", [1, 2, 4]),
+    (" But these proteins do not act only through abundance. Earlier eggshell glycoproteomic work showed that the same eggshell-matrix proteins can appear in distinct N-glycosylation states, implying that differences in glycosylation extent can change biological function without wholesale protein replacement.", [18]),
+    (" Avian eggshell studies, however, have rarely resolved which specific N-glycan forms are carried by shared matrix proteins across species.", [18]),
+    (" That absence is limiting because comparative eggshell work has often had to infer mechanism from protein identity or abundance without directly observing the glycan forms carried by those same shared proteins.", [18]),
+    (" The missing layer is therefore not whether matrix proteins matter, but whether glycosylation on shared matrix proteins can explain why similar protein toolkits yield different eggshell structures.", [2, 4, 18]),
 ])
 
 p_intro_sig = spara([
-    (" That gap matters because glycosylation can influence several protein properties, including stability, intermolecular recognition, surface exposure, and conformational control; among them, folding state is especially important here.", [11, 12, 18, 42, 43, 49, 50, 51]),
-    (" OVAL undergoes Ca²⁺-dependent unfolding as mineralization begins, making glycan-dependent surface accessibility a testable mechanistic variable.", [6, 7, 11, 12, 18, 42, 43]),
-    (" That logic is why we sought to connect glycan-state detection to Ca²⁺-relevant accessibility: if glycan differences reshape how the same shared matrix protein holds or leaves its folded state, then structural modeling should reveal corresponding differences in the Ca²⁺-accessible surface presented at the onset of mineralization.", [11, 12, 18, 42, 43, 49, 50, 51]),
-    (" If that structural difference matters biologically, then it should still be visible at the hatching-relevant mechanical end point: local resistance at the mammillary interface under egg-tooth-like loading.", [16, 17, 34, 35, 37, 38]),
+    (" That gap matters because glycosylation can influence several protein properties, including stability, intermolecular recognition, surface exposure, and conformational control; among them, folding state is especially important here.", [49, 50]),
+    (" Prior mineralization-related work suggested that OVAL can enter a Ca²⁺-responsive conformational state during early shell formation, making glycan-dependent surface accessibility a testable mechanistic variable.", [4, 29]),
+    (" That logic is why we sought to connect glycan-state detection to Ca²⁺-relevant accessibility: if glycan differences reshape how the same shared matrix protein presents its folded surface, then structural modeling should reveal corresponding differences in the Ca²⁺-accessible interface presented at the onset of mineralization.", [11, 42, 43]),
+    (" If that structural difference matters biologically, then it should still be visible at the hatching-relevant mechanical end point: local resistance at the mammillary interface under egg-tooth-like loading.", [16, 17, 38]),
 ])
 
-# §3 — Core gap
 p_intro_gap = spara([
-    (" We therefore framed the core question more narrowly: once the comparison is anchored to a conserved egg-tooth interface, can glycan-state differences on shared matrix proteins help account for why the same shell-building toolkit is associated with different Ca²⁺-accessible states when mineralization begins?", [11, 12, 18, 42, 43, 49, 50, 51]),
-    (" OVAL provided a tractable test case because prior in vitro work had already shown a specific mechanistic sequence, Ca²⁺ loading, then unfolding, then mineralization onset, making it reasonable to ask whether glycan state contributes to that calcium-accessible conformational context.", [6, 7, 11, 12, 18, 42, 43]),
-    (" The analysis therefore follows a chain from conserved hatching tool to eggshell structure, matrix regulation, glycosylation, Ca²⁺-accessible surface state, structural inference, and finite-element validation.", [4, 11, 12, 16, 42, 57, 69]),
-    (" The aim was not to force all three species into one overly simple ranking, but to ask whether one conserved interface could still reveal a coherent path from shell structure to molecular state and local function.", [4, 11, 12, 16, 42, 57, 69]),
+    (" We therefore framed the core question more narrowly: once the comparison is anchored to a conserved egg-tooth interface, can glycan-state differences on shared matrix proteins help account for why the same shell-building toolkit is associated with different Ca²⁺-accessible states when mineralization begins?", [18, 42]),
+    (" OVAL provided a tractable test case because prior mineralization-related work had already made its Ca²⁺-responsive surface behavior biologically relevant, making it reasonable to ask whether glycan state contributes to that calcium-accessible context.", [4, 29]),
+    (" The analysis therefore follows a chain from conserved hatching tool to eggshell structure, matrix regulation, glycosylation, Ca²⁺-accessible surface state, structural inference, and finite-element validation.", []),
+    (" The aim was not to force all three species onto one overly simple axis, but to ask whether one conserved interface could still reveal a coherent path from shell structure to molecular state and local function.", []),
 ])
 
 # §4 — This study
@@ -276,13 +276,13 @@ p_intro4 = smixed([
             ("Anas platyrhynchos", False, True),
             (", and ", False, False),
             ("Columba livia", False, True),
-            (" as terrestrial precocial, aquatic-associated precocial, and terrestrial altricial models, respectively, thereby spanning crossed developmental and ecological contrasts within a common hatching framework.", False, False)], [3, 22, 24, 25, 82, 83]),
-    ([(" This design prevented the comparison from collapsing into either a simple phylogenetic pairing or a single precocial-versus-altricial contrast.", False, False)], [3, 22, 24, 25, 82, 83]),
-    ([(" We integrated micro-CT morphometry to define mammillary organization, comparative eggshell-matrix proteomics and intact glycopeptide mass spectrometry to resolve shared matrix proteins and their glycan states, Re-Glyco structural modeling and electrostatic analysis to infer protein-surface consequences, and finite-element simulation to test whether the same cross-species contrast remained detectable in local hatching resistance.", False, False)], [3, 22, 24, 25]),
-    ([(" Each level was therefore used to constrain the next, so that molecular interpretation remained tied to shell structure rather than floating free of the material context.", False, False)], [3, 22, 24, 25, 42]),
-        ([(" In the present dataset, that chain was clearest for OVAL, whose glycan states aligned with mammillary density, Ca²⁺-relevant surface accessibility, and local hatching resistance.", False, False)], [11, 12, 16]),
-    ([(" OVAL was therefore not introduced as a preferred candidate in advance; it emerged as the shared protein on which the full comparison became most legible.", False, False)], [11, 12, 16, 18, 42]),
-        ([(" The resulting Introduction therefore leads into the Results with the same causal sequence used by the manuscript as a whole: conserved egg-tooth function, eggshell focus, mammillary organization, matrix proteins, glycosylation, structural inference, and finite-element validation.", False, False)], [4, 11, 12, 16, 42]),
+            (" as terrestrial precocial, aquatic-associated precocial, and terrestrial altricial models, respectively, thereby spanning crossed developmental and ecological contrasts within a common hatching framework.", False, False)], [22, 23, 24]),
+    ([(" This design prevented the comparison from collapsing into either a simple phylogenetic pairing or a single precocial-versus-altricial contrast.", False, False)], [22, 24, 25]),
+    ([(" We integrated micro-CT morphometry to define mammillary organization, comparative eggshell-matrix proteomics and intact glycopeptide mass spectrometry to resolve shared matrix proteins and their glycan states, Re-Glyco structural modeling and electrostatic analysis to infer protein-surface consequences, and finite-element simulation to test whether the same cross-species contrast remained detectable in local hatching resistance.", False, False)], []),
+    ([(" Each level was therefore used to constrain the next, so that molecular interpretation remained tied to shell structure rather than floating free of the material context.", False, False)], []),
+        ([(" In the present dataset, that chain was clearest for OVAL, whose glycan states aligned with mammillary density, Ca²⁺-relevant surface accessibility, and local hatching resistance.", False, False)], []),
+    ([(" OVAL was therefore not introduced as a preferred candidate in advance; it emerged as the shared protein on which the full comparison became most legible.", False, False)], [18]),
+        ([(" The resulting Introduction therefore leads into the Results with the same causal sequence used by the manuscript as a whole: conserved egg-tooth function, eggshell focus, mammillary organization, matrix proteins, glycosylation, structural inference, and finite-element validation.", False, False)], []),
 ])
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -337,9 +337,9 @@ p_s0b = mixed([
     ("A. platyrhynchos", False, True),
     (" (0.4413 ± 0.0249), and lowest in ", False, False),
     ("G. gallus", False, True),
-    (" (0.3975 ± 0.0127). Quantitatively, chicken showed the densest early mineralization pattern, pigeon devoted the largest share of shell volume to crystal units grown from individual mammillary knobs, and duck remained intermediate in crystal-unit proportion while resembling pigeon in density. The two metrics therefore did not collapse into one simple monotonic ranking, but they agreed that mammillary organization had already diverged in measurable ways before later shell traits were considered. Because mammillary organization is the earliest structural layer governing eggshell mechanics and is controlled by eggshell matrix proteins, the next question was whether this cross-species morphology reflected wholesale toolkit replacement or different use of a largely shared system.", False, False),
+    (" (0.3975 ± 0.0127). Quantitatively, chicken showed the densest early mineralization pattern, pigeon devoted the largest share of shell volume to crystal units grown from individual mammillary knobs, and duck remained intermediate in crystal-unit proportion while resembling pigeon in density. The two metrics therefore did not collapse into one simple monotonic axis, but they agreed that mammillary organization had already diverged in measurable ways before later shell traits were considered. Because mammillary organization is the earliest structural layer governing eggshell mechanics and is controlled by eggshell matrix proteins, the next question was whether this cross-species morphology reflected wholesale toolkit replacement or different use of a largely shared system.", False, False),
 ])
-cite(p_s0b, [1, 2, 28, 30, 36, 38, 53, 54, 57])
+cite(p_s0b, [1, 4, 28])
 
 doc.add_page_break()
 add_centered_figure("Fig1.jpg", width_cm=10.1, before=0, after=20)
@@ -366,20 +366,20 @@ doc.add_page_break()
 head("Shared matrix proteins focus the comparison on glycosylation")
 
 p_sprot_bg = spara([
-    ("Orthogroup analysis identified a large shared core together with pairwise-shared and lineage-restricted complements in the eggshell matrix proteomes of the three species (Fig. S3). This pattern indicates that the observed eggshell differences did not arise from wholesale replacement of the matrix-protein toolkit.", [11, 20, 52, 53, 54]),
+    ("Orthogroup analysis identified a large shared core together with pairwise-shared and lineage-restricted complements in the eggshell matrix proteomes of the three species (Fig. S3). This pattern indicates that the observed eggshell differences did not arise from wholesale replacement of the matrix-protein toolkit.", []),
     (" At the overall level, the proteome still followed the broad frame set by shared ancestry (Fig. S4). The main question therefore shifted from which proteins were present to how a shared set of proteins was being used.", []),
-    (" The retained shared core was therefore the main molecular background against which any candidate mechanistic difference had to be judged, not a residual category to be ignored.", [11, 20, 52, 53, 54]),
+    (" The retained shared core was therefore the main molecular background against which any candidate mechanistic difference had to be judged, not a residual category to be ignored.", []),
 ])
 
 p_sprot_go = spara([
-    ("GO enrichment and gene-family turnover further indicated lineage-specific immune and defense background (Figs. S5 and S6), but those signals mainly described the comparative backdrop rather than the feature most directly tied to mammillary organization.", [3, 5, 14, 15, 24, 25, 26, 29, 52]),
-    (" They therefore remained relevant as evolutionary context, yet they did not by themselves identify the most proximate layer linking eggshell structure to hatching-relevant mechanics.", [3, 5, 14, 15, 24, 25, 26, 29, 52]),
+    ("GO enrichment and gene-family turnover further indicated lineage-specific immune and defense background (Figs. S5 and S6), but those signals mainly described the comparative backdrop rather than the feature most directly tied to mammillary organization.", []),
+    (" They therefore remained relevant as evolutionary context, yet they did not by themselves identify the most proximate layer linking eggshell structure to hatching-relevant mechanics.", []),
 ])
 
 p_sprot_focus = spara([
     (" At the same time, the G. gallus-exclusive set was significantly enriched for protein N-linked glycosylation (BP; Fig. S5), indicating that the most informative differences lay not only in proteome background but also in post-translational state.", []),
-    (" Because glycosylation can change what the same matrix protein does, this result narrowed the analysis from broad proteome background to comparative glycoproteomics and, specifically, to how N-linked glycosylation on shared proteins differed across the three species.", [8, 18, 19, 21]),
-    (" We therefore no longer asked only which matrix proteins were present, but which chemical states were preferentially deployed on those proteins in each lineage.", [8, 18, 19, 21]),
+    (" Because glycosylation can change what the same matrix protein does, this result narrowed the analysis from broad proteome background to comparative glycoproteomics and, specifically, to how N-linked glycosylation on shared proteins differed across the three species.", [18]),
+    (" We therefore no longer asked only which matrix proteins were present, but which chemical states were preferentially deployed on those proteins in each lineage.", []),
 ])
 
 head("OVAL glycosylation marks the clearest cross-species difference")
@@ -402,20 +402,18 @@ p_s2b = mixed([
     ("G. gallus", False, True),
     (" as the reference, non-reference candidates were retained only when the mean E-value was below 1 × 10⁻⁵ and sequence identity met the final comparability thresholds. This filtering restricted the downstream comparison to high-confidence orthologs. The restriction was important because the structural interpretation below required comparing like with like rather than merely different members of a broad protein family. Under that stricter mapping, OC17 was glycosylated only in chicken, whereas OC116, TRFE, and OVAL all retained glycosylation signals across the three species and therefore served as shared anchors. Among them, OVAL showed the clearest cross-species glycan differences and became the priority target for subsequent structural analysis.", False, False),
 ])
-cite(p_s2b, [6, 7, 8, 9, 10, 19, 21, 29])
-
 p_s2c = spara([
     ("Integrating protein abundance and glycan abundance into the same analytical frame then clarified why OVAL, rather than OC116 or TRFE, best tracked the cross-species eggshell differences (Fig. 3B-D). Across the full dataset, protein-glycan coupling was weak in chicken but consistently positive in duck and pigeon. The three lineages therefore differed not only in glycan identity, but also in how glycosylation scaled with protein output.", []),
     (" Yet the highlighted eggshell-matrix proteins showed that high abundance and high glycan output were not the same thing. OVAL remained abundant in all three species, but its glycan burden changed sharply across them: relatively modest in chicken, stronger in duck, and strongest in pigeon. OVAL therefore stayed cross-species comparable while also escaping simple abundance matching.", []),
-    (" By comparison, OC116 and TRFE remained informative shared proteins but did not separate bulk protein abundance from glycan output as consistently as OVAL did in the same analytical space.", [1, 4, 6, 7, 8, 18, 47, 48]),
-    (" The pairwise enrichment plots in Fig. 3E-G sharpened the same point. Intact-glycopeptide assignments identified OVAL as the clearest cross-species contrast, from compact high-mannose glycans in chicken to neutral complex-hybrid glycans in duck and more extended sialylated complex-hybrid glycans in pigeon. Fig. 3B-G therefore identified OVAL as the shared protein whose glycosylation changed in the most consistently phenotype-relevant way.", [1, 4, 6, 7, 8, 18, 47, 48]),
+    (" By comparison, OC116 and TRFE remained informative shared proteins but did not separate bulk protein abundance from glycan output as consistently as OVAL did in the same analytical space.", []),
+    (" The pairwise enrichment plots in Fig. 3E-G sharpened the same point. Intact-glycopeptide assignments identified OVAL as the clearest cross-species contrast, from compact high-mannose glycans in chicken to neutral complex-hybrid glycans in duck and more extended sialylated complex-hybrid glycans in pigeon. Fig. 3B-G therefore identified OVAL as the shared protein whose glycosylation changed in the most consistently phenotype-relevant way.", []),
 ])
 
 p_s2d = spara([
-    ("Because those OVAL glycan classes differ strongly in size and charge distribution, the comparison pointed to OVAL surface accessibility rather than OVAL abundance alone as the comparative variable most plausibly associated with early eggshell mineralization.", [1, 4, 6, 7, 8, 18, 47, 48]),
-    (" The resulting structural question was how glycan state changed the exposed, chemically active OVAL surface during early mineralization, a feature that could be tested directly by structural ensembles and electrostatic calculations rather than inferred only from abundance matrices.", [1, 4, 6, 7, 8, 18, 42, 47, 48]),
-    (" The relevant variable was not simply how much OVAL was present, but how much of its acidic interface remained chemically reachable once decorated by different glycans.", [1, 4, 6, 7, 8, 18, 42, 47, 48]),
-    (" Ortholog control, abundance decoupling, and glycan-class progression left OVAL as the only shared candidate that remained simultaneously comparable, chemically specific, and structurally actionable.", [1, 4, 6, 7, 8, 18, 42, 47, 48]),
+    ("Because those OVAL glycan classes differ strongly in size and charge distribution, the comparison pointed to OVAL surface accessibility rather than OVAL abundance alone as the comparative variable most plausibly associated with early eggshell mineralization.", []),
+    (" The resulting structural question was how glycan state changed the exposed, chemically active OVAL surface during early mineralization, a feature that could be tested directly by structural ensembles and electrostatic calculations rather than inferred only from abundance matrices.", []),
+    (" The relevant variable was not simply how much OVAL was present, but how much of its acidic interface remained chemically reachable once decorated by different glycans.", []),
+    (" Ortholog control, abundance decoupling, and glycan-class progression left OVAL as the only shared candidate that remained simultaneously comparable, chemically specific, and structurally actionable.", []),
 ])
 
 add_centered_figure("Fig3.jpg", width_cm=15.5)
@@ -430,23 +428,23 @@ add_main_figure_legend(
 head("OVAL glycan state reshapes surface accessibility")
 
 p_s3a = spara([
-    ("OVAL was then examined as the strongest shared candidate for a structural mechanism. In vitro work has already shown that OVAL can participate in early mineralization-related events, so glycan state provided a biologically plausible control layer. We therefore rebuilt dominant glycosylated OVAL ensembles together with matched deglycosylated references to test whether the three species differed mainly through glycan-dependent surface behavior rather than through backbone sequence alone.", [6, 7, 11, 12, 18, 42, 43]),
-    (" Within that shared structural frame, the first question was whether glycosylation alone was sufficient to separate each species from its matched apo reference. In Fig. 4A, a Ca²⁺ hotspot denotes an acidic Asp/Glu surface position with sufficiently negative electrostatic potential to favor local calcium approach. Fig. 4B shows how much of that carboxylate-bearing surface remained physically exposed, and Fig. 4C visualizes the same shift as a whole-surface electrostatic map. Across all three species, glycosylation displaced these readouts away from the matched deglycosylated references, whereas the deglycosylated backbones themselves clustered much more closely across species. Once glycans were removed, much of the cross-species separation collapsed, indicating that most of that divergence was introduced by glycosylation rather than by the protein scaffold alone (Fig. S7).", [6, 7, 11, 12, 18, 42, 43]),
+    ("OVAL was then examined as the strongest shared candidate for a structural mechanism. In vitro work has already shown that OVAL can participate in early mineralization-related events, so glycan state provided a biologically plausible control layer. We therefore rebuilt dominant glycosylated OVAL ensembles together with matched deglycosylated references to test whether the three species differed mainly through glycan-dependent surface behavior rather than through backbone sequence alone.", [4, 11]),
+    (" Within that shared structural frame, the first question was whether glycosylation alone was sufficient to separate each species from its matched apo reference. In Fig. 4A, a Ca²⁺ hotspot denotes an acidic Asp/Glu surface position with sufficiently negative electrostatic potential to favor local calcium approach. Fig. 4B shows how much of that carboxylate-bearing surface remained physically exposed, and Fig. 4C visualizes the same shift as a whole-surface electrostatic map. Across all three species, glycosylation displaced these readouts away from the matched deglycosylated references, whereas the deglycosylated backbones themselves clustered much more closely across species. Once glycans were removed, much of the cross-species separation collapsed, indicating that most of that divergence was introduced by glycosylation rather than by the protein scaffold alone (Fig. S7).", []),
 ])
 
 p_s3b = spara([
-    (" That glycan-dependent separation then required a geometrical explanation. In Fig. 4D, radius of gyration reports how broadly a glycan occupies space. Fig. 4E captures how extended the chain becomes, Fig. 4F measures how far the glycan projects from the protein surface, and Fig. 4G shows how tightly it folds back to contact the protein.", [11, 12, 42, 43, 44, 45, 46]),
-    (" Read together, these metrics showed that pigeon glycans occupied the largest conformational space yet also approached the protein surface most closely, consistent with long but surface-hugging glycans. Chicken glycans remained the most compact and least contacting, whereas duck remained intermediate. The three species therefore differed not only in glycan class, but also in the spatial manner by which the glycan layer sat over the OVAL surface (Fig. 4D-G).", [11, 12, 42, 43, 44, 45, 46]),
+    (" That glycan-dependent separation then required a geometrical explanation. In Fig. 4D, radius of gyration reports how broadly a glycan occupies space. Fig. 4E captures how extended the chain becomes, Fig. 4F measures how far the glycan projects from the protein surface, and Fig. 4G shows how tightly it folds back to contact the protein.", []),
+    (" Read together, these metrics showed that pigeon glycans occupied the largest conformational space yet also approached the protein surface most closely, consistent with long but surface-hugging glycans. Chicken glycans remained the most compact and least contacting, whereas duck remained intermediate. The three species therefore differed not only in glycan class, but also in the spatial manner by which the glycan layer sat over the OVAL surface (Fig. 4D-G).", []),
 ])
 
 p_s3c = spara([
-    (" Once geometry diverged, the next question was whether those differences changed how strongly the glycan layer masked the shared acidic OVAL interface. Fig. 4H quantified interface shielding, that is, how much of the relevant acidic surface was masked by glycans. Fig. 4I reported the solvent-accessible surface area of hotspot residues and therefore how much of those acidic sites remained open to solvent and potentially to ions. Fig. 4J recorded what fraction of candidate acidic residues still remained in the hotspot category, and Fig. 4K counted how many Ca²⁺-relevant hotspots remained both electrostatically favorable and physically reachable.", [11, 12, 42, 43, 44, 45, 46, 49, 50, 51]),
-    (" Across these four readouts, shielding increased from chicken to duck to pigeon, whereas exposed hotspot area, hotspot fraction, and net accessible hotspot number declined in the opposite direction. At this stage the interpretation became specific: the species were not separated simply by carrying different glycans, but by how strongly those glycans covered the shared acidic OVAL interface that could otherwise engage local calcium during early mineralization (Fig. 4H-K).", [11, 12, 42, 43, 44, 45, 46, 49, 50, 51]),
+    (" Once geometry diverged, the next question was whether those differences changed how strongly the glycan layer masked the shared acidic OVAL interface. Fig. 4H quantified interface shielding, that is, how much of the relevant acidic surface was masked by glycans. Fig. 4I reported the solvent-accessible surface area of hotspot residues and therefore how much of those acidic sites remained open to solvent and potentially to ions. Fig. 4J recorded what fraction of candidate acidic residues still remained in the hotspot category, and Fig. 4K counted how many Ca²⁺-relevant hotspots remained both electrostatically favorable and physically reachable.", []),
+    (" Across these four readouts, shielding increased from chicken to duck to pigeon, whereas exposed hotspot area, hotspot fraction, and net accessible hotspot number declined in the opposite direction. At this stage the interpretation became specific: the species were not separated simply by carrying different glycans, but by how strongly those glycans covered the shared acidic OVAL interface that could otherwise engage local calcium during early mineralization (Fig. 4H-K).", []),
 ])
 
 p_s3d = spara([
-    (" The same ordering remained visible when accessibility was partitioned into exposed and shielded fractions at the whole-interface level. Fig. 4L performed that bookkeeping for hotspot counts, whereas Fig. 4M did so for hotspot-residue surface area, allowing the reader to see not only how much potentially Ca²⁺-relevant surface existed, but how much of it remained usable after glycan masking.", [11, 12, 42, 43, 44, 45, 46, 49, 50, 51]),
-    (" Chicken retained the largest exposed fraction, pigeon shifted the largest fraction into the shielded compartment, and duck again remained intermediate. The three dominant OVAL glycoforms therefore converged on one ordered physical consequence: high-mannose chicken OVAL left the acidic interface most open, neutral complex-hybrid duck OVAL partly covered it, and sialylated complex-hybrid pigeon OVAL produced the most extensive shielding. The reglycosylation and electrostatic analyses thus resolved the cross-species contrast into a stepwise physical interpretation, from glycan composition, to glycan geometry, to interface masking, to Ca²⁺-relevant accessibility on a shared matrix protein (Fig. 4L-M).", [11, 12, 42, 43, 44, 45, 46, 49, 50, 51]),
+    (" The same cross-species contrast remained visible when accessibility was partitioned into exposed and shielded fractions at the whole-interface level. Fig. 4L performed that bookkeeping for hotspot counts, whereas Fig. 4M did so for hotspot-residue surface area, allowing the reader to see not only how much potentially Ca²⁺-relevant surface existed, but how much of it remained usable after glycan masking.", []),
+    (" Chicken retained the largest exposed fraction, pigeon shifted the largest fraction into the shielded compartment, and duck again remained intermediate. The three dominant OVAL glycoforms therefore converged on one shared physical contrast: high-mannose chicken OVAL left the acidic interface most open, neutral complex-hybrid duck OVAL partly covered it, and sialylated complex-hybrid pigeon OVAL produced the most extensive shielding. The reglycosylation and electrostatic analyses thus resolved the cross-species contrast into a stepwise physical interpretation, from glycan composition, to glycan geometry, to interface masking, to Ca²⁺-relevant accessibility on a shared matrix protein (Fig. 4L-M).", []),
 ])
 
 doc.add_page_break()
@@ -539,7 +537,7 @@ add_main_figure_legend(
     ],
 )
 
-cite(p_s4a, [16, 17, 34, 35, 37, 38])
+cite(p_s4a, [16, 17, 38])
 
 # ════════════════════════════════════════════════════════════════════════════
 # Discussion
@@ -549,91 +547,86 @@ para("Discussion", bold=True, size=14, before=320, after=160,
 
 p_disc_mam1 = smixed([
     ([('The results define a consistent comparative sequence. Because egg-tooth function remained conserved across the three birds, the most informative differences had to be sought in the eggshell. The first mechanically relevant difference appeared in the mammillary layer, and the shared matrix toolkit then focused the comparison on glycosylation rather than wholesale protein replacement. ', False, False),
-            ('Within that chain, OVAL glycan state provided the clearest comparative correspondence between molecular variation, surface accessibility, and local hatching resistance.', False, False)], [1, 2, 4, 15, 16, 17, 20, 21, 22, 23, 38, 39, 41, 42, 82, 86]),
+            ('Within that chain, OVAL glycan state provided the clearest comparative correspondence between molecular variation, surface accessibility, and local hatching resistance.', False, False)], [1, 16, 18]),
 ])
 
 p_disc_regulator = spara([
-    ("The comparative design matters for the interpretation because egg traits are shaped most directly by the problem of successful reproduction rather than by a single binary label.", [4, 15, 23, 27, 39, 41]),
-    (" Nesting environment tracks a terrestrial-to-aquatic gradient, offspring condition spans a continuum from more precocial to more altricial young, and neither axis is well represented by a simple yes-or-no partition.", [15, 23, 24, 25, 39, 41]),
-    (" Earlier comparative discussions often used habitat association or developmental mode as categorical descriptors of eggshell biology; the present design extends that literature by treating both as continuous axes and by deliberately sampling separated regions of that shared space.", [15, 23, 24, 25, 39, 41]),
-    (" Duck therefore prevents the comparison from collapsing into a simple precocial-versus-altricial contrast: it retains a broadly precocial developmental condition while shifting toward an intermediate OVAL glycan state and accessibility profile, with a τ_max outcome that converges with pigeon rather than with chicken.", [4, 12, 15, 16, 17, 23, 27, 39, 41]),
-    (" In that sense, the three-species design is informative not because it creates neat categories, but because it samples deliberately separated regions of a continuous ecological-developmental space while keeping the hatching interface itself comparable.", [15, 16, 22, 23, 24, 25, 41]),
+    ("The comparative design matters for the interpretation because egg traits are shaped most directly by the problem of successful reproduction rather than by a single binary label.", [15, 39]),
+    (" Nesting environment tracks a terrestrial-to-aquatic gradient, offspring condition spans a continuum from more precocial to more altricial young, and neither axis is well represented by a simple yes-or-no partition.", [23, 24]),
+    (" Earlier comparative discussions often used habitat association or developmental mode as categorical descriptors of eggshell biology; the present design extends that literature by treating both as continuous axes and by deliberately sampling separated regions of that shared space.", [15, 24]),
+    (" Duck therefore prevents the comparison from collapsing into a simple precocial-versus-altricial contrast: it retains a broadly precocial developmental condition while shifting toward an intermediate OVAL glycan state and accessibility profile, with a τ_max outcome that converges with pigeon rather than with chicken.", []),
+    (" In that sense, the three-species design is informative not because it creates neat categories, but because it samples deliberately separated regions of a continuous ecological-developmental space while keeping the hatching interface itself comparable.", [22, 24]),
 ])
 
 p_disc_axis = spara([
-    ("Mammillary-layer mineralization mode remains the central structural level in the interpretation.", [1, 2, 20, 28, 38]),
-    (" Once early calcite crystal units are established, later eggshell regions inherit the spacing logic created in that first mineralization window, so a dense mammillary field changes matrix retention, mineral continuity, and local stress redistribution as well as morphology.", [1, 2, 28, 30, 36, 38]),
-    (" That emphasis is consistent with earlier eggshell studies that place the mammillary layer at the intersection of crystal nucleation and matrix control, but the present comparison goes further by linking that layer to a specific cross-species glycan-state readout rather than to shell-quality descriptors alone.", [1, 2, 20, 28, 30, 36, 38]),
-    (" For that reason, mammillary organization is not merely another shell trait, but the earliest material context in which matrix chemistry can plausibly bias later mechanical outcome.", [1, 2, 20, 28, 30, 36, 38]),
-    (" That structural position is why the mammillary layer remains the first place where a cross-species difference can be read as potentially consequential rather than merely descriptive.", [1, 2, 20, 28, 30, 36, 38]),
+    ("Mammillary-layer mineralization mode remains the central structural level in the interpretation.", [1, 28]),
+    (" Once early calcite crystal units are established, later eggshell regions inherit the spacing logic created in that first mineralization window, so a dense mammillary field changes matrix retention, mineral continuity, and local stress redistribution as well as morphology.", [1, 30, 36]),
+    (" That emphasis is consistent with earlier eggshell studies that place the mammillary layer at the intersection of crystal nucleation and matrix control, but the present comparison goes further by linking that layer to a specific cross-species glycan-state readout rather than to shell-quality descriptors alone.", [1, 28]),
+    (" For that reason, mammillary organization is not merely another shell trait, but the earliest material context in which matrix chemistry can plausibly bias later mechanical outcome.", [1, 2]),
+    (" That structural position is why the mammillary layer remains the first place where a cross-species difference can be read as potentially consequential rather than merely descriptive.", [1, 28]),
 ])
 
 p_disc_mam2 = spara([
     ("Among the molecular layers examined here, OVAL N-glycan architecture most closely tracked the cross-species structural differences.", []),
-    (" Orthogroup turnover, gene-family change, and glycoprotein-network divergence still matter, but they mainly define comparative background rather than the nearest explanation.", [1, 2, 8, 18, 21, 27]),
-    (" OVAL glycan state was especially informative because it is shared across species, chemically interpretable, and located on an abundant matrix protein already implicated in mineralization.", [4, 6, 7, 18, 21, 42, 44, 45, 46]),
-    (" Earlier work had already kept OVAL in view as an abundant eggshell glycoprotein and mineralization candidate, and prior glycoproteomic studies showed that eggshell-matrix proteins can occupy different N-glycosylation states; the advance here is that an ortholog-resolved cross-species comparison identifies which of those states aligns most clearly with phenotype.", [4, 6, 7, 18, 21, 42, 44, 45, 46]),
-    (" That combination makes OVAL useful not because it is unique, but because it remains comparable across species while still carrying interpretable chemical divergence.", [4, 6, 7, 18, 21, 42, 44, 45, 46]),
-    (" It also remains interpretable at the level of specific glycan classes rather than only as a generic increase or decrease in modification load.", [4, 6, 7, 18, 21, 42, 44, 45, 46]),
+    (" Orthogroup turnover, gene-family change, and glycoprotein-network divergence still matter, but they mainly define comparative background rather than the nearest explanation.", [18, 27]),
+    (" OVAL glycan state was especially informative because it is shared across species, chemically interpretable, and located on an abundant matrix protein already implicated in mineralization.", [4, 18]),
+    (" Earlier work had already kept OVAL in view as an abundant eggshell glycoprotein and mineralization candidate, and prior glycoproteomic studies showed that eggshell-matrix proteins can occupy different N-glycosylation states; the advance here is that an ortholog-resolved cross-species comparison identifies which of those states aligns most clearly with phenotype.", [4, 18]),
+    (" That point also matters at the site level. Earlier chicken studies established a glycosite foundation for OVAL and identified glycosylated Asn in OC116, whereas the present dataset extends that foundation by resolving dominant glycan classes on the corresponding OVAL ortholog sequons carried into structural modeling (G. gallus N293; A. platyrhynchos and C. livia N97), rather than stopping at the presence of glycosylation alone.", [8, 18]),
+    (" That combination makes OVAL useful not because it is unique, but because it remains comparable across species while still carrying interpretable chemical divergence.", []),
+    (" It also remains interpretable at the level of specific glycan classes rather than only as a generic increase or decrease in modification load.", []),
 ])
 
-p_disc_other = para(
-    "The non-OVAL signals still matter. OC116 and TRFE remained informative shared proteins, whereas OC17 appeared glycosylated only in chicken and may therefore represent a more lineage-restricted mineralization program. Earlier eggshell studies had already assigned functional importance to OC17, OC116, and ovotransferrin-related matrix components, and the present dataset does not overturn that view; instead, it shows that these proteins define the biological backdrop more consistently than they define the sharpest cross-species discriminator. The shared toolkit remains multicomponent even if one component offers the most experimentally tractable entry point. These findings do not imply that one protein explains the entire eggshell; rather, OVAL provides the clearest comparative path by which matrix modification could plausibly be carried forward to structure and function in the present dataset."
-)
+p_disc_other = spara([
+    ("The non-OVAL signals still matter. OC116 and TRFE remained informative shared proteins, whereas OC17 appeared glycosylated only in chicken and may therefore represent a more lineage-restricted mineralization program.", []),
+    (" Earlier eggshell studies had already assigned functional importance to OC17, OC116, and ovotransferrin-related matrix components, and the present dataset does not overturn that view; instead, it shows that these proteins define the biological backdrop more consistently than they define the sharpest cross-species discriminator.", [10, 19, 29]),
+    (" For OC116 in particular, earlier biochemical work had already established glycosylated Asn in chicken eggshell matrix, whereas our comparison adds that retained glycosylation alone is not yet sufficient to recover as clear a structure-linked contrast as the one observed for OVAL.", [21]),
+    (" The shared toolkit remains multicomponent even if one component offers the most experimentally tractable entry point.", []),
+    (" These findings do not imply that one protein explains the entire eggshell; rather, OVAL provides the clearest comparative path by which matrix modification could plausibly be carried forward to structure and function in the present dataset.", []),
+])
 
-cite(p_disc_other, [10, 19, 21, 29, 42, 44, 45, 46, 66, 81])
-
-p_disc_oval = para(
-    "Re-Glyco and APBS analyses provide the structural bridge in this argument. Compact chicken glycans left the critical acidic OVAL surface relatively exposed, whereas longer, more electronegative pigeon glycans reduced Ca²⁺ approach both sterically and electrostatically; duck again fell between those endpoints. Earlier in vitro and structural work had already suggested that OVAL conformation and electrostatics matter during mineralization, but they did not compare matched glycoform-resolved surface ensembles across bird species; to our knowledge, that comparative step is new here. Glycan-state variation thus becomes a physically interpretable surface difference. Although this result does not establish a direct causal mechanism for mineralization, it supports a restrained inference that different glycan states on the same matrix protein could alter the chemical surface presented to the mineralizing environment and thereby plausibly contribute to the structural divergence observed here."
-)
-
-cite(p_disc_oval, [4, 11, 12, 42, 44, 45, 46, 49, 50, 51, 52, 55, 65])
+p_disc_oval = spara([
+    ("Re-Glyco and APBS analyses provide the structural bridge in this argument.", []),
+    (" Compact chicken glycans left the critical acidic OVAL surface relatively exposed, whereas longer, more electronegative pigeon glycans reduced Ca²⁺ approach both sterically and electrostatically; duck again fell between those endpoints.", []),
+    (" Earlier in vitro and structural work had already suggested that OVAL conformation and electrostatics matter during mineralization, but they did not compare matched glycoform-resolved surface ensembles across bird species; to our knowledge, that comparative step is new here.", [4, 11]),
+    (" Glycan-state variation thus becomes a physically interpretable surface difference.", []),
+    (" Although this result does not establish a direct causal mechanism for mineralization, it supports a restrained inference that different glycan states on the same matrix protein could alter the chemical surface presented to the mineralizing environment and thereby plausibly contribute to the structural divergence observed here.", [49]),
+])
 
 p_disc_mech = spara([
     ("The mechanical analysis extends the same pattern to an organism-level functional context.", [16, 17, 38]),
-    (" τ_max rather than raw fracture force best captures the mammillary-level mechanical difference.", [16, 17, 34, 35, 37, 38]),
-    (" That distinction also marks a difference from most previous eggshell mechanical studies, which emphasized breaking force, shell strength, or whole-shell quality metrics; here the question was whether a local mammillary-interface variable recovered the same ordering as the molecular and structural comparisons.", [16, 17, 34, 35, 37, 38]),
-    (" Absolute failure load remains sensitive to eggshell thickness and whole-eggshell geometry, whereas τ_max provides a more direct readout of local hatching resistance at the mammillary interface under hatching-relevant loading. Duck and pigeon converged in τ_max despite their different overall mammillary geometries, suggesting that once the chicken-like high-density state is absent, downstream shape variation alone does not restore the same mammillary-interface resistance.", [1, 2, 16, 17, 34, 35, 37, 38]),
-    (" That is precisely why τ_max, rather than whole-shell force alone, is the more informative functional companion to the molecular and morphological results.", [16, 17, 34, 35, 37, 38]),
+    (" τ_max rather than raw fracture force best captures the mammillary-level mechanical difference.", [34, 38]),
+    (" That distinction also marks a difference from most previous eggshell mechanical studies, which emphasized breaking force, shell strength, or whole-shell quality metrics; here the question was whether a local mammillary-interface variable recovered the same contrast structure already seen in the molecular and structural comparisons.", [34, 35]),
+    (" Absolute failure load remains sensitive to eggshell thickness and whole-eggshell geometry, whereas τ_max provides a more direct readout of local hatching resistance at the mammillary interface under hatching-relevant loading. Duck and pigeon converged in τ_max despite their different overall mammillary geometries, suggesting that once the chicken-like high-density state is absent, downstream shape variation alone does not restore the same mammillary-interface resistance.", [17, 38]),
+    (" That is precisely why τ_max, rather than whole-shell force alone, is the more informative functional companion to the molecular and morphological results.", [34, 38]),
 ])
 
 p_disc_evo = para(
     "Duck sharpens the interpretation because it separates developmental mode from the rest of the chain. It did not remain chicken-like across the molecular, structural, and mechanical analyses, showing that a shared hatching problem can be resolved through different matrix-state configurations. In practical terms, duck indicates that thickness can buffer whole-shell loading more readily than it can recreate the same local interface resistance, yet local τ_max differences at the mammillary interface remained detectable."
 )
 
-cite(p_disc_evo, [3, 15, 16, 17, 37, 38, 39, 41, 57])
-
 p_disc_discriminate = spara([
     ("Several plausible background variables can be separated from the features that repeatedly recover the same cross-species pattern.", []),
-    (" Eggshell thickness, body size, and broad reproductive ecology may all contribute background variation, and lineage history undoubtedly matters.", [2, 14, 16, 17, 24, 25]),
-    (" But thickness-based explanations do not account for the τ_max differences, and diffuse lineage-divergence explanations do not explain why the same contrast recurs in glycan class, electrostatic accessibility, and mammillary-layer organization.", [4, 16, 17, 20, 21, 38, 42]),
-    (" What recurs across the dataset is therefore not a generic species ranking, but a repeated alignment between glycan state, surface shielding, mammillary organization, and τ_max grouping.", [4, 16, 17, 20, 21, 38, 42]),
-    (" Ecology and phylogeny establish the design space, whereas matrix-protein glycan state offers the most proximate chemically readable layer recovered in this three-species dataset, rather than serving as a passive background descriptor alone.", [1, 2, 4, 20, 21, 38, 42, 57, 70]),
+    (" Eggshell thickness, body size, and broad reproductive ecology may all contribute background variation, and lineage history undoubtedly matters.", [14, 24]),
+    (" But thickness-based explanations do not account for the τ_max differences, and diffuse lineage-divergence explanations do not explain why the same contrast recurs in glycan class, electrostatic accessibility, and mammillary-layer organization.", [16, 38]),
+    (" What recurs across the dataset is therefore not a single-axis species ranking, but a repeated alignment between glycan state, surface shielding, mammillary organization, and τ_max grouping.", []),
+    (" Ecology and phylogeny establish the design space, whereas matrix-protein glycan state offers the most proximate chemically readable layer recovered in this three-species dataset, rather than serving as a passive background descriptor alone.", [4, 18]),
 ])
 
 p_disc_function = para(
-    "The broader implication is methodological within comparative biomineralization as much as biological. A chemically specific post-translational state on a shared matrix protein can help fill the missing layer between eggshell structure and local function in a tractable comparative dataset. Comparable work in other biomineralized systems has already suggested that reused matrix proteins can be functionally retuned by post-translational chemistry, but that logic has rarely been carried through an avian eggshell comparison from intact glycopeptides to structural modeling and local mechanics in one dataset. This intermediate layer is especially valuable in biomineralization systems, where broad proteome turnover is often easier to detect than the chemical states that bias crystal growth. Similar logic should be tested beyond avian eggshells rather than assumed, because many mineralized systems rely on abundant matrix proteins whose post-translational states can shift without wholesale replacement of the underlying repertoire. In that narrower sense, the present study shows how a conserved protein toolkit can be differentially redeployed through glycan state in a three-species eggshell comparison."
+    "The broader implication is methodological within comparative biomineralization as much as biological. A chemically specific post-translational state on a shared matrix protein can help fill the missing layer between eggshell structure and local function in a tractable comparative dataset. In biomineralization systems, broad proteome turnover is often easier to detect than the chemical states that may bias crystal growth. Similar logic should be tested beyond avian eggshells rather than assumed, because many mineralized systems rely on abundant matrix proteins whose post-translational states can shift without wholesale replacement of the underlying repertoire. In that narrower sense, the present study shows how a conserved protein toolkit can be differentially redeployed through glycan state in a three-species eggshell comparison."
 )
-
-cite(p_disc_function, [4, 6, 7, 18, 20, 21, 42, 49, 50, 52, 62, 67, 68, 69, 71, 72, 73, 75, 77, 79])
 
 p_disc_selection = para(
-    "OVAL glycan state therefore serves here as a chemically specific comparative layer within this three-species eggshell dataset, one that can be mapped onto structure and evaluated against function. In omics-rich biomineralization studies, lineage differences are often easier to detect than the molecular features that most consistently organize phenotype. In this three-species comparison, glycan state was the most interpretable layer relative to broad proteome turnover. To our knowledge, few eggshell studies have been able to separate lineage turnover from modification-state variation this explicitly, which is why the present ortholog-filtered comparison remains useful despite its limited taxonomic breadth. The same comparative logic could be tested in other abundant matrix proteins if their modification states can be resolved with similar confidence. In other mineralized systems, analogous layers may instead reside in sulfation, phosphorylation, proteolytic processing, or regulated cofactor binding on reused matrix proteins."
+    "OVAL glycan state therefore serves here as a chemically specific comparative layer within this three-species eggshell dataset, one that can be mapped onto structure and evaluated against function. In omics-rich biomineralization studies, lineage differences are often easier to detect than the molecular features that most consistently organize phenotype. In this three-species comparison, glycan state was the most interpretable layer relative to broad proteome turnover. The ortholog-filtered design was useful precisely because it separated lineage turnover from modification-state variation within the same dataset, despite the limited taxonomic breadth. The same comparative logic could be tested in other abundant matrix proteins if their modification states can be resolved with similar confidence. In other mineralized systems, analogous layers may instead reside in sulfation, phosphorylation, proteolytic processing, or regulated cofactor binding on reused matrix proteins."
 )
-
-cite(p_disc_selection, [20, 21, 42, 49, 50, 52, 58, 59, 60, 65, 66, 74])
 
 p_disc_future = para(
     "Caveats define the present scope. We analyzed dominant glycoforms rather than the full in vivo range of glycan heterogeneity because current glycan-structure libraries remain incomplete. That means the present structural ensembles are best read as well-supported dominant states rather than exhaustive representations of in vivo glycan diversity. We also treated each species as mechanically uniform at the scale of the mean eggshell and relied on incompletely constrained uterine ionic conditions in the APBS framework. The most useful next tests are defined-glycoform mineralization assays, site-directed manipulation of OVAL glycosylation coupled with uterine chemistry measurements, site-resolved mechanical validation, and broader phylogenetic sampling. It will be equally important to test whether the same glycan-state axis remains stable across more taxa, or whether different avian lineages solve the same shell-building problem through distinct molecular routes. These experiments should clarify whether OVAL glycan state participates directly in mineralization or mainly serves as a comparative molecular indicator."
 )
 
-cite(p_disc_future, [4, 11, 12, 20, 21, 42, 49, 50, 51, 52, 57, 70, 76])
-
 p_disc_close = para(
     "Within those limits, the present three-species comparison supports a continuous interpretation. Conserved egg-tooth function shifts the analysis to the eggshell, the first clear divergence appears in the mammillary layer, and the shared matrix toolkit focuses attention on glycosylation rather than wholesale protein replacement. Within that sequence, OVAL glycan state offers the most structurally interpretable correspondence between mammillary organization and local hatching resistance in this dataset. Matrix-protein glycan state is therefore best viewed here as a chemically interpretable comparative layer associated with, and plausibly contributing to, eggshell performance rather than solely determining it."
 )
-
-cite(p_disc_close, [6, 7, 18, 20, 21, 42, 44, 45, 46, 49, 50, 72, 78, 80])
 
 p_disc_limits = p_disc_close
 
@@ -788,7 +781,7 @@ p_m_ortho = mixed([
      "against the 3,250-orthogroup background; terms with adjusted p\u202f<\u202f0.05 were "
      "considered significant.", False, False),
 ])
-cite(p_m_ortho, [3, 5, 14, 24, 25])
+cite(p_m_ortho, [5, 14, 24])
 
 head("Cross-species glycoprotein ortholog identification")
 
@@ -847,7 +840,7 @@ p_m_reglyco = mixed([
      "distance). Per-structure summary statistics (mean\u00a0\u00b1\u00a0s.d.) and pairwise species "
      "comparisons (Mann\u2013Whitney\u00a0U test, two-tailed) were performed for each descriptor.", False, False),
 ])
-cite(p_m_reglyco, [11, 49, 50, 51, 56, 58, 59, 60, 65])
+cite(p_m_reglyco, [11, 56, 65])
 
 head("Electrostatic potential calculation")
 
@@ -856,7 +849,7 @@ p_m_apbs = para(
     "model and a matched deglycosylated (apo) reference using APBS v3.4.1. Atomic "
     "partial charges and radii were assigned with PDB2PQR using the CHARMM36 force "
     "field and PROPKA protonation at pH 7.4; glycan heavy-atom partial charges were "
-    "assigned from the GLYCAM06 parameter set (Kirschner et al., 2008, J. Comput. "
+    "assigned from the GLYCAM06 parameter set. "
     "Chem. 29:622). Solvent-accessible surface areas were calculated by the "
     "Shrake\u2013Rupley algorithm; surface residues were defined by relative ASA "
     "\u2265 0.25. Ca\u00b2\u207a-binding electrostatic hotspots were defined as surface Asp or "
