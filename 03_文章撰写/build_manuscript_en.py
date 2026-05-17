@@ -204,11 +204,11 @@ para("Abstract", bold=True, size=11, before=80, after=40,
 
 para(
     "Birds hatch with a broadly conserved egg tooth, shifting unresolved mechanical differences to the eggshell. "
-    "We asked whether, within this three-species comparison, the first eggshell divergence appeared in the mammillary layer, where matrix proteins regulate early mineralization. "
-    "Across chicken, duck, and pigeon, micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco modeling, electrostatic analysis, and finite-element simulation showed that mammillary organization provided the first clear eggshell difference while the matrix-protein toolkit remained largely shared. "
+    "We asked whether, within this three-species comparison, the first clear eggshell divergence we could resolve appeared in the mammillary layer, where matrix proteins regulate early mineralization. "
+    "Across chicken, duck, and pigeon, micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco modeling, electrostatic analysis, and finite-element simulation resolved mammillary organization as the first clear eggshell difference while the matrix-protein toolkit remained largely shared. "
     "Among shared proteins, ovalbumin (OVAL) showed a glycan-state contrast spanning high-mannose-dominant chicken, neutral complex-hybrid-dominant duck, and sialylated complex-hybrid-dominant pigeon. "
     "Structural modeling associated those states with lower Ca²⁺-relevant surface accessibility from chicken to pigeon, and finite-element analysis recovered the same chicken-versus-duck/pigeon mechanical contrast in simulated local hatching resistance. "
-    "Together, these observations position matrix-protein glycan state as a chemically interpretable comparative layer that covaries with mammillary organization and local hatching performance in this three-species dataset.",
+    "Together, these observations position matrix-protein glycan state as a chemically interpretable comparative layer that covaries with mammillary organization and simulated local hatching resistance in this three-species dataset.",
     bold=False, size=10, before=0, after=80, align=WD_ALIGN_PARAGRAPH.JUSTIFY
 )
 
@@ -547,7 +547,7 @@ para("Discussion", bold=True, size=14, before=320, after=160,
 
 p_disc_mam1 = smixed([
     ([('The results define a consistent comparative sequence. Because egg-tooth function remained conserved across the three birds, the most informative differences had to be sought in the eggshell. The first mechanically relevant difference appeared in the mammillary layer, and the shared matrix toolkit then focused the comparison on glycosylation rather than wholesale protein replacement. ', False, False),
-            ('Within that chain, OVAL glycan state provided the clearest comparative correspondence between molecular variation, surface accessibility, and local hatching resistance.', False, False)], [1, 16, 18]),
+            ('Within that chain, OVAL glycan state provided the most interpretable comparative correspondence recovered here between molecular variation, surface accessibility, and local hatching resistance.', False, False)], [1, 16, 18]),
 ])
 
 p_disc_regulator = spara([
@@ -581,7 +581,7 @@ p_disc_other = spara([
     (" Earlier eggshell studies had already assigned functional importance to OC17, OC116, and ovotransferrin-related matrix components, and the present dataset does not overturn that view; instead, it shows that these proteins define the biological backdrop more consistently than they define the sharpest cross-species discriminator.", [10, 19, 29]),
     (" For OC116 in particular, earlier biochemical work had already established glycosylated Asn in chicken eggshell matrix, whereas our comparison adds that retained glycosylation alone is not yet sufficient to recover as clear a structure-linked contrast as the one observed for OVAL.", [21]),
     (" The shared toolkit remains multicomponent even if one component offers the most experimentally tractable entry point.", []),
-    (" These findings do not imply that one protein explains the entire eggshell; rather, OVAL provides the clearest comparative path by which matrix modification could plausibly be carried forward to structure and function in the present dataset.", []),
+    (" These findings do not imply that one protein explains the entire eggshell; rather, OVAL provides the most tractable comparative path by which matrix modification could plausibly be carried forward to structure and function in the present dataset.", []),
 ])
 
 p_disc_oval = spara([
@@ -617,7 +617,7 @@ p_disc_function = para(
 )
 
 p_disc_selection = para(
-    "OVAL glycan state therefore serves here as a chemically specific comparative layer within this three-species eggshell dataset, one that can be mapped onto structure and evaluated against function. In omics-rich biomineralization studies, lineage differences are often easier to detect than the molecular features that most consistently organize phenotype. In this three-species comparison, glycan state was the most interpretable layer relative to broad proteome turnover. The ortholog-filtered design was useful precisely because it separated lineage turnover from modification-state variation within the same dataset, despite the limited taxonomic breadth. The same comparative logic could be tested in other abundant matrix proteins if their modification states can be resolved with similar confidence. In other mineralized systems, analogous layers may instead reside in sulfation, phosphorylation, proteolytic processing, or regulated cofactor binding on reused matrix proteins."
+    "OVAL glycan state therefore serves here as a chemically specific comparative layer within this three-species eggshell dataset, one that can be mapped onto structure and evaluated against function. In omics-rich biomineralization studies, lineage differences are often easier to detect than the molecular features that most consistently organize phenotype. In this three-species comparison, glycan state was the most interpretable layer relative to broad proteome turnover. The ortholog-filtered design was useful precisely because it helped separate lineage turnover from modification-state variation within the same dataset, despite the limited taxonomic breadth. The same comparative logic could be tested in other abundant matrix proteins if their modification states can be resolved with similar confidence. In other mineralized systems, analogous layers may instead reside in sulfation, phosphorylation, proteolytic processing, or regulated cofactor binding on reused matrix proteins."
 )
 
 p_disc_future = para(
