@@ -543,7 +543,7 @@ add_main_figure_legend(
     ],
 )
 
-cite(p_s4a, [16, 17, 38])
+cite(p_s4a, [16, 37, 69])
 
 # ════════════════════════════════════════════════════════════════════════════
 # Discussion
@@ -622,7 +622,7 @@ p_disc_discriminate = spara([
 p_disc_function = para(
     "The broader implication is methodological within comparative biomineralization as much as biological. A chemically specific post-translational state on a shared matrix protein can help fill the missing layer between eggshell structure and local function in a tractable comparative dataset. In biomineralization systems, broad proteome turnover is often easier to detect than the chemical states that may bias crystal growth. Similar logic should be tested beyond avian eggshells rather than assumed, because many mineralized systems rely on abundant matrix proteins whose post-translational states can shift without wholesale replacement of the underlying repertoire. In that narrower sense, the present study shows how a conserved protein toolkit can be differentially redeployed through glycan state in a three-species eggshell comparison."
 )
-cite(p_disc_function, [67, 73])
+cite(p_disc_function, [67, 73, 74])
 
 p_disc_selection = para(
     "OVAL glycan state therefore serves here as a chemically specific comparative layer within this three-species eggshell dataset, one that can be mapped onto structure and evaluated against function. In omics-rich biomineralization studies, lineage differences are often easier to detect than the molecular features that most consistently organize phenotype. In this three-species comparison, glycan state was the most interpretable layer relative to broad proteome turnover. The ortholog-filtered design was useful precisely because it helped separate lineage turnover from modification-state variation within the same dataset, despite the limited taxonomic breadth. The same comparative logic could be tested in other abundant matrix proteins if their modification states can be resolved with similar confidence. In other mineralized systems, analogous layers may instead reside in sulfation, phosphorylation, proteolytic processing, or regulated cofactor binding on reused matrix proteins."
@@ -698,7 +698,7 @@ p_m_ct = para(
     "column-unit volume fraction was then calculated as mean column-unit volume divided by the total eggshell volume of the corresponding ROI. "
     "Because the columnar units initiated by mammillae are arranged as repetitive and approximately even planar units in normal avian eggshell microstructure, these parameters were treated as local average representatives of whole-shell organization (n\u202f=\u202f2 fragments per species). The same segmentation and post-processing workflow was applied to all scans so that species contrasts reflected morphology rather than reconstruction settings."
 )
-cite(p_m_ct, [1, 38])
+cite(p_m_ct, [1, 30])
 
 head("Shotgun proteomics of eggshell matrix proteins")
 
@@ -897,7 +897,7 @@ p_m_fea = mixed([
      "contact force (F_max) and peak contact shear stress (\u03c4_max) were extracted "
      "per position. Sampling nine offsets allowed local positional heterogeneity to be measured without changing fragment size or loading geometry between species.", False, False),
 ])
-cite(p_m_fea, [16, 37, 38])
+cite(p_m_fea, [16, 37, 69])
 
 head("Statistical analysis")
 
