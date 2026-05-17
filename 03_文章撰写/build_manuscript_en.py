@@ -203,13 +203,12 @@ para("Abstract", bold=True, size=11, before=80, after=40,
      align=WD_ALIGN_PARAGRAPH.LEFT)
 
 para(
-    "Birds hatch with a broadly conserved egg tooth, shifting the unresolved source of mechanical differences to the eggshell. "
-    "We tested whether the first species-level difference arises in the mammillary layer, where matrix proteins regulate early mineralization. "
-    "Across chicken, duck, and pigeon, micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco structural modeling, electrostatic analysis, and finite-element simulation showed that mammillary organization provided the first clear eggshell difference while the overall matrix-protein toolkit remained largely shared. "
-    "That combination narrowed the explanatory problem from protein turnover to how common matrix components are chemically redeployed across species. "
-    "Among shared proteins, ovalbumin (OVAL) showed the clearest glycan shift, from high-mannose in chicken to neutral complex-hybrid in duck and sialylated complex-hybrid in pigeon. "
-    "Structural modeling linked those states to lower Ca²⁺-relevant surface accessibility from chicken to pigeon, and finite-element analysis recovered the same cross-species contrast in local hatching resistance at the mammillary interface. "
-    "These results support matrix-protein glycan state as a chemically interpretable layer linking shared eggshell biology to mammillary organization and local hatching performance.",
+    "Birds hatch with a broadly conserved egg tooth, shifting unresolved mechanical differences to the eggshell. "
+    "We tested whether the first species-level divergence arises in the mammillary layer, where matrix proteins regulate early mineralization. "
+    "Across chicken, duck, and pigeon, micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco modeling, electrostatic analysis, and finite-element simulation showed that mammillary organization provided the first clear eggshell difference while the matrix-protein toolkit remained largely shared. "
+    "Among shared proteins, ovalbumin (OVAL) showed an ordered glycan shift from high-mannose in chicken to neutral complex-hybrid in duck and sialylated complex-hybrid in pigeon. "
+    "Structural modeling linked those states to lower Ca²⁺-relevant surface accessibility from chicken to pigeon, and finite-element analysis recovered the same ordering in local hatching resistance. "
+    "Matrix-protein glycan state thus links shared eggshell biology to mammillary organization and local hatching performance.",
     bold=False, size=10, before=0, after=80, align=WD_ALIGN_PARAGRAPH.JUSTIFY
 )
 
@@ -563,13 +562,13 @@ p_disc_mam2 = spara([
 ])
 
 p_disc_other = para(
-    "The non-OVAL signals still matter. OC116 and TRFE remained informative shared proteins, whereas OC17 appeared glycosylated only in chicken and may therefore represent a more lineage-restricted mineralization program. The shared toolkit therefore remains multicomponent even if one component offers the most experimentally tractable explanatory handle. These findings do not imply that one protein explains the entire eggshell; rather, OVAL provides a particularly clear path from matrix modification to structure and function in the present dataset."
+    "The non-OVAL signals still matter. OC116 and TRFE remained informative shared proteins, whereas OC17 appeared glycosylated only in chicken and may therefore represent a more lineage-restricted mineralization program. The shared toolkit remains multicomponent even if one component offers the most experimentally tractable entry point. These findings do not imply that one protein explains the entire eggshell; rather, OVAL provides a clear path from matrix modification to structure and function in the present dataset."
 )
 
 cite(p_disc_other, [10, 19, 21, 29, 42, 44, 45, 46, 66, 81])
 
 p_disc_oval = para(
-    "Re-Glyco and APBS analyses provide the structural bridge in this argument. Compact chicken glycans left the critical acidic OVAL surface relatively exposed, whereas the longer and more electronegative pigeon glycans reduced Ca²⁺ approach both sterically and electrostatically; duck again fell between those endpoints. Glycan-state variation thus shifts from a catalogued compositional difference to a physically interpretable surface difference. This result does not by itself prove a direct causal mechanism for mineralization, but it indicates how different glycan states on the same matrix protein can change the chemical surface presented to the mineralizing environment."
+    "Re-Glyco and APBS analyses provide the structural bridge in this argument. Compact chicken glycans left the critical acidic OVAL surface relatively exposed, whereas longer, more electronegative pigeon glycans reduced Ca²⁺ approach both sterically and electrostatically; duck again fell between those endpoints. Glycan-state variation thus becomes a physically interpretable surface difference. Although this result does not establish a direct causal mechanism for mineralization, it shows how different glycan states on the same matrix protein can alter the chemical surface presented to the mineralizing environment."
 )
 
 cite(p_disc_oval, [4, 11, 12, 42, 44, 45, 46, 49, 50, 51, 52, 55, 65])
@@ -604,19 +603,19 @@ p_disc_mech = spara([
 ])
 
 p_disc_evo = para(
-    "Duck sharpens the interpretation because it separates developmental mode from the rest of the chain. It did not remain chicken-like across the molecular, structural, and mechanical analyses, showing that a shared hatching problem can be resolved through different matrix-state configurations. In practical terms, duck indicates that thickness can buffer whole-shell loading more readily than it can recreate the same local interface resistance, yet it did not erase the local τ_max differences recovered at the mammillary interface."
+    "Duck sharpens the interpretation because it separates developmental mode from the rest of the chain. It did not remain chicken-like across the molecular, structural, and mechanical analyses, showing that a shared hatching problem can be resolved through different matrix-state configurations. In practical terms, duck indicates that thickness can buffer whole-shell loading more readily than it can recreate the same local interface resistance, yet local τ_max differences at the mammillary interface remained detectable."
 )
 
 cite(p_disc_evo, [3, 15, 16, 17, 37, 38, 39, 41, 57])
 
 p_disc_function = para(
-    "The broader implication is methodological as much as biological. A chemically specific post-translational state on a shared matrix protein helps fill the missing layer between eggshell structure and local function. This type of intermediate layer is especially valuable in biomineralization systems, where broad proteome turnover is often easier to detect than the specific chemical states that bias crystal growth. Similar logic may extend beyond avian eggshells, because many mineralized systems rely on abundant matrix proteins whose post-translational states can shift without wholesale replacement of the underlying protein repertoire. That does not reduce eggshell diversification to a single molecule, but it does show how a conserved protein toolkit can generate different structural outcomes through glycan-state redeployment."
+    "The broader implication is methodological as much as biological. A chemically specific post-translational state on a shared matrix protein helps fill the missing layer between eggshell structure and local function. This intermediate layer is especially valuable in biomineralization systems, where broad proteome turnover is often easier to detect than the chemical states that bias crystal growth. Similar logic may extend beyond avian eggshells, because many mineralized systems rely on abundant matrix proteins whose post-translational states can shift without wholesale replacement of the underlying repertoire. That does not reduce eggshell diversification to a single molecule, but it does show how a conserved protein toolkit can generate different structural outcomes through glycan-state redeployment."
 )
 
 cite(p_disc_function, [4, 6, 7, 18, 20, 21, 42, 49, 50, 52, 62, 67, 68, 69, 71, 72, 73, 75, 77, 79])
 
 p_disc_selection = para(
-    "OVAL glycan state therefore serves here as a chemically specific comparative layer that can be mapped onto structure and evaluated against function. In omics-rich biomineralization studies, lineage differences are often easier to detect than the molecular features that most consistently organize phenotype itself. In this eggshell system, that layer appears to lie in glycan state rather than in broad proteome turnover. The same comparative logic could in principle be extended to other abundant matrix proteins if their modification states can be resolved with similar confidence. In other mineralized systems, analogous layers may instead be carried by sulfation, phosphorylation, proteolytic processing, or regulated cofactor binding on reused matrix proteins."
+    "OVAL glycan state therefore serves here as a chemically specific comparative layer that can be mapped onto structure and evaluated against function. In omics-rich biomineralization studies, lineage differences are often easier to detect than the molecular features that most consistently organize phenotype. In this eggshell system, that layer appears to lie in glycan state rather than in broad proteome turnover. The same comparative logic could be extended to other abundant matrix proteins if their modification states can be resolved with similar confidence. In other mineralized systems, analogous layers may instead be carried by sulfation, phosphorylation, proteolytic processing, or regulated cofactor binding on reused matrix proteins."
 )
 
 cite(p_disc_selection, [20, 21, 42, 49, 50, 52, 58, 59, 60, 65, 66, 74])
