@@ -369,7 +369,7 @@ p_sprot_go = spara([
 
 p_sprot_focus = spara([
     (" The G. gallus-exclusive set was simultaneously enriched for protein N-linked glycosylation (BP; Fig. S5), shifting the comparison from protein presence to chemical deployment. The retained shared core thus became the relevant molecular background, and glycosylation on shared proteins emerged as the most proximate candidate layer for explaining divergence in mammillary organization and downstream shell behavior.", [18]),
-    (" Most recurrent eggshell matrix proteins emphasized in earlier studies were recovered in the broader proteomic and glycoproteomic background here, indicating substantial agreement with prior eggshell-matrix work. The present dataset also broadened that comparative background, but the strict three-species structural subset remained narrower: OVAL, OC116, and TRFE retained glycosylation across all three species, whereas OC17 remained chicken-restricted.", []),
+    (" Most recurrent eggshell matrix proteins emphasized in earlier studies were recovered in the broader proteomic and glycoproteomic background here, indicating substantial agreement with prior eggshell-matrix work. The present dataset also broadened that comparative background.", []),
 ])
 
 head("OVAL glycosylation provides the most interpretable cross-species contrast")
