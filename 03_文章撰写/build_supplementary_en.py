@@ -14,7 +14,7 @@ from docx.shared import Cm, Pt
 
 FIG_BASE = Path(r"D:\system_folder\Desktop\Work On\Supplementary\Figures")
 MAIN_FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
-OUT = str(Path(__file__).with_name("supplementary_materials_en.docx"))
+OUT = str(Path(__file__).with_name("supplementary_materials260518v3.docx"))
 
 doc = Document()
 
@@ -131,7 +131,7 @@ def fig_caption(parts, before=0, after=240):
 para("Supplementary Materials for", size=11, before=0, after=40,
      align=WD_ALIGN_PARAGRAPH.CENTER)
 para(
-    "Eggshell glycan states covary with mammillary organization and local hatching resistance across three bird species",
+    "OVAL glycan state aligns with mammillary organization and local hatching resistance across three bird species",
     bold=True, size=12, before=0, after=160, align=WD_ALIGN_PARAGRAPH.CENTER,
 )
 para("",
@@ -162,10 +162,10 @@ mpara([
     ("Anas platyrhynchos", False, True),
     (", and ", False, False),
     ("Columba livia", False, True),
-    (" in three distinct, non-overlapping regions of avian ecological space (Fig. S1), corresponding to terrestrial ground-nesting precocial, semi-aquatic precocial, and elevated-nesting altricial life-history strategies, respectively. Species selection was therefore designed to span both the precocial-altricial and terrestrial-semi-aquatic comparison axes rather than to maximize any single phylogenetic or morphological contrast.", False, False),
+    (" in three distinct, non-overlapping regions of avian ecological space (Fig. S1), corresponding to terrestrial ground-nesting precocial, semi-aquatic precocial, and elevated-nesting altricial life-history strategies, respectively. The three-species set was selected to sample both developmental and ecological contrasts within a common hatching framework rather than to maximize any single phylogenetic or morphological separation.", False, False),
 ])
 mpara([
-    ("To confirm that this three-cluster separation was not an artefact of how categorical variables were numerically encoded, we performed 500 randomized perturbation iterations in which all encoding weights were independently shifted within +/-30% of their original values. Across all iterations, both the variance explained by the first two principal components and the cluster silhouette coefficient remained tightly centered on the unperturbed baseline (Fig. S1). This result indicates that species-group assignments are robust to the subjective component of the coding scheme and that the three focal species remain separated in this comparative ecological space under reasonable encodings.", False, False),
+    ("To test whether this separation depended on the numerical encoding of categorical variables, we performed 500 randomized perturbation iterations in which all encoding weights were independently shifted within +/-30% of their original values. Across all iterations, the variance explained by the first two principal components and the cluster silhouette coefficient remained tightly centered on the unperturbed baseline (Fig. S1). The species assignments therefore remained stable under reasonable alternative encodings.", False, False),
 ], before=80)
 
 st_head("Supplementary Text 2. Eggshell matrix proteome orthogroup analysis.")
@@ -176,10 +176,10 @@ mpara([
     ("A. platyrhynchos", False, True),
     (", and ", False, False),
     ("C. livia", False, True),
-    (", respectively (Fig. S3). Using all-versus-all protein similarity and graph-based clustering, the workflow resolved these proteins into a conserved three-species shared core of 1,997 orthogroups, pairwise-shared subsets of 180 (Gallus-Anas), 434 (Gallus-Columba), and 716 (Anas-Columba), and lineage-restricted sets of 9, 28, and 72 orthogroups for chicken, duck, and pigeon, respectively. This topology is consistent with a comparison structured by differential deployment within a common protein repertoire rather than by wholesale replacement of the eggshell matrix toolkit.", False, False),
+    (", respectively (Fig. S3). The workflow resolved these proteins into a conserved three-species core of 1,997 orthogroups, pairwise-shared subsets of 180 (Gallus-Anas), 434 (Gallus-Columba), and 716 (Anas-Columba), and lineage-restricted sets of 9, 28, and 72 orthogroups for chicken, duck, and pigeon, respectively. The orthogroup structure therefore supports comparison on a shared matrix background rather than wholesale replacement of the eggshell toolkit.", False, False),
 ])
 mpara([
-    ("GO enrichment of pairwise-shared sets indicated ecological, rather than purely phylogenetic, stratification (Fig. S5). The ", False, False),
+    ("GO enrichment of pairwise-shared sets highlighted ecological rather than purely phylogenetic stratification (Fig. S5). The ", False, False),
     ("A. platyrhynchos", False, True),
     ("-", False, False),
     ("C. livia", False, True),
@@ -196,14 +196,14 @@ mpara([
     ("A. platyrhynchos", False, True),
     (" was intermediate, and ", False, False),
     ("C. livia", False, True),
-    (" showed net expansion. Together, these proteome-level patterns were consistent with broad evolutionary divergence among the three eggshell formation systems while retaining a conserved shared toolkit.", False, False),
+    (" showed net expansion. These proteome-level patterns indicate broad lineage divergence while retaining a conserved shared toolkit.", False, False),
 ], before=80)
 
 doc.add_page_break()
 section_head("Figures")
 
 add_image(FIG_BASE / "SuppFig1_Species_Selection" / "Sensitivity_Analysis_Results.png", width_cm=15.5)
-fig_title("Fig. S1.", "Sensitivity analysis validating the macroecological species-selection framework.")
+fig_title("Fig. S1.", "Sensitivity analysis of the macroecological species-selection framework.")
 fig_caption([
     ("Distribution of variance explained (R^2) and cluster silhouette coefficients from 500 randomized perturbation iterations applied to the AVONET-based principal-component space used to select ", False, False),
     ("Gallus gallus", False, True),
@@ -211,28 +211,28 @@ fig_caption([
     ("Anas platyrhynchos", False, True),
     (", and ", False, False),
     ("Columba livia", False, True),
-    (" as focal species. Categorical ecological variables were numerically encoded, and each iteration introduced independent random shifts to all encoding weights within +/-30% of the original values. The tight concentration of both metrics around the baseline indicates that species-group assignments are robust to the subjective encoding component.", False, False),
+    (" as focal species. Categorical ecological variables were numerically encoded, and each iteration introduced independent random shifts to all encoding weights within +/-30% of the original values. The tight concentration of both metrics around the baseline shows that species-group assignments are robust to the categorical encoding scheme.", False, False),
 ])
 
 doc.add_page_break()
 add_image(MAIN_FIG_BASE / "PanelB.jpg", width_cm=15.5)
 fig_title("Fig. S2.", "Order-level avian phylogenetic context and comparative-axis heatmaps for the focal species.")
 fig_caption([
-    ("Phylogenetic relationship of representative avian taxa together with heatmap tracks for aquatic association (X), developmental mode (Z), and lifestyle-habitat discordance (Y). Colored order labels locate the broader comparative frame used for species selection, and the positions of the focal lineages show that the chicken, duck, and pigeon comparison spans functional axes that only partly overlap with phylogeny.", False, False),
+    ("Phylogenetic relationship of representative avian taxa together with heatmap tracks for aquatic association (X), developmental mode (Z), and lifestyle-habitat discordance (Y). Colored order labels locate the broader comparative frame used for species selection. The positions of the focal lineages show that the chicken, duck, and pigeon comparison spans functional axes that only partly overlap with phylogeny.", False, False),
 ])
 
 doc.add_page_break()
 add_image(FIG_BASE / "SuppFig2_Venn_Orthogroups" / "Fig_venn_orthogroups.png", width_cm=12.0)
 fig_title("Fig. S3.", "Three-species Venn diagram of shared and lineage-restricted eggshell matrix orthogroups.")
 fig_caption([
-    ("OrthoFinder-based orthogroup analysis resolves the three eggshell matrix proteomes into a large three-species shared core, three pairwise-shared subsets, and three lineage-restricted subsets. Numbers indicate orthogroup counts for each subset. The large shared core is consistent with cross-species comparison being shaped by differential deployment within a common protein repertoire rather than by wholesale protein replacement.", False, False),
+    ("OrthoFinder-based orthogroup analysis resolves the three eggshell matrix proteomes into a large three-species shared core, three pairwise-shared subsets, and three lineage-restricted subsets. Numbers indicate orthogroup counts for each subset. The large shared core shows that cross-species comparison is built on a common protein repertoire rather than on wholesale protein replacement.", False, False),
 ])
 
 doc.add_page_break()
 add_image(FIG_BASE / "SuppFig3_Phylo_Tree" / "Fig_phylo_tree.png", width_cm=14.0)
 fig_title("Fig. S4.", "Maximum-likelihood phylogenetic tree of the three focal species reconstructed from single-copy orthologs.")
 fig_caption([
-    ("Phylogenetic tree inferred by IQ-TREE from a concatenated alignment of single-copy orthologous protein sequences. Branch lengths reflect substitutions per site. Ultrafast bootstrap support values (1000 replicates) are shown at internal nodes. The topology, with Galliformes and Anseriformes as sister clades within Galloanseres and Columbiformes as the more distant outgroup, is consistent with published avian phylogenies and provides the phylogenetic context for the comparative framework used in the main text.", False, False),
+    ("Phylogenetic tree inferred by IQ-TREE from a concatenated alignment of single-copy orthologous protein sequences. Branch lengths reflect substitutions per site. Ultrafast bootstrap support values (1000 replicates) are shown at internal nodes. The topology places Galliformes and Anseriformes as sister clades within Galloanseres and Columbiformes as the more distant outgroup, consistent with published avian phylogenies.", False, False),
 ])
 
 doc.add_page_break()
@@ -241,7 +241,7 @@ fig_title("Fig. S5.", "GO enrichment across species-specific and pairwise eggshe
 fig_caption([
     ("Top, GO terms enriched in the three pairwise-shared ortholog sets (GnA, Gallus-Anas; GnC, Gallus-Columba; AnC, Anas-Columba). Bottom, GO terms enriched in the three species-specific ortholog sets (Gallus, Anas, Columba). Colors denote GO category: biological process (BP), cellular component (CC), and molecular function (MF). The combined view highlights both ecological signal in the pairwise-shared sets and lineage-restricted signal in the species-specific sets; notably, the ", False, False),
     ("G. gallus", False, True),
-    ("-specific set retained protein N-linked glycosylation among its enriched biological-process terms, consistent with the focus on cross-species glycoproteomic divergence in the main text.", False, False),
+    ("-specific set retained protein N-linked glycosylation among its enriched biological-process terms.", False, False),
 ])
 
 doc.add_page_break()
@@ -252,12 +252,12 @@ fig_caption([
     ("p", False, True),
     (" < 0.05 (Viterbi ", False, False),
     ("p", False, True),
-    ("-value) are shown. The pattern is consistent with the GO enrichment results: lineages differed in the turnover of immune and defense-related gene families, while core eggshell matrix families were broadly conserved.", False, False),
+    ("-value) are shown. Lineages differed in the turnover of immune- and defense-related gene families, whereas core eggshell matrix families remained broadly conserved.", False, False),
 ])
 
 doc.add_page_break()
 add_image(FIG_BASE / "SuppFig7_Glycosylation_Hotspot" / "Fig_hotspot_ensemble_1.png", width_cm=15.5)
-fig_title("Fig. S7.", "Re-Glyco ensemble analysis of OVAL glycan geometry and apo-versus-glycosylated comparison.")
+fig_title("Fig. S7.", "Re-Glyco ensemble analysis of OVAL glycan geometry and apo-versus-glycosylated states.")
 fig_caption([
     ("(A) Distribution of glycan radius of gyration (R", False, False),
     ("g", False, False),
@@ -275,7 +275,7 @@ fig_caption([
     ("G. gallus", False, True),
     (" showed the smallest conformational space and the weakest shielding; ", False, False),
     ("A. platyrhynchos", False, True),
-    (" was intermediate. The apo comparison provides an internal control: once N-glycans were removed, cross-species separation in hotspot count largely collapsed, consistent with most of the divergence in the glycosylated states being introduced by the glycan layer rather than by the protein scaffold alone within this modeling framework. Panel C contrasts were evaluated against the apo reference by one-sample t test.", False, False),
+    (" was intermediate. The apo comparison provides an internal control: once N-glycans were removed, cross-species separation in hotspot count largely collapsed. Panel C contrasts were evaluated against the apo reference by one-sample t test.", False, False),
 ])
 
 doc.add_page_break()
@@ -312,7 +312,7 @@ fig_caption([
     ("max", False, False),
     (" and peak shear stress (τ", False, False),
     ("max", False, False),
-    (") computed from these nine replicates per species are reported in the main text and Fig. 6. Simulations were run in LS-DYNA (Ansys) using explicit dynamic finite-element analysis; eggshell thicknesses were set to species-specific values measured from micro-CT.", False, False),
+    (") computed from these nine replicates per species are reported in the main text and Fig. 6. Simulations were run in LS-DYNA (Ansys) using explicit dynamic finite-element analysis, with eggshell thickness set to the species-specific value measured from micro-CT.", False, False),
 ])
 
 doc.save(OUT)
