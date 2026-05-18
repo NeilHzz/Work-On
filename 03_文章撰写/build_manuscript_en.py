@@ -253,9 +253,9 @@ p_intro2 = spara([
 ])
 
 p_intro_sig = spara([
-    (" That gap matters because glycosylation can alter protein stability, molecular recognition, surface exposure, and conformational state. In other systems, glycans can also act as dynamic shields rather than passive bulk alone.", [42, 43, 61, 63, 72, 78]),
-    (" Zeng and colleagues further showed that the same eggshell matrix protein can appear in different N-glycosylation states across the cuticle and mineralized layer, implying that glycan state can help redistribute biological role across eggshell compartments rather than simply decorate a fixed protein scaffold.", [18]),
-    (" Prior mineralization-related work further suggested that OVAL can enter a Ca²⁺-responsive conformational state during early shell formation. Glycan-dependent surface accessibility therefore becomes a testable mechanistic variable. If glycan differences reshape how the same shared matrix protein presents its folded surface, structural modeling should reveal corresponding differences in the Ca²⁺-accessible interface presented at the onset of mineralization.", [4, 11, 29, 42, 43, 61, 63, 81]),
+    (" Glycosylation alters protein stability, molecular recognition, surface exposure, and conformational state, and glycans in other systems can act as dynamic shields rather than passive bulk alone.", [42, 43, 61, 63, 72, 78]),
+    (" Zeng and colleagues further showed that the same eggshell matrix protein can occupy different N-glycosylation states across the cuticle and mineralized layer, indicating that glycan state can redistribute biological role across eggshell compartments rather than simply decorate a fixed protein scaffold.", [18]),
+    (" Prior mineralization-related work also suggested that OVAL can enter a Ca²⁺-responsive conformational state during early shell formation. We therefore asked whether cross-species glycan differences reshape the folded OVAL surface and alter the Ca²⁺-accessible interface presented at mineralization onset.", [4, 11, 29, 42, 43, 61, 63, 81]),
     (" If that structural difference is biologically relevant, then it should remain detectable at the hatching-relevant mechanical end point as local resistance at the mammillary interface under egg-tooth-like loading.", [16, 37, 69]),
 ])
 
@@ -290,7 +290,7 @@ para("Results", bold=True, size=14, before=320, after=160,
 head("Conserved egg-tooth function focuses the analysis on the eggshell")
 
 p_ss1 = smixed([
-    ([(' With shell-breaking tool functionally conserved, hatching-related differences had to be sought in the eggshell. We therefore placed extant birds into a comparative space using 10,993 AVONET species records and selected three deliberately separated model species from this comparative space (Fig. 1A).', False, False)], [16, 22, 41]),
+    ([(' We placed extant birds into a comparative space using 10,993 AVONET species records and selected three deliberately separated model species from this comparative space (Fig. 1A).', False, False)], [16, 22, 41]),
     ([(' This broader mapping was used to prioritize the two egg-relevant axes least likely to be secondary: nesting environment, which covaries strongly with terrestrial-to-aquatic habitat use, and offspring developmental state, which spans a continuum from more precocial to more altricial young.', False, False)], [15, 22, 23]),
         ([(' Within this comparison space, ', False, False),
             ('Gallus gallus', False, True),
@@ -302,7 +302,7 @@ p_ss1 = smixed([
             ([(' This functional grouping only partly overlaps with phylogeny: chicken and duck remain closely related precocial taxa but separate along the habitat axis, whereas pigeon anchors the altricial end of the comparison (Fig. S2).', False, False)], [3, 22, 23]),
             ([(' The comparison was therefore structured to retain shared ancestry in view while still forcing clear life-history separation into the same analytical frame.', False, False)], [3, 15, 22]),
             ([(' The focal species differed in beak-tip geometry, but the egg tooth itself remained a similarly localized dorsal breaker in all three species and pointed to the same inside-out shell-breaking event during hatching (Fig. 1B).', False, False)], [16, 37, 82, 86]),
-    ([(' Within this contrast set, the comparison therefore moves from egg-tooth conservation to eggshell divergence: once the interface is held constant, the relevant question becomes which eggshell layer first separates the species.', False, False)], []),
+    ([(' Within this contrast set, the relevant question becomes which eggshell layer first separates the species once the hatching interface is held constant.', False, False)], []),
 ])
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -533,8 +533,8 @@ para("Discussion", bold=True, size=14, before=320, after=160,
     align=WD_ALIGN_PARAGRAPH.LEFT)
 
 p_disc_mam1 = smixed([
-    ([('The present study links a conserved hatching interface to mammillary organization, glycan-state variation on shared matrix proteins, and local hatching mechanics. Because egg-tooth function remained conserved across the three birds, the most informative differences were recovered in the eggshell itself, first in the mammillary layer and then in glycosylation on a shared matrix background. ', False, False),
-            ('Within that sequence, OVAL glycan state provided the most interpretable correspondence between molecular variation, surface accessibility, and local hatching resistance recovered in this dataset.', False, False)], [1, 16, 18]),
+    ([('Mammillary organization diverged while the eggshell-matrix toolkit remained broadly shared across the three species. ', False, False),
+            ('Within that shared background, OVAL glycan state provided the clearest correspondence between molecular variation, surface accessibility, and local hatching resistance recovered in this dataset.', False, False)], [1, 16, 18]),
 ])
 
 p_disc_regulator = spara([
