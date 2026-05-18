@@ -226,9 +226,9 @@ para("Introduction", bold=True, size=14, before=0, after=160,
 
 # §1 — Background value
 p_s1a = spara([
-    (" Bird hatching begins with a simple mechanical problem: the embryo must focus force on one small shell-breaking site.", [16, 86]),
-    (" In birds, that site is defined by the egg tooth, a transient structure that presses the inner eggshell surface during escape.", [16, 86]),
-    (" If egg-tooth function is broadly conserved across species, then meaningful hatching differences are more likely to lie in the eggshell than in the shell-breaking tool itself.", [16, 86]),
+    (" Bird hatching begins with a simple mechanical problem: the embryo must focus force on one small shell-breaking site.", [16]),
+    (" In birds, that site is defined by the egg tooth, a transient structure that presses the inner eggshell surface during escape.", [86]),
+    (" If egg-tooth function is broadly conserved across species, then meaningful hatching differences are more likely to lie in the eggshell than in the shell-breaking tool itself.", []),
     (" Comparable hatching-assist structures also occur in other egg-laying amniotes, including monotremes, sauropod embryos, and geckos, reinforcing the value of holding the shell-breaking interface constant while examining eggshell divergence.", [82, 83, 84, 85]),
     (" Avian eggshells already vary with incubation environment and life-history strategy rather than presenting one uniform solution across birds.", [15, 39, 40, 41]),
     (" Nesting habitat can alter the balance among water loss, gas exchange, and microbial exposure, so terrestrial and aquatic-associated birds need not build identical shell barriers or pore systems.", [39, 40, 41]),
