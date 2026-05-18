@@ -14,7 +14,7 @@ from docx.shared import Cm, Pt
 
 FIG_BASE = Path(r"D:\system_folder\Desktop\Work On\Supplementary\Figures")
 MAIN_FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
-OUT = str(Path(__file__).with_name("supplementary_materials260518v3.docx"))
+OUT = str(Path(__file__).with_name("supplementary_materials260519v2.docx"))
 
 doc = Document()
 
