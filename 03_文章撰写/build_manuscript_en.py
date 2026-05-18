@@ -370,6 +370,7 @@ p_sprot_go = spara([
 
 p_sprot_focus = spara([
     (" The G. gallus-exclusive set was simultaneously enriched for protein N-linked glycosylation (BP; Fig. S5), shifting the comparison from protein presence to chemical deployment. The retained shared core thus became the relevant molecular background, and glycosylation on shared proteins emerged as the most proximate candidate layer for explaining divergence in mammillary organization and downstream shell behavior.", [18]),
+    (" Within that shared matrix frame, the recurrent proteins emphasized in the Introduction were recovered unevenly in the present dataset: OVAL, OC116, and TRFE persisted as the only three-species glycosylated anchors, OC17 remained chicken-restricted, and proteins such as ovomucoid, lactadherin, clusterin, and the broader Codlin-prioritized set did not remain in the final shared structural subset.", []),
 ])
 
 head("OVAL glycosylation provides the most interpretable cross-species contrast")
@@ -425,13 +426,13 @@ p_s3b = spara([
 ])
 
 p_s3c = spara([
-    (" Once that geometric ordering was established, the next question was how much of the shared acidic interface remained usable for mineral-facing chemistry. Interface shielding rose stepwise from chicken to duck to pigeon in Fig. 4H, and that same ordering was mirrored by declines in hotspot-residue solvent-accessible surface area in Fig. 4I, in the hotspot fraction among candidate acidic residues in Fig. 4J, and in the number of Ca²⁺-relevant hotspots that remained both electrostatically favorable and physically reachable in Fig. 4K.", []),
-    (" These panels therefore do not describe independent readouts so much as one masking cascade. As glycan geometry shifted from compact to extended-and-surface-hugging, the same acidic OVAL interface became progressively more shielded, less exposed, and less chemically available during early mineralization (Fig. 4H-K).", []),
+    (" Once that geometric ordering was established, Fig. 4H to K asked what the same glycan geometry did to one shared acidic interface rather than to four unrelated properties. Fig. 4H first measures gross shielding of that interface; Fig. 4I then asks how much hotspot surface area remains solvent exposed after shielding; Fig. 4J asks what fraction of the candidate acidic residues still qualifies as hotspot surface; and Fig. 4K retains only the subset of those hotspots that remains both electrostatically favorable and physically reachable to Ca²⁺.", []),
+    (" Read in that order, Fig. 4H-K form one directional masking cascade. Interface shielding rose stepwise from chicken to duck to pigeon, and each downstream filter preserved the same ranking, showing that extended, surface-hugging glycans progressively convert the shared acidic OVAL face from broadly available surface into a smaller, chemically usable mineral-facing patch during early mineralization.", []),
 ])
 
 p_s3d = spara([
     (" Fig. 4L and Fig. 4M then collapse the same contrast to the whole-interface level by partitioning hotspot counts and hotspot-residue surface area into exposed and shielded fractions. Chicken retained the largest exposed share in both panels, pigeon shifted the largest share into the shielded compartment, and duck again remained intermediate.", []),
-    (" By that point the full chain becomes explicit: high-mannose chicken OVAL left the acidic interface most open, neutral complex-hybrid duck OVAL partly covered it, and sialylated complex-hybrid pigeon OVAL produced the most extensive shielding. Fig. 4A to M therefore form one continuous structural argument, moving from glycan-dependent separation, to glycan geometry, to interface masking, and finally to Ca²⁺-relevant accessibility on a shared matrix protein.", []),
+    (" At that whole-interface level, chicken also retained the strongest inferred Ca²⁺-capturing capacity and was therefore the state most compatible with an earlier Ca²⁺-responsive opening of OVAL at mineralization onset; pigeon defined the weakest and latest-starting limit, and duck again remained intermediate. That ordering matches the earlier phenotype chain: chicken combined the densest mammillary field and the highest local hatching resistance, whereas duck and pigeon converged toward the lower-resistance side from different structural backgrounds. Fig. 4A to M therefore form one continuous structural argument, moving from glycan-dependent separation, to glycan geometry, to interface masking, and finally to Ca²⁺-relevant accessibility on a shared matrix protein.", []),
 ])
 
 doc.add_page_break()
@@ -599,7 +600,7 @@ p_disc_function = para(
 cite(p_disc_function, [67, 73, 74])
 
 p_disc_selection = para(
-    "Duck and pigeon remain essential because they define the bounds of that chicken state. Duck shows that greater shell thickness can elevate raw force without recreating the same mammillary-interface resistance. Pigeon shows that a thinner shell can converge with duck at low τ_max through a different morphological background. Together, these contrasts make chicken the clearest reference state for linking glycan-dependent matrix behavior to eggshell performance. Within that frame, OVAL glycan state is the most explicit molecular layer through which the chicken-like high-resistance state becomes mechanistically interpretable."
+    "Duck and pigeon remain essential because they define the bounds of that chicken state across both shell structure and ecological-developmental position. Duck shows that a more aquatic niche and broadly precocial developmental condition can coexist with greater shell thickness, intermediate OVAL accessibility, and low τ_max without recreating the same mammillary-interface resistance. Pigeon shows that a more terrestrial and more altricial position can still converge with duck at low τ_max, but from a thinner shell and a different mammillary background. Together, these contrasts make chicken the clearest reference state for linking glycan-dependent matrix behavior to eggshell performance across the ecological and developmental space sampled here. Within that frame, OVAL glycan state is the most explicit molecular layer through which the chicken-like high-resistance state becomes mechanistically interpretable."
 )
 
 p_disc_biomineral = para(
