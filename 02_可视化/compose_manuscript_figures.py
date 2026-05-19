@@ -471,19 +471,19 @@ def compose_fig4():
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Fig 5  (3 rows; each row: left ~22 % bird illustration + right ~78 % FEM)
-#         Row A = Columba (pigeon), B = Anas (duck), C = Gallus (chicken)
+# Fig 5  (3 rows; each row: left ~35 % bird illustration + right ~65 % FEM)
+#         Row A = Gallus (chicken), B = Anas (duck), C = Columba (pigeon)
 # ─────────────────────────────────────────────────────────────────────────────
 
 def compose_fig5():
     print("\n=== Composing Fig 5 ===")
-    inner_w  = CANVAS_W - 2 * MARGIN
-    left_frac = 0.22
-    left_w   = int(inner_w * left_frac)
-    right_w  = inner_w - left_w - GAP
+    inner_w   = CANVAS_W - 2 * MARGIN
+    left_frac = 0.35                        # ~35 % matches reference (983/2776)
+    left_w    = int(inner_w * left_frac)
+    right_w   = inner_w - left_w           # no gap between illustration and FEM
 
-    # All FEM renders are 1900×1400.  Scale to right_w, height follows naturally.
-    # Left column: beak/egg-tooth illustrations from eggtooth/ folder
+    # Left column: beak/egg-tooth illustrations (2048×2048 square) from eggtooth/
+    # Right column: FEM renders (1900×1400) — scale to right_w, crop bottom to row_h
     # Row order: A = Gallus (chicken), B = Anas (duck), C = Columba (pigeon)
     species_data = [
         ("A", EGGTOOTH / "鸡（喙）.png",   FEM / "chicken_model_render.png", "Gallus (chicken)"),
@@ -493,36 +493,31 @@ def compose_fig5():
 
     rows = []
     for lbl, illus_path, fem_path, sp_name in species_data:
-        fem_raw = load_img(fem_path)
-        if fem_raw is None:
-            fem_img = make_placeholder(right_w, int(right_w * 0.74),
-                                       f"{sp_name} FEM render\n(file not found)")
-        else:
-            fem_img = scale_to_w(fem_raw, right_w)
-
-        row_h = fem_img.height   # row height driven by FEM render
-
+        # Scale illustration to left_w; it is 2048×2048 so height == left_w → row height
         illus_raw = load_img(illus_path)
         if illus_raw is None:
-            illus_img = make_placeholder(left_w, row_h,
-                                         f"{sp_name}\nillustration not found")
+            illus_img = make_placeholder(left_w, left_w, f"{sp_name}\nillustration not found")
         else:
-            # Scale illustration to left_w; centre it vertically if shorter than row_h
-            illus_scaled = scale_to_w(illus_raw, left_w)
-            if illus_scaled.height <= row_h:
-                y_off = (row_h - illus_scaled.height) // 2
-                illus_img = Image.new("RGBA", (left_w, row_h), (255, 255, 255, 0))
-                illus_img.paste(illus_scaled, (0, y_off), illus_scaled)
-            else:
-                illus_img = illus_scaled.crop((0, 0, left_w, row_h))
+            illus_img = scale_to_w(illus_raw, left_w)
 
-        # Add panel letter to the illustration (left panel)
+        row_h = illus_img.height   # row height driven by the square illustration
+
+        # Scale FEM to right_w, then crop bottom excess so it matches row_h
+        fem_raw = load_img(fem_path)
+        if fem_raw is None:
+            fem_img = make_placeholder(right_w, row_h, f"{sp_name} FEM render\n(file not found)")
+        else:
+            fem_img = scale_to_w(fem_raw, right_w)
+            if fem_img.height > row_h:
+                fem_img = fem_img.crop((0, 0, right_w, row_h))
+
+        # Add panel letter to the illustration (top-left)
         illus_img = add_label(illus_img, lbl, font=FONT_LG)
 
-        # Combine illustration + FEM into one row strip
+        # Combine illustration + FEM into one row strip (no gap between columns)
         row_strip = Image.new("RGBA", (inner_w, row_h), (255, 255, 255, 0))
         row_strip.paste(illus_img, (0, 0), illus_img)
-        row_strip.paste(fem_img,   (left_w + GAP, 0), fem_img)
+        row_strip.paste(fem_img,   (left_w, 0), fem_img)
         rows.append(row_strip)
 
     total_h = 2 * MARGIN + sum(r.height for r in rows) + GAP * (len(rows) - 1)
@@ -537,37 +532,69 @@ def compose_fig5():
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Fig 6  (left ~65 % = force+shear timeseries; right ~35 % = DMRT bars)
+# Fig 6  (2-row × 2-column grid)
+#   Row A: Force timeseries (left, ~38 %)  | F_max DMRT bars (right, ~60 %)
+#   Row B: Shear timeseries (left, ~38 %)  | τ_max DMRT bars (right, ~60 %)
+#   Sources:
+#     Fig6A.png — both timeseries stacked (Force top / Shear bottom); split at H//2
+#     Fig6B.png — both DMRT bars side-by-side (F_max left / τ_max right); split at W//2
 # ─────────────────────────────────────────────────────────────────────────────
 
 def compose_fig6():
     print("\n=== Composing Fig 6 ===")
-    inner_w = CANVAS_W - 2 * MARGIN
-    left_w  = int(inner_w * 0.65)
-    right_w = inner_w - left_w - GAP
+    inner_w   = CANVAS_W - 2 * MARGIN
+    left_frac = 0.38               # timeseries column ~38 % (matches reference)
+    left_w    = int(inner_w * left_frac)
+    right_w   = inner_w - left_w - GAP
 
-    # Fig6A contains both timeseries subplots (force F top, shear τ bottom)
-    left_raw = load_img(PNG / "Fig6A.png")
-    if left_raw is None:
-        left_img = make_placeholder(left_w, int(left_w * 0.83),
-                                    "Fig6A — timeseries (not found)")
-    else:
-        left_img = scale_to_w(left_raw, left_w)
+    # ── load source panels ──────────────────────────────────────────────────
+    raw_a = load_img(PNG / "Fig6A.png")   # 2372×1963  Force(top) + Shear(bottom)
+    raw_b = load_img(PNG / "Fig6B.png")   # 2375×1275  F_max(left) + τ_max(right)
 
-    # Fig6B contains both DMRT bar charts
-    right_raw = load_img(PNG / "Fig6B.png")
-    if right_raw is None:
-        right_img = make_placeholder(right_w, left_img.height,
-                                     "Fig6B — DMRT bars (not found)")
-    else:
-        right_img = scale_to_w(right_raw, right_w)
+    if raw_a is None:
+        raw_a = make_placeholder(2372, 1963, "Fig6A not found")
+    if raw_b is None:
+        raw_b = make_placeholder(2375, 1275, "Fig6B not found")
 
-    # Use the taller column to determine canvas height; shorter one aligns to top
-    canvas_h = 2 * MARGIN + max(left_img.height, right_img.height)
-    canvas = Image.new("RGBA", (CANVAS_W, canvas_h), (255, 255, 255, 255))
+    # ── split Fig6A vertically at midpoint ──────────────────────────────────
+    Ha, Wa = raw_a.height, raw_a.width
+    a_top = raw_a.crop((0, 0,       Wa, Ha // 2))   # Force timeseries
+    a_bot = raw_a.crop((0, Ha // 2, Wa, Ha))         # Shear timeseries
 
-    paste(canvas, left_img,  MARGIN, MARGIN)
-    paste(canvas, right_img, MARGIN + left_w + GAP, MARGIN)
+    # ── split Fig6B horizontally at midpoint ────────────────────────────────
+    Hb, Wb = raw_b.height, raw_b.width
+    b_left  = raw_b.crop((0,       0, Wb // 2, Hb))  # F_max bars
+    b_right = raw_b.crop((Wb // 2, 0, Wb,      Hb))  # τ_max bars
+
+    # ── scale left (timeseries) panels to left_w ────────────────────────────
+    a_top_s = scale_to_w(a_top, left_w)
+    a_bot_s = scale_to_w(a_bot, left_w)
+    row_A_h = a_top_s.height
+    row_B_h = a_bot_s.height
+
+    # ── add panel labels (top-left of timeseries panels) ────────────────────
+    a_top_s = add_label(a_top_s, "A", font=FONT_LG)
+    a_bot_s = add_label(a_bot_s, "B", font=FONT_LG)
+
+    # ── scale right (bar) panels to match row heights ────────────────────────
+    b_left_s  = scale_to_h(b_left,  row_A_h)
+    b_right_s = scale_to_h(b_right, row_B_h)
+
+    # ── compose canvas ───────────────────────────────────────────────────────
+    total_h = 2 * MARGIN + row_A_h + GAP + row_B_h
+    canvas  = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
+
+    # Row A
+    y = MARGIN
+    paste(canvas, a_top_s, MARGIN, y)
+    bx_A = MARGIN + left_w + GAP + max(0, (right_w - b_left_s.width) // 2)
+    paste(canvas, b_left_s, bx_A, y)
+
+    # Row B
+    y += row_A_h + GAP
+    paste(canvas, a_bot_s, MARGIN, y)
+    bx_B = MARGIN + left_w + GAP + max(0, (right_w - b_right_s.width) // 2)
+    paste(canvas, b_right_s, bx_B, y)
 
     save_fig(canvas, "Fig6_composed")
 
