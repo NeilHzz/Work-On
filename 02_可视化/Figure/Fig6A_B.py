@@ -200,6 +200,21 @@ plt.tight_layout(rect=[0, 0, 1, 0.93])
 save_fig(plt.gcf(), "Fig6B", dpi=200)
 plt.close("all")
 
+# ── Individual DMRT panels ─────────────────────────────────────────────────
+rng = np.random.default_rng(42)
+fig_fmax, ax_fmax = plt.subplots(1, 1, figsize=(6, 6.5))
+plot_dmrt(ax_fmax, res_F, F_DATA, "F_max", "N")
+plt.tight_layout()
+save_fig(plt.gcf(), "Fig6B_Fmax", dpi=200)
+plt.close("all")
+
+rng = np.random.default_rng(42)
+fig_taumax, ax_taumax = plt.subplots(1, 1, figsize=(6, 6.5))
+plot_dmrt(ax_taumax, res_tau, TAU_DATA, "τ_max", "MPa")
+plt.tight_layout()
+save_fig(plt.gcf(), "Fig6B_Taumax", dpi=200)
+plt.close("all")
+
 # ─────────────────────────────────────────────────────────────
 # Fig 2 — Time-series mean ± 1σ
 # ─────────────────────────────────────────────────────────────
@@ -280,6 +295,78 @@ if ts_data:
     save_fig(plt.gcf(), "Fig6A", dpi=200)
     plt.close("all")
     print("[OK] Time-series: Fig6A")
+
+    # ── Individual timeseries panels (figsize=(12,5.67) → AR≈2.12 匹配参考) ──
+    # Force only
+    fig_force, ax_f_only = plt.subplots(1, 1, figsize=(12, 5.67))
+    for sp, color, T_mm in zip(SPECIES, COLORS, T_MMS):
+        if sp not in ts_data:
+            continue
+        t_ref, mat = ts_data[sp]
+        mean_f = mat.mean(axis=0)
+        std_f  = mat.std(axis=0)
+        ts_s, ms_f = smooth(t_ref, mean_f)
+        _, lo_f = smooth(t_ref, np.clip(mean_f - std_f, 0, None))
+        _, hi_f = smooth(t_ref, mean_f + std_f)
+        ax_f_only.fill_between(ts_s, lo_f, hi_f, color=color, alpha=0.15)
+        ax_f_only.plot(ts_s, ms_f, color=color, lw=2.2,
+                       label=f'$\\it{{{sp}}}$ (n={mat.shape[0]})')
+        pk_f = np.argmax(ms_f)
+        marker_f = '⭐' if _is_sig(sp, res_F) else '•'
+        ax_f_only.text(ts_s[pk_f], ms_f[pk_f], marker_f,
+                       color=color, ha='center', va='bottom', fontsize=13, zorder=10,
+                       fontfamily='Segoe UI Emoji')
+    ax_f_only.set_ylabel("Contact force F (N)", fontsize=12)
+    ax_f_only.set_xlabel("Time (μs)", fontsize=12)
+    ax_f_only.legend(fontsize=10, framealpha=0.9)
+    ax_f_only.grid(axis="y", linestyle="--", linewidth=0.6, alpha=0.4)
+    ax_f_only.yaxis.set_minor_locator(ticker.AutoMinorLocator(2))
+    ax_f_only.spines['top'].set_visible(False)
+    ax_f_only.spines['right'].set_visible(False)
+    plt.tight_layout()
+    save_fig(plt.gcf(), "Fig6A_Force", dpi=200)
+    plt.close("all")
+
+    # Shear only
+    fig_shear, ax_tau_only = plt.subplots(1, 1, figsize=(12, 5.67))
+    _tau_merge_peaks = {}
+    for sp, color, T_mm in zip(SPECIES, COLORS, T_MMS):
+        if sp not in ts_data:
+            continue
+        t_ref, mat = ts_data[sp]
+        mean_f = mat.mean(axis=0)
+        std_f  = mat.std(axis=0)
+        ts_s2, ms_tau = smooth(t_ref, to_tau(mean_f, T_mm))
+        _, lo_tau = smooth(t_ref, to_tau(np.clip(mean_f - std_f, 0, None), T_mm))
+        _, hi_tau = smooth(t_ref, to_tau(mean_f + std_f, T_mm))
+        ax_tau_only.fill_between(ts_s2, lo_tau, hi_tau, color=color, alpha=0.15)
+        ax_tau_only.plot(ts_s2, ms_tau, color=color, lw=2.2,
+                         label=f'$\\it{{{sp}}}$ (n={mat.shape[0]})')
+        pk_tau = np.argmax(ms_tau)
+        if sp in ('Columba', 'Anas'):
+            _tau_merge_peaks[sp] = (ts_s2[pk_tau], ms_tau[pk_tau])
+        else:
+            marker_tau = '⭐' if _is_sig(sp, res_tau) else '•'
+            ax_tau_only.text(ts_s2[pk_tau], ms_tau[pk_tau], marker_tau,
+                             color=color, ha='center', va='bottom', fontsize=13, zorder=10,
+                             fontfamily='Segoe UI Emoji')
+    if _tau_merge_peaks:
+        merged_x = np.mean([v[0] for v in _tau_merge_peaks.values()])
+        merged_y = np.mean([v[1] for v in _tau_merge_peaks.values()])
+        ax_tau_only.plot(merged_x, merged_y, marker='o', markersize=9,
+                         color='#888888', markeredgecolor='white', markeredgewidth=1.2,
+                         zorder=10, linestyle='none')
+    ax_tau_only.set_ylabel("Shear stress τ (MPa)", fontsize=12)
+    ax_tau_only.set_xlabel("Time (μs)", fontsize=12)
+    ax_tau_only.legend(fontsize=10, framealpha=0.9)
+    ax_tau_only.grid(axis="y", linestyle="--", linewidth=0.6, alpha=0.4)
+    ax_tau_only.yaxis.set_minor_locator(ticker.AutoMinorLocator(2))
+    ax_tau_only.spines['top'].set_visible(False)
+    ax_tau_only.spines['right'].set_visible(False)
+    plt.tight_layout()
+    save_fig(plt.gcf(), "Fig6A_Shear", dpi=200)
+    plt.close("all")
+    print("[OK] Individual panels: Fig6A_Force, Fig6A_Shear, Fig6B_Fmax, Fig6B_Taumax")
 else:
     print("[SKIP] Time-series: no per-case data available")
 
