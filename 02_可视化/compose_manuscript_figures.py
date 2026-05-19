@@ -543,7 +543,7 @@ def compose_fig5():
 def compose_fig6():
     print("\n=== Composing Fig 6 ===")
     inner_w   = CANVAS_W - 2 * MARGIN
-    left_frac = 0.38               # timeseries column ~38 % (matches reference)
+    left_frac = 0.65               # timeseries column ~65 % (figsize 12/(12+6) = 0.667)
     left_w    = int(inner_w * left_frac)
     right_w   = inner_w - left_w - GAP
 
