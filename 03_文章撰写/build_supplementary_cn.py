@@ -116,7 +116,7 @@ para("补充材料", bold=True, size=14,
      before=0, after=240, align=WD_ALIGN_PARAGRAPH.CENTER)
 
 para(
-    "OVAL糖链状态与三种鸟类的乳突层组织及局部出壳抗性相对应",
+    "蛋壳基质蛋白糖链状态连接鸟类乳突层组织与局部出壳抗性",
     italic=False, size=11, before=0, after=360,
     align=WD_ALIGN_PARAGRAPH.CENTER,
 )

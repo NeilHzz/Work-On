@@ -131,7 +131,7 @@ def fig_caption(parts, before=0, after=240):
 para("Supplementary Materials for", size=11, before=0, after=40,
      align=WD_ALIGN_PARAGRAPH.CENTER)
 para(
-    "OVAL glycan state aligns with mammillary organization and local hatching resistance across three bird species",
+    "Glycan states of eggshell matrix proteins link mammillary organization to local hatching resistance across birds",
     bold=True, size=12, before=0, after=160, align=WD_ALIGN_PARAGRAPH.CENTER,
 )
 para("",

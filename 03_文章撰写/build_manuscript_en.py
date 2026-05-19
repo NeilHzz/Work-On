@@ -191,12 +191,12 @@ def add_main_figure_legend(label, title, caption_parts, before=0, after=160):
 
 # Title (≤135 characters)
 para(
-    "OVAL glycan state aligns with mammillary organization and local hatching resistance across three bird species",
+    "Glycan states of eggshell matrix proteins link mammillary organization to local hatching resistance across birds",
     bold=True, size=14, before=0, after=160, align=WD_ALIGN_PARAGRAPH.LEFT
 )
 
 # Short title (≤50 characters)
-para("OVAL glycans and hatching resistance",
+para("Matrix protein glycans and hatching resistance",
      bold=False, size=11, after=60, align=WD_ALIGN_PARAGRAPH.LEFT)
 
 para(

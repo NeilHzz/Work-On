@@ -202,13 +202,13 @@ def add_main_figure_legend(label, title, caption_parts, before=0, after=160):
 # 封面信息 (Science Advances)
 # ════════════════════════════════════════════════════════════════════════════
 para(
-    "OVAL糖链状态与三种鸟类的乳突层组织及局部出壳抗性相对应",
+    "蛋壳基质蛋白糖链状态连接鸟类乳突层组织与局部出壳抗性",
     bold=True, size=14, before=0, after=160,
     align=WD_ALIGN_PARAGRAPH.LEFT
 )
 
 para(
-    "短标题：OVAL糖链与出壳抗性",
+    "短标题：基质蛋白糖链与出壳抗性",
     bold=False, size=11, before=0, after=60,
     align=WD_ALIGN_PARAGRAPH.LEFT
 )
