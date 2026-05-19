@@ -14,6 +14,7 @@ from docx.shared import Cm, Pt
 
 FIG_BASE = Path(r"D:\system_folder\Desktop\Work On\Supplementary\Figures")
 MAIN_FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
+PANEL_FIG_BASE = Path(__file__).resolve().parent.parent / "02_可视化" / "Figure" / "PNG"
 OUT = str(Path(__file__).with_name("supplementary_materials260519v2_cn.docx"))
 
 doc = Document()
@@ -186,7 +187,7 @@ fig_caption(
 # 图S2
 doc.add_page_break()
 fig_title("图S2.", "目标物种在更广鸟类比较框架中的系统位置与比较轴热图。")
-add_image(MAIN_FIG_BASE / "PanelB.jpg", width_cm=15.5)
+add_image(PANEL_FIG_BASE / "Fig1B.png", width_cm=15.5)
 fig_caption(
     "代表性鸟类类群的系统发育关系及水生关联（X）、发育方式（Z）和生态不一致性（Y）三条比较轴的热图。彩色目级标签给出了目标物种所处的更广比较框架。鸡、鸭和鸽的位置显示，这组三物种比较覆盖的功能轴线只与系统关系部分重合。"
 )

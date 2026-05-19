@@ -14,6 +14,7 @@ from docx.shared import Cm, Pt
 
 FIG_BASE = Path(r"D:\system_folder\Desktop\Work On\Supplementary\Figures")
 MAIN_FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
+PANEL_FIG_BASE = Path(__file__).resolve().parent.parent / "02_可视化" / "Figure" / "PNG"
 OUT = str(Path(__file__).with_name("supplementary_materials260519v2.docx"))
 
 doc = Document()
@@ -215,7 +216,7 @@ fig_caption([
 ])
 
 doc.add_page_break()
-add_image(MAIN_FIG_BASE / "PanelB.jpg", width_cm=15.5)
+add_image(PANEL_FIG_BASE / "Fig1B.png", width_cm=15.5)
 fig_title("Fig. S2.", "Order-level avian phylogenetic context and comparative-axis heatmaps for the focal species.")
 fig_caption([
     ("Phylogenetic relationship of representative avian taxa together with heatmap tracks for aquatic association (X), developmental mode (Z), and lifestyle-habitat discordance (Y). Colored order labels locate the broader comparative frame used for species selection. The positions of the focal lineages show that the chicken, duck, and pigeon comparison spans functional axes that only partly overlap with phylogeny.", False, False),
