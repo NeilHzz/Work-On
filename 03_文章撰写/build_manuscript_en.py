@@ -260,7 +260,7 @@ p_intro_sig = spara([
 ])
 
 p_intro_gap = spara([
-    (" We therefore anchored the comparison to a conserved egg-tooth interface and tested whether glycan-state differences on shared matrix proteins could explain why a common shell-building toolkit yields different Ca²⁺-accessible states at the onset of mineralization. In that framing, the key missing step is not another protein list, but a bridge from glycan class to surface presentation on a shared matrix background.", [4, 18, 29, 42]),
+    (" We therefore anchored the comparison to a conserved egg-tooth interface and tested whether glycan-state differences on shared matrix proteins could explain why a common shell-building toolkit yields different Ca²⁺-accessible states at the onset of mineralization. In that framing, the key missing step is not another protein list, but a bridge from glycan class to surface presentation on a shared matrix background.", []),
     (" OVAL provided a tractable test case: its Ca²⁺-responsive surface behavior had already been made biologically relevant in earlier mineralization work, it remained abundant across species, and its dominant glycan classes could be followed from glycoproteomics into structural modeling.", [4, 18, 29, 42]),
 ])
 
