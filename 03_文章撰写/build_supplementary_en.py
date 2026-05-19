@@ -15,7 +15,7 @@ from docx.shared import Cm, Pt
 FIG_BASE = Path(r"D:\system_folder\Desktop\Work On\Supplementary\Figures")
 MAIN_FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
 PANEL_FIG_BASE = Path(__file__).resolve().parent.parent / "02_可视化" / "Figure" / "PNG"
-OUT = str(Path(__file__).with_name("supplementary_materials260519v2.docx"))
+OUT = str(Path(__file__).with_name("supplementary_materials260520.docx"))
 
 doc = Document()
 
@@ -253,7 +253,7 @@ fig_caption([
     ("p", False, True),
     (" < 0.05 (Viterbi ", False, False),
     ("p", False, True),
-    ("-value) are shown. Lineages differed in the turnover of immune- and defense-related gene families, whereas core eggshell matrix families remained broadly conserved.", False, False),
+    (" value) are shown. Lineages differed in the turnover of immune- and defense-related gene families, whereas core eggshell matrix families remained broadly conserved.", False, False),
 ])
 
 doc.add_page_break()
@@ -304,13 +304,13 @@ fig_caption([
     ("C. livia", False, True),
     (" (C). Each curve represents one simulation; curves are shown from the onset of contact to peak force. Insets show the peak contact force (", False, False),
     ("F", False, True),
-    ("max", False, False),
+    ("_max", False, False),
     (") distribution across the nine positions for each species. (D-F) Corresponding Y-direction reaction-force (", False, False),
     ("F", False, True),
     ("Y", False, False),
     (") time courses. Species means ± s.d. of ", False, False),
     ("F", False, True),
-    ("max", False, False),
+    ("_max", False, False),
     (" and peak shear stress (τ", False, False),
     ("max", False, False),
     (") computed from these nine replicates per species are reported in the main text and Fig. 6. Simulations were run in LS-DYNA (Ansys) using explicit dynamic finite-element analysis, with eggshell thickness set to the species-specific value measured from micro-CT.", False, False),

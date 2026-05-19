@@ -15,7 +15,7 @@ from docx.shared import Cm, Pt
 FIG_BASE = Path(r"D:\system_folder\Desktop\Work On\Supplementary\Figures")
 MAIN_FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
 PANEL_FIG_BASE = Path(__file__).resolve().parent.parent / "02_可视化" / "Figure" / "PNG"
-OUT = str(Path(__file__).with_name("supplementary_materials260519v2_cn.docx"))
+OUT = str(Path(__file__).with_name("supplementary_materials260520_cn.docx"))
 
 doc = Document()
 
@@ -252,7 +252,7 @@ add_images_row([
     FIG_BASE / "SuppFig8_FEA_Force_Analysis" / "pigeon_rcforc_yforce.png",
 ], width_cm=7.5)
 fig_caption(
-    "(A–C) G. gallus（A）、A. platyrhynchos（B）和 C. livia（C）在九个参数化冲击位置（3 × 3 横向偏移网格）上的接触力（F）时间历程曲线。每条曲线代表一次模拟，显示从接触开始到峰值接触力的全过程。内嵌图给出了各物种九个位置的峰值接触力（Fmax）分布。(D–F) 对应的 Y 方向反力（FY）时间历程。由这九次重复计算得到的物种峰值接触力（Fmax）和峰值接触剪切应力（τmax）的均值 ± s.d. 已在正文和图6中报告。模拟采用 LS-DYNA（Ansys）显式动力有限元分析完成，蛋壳厚度设置为基于 micro-CT 测得的物种特异性数值。"
+    "(A–C) G. gallus（A）、A. platyrhynchos（B）和 C. livia（C）在九个参数化冲击位置（3 × 3 横向偏移网格）上的接触力（F）时间历程曲线。每条曲线代表一次模拟，显示从接触开始到峰值接触力的全过程。内嵌图给出了各物种九个位置的峰值接触力（F_max）分布。(D–F) 对应的 Y 方向反力（FY）时间历程。由这九次重复计算得到的物种峰值接触力（F_max）和峰值接触剪切应力（τ_max）的均值 ± s.d. 已在正文和图6中报告。模拟采用 LS-DYNA（Ansys）显式动力有限元分析完成，蛋壳厚度设置为基于 micro-CT 测得的物种特异性数值。"
 )
 
 
