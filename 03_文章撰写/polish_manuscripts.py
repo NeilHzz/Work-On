@@ -18,11 +18,11 @@ import re
 # ─────────────────────────────────────────────
 
 NEW_TITLE_EN = (
-    "N-glycan class on ovalbumin encodes a composite adaptive response to "
-    "developmental strategy and calcium ecology in three avian species"
+    "Glycan states of eggshell matrix proteins link mammillary organization "
+    "to local hatching resistance across birds"
 )
 
-NEW_SHORT_TITLE_EN = "Avian OVAL glycan, ecology, and eggshell structure"
+NEW_SHORT_TITLE_EN = "Matrix protein glycans and hatching resistance"
 
 NEW_TEASER_EN = (
     "N-glycan class on ovalbumin tunes eggshell nucleation density and "
@@ -51,10 +51,10 @@ NEW_ABSTRACT_EN = (
 
 # Chinese versions
 NEW_TITLE_CN = (
-    "卵白蛋白N-糖链类别编码三种禽类发育策略与生态钙可获性适应响应的复合信号"
+    "蛋壳基质蛋白糖链状态连接鸟类乳突层组织与局部出壳抗性"
 )
 
-NEW_SHORT_TITLE_CN = "禽类卵白蛋白糖链类别与蛋壳生态适应"
+NEW_SHORT_TITLE_CN = "基质蛋白糖链与出壳抗性"
 
 NEW_TEASER_CN = (
     "卵白蛋白N-糖链类别通过调控蛋壳乳突成核密度与力学抗性，"
