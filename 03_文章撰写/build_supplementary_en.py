@@ -312,7 +312,7 @@ fig_caption([
     ("F", False, True),
     ("_max", False, False),
     (" and peak shear stress (τ", False, False),
-    ("max", False, False),
+    ("_max", False, False),
     (") computed from these nine replicates per species are reported in the main text and Fig. 6. Simulations were run in LS-DYNA (Ansys) using explicit dynamic finite-element analysis, with eggshell thickness set to the species-specific value measured from micro-CT.", False, False),
 ])
 

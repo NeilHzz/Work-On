@@ -815,7 +815,7 @@ para(
     "与apo参考值比较；"
     "糖基化与apo结构间总Asp/Glu SASA差异及"
     "表面静电势中位数的偏移均以单样本t检验（对照apo参考值）评估。"
-    "蛋白\u2013糖基化位点丰度耦合以log\u2082转换强度的Spearman秩相关定量。"
+    "蛋白\u2013糖基化位点丰度耦合以log2转换强度的Spearman秩相关定量。"
     "有限元仿真结果（F_max、\u03c4_max）以单因素ANOVA结合"
     "Duncan多重范围检验（DMRT；\u03b1\u202f=\u202f0.05）进行物种比较。"
     "所有统计分析在Python中以scipy.stats和statsmodels完成。"
