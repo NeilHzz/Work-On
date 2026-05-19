@@ -7,13 +7,15 @@ matching the layout from Figure260421/ reference images.
 
 Panel sources   : 02_可视化/Figure/PNG/
 FEM renders     : 01_数据与计算/LS-DYNA_原始模型/
-Bird illustrations: 01_数据与计算/乳突层形态结构/
+Bird illustrations (eggtooth): 02_可视化/eggtooth/
 Old panels      : 02_可视化/Sci_Adv_Figure/PNG/Fig1/  (for Fig1C)
 Output          : 02_可视化/Composed/
 
 Panel mapping (script file → manuscript figure / panel):
   Fig1A.png          → Fig1  A  (CVA 3D scatter)
-  Fig1B.png          → Fig1  B  (Phylogenetic tree + heatmap)
+  eggtooth/鸡.png + 鸭.png + 鸽子.png (top row)
+  + 鸡（喙）.png + 鸭（喙）.png + 鸽子（喙）.png (bottom row)
+                     → Fig1  B  (2×3 bird illustration grid)
   [old mammilla]     → Fig1  C  (SEM + egg shell + mammilla structure)
   Fig1D.png          → Fig1  D  (Mammilla density + volume boxplots)
   Fig3A.png          → Fig2     (Glycotype radial network, no letter)
@@ -37,9 +39,9 @@ Panel mapping (script file → manuscript figure / panel):
   Fig5L.png          → Fig4  K  (Net accessible Ca²⁺)
   Fig5M.png          → Fig4  L  (Stacked bar – species comparison)
   Fig5N.png          → Fig4  M  (Stacked bar – glycosite comparison)
-  T_Pigeon.png + pigeon_model_render.png → Fig5  A
-  T_Duck.png   + duck_model_render.png   → Fig5  B
-  T_Chicken.png+ chicken_model_render.png→ Fig5  C
+  eggtooth/鸡（喙）.png + chicken_model_render.png → Fig5  A  (Gallus)
+  eggtooth/鸭（喙）.png + duck_model_render.png    → Fig5  B  (Anas)
+  eggtooth/鸽子（喙）.png + pigeon_model_render.png→ Fig5  C  (Columba)
   Fig6A.png          → Fig6  (left 65%  – force & shear timeseries)
   Fig6B.png          → Fig6  (right 35% – DMRT bar charts)
 """
@@ -53,9 +55,10 @@ import sys
 # ─────────────────────────────────────────────────────────────────────────────
 BASE   = Path(__file__).resolve().parent.parent          # …/Work On/
 PNG    = Path(__file__).resolve().parent / "Figure" / "PNG"
-FEM    = BASE / "01_数据与计算" / "LS-DYNA_原始模型"
-ILLUS  = BASE / "01_数据与计算" / "乳突层形态结构"
-OLD_F1 = Path(__file__).resolve().parent / "Sci_Adv_Figure" / "PNG" / "Fig1"
+FEM      = BASE / "01_数据与计算" / "LS-DYNA_原始模型"
+ILLUS    = BASE / "01_数据与计算" / "乳突层形态结构"
+EGGTOOTH = Path(__file__).resolve().parent / "eggtooth"
+OLD_F1   = Path(__file__).resolve().parent / "Sci_Adv_Figure" / "PNG" / "Fig1"
 OUT    = Path(__file__).resolve().parent / "Composed"
 OUT.mkdir(exist_ok=True)
 
@@ -247,8 +250,34 @@ def compose_fig1():
     # Panel A: CVA 3D scatter (no pre-existing corner label from script)
     A = full("Fig1A.png", "A")
 
-    # Panel B: Phylogenetic tree + heatmap
-    B = full("Fig1B.png", "B")
+    # Panel B: 2×3 bird illustration grid
+    #   Row 1 (top)    = full bird head portraits  (鸡 / 鸭 / 鸽子)
+    #   Row 2 (bottom) = beak / egg-tooth closeups (鸡（喙）/ 鸭（喙）/ 鸽子（喙）)
+    col_w_b = (inner_w - 2 * GAP) // 3
+    top_names = ["鸡.png", "鸭.png", "鸽子.png"]
+    bot_names = ["鸡（喙）.png", "鸭（喙）.png", "鸽子（喙）.png"]
+
+    def _eg(name):
+        raw = load_img(EGGTOOTH / name)
+        if raw is None:
+            return make_placeholder(col_w_b, col_w_b, name)
+        return scale_to_w(raw, col_w_b)
+
+    row_top_imgs = [_eg(n) for n in top_names]
+    row_bot_imgs = [_eg(n) for n in bot_names]
+    top_row_h = max(img.height for img in row_top_imgs)
+    bot_row_h = max(img.height for img in row_bot_imgs)
+    b_h = top_row_h + GAP + bot_row_h
+    B = Image.new("RGBA", (inner_w, b_h), (255, 255, 255, 0))
+    x = 0
+    for img in row_top_imgs:
+        B.paste(img, (x, 0), img)
+        x += col_w_b + GAP
+    x = 0
+    for img in row_bot_imgs:
+        B.paste(img, (x, top_row_h + GAP), img)
+        x += col_w_b + GAP
+    B = add_label(B, "B", font=FONT_XL)
 
     # Panel C: SEM + egg shell + mammilla microstructure (from old Sci_Adv panel)
     raw_c = load_img(OLD_F1 / "2-2Fig_mammilla_microstructure_panels.png")
@@ -454,10 +483,12 @@ def compose_fig5():
     right_w  = inner_w - left_w - GAP
 
     # All FEM renders are 1900×1400.  Scale to right_w, height follows naturally.
+    # Left column: beak/egg-tooth illustrations from eggtooth/ folder
+    # Row order: A = Gallus (chicken), B = Anas (duck), C = Columba (pigeon)
     species_data = [
-        ("A", ILLUS / "T_Pigeon.png",  FEM / "pigeon_model_render.png",  "Columba (pigeon)"),
-        ("B", ILLUS / "T_Duck.png",    FEM / "duck_model_render.png",    "Anas (duck)"),
-        ("C", ILLUS / "T_Chicken.png", FEM / "chicken_model_render.png", "Gallus (chicken)"),
+        ("A", EGGTOOTH / "鸡（喙）.png",   FEM / "chicken_model_render.png", "Gallus (chicken)"),
+        ("B", EGGTOOTH / "鸭（喙）.png",   FEM / "duck_model_render.png",    "Anas (duck)"),
+        ("C", EGGTOOTH / "鸽子（喙）.png", FEM / "pigeon_model_render.png",  "Columba (pigeon)"),
     ]
 
     rows = []
