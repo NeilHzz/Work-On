@@ -273,7 +273,7 @@ p_intro4 = smixed([
       (', and ', False, False),
       ('Columba livia', False, True),
       (' as terrestrial precocial, aquatic-associated precocial, and terrestrial altricial models, respectively, thereby spanning crossed developmental and ecological contrasts within a common hatching framework.', False, False)], [3, 22, 23]),
-    ([(' This design prevented the comparison from collapsing into either a simple phylogenetic pairing or a single precocial-versus-altricial contrast.', False, False)], [3, 22, 23]),
+        ([(' This design prevented the comparison from collapsing into either a simple phylogenetic pairing or a single precocial-versus-altricial contrast.', False, False)], []),
     ([(' We integrated micro-CT morphometry to define mammillary organization; comparative eggshell-matrix proteomics and intact glycopeptide mass spectrometry to resolve shared matrix proteins and their glycan states; Re-Glyco structural modeling and electrostatic analysis to infer protein-surface consequences; and finite-element simulation to test whether the same cross-species contrast remained detectable in local hatching resistance.', False, False)], []),
     ([(' Each level constrained the next, keeping molecular interpretation tied to shell structure rather than floating free of the material context.', False, False)], []),
     ([(' In the present dataset, that sequential comparison converged most clearly on OVAL, whose glycan states aligned with mammillary density, Ca²⁺-relevant surface accessibility, and local hatching resistance.', False, False)], [18]),
@@ -300,7 +300,7 @@ p_ss1 = smixed([
             ('Columba livia', False, True),
                 (' were therefore chosen as deliberately separated species near contrasting regions of those continuous ecological-developmental gradients, so that downstream comparison would be less blurred by intermediate combinations.', False, False)], [3, 22, 23, 41]),
             ([(' This functional grouping only partly overlaps with phylogeny: chicken and duck remain closely related precocial taxa but separate along the habitat axis, whereas pigeon anchors the altricial end of the comparison (Fig. S2).', False, False)], [3, 22, 23]),
-            ([(' The comparison was therefore structured to retain shared ancestry in view while still forcing clear life-history separation into the same analytical frame.', False, False)], [3, 15, 22]),
+            ([(' The comparison was therefore structured to retain shared ancestry in view while still bringing clear life-history separation into the same analytical frame.', False, False)], []),
             ([(' The focal species differed in beak-tip geometry, but the egg tooth itself remained a similarly localized dorsal breaker in all three species and pointed to the same inside-out shell-breaking event during hatching (Fig. 1B).', False, False)], [16, 37, 82, 86]),
     ([(' Within this contrast set, the relevant question becomes which eggshell layer first separates the species once the hatching interface is held constant.', False, False)], []),
 ])
