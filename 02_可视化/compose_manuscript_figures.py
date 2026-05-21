@@ -532,69 +532,57 @@ def compose_fig5():
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Fig 6  (2-row × 2-column grid)
-#   Row A: Force timeseries (left, ~38 %)  | F_max DMRT bars (right, ~60 %)
-#   Row B: Shear timeseries (left, ~38 %)  | τ_max DMRT bars (right, ~60 %)
-#   Sources:
-#     Fig6A.png — both timeseries stacked (Force top / Shear bottom); split at H//2
-#     Fig6B.png — both DMRT bars side-by-side (F_max left / τ_max right); split at W//2
+# Fig 6  (2-row × 2-column grid — uses individually saved panels)
+#   Row A: Force timeseries  (Fig6A_Force.png, left ~65 %) | F_max bars  (Fig6B_Fmax.png)
+#   Row B: Shear timeseries  (Fig6A_Shear.png, left ~65 %) | τ_max bars  (Fig6B_Taumax.png)
+#   Generate source panels first: run  02_可视化/Figure/Fig6A_B.py
 # ─────────────────────────────────────────────────────────────────────────────
 
 def compose_fig6():
     print("\n=== Composing Fig 6 ===")
     inner_w   = CANVAS_W - 2 * MARGIN
-    left_frac = 0.65               # timeseries column ~65 % (figsize 12/(12+6) = 0.667)
+    left_frac = 0.65               # timeseries column ~65 % (figsize 12/18)
     left_w    = int(inner_w * left_frac)
     right_w   = inner_w - left_w - GAP
 
-    # ── load source panels ──────────────────────────────────────────────────
-    raw_a = load_img(PNG / "Fig6A.png")   # 2372×1963  Force(top) + Shear(bottom)
-    raw_b = load_img(PNG / "Fig6B.png")   # 2375×1275  F_max(left) + τ_max(right)
+    # ── load individually generated panels ──────────────────────────────────
+    raw_force  = load_img(PNG / "Fig6A_Force.png")
+    raw_shear  = load_img(PNG / "Fig6A_Shear.png")
+    raw_fmax   = load_img(PNG / "Fig6B_Fmax.png")
+    raw_taumax = load_img(PNG / "Fig6B_Taumax.png")
 
-    if raw_a is None:
-        raw_a = make_placeholder(2372, 1963, "Fig6A not found")
-    if raw_b is None:
-        raw_b = make_placeholder(2375, 1275, "Fig6B not found")
+    if raw_force  is None: raw_force  = make_placeholder(2400, 1134, "Fig6A_Force not found\nrun Fig6A_B.py first")
+    if raw_shear  is None: raw_shear  = make_placeholder(2400, 1134, "Fig6A_Shear not found\nrun Fig6A_B.py first")
+    if raw_fmax   is None: raw_fmax   = make_placeholder(1200, 1300, "Fig6B_Fmax not found\nrun Fig6A_B.py first")
+    if raw_taumax is None: raw_taumax = make_placeholder(1200, 1300, "Fig6B_Taumax not found\nrun Fig6A_B.py first")
 
-    # ── split Fig6A vertically at midpoint ──────────────────────────────────
-    Ha, Wa = raw_a.height, raw_a.width
-    a_top = raw_a.crop((0, 0,       Wa, Ha // 2))   # Force timeseries
-    a_bot = raw_a.crop((0, Ha // 2, Wa, Ha))         # Shear timeseries
+    # ── scale left (timeseries) panels to left_w → row heights ──────────────
+    force_s = scale_to_w(raw_force, left_w)
+    shear_s = scale_to_w(raw_shear, left_w)
+    row_A_h = force_s.height
+    row_B_h = shear_s.height
 
-    # ── split Fig6B horizontally at midpoint ────────────────────────────────
-    Hb, Wb = raw_b.height, raw_b.width
-    b_left  = raw_b.crop((0,       0, Wb // 2, Hb))  # F_max bars
-    b_right = raw_b.crop((Wb // 2, 0, Wb,      Hb))  # τ_max bars
+    # ── panel labels ─────────────────────────────────────────────────────────
+    force_s = add_label(force_s, "A", font=FONT_LG)
+    shear_s = add_label(shear_s, "B", font=FONT_LG)
 
-    # ── scale left (timeseries) panels to left_w ────────────────────────────
-    a_top_s = scale_to_w(a_top, left_w)
-    a_bot_s = scale_to_w(a_bot, left_w)
-    row_A_h = a_top_s.height
-    row_B_h = a_bot_s.height
+    # ── scale right (bar) panels to match row heights ─────────────────────────
+    fmax_s   = scale_to_h(raw_fmax,   row_A_h)
+    taumax_s = scale_to_h(raw_taumax, row_B_h)
 
-    # ── add panel labels (top-left of timeseries panels) ────────────────────
-    a_top_s = add_label(a_top_s, "A", font=FONT_LG)
-    a_bot_s = add_label(a_bot_s, "B", font=FONT_LG)
-
-    # ── scale right (bar) panels to match row heights ────────────────────────
-    b_left_s  = scale_to_h(b_left,  row_A_h)
-    b_right_s = scale_to_h(b_right, row_B_h)
-
-    # ── compose canvas ───────────────────────────────────────────────────────
+    # ── compose canvas ────────────────────────────────────────────────────────
     total_h = 2 * MARGIN + row_A_h + GAP + row_B_h
     canvas  = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
 
-    # Row A
     y = MARGIN
-    paste(canvas, a_top_s, MARGIN, y)
-    bx_A = MARGIN + left_w + GAP + max(0, (right_w - b_left_s.width) // 2)
-    paste(canvas, b_left_s, bx_A, y)
+    paste(canvas, force_s, MARGIN, y)
+    bx_A = MARGIN + left_w + GAP + max(0, (right_w - fmax_s.width) // 2)
+    paste(canvas, fmax_s, bx_A, y)
 
-    # Row B
     y += row_A_h + GAP
-    paste(canvas, a_bot_s, MARGIN, y)
-    bx_B = MARGIN + left_w + GAP + max(0, (right_w - b_right_s.width) // 2)
-    paste(canvas, b_right_s, bx_B, y)
+    paste(canvas, shear_s, MARGIN, y)
+    bx_B = MARGIN + left_w + GAP + max(0, (right_w - taumax_s.width) // 2)
+    paste(canvas, taumax_s, bx_B, y)
 
     save_fig(canvas, "Fig6_composed")
 
