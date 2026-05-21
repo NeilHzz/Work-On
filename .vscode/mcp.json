@@ -2,7 +2,7 @@
   "servers": {
     "zotero": {
       "type": "stdio",
-      "command": "C:\\Users\\Admin\\.local\\bin\\uvx.exe",
+      "command": "E:\\PY310\\Scripts\\uvx.exe",
       "args": ["--upgrade", "zotero-mcp"],
       "env": {
         "ZOTERO_LOCAL": "true",
