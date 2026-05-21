@@ -737,7 +737,7 @@ para(
     "Number Comparable字段，则先去除<\u00a02的蛋白条目。蛋白层面的糖链丰度定义为"
     "该accession下全部定量糖基化位点平均非零强度之和。Gallus对Anas和Gallus对"
     "Columba的比较空间分别由blastp outfmt 6结果建立，对每个query保留最佳命中；"
-    "筛选条件为平均E值<=1 x 10^-5且平均序列同一性>=0.40；若query与subject的"
+    "筛选条件为平均E值<=1 × 10⁻⁵且平均序列同一性>=0.40；若query与subject的"
     "非重叠HSP数量不同，则改用最大序列同一性>=0.40作为阈值。Anas对Columba的"
     "比较则通过同时通过上述过滤的Gallus共享直系同源进行桥接。对每一对保留的"
     "直系同源蛋白，x坐标定义为log2(I_ref) - log2(I_comp)，y坐标定义为log2(G_ref) - "

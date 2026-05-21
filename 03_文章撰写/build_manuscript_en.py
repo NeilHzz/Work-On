@@ -812,7 +812,7 @@ para(
     "intensities across all quantified glycosylation sites assigned to that accession. "
     "Gallus-versus-Anas and Gallus-versus-Columba comparison spaces were built from "
     "blastp outfmt 6 mappings, retaining the best hit per query when the mean E value "
-    "was <= 1 x 10^-5 and the average sequence identity was >= 0.40; when query and "
+    "was <= 1 × 10⁻⁵ and the average sequence identity was >= 0.40; when query and "
     "subject had different numbers of non-overlapping HSPs, the maximum identity "
     "threshold >= 0.40 was applied instead. The Anas-versus-Columba plane was bridged "
     "through shared Gallus orthologs that passed the same filter in both datasets. For "
