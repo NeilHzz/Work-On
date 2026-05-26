@@ -59,7 +59,7 @@ col_cl  = focal_sp['Columba livia']['cluster']
 gal_cl  = focal_sp['Gallus gallus']['cluster']
 assert len({anas_cl, col_cl, gal_cl}) == 3, "Focal species not in 3 separate clusters!"
 
-cl_colors = {anas_cl: '#7895C1', gal_cl: '#B54664', col_cl: '#F0C284'}
+cl_colors = {anas_cl: '#93AACD', gal_cl: '#C46B83', col_cl: '#F3CE9D'}
 cl_ec     = {anas_cl: '#4A6080', gal_cl: '#7A1A30', col_cl: '#A07828'}
 cl_labels = {
     anas_cl: 'Aquatic foragers\n(n=%d sp.)' % (df['cluster'] == anas_cl).sum(),
@@ -67,17 +67,17 @@ cl_labels = {
     col_cl:  'Terrestrial altricial\n(n=%d sp.)' % (df['cluster'] == col_cl).sum(),
 }
 focal_cfg = {
-    'Anas platyrhynchos': ('Anas',    '#7895C1', 'o', 260),
-    'Columba livia':      ('Columba', '#F0C284', 's', 240),
-    'Gallus gallus':      ('Gallus',  '#B54664', '^', 240),
+    'Anas platyrhynchos': ('Anas',    '#93AACD', 'o', 260),
+    'Columba livia':      ('Columba', '#F3CE9D', 's', 240),
+    'Gallus gallus':      ('Gallus',  '#C46B83', '^', 240),
 }
 
 # ---- Order color palette ----
 ORDER_COLORS = {
     # focal — fixed, do not change
-    'Anseriformes':        '#7895C1',
-    'Galliformes':         '#B54664',
-    'Columbiformes':       '#F0C284',
+    'Anseriformes':        '#93AACD',
+    'Galliformes':         '#C46B83',
+    'Columbiformes':       '#F3CE9D',
     # aquatic belt
     'Charadriiformes':     '#70A850',  # was #6BAED6 blue → conflicts in R7 (Gallus zone)
     'Procellariiformes':   '#4A7BB5',
@@ -157,7 +157,7 @@ for order in all_orders_sorted:
                 df.loc[mask, 'pc2_jit'],
                 df.loc[mask, 'dev_jit'],
                 c=color,
-                alpha=0.65 if is_focal else 0.25,
+                alpha=1.0 if is_focal else 0.25,
                 s=10 if is_focal else 5,
                 linewidths=0,
                 depthshade=True,
@@ -250,9 +250,9 @@ for sp, (short, col, mrkr, sz) in focal_cfg.items():
 # Legend
 legend_groups = [
     ('\u2500\u2500 Focal species \u2500\u2500\u2500\u2500\u2500\u2500', '#FFFFFF'),
-    ('Anseriformes  (Anas)',    '#7895C1'),
-    ('Galliformes  (Gallus)',   '#B54664'),
-    ('Columbiformes  (Columba)','#F0C284'),
+    ('Anseriformes  (Anas)',    '#93AACD'),
+    ('Galliformes  (Gallus)',   '#C46B83'),
+    ('Columbiformes  (Columba)','#F3CE9D'),
     ('\u2500\u2500 Aquatic \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500', '#FFFFFF'),
     ('Charadriiformes',   '#6BAED6'),
     ('Procellariiformes', '#4A7BB5'),

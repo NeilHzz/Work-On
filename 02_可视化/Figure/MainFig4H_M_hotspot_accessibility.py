@@ -91,7 +91,7 @@ OUT_PNG = os.path.join(r"D:\system_folder\Desktop\Work On\02_可视化\Figure\pn
 DPI     = 300
 
 SPECIES_ORDER = ['Gallus', 'Anas', 'Columba']
-SPECIES_COLOR = {'Gallus': '#B54664', 'Anas': '#7895C1', 'Columba': '#F0C284'}
+SPECIES_COLOR = {'Gallus': '#C46B83', 'Anas': '#93AACD', 'Columba': '#F3CE9D'}
 
 
 # ── 统计标注 ──────────────────────────────────────────────────────────────────
@@ -123,14 +123,14 @@ def draw_violin_panel(ax, groups_dict, ylabel, title, panel_label,
     for i, body in enumerate(vp['bodies']):
         sp  = SPECIES_ORDER[i]
         body.set_facecolor(SPECIES_COLOR[sp])
-        body.set_alpha(0.55)
+        body.set_alpha(1.0)
         body.set_edgecolor('none')
 
     for i, sp in enumerate(SPECIES_ORDER):
         vals = groups_dict[sp]
         jit  = rng.uniform(-0.12, 0.12, len(vals))
         ax.scatter(i + jit, vals, s=14, color=SPECIES_COLOR[sp],
-                   alpha=0.65, edgecolors='none', zorder=3)
+                   alpha=1.0, edgecolors='none', zorder=3)
         med = np.median(vals)
         ax.hlines(med, i - 0.22, i + 0.22,
                   color='#222', lw=1.6, zorder=4)
@@ -175,7 +175,7 @@ def draw_stacked_bar(ax, df):
         err  = stds[sp]
 
         # Net accessible bar (solid)
-        ax.bar(xs[i], net, bar_w, color=col, alpha=0.80,
+        ax.bar(xs[i], net, bar_w, color=col, alpha=1.0,
                label='Net Accessible' if i == 0 else '')
 
         # Shielded bar on top (hatched)
@@ -243,7 +243,7 @@ def draw_sasa_bar(ax, df):
         sh   = shielded_means[sp]
         err  = stds[sp]
 
-        ax.bar(xs[i], net, bar_w, color=col, alpha=0.80,
+        ax.bar(xs[i], net, bar_w, color=col, alpha=1.0,
             label='Net Accessible' if i == 0 else '')
         ax.bar(xs[i], sh, bar_w, bottom=net, color=col, alpha=0.28,
             hatch='///', edgecolor=col, linewidth=0.6,

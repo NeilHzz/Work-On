@@ -21,6 +21,8 @@ import matplotlib.ticker as ticker
 from scipy.interpolate import PchipInterpolator
 from scipy import stats
 
+SINGLE_PANEL_ADJUST = dict(left=0.13, right=0.97, bottom=0.13, top=0.93)
+
 # ─────────────────────────────────────────────────────────────
 # Paths
 # ─────────────────────────────────────────────────────────────
@@ -31,6 +33,18 @@ os.makedirs(OUT_DIR, exist_ok=True)
 OUT_DMRT   = os.path.join(OUT_DIR, "Fig_force_duncan.png")
 OUT_TS     = os.path.join(OUT_DIR, "Fig_force_timeseries.png")
 
+FIXED_PNG_DIR = os.path.join(SCRIPT_DIR, "PNG")
+FIXED_PDF_DIR = os.path.join(SCRIPT_DIR, "PDF")
+FIXED_SVG_DIR = os.path.join(SCRIPT_DIR, "SVG")
+for _fixed_dir in (FIXED_PNG_DIR, FIXED_PDF_DIR, FIXED_SVG_DIR):
+    os.makedirs(_fixed_dir, exist_ok=True)
+
+def save_fig_fixed(fig, name, dpi=200):
+    fig.savefig(os.path.join(FIXED_PNG_DIR, f"{name}.png"), dpi=dpi, facecolor="white")
+    fig.savefig(os.path.join(FIXED_PDF_DIR, f"{name}.pdf"), facecolor="white")
+    fig.savefig(os.path.join(FIXED_SVG_DIR, f"{name}.svg"), facecolor="white")
+    print(f"  Saved: {name} [PNG/PDF/SVG]")
+
 # ─────────────────────────────────────────────────────────────
 # Parameters
 # ─────────────────────────────────────────────────────────────
@@ -38,9 +52,9 @@ SPECIES  = ["Gallus",   "Columba",  "Anas"]
 T_MMS    = [0.29,       0.19,       0.3462]   # shell thickness mm
 D_SHELL  = 2.0   # mm
 STANDARD_SPECIES_COLORS = {
-    "Gallus": "#B54664",
-    "Anas": "#7895C1",
-    "Columba": "#F0C284",
+    "Gallus": "#C46B83",
+    "Anas": "#93AACD",
+    "Columba": "#F3CE9D",
 }
 COLORS   = [STANDARD_SPECIES_COLORS[sp] for sp in SPECIES]
 
@@ -113,6 +127,24 @@ def _cld3(names, sig):
     ltrs = table[(s01, s02, s12)]
     return {names[i]: ltrs[i] for i in range(3)}
 
+def _letters_highest_as_a(letters, ordered_names):
+    reverse_map = {"a": "c", "b": "b", "c": "a"}
+    reversed_letters = {
+        name: "".join(sorted({reverse_map[ch] for ch in value}))
+        for name, value in letters.items()
+    }
+    compact_map = {}
+    next_code = ord("a")
+    for name in reversed(ordered_names):
+        for ch in reversed_letters[name]:
+            if ch not in compact_map:
+                compact_map[ch] = chr(next_code)
+                next_code += 1
+    return {
+        name: "".join(compact_map[ch] for ch in reversed_letters[name])
+        for name in letters
+    }
+
 def duncan_mrt(groups, names, alpha=0.05):
     k = len(groups)
     ns = [len(g) for g in groups]
@@ -142,7 +174,7 @@ def duncan_mrt(groups, names, alpha=0.05):
             Rp = crit[p-2]
             sig[i,j] = sig[j,i] = (d > Rp)
             diffs[i,j] = d; diffs[j,i] = -d
-    letters = _cld3(s_names, sig)
+    letters = _letters_highest_as_a(_cld3(s_names, sig), s_names)
     return dict(f_stat=f_stat, p_anova=p_anova, MSE=MSE, df_e=df_e, SE=SE,
                 order=order, s_names=s_names, s_means=s_means, s_stds=s_stds,
                 s_groups=s_groups, s_ns=s_ns, crit=crit, sig=sig, diffs=diffs,
@@ -168,7 +200,7 @@ def plot_dmrt(ax, res, data_orig, metric_label, unit):
     x = np.arange(len(SPECIES))
 
     bars = ax.bar(x, orig_means, width=0.5,
-                  color=COLORS, alpha=0.70,
+                  color=COLORS, alpha=1.0,
                   edgecolor="k", linewidth=1.0, zorder=2)
     ax.errorbar(x, orig_means, yerr=orig_stds,
                 fmt="none", ecolor="k",
@@ -177,7 +209,7 @@ def plot_dmrt(ax, res, data_orig, metric_label, unit):
         jitter = rng.uniform(-0.14, 0.14, size=len(sp_data))
         ax.scatter(xi + jitter, sp_data, s=36,
                    color=color, edgecolors="k",
-                   linewidths=0.5, zorder=4, alpha=0.90)
+                   linewidths=0.5, zorder=4, alpha=1.0)
 
     # Duncan letter labels only
     y_top = orig_means + orig_stds
@@ -194,8 +226,10 @@ def plot_dmrt(ax, res, data_orig, metric_label, unit):
     ax.set_ylim(0, y_max * 1.30)
     ax.yaxis.set_minor_locator(ticker.AutoMinorLocator(2))
     ax.grid(axis="y", linestyle="--", linewidth=0.6, alpha=0.5, zorder=0)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
     ax.set_title(
-        f"{metric_label}\nANOVA:  F = {res['f_stat']:.2f},  p = {res['p_anova']:.2e}",
+        f"{metric_label}\np = {res['p_anova']:.2e}",
         fontsize=20, pad=10
     )
 
@@ -207,17 +241,17 @@ plt.close("all")
 
 # ── Individual DMRT panels ─────────────────────────────────────────────────
 rng = np.random.default_rng(42)
-fig_fmax, ax_fmax = plt.subplots(1, 1, figsize=(6, 6.5))
+fig_fmax, ax_fmax = plt.subplots(1, 1, figsize=(6, 5.67))
 plot_dmrt(ax_fmax, res_F, F_DATA, "F_max", "N")
-plt.tight_layout()
-save_fig(plt.gcf(), "Fig6B_Fmax", dpi=200)
+fig_fmax.subplots_adjust(**SINGLE_PANEL_ADJUST)
+save_fig_fixed(plt.gcf(), "Fig6B_Fmax", dpi=200)
 plt.close("all")
 
 rng = np.random.default_rng(42)
-fig_taumax, ax_taumax = plt.subplots(1, 1, figsize=(6, 6.5))
+fig_taumax, ax_taumax = plt.subplots(1, 1, figsize=(6, 5.67))
 plot_dmrt(ax_taumax, res_tau, TAU_DATA, "τ_max", "MPa")
-plt.tight_layout()
-save_fig(plt.gcf(), "Fig6B_Taumax", dpi=200)
+fig_taumax.subplots_adjust(**SINGLE_PANEL_ADJUST)
+save_fig_fixed(plt.gcf(), "Fig6B_Taumax", dpi=200)
 plt.close("all")
 
 # ─────────────────────────────────────────────────────────────
@@ -252,7 +286,7 @@ if ts_data:
         _, hi_f = smooth(t_ref, mean_f + std_f)
         ax_f.fill_between(ts_s, lo_f, hi_f, color=color, alpha=0.15)
         ax_f.plot(ts_s, ms_f, color=color, lw=2.2,
-                  label=f'$\\it{{{sp}}}$ (n={mat.shape[0]})')
+                  label=f'$\\it{{{sp}}}$')
         # Peak marker: ⭐ if significantly different from any other species, else •
         pk_f = np.argmax(ms_f)
         marker_f = '⭐' if _is_sig(sp, res_F) else '•'
@@ -266,7 +300,7 @@ if ts_data:
         _, hi_tau = smooth(t_ref, to_tau(mean_f + std_f, T_mm))
         ax_tau.fill_between(ts_s2, lo_tau, hi_tau, color=color, alpha=0.15)
         ax_tau.plot(ts_s2, ms_tau, color=color, lw=2.2,
-                    label=f'$\\it{{{sp}}}$ (n={mat.shape[0]})')
+                    label=f'$\\it{{{sp}}}$')
         pk_tau = np.argmax(ms_tau)
         if sp in ('Columba', 'Anas'):
             # Collect peaks for merged single dot
@@ -289,11 +323,12 @@ if ts_data:
     for ax, ylabel in [(ax_f, "Contact force F (N)"),
                        (ax_tau, "Shear stress τ (MPa)")]:
         ax.set_ylabel(ylabel, fontsize=20)
-        ax.legend(fontsize=18, framealpha=0.9)
         ax.grid(axis="y", linestyle="--", linewidth=0.6, alpha=0.4)
         ax.yaxis.set_minor_locator(ticker.AutoMinorLocator(2))
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
+
+    ax_f.legend(fontsize=18, framealpha=0.9)
 
     ax_tau.set_xlabel("Time (μs)", fontsize=20)
     plt.tight_layout()
@@ -315,7 +350,7 @@ if ts_data:
         _, hi_f = smooth(t_ref, mean_f + std_f)
         ax_f_only.fill_between(ts_s, lo_f, hi_f, color=color, alpha=0.15)
         ax_f_only.plot(ts_s, ms_f, color=color, lw=2.2,
-                       label=f'$\\it{{{sp}}}$ (n={mat.shape[0]})')
+                       label=f'$\\it{{{sp}}}$')
         pk_f = np.argmax(ms_f)
         marker_f = '⭐' if _is_sig(sp, res_F) else '•'
         ax_f_only.text(ts_s[pk_f], ms_f[pk_f], marker_f,
@@ -328,8 +363,8 @@ if ts_data:
     ax_f_only.yaxis.set_minor_locator(ticker.AutoMinorLocator(2))
     ax_f_only.spines['top'].set_visible(False)
     ax_f_only.spines['right'].set_visible(False)
-    plt.tight_layout()
-    save_fig(plt.gcf(), "Fig6A_Force", dpi=200)
+    fig_force.subplots_adjust(**SINGLE_PANEL_ADJUST)
+    save_fig_fixed(plt.gcf(), "Fig6A_Force", dpi=200)
     plt.close("all")
 
     # Shear only
@@ -346,7 +381,7 @@ if ts_data:
         _, hi_tau = smooth(t_ref, to_tau(mean_f + std_f, T_mm))
         ax_tau_only.fill_between(ts_s2, lo_tau, hi_tau, color=color, alpha=0.15)
         ax_tau_only.plot(ts_s2, ms_tau, color=color, lw=2.2,
-                         label=f'$\\it{{{sp}}}$ (n={mat.shape[0]})')
+                         label=f'$\\it{{{sp}}}$')
         pk_tau = np.argmax(ms_tau)
         if sp in ('Columba', 'Anas'):
             _tau_merge_peaks[sp] = (ts_s2[pk_tau], ms_tau[pk_tau])
@@ -363,13 +398,12 @@ if ts_data:
                          zorder=10, linestyle='none')
     ax_tau_only.set_ylabel("Shear stress τ (MPa)", fontsize=20)
     ax_tau_only.set_xlabel("Time (μs)", fontsize=20)
-    ax_tau_only.legend(fontsize=18, framealpha=0.9)
     ax_tau_only.grid(axis="y", linestyle="--", linewidth=0.6, alpha=0.4)
     ax_tau_only.yaxis.set_minor_locator(ticker.AutoMinorLocator(2))
     ax_tau_only.spines['top'].set_visible(False)
     ax_tau_only.spines['right'].set_visible(False)
-    plt.tight_layout()
-    save_fig(plt.gcf(), "Fig6A_Shear", dpi=200)
+    fig_shear.subplots_adjust(**SINGLE_PANEL_ADJUST)
+    save_fig_fixed(plt.gcf(), "Fig6A_Shear", dpi=200)
     plt.close("all")
     print("[OK] Individual panels: Fig6A_Force, Fig6A_Shear, Fig6B_Fmax, Fig6B_Taumax")
 else:

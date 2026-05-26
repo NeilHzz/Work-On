@@ -96,9 +96,9 @@ FONT_FIG4_LABEL = _load_font(120)
 FONT_PUB_LABEL = _load_font(120)
 
 SPECIES_COLORS = {
-    "Gallus": "#B54664",
-    "Anas": "#7895C1",
-    "Columba": "#F0C284",
+    "Gallus": "#C46B83",
+    "Anas": "#93AACD",
+    "Columba": "#F3CE9D",
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
