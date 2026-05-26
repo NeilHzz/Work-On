@@ -31,6 +31,12 @@ import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _save import save_fig
 
 
+def format_p_value(p_value: float) -> str:
+    if p_value <= 0 or not np.isfinite(p_value):
+        return 'p < 1e-300'
+    return f'p = {p_value:.2e}'
+
+
 # ═════ Duncan's Multiple Range Test ════════════════════════════════════════
 def duncan_mrt(groups: list, names: list, alpha: float = 0.05) -> dict:
     k = len(groups)
@@ -135,7 +141,7 @@ def draw_violin_panel(ax, groups_dict, ylabel, title, panel_label,
     ax.set_xticklabels([sp + n for sp, n in zip(SPECIES_ORDER, n_labels)],
                        fontsize=8.5)
     ax.set_ylabel(ylabel, fontsize=9)
-    ax.set_title(f"{title}\np = {res['p_anova']:.2e}",
+    ax.set_title(f"{title}\n{format_p_value(res['p_anova'])}",
                  fontsize=9, pad=6)
     ax.set_ylim(y_min - y_range * ypad_bot, letter_y + y_range * 0.20)
     ax.spines['top'].set_visible(False)
@@ -195,7 +201,7 @@ def draw_stacked_bar(ax, df):
     ax.set_ylabel('Hotspot Count (mean ± 95% CI)', fontsize=9.5)
     ax.set_title(
         f'Ca$^{{2+}}$ Hotspot Accessibility'
-        f'\np = {res_bar["p_anova"]:.2e}',
+        f'\n{format_p_value(res_bar["p_anova"])}',
         fontsize=9.5, pad=8)
     ax.set_ylim(0, letter_y + y_top * 0.22)
     ax.set_xlim(-0.6, len(SPECIES_ORDER) - 0.4)
@@ -263,7 +269,7 @@ def draw_sasa_bar(ax, df):
     ax.set_ylabel(r'Hotspot Residue SASA (Å²)', fontsize=9.5)
     ax.set_title(
         r'Ca$^{2+}$ Hotspot Residue SASA'
-        f'\np = {res_sasa["p_anova"]:.2e}',
+        f'\n{format_p_value(res_sasa["p_anova"])}',
         fontsize=9.5, pad=8)
     ax.set_ylim(0, letter_y + y_top * 0.22)
     ax.set_xlim(-0.6, len(SPECIES_ORDER) - 0.4)

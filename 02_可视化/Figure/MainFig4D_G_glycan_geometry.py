@@ -27,6 +27,12 @@ from _save import save_fig
 from scipy import stats
 
 
+def format_p_value(p_value: float) -> str:
+    if p_value <= 0 or not np.isfinite(p_value):
+        return 'p < 1e-300'
+    return f'p = {p_value:.2e}'
+
+
 # ══════════════════════════════════════════════════════════════════════
 # Duncan's Multiple Range Test (3 groups)
 # ══════════════════════════════════════════════════════════════════════
@@ -136,9 +142,10 @@ def violin_one(ax, metric, ylabel, subtitle=''):
         ax.text(xi, letter_y, ltr, ha='center', va='bottom',
                 fontsize=11, fontweight='bold', color='#333')
     ax.set_ylim(top=letter_y + span * 0.15)
-    title_str = (f"{subtitle}\np = {res['p_anova']:.2e}"
+    p_text = format_p_value(res['p_anova'])
+    title_str = (f"{subtitle}\n{p_text}"
                 if subtitle else
-                f"p = {res['p_anova']:.2e}")
+                p_text)
     ax.set_title(title_str, fontsize=7.5, color='black', pad=2)
 
     ax.spines['top'].set_visible(False)
