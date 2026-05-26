@@ -495,14 +495,14 @@ legend_patches = [
     mpatches.Patch(color=COL_GREY,        label=r"$\it{Gallus}$ (no ortholog)", alpha=0.85),
 ]
 ax.legend(handles=legend_patches,
-          loc="lower right",
+          loc="lower left",
           frameon=True, framealpha=0.9,
           edgecolor="#bbbbbb",
-          fontsize=12,
+          fontsize=10,
           title="Species",
-          title_fontsize=12,
-          prop={"family": "Times New Roman", "size": 12},
-          bbox_to_anchor=(0.99, 0.01))
+          title_fontsize=10,
+          prop={"family": "Times New Roman", "size": 10},
+          bbox_to_anchor=(0.02, 0.02))
 
 # ── 4g. 标题 ──────────────────────────────────────────────────────────────────
 ax.set_title("BLAST Ortholog Mapping – Chord Diagram",
