@@ -51,8 +51,9 @@ target_mapping = {
 }
 
 SPECIES_COLORS = {'Gallus': '#B54664', 'Anas': '#7895C1', 'Columba': '#F0C284'}
-MUTED_SPECIES_COLORS = {'Gallus': '#C98293', 'Anas': '#A8BAD8', 'Columba': '#E4C989'}
+MUTED_SPECIES_COLORS = {'Gallus': '#E3B7C1', 'Anas': '#CDD8EA', 'Columba': '#F0DDAE'}
 OVAL_COLOR = '#C62828'
+LABEL_GRAY = '#4A4A4A'
 
 
 def target_color(species, target_name):
@@ -158,7 +159,7 @@ for species in species_list:
                     df_merged.loc[mask_target, 'Log2_Protein_Intensity'],
                     df_merged.loc[mask_target, 'Log2_Glycan_Intensity'],
                     color=highlight_color, alpha=0.85, s=180,
-                    marker='o', edgecolor='black', linewidth=1.0,
+                    marker='o', edgecolor='none', linewidth=0,
                     label=target_name, zorder=5
                 )
             
@@ -181,9 +182,9 @@ for species in species_list:
                     f"{target_name}\n({row['Position']}N)",
                     xy=(row['Log2_Protein_Intensity'], row['Log2_Glycan_Intensity']),
                     xytext=(dx, dy), textcoords='offset points',
-                    fontsize=10, fontweight='bold', color=highlight_color,
+                    fontsize=10, fontweight='bold', color=OVAL_COLOR if target_name == 'OVAL' else LABEL_GRAY,
                     va='center', ha=ha,
-                    bbox=dict(boxstyle="round,pad=0.25", fc="white", ec=highlight_color,
+                    bbox=dict(boxstyle="round,pad=0.25", fc="white", ec=highlight_color if target_name == 'OVAL' else LABEL_GRAY,
                               linewidth=0.8, alpha=0.90),
                     zorder=6
                 )
