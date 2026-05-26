@@ -31,12 +31,12 @@ import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _save import save_fig
 
 
-TITLE_FS = 7
-AXIS_LABEL_FS = 7
-TICK_FS = 7
-LEGEND_FS = 7
-STAT_FS = 7
-VALUE_FS = 7
+TITLE_FS = 24
+AXIS_LABEL_FS = 24
+TICK_FS = 24
+LEGEND_FS = 24
+STAT_FS = 24
+VALUE_FS = 24
 
 
 def format_p_value(p_value: float) -> str:

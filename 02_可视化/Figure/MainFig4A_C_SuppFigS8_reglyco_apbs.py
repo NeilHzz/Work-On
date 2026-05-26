@@ -47,12 +47,12 @@ SPECIES_COLOR = {
     'Columba': '#F0C284',
 }
 
-TITLE_FS = 7
-AXIS_LABEL_FS = 7
-TICK_FS = 7
-LEGEND_FS = 7
-STAT_FS = 7
-PANEL_LABEL_FS = 8
+TITLE_FS = 24
+AXIS_LABEL_FS = 24
+TICK_FS = 24
+LEGEND_FS = 24
+STAT_FS = 24
+PANEL_LABEL_FS = 24
 
 # 绘图顺序：G1 + A1-A3 + C1-C14（糖基化），再 3 个 apo
 GLYC_ORDER = ['G1', 'A1', 'A2', 'A3',

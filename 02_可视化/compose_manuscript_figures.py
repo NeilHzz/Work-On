@@ -69,6 +69,7 @@ CANVAS_W = 7200   # total canvas width (px) – matches 600 DPI × 12 cm
 MARGIN   = 80     # outer margin (px)
 GAP      = 50     # gap between adjacent panels in a row
 DPI      = 300    # output DPI tag
+FIG4_PUBLICATION_DPI = 1000  # 7200 px wide → ~18.3 cm at native size
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Font helpers
@@ -92,6 +93,7 @@ FONT_XL  = _load_font(120)   # full-width panels
 FONT_LG  = _load_font(100)   # half-width panels
 FONT_MD  = _load_font(80)    # third-width panels
 FONT_SM  = _load_font(64)    # quarter-width panels
+FONT_FIG4_LABEL = _load_font(140)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Image utilities
@@ -167,12 +169,12 @@ def paste(canvas: Image.Image, img: Image.Image, x: int, y: int):
     canvas.paste(img, (x, y), img)
 
 
-def save_fig(img: Image.Image, name: str):
+def save_fig(img: Image.Image, name: str, dpi: int = DPI):
     """Flatten to RGB (white background) and save as PNG."""
     bg = Image.new("RGB", img.size, (255, 255, 255))
     bg.paste(img, mask=img.split()[3])
     out = OUT / f"{name}.png"
-    bg.save(out, dpi=(DPI, DPI))
+    bg.save(out, dpi=(dpi, dpi))
     print(f"  Saved → {out}")
 
 
@@ -410,7 +412,7 @@ def compose_fig4():
 
     def build_row(files_labels, ncols, cover_old=False):
         col_w = (inner_w - (ncols - 1) * GAP) // ncols
-        font  = FONT_MD
+        font  = FONT_FIG4_LABEL
         imgs  = []
         for fname, lbl in files_labels:
             raw = load_img(PNG / fname)
@@ -471,7 +473,7 @@ def compose_fig4():
     row4_x = (CANVAS_W - row4_w) // 2
     y = paste_row(canvas, r4, cw4, y, x_start=row4_x)
 
-    save_fig(canvas, "Fig4_composed")
+    save_fig(canvas, "Fig4_composed", dpi=FIG4_PUBLICATION_DPI)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
