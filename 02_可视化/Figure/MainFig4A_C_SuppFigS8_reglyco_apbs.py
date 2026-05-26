@@ -47,6 +47,13 @@ SPECIES_COLOR = {
     'Columba': '#F0C284',
 }
 
+TITLE_FS = 9.5
+AXIS_LABEL_FS = 9.5
+TICK_FS = 9
+LEGEND_FS = 8.5
+STAT_FS = 10
+PANEL_LABEL_FS = 16
+
 # 绘图顺序：G1 + A1-A3 + C1-C14（糖基化），再 3 个 apo
 GLYC_ORDER = ['G1', 'A1', 'A2', 'A3',
               'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7',
@@ -70,7 +77,7 @@ def _stat_bracket(ax, x1, x2, y0, tick_h, label):
     ax.plot([x1, x1, x2, x2], [y0, y0 + tick_h, y0 + tick_h, y0],
             color='#333', lw=0.9, clip_on=False)
     ax.text((x1 + x2) / 2, y0 + tick_h * 1.3, label,
-            ha='center', va='bottom', fontsize=9,
+            ha='center', va='bottom', fontsize=STAT_FS,
             color='#222', fontweight='bold', clip_on=False)
 
 
@@ -302,9 +309,9 @@ def draw_hotspot(ax, summary):
     all_vals = pd.concat([glyc['N_hotspot'], apo['N_hotspot']]).values
     ymax = max(all_vals.max() + 2, ymax_stat + 1)
     ax.set_xticks(range(len(species_order)))
-    ax.set_xticklabels(species_order, fontsize=9)
-    ax.set_ylabel(r'Ca$^{2+}$ binding hotspots (n)', fontsize=9)
-    ax.set_title(r'Ca$^{2+}$ Hotspot Residues', fontsize=9, pad=8)
+    ax.set_xticklabels(species_order, fontsize=TICK_FS)
+    ax.set_ylabel(r'Ca$^{2+}$ binding hotspots (n)', fontsize=AXIS_LABEL_FS)
+    ax.set_title(r'Ca$^{2+}$ Hotspot Residues', fontsize=TITLE_FS, pad=8)
     ax.set_ylim(0, max(ymax, 5))
 
     # 图例
@@ -313,7 +320,7 @@ def draw_hotspot(ax, summary):
         mpatches.Patch(facecolor='#888', alpha=0.28,
                    edgecolor='#888', label='Apo'),
     ]
-    ax.legend(handles=legend_els, fontsize=7.5, framealpha=0.6)
+    ax.legend(handles=legend_els, fontsize=LEGEND_FS, framealpha=0.6)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.yaxis.set_major_locator(ticker.MaxNLocator(integer=True))
@@ -396,9 +403,9 @@ def draw_ca2_sasa(ax, csv_map):
         max_y = max(max_y, y0_global + tick_h * 2.5 + 50)
 
     ax.set_xticks(range(len(species_order)))
-    ax.set_xticklabels(species_order, fontsize=9)
-    ax.set_ylabel('Asp+Glu surface SASA (Å²)', fontsize=9)
-    ax.set_title('Carboxylate Surface Accessibility', fontsize=9, pad=8)
+    ax.set_xticklabels(species_order, fontsize=TICK_FS)
+    ax.set_ylabel('Asp+Glu surface SASA (Å²)', fontsize=AXIS_LABEL_FS)
+    ax.set_title('Carboxylate Surface Accessibility', fontsize=TITLE_FS, pad=8)
     ax.set_ylim(1000, max(max_y + 10, 3700))
 
     ax.spines['top'].set_visible(False)
@@ -492,9 +499,9 @@ def draw_apbs_strip(ax, summary, csv_map):
                 _stat_bracket(ax, xi - 0.15, xi + 0.15, y0_base, tick_h, lbl)
 
     ax.set_xticks(range(len(species_order)))
-    ax.set_xticklabels(species_order, fontsize=9)
-    ax.set_ylabel('Surface APBS potential (kT/e)', fontsize=9)
-    ax.set_title('Surface Potential Distribution', fontsize=9, pad=8)
+    ax.set_xticklabels(species_order, fontsize=TICK_FS)
+    ax.set_ylabel('Surface APBS potential (kT/e)', fontsize=AXIS_LABEL_FS)
+    ax.set_title('Surface Potential Distribution', fontsize=TITLE_FS, pad=8)
     if all_vals:
         ax.set_ylim(min(all_vals) - 1, max(all_vals) * 1.3 + 1)
 
@@ -532,7 +539,7 @@ def main():
                                 0.86, (ROW_H * n_rows_strip + 0.45) / fig_h_strip])
     draw_strip(ax_strip, csv_map)
     fig_a.text(0.01, 1.0 - 0.05 / fig_h_strip, 'A',
-               fontsize=16, fontweight='bold', va='top')
+               fontsize=PANEL_LABEL_FS, fontweight='bold', va='top')
     save_panel(fig_a, 'Fig5A')
     plt.close(fig_a)
 
@@ -541,7 +548,7 @@ def main():
     fig_b.patch.set_facecolor('white')
     draw_hotspot(ax_b, summary)
     fig_b.text(0.01, 0.98, 'B', transform=fig_b.transFigure,
-               fontsize=16, fontweight='bold', va='top')
+               fontsize=PANEL_LABEL_FS, fontweight='bold', va='top')
     fig_b.tight_layout()
     save_panel(fig_b, 'Fig5B')
     plt.close(fig_b)
@@ -551,7 +558,7 @@ def main():
     fig_c.patch.set_facecolor('white')
     draw_ca2_sasa(ax_c, csv_map)
     fig_c.text(0.01, 0.98, 'C', transform=fig_c.transFigure,
-               fontsize=16, fontweight='bold', va='top')
+               fontsize=PANEL_LABEL_FS, fontweight='bold', va='top')
     fig_c.tight_layout()
     save_panel(fig_c, 'Fig5C')
     plt.close(fig_c)
@@ -561,7 +568,7 @@ def main():
     fig_d.patch.set_facecolor('white')
     draw_apbs_strip(ax_d, summary, csv_map)
     fig_d.text(0.01, 0.98, 'D', transform=fig_d.transFigure,
-               fontsize=16, fontweight='bold', va='top')
+               fontsize=PANEL_LABEL_FS, fontweight='bold', va='top')
     fig_d.tight_layout()
     save_panel(fig_d, 'Fig5D')
     plt.close(fig_d)

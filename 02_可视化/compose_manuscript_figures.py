@@ -410,7 +410,7 @@ def compose_fig4():
 
     def build_row(files_labels, ncols, cover_old=False):
         col_w = (inner_w - (ncols - 1) * GAP) // ncols
-        font  = FONT_MD if ncols <= 3 else FONT_SM
+        font  = FONT_MD
         imgs  = []
         for fname, lbl in files_labels:
             raw = load_img(PNG / fname)

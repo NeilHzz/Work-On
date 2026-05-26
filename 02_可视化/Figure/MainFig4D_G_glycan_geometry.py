@@ -27,6 +27,18 @@ from _save import save_fig
 from scipy import stats
 
 
+TITLE_FS = 9.5
+AXIS_LABEL_FS = 9.5
+TICK_FS = 9
+STAT_FS = 10
+
+
+def format_p_value(p_value: float) -> str:
+    if p_value <= 0 or not np.isfinite(p_value):
+        return 'p < 1e-300'
+    return f'p = {p_value:.2e}'
+
+
 # ══════════════════════════════════════════════════════════════════════
 # Duncan's Multiple Range Test (3 groups)
 # ══════════════════════════════════════════════════════════════════════
@@ -124,8 +136,8 @@ def violin_one(ax, metric, ylabel, subtitle=''):
 
     ax.set_xticks(range(len(SPECIES_ORDER)))
     ax.set_xticklabels([f'{sp}\n(n={len(d)})' for sp, d in zip(SPECIES_ORDER, data)],
-                       fontsize=8)
-    ax.set_ylabel(ylabel, fontsize=9)
+                       fontsize=TICK_FS)
+    ax.set_ylabel(ylabel, fontsize=AXIS_LABEL_FS)
 
     # Duncan CLD 字母标注
     ymax = max(d.max() for d in data if len(d))
@@ -134,12 +146,13 @@ def violin_one(ax, metric, ylabel, subtitle=''):
     for xi, sp in enumerate(SPECIES_ORDER):
         ltr = res['letters'].get(sp, '')
         ax.text(xi, letter_y, ltr, ha='center', va='bottom',
-                fontsize=11, fontweight='bold', color='#333')
+            fontsize=STAT_FS, fontweight='bold', color='#333')
     ax.set_ylim(top=letter_y + span * 0.15)
-    title_str = (f"{subtitle}\nANOVA: F={res['f_stat']:.2f}, p={res['p_anova']:.2e}"
+    p_text = format_p_value(res['p_anova'])
+    title_str = (f"{subtitle}\n{p_text}"
                 if subtitle else
-                f"ANOVA: F={res['f_stat']:.2f}, p={res['p_anova']:.2e}")
-    ax.set_title(title_str, fontsize=7.5, color='black', pad=2)
+                p_text)
+    ax.set_title(title_str, fontsize=TITLE_FS, color='black', pad=4)
 
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
