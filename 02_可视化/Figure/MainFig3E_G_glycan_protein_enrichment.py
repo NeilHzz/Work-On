@@ -66,10 +66,12 @@ GALLUS_TARGETS = {
 }
 
 TARGET_COLORS = {
-    'OVAL':  '#6BA3E8',   # 蓝色 (匹配底色 #CADCF8)
-    'OC116': '#E8A040',   # 橙色 (匹配底色 #FFE0B2)
-    'TRFE':  '#5BAF6B',   # 绿色 (匹配底色 #C8E6C9)
+    'OVAL':  '#C62828',
+    'OC116': '#66A96B',
+    'TRFE':  '#5A5A5A',
 }
+BACKGROUND_PROTEIN_COLOR = '#C7C7C7'
+LABEL_GRAY = '#4A4A4A'
 
 # ─── Blastp 过滤参数 ──────────────────────────────────────────────────────
 EVALUE_CUTOFF = 1e-5
@@ -559,23 +561,6 @@ def plot_2d_enrichment(sp_ref, sp_comp):
     fig = plt.figure(figsize=(7.5, 7.0))
     ax  = fig.add_axes([0.13, 0.11, 0.82, 0.80])
 
-    # 四象限背景色（对角线上下）
-    def _fill(ax, vmin, vmax, above, color, alpha):
-        if above:
-            verts = [(vmin, vmin), (vmax, vmax), (vmax, vmax + (vmax - vmin)), (vmin, vmin + (vmax - vmin))]
-            verts = [(vmin, vmin), (vmax, vmax), (vmax, vmax), (vmin, vmin)]
-            verts = [(vmin, vmin), (vmax, vmax), (vmax, vmax), (vmin, vmin)]
-        pts_below = [(vmin, vmin), (vmax, vmin), (vmax, vmax), (vmin, vmin)]
-        pts_above = [(vmin, vmin), (vmax, vmax), (vmax, vmax), (vmin, vmax)]
-        verts = pts_above if above else pts_below
-        poly = Polygon(verts, closed=True)
-        pc = PatchCollection([poly], facecolor=color, alpha=alpha, zorder=0,
-                             edgecolor='none', transform=ax.transData, clip_on=True)
-        ax.add_collection(pc)
-
-    _fill(ax, vmin, vmax, above=False, color='#FDE8E4', alpha=0.65)
-    _fill(ax, vmin, vmax, above=True,  color='#E4F0FB', alpha=0.65)
-
     # 参考线
     ax.plot([vmin, vmax], [vmin, vmax], '--', color='#666666', lw=1.6, zorder=3, alpha=0.7)
     ax.axhline(0, color='#BBBBBB', lw=0.9, linestyle=':', zorder=2)
@@ -587,42 +572,48 @@ def plot_2d_enrichment(sp_ref, sp_comp):
     texts = []
     for _, row in bg_df.iterrows():
         ax.scatter(row['prot_log2FC'], row['glyc_log2FC'],
-                   c='#888888', s=55, zorder=4, linewidths=0.6,
-                   edgecolors='white', alpha=0.9)
+                   c=BACKGROUND_PROTEIN_COLOR, s=55, zorder=4, linewidths=0,
+                   edgecolors='none', alpha=0.85)
 
     # 目标蛋白
     TARGET_ANNOT = {
-        'OVAL':  {'dx': -55, 'dy': -15, 'ha': 'right', 'no_arrow': False, 'boxcolor': '#CADCF8'},
-        'OC116': {'dx': -90, 'dy': -18, 'ha': 'right', 'no_arrow': False, 'boxcolor': '#FFE0B2'},
-        'TRFE':  {'dx': -90, 'dy': -46, 'ha': 'right', 'no_arrow': False, 'boxcolor': '#C8E6C9'},
+        'OVAL':  {'dx': -55, 'dy': -15, 'ha': 'right', 'no_arrow': False},
+        'OC116': {'dx': -90, 'dy': -18, 'ha': 'right', 'no_arrow': False},
+        'TRFE':  {'dx': -90, 'dy': -46, 'ha': 'right', 'no_arrow': False},
     }
     # Pair-specific label position overrides
     if (sp_ref, sp_comp) == ('Gallus', 'Columba'):
-        TARGET_ANNOT['TRFE']  = {'dx': -12, 'dy':   0, 'ha': 'right', 'no_arrow': True,  'boxcolor': '#C8E6C9'}
-        TARGET_ANNOT['OVAL']  = {'dx': -12, 'dy': -18, 'ha': 'right', 'no_arrow': True,  'boxcolor': '#CADCF8'}
-        TARGET_ANNOT['OC116'] = {'dx':  12, 'dy':   0, 'ha': 'left',  'no_arrow': True,  'boxcolor': '#FFE0B2'}
+        TARGET_ANNOT['TRFE']  = {'dx': -12, 'dy':   0, 'ha': 'right', 'no_arrow': True}
+        TARGET_ANNOT['OVAL']  = {'dx': -12, 'dy': -18, 'ha': 'right', 'no_arrow': True}
+        TARGET_ANNOT['OC116'] = {'dx':  12, 'dy':   0, 'ha': 'left',  'no_arrow': True}
     if (sp_ref, sp_comp) == ('Gallus', 'Anas'):
-        TARGET_ANNOT['TRFE']  = {'dx': -12, 'dy':   0, 'ha': 'right', 'no_arrow': True,  'boxcolor': '#C8E6C9'}
-        TARGET_ANNOT['OVAL']  = {'dx':  12, 'dy':   0, 'ha': 'left',  'no_arrow': True,  'boxcolor': '#CADCF8'}
-        TARGET_ANNOT['OC116'] = {'dx':  12, 'dy':   0, 'ha': 'left',  'no_arrow': True,  'boxcolor': '#FFE0B2'}
+        TARGET_ANNOT['TRFE']  = {'dx': -12, 'dy':   0, 'ha': 'right', 'no_arrow': True}
+        TARGET_ANNOT['OVAL']  = {'dx':  12, 'dy':   0, 'ha': 'left',  'no_arrow': True}
+        TARGET_ANNOT['OC116'] = {'dx':  12, 'dy':   0, 'ha': 'left',  'no_arrow': True}
     if (sp_ref, sp_comp) == ('Anas', 'Columba'):
-        TARGET_ANNOT['OC116'] = {'dx': -12, 'dy':   0, 'ha': 'right', 'no_arrow': True,  'boxcolor': '#FFE0B2'}
-        TARGET_ANNOT['OVAL']  = {'dx': -12, 'dy':   0, 'ha': 'right', 'no_arrow': True,  'boxcolor': '#CADCF8'}
-        TARGET_ANNOT['TRFE']  = {'dx':  30, 'dy':   0, 'ha': 'left',  'no_arrow': True,  'boxcolor': '#C8E6C9'}
+        TARGET_ANNOT['OC116'] = {'dx': -12, 'dy':   0, 'ha': 'right', 'no_arrow': True}
+        TARGET_ANNOT['OVAL']  = {'dx': -12, 'dy':   0, 'ha': 'right', 'no_arrow': True}
+        TARGET_ANNOT['TRFE']  = {'dx':  30, 'dy':   0, 'ha': 'left',  'no_arrow': True}
     for pname, color in TARGET_COLORS.items():
         sub = df[df['target'] == pname]
         if sub.empty: continue
         row = sub.iloc[0]
-        ax.scatter(row['prot_log2FC'], row['glyc_log2FC'],
-                   c=color, s=200, zorder=6, linewidths=1.2, edgecolors='white')
-        cfg = TARGET_ANNOT.get(pname, {'dx': 40, 'dy': 20, 'boxcolor': '#EEEEEE'})
+        if pname == 'OVAL':
+            ax.text(row['prot_log2FC'], row['glyc_log2FC'], '⭐',
+                    color=color, ha='center', va='center', fontsize=17,
+                    zorder=7, fontfamily='Segoe UI Emoji')
+        else:
+            ax.scatter(row['prot_log2FC'], row['glyc_log2FC'],
+                       c=color, s=170, zorder=6, linewidths=0, edgecolors='none', alpha=0.92)
+        cfg = TARGET_ANNOT.get(pname, {'dx': 40, 'dy': 20})
         annot_kw = dict(
             xy=(row['prot_log2FC'], row['glyc_log2FC']),
             xytext=(cfg['dx'], cfg['dy']), textcoords='offset points',
-            fontsize=8.5, color=color,
+            fontsize=8.5, color=color if pname == 'OVAL' else LABEL_GRAY,
             ha=cfg.get('ha', 'right'), va='center',
-            bbox=dict(boxstyle='round,pad=0.35', facecolor=cfg['boxcolor'],
-                      edgecolor=color, linewidth=1.0, alpha=0.92),
+            bbox=dict(boxstyle='round,pad=0.35', facecolor='white',
+                      edgecolor=color if pname == 'OVAL' else LABEL_GRAY,
+                      linewidth=1.0, alpha=0.92),
         )
         if not cfg.get('no_arrow', False):
             annot_kw['arrowprops'] = dict(arrowstyle='->', color=color, lw=1.2,

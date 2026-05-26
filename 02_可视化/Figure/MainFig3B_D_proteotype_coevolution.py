@@ -52,13 +52,20 @@ target_mapping = {
 
 SPECIES_COLORS = {'Gallus': '#B54664', 'Anas': '#7895C1', 'Columba': '#F0C284'}
 MUTED_SPECIES_COLORS = {'Gallus': '#E3B7C1', 'Anas': '#CDD8EA', 'Columba': '#F0DDAE'}
+BACKGROUND_PROTEIN_COLOR = '#C7C7C7'
 OVAL_COLOR = '#C62828'
+OC116_COLOR = '#66A96B'
+TRFE_COLOR = '#5A5A5A'
 LABEL_GRAY = '#4A4A4A'
 
 
 def target_color(species, target_name):
     if target_name == 'OVAL':
         return OVAL_COLOR
+    if target_name == 'OC116':
+        return OC116_COLOR
+    if target_name == 'TRFE':
+        return TRFE_COLOR
     return MUTED_SPECIES_COLORS[species]
 
 species_list = ["Gallus", "Anas", "Columba"]
@@ -137,7 +144,7 @@ for species in species_list:
     plt.scatter(
         df_merged.loc[mask_other, 'Log2_Protein_Intensity'],
         df_merged.loc[mask_other, 'Log2_Glycan_Intensity'],
-        color='#DFDFDF', alpha=0.6, s=80, edgecolor='white', linewidth=0.5, label='Other Proteins', zorder=2
+        color=BACKGROUND_PROTEIN_COLOR, alpha=0.65, s=80, edgecolor='white', linewidth=0.5, label='Other Proteins', zorder=2
     )
     
     # 2. 绘制目标蛋白点 (高亮颜色，大尺寸)
