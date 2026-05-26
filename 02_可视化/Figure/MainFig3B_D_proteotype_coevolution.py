@@ -51,17 +51,14 @@ target_mapping = {
 }
 
 SPECIES_COLORS = {'Gallus': '#B54664', 'Anas': '#7895C1', 'Columba': '#F0C284'}
+MUTED_SPECIES_COLORS = {'Gallus': '#C98293', 'Anas': '#A8BAD8', 'Columba': '#E4C989'}
 OVAL_COLOR = '#C62828'
 
 
 def target_color(species, target_name):
     if target_name == 'OVAL':
         return OVAL_COLOR
-    return SPECIES_COLORS[species]
-
-
-def target_marker(target_name):
-    return '*' if target_name == 'OVAL' else 'o'
+    return MUTED_SPECIES_COLORS[species]
 
 species_list = ["Gallus", "Anas", "Columba"]
 
@@ -147,13 +144,23 @@ for species in species_list:
         mask_target = df_merged['Target'] == target_name
         if mask_target.sum() > 0:
             highlight_color = target_color(species, target_name)
-            plt.scatter(
-                df_merged.loc[mask_target, 'Log2_Protein_Intensity'],
-                df_merged.loc[mask_target, 'Log2_Glycan_Intensity'],
-                color=highlight_color, alpha=0.9, s=260 if target_name == 'OVAL' else 200,
-                marker=target_marker(target_name), edgecolor='black', linewidth=1.5,
-                label=target_name, zorder=5
-            )
+            if target_name == 'OVAL':
+                ax = plt.gca()
+                for _, oval_row in df_merged[mask_target].iterrows():
+                    ax.text(
+                        oval_row['Log2_Protein_Intensity'],
+                        oval_row['Log2_Glycan_Intensity'],
+                        '⭐', color=highlight_color, ha='center', va='center',
+                        fontsize=17, zorder=7, fontfamily='Segoe UI Emoji'
+                    )
+            else:
+                plt.scatter(
+                    df_merged.loc[mask_target, 'Log2_Protein_Intensity'],
+                    df_merged.loc[mask_target, 'Log2_Glycan_Intensity'],
+                    color=highlight_color, alpha=0.85, s=180,
+                    marker='o', edgecolor='black', linewidth=1.0,
+                    label=target_name, zorder=5
+                )
             
             rows = df_merged[mask_target].sort_values('Log2_Glycan_Intensity').reset_index(drop=True)
             n = len(rows)
