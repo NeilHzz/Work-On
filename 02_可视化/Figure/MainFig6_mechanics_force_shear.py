@@ -21,7 +21,7 @@ import matplotlib.ticker as ticker
 from scipy.interpolate import PchipInterpolator
 from scipy import stats
 
-SINGLE_PANEL_ADJUST = dict(left=0.13, right=0.97, bottom=0.18, top=0.80)
+SINGLE_PANEL_ADJUST = dict(left=0.13, right=0.97, bottom=0.13, top=0.93)
 
 # ─────────────────────────────────────────────────────────────
 # Paths
