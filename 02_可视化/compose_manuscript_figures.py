@@ -345,7 +345,7 @@ def compose_fig2():
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Fig 3  (A = left ~38 %, full height; B–G = right ~62 %, 2 rows × 3 cols)
+# Fig 3  (A = left ~38 %, full height; B-G = right ~62 %, 3 rows x 2 cols)
 # ─────────────────────────────────────────────────────────────────────────────
 
 def compose_fig3():
@@ -354,7 +354,7 @@ def compose_fig3():
     left_frac = 0.38
     left_w  = int(inner_w * left_frac)
     right_w = inner_w - left_w - GAP
-    col_w   = (right_w - 2 * GAP) // 3     # 3 equal columns on the right
+    col_w   = (right_w - GAP) // 2     # 2 equal columns on the right
 
     def rp(fname, label):
         """Right-side panel: scale to col_w, add label."""
@@ -362,21 +362,19 @@ def compose_fig3():
         if raw is None:
             raw = make_placeholder(col_w, int(col_w * 1.05), label)
         img = scale_to_w(raw, col_w)
-        return add_label(img, label, font=FONT_SM)
+        return add_label(img, label, font=FONT_PUB_LABEL)
 
-    # Top row (B, C, D) — Proteotype Coevolution scatters
+    # Right grid: 3 rows x 2 columns for readable source text at publication width.
     B = rp("Fig4A.png", "B")
     C = rp("Fig4B.png", "C")
     D = rp("Fig4C.png", "D")
-
-    # Bottom row (E, F, G) — 2D Enrichment scatters
     E = rp("Fig4H.png", "E")
     F = rp("Fig4I.png", "F")
     G = rp("Fig4J.png", "G")
 
-    top_h = max(B.height, C.height, D.height)
-    bot_h = max(E.height, F.height, G.height)
-    right_h = top_h + GAP + bot_h
+    right_rows = [[B, C], [D, E], [F, G]]
+    row_heights = [max(img.height for img in row) for row in right_rows]
+    right_h = sum(row_heights) + GAP * (len(right_rows) - 1)
 
     # Panel A: chord diagram — scale to left_w preserving aspect ratio
     raw_a = load_img(PNG / "Fig3B.png")
@@ -399,18 +397,14 @@ def compose_fig3():
     # Paste A (left column)
     paste(canvas, A, MARGIN, MARGIN)
 
-    # Paste right top row
-    x_right = MARGIN + left_w + GAP
-    for img in [B, C, D]:
-        paste(canvas, img, x_right, MARGIN)
-        x_right += col_w + GAP
-
-    # Paste right bottom row
-    x_right = MARGIN + left_w + GAP
-    y_bot = MARGIN + top_h + GAP
-    for img in [E, F, G]:
-        paste(canvas, img, x_right, y_bot)
-        x_right += col_w + GAP
+    # Paste right 3 x 2 grid
+    y_row = MARGIN
+    for row, row_h in zip(right_rows, row_heights):
+        x_right = MARGIN + left_w + GAP
+        for img in row:
+            paste(canvas, img, x_right, y_row + (row_h - img.height) // 2)
+            x_right += col_w + GAP
+        y_row += row_h + GAP
 
     save_fig(canvas, "Fig3_composed")
 

@@ -14,7 +14,7 @@ import pandas as pd
 import matplotlib
 matplotlib.use("Agg")
 matplotlib.rcParams["font.family"] = "Times New Roman"
-matplotlib.rcParams["font.size"] = 11
+matplotlib.rcParams["font.size"] = 18
 matplotlib.rcParams["axes.linewidth"] = 1.3
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
@@ -153,7 +153,7 @@ fig1, axes = plt.subplots(1, 2, figsize=(12, 6.5))
 fig1.suptitle(
     "Duncan's Multiple Range Test — Egg Shell Impact Simulation\n"
     "(n = 9 per species, α = 0.05;  same letter = no significant difference)",
-    fontsize=12.5, fontweight="bold"
+    fontsize=20, fontweight="bold"
 )
 rng = np.random.default_rng(42)
 
@@ -181,17 +181,17 @@ def plot_dmrt(ax, res, data_orig, metric_label, unit):
         ltr = res['letters'].get(sp, '')
         ht = orig_means[i] + orig_stds[i]
         ax.text(i, ht + y_max * 0.02, ltr,
-                ha='center', va='bottom', fontsize=12, fontweight='bold')
+                ha='center', va='bottom', fontsize=20, fontweight='bold')
 
     ax.set_xticks(x)
-    ax.set_xticklabels([f'$\\it{{{sp}}}$' for sp in SPECIES], fontsize=12)
-    ax.set_ylabel(f"{metric_label} ({unit})", fontsize=13)
+    ax.set_xticklabels([f'$\\it{{{sp}}}$' for sp in SPECIES], fontsize=20)
+    ax.set_ylabel(f"{metric_label} ({unit})", fontsize=20)
     ax.set_ylim(0, y_max * 1.30)
     ax.yaxis.set_minor_locator(ticker.AutoMinorLocator(2))
     ax.grid(axis="y", linestyle="--", linewidth=0.6, alpha=0.5, zorder=0)
     ax.set_title(
         f"{metric_label}\nANOVA:  F = {res['f_stat']:.2f},  p = {res['p_anova']:.2e}",
-        fontsize=11.5, pad=8
+        fontsize=20, pad=10
     )
 
 plot_dmrt(axes[0], res_F,   F_DATA,   "F_max",  "N")
@@ -222,7 +222,7 @@ if ts_data:
     fig2, (ax_f, ax_tau) = plt.subplots(2, 1, figsize=(12, 10), sharex=True)
     fig2.suptitle(
         "Contact Force and Shear Stress — Mean ± 1\u03c3 across 9 impact positions",
-        fontsize=13, fontweight="bold"
+        fontsize=22, fontweight="bold"
     )
 
     def smooth(t, y):
@@ -252,7 +252,7 @@ if ts_data:
         pk_f = np.argmax(ms_f)
         marker_f = '⭐' if _is_sig(sp, res_F) else '•'
         ax_f.text(ts_s[pk_f], ms_f[pk_f], marker_f,
-                  color=color, ha='center', va='bottom', fontsize=13, zorder=10,
+                  color=color, ha='center', va='bottom', fontsize=20, zorder=10,
                   fontfamily='Segoe UI Emoji')
 
         # Tau
@@ -270,7 +270,7 @@ if ts_data:
             # Peak marker: ⭐ if significantly different from any other species, else •
             marker_tau = '⭐' if _is_sig(sp, res_tau) else '•'
             ax_tau.text(ts_s2[pk_tau], ms_tau[pk_tau], marker_tau,
-                        color=color, ha='center', va='bottom', fontsize=13, zorder=10,
+                        color=color, ha='center', va='bottom', fontsize=20, zorder=10,
                         fontfamily='Segoe UI Emoji')
 
     # Draw a single merged dot for Columba + Anas in τ
@@ -283,14 +283,14 @@ if ts_data:
 
     for ax, ylabel in [(ax_f, "Contact force F (N)"),
                        (ax_tau, "Shear stress τ (MPa)")]:
-        ax.set_ylabel(ylabel, fontsize=12)
-        ax.legend(fontsize=10, framealpha=0.9)
+        ax.set_ylabel(ylabel, fontsize=20)
+        ax.legend(fontsize=18, framealpha=0.9)
         ax.grid(axis="y", linestyle="--", linewidth=0.6, alpha=0.4)
         ax.yaxis.set_minor_locator(ticker.AutoMinorLocator(2))
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
 
-    ax_tau.set_xlabel("Time (μs)", fontsize=12)
+    ax_tau.set_xlabel("Time (μs)", fontsize=20)
     plt.tight_layout()
     save_fig(plt.gcf(), "Fig6A", dpi=200)
     plt.close("all")
@@ -314,11 +314,11 @@ if ts_data:
         pk_f = np.argmax(ms_f)
         marker_f = '⭐' if _is_sig(sp, res_F) else '•'
         ax_f_only.text(ts_s[pk_f], ms_f[pk_f], marker_f,
-                       color=color, ha='center', va='bottom', fontsize=13, zorder=10,
+                       color=color, ha='center', va='bottom', fontsize=20, zorder=10,
                        fontfamily='Segoe UI Emoji')
-    ax_f_only.set_ylabel("Contact force F (N)", fontsize=12)
-    ax_f_only.set_xlabel("Time (μs)", fontsize=12)
-    ax_f_only.legend(fontsize=10, framealpha=0.9)
+    ax_f_only.set_ylabel("Contact force F (N)", fontsize=20)
+    ax_f_only.set_xlabel("Time (μs)", fontsize=20)
+    ax_f_only.legend(fontsize=18, framealpha=0.9)
     ax_f_only.grid(axis="y", linestyle="--", linewidth=0.6, alpha=0.4)
     ax_f_only.yaxis.set_minor_locator(ticker.AutoMinorLocator(2))
     ax_f_only.spines['top'].set_visible(False)
@@ -348,7 +348,7 @@ if ts_data:
         else:
             marker_tau = '⭐' if _is_sig(sp, res_tau) else '•'
             ax_tau_only.text(ts_s2[pk_tau], ms_tau[pk_tau], marker_tau,
-                             color=color, ha='center', va='bottom', fontsize=13, zorder=10,
+                             color=color, ha='center', va='bottom', fontsize=20, zorder=10,
                              fontfamily='Segoe UI Emoji')
     if _tau_merge_peaks:
         merged_x = np.mean([v[0] for v in _tau_merge_peaks.values()])
@@ -356,9 +356,9 @@ if ts_data:
         ax_tau_only.plot(merged_x, merged_y, marker='o', markersize=9,
                          color='#888888', markeredgecolor='white', markeredgewidth=1.2,
                          zorder=10, linestyle='none')
-    ax_tau_only.set_ylabel("Shear stress τ (MPa)", fontsize=12)
-    ax_tau_only.set_xlabel("Time (μs)", fontsize=12)
-    ax_tau_only.legend(fontsize=10, framealpha=0.9)
+    ax_tau_only.set_ylabel("Shear stress τ (MPa)", fontsize=20)
+    ax_tau_only.set_xlabel("Time (μs)", fontsize=20)
+    ax_tau_only.legend(fontsize=18, framealpha=0.9)
     ax_tau_only.grid(axis="y", linestyle="--", linewidth=0.6, alpha=0.4)
     ax_tau_only.yaxis.set_minor_locator(ticker.AutoMinorLocator(2))
     ax_tau_only.spines['top'].set_visible(False)
