@@ -47,12 +47,12 @@ SPECIES_COLOR = {
     'Columba': '#F0C284',
 }
 
-TITLE_FS = 9.5
-AXIS_LABEL_FS = 9.5
-TICK_FS = 9
-LEGEND_FS = 8.5
-STAT_FS = 10
-PANEL_LABEL_FS = 16
+TITLE_FS = 7
+AXIS_LABEL_FS = 7
+TICK_FS = 7
+LEGEND_FS = 7
+STAT_FS = 7
+PANEL_LABEL_FS = 8
 
 # 绘图顺序：G1 + A1-A3 + C1-C14（糖基化），再 3 个 apo
 GLYC_ORDER = ['G1', 'A1', 'A2', 'A3',
@@ -544,7 +544,7 @@ def main():
     plt.close(fig_a)
 
     # ── Panel B: Ca2+ hotspot residues ────────────────────────────────────
-    fig_b, ax_b = plt.subplots(figsize=(6, 5.5))
+    fig_b, ax_b = plt.subplots(figsize=(7.7, 5.5))
     fig_b.patch.set_facecolor('white')
     draw_hotspot(ax_b, summary)
     fig_b.text(0.01, 0.98, 'B', transform=fig_b.transFigure,
@@ -554,7 +554,7 @@ def main():
     plt.close(fig_b)
 
     # ── Panel C: Ca2+ SASA ────────────────────────────────────────────────
-    fig_c, ax_c = plt.subplots(figsize=(6, 5.5))
+    fig_c, ax_c = plt.subplots(figsize=(7.7, 5.5))
     fig_c.patch.set_facecolor('white')
     draw_ca2_sasa(ax_c, csv_map)
     fig_c.text(0.01, 0.98, 'C', transform=fig_c.transFigure,
@@ -564,7 +564,7 @@ def main():
     plt.close(fig_c)
 
     # ── Panel D: APBS strip ───────────────────────────────────────────────
-    fig_d, ax_d = plt.subplots(figsize=(6, 5.5))
+    fig_d, ax_d = plt.subplots(figsize=(7.7, 5.5))
     fig_d.patch.set_facecolor('white')
     draw_apbs_strip(ax_d, summary, csv_map)
     fig_d.text(0.01, 0.98, 'D', transform=fig_d.transFigure,

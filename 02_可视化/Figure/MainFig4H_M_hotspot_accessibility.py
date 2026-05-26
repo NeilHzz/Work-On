@@ -31,12 +31,12 @@ import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _save import save_fig
 
 
-TITLE_FS = 9.5
-AXIS_LABEL_FS = 9.5
-TICK_FS = 9
-LEGEND_FS = 8.5
-STAT_FS = 10
-VALUE_FS = 9
+TITLE_FS = 7
+AXIS_LABEL_FS = 7
+TICK_FS = 7
+LEGEND_FS = 7
+STAT_FS = 7
+VALUE_FS = 7
 
 
 def format_p_value(p_value: float) -> str:
@@ -318,7 +318,7 @@ def main():
 
     # Panels A-D: individual violin plots
     for lbl, gd, ylabel, title in panels_violin:
-        fig, ax = plt.subplots(figsize=(5.5, 5.5))
+        fig, ax = plt.subplots(figsize=(5.9, 5.5))
         fig.patch.set_facecolor('white')
         draw_violin_panel(ax, gd, ylabel, title, lbl)
         fig.tight_layout()
@@ -326,7 +326,7 @@ def main():
         plt.close(fig)
 
     # Panel E: stacked bar
-    fig, ax = plt.subplots(figsize=(5.5, 5.5))
+    fig, ax = plt.subplots(figsize=(11.8, 5.5))
     fig.patch.set_facecolor('white')
     draw_stacked_bar(ax, df)
     fig.tight_layout()
@@ -334,7 +334,7 @@ def main():
     plt.close(fig)
 
     # Panel F: SASA bar
-    fig, ax = plt.subplots(figsize=(5.5, 5.5))
+    fig, ax = plt.subplots(figsize=(11.8, 5.5))
     fig.patch.set_facecolor('white')
     draw_sasa_bar(ax, df)
     fig.tight_layout()

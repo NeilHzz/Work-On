@@ -27,10 +27,10 @@ from _save import save_fig
 from scipy import stats
 
 
-TITLE_FS = 9.5
-AXIS_LABEL_FS = 9.5
-TICK_FS = 9
-STAT_FS = 10
+TITLE_FS = 7
+AXIS_LABEL_FS = 7
+TICK_FS = 7
+STAT_FS = 7
 
 
 def format_p_value(p_value: float) -> str:
@@ -181,7 +181,7 @@ metric_labels = list(METRICS.values())
 panel_labels  = list('ABCD')
 
 for mk, ml, lbl in zip(metric_keys, metric_labels, panel_labels):
-    fig, ax = plt.subplots(figsize=(5, 5))
+    fig, ax = plt.subplots(figsize=(5.85, 5))
     fig.patch.set_facecolor('white')
     violin_one(ax, mk, ml, subtitle=SUBTITLES.get(mk, ''))
     fig.tight_layout()
