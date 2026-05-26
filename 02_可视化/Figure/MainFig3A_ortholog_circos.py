@@ -411,7 +411,7 @@ for sp, ang_dict in [("Gallus", g_angles), ("Anas", a_angles), ("Columba", c_ang
     if regular_arcs:
         s_rad = min(v[1] for v in regular_arcs.values())
         e_rad = max(v[2] for v in regular_arcs.values())
-        draw_filled_arc(ax, RADIUS - ARC_WIDTH, RADIUS, s_rad, e_rad, COL[sp], alpha=0.85, zorder=4)
+        draw_filled_arc(ax, RADIUS - ARC_WIDTH, RADIUS, s_rad, e_rad, COL[sp], alpha=1.0, zorder=4)
         angles_arr = np.linspace(s_rad, e_rad, 300)
         ax.plot(RADIUS * np.cos(angles_arr), RADIUS * np.sin(angles_arr), color=COL[sp], lw=1.2, zorder=6)
         ax.plot((RADIUS-ARC_WIDTH)*np.cos(angles_arr), (RADIUS-ARC_WIDTH)*np.sin(angles_arr),
@@ -489,9 +489,9 @@ for sp, ang_dict in [("Gallus", g_angles), ("Anas", a_angles), ("Columba", c_ang
 
 # ── 4f. 图例 ──────────────────────────────────────────────────────────────────
 legend_patches = [
-    mpatches.Patch(color=COL["Gallus"],  label=r"$\it{Gallus}$",  alpha=0.9),
-    mpatches.Patch(color=COL["Anas"],    label=r"$\it{Anas}$",    alpha=0.9),
-    mpatches.Patch(color=COL["Columba"], label=r"$\it{Columba}$", alpha=0.9),
+    mpatches.Patch(color=COL["Gallus"],  label=r"$\it{Gallus}$",  alpha=1.0),
+    mpatches.Patch(color=COL["Anas"],    label=r"$\it{Anas}$",    alpha=1.0),
+    mpatches.Patch(color=COL["Columba"], label=r"$\it{Columba}$", alpha=1.0),
     mpatches.Patch(color=COL_GREY,        label=r"$\it{Gallus}$ (no ortholog)", alpha=0.85),
 ]
 ax.legend(handles=legend_patches,

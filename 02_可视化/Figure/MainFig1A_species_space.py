@@ -157,7 +157,7 @@ for order in all_orders_sorted:
                 df.loc[mask, 'pc2_jit'],
                 df.loc[mask, 'dev_jit'],
                 c=color,
-                alpha=0.65 if is_focal else 0.25,
+                alpha=1.0 if is_focal else 0.25,
                 s=10 if is_focal else 5,
                 linewidths=0,
                 depthshade=True,
