@@ -4,7 +4,7 @@ Figure 文件夹 — 子图脚本索引
 MainFig1A_species_space.py              — 主图 Fig. 1A，物种选择 3D scatter (k-means 聚类)
 MainFig1D_mammilla_quantification.py    — 主图 Fig. 1D，乳突层微结构量化 (箱线图)
 SuppFigS2_phylo_context.py              — 补充图 Fig. S2，物种选择系统发育树 + 热图
-Fig1C                                  — 主图 Fig. 1C，乳突层 CT 形貌图 (非 Python 生成，来源: Sci_Adv_Figure/PNG/Fig1/2-2Fig_mammilla_microstructure_panels.png)
+Fig1C                                  — 主图 Fig. 1C，乳突层 CT 形貌图 (非 Python 生成，来源: eggtooth/乳突层结构.jpg)
 
 MainFig2_glycotype_network.py           — 主图 Fig. 2，同源糖型蛋白圆环网络图
 

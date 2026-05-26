@@ -8,7 +8,6 @@ matching the layout from Figure260421/ reference images.
 Panel sources   : 02_可视化/Figure/PNG/
 FEM renders     : 01_数据与计算/LS-DYNA_原始模型/
 Bird illustrations (eggtooth): 02_可视化/eggtooth/
-Old panels      : 02_可视化/Sci_Adv_Figure/PNG/Fig1/  (for Fig1C)
 Output          : 02_可视化/Composed/
 
 Panel mapping (source image → manuscript figure / panel):
@@ -16,7 +15,7 @@ Panel mapping (source image → manuscript figure / panel):
   eggtooth/鸡.png + 鸭.png + 鸽子.png (top row)
   + 鸡（喙）.png + 鸭（喙）.png + 鸽子（喙）.png (bottom row)
                      → Fig1  B  (2×3 bird illustration grid)
-  [old mammilla]     → Fig1  C  (SEM + egg shell + mammilla structure)
+    eggtooth/乳突层结构.jpg → Fig1  C  (SEM + egg shell + mammilla structure)
   Fig1D.png          → Fig1  D  (Mammilla density + volume boxplots)
   Fig3A.png          → Fig2     (Glycotype radial network, no letter)
   Fig3B.png          → Fig3  A  (Chord diagram)
@@ -58,7 +57,6 @@ PNG    = Path(__file__).resolve().parent / "Figure" / "PNG"
 FEM      = BASE / "01_数据与计算" / "LS-DYNA_原始模型"
 ILLUS    = BASE / "01_数据与计算" / "乳突层形态结构"
 EGGTOOTH = Path(__file__).resolve().parent / "eggtooth"
-OLD_F1   = Path(__file__).resolve().parent / "Sci_Adv_Figure" / "PNG" / "Fig1"
 OUT    = Path(__file__).resolve().parent / "Composed"
 OUT.mkdir(exist_ok=True)
 
@@ -292,13 +290,12 @@ def compose_fig1():
 
     bottom_col_w = (inner_w - GAP) // 2
 
-    # Panel C: SEM + egg shell + mammilla microstructure (from old Sci_Adv panel)
-    raw_c = load_img(OLD_F1 / "2-2Fig_mammilla_microstructure_panels.png")
+    # Panel C: SEM + egg shell + mammilla microstructure
+    raw_c = load_img(EGGTOOTH / "乳突层结构.jpg")
     if raw_c is None:
         raw_c = make_placeholder(bottom_col_w, int(bottom_col_w * 0.6),
                                  "Panel C — mammilla microstructure\n"
-                                 "(02_可视化/Sci_Adv_Figure/PNG/Fig1/"
-                                 "2-2Fig_mammilla_microstructure_panels.png)")
+                                 "(02_可视化/eggtooth/乳突层结构.jpg)")
     C = scale_to_w(raw_c, bottom_col_w)
     C = add_label(C, "C", font=FONT_PUB_LABEL)
 
