@@ -33,6 +33,18 @@ os.makedirs(OUT_DIR, exist_ok=True)
 OUT_DMRT   = os.path.join(OUT_DIR, "Fig_force_duncan.png")
 OUT_TS     = os.path.join(OUT_DIR, "Fig_force_timeseries.png")
 
+FIXED_PNG_DIR = os.path.join(SCRIPT_DIR, "PNG")
+FIXED_PDF_DIR = os.path.join(SCRIPT_DIR, "PDF")
+FIXED_SVG_DIR = os.path.join(SCRIPT_DIR, "SVG")
+for _fixed_dir in (FIXED_PNG_DIR, FIXED_PDF_DIR, FIXED_SVG_DIR):
+    os.makedirs(_fixed_dir, exist_ok=True)
+
+def save_fig_fixed(fig, name, dpi=200):
+    fig.savefig(os.path.join(FIXED_PNG_DIR, f"{name}.png"), dpi=dpi, facecolor="white")
+    fig.savefig(os.path.join(FIXED_PDF_DIR, f"{name}.pdf"), facecolor="white")
+    fig.savefig(os.path.join(FIXED_SVG_DIR, f"{name}.svg"), facecolor="white")
+    print(f"  Saved: {name} [PNG/PDF/SVG]")
+
 # ─────────────────────────────────────────────────────────────
 # Parameters
 # ─────────────────────────────────────────────────────────────
@@ -232,14 +244,14 @@ rng = np.random.default_rng(42)
 fig_fmax, ax_fmax = plt.subplots(1, 1, figsize=(6, 5.67))
 plot_dmrt(ax_fmax, res_F, F_DATA, "F_max", "N")
 fig_fmax.subplots_adjust(**SINGLE_PANEL_ADJUST)
-save_fig(plt.gcf(), "Fig6B_Fmax", dpi=200)
+save_fig_fixed(plt.gcf(), "Fig6B_Fmax", dpi=200)
 plt.close("all")
 
 rng = np.random.default_rng(42)
 fig_taumax, ax_taumax = plt.subplots(1, 1, figsize=(6, 5.67))
 plot_dmrt(ax_taumax, res_tau, TAU_DATA, "τ_max", "MPa")
 fig_taumax.subplots_adjust(**SINGLE_PANEL_ADJUST)
-save_fig(plt.gcf(), "Fig6B_Taumax", dpi=200)
+save_fig_fixed(plt.gcf(), "Fig6B_Taumax", dpi=200)
 plt.close("all")
 
 # ─────────────────────────────────────────────────────────────
@@ -352,7 +364,7 @@ if ts_data:
     ax_f_only.spines['top'].set_visible(False)
     ax_f_only.spines['right'].set_visible(False)
     fig_force.subplots_adjust(**SINGLE_PANEL_ADJUST)
-    save_fig(plt.gcf(), "Fig6A_Force", dpi=200)
+    save_fig_fixed(plt.gcf(), "Fig6A_Force", dpi=200)
     plt.close("all")
 
     # Shear only
@@ -391,7 +403,7 @@ if ts_data:
     ax_tau_only.spines['top'].set_visible(False)
     ax_tau_only.spines['right'].set_visible(False)
     fig_shear.subplots_adjust(**SINGLE_PANEL_ADJUST)
-    save_fig(plt.gcf(), "Fig6A_Shear", dpi=200)
+    save_fig_fixed(plt.gcf(), "Fig6A_Shear", dpi=200)
     plt.close("all")
     print("[OK] Individual panels: Fig6A_Force, Fig6A_Shear, Fig6B_Fmax, Fig6B_Taumax")
 else:
