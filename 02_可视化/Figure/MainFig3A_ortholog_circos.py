@@ -464,7 +464,7 @@ for sp, ang_dict in [("Gallus", g_angles), ("Anas", a_angles), ("Columba", c_ang
 
         label_text = all_display_names.get(acc, acc)
         fw = "bold" if is_target_prot else "normal"
-        fs = 18 if is_target_prot else 12
+        fs = 16 if is_target_prot else 10
 
         if is_oc17:
             label_color = COL_GREY
@@ -498,10 +498,10 @@ ax.legend(handles=legend_patches,
           loc="lower right",
           frameon=True, framealpha=0.9,
           edgecolor="#bbbbbb",
-          fontsize=16,
+          fontsize=12,
           title="Species",
-          title_fontsize=16,
-          prop={"family": "Times New Roman", "size": 16},
+          title_fontsize=12,
+          prop={"family": "Times New Roman", "size": 12},
           bbox_to_anchor=(0.99, 0.01))
 
 # ── 4g. 标题 ──────────────────────────────────────────────────────────────────

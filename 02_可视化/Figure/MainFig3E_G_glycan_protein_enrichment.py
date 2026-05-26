@@ -640,9 +640,9 @@ def plot_2d_enrichment(sp_ref, sp_comp):
     ax.spines['bottom'].set_linewidth(1.4)
 
     # 标题
-    fig.text(0.42, 0.96,
-             f'2D Glycan–Protein Enrichment  ({sp_ref} vs {sp_comp})',
-             ha='center', va='top', fontsize=24, fontweight='bold', color='#222222')
+    fig.text(0.53, 0.955,
+             f'Glycan-Protein Enrichment ({sp_ref} vs {sp_comp})',
+             ha='center', va='top', fontsize=20, fontweight='bold', color='#222222')
 
     _panel = _PAIR_PANEL.get((sp_ref, sp_comp), f'Fig4_{sp_ref}_{sp_comp}')
     save_fig(plt.gcf(), _panel)
