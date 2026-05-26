@@ -14,7 +14,7 @@ matplotlib.use('Agg')
 matplotlib.rcParams["font.family"] = "Times New Roman"
 matplotlib.rcParams["font.sans-serif"] = ["Times New Roman", "DejaVu Sans"]
 matplotlib.rcParams["mathtext.fontset"] = "stix"
-matplotlib.rcParams["font.size"] = 10
+matplotlib.rcParams["font.size"] = 16
 import os
 import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _save import save_fig
@@ -293,22 +293,22 @@ for lbl, col in legend_groups:
 
 ax1.legend(handles=legend_handles,
            loc='upper left', bbox_to_anchor=(1.05, 1.0),
-           fontsize=7.5, framealpha=0.93,
+           fontsize=14, framealpha=0.93,
            ncol=1, handlelength=0.9, handleheight=0.85,
            borderpad=0.5, labelspacing=0.25,
-           title='Taxonomic order', title_fontsize=8.0)
+           title='Taxonomic order', title_fontsize=15)
 
 ax1.text2D(0.05, 0.05, 'k-means k=3\nSilhouette = %.3f' % sc3,
            transform=ax1.transAxes,
-           ha='left', va='bottom', fontsize=8.5, color='#444444',
+           ha='left', va='bottom', fontsize=15, color='#444444',
            bbox=dict(fc='white', ec='#AAAAAA', alpha=0.80, pad=3, lw=0.8))
 
 ax1.set_xlim(0, 1)
 ax1.set_ylim(1, 0)
 ax1.set_zlim(-0.05, 1.05)
-ax1.set_xlabel('Aquatic association (PC1)', fontsize=10, labelpad=10)
-ax1.set_ylabel('Lifestyle–habitat discordance', fontsize=10, labelpad=10)
-ax1.set_zlabel('Developmental mode', fontsize=10, labelpad=10)
+ax1.set_xlabel('Aquatic association (PC1)', fontsize=18, labelpad=12)
+ax1.set_ylabel('Lifestyle-habitat discordance', fontsize=18, labelpad=12)
+ax1.set_zlabel('Developmental mode', fontsize=18, labelpad=12)
 ax1.view_init(elev=25, azim=40)
 
 # fig.suptitle(
@@ -330,7 +330,7 @@ for sp, val in focal_cfg.items():
     xf, yf = _lbl_pos.get(sp, (0.5, 0.5))
     ax1.text2D(xf, yf, short,
                transform=ax1.transAxes,
-               fontsize=11, fontweight='bold', fontstyle='italic', color=col,
+               fontsize=18, fontweight='bold', fontstyle='italic', color=col,
                ha='center', va='bottom', clip_on=False,
                bbox=dict(fc='white', ec=col, lw=1.5, alpha=0.92,
                          boxstyle='round,pad=0.3'))

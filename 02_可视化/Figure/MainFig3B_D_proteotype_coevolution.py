@@ -19,8 +19,8 @@ mpl.rcParams['axes.spines.right'] = False  # 隐藏右侧边框
 mpl.rcParams['axes.linewidth'] = 1.5       # 加粗坐标轴
 mpl.rcParams['xtick.major.width'] = 1.5    # 加粗刻度线
 mpl.rcParams['ytick.major.width'] = 1.5
-mpl.rcParams['xtick.labelsize'] = 12
-mpl.rcParams['ytick.labelsize'] = 12
+mpl.rcParams['xtick.labelsize'] = 22
+mpl.rcParams['ytick.labelsize'] = 22
 
 data_dir = r"D:\system_folder\Desktop\Work On\01_数据与计算\Raw_Data\MS_DATA"
 out_dir = r"D:\system_folder\Desktop\Work On\02_可视化\Figure\png"
@@ -159,7 +159,7 @@ for species in species_list:
                         oval_row['Log2_Protein_Intensity'],
                         oval_row['Log2_Glycan_Intensity'],
                         '⭐', color=highlight_color, ha='center', va='center',
-                        fontsize=17, zorder=7, fontfamily='Segoe UI Emoji'
+                        fontsize=24, zorder=7, fontfamily='Segoe UI Emoji'
                     )
             else:
                 plt.scatter(
@@ -189,7 +189,7 @@ for species in species_list:
                     f"{target_name}\n({row['Position']}N)",
                     xy=(row['Log2_Protein_Intensity'], row['Log2_Glycan_Intensity']),
                     xytext=(dx, dy), textcoords='offset points',
-                    fontsize=10, fontweight='bold', color=OVAL_COLOR if target_name == 'OVAL' else LABEL_GRAY,
+                    fontsize=18, fontweight='bold', color=OVAL_COLOR if target_name == 'OVAL' else LABEL_GRAY,
                     va='center', ha=ha,
                     bbox=dict(boxstyle="round,pad=0.25", fc="white", ec=highlight_color if target_name == 'OVAL' else LABEL_GRAY,
                               linewidth=0.8, alpha=0.90),
@@ -202,14 +202,14 @@ for species in species_list:
     plt.plot([min_val, max_val], [min_val, max_val], color='#888888', linestyle='--', linewidth=1.5, zorder=1)
     
     # 4. 格式化坐标轴和标题
-    plt.xlabel('Log$_2$(Protein Intensity)', fontsize=16, fontweight='bold')
-    plt.ylabel('Log$_2$(Glycan Intensity)', fontsize=16, fontweight='bold')
-    plt.title(f'{species} Proteotype Coevolution', fontsize=18, fontweight='bold', pad=20)
+    plt.xlabel('Log$_2$(Protein Intensity)', fontsize=24, fontweight='bold')
+    plt.ylabel('Log$_2$(Glycan Intensity)', fontsize=24, fontweight='bold')
+    plt.title(f'{species} Proteotype Coevolution', fontsize=26, fontweight='bold', pad=22)
     
     # 5. 添加统计学信息框
     sig = "***" if p_value < 0.001 else "**" if p_value < 0.01 else "*" if p_value < 0.05 else "ns"
     stats_text = f"Spearman $\\rho$ = {correlation:.2f}\n$P$ = {p_value:.2e} ({sig})"
-    plt.text(0.05, 0.95, stats_text, transform=plt.gca().transAxes, fontsize=13, fontweight='bold',
+    plt.text(0.05, 0.95, stats_text, transform=plt.gca().transAxes, fontsize=20, fontweight='bold',
              verticalalignment='top', bbox=dict(boxstyle='round,pad=0.5', facecolor='#F8F9FA', alpha=0.9, edgecolor='#CCCCCC'))
              
     plt.tight_layout()

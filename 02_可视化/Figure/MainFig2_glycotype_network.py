@@ -612,7 +612,7 @@ for gt in glycan_node_list:
 
     # 内部短名称标签（第一行缩写，第二行 chains 数）
     inner_label = f"{SHORT_NAME.get(gt, gt)}\n{len(glycan_type_chains[gt])}"
-    ax.text(gx, gy, inner_label, fontsize=15, fontweight="bold",
+    ax.text(gx, gy, inner_label, fontsize=24, fontweight="bold",
             color="white", ha="center", va="center", zorder=7,
             linespacing=1.3,
             path_effects=[pe.withStroke(linewidth=1.2, foreground=ec_col)])
@@ -622,7 +622,7 @@ for gt in glycan_node_list:
     ly = (R_GLYCAN + gr + 1.8) * math.sin(angle_rad)
     annot = f"{gt}\nproteins={gt_prot_count.get(gt, 0)}"
     ha    = "left" if math.cos(angle_rad) >= 0 else "right"
-    ax.text(lx, ly, annot, fontsize=15, color="#111111",
+    ax.text(lx, ly, annot, fontsize=24, color="#111111",
             ha=ha, va="center", linespacing=1.35, zorder=8,
             bbox=dict(boxstyle="round,pad=0.25", fc="white",
                       ec=ec_col, lw=1.2, alpha=0.88))
@@ -637,7 +637,7 @@ plt.tight_layout()
 # Vector formats skipped for Fig3A — 567-node network is too complex
 from _save import PNG_DIR
 import os as _os
-plt.gcf().savefig(_os.path.join(PNG_DIR, "Fig3A.png"), dpi=200, bbox_inches='tight', facecolor='white')
+plt.gcf().savefig(_os.path.join(PNG_DIR, "Fig3A.png"), dpi=300, bbox_inches='tight', facecolor='white')
 print("  Saved: Fig3A [PNG]")
 # Generate PDF from PNG using Pillow
 from PIL import Image as _PILImage
@@ -645,6 +645,6 @@ _png_path = _os.path.join(PNG_DIR, "Fig3A.png")
 from _save import PDF_DIR
 _pdf_path = _os.path.join(PDF_DIR, "Fig3A.pdf")
 _im = _PILImage.open(_png_path).convert('RGB')
-_im.save(_pdf_path, 'PDF', resolution=200)
+_im.save(_pdf_path, 'PDF', resolution=300)
 print("  Saved: Fig3A [PDF from raster]")
 plt.close('all')

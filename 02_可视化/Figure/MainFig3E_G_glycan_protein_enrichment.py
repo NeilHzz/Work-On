@@ -38,8 +38,8 @@ mpl.rcParams['axes.spines.right']    = False
 mpl.rcParams['axes.linewidth']       = 1.5
 mpl.rcParams['xtick.major.width']    = 1.5
 mpl.rcParams['ytick.major.width']    = 1.5
-mpl.rcParams['xtick.labelsize']      = 12
-mpl.rcParams['ytick.labelsize']      = 12
+mpl.rcParams['xtick.labelsize']      = 22
+mpl.rcParams['ytick.labelsize']      = 22
 
 # ─── 路径 ─────────────────────────────────────────────────────────────────
 BASE           = r"D:\system_folder\Desktop\Work On"
@@ -600,7 +600,7 @@ def plot_2d_enrichment(sp_ref, sp_comp):
         row = sub.iloc[0]
         if pname == 'OVAL':
             ax.text(row['prot_log2FC'], row['glyc_log2FC'], '⭐',
-                    color=color, ha='center', va='center', fontsize=17,
+                    color=color, ha='center', va='center', fontsize=24,
                     zorder=7, fontfamily='Segoe UI Emoji')
         else:
             ax.scatter(row['prot_log2FC'], row['glyc_log2FC'],
@@ -609,7 +609,7 @@ def plot_2d_enrichment(sp_ref, sp_comp):
         annot_kw = dict(
             xy=(row['prot_log2FC'], row['glyc_log2FC']),
             xytext=(cfg['dx'], cfg['dy']), textcoords='offset points',
-            fontsize=8.5, color=color if pname == 'OVAL' else LABEL_GRAY,
+            fontsize=18, color=color if pname == 'OVAL' else LABEL_GRAY,
             ha=cfg.get('ha', 'right'), va='center',
             bbox=dict(boxstyle='round,pad=0.35', facecolor='white',
                       edgecolor=color if pname == 'OVAL' else LABEL_GRAY,
@@ -629,20 +629,20 @@ def plot_2d_enrichment(sp_ref, sp_comp):
 
     # 坐标轴
     ax.set_xlabel(f'Protein  $\\log_2$FC  ({sp_ref} / {sp_comp})',
-                  fontsize=12, fontweight='bold', labelpad=6)
+                  fontsize=24, fontweight='bold', labelpad=8)
     ax.set_ylabel(f'Glycan  $\\log_2$FC  ({sp_ref} / {sp_comp})',
-                  fontsize=12, fontweight='bold', labelpad=6)
+                  fontsize=24, fontweight='bold', labelpad=8)
     ax.set_xlim(vmin, vmax)
     ax.set_ylim(vmin, vmax)
     ax.set_aspect('equal')
-    ax.tick_params(labelsize=10)
+    ax.tick_params(labelsize=22)
     ax.spines['left'].set_linewidth(1.4)
     ax.spines['bottom'].set_linewidth(1.4)
 
     # 标题
     fig.text(0.42, 0.96,
              f'2D Glycan–Protein Enrichment  ({sp_ref} vs {sp_comp})',
-             ha='center', va='top', fontsize=13, fontweight='bold', color='#222222')
+             ha='center', va='top', fontsize=24, fontweight='bold', color='#222222')
 
     _panel = _PAIR_PANEL.get((sp_ref, sp_comp), f'Fig4_{sp_ref}_{sp_comp}')
     save_fig(plt.gcf(), _panel)
@@ -675,10 +675,10 @@ def make_legend():
         handles=handles,
         loc='center',
         frameon=True,
-        fontsize=12,
+        fontsize=18,
         edgecolor='#CCCCCC',
         title='Highlighted Proteins',
-        title_fontsize=13,
+        title_fontsize=20,
     )
     leg.get_frame().set_linewidth(1.0)
 

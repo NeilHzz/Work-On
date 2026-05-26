@@ -225,15 +225,15 @@ def plot_microstructure_panels(df_plot, metric_arrays: dict):
         for xi, sp in enumerate(ORDER):
             ltr = res['letters'].get(sp, '')
             ax.text(xi, y_letter, ltr, ha='center', va='bottom',
-                    fontsize=13, fontweight='bold', color='#333333')
+                    fontsize=20, fontweight='bold', color='#333333')
 
         ax.set_title(
             f"{titles[i]}\n"
             f"Duncan ANOVA: F={res['f_stat']:.2f}, p={res['p_anova']:.2e}",
-            fontsize=12, fontweight='bold')
+            fontsize=20, fontweight='bold')
         ax.set_xlabel('')
-        ax.set_ylabel(col, fontsize=11)
-        ax.tick_params(axis='both', which='major', labelsize=10)
+        ax.set_ylabel(col, fontsize=20)
+        ax.tick_params(axis='both', which='major', labelsize=20)
         ax.set_ylim(top=y_letter + y_range * 0.12)
         sns.despine(ax=ax)
 
@@ -265,9 +265,9 @@ def plot_mammilla_density_significance(chicken_data, duck_data, pigeon_data):
                 boxprops=dict(alpha=0.8, linewidth=1.5))
     sns.stripplot(x='Species', y='Density', data=df_plot, order=ORDER, ax=ax,
                   color='black', alpha=0.6, jitter=True, size=6)
-    ax.set_ylabel('Mammilla Density (per mm²)', fontsize=14, fontweight='bold')
+    ax.set_ylabel('Mammilla Density (per mm²)', fontsize=20, fontweight='bold')
     ax.set_xlabel('')
-    ax.tick_params(axis='both', which='major', labelsize=12)
+    ax.tick_params(axis='both', which='major', labelsize=20)
 
     # 标注显著性连线（有差异的组对）+ Duncan 字母
     y_range  = df_plot['Density'].max() - df_plot['Density'].min()
@@ -286,7 +286,7 @@ def plot_mammilla_density_significance(chicken_data, duck_data, pigeon_data):
                 [by - h * 0.1, by, by, by - h * 0.1],
                 lw=1.5, color='black')
         ax.text((xi + xj) / 2, by + h * 0.05, '**',
-                ha='center', va='bottom', fontsize=12, color='black')
+                ha='center', va='bottom', fontsize=20, color='black')
         bracket_top = by + h * 0.4
 
     # Duncan 字母
@@ -294,13 +294,13 @@ def plot_mammilla_density_significance(chicken_data, duck_data, pigeon_data):
     for xi, sp in enumerate(ORDER):
         ltr = res['letters'].get(sp, '')
         ax.text(xi, y_letter, ltr, ha='center', va='bottom',
-                fontsize=14, fontweight='bold', color='#333333')
+                fontsize=20, fontweight='bold', color='#333333')
 
     ax.set_ylim(top=y_letter + y_range * 0.15)
     ax.set_title(
         f"Mammilla Density\n"
         f"Duncan ANOVA: F={res['f_stat']:.2f}, p={res['p_anova']:.2e}",
-        fontsize=12, fontweight='bold')
+        fontsize=20, fontweight='bold')
 
     sns.despine()
     plt.tight_layout()

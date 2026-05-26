@@ -464,7 +464,7 @@ for sp, ang_dict in [("Gallus", g_angles), ("Anas", a_angles), ("Columba", c_ang
 
         label_text = all_display_names.get(acc, acc)
         fw = "bold" if is_target_prot else "normal"
-        fs = 8.5 if is_target_prot else 7.5
+        fs = 18 if is_target_prot else 12
 
         if is_oc17:
             label_color = COL_GREY
@@ -498,15 +498,15 @@ ax.legend(handles=legend_patches,
           loc="lower right",
           frameon=True, framealpha=0.9,
           edgecolor="#bbbbbb",
-          fontsize=8,
+          fontsize=16,
           title="Species",
-          title_fontsize=8,
-          prop={"family": "Times New Roman", "size": 8},
+          title_fontsize=16,
+          prop={"family": "Times New Roman", "size": 16},
           bbox_to_anchor=(0.99, 0.01))
 
 # ── 4g. 标题 ──────────────────────────────────────────────────────────────────
 ax.set_title("BLAST Ortholog Mapping – Chord Diagram",
-             fontsize=9, fontweight="bold", pad=6, color="#222222",
+             fontsize=18, fontweight="bold", pad=8, color="#222222",
              fontfamily="Times New Roman")
 
 plt.tight_layout()
