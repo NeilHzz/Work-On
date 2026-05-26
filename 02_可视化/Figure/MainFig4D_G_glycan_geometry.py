@@ -136,9 +136,9 @@ def violin_one(ax, metric, ylabel, subtitle=''):
         ax.text(xi, letter_y, ltr, ha='center', va='bottom',
                 fontsize=11, fontweight='bold', color='#333')
     ax.set_ylim(top=letter_y + span * 0.15)
-    title_str = (f"{subtitle}\nANOVA: F={res['f_stat']:.2f}, p={res['p_anova']:.2e}"
+    title_str = (f"{subtitle}\np = {res['p_anova']:.2e}"
                 if subtitle else
-                f"ANOVA: F={res['f_stat']:.2f}, p={res['p_anova']:.2e}")
+                f"p = {res['p_anova']:.2e}")
     ax.set_title(title_str, fontsize=7.5, color='black', pad=2)
 
     ax.spines['top'].set_visible(False)
