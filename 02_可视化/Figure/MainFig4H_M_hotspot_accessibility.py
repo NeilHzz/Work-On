@@ -194,16 +194,16 @@ def draw_stacked_bar(ax, df):
     ax.set_xticklabels(SPECIES_ORDER, fontsize=11)
     ax.set_ylabel('Hotspot Count (mean ± 95% CI)', fontsize=9.5)
     ax.set_title(
-        f'Ca$^{{2+}}$ Hotspot Accessibility: Net Accessible vs. Glycan-Shielded'
-        f'\nANOVA: F={res_bar["f_stat"]:.2f}, p={res_bar["p_anova"]:.2e}',
+        f'Ca$^{{2+}}$ Hotspot Accessibility'
+        f'\nANOVA: p={res_bar["p_anova"]:.2e}',
         fontsize=9.5, pad=8)
     ax.set_ylim(0, letter_y + y_top * 0.22)
     ax.set_xlim(-0.6, len(SPECIES_ORDER) - 0.4)
 
     legend_handles = [
-        mpatches.Patch(facecolor='#aaa', label='Net Accessible (exposed to solvent)'),
+        mpatches.Patch(facecolor='#aaa', label='Net Accessible'),
         mpatches.Patch(facecolor='#ddd', hatch='///', edgecolor='#888',
-                       label='Glycan-Shielded (blocked)'),
+                       label='Glycan-Shielded'),
     ]
     ax.legend(handles=legend_handles, fontsize=8.5, loc='upper right',
               framealpha=0.8, edgecolor='none')
@@ -262,15 +262,15 @@ def draw_sasa_bar(ax, df):
     ax.set_xticklabels(SPECIES_ORDER, fontsize=11)
     ax.set_ylabel(r'Hotspot Residue SASA (Å²)', fontsize=9.5)
     ax.set_title(
-        r'Ca$^{2+}$ Hotspot Residue SASA: Net Accessible vs. Glycan-Shielded'
-        f'\nANOVA: F={res_sasa["f_stat"]:.2f}, p={res_sasa["p_anova"]:.2e}',
+        r'Ca$^{2+}$ Hotspot Residue SASA'
+        f'\nANOVA: p={res_sasa["p_anova"]:.2e}',
         fontsize=9.5, pad=8)
     ax.set_ylim(0, letter_y + y_top * 0.22)
     ax.set_xlim(-0.6, len(SPECIES_ORDER) - 0.4)
     legend_handles = [
-        mpatches.Patch(facecolor='#aaa', label='Net Accessible SASA (with glycan)'),
+        mpatches.Patch(facecolor='#aaa', label='Net Accessible'),
         mpatches.Patch(facecolor='#ddd', hatch='///', edgecolor='#888',
-                       label='Glycan-Shielded SASA (blocked)'),
+                       label='Glycan-Shielded'),
     ]
     ax.legend(handles=legend_handles, fontsize=8.5, loc='upper right',
               framealpha=0.8, edgecolor='none')
