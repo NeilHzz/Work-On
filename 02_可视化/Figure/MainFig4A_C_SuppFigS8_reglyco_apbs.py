@@ -42,9 +42,9 @@ DPI     = 300
 VCLIP   = 20.0    # strip chart ± kT/e 截断
 
 SPECIES_COLOR = {
+    'Gallus':  '#B54664',
     'Anas':    '#7895C1',
     'Columba': '#F0C284',
-    'Gallus':  '#B54664',
 }
 
 # 绘图顺序：G1 + A1-A3 + C1-C14（糖基化），再 3 个 apo

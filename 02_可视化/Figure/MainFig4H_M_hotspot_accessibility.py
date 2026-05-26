@@ -78,7 +78,6 @@ DPI     = 300
 
 SPECIES_ORDER = ['Gallus', 'Anas', 'Columba']
 SPECIES_COLOR = {'Gallus': '#B54664', 'Anas': '#7895C1', 'Columba': '#F0C284'}
-SPECIES_LIGHT = {'Gallus': '#e8a0b4', 'Anas': '#b0c8e8', 'Columba': '#f8e0b0'}
 
 
 # ── 统计标注 ──────────────────────────────────────────────────────────────────
@@ -157,7 +156,6 @@ def draw_stacked_bar(ax, df):
 
     for i, sp in enumerate(SPECIES_ORDER):
         col  = SPECIES_COLOR[sp]
-        lcol = SPECIES_LIGHT[sp]
         net  = means[sp]
         sh   = shielded_means[sp]
         err  = stds[sp]
@@ -166,8 +164,8 @@ def draw_stacked_bar(ax, df):
         ax.bar(xs[i], net, bar_w, color=col, label='Net Accessible' if i == 0 else '')
 
         # Shielded bar on top (hatched)
-        ax.bar(xs[i], sh, bar_w, bottom=net, color=lcol,
-               hatch='///', edgecolor='#888', linewidth=0.5,
+        ax.bar(xs[i], sh, bar_w, bottom=net, color=col, alpha=0.32,
+               hatch='///', edgecolor=col, linewidth=0.6,
                label='Glycan-Shielded (blocked)' if i == 0 else '')
 
         # Error bar on net
@@ -226,15 +224,14 @@ def draw_sasa_bar(ax, df):
 
     for i, sp in enumerate(SPECIES_ORDER):
         col  = SPECIES_COLOR[sp]
-        lcol = SPECIES_LIGHT[sp]
         net  = means[sp]
         sh   = shielded_means[sp]
         err  = stds[sp]
 
         ax.bar(xs[i], net, bar_w, color=col,
                label='Net Accessible SASA' if i == 0 else '')
-        ax.bar(xs[i], sh, bar_w, bottom=net, color=lcol,
-               hatch='///', edgecolor='#888', linewidth=0.5,
+        ax.bar(xs[i], sh, bar_w, bottom=net, color=col, alpha=0.32,
+               hatch='///', edgecolor=col, linewidth=0.6,
                label='Glycan-Shielded SASA' if i == 0 else '')
         ax.errorbar(xs[i], net, yerr=err, fmt='none',
                     color='#333', elinewidth=1.4, capsize=5, zorder=5)
