@@ -147,7 +147,7 @@ def draw_strip(ax, csv_map):
     for row_i, name in enumerate(all_names):
         sp    = species_of(name)
         color = SPECIES_COLOR[sp]
-        label = name.replace('_apo', '') + (' (Deglyco)' if '_apo' in name else '')
+        label = name.replace('_apo', '') + (' (Apo)' if '_apo' in name else '')
         y_c   = n_rows - row_i - 1 + 0.5
         ax.text(-2, y_c, label, ha='right', va='center',
                 fontsize=7.5, fontweight='bold', color=color,
@@ -311,7 +311,7 @@ def draw_hotspot(ax, summary):
     legend_els = [
         mpatches.Patch(facecolor='#888', alpha=0.80, label='Glycosylated'),
         mpatches.Patch(facecolor='#888', alpha=0.28,
-                   edgecolor='#888', label='Deglyco (no glycan)'),
+                   edgecolor='#888', label='Apo'),
     ]
     ax.legend(handles=legend_els, fontsize=7.5, framealpha=0.6)
     ax.spines['top'].set_visible(False)

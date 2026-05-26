@@ -262,7 +262,7 @@ doc.add_page_break()
 fig_title("图S10.", "OVAL 糖链几何及 apo/糖基化对照的 Re-Glyco 系综分析。")
 add_image(FIG_BASE / "SuppFig7_Glycosylation_Hotspot" / "Fig_hotspot_ensemble_1.png", width_cm=15.5)
 fig_caption(
-    "(A) 三种物种特异性 OVAL–糖链复合物在构象系综重复中的糖链回旋半径（Rg）分布，按物种着色（G. gallus 为橙色，A. platyrhynchos 为蓝色，C. livia 为绿色）。(B) 相同三种复合物的糖链端到端距离分布。(C) 各物种糖基化与 apo（去糖基化）OVAL 结构逐构象的 Ca²⁺ 热点计数（Nhot）比较。C. livia 具有最大的构象空间和最强的糖链遮蔽；G. gallus 具有最小的构象空间和最弱的遮蔽；A. platyrhynchos 居中。移除 N-糖链后，跨物种在热点计数上的分离明显收敛。图中 panel C 相对 apo 参考的差异采用一样本 t 检验评估。"
+    "(A) 三种物种特异性 OVAL–糖链复合物在构象系综重复中的糖链回旋半径（Rg）分布，按物种着色（G. gallus 为橙色，A. platyrhynchos 为蓝色，C. livia 为绿色）。(B) 相同三种复合物的糖链端到端距离分布。(C) 各物种糖基化与 apo OVAL 结构逐构象的 Ca²⁺ 热点计数（Nhot）比较。C. livia 具有最大的构象空间和最强的糖链遮蔽；G. gallus 具有最小的构象空间和最弱的遮蔽；A. platyrhynchos 居中。移除 N-糖链后，跨物种在热点计数上的分离明显收敛。图中 panel C 相对 apo 参考的差异采用一样本 t 检验评估。"
 )
 
 

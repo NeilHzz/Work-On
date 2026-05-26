@@ -291,7 +291,7 @@ fig_caption([
     ("C. livia", False, True),
     (" green). (B) Glycan end-to-end distance distributions across conformations for the same three complexes. (C) Per-conformation Ca²⁺ hotspot count (N", False, False),
     ("hot", False, False),
-    (") comparing the glycosylated and apo (deglycosylated) OVAL structures for each species. ", False, False),
+    (") comparing the glycosylated and apo OVAL structures for each species. ", False, False),
     ("C. livia", False, True),
     (" showed the largest conformational space and the strongest glycan shielding; ", False, False),
     ("G. gallus", False, True),
