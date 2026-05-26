@@ -91,6 +91,9 @@ CATEGORY_LABELS = {
 }
 
 
+CATEGORY_SORT_ORDER = {category: index for index, category in enumerate(ORDERED_CATEGORIES)}
+
+
 DIRECTNESS_LABELS = {
     "support": "背景支持文献",
 }
@@ -105,6 +108,8 @@ ADDITIONAL_REFERENCES = [
         "category": "n_glycosylation",
         "journal": "Journal of Agricultural and Food Chemistry",
         "material": "蛋清",
+        "core_target": "蛋清糖蛋白组",
+        "main_content": "系统鉴定鸡蛋蛋清蛋白中的 N-糖基化位点与糖蛋白组成，建立蛋清 N-糖蛋白图谱。",
     },
     {
         "authors": "Harvey DJ, Wing DR, Kuster B, Wilson IBH",
@@ -114,6 +119,8 @@ ADDITIONAL_REFERENCES = [
         "category": "n_glycosylation",
         "journal": "Journal of the American Society for Mass Spectrometry",
         "material": "蛋清（ovalbumin 及共纯化糖蛋白）",
+        "core_target": "ovalbumin 及共纯化蛋清糖蛋白",
+        "main_content": "解析 ovalbumin 及共纯化蛋白的 N-连接糖链组成，比较蛋清主要糖蛋白的糖链特征。",
     },
     {
         "authors": "Yamashita K, Tachibana Y, Nakayama T, Kitamura M, Ito Y, Kobata A",
@@ -123,6 +130,8 @@ ADDITIONAL_REFERENCES = [
         "category": "n_glycosylation",
         "journal": "Journal of Biological Chemistry",
         "material": "蛋清（ovomucoid）",
+        "core_target": "ovomucoid",
+        "main_content": "解析鸡 ovomucoid 的复杂型 N-糖链结构，证明其存在多分支天线型糖链。",
     },
     {
         "authors": "Offengenden M, Fentabil MA, Wu J",
@@ -132,6 +141,8 @@ ADDITIONAL_REFERENCES = [
         "category": "n_glycosylation",
         "journal": "Glycoconjugate Journal",
         "material": "蛋清（ovomucin）",
+        "core_target": "ovomucin",
+        "main_content": "表征蛋清 ovomucin 的 N-糖基化模式，说明其糖链组成与黏弹性相关。",
     },
     {
         "authors": "Geng F, Xie Y, Wang J, Majumder K, Qiu N, Ma M",
@@ -141,6 +152,8 @@ ADDITIONAL_REFERENCES = [
         "category": "n_glycosylation",
         "journal": "Journal of Agricultural and Food Chemistry",
         "material": "卵黄",
+        "core_target": "卵黄糖蛋白组",
+        "main_content": "系统绘制鸡卵黄 N-糖蛋白组图谱，鉴定卵黄中主要糖蛋白及其糖基化位点。",
     },
     {
         "authors": "Zhu F, Qiu N, Sun H, Meng Y, Zhou Y",
@@ -150,6 +163,8 @@ ADDITIONAL_REFERENCES = [
         "category": "multi_ptm",
         "journal": "Journal of Agricultural and Food Chemistry",
         "material": "鸡蛋整体（胚胎发育）",
+        "core_target": "胚胎发育期鸡蛋蛋白组/糖蛋白组",
+        "main_content": "联合蛋白组与 N-糖蛋白组分析胚胎发育过程中鸡蛋蛋白动态变化，揭示发育相关修饰重塑。",
     },
     {
         "authors": "Zhou Y, Qiu N, Mine Y, Keast R, Meng Y",
@@ -159,6 +174,8 @@ ADDITIONAL_REFERENCES = [
         "category": "n_glycosylation",
         "journal": "Journal of Agricultural and Food Chemistry",
         "material": "卵黄膜",
+        "core_target": "卵黄膜糖蛋白组",
+        "main_content": "比较高温储存前后卵黄膜 N-糖蛋白变化，解释卵黄膜劣变的分子机制。",
     },
     {
         "authors": "Hirose J, Doi Y, Kitabatake N, Narita H",
@@ -168,6 +185,8 @@ ADDITIONAL_REFERENCES = [
         "category": "n_glycosylation",
         "journal": "Bioscience, Biotechnology, and Biochemistry",
         "material": "蛋清（ovalbumin-related gene Y）",
+        "core_target": "ovalbumin-related gene Y protein",
+        "main_content": "证明 ovalbumin-related gene Y 蛋白携带 ovomucoid 型糖链，扩展了蛋清糖蛋白谱系。",
     },
     {
         "authors": "Qi Q, Shi D, Su W, Mu Y",
@@ -177,6 +196,8 @@ ADDITIONAL_REFERENCES = [
         "category": "n_glycosylation",
         "journal": "Food Chemistry: X",
         "material": "蛋清（皮蛋加工体系）",
+        "core_target": "皮蛋蛋清糖蛋白组",
+        "main_content": "分析盐碱加工条件下皮蛋蛋清的 N-糖蛋白结构和功能改变，揭示加工诱导的糖基化重塑。",
     },
     {
         "authors": "Dai D, Wang X, Wu K, Lan F, Jin J, Zhang W, Wen C, Li J, Yang N, Sun C",
@@ -186,6 +207,8 @@ ADDITIONAL_REFERENCES = [
         "category": "n_glycosylation",
         "journal": "Poultry Science",
         "material": "受精蛋清",
+        "core_target": "受精蛋清蛋白组/糖蛋白组",
+        "main_content": "联合分析受精蛋清在储存和孵化中的蛋白组与 N-糖基化变化，揭示胚胎相关蛋白调控。",
     },
     {
         "authors": "Xiao D, Hu G, Ding Q, He H, Wang J, Geng F",
@@ -195,8 +218,48 @@ ADDITIONAL_REFERENCES = [
         "category": "multi_ptm",
         "journal": "Poultry Science",
         "material": "卵黄浆",
+        "core_target": "卵黄浆蛋白组/磷蛋白组/糖蛋白组",
+        "main_content": "整合蛋白组、磷蛋白组和 N-糖蛋白组数据，概述卵黄浆的多修饰分布与功能关联。",
     },
 ]
+
+
+CORE_TARGET_BY_DOI = {
+    "10.1016/S0014-5793(99)01586-0": "蛋壳基质多修饰 ovocleidin",
+    "10.1074/jbc.274.46.32915": "ovocleidin-116",
+    "10.1016/S0945-053X(02)00031-8": "ovocleidin-116",
+    "10.1021/acs.jafc.3c00708": "蛋壳角质层糖蛋白组",
+    "10.1016/j.fbio.2020.100590": "蛋清糖蛋白组",
+    "10.1016/j.ijbiomac.2020.08.193": "卵黄膜糖蛋白组",
+    "10.1111/jfbc.14006": "受精蛋整体蛋白/糖蛋白",
+    "10.1021/jf048369l": "ovalbumin gene Y protein",
+    "10.1016/j.fbio.2024.103938": "蛋清 O-糖肽组",
+    "10.1073/pnas.94.12.6244": "ovalbumin 前体",
+    "10.1042/BJ2400871": "phosvitin",
+    "10.1021/bi00298a027": "riboflavin-binding protein",
+    "10.1002/pmic.200600635": "蛋壳磷蛋白组",
+    "10.1021/acs.jafc.9b04638": "孵化过程鸡蛋蛋白磷酸化组",
+    "10.1016/j.foodchem.2020.127167": "蛋壳基质蛋白组/糖蛋白组/磷蛋白组",
+    "10.2141/jpsa.009122": "蛋壳基质蛋白综述",
+    "10.1007/s00018-009-0046-y": "蛋壳基质蛋白功能网络",
+    "10.2741/3985": "蛋壳基质蛋白与矿化调控",
+    "10.1186/s12860-021-00350-0": "蛋壳质量相关候选蛋白",
+    "10.1186/s12953-015-0078-1": "跨禽种蛋壳基质蛋白",
+    "10.1126/sciadv.aar3219": "蛋壳矿化纳米结构蛋白框架",
+    "10.1074/jbc.M610294200": "ovocalyxin-36",
+    "10.1074/jbc.M406033200": "ovocleidin-17",
+    "10.1021/acs.jafc.7b01706": "蛋清糖蛋白组",
+    "10.1016/S1044-0305(00)00122-7": "ovalbumin 及共纯化蛋清糖蛋白",
+    "10.1016/S0021-9258(18)33585-3": "ovomucoid",
+    "10.1007/s10719-011-9328-3": "ovomucin",
+    "10.1021/acs.jafc.8b04492": "卵黄糖蛋白组",
+    "10.1021/acs.jafc.9b05133": "胚胎发育期鸡蛋蛋白组/糖蛋白组",
+    "10.1021/acs.jafc.0c07557": "卵黄膜糖蛋白组",
+    "10.1271/bbb.70.144": "ovalbumin-related gene Y protein",
+    "10.1016/j.fochx.2024.101244": "皮蛋蛋清糖蛋白组",
+    "10.1016/j.psj.2024.104526": "受精蛋清蛋白组/糖蛋白组",
+    "10.1016/j.psj.2024.104253": "卵黄浆蛋白组/磷蛋白组/糖蛋白组",
+}
 
 
 MATERIAL_BY_DOI = {
@@ -256,6 +319,8 @@ class Entry:
     title: str
     journal: str
     material: str
+    core_target: str
+    main_content: str
 
 
 def normalize_doi(doi: str) -> str:
@@ -264,6 +329,22 @@ def normalize_doi(doi: str) -> str:
 
 def directness_label(category: str) -> str:
     return DIRECTNESS_LABELS.get(category, "直接证据")
+
+
+def summary_to_main_content(summary: str) -> str:
+    prefix = "摘要要点："
+    if summary.startswith(prefix):
+        return summary[len(prefix):].strip()
+    return summary.strip()
+
+
+def all_entries_sort_key(entry: Entry) -> tuple[bool, int, int, str]:
+    return (
+        directness_label(entry.category) == "背景支持文献",
+        CATEGORY_SORT_ORDER[entry.category],
+        entry.year,
+        entry.title,
+    )
 
 
 def parse_entries(document: Document) -> list[Entry]:
@@ -303,6 +384,8 @@ def parse_entries(document: Document) -> list[Entry]:
                 title=reference_match.group("title"),
                 journal=reference_match.group("journal"),
                 material=MATERIAL_BY_DOI.get(doi, ""),
+                core_target=CORE_TARGET_BY_DOI.get(doi, MATERIAL_BY_DOI.get(doi, "")),
+                main_content=summary_to_main_content(summary),
             )
         )
     return entries
@@ -359,7 +442,7 @@ def export_xlsx(grouped_entries: dict[str, list[Entry]]) -> None:
     workbook = Workbook()
     worksheet = workbook.active
     worksheet.title = "PTM References"
-    worksheet.append(["文章题目", "DOI", "修饰类型", "作者", "发表年限", "期刊", "样本来源/材料类型", "是否直接研究PTM"])
+    worksheet.append(["文章题目", "DOI", "修饰类型", "作者", "发表年限", "期刊", "样本来源/材料类型", "研究对象/核心蛋白", "文章主要内容", "是否直接研究PTM"])
 
     for category in ORDERED_CATEGORIES:
         for entry in grouped_entries[category]:
@@ -372,6 +455,8 @@ def export_xlsx(grouped_entries: dict[str, list[Entry]]) -> None:
                     entry.year,
                     entry.journal,
                     entry.material,
+                    entry.core_target,
+                    entry.main_content,
                     directness_label(entry.category),
                 ]
             )
@@ -383,7 +468,9 @@ def export_xlsx(grouped_entries: dict[str, list[Entry]]) -> None:
     worksheet.column_dimensions["E"].width = 12
     worksheet.column_dimensions["F"].width = 38
     worksheet.column_dimensions["G"].width = 28
-    worksheet.column_dimensions["H"].width = 18
+    worksheet.column_dimensions["H"].width = 34
+    worksheet.column_dimensions["I"].width = 78
+    worksheet.column_dimensions["J"].width = 18
     workbook.save(str(XLSX_PATH))
 
 
@@ -402,6 +489,8 @@ def build_additional_entries() -> list[Entry]:
                 title=item["title"],
                 journal=item["journal"],
                 material=item["material"],
+                core_target=item["core_target"],
+                main_content=item["main_content"],
             )
         )
     return entries
@@ -412,7 +501,7 @@ def merge_all_entries(parsed_entries: list[Entry]) -> list[Entry]:
     for entry in build_additional_entries():
         merged.setdefault(normalize_doi(entry.doi), entry)
     all_entries = list(merged.values())
-    all_entries.sort(key=lambda item: (CATEGORY_LABELS[item.category], item.year, item.title))
+    all_entries.sort(key=all_entries_sort_key)
     return all_entries
 
 
@@ -420,7 +509,7 @@ def export_all_literature_xlsx(entries: list[Entry]) -> None:
     workbook = Workbook()
     worksheet = workbook.active
     worksheet.title = "All PTM Literature"
-    worksheet.append(["文章题目", "DOI", "修饰类型", "作者", "发表年限", "期刊", "样本来源/材料类型", "是否直接研究PTM"])
+    worksheet.append(["文章题目", "DOI", "修饰类型", "作者", "发表年限", "期刊", "样本来源/材料类型", "研究对象/核心蛋白", "文章主要内容", "是否直接研究PTM"])
 
     for entry in entries:
         worksheet.append(
@@ -432,6 +521,8 @@ def export_all_literature_xlsx(entries: list[Entry]) -> None:
                 entry.year,
                 entry.journal,
                 entry.material,
+                entry.core_target,
+                entry.main_content,
                 directness_label(entry.category),
             ]
         )
@@ -443,7 +534,9 @@ def export_all_literature_xlsx(entries: list[Entry]) -> None:
     worksheet.column_dimensions["E"].width = 12
     worksheet.column_dimensions["F"].width = 38
     worksheet.column_dimensions["G"].width = 28
-    worksheet.column_dimensions["H"].width = 18
+    worksheet.column_dimensions["H"].width = 34
+    worksheet.column_dimensions["I"].width = 78
+    worksheet.column_dimensions["J"].width = 18
     workbook.save(str(ALL_XLSX_PATH))
 
 
