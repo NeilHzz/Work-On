@@ -222,11 +222,16 @@ def plot_microstructure_panels(df_plot, metric_arrays: dict):
         res = duncan_mrt(grp_data, ORDER)
         print_dmrt(f"{titles[i]}", res)
 
-        sns.boxplot(x='Species', y=col, order=ORDER, data=df_plot, ax=ax,
-                    palette=COLORS, width=0.5, showfliers=False,
-                    boxprops=dict(alpha=0.7))
-        sns.stripplot(x='Species', y=col, order=ORDER, data=df_plot, ax=ax,
-                      color='black', alpha=0.6, jitter=True, size=5)
+        sns.boxplot(x='Species', y=col, hue='Species', order=ORDER, data=df_plot, ax=ax,
+                palette=COLORS, width=0.5, showfliers=False,
+                saturation=1, legend=False,
+                boxprops=dict(alpha=1.0, linewidth=1.5),
+                whiskerprops=dict(color='#444444', linewidth=1.5),
+                capprops=dict(color='#444444', linewidth=1.5),
+                medianprops=dict(color='#333333', linewidth=2.0))
+        sns.stripplot(x='Species', y=col, hue='Species', order=ORDER, data=df_plot, ax=ax,
+                  palette=COLORS, alpha=0.95, jitter=True, size=5,
+                  edgecolor='#222222', linewidth=0.45, legend=False)
 
         # 标注 Duncan 字母
         y_range = df_plot[col].max() - df_plot[col].min()
@@ -269,11 +274,16 @@ def plot_mammilla_density_significance(chicken_data, duck_data, pigeon_data):
 
     # --- 绘图 ---
     fig, ax = plt.subplots(figsize=(6, 5.5))
-    sns.boxplot(x='Species', y='Density', data=df_plot, order=ORDER, ax=ax,
+    sns.boxplot(x='Species', y='Density', data=df_plot, hue='Species', order=ORDER, ax=ax,
                 palette=COLORS, width=0.5, showfliers=False,
-                boxprops=dict(alpha=0.8, linewidth=1.5))
-    sns.stripplot(x='Species', y='Density', data=df_plot, order=ORDER, ax=ax,
-                  color='black', alpha=0.6, jitter=True, size=6)
+                saturation=1, legend=False,
+                boxprops=dict(alpha=1.0, linewidth=1.5),
+                whiskerprops=dict(color='#444444', linewidth=1.5),
+                capprops=dict(color='#444444', linewidth=1.5),
+                medianprops=dict(color='#333333', linewidth=2.0))
+    sns.stripplot(x='Species', y='Density', data=df_plot, hue='Species', order=ORDER, ax=ax,
+                  palette=COLORS, alpha=0.95, jitter=True, size=6,
+                  edgecolor='#222222', linewidth=0.45, legend=False)
     ax.set_ylabel('Mammilla Density (per mm²)', fontsize=20, fontweight='bold')
     ax.set_xlabel('')
     ax.tick_params(axis='both', which='major', labelsize=20)
