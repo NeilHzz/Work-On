@@ -42,7 +42,7 @@ def duncan_mrt(groups: list, names: list, alpha: float = 0.05) -> dict:
     MSE    = SS_e / df_e
     n_harm = k / sum(1.0 / n for n in ns)
     SE     = np.sqrt(MSE / n_harm)
-    order  = np.argsort(means)
+    order  = np.argsort(means)[::-1]
     s_means = means[order]
     s_names = [names[i] for i in order]
     crit = [stats.studentized_range.ppf(1.0 - alpha, k=p, df=df_e) * SE
@@ -51,7 +51,7 @@ def duncan_mrt(groups: list, names: list, alpha: float = 0.05) -> dict:
     for i in range(k):
         for j in range(i + 1, k):
             p_span = j - i + 1
-            sig[i, j] = sig[j, i] = (s_means[j] - s_means[i] > crit[p_span - 2])
+            sig[i, j] = sig[j, i] = (s_means[i] - s_means[j] > crit[p_span - 2])
     if k == 3:
         s01, s02, s12 = bool(sig[0,1]), bool(sig[0,2]), bool(sig[1,2])
         table = {
