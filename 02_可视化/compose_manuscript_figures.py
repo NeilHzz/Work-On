@@ -93,7 +93,7 @@ FONT_XL  = _load_font(120)   # full-width panels
 FONT_LG  = _load_font(100)   # half-width panels
 FONT_MD  = _load_font(80)    # third-width panels
 FONT_SM  = _load_font(64)    # quarter-width panels
-FONT_FIG4_LABEL = _load_font(140)
+FONT_FIG4_LABEL = _load_font(120)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Image utilities

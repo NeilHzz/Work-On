@@ -27,10 +27,10 @@ from _save import save_fig
 from scipy import stats
 
 
-TITLE_FS = 24
-AXIS_LABEL_FS = 24
-TICK_FS = 24
-STAT_FS = 24
+TITLE_FS = 20
+AXIS_LABEL_FS = 20
+TICK_FS = 20
+STAT_FS = 20
 
 
 def format_p_value(p_value: float) -> str:
