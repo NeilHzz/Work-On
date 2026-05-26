@@ -364,7 +364,7 @@ p_sprot_bg = spara([
 ])
 
 p_sprot_go = spara([
-    (" GO enrichment and gene-family turnover further pointed to lineage-specific immune and defense background (Figs. S5, S6, and S9), but those signals described comparative context more than the layer most directly tied to mammillary organization. Those lineage-biased signals remained relevant as evolutionary backdrop, but they did not by themselves identify the proximate layer connecting a shared matrix repertoire to mammillary-layer divergence and, later, hatching-relevant mechanics across species.", []),
+    (" GO enrichment and gene-family turnover further pointed to lineage-specific immune and defense background (Figs. S5, S8, and S9), but those signals described comparative context more than the layer most directly tied to mammillary organization. Those lineage-biased signals remained relevant as evolutionary backdrop, but they did not by themselves identify the proximate layer connecting a shared matrix repertoire to mammillary-layer divergence and, later, hatching-relevant mechanics across species.", []),
 ])
 
 p_sprot_focus = spara([
