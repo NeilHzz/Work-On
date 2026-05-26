@@ -90,8 +90,8 @@ GROUP_LABEL = {
 
 # ─── 路径 ────────────────────────────────────────────────────────────────────
 ROOT     = Path(__file__).parent
-DATA_DIR = Path(r"D:\system_folder\Desktop\Work On/Ortho/Venn GO")
-OUT_DIR  = Path(r"D:\system_folder\Desktop\Work On\02_可视化\Figure\png")
+DATA_DIR = Path(r"D:\system_folder\Desktop\Work On\01_数据与计算\Ortho\Venn GO")
+OUT_DIR  = Path(r"D:\system_folder\Desktop\Work On\02_可视化\Figure\PNG")
 OUT_DIR.mkdir(exist_ok=True)
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -195,7 +195,7 @@ def plot_hbar_panel(frames: dict, out: Path, top_n: int = 8):
     plt.tight_layout(rect=[0, 0.05, 1, 1], w_pad=2.2, h_pad=2.0)
     fig.savefig(out, dpi=300)
     plt.close(fig)
-    print(f"  \u2713 {out.name}")
+    print(f"  [OK] {out.name}")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -214,7 +214,7 @@ def plot_bubble_panel(frames: dict, groups: list, out: Path,
         rows.append(df)
     combined = pd.concat(rows, ignore_index=True)
     if combined.empty:
-        print(f"  \u26a0 {out.name} \u2014 \u65e0\u6570\u636e\uff0c\u8df3\u8fc7")
+        print(f"  [WARN] {out.name}: no data, skipped")
         return
 
     term_order = (combined.groupby("term")["neglog10p"].max()
