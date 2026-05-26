@@ -326,7 +326,7 @@ def main():
         plt.close(fig)
 
     # Panel E: stacked bar
-    fig, ax = plt.subplots(figsize=(11.8, 5.5))
+    fig, ax = plt.subplots(figsize=(5.9, 5.5))
     fig.patch.set_facecolor('white')
     draw_stacked_bar(ax, df)
     fig.tight_layout()
@@ -334,7 +334,7 @@ def main():
     plt.close(fig)
 
     # Panel F: SASA bar
-    fig, ax = plt.subplots(figsize=(11.8, 5.5))
+    fig, ax = plt.subplots(figsize=(5.9, 5.5))
     fig.patch.set_facecolor('white')
     draw_sasa_bar(ax, df)
     fig.tight_layout()

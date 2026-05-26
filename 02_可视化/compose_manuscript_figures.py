@@ -448,12 +448,12 @@ def compose_fig4():
         ("Fig5L.png", "K"),
     ], ncols=4, cover_old=True)
 
-    # Row 4 (L, M) — 2 panels each 1/2 width
+    # Row 4 (L, M) — center two panels on the same four-column grid
     # Source panels Fig5M/N have embedded labels M/N → cover and relabel
     r4, cw4 = build_row([
         ("Fig5M.png", "L"),
         ("Fig5N.png", "M"),
-    ], ncols=2, cover_old=True)
+    ], ncols=4, cover_old=True)
 
     def row_h(panels):
         return max(p.height for p in panels if p is not None)
@@ -464,8 +464,12 @@ def compose_fig4():
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
 
     y = MARGIN
-    for row, cw in [(r1, cw1), (r2, cw2), (r3, cw3), (r4, cw4)]:
+    for row, cw in [(r1, cw1), (r2, cw2), (r3, cw3)]:
         y = paste_row(canvas, row, cw, y)
+
+    row4_w = 2 * cw4 + GAP
+    row4_x = (CANVAS_W - row4_w) // 2
+    y = paste_row(canvas, r4, cw4, y, x_start=row4_x)
 
     save_fig(canvas, "Fig4_composed")
 
