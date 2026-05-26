@@ -134,9 +134,12 @@ for line in [
     "图S3. 三物种共享与谱系限制性蛋壳基质正交组的 Venn 图",
     "图S4. 基于单拷贝直系同源物重建的三个目标物种的最大似然系统发育树",
     "图S5. 物种特异与成对共享蛋壳基质蛋白集合的 GO 富集",
-    "图S6. 三个物种的 CAFE5 基因家族扩张与收缩",
-    "图S7. OVAL 糖链几何及 apo/糖基化对照的 Re-Glyco 系综分析",
-    "图S8. 各物种九个偏移位置的有限元反力时间历程",
+    "图S6. 基因家族周转对应的谱系偏向功能富集",
+    "图S7. 反复出现的蛋壳基质蛋白的蛋白特异性糖基化谱",
+    "图S8. 糖基化与 apo OVAL 结构系综的表面电势分布",
+    "图S9. 三个物种的 CAFE5 基因家族扩张与收缩",
+    "图S10. OVAL 糖链几何及 apo/糖基化对照的 Re-Glyco 系综分析",
+    "图S11. 各物种九个偏移位置的有限元反力时间历程",
 ]:
     para(line, size=11, before=0, after=40, align=WD_ALIGN_PARAGRAPH.LEFT)
 
@@ -170,7 +173,7 @@ fig_caption(
 )
 
 fig_caption(
-    "基因家族扩张与收缩分析（CAFE5）进一步显示谱系分化具有明显不对称性：G. gallus 总体表现为净家族收缩，A. platyrhynchos 居中，而 C. livia 表现为净扩张（图S6）。鸡中收缩的家族富集于免疫相关功能；鸽中扩张的家族则富集于跨膜转运、Rho 信号和突触相关过程。这些蛋白组层面的模式说明三种蛋壳形成系统之间存在广泛分化，同时共享核心工具箱仍被保留。"
+    "基因家族扩张与收缩分析（CAFE5）进一步显示谱系分化具有明显不对称性：G. gallus 总体表现为净家族收缩，A. platyrhynchos 居中，而 C. livia 表现为净扩张（图S6和S9）。鸡中收缩的家族富集于免疫相关功能；鸽中扩张的家族则富集于跨膜转运、Rho 信号和突触相关过程。这些蛋白组层面的模式说明三种蛋壳形成系统之间存在广泛分化，同时共享核心工具箱仍被保留。"
 )
 
 doc.add_page_break()
@@ -222,23 +225,50 @@ fig_caption(
 
 # 图S6
 doc.add_page_break()
-fig_title("图S6.", "三个物种的 CAFE5 基因家族扩张与收缩。")
+fig_title("图S6.", "基因家族周转对应的谱系偏向功能富集。")
+add_image(PANEL_FIG_BASE / "Fig2H.png", width_cm=16.0)
+fig_caption(
+    "基于扩张和收缩基因家族得到的谱系、周转方向与 GO 富集条目之间的 alluvial 汇总图。流线颜色区分扩张与收缩信号，右侧端点概括各谱系相关的生物过程、细胞组分和分子功能条目。该图从功能富集层面补充 CAFE5 周转树，显示各谱系扩张或收缩家族主要对应的功能类别。"
+)
+
+
+# 图S7
+doc.add_page_break()
+fig_title("图S7.", "反复出现的蛋壳基质蛋白的蛋白特异性糖基化谱。")
+add_image(PANEL_FIG_BASE / "Fig4D_G.png", width_cm=15.5)
+fig_caption(
+    "OVAL、OC116、TRFE 和 OC17 等反复出现的蛋壳基质蛋白在鸡、鸭和鸽中的糖链类别组成。堆叠柱表示每个蛋白-物种组合中检测到的不同糖型类别的相对贡献。该图提供了蛋白层面的糖基化背景，并解释正文为何进一步聚焦于 OVAL 的结构可及性分析。"
+)
+
+
+# 图S8
+doc.add_page_break()
+fig_title("图S8.", "糖基化与 apo OVAL 结构系综的表面电势分布。")
+add_image(PANEL_FIG_BASE / "Fig5A.png", width_cm=16.0)
+fig_caption(
+    "糖基化 OVAL 模型及配对 apo 参考结构的逐结构表面电势 strip 图。每一行代表一个重建结构，并按物种和糖基化状态排列。该图给出了主图 Re-Glyco 分析中热点数量、羧酸基可及性和 APBS 电势分布汇总结果背后的完整系综背景。"
+)
+
+
+# 图S9
+doc.add_page_break()
+fig_title("图S9.", "三个物种的 CAFE5 基因家族扩张与收缩。")
 add_image(FIG_BASE / "SuppFig5_CAFE5_Gene_Family_Turnover" / "Fig_cafe5_expansion_contraction.png", width_cm=14.0)
 fig_caption(
     "系统发育树上标注了利用物种分化时间树并由 CAFE5 推断的谱系特异性基因家族扩张（红色）与收缩（蓝色）事件。节点上的数字表示估计的祖先基因家族大小，分支上的数字表示净变化。仅展示每个家族 p < 0.05（Viterbi p 值）的基因家族。各谱系在免疫和防御相关基因家族的周转上存在差异，而核心蛋壳基质基因家族总体保持保守。"
 )
-# 图S7
+# 图S10
 doc.add_page_break()
-fig_title("图S7.", "OVAL 糖链几何及 apo/糖基化对照的 Re-Glyco 系综分析。")
+fig_title("图S10.", "OVAL 糖链几何及 apo/糖基化对照的 Re-Glyco 系综分析。")
 add_image(FIG_BASE / "SuppFig7_Glycosylation_Hotspot" / "Fig_hotspot_ensemble_1.png", width_cm=15.5)
 fig_caption(
     "(A) 三种物种特异性 OVAL–糖链复合物在构象系综重复中的糖链回旋半径（Rg）分布，按物种着色（G. gallus 为橙色，A. platyrhynchos 为蓝色，C. livia 为绿色）。(B) 相同三种复合物的糖链端到端距离分布。(C) 各物种糖基化与 apo（去糖基化）OVAL 结构逐构象的 Ca²⁺ 热点计数（Nhot）比较。C. livia 具有最大的构象空间和最强的糖链遮蔽；G. gallus 具有最小的构象空间和最弱的遮蔽；A. platyrhynchos 居中。移除 N-糖链后，跨物种在热点计数上的分离明显收敛。图中 panel C 相对 apo 参考的差异采用一样本 t 检验评估。"
 )
 
 
-# 图S8
+# 图S11
 doc.add_page_break()
-fig_title("图S8.", "各物种九个偏移位置的有限元反力时间历程。")
+fig_title("图S11.", "各物种九个偏移位置的有限元反力时间历程。")
 add_images_row([
     FIG_BASE / "SuppFig8_FEA_Force_Analysis" / "chicken_rcforc_3x3.png",
     FIG_BASE / "SuppFig8_FEA_Force_Analysis" / "chicken_rcforc_yforce.png",
