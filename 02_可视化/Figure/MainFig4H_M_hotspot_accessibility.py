@@ -31,6 +31,14 @@ import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _save import save_fig
 
 
+TITLE_FS = 9.5
+AXIS_LABEL_FS = 9.5
+TICK_FS = 9
+LEGEND_FS = 8.5
+STAT_FS = 10
+VALUE_FS = 9
+
+
 def format_p_value(p_value: float) -> str:
     if p_value <= 0 or not np.isfinite(p_value):
         return 'p < 1e-300'
@@ -94,7 +102,7 @@ def sig_label(p):
     return 'ns'
 
 
-def add_significance_brackets(ax, x1, x2, y, h, label, fs=8):
+def add_significance_brackets(ax, x1, x2, y, h, label, fs=STAT_FS):
     ax.plot([x1, x1, x2, x2], [y, y + h, y + h, y], lw=0.9, c='#333')
     ax.text((x1 + x2) / 2, y + h * 1.05, label,
             ha='center', va='bottom', fontsize=fs, color='#333')
@@ -134,15 +142,15 @@ def draw_violin_panel(ax, groups_dict, ylabel, title, panel_label,
     for xi, sp in enumerate(SPECIES_ORDER):
         ltr = res['letters'].get(sp, '')
         ax.text(xi, letter_y, ltr, ha='center', va='bottom',
-                fontsize=11, fontweight='bold', color='#333')
+            fontsize=STAT_FS, fontweight='bold', color='#333')
 
     n_labels = [f'\n(n={len(groups_dict[sp])})' for sp in SPECIES_ORDER]
     ax.set_xticks(positions)
     ax.set_xticklabels([sp + n for sp, n in zip(SPECIES_ORDER, n_labels)],
-                       fontsize=8.5)
-    ax.set_ylabel(ylabel, fontsize=9)
+                       fontsize=TICK_FS)
+    ax.set_ylabel(ylabel, fontsize=AXIS_LABEL_FS)
     ax.set_title(f"{title}\n{format_p_value(res['p_anova'])}",
-                 fontsize=9, pad=6)
+                 fontsize=TITLE_FS, pad=6)
     ax.set_ylim(y_min - y_range * ypad_bot, letter_y + y_range * 0.20)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
@@ -181,9 +189,9 @@ def draw_stacked_bar(ax, df):
 
         # Text labels
         ax.text(xs[i], net / 2, f'{net:.1f}', ha='center', va='center',
-                fontsize=11, color='white')
+            fontsize=VALUE_FS, color='white')
         ax.text(xs[i], net + sh / 2, f'{sh:.1f}', ha='center', va='center',
-                fontsize=9, color='#555')
+            fontsize=VALUE_FS, color='#555')
 
     # Duncan's MRT CLD letters on net_accessible
     y_top = max(means[sp] + shielded_means[sp] for sp in SPECIES_ORDER)
@@ -194,15 +202,15 @@ def draw_stacked_bar(ax, df):
     for xi, sp in enumerate(SPECIES_ORDER):
         ltr = res_bar['letters'].get(sp, '')
         ax.text(xi, letter_y, ltr, ha='center', va='bottom',
-                fontsize=12, fontweight='bold', color='#333')
+                fontsize=STAT_FS, fontweight='bold', color='#333')
 
     ax.set_xticks(xs)
-    ax.set_xticklabels(SPECIES_ORDER, fontsize=11)
-    ax.set_ylabel('Hotspot Count (mean ± 95% CI)', fontsize=9.5)
+    ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
+    ax.set_ylabel('Hotspot Count (mean ± 95% CI)', fontsize=AXIS_LABEL_FS)
     ax.set_title(
         f'Ca$^{{2+}}$ Hotspot Accessibility'
         f'\n{format_p_value(res_bar["p_anova"])}',
-        fontsize=9.5, pad=8)
+        fontsize=TITLE_FS, pad=8)
     ax.set_ylim(0, letter_y + y_top * 0.22)
     ax.set_xlim(-0.6, len(SPECIES_ORDER) - 0.4)
 
@@ -211,7 +219,7 @@ def draw_stacked_bar(ax, df):
         mpatches.Patch(facecolor='#ddd', hatch='///', edgecolor='#888',
                        label='Glycan-Shielded'),
     ]
-    ax.legend(handles=legend_handles, fontsize=8.5, loc='upper right',
+    ax.legend(handles=legend_handles, fontsize=LEGEND_FS, loc='upper right',
               framealpha=0.8, edgecolor='none')
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
@@ -243,15 +251,15 @@ def draw_sasa_bar(ax, df):
         ax.errorbar(xs[i], net, yerr=err, fmt='none',
                     color='#333', elinewidth=1.4, capsize=5, zorder=5)
         ax.text(xs[i], net / 2, f'{net:.1f}',
-                ha='center', va='center', fontsize=11, color='white')
+            ha='center', va='center', fontsize=VALUE_FS, color='white')
         # shielded 段太窄时将标注移到柱顶上方避免遗挮
         min_inside = (net + sh) * 0.09
         if sh >= min_inside:
             ax.text(xs[i], net + sh / 2, f'{sh:.1f}',
-                    ha='center', va='center', fontsize=9, color='#555')
+                    ha='center', va='center', fontsize=VALUE_FS, color='#555')
         else:
             ax.text(xs[i], net + sh + (net + sh) * 0.015, f'{sh:.1f}',
-                    ha='center', va='bottom', fontsize=8.5, color='#555')
+                    ha='center', va='bottom', fontsize=VALUE_FS, color='#555')
 
     y_top = max(means[sp] + shielded_means[sp] for sp in SPECIES_ORDER)
     # Duncan's MRT CLD letters on iface_full_sasa
@@ -262,15 +270,15 @@ def draw_sasa_bar(ax, df):
     for xi, sp in enumerate(SPECIES_ORDER):
         ltr = res_sasa['letters'].get(sp, '')
         ax.text(xi, letter_y, ltr, ha='center', va='bottom',
-                fontsize=12, fontweight='bold', color='#333')
+                fontsize=STAT_FS, fontweight='bold', color='#333')
 
     ax.set_xticks(xs)
-    ax.set_xticklabels(SPECIES_ORDER, fontsize=11)
-    ax.set_ylabel(r'Hotspot Residue SASA (Å²)', fontsize=9.5)
+    ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
+    ax.set_ylabel(r'Hotspot Residue SASA (Å²)', fontsize=AXIS_LABEL_FS)
     ax.set_title(
         r'Ca$^{2+}$ Hotspot Residue SASA'
         f'\n{format_p_value(res_sasa["p_anova"])}',
-        fontsize=9.5, pad=8)
+        fontsize=TITLE_FS, pad=8)
     ax.set_ylim(0, letter_y + y_top * 0.22)
     ax.set_xlim(-0.6, len(SPECIES_ORDER) - 0.4)
     legend_handles = [
@@ -278,7 +286,7 @@ def draw_sasa_bar(ax, df):
         mpatches.Patch(facecolor='#ddd', hatch='///', edgecolor='#888',
                        label='Glycan-Shielded'),
     ]
-    ax.legend(handles=legend_handles, fontsize=8.5, loc='upper right',
+    ax.legend(handles=legend_handles, fontsize=LEGEND_FS, loc='upper right',
               framealpha=0.8, edgecolor='none')
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
