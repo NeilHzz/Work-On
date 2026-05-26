@@ -1,31 +1,32 @@
 Figure 文件夹 — 子图脚本索引
 ==============================
 
-Fig1A.py    — 物种选择 3D scatter (k-means 聚类)
-Fig1B.py    — 物种选择 系统发育树 + 热图
-Fig1C       — 乳突层 CT 形貌图 (非Python生成，原图: Sci_Adv_Figure/PNG/Fig1/2-1图片1.png)
-Fig1D.py    — 乳突层微结构量化 (箱线图)
+MainFig1A_species_space.py              — 主图 Fig. 1A，物种选择 3D scatter (k-means 聚类)
+MainFig1D_mammilla_quantification.py    — 主图 Fig. 1D，乳突层微结构量化 (箱线图)
+SuppFigS2_phylo_context.py              — 补充图 Fig. S2，物种选择系统发育树 + 热图
+Fig1C                                  — 主图 Fig. 1C，乳突层 CT 形貌图 (非 Python 生成，来源: Sci_Adv_Figure/PNG/Fig1/2-2Fig_mammilla_microstructure_panels.png)
 
-Fig2A.py    — 蛋白组 Venn 图 (三种交集)
-Fig2B.py    — 进化树 (Newick)
-Fig2C_F.py  — GO 富集气泡图 (C=BP pairwise, D=CC pairwise, E=MF pairwise, F=单物种特异性)
-Fig2G.py    — CAFE5 基因家族扩张/收缩树
-Fig2H.py    — 基因家族扩张/收缩对应的 GO 富集
+MainFig2_glycotype_network.py           — 主图 Fig. 2，同源糖型蛋白圆环网络图
 
-Fig3A.py    — 同源糖型蛋白圆环网络图
-Fig3B.py    — 糖蛋白 BlastP 弦图 (chord diagram)
+MainFig3A_ortholog_circos.py            — 主图 Fig. 3A，糖蛋白 BlastP 弦图 (chord diagram)
+MainFig3B_D_proteotype_coevolution.py   — 主图 Fig. 3B-D，Proteotype Coevolution 散点图
+MainFig3E_G_glycan_protein_enrichment.py — 主图 Fig. 3E-G，2D Glycan-Protein Enrichment
 
-Fig4A_C.py  — Proteotype Coevolution 散点图 (A=Gallus, B=Anas, C=Columba)
-Fig4D_G.py  — Glycosylation Profiling 堆积条形图 (D=OVAL, E=OC116, F=TRFE, G=OC17)
-Fig4H_J.py  — 2D Glycan-Protein Enrichment (H=Anas vs Columba, I=Gallus vs Anas, J=Gallus vs Columba)
+MainFig4A_C_SuppFigS8_reglyco_apbs.py   — 主图 Fig. 4A-C + 补充图 Fig. S8，OVAL APBS/热点/逐结构电势
+MainFig4D_G_glycan_geometry.py          — 主图 Fig. 4D-G，糖链集合体几何统计
+MainFig4H_M_hotspot_accessibility.py    — 主图 Fig. 4H-M，Hotspot 可及性分析
 
-Fig5A_D.py  — OVAL Ca²⁺ 电势/热点分析 (A=逐AA电势, B=Ca²⁺ Hotspot, C=COO⁻ SASA, D=表面电势分布)
-Fig5E_H.py  — 糖链集合体统计 (E=Glycan Rg, F=End-to-End, G=Glycan-Protein Dist, H=Min Dist to Ca)
-Fig5I_N.py  — Hotspot 可及性分析 (I=Interface Shielding, J=SASA, K=Fraction, L=Net Accessible, M/N=对比图)
+MainFig6_mechanics_force_shear.py       — 主图 Fig. 6，Force/Shear 时间序列和 F_max/τ_max 统计
 
-Fig6A_B.py  — 力学仿真 (A=Contact Force + Shear Stress 时间序列, B=F_max/τ_max Duncan 比较)
+SuppFigS3_orthogroup_venn.py            — 补充图 Fig. S3，蛋白组 Venn 图 (三物种交集)
+SuppFigS4_single_copy_phylogeny.py      — 补充图 Fig. S4，单拷贝直系同源物系统发育树
+SuppFigS5_go_enrichment.py              — 补充图 Fig. S5，GO 富集图
+SuppFigS6_gene_turnover_go_alluvial.py  — 补充图 Fig. S6，基因家族扩张/收缩对应 GO 富集 alluvial 图
+SuppFigS7_glycosylation_profiles.py     — 补充图 Fig. S7，蛋白特异性 Glycosylation Profiling
+SuppFigS9_cafe5_turnover_tree.py        — 补充图 Fig. S9，CAFE5 基因家族扩张/收缩树
 
 注意:
 - 每个多面板脚本运行一次即生成对应的所有子图
-- 原始脚本路径中的数据引用可能需要调整 (原脚本使用相对路径读取同目录下的数据)
+- 主图 Fig. 1B、Fig. 5A-C 还会直接使用 eggtooth/FEM 图片素材，不完全由 Figure 文件夹脚本生成
+- 原始脚本路径中的数据引用可能需要调整 (部分脚本使用绝对路径读取数据)
 - 运行前请确认数据文件路径正确

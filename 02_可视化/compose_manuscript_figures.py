@@ -11,7 +11,7 @@ Bird illustrations (eggtooth): 02_可视化/eggtooth/
 Old panels      : 02_可视化/Sci_Adv_Figure/PNG/Fig1/  (for Fig1C)
 Output          : 02_可视化/Composed/
 
-Panel mapping (script file → manuscript figure / panel):
+Panel mapping (source image → manuscript figure / panel):
   Fig1A.png          → Fig1  A  (CVA 3D scatter)
   eggtooth/鸡.png + 鸭.png + 鸽子.png (top row)
   + 鸡（喙）.png + 鸭（喙）.png + 鸽子（喙）.png (bottom row)
@@ -42,8 +42,8 @@ Panel mapping (script file → manuscript figure / panel):
   eggtooth/鸡（喙）.png + chicken_model_render.png → Fig5  A  (Gallus)
   eggtooth/鸭（喙）.png + duck_model_render.png    → Fig5  B  (Anas)
   eggtooth/鸽子（喙）.png + pigeon_model_render.png→ Fig5  C  (Columba)
-  Fig6A.png          → Fig6  (left 65%  – force & shear timeseries)
-  Fig6B.png          → Fig6  (right 35% – DMRT bar charts)
+    Fig6A_Force.png + Fig6B_Fmax.png   → Fig6 A
+    Fig6A_Shear.png + Fig6B_Taumax.png → Fig6 B
 """
 
 from pathlib import Path
@@ -193,7 +193,7 @@ def row_images(files_labels: list[tuple[str, str]], ncols: int,
         Total inner canvas width (excluding outer margins).
     cover_old_label : bool
         Whether to white-out the existing embedded label before drawing the
-        new manuscript label (needed for panels from Fig5A_D.py).
+        new manuscript label (needed for panels from MainFig4A_C_SuppFigS8_reglyco_apbs.py).
 
     Returns
     -------
@@ -314,7 +314,7 @@ def compose_fig2():
     print("\n=== Composing Fig 2 ===")
     inner_w = CANVAS_W - 2 * MARGIN
 
-    # The glycotype radial network is saved by Fig3A.py as "Fig3A.png"
+    # The glycotype radial network is saved by MainFig2_glycotype_network.py as "Fig3A.png"
     raw = load_img(PNG / "Fig3A.png")
     if raw is None:
         raw = make_placeholder(inner_w, inner_w,
@@ -535,7 +535,7 @@ def compose_fig5():
 # Fig 6  (2-row × 2-column grid — uses individually saved panels)
 #   Row A: Force timeseries  (Fig6A_Force.png, left ~65 %) | F_max bars  (Fig6B_Fmax.png)
 #   Row B: Shear timeseries  (Fig6A_Shear.png, left ~65 %) | τ_max bars  (Fig6B_Taumax.png)
-#   Generate source panels first: run  02_可视化/Figure/Fig6A_B.py
+#   Generate source panels first: run  02_可视化/Figure/MainFig6_mechanics_force_shear.py
 # ─────────────────────────────────────────────────────────────────────────────
 
 def compose_fig6():
@@ -551,10 +551,10 @@ def compose_fig6():
     raw_fmax   = load_img(PNG / "Fig6B_Fmax.png")
     raw_taumax = load_img(PNG / "Fig6B_Taumax.png")
 
-    if raw_force  is None: raw_force  = make_placeholder(2400, 1134, "Fig6A_Force not found\nrun Fig6A_B.py first")
-    if raw_shear  is None: raw_shear  = make_placeholder(2400, 1134, "Fig6A_Shear not found\nrun Fig6A_B.py first")
-    if raw_fmax   is None: raw_fmax   = make_placeholder(1200, 1300, "Fig6B_Fmax not found\nrun Fig6A_B.py first")
-    if raw_taumax is None: raw_taumax = make_placeholder(1200, 1300, "Fig6B_Taumax not found\nrun Fig6A_B.py first")
+    if raw_force  is None: raw_force  = make_placeholder(2400, 1134, "Fig6A_Force not found\nrun MainFig6_mechanics_force_shear.py first")
+    if raw_shear  is None: raw_shear  = make_placeholder(2400, 1134, "Fig6A_Shear not found\nrun MainFig6_mechanics_force_shear.py first")
+    if raw_fmax   is None: raw_fmax   = make_placeholder(1200, 1300, "Fig6B_Fmax not found\nrun MainFig6_mechanics_force_shear.py first")
+    if raw_taumax is None: raw_taumax = make_placeholder(1200, 1300, "Fig6B_Taumax not found\nrun MainFig6_mechanics_force_shear.py first")
 
     # ── scale left (timeseries) panels to left_w → row heights ──────────────
     force_s = scale_to_w(raw_force, left_w)

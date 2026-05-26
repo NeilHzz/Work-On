@@ -142,7 +142,7 @@ para("This PDF file includes:", bold=True, size=11, before=0, after=60,
      align=WD_ALIGN_PARAGRAPH.LEFT)
 for line in [
     "Supplementary Text 1 to 2",
-    "Figs. S1 to S8",
+    "Figs. S1 to S11",
     "Table S1 to S7 (uploaded separately as Excel files)",
 ]:
     bullet = doc.add_paragraph(style="List Bullet")
@@ -191,7 +191,7 @@ mpara([
     ("-shared set retained precocial-associated functions such as adaptive immune response and spermatogenesis. Lineage-restricted GO signals sharpened the same contrast, most notably by retaining protein N-linked glycosylation in the chicken-specific set.", False, False),
 ], before=80)
 mpara([
-    ("Gene-family expansion and contraction inferred by CAFE5 further supported asymmetric lineage divergence (Fig. S6): ", False, False),
+    ("Gene-family expansion and contraction inferred by CAFE5 further supported asymmetric lineage divergence (Figs. S6 and S9): ", False, False),
     ("G. gallus", False, True),
     (" showed net family contraction, ", False, False),
     ("A. platyrhynchos", False, True),
@@ -246,8 +246,29 @@ fig_caption([
 ])
 
 doc.add_page_break()
+add_image(PANEL_FIG_BASE / "Fig2H.png", width_cm=16.0)
+fig_title("Fig. S6.", "Functional enrichment links gene-family turnover to lineage-biased biological processes.")
+fig_caption([
+    ("Alluvial summary connecting species, gene-family turnover direction, and enriched Gene Ontology terms inferred from expanded and contracted families. Flow colors distinguish expansion and contraction signals, and terminal blocks summarize the enriched biological-process, cellular-component, and molecular-function terms associated with each lineage. The plot complements the CAFE5 turnover tree by showing which functional categories account for the lineage-biased expansion and contraction patterns.", False, False),
+])
+
+doc.add_page_break()
+add_image(PANEL_FIG_BASE / "Fig4D_G.png", width_cm=15.5)
+fig_title("Fig. S7.", "Protein-specific glycosylation profiles of recurrent eggshell matrix proteins.")
+fig_caption([
+    ("Stacked glycan-class profiles for recurrent eggshell matrix proteins across chicken, duck, and pigeon, including OVAL, OC116, TRFE, and OC17. Bars summarize the relative contribution of detected glycan classes for each protein-species combination, providing the protein-level glycosylation background that motivated the focused OVAL structural analysis in the main figures.", False, False),
+])
+
+doc.add_page_break()
+add_image(PANEL_FIG_BASE / "Fig5A.png", width_cm=16.0)
+fig_title("Fig. S8.", "Surface electrostatic profiles across glycosylated and apo OVAL structural ensembles.")
+fig_caption([
+    ("Per-structure strip chart of surface electrostatic potential across glycosylated OVAL models and matched apo references. Each row corresponds to a reconstructed structure, ordered by species and glycosylation state. The panel provides the full ensemble-level context behind the summarized hotspot, carboxylate-accessibility, and APBS-potential comparisons shown in the main Re-Glyco figure.", False, False),
+])
+
+doc.add_page_break()
 add_image(FIG_BASE / "SuppFig5_CAFE5_Gene_Family_Turnover" / "Fig_cafe5_expansion_contraction.png", width_cm=14.0)
-fig_title("Fig. S6.", "CAFE5 gene-family expansion and contraction across the three species.")
+fig_title("Fig. S9.", "CAFE5 gene-family expansion and contraction across the three species.")
 fig_caption([
     ("Phylogenetic tree annotated with lineage-specific gene-family expansion (red) and contraction (blue) events inferred by CAFE5 using the species divergence time tree. Numbers at nodes indicate the estimated ancestral gene-family size; numbers on branches indicate the net change. Only gene families with a per-family ", False, False),
     ("p", False, True),
@@ -258,7 +279,7 @@ fig_caption([
 
 doc.add_page_break()
 add_image(FIG_BASE / "SuppFig7_Glycosylation_Hotspot" / "Fig_hotspot_ensemble_1.png", width_cm=15.5)
-fig_title("Fig. S7.", "Re-Glyco ensemble analysis of OVAL glycan geometry and apo-versus-glycosylated states.")
+fig_title("Fig. S10.", "Re-Glyco ensemble analysis of OVAL glycan geometry and apo-versus-glycosylated states.")
 fig_caption([
     ("(A) Distribution of glycan radius of gyration (R", False, False),
     ("g", False, False),
@@ -292,7 +313,7 @@ add_images_row([
     FIG_BASE / "SuppFig8_FEA_Force_Analysis" / "pigeon_rcforc_3x3.png",
     FIG_BASE / "SuppFig8_FEA_Force_Analysis" / "pigeon_rcforc_yforce.png",
 ], width_cm=7.5)
-fig_title("Fig. S8.", "Per-species finite-element reaction-force time courses across all nine offset positions.")
+fig_title("Fig. S11.", "Per-species finite-element reaction-force time courses across all nine offset positions.")
 fig_caption([
     ("(A-C) Contact force (", False, False),
     ("F", False, True),

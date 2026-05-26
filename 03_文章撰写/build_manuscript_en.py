@@ -364,7 +364,7 @@ p_sprot_bg = spara([
 ])
 
 p_sprot_go = spara([
-    (" GO enrichment and gene-family turnover further pointed to lineage-specific immune and defense background (Figs. S5 and S6), but those signals described comparative context more than the layer most directly tied to mammillary organization. Those lineage-biased signals remained relevant as evolutionary backdrop, but they did not by themselves identify the proximate layer connecting a shared matrix repertoire to mammillary-layer divergence and, later, hatching-relevant mechanics across species.", []),
+    (" GO enrichment and gene-family turnover further pointed to lineage-specific immune and defense background (Figs. S5, S6, and S9), but those signals described comparative context more than the layer most directly tied to mammillary organization. Those lineage-biased signals remained relevant as evolutionary backdrop, but they did not by themselves identify the proximate layer connecting a shared matrix repertoire to mammillary-layer divergence and, later, hatching-relevant mechanics across species.", []),
 ])
 
 p_sprot_focus = spara([
@@ -416,7 +416,7 @@ head("OVAL glycan state reshapes surface accessibility")
 
 p_s3a = spara([
     ("OVAL was selected for structural analysis because it remained shared, chemically distinct, and directly comparable across species. Dominant glycosylated OVAL ensembles and matched deglycosylated references were rebuilt to test whether the three species differed mainly through glycan-dependent surface behavior rather than through backbone sequence alone.", [4, 11]),
-    (" In Fig. 4A, glycosylated ensembles departed from their matched apo references in the number of Ca²⁺-relevant acidic hotspots, and the same displacement reappeared in the physically exposed carboxylate surface measured in Fig. 4B and in the whole-surface electrostatic maps in Fig. 4C. Removing glycans collapsed much of that separation and brought the three backbones closer together. The initial structural difference therefore reflected a glycan-imposed shift in the exposed acidic surface presented at mineralization onset rather than a generic sequence effect (Fig. 4A to C; Fig. S7).", []),
+    (" In Fig. 4A, glycosylated ensembles departed from their matched apo references in the number of Ca²⁺-relevant acidic hotspots, and the same displacement reappeared in the physically exposed carboxylate surface measured in Fig. 4B and in the whole-surface electrostatic maps in Fig. 4C. Removing glycans collapsed much of that separation and brought the three backbones closer together. The initial structural difference therefore reflected a glycan-imposed shift in the exposed acidic surface presented at mineralization onset rather than a generic sequence effect (Fig. 4A to C; Fig. S10).", []),
 ])
 
 p_s3b = spara([
@@ -450,7 +450,7 @@ doc.add_page_break()
 head("Finite-element modeling recovers the same contrast in local hatching resistance")
 
 p_s4a = mixed([
-    ("Finite-element testing translated the shared egg-tooth interface into an explicit inside-out loading design. Fig. 5A summarizes the loading background of hatching. Fig. 5B to D pair species-specific dorsal beak views with the corresponding micro-CT-derived finite-element setups built from the beak-tip geometry summarized in Fig. 1B. Because the meshes preserved species-specific shell geometry, the analysis remained anchored to the same mammillary context identified morphologically. Impact loading was sampled on circular eggshell fragments (model diameter D = 2.0 mm) at nine parameterized lateral-offset positions on a 3 × 3 grid (0.5 mm spacing), yielding n = 9 independent contact shear-stress time courses per species. Both raw peak contact force (F_max) and peak contact shear stress (τ_max) were recorded to reduce the influence of model size, gross geometry, and especially eggshell thickness. Peak τ_max was used as the direct readout of local hatching resistance at the mammillary contact interface, and species means ± s.d. were calculated across the nine positions (Fig. S8A to F; eggshell thicknesses: ", False, False),
+    ("Finite-element testing translated the shared egg-tooth interface into an explicit inside-out loading design. Fig. 5A summarizes the loading background of hatching. Fig. 5B to D pair species-specific dorsal beak views with the corresponding micro-CT-derived finite-element setups built from the beak-tip geometry summarized in Fig. 1B. Because the meshes preserved species-specific shell geometry, the analysis remained anchored to the same mammillary context identified morphologically. Impact loading was sampled on circular eggshell fragments (model diameter D = 2.0 mm) at nine parameterized lateral-offset positions on a 3 × 3 grid (0.5 mm spacing), yielding n = 9 independent contact shear-stress time courses per species. Both raw peak contact force (F_max) and peak contact shear stress (τ_max) were recorded to reduce the influence of model size, gross geometry, and especially eggshell thickness. Peak τ_max was used as the direct readout of local hatching resistance at the mammillary contact interface, and species means ± s.d. were calculated across the nine positions (Fig. S11A to F; eggshell thicknesses: ", False, False),
     ("G. gallus", False, True),
     (" 0.29 mm, ", False, False),
     ("A. platyrhynchos", False, True),

@@ -27,7 +27,7 @@ plt.rcParams.update({
 })
 
 ROOT    = Path(__file__).parent
-SRC     = Path(r"D:\system_folder\Desktop\Work On/Ortho/Phylogenetic/Species_phylogenetic_tree.nwk.gz")
+SRC     = Path(r"D:\system_folder\Desktop\Work On\01_数据与计算\Ortho\Phylogenetic\Species_phylogenetic_tree.nwk.gz")
 FIG_DIR = Path(r"D:\system_folder\Desktop\Work On\02_可视化\Figure\png")
 FIG_DIR.mkdir(exist_ok=True)
 
