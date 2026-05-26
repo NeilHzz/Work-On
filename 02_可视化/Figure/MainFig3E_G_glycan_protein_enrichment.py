@@ -669,13 +669,15 @@ def make_legend():
     ax.set_visible(False)
 
     # 构造与 Fig4A-C 相同风格的 legend handles
-    handle_bg = plt.scatter([], [], color='#DFDFDF', s=80, edgecolor='white',
+    handle_bg = plt.scatter([], [], color=BACKGROUND_PROTEIN_COLOR, s=80, edgecolor='none',
                             linewidth=0.5, label='Other Proteins')
     handles = [handle_bg]
-    for pname, color in [('OVAL', '#6BA3E8'), ('OC116', '#E8A040'), ('TRFE', '#5BAF6B')]:
-        h = plt.scatter([], [], color=color, s=200, edgecolor='none',
-                        linewidth=0, label=pname)
-        handles.append(h)
+    handles.append(mpl.lines.Line2D([], [], marker='$⭐$', linestyle='None',
+                                    color=TARGET_COLORS['OVAL'], markersize=16,
+                                    label='OVAL'))
+    for pname in ['OC116', 'TRFE']:
+        handles.append(plt.scatter([], [], color=TARGET_COLORS[pname], s=170,
+                                   edgecolor='none', linewidth=0, label=pname))
 
     leg = fig.legend(
         handles=handles,
