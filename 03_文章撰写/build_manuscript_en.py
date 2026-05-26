@@ -415,7 +415,7 @@ add_main_figure_legend(
 head("OVAL glycan state reshapes surface accessibility")
 
 p_s3a = spara([
-    ("OVAL was selected for structural analysis because it remained shared, chemically distinct, and directly comparable across species. Dominant glycosylated OVAL ensembles and matched deglycosylated references were rebuilt to test whether the three species differed mainly through glycan-dependent surface behavior rather than through backbone sequence alone.", [4, 11]),
+    ("OVAL was selected for structural analysis because it remained shared, chemically distinct, and directly comparable across species. Dominant glycosylated OVAL ensembles and matched apo references were rebuilt to test whether the three species differed mainly through glycan-dependent surface behavior rather than through backbone sequence alone.", [4, 11]),
     (" In Fig. 4A, glycosylated ensembles departed from their matched apo references in the number of Ca²⁺-relevant acidic hotspots, and the same displacement reappeared in the physically exposed carboxylate surface measured in Fig. 4B and in the whole-surface electrostatic maps in Fig. 4C. Removing glycans collapsed much of that separation and brought the three backbones closer together. The initial structural difference therefore reflected a glycan-imposed shift in the exposed acidic surface presented at mineralization onset rather than a generic sequence effect (Fig. 4A to C; Fig. S10).", []),
 ])
 
@@ -440,7 +440,7 @@ add_main_figure_legend(
     "Fig. 4.",
     "OVAL glycan state reorganizes interface exposure and Ca²⁺-relevant accessibility.",
     [
-        ("(A) Number of Ca²⁺ hotspot residues, defined as surface Asp/Glu positions with APBS potential below −5 kT/e, in glycosylated and matched deglycosylated OVAL ensembles. (B) Carboxylate surface accessibility. (C) Surface electrostatic potential distributions for glycosylated versus deglycosylated structures. (D to G) Ensemble geometric descriptors of the rebuilt glycans, including radius of gyration, end-to-end distance, glycan-protein distance, and minimum glycan-backbone distance. (H) Glycan-mediated interface shielding. (I) Mean solvent-accessible surface area (SASA) of hotspot residues. (J) Hotspot fraction among candidate acidic residues. (K) Net accessible Ca²⁺ hotspots. (L) Partition of hotspot accessibility into net accessible and glycan-shielded components. (M) Partition of hotspot-residue SASA into net accessible and glycan-shielded components. Species-specific ensemble sizes are indicated beneath the violins. Species comparisons in Fig. 4D to M used one-way ANOVA followed by Duncan's multiple range test; glycosylated-versus-apo contrasts in Fig. 4A to C were evaluated against matched apo references by one-sample t test, with significance annotations shown above the brackets.", False, False),
+        ("(A) Number of Ca²⁺ hotspot residues, defined as surface Asp/Glu positions with APBS potential below −5 kT/e, in glycosylated and matched apo OVAL ensembles. (B) Carboxylate surface accessibility. (C) Surface electrostatic potential distributions for glycosylated versus apo structures. (D to G) Ensemble geometric descriptors of the rebuilt glycans, including radius of gyration, end-to-end distance, glycan-protein distance, and minimum glycan-backbone distance. (H) Glycan-mediated interface shielding. (I) Mean solvent-accessible surface area (SASA) of hotspot residues. (J) Hotspot fraction among candidate acidic residues. (K) Net accessible Ca²⁺ hotspots. (L) Partition of hotspot accessibility into net accessible and glycan-shielded components. (M) Partition of hotspot-residue SASA into net accessible and glycan-shielded components. Species-specific ensemble sizes are indicated beneath the violins. Species comparisons in Fig. 4D to M used one-way ANOVA followed by Duncan's multiple range test; glycosylated-versus-apo contrasts in Fig. 4A to C were evaluated against matched apo references by one-sample t test, with significance annotations shown above the brackets.", False, False),
     ],
     before=20,
     after=80,
@@ -871,7 +871,7 @@ head("Electrostatic potential calculation")
 
 p_m_apbs = para(
     "Electrostatic surface potentials were computed for each Re-Glyco ensemble "
-    "model and a matched deglycosylated (apo) reference using APBS v3.4.1. Atomic "
+    "model and a matched apo reference with glycans removed using APBS v3.4.1. Atomic "
     "partial charges and radii were assigned with PDB2PQR using the CHARMM36 force "
     "field and PROPKA protonation at pH 7.4; glycan heavy-atom partial charges were "
     "assigned from the GLYCAM06 parameter set. "

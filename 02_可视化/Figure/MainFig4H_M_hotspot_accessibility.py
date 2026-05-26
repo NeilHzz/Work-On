@@ -42,7 +42,7 @@ def duncan_mrt(groups: list, names: list, alpha: float = 0.05) -> dict:
     MSE    = SS_e / df_e
     n_harm = k / sum(1.0 / n for n in ns)
     SE     = np.sqrt(MSE / n_harm)
-    order  = np.argsort(means)
+    order  = np.argsort(means)[::-1]
     s_means = means[order]
     s_names = [names[i] for i in order]
     crit = [stats.studentized_range.ppf(1.0 - alpha, k=p, df=df_e) * SE
@@ -51,7 +51,7 @@ def duncan_mrt(groups: list, names: list, alpha: float = 0.05) -> dict:
     for i in range(k):
         for j in range(i + 1, k):
             p_span = j - i + 1
-            sig[i, j] = sig[j, i] = (s_means[j] - s_means[i] > crit[p_span - 2])
+            sig[i, j] = sig[j, i] = (s_means[i] - s_means[j] > crit[p_span - 2])
     if k == 3:
         s01, s02, s12 = bool(sig[0,1]), bool(sig[0,2]), bool(sig[1,2])
         table = {
@@ -78,7 +78,6 @@ DPI     = 300
 
 SPECIES_ORDER = ['Gallus', 'Anas', 'Columba']
 SPECIES_COLOR = {'Gallus': '#B54664', 'Anas': '#7895C1', 'Columba': '#F0C284'}
-SPECIES_LIGHT = {'Gallus': '#e8a0b4', 'Anas': '#b0c8e8', 'Columba': '#f8e0b0'}
 
 
 # ── 统计标注 ──────────────────────────────────────────────────────────────────
@@ -141,8 +140,6 @@ def draw_violin_panel(ax, groups_dict, ylabel, title, panel_label,
     ax.set_ylim(y_min - y_range * ypad_bot, letter_y + y_range * 0.20)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.text(-0.12, 1.04, panel_label, transform=ax.transAxes,
-            fontsize=13, fontweight='bold', va='top')
 
 
 # ── 堆叠柱状图 ────────────────────────────────────────────────────────────────
@@ -159,17 +156,17 @@ def draw_stacked_bar(ax, df):
 
     for i, sp in enumerate(SPECIES_ORDER):
         col  = SPECIES_COLOR[sp]
-        lcol = SPECIES_LIGHT[sp]
         net  = means[sp]
         sh   = shielded_means[sp]
         err  = stds[sp]
 
         # Net accessible bar (solid)
-        ax.bar(xs[i], net, bar_w, color=col, label='Net Accessible' if i == 0 else '')
+        ax.bar(xs[i], net, bar_w, color=col, alpha=0.80,
+               label='Net Accessible' if i == 0 else '')
 
         # Shielded bar on top (hatched)
-        ax.bar(xs[i], sh, bar_w, bottom=net, color=lcol,
-               hatch='///', edgecolor='#888', linewidth=0.5,
+        ax.bar(xs[i], sh, bar_w, bottom=net, color=col, alpha=0.28,
+               hatch='///', edgecolor=col, linewidth=0.6,
                label='Glycan-Shielded (blocked)' if i == 0 else '')
 
         # Error bar on net
@@ -212,8 +209,6 @@ def draw_stacked_bar(ax, df):
               framealpha=0.8, edgecolor='none')
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.text(-0.07, 1.04, 'E', transform=ax.transAxes,
-            fontsize=13, fontweight='bold', va='top')
 
 
 # ── Panel F: 热点残基 SASA 堆叠柱图（iface_full_sasa vs. iface_shielding）─────
@@ -230,16 +225,15 @@ def draw_sasa_bar(ax, df):
 
     for i, sp in enumerate(SPECIES_ORDER):
         col  = SPECIES_COLOR[sp]
-        lcol = SPECIES_LIGHT[sp]
         net  = means[sp]
         sh   = shielded_means[sp]
         err  = stds[sp]
 
-        ax.bar(xs[i], net, bar_w, color=col,
-               label='Net Accessible SASA' if i == 0 else '')
-        ax.bar(xs[i], sh, bar_w, bottom=net, color=lcol,
-               hatch='///', edgecolor='#888', linewidth=0.5,
-               label='Glycan-Shielded SASA' if i == 0 else '')
+        ax.bar(xs[i], net, bar_w, color=col, alpha=0.80,
+            label='Net Accessible SASA' if i == 0 else '')
+        ax.bar(xs[i], sh, bar_w, bottom=net, color=col, alpha=0.28,
+            hatch='///', edgecolor=col, linewidth=0.6,
+            label='Glycan-Shielded SASA' if i == 0 else '')
         ax.errorbar(xs[i], net, yerr=err, fmt='none',
                     color='#333', elinewidth=1.4, capsize=5, zorder=5)
         ax.text(xs[i], net / 2, f'{net:.1f}',
@@ -282,8 +276,6 @@ def draw_sasa_bar(ax, df):
               framealpha=0.8, edgecolor='none')
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.text(-0.07, 1.04, 'F', transform=ax.transAxes,
-            fontsize=13, fontweight='bold', va='top')
 
 
 # ══════════════════════════════════════════════════════════════════════════════

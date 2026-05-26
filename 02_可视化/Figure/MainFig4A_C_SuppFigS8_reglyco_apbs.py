@@ -42,9 +42,9 @@ DPI     = 300
 VCLIP   = 20.0    # strip chart ± kT/e 截断
 
 SPECIES_COLOR = {
+    'Gallus':  '#B54664',
     'Anas':    '#7895C1',
     'Columba': '#F0C284',
-    'Gallus':  '#B54664',
 }
 
 # 绘图顺序：G1 + A1-A3 + C1-C14（糖基化），再 3 个 apo
@@ -147,7 +147,7 @@ def draw_strip(ax, csv_map):
     for row_i, name in enumerate(all_names):
         sp    = species_of(name)
         color = SPECIES_COLOR[sp]
-        label = name.replace('_apo', '') + (' (Deglyco)' if '_apo' in name else '')
+        label = name.replace('_apo', '') + (' (Apo)' if '_apo' in name else '')
         y_c   = n_rows - row_i - 1 + 0.5
         ax.text(-2, y_c, label, ha='right', va='center',
                 fontsize=7.5, fontweight='bold', color=color,
@@ -265,7 +265,7 @@ def draw_hotspot(ax, summary):
                             fmt='none', color='#333', elinewidth=1.2, capsize=4, zorder=3)
         if len(a_vals):
             ax.bar(xi + 0.2, a_vals.mean(), 0.35, color=col,
-                   alpha=0.40, hatch='///', edgecolor='gray', linewidth=0.6, zorder=2)
+                   alpha=0.28, edgecolor=col, linewidth=0.8, zorder=2)
 
         # 散点
         if len(g_vals):
@@ -282,23 +282,20 @@ def draw_hotspot(ax, summary):
             gm   = g_vals.mean()
             am   = a_vals[0]
             gstd = g_vals.std() if len(g_vals) > 1 else 0
-            delta = gm - am
-            sign  = '+' if delta >= 0 else '-'
             if len(g_vals) >= 2:
                 _, p  = stats.ttest_1samp(g_vals, am)
                 lbl   = _pstar(p)
-                data_top = max(g_vals.max() + gstd, am)
-                stat_b_queue.append((xi, data_top, lbl, delta, sign))
+                if lbl != 'ns':
+                    data_top = max(g_vals.max() + gstd, am)
+                    stat_b_queue.append((xi, data_top, lbl))
 
     # 统一高度绘制括号
     if stat_b_queue:
         tick_h   = 0.8
         y0_global = max(d[1] for d in stat_b_queue) + 1.5
-        for xi, _, lbl, delta, sign in stat_b_queue:
+        for xi, _, lbl in stat_b_queue:
             _stat_bracket(ax, xi - 0.2, xi + 0.2, y0_global, tick_h, lbl)
-            ax.text(xi, y0_global + tick_h * 2.5, f'\u0394{sign}{abs(delta):.1f}',
-                    ha='center', va='bottom', fontsize=7.5, color='#555')
-        ymax_stat = y0_global + tick_h * 5
+        ymax_stat = y0_global + tick_h * 3
     else:
         ymax_stat = 0
 
@@ -306,16 +303,15 @@ def draw_hotspot(ax, summary):
     ymax = max(all_vals.max() + 2, ymax_stat + 1)
     ax.set_xticks(range(len(species_order)))
     ax.set_xticklabels(species_order, fontsize=9)
-    ax.set_ylabel('Ca2+ binding hotspots (n)', fontsize=9)
-    ax.set_title('Ca2+ Hotspot Residues\n(Asp/Glu, APBS < -5 kT/e, surface)',
-                 fontsize=9, pad=8)
+    ax.set_ylabel(r'Ca$^{2+}$ binding hotspots (n)', fontsize=9)
+    ax.set_title(r'Ca$^{2+}$ Hotspot Residues', fontsize=9, pad=8)
     ax.set_ylim(0, max(ymax, 5))
 
     # 图例
     legend_els = [
         mpatches.Patch(facecolor='#888', alpha=0.80, label='Glycosylated'),
-        mpatches.Patch(facecolor='#888', alpha=0.40, hatch='///',
-                       edgecolor='gray', label='Deglyco (no glycan)'),
+        mpatches.Patch(facecolor='#888', alpha=0.28,
+                   edgecolor='#888', label='Apo'),
     ]
     ax.legend(handles=legend_els, fontsize=7.5, framealpha=0.6)
     ax.spines['top'].set_visible(False)
@@ -373,41 +369,36 @@ def draw_ca2_sasa(ax, csv_map):
 
         if len(a_vals):
             ax.bar(xi + 0.2, a_vals.mean(), 0.35, color=col,
-                   alpha=0.40, hatch='///', edgecolor='gray', linewidth=0.6, zorder=2)
+                   alpha=0.28, edgecolor=col, linewidth=0.8, zorder=2)
             jit = rng.uniform(-0.08, 0.08, len(a_vals))
             ax.scatter(xi + 0.2 + jit, a_vals, s=28, color=col,
                        edgecolors='white', linewidths=0.5, zorder=4, alpha=0.55)
             max_y = max(max_y, a_vals.max() + 30)
 
-        # 统计检验 + Δ
+        # 统计检验
         if len(g_vals) and len(a_vals):
             am    = a_vals[0]
             gm    = g_vals.mean()
             gstd  = g_vals.std() if len(g_vals) > 1 else 0
-            delta = gm - am
-            sign  = '+' if delta >= 0 else '-'
             if len(g_vals) >= 2:
                 _, p = stats.ttest_1samp(g_vals, am)
                 lbl  = _pstar(p)
-                data_top = max(g_vals.max() + gstd, a_vals.max())
-                stat_c_queue.append((xi, data_top, lbl, delta, sign))
+                if lbl != 'ns':
+                    data_top = max(g_vals.max() + gstd, a_vals.max())
+                    stat_c_queue.append((xi, data_top, lbl))
 
     # 统一高度绘제括号
     if stat_c_queue:
         tick_h    = 120          # Panel C y-range ~2700, font ~75 units; need gap > 80 units
         y0_global = max(d[1] for d in stat_c_queue) + 50
-        for xi, _, lbl, delta, sign in stat_c_queue:
+        for xi, _, lbl in stat_c_queue:
             _stat_bracket(ax, xi - 0.2, xi + 0.2, y0_global, tick_h, lbl)
-            ax.text(xi, y0_global + tick_h * 3.0, f'\u0394{sign}{abs(delta):.0f} \u00c5\u00b2',
-                    ha='center', va='bottom', fontsize=7.5, color='#555')
-        max_y = max(max_y, y0_global + tick_h * 4.5 + 50)
+        max_y = max(max_y, y0_global + tick_h * 2.5 + 50)
 
     ax.set_xticks(range(len(species_order)))
     ax.set_xticklabels(species_order, fontsize=9)
     ax.set_ylabel('Asp+Glu surface SASA (Å²)', fontsize=9)
-    ax.set_title('Carboxylate Surface Accessibility\n'
-                 '(glycanAware APBS, water probe, per structure)',
-                 fontsize=9, pad=8)
+    ax.set_title('Carboxylate Surface Accessibility', fontsize=9, pad=8)
     ax.set_ylim(1000, max(max_y + 10, 3700))
 
     ax.spines['top'].set_visible(False)
@@ -491,23 +482,19 @@ def draw_apbs_strip(ax, summary, csv_map):
             if len(g_med) >= 2 and len(a_med) == 1:
                 _, p  = stats.ttest_1samp(g_med, a_med[0])
                 lbl   = _pstar(p)
-                delta = g_med.mean() - a_med[0]
-                sign  = '+' if delta >= 0 else '-'
-                stat_queue_d.append((xi, lbl, delta, sign))
+                if lbl != 'ns':
+                    stat_queue_d.append((xi, lbl))
         if stat_queue_d and all_vals:
             rng_span = max(all_vals) - min(all_vals)
             tick_h   = rng_span * 0.04
             y0_base  = max(all_vals) + rng_span * 0.06
-            for xi, lbl, delta, sign in stat_queue_d:
+            for xi, lbl in stat_queue_d:
                 _stat_bracket(ax, xi - 0.15, xi + 0.15, y0_base, tick_h, lbl)
-                ax.text(xi, y0_base + tick_h * 2.8, f'\u0394{sign}{abs(delta):.2f}',
-                        ha='center', va='bottom', fontsize=7.5, color='#555')
 
     ax.set_xticks(range(len(species_order)))
     ax.set_xticklabels(species_order, fontsize=9)
     ax.set_ylabel('Surface APBS potential (kT/e)', fontsize=9)
-    ax.set_title('Surface Potential Distribution\n(Glycosylated vs Deglyco)',
-                 fontsize=9, pad=8)
+    ax.set_title('Surface Potential Distribution', fontsize=9, pad=8)
     if all_vals:
         ax.set_ylim(min(all_vals) - 1, max(all_vals) * 1.3 + 1)
 

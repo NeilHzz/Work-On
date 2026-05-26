@@ -24,7 +24,6 @@ mpl.rcParams['ytick.labelsize'] = 12
 
 data_dir = r"D:\system_folder\Desktop\Work On\01_数据与计算\Raw_Data\MS_DATA"
 out_dir = r"D:\system_folder\Desktop\Work On\02_可视化\Figure\png"
-NOLEG = os.environ.get('NOLEG', '0') == '1'
 _SP_PANEL = {"Gallus": "Fig4A", "Anas": "Fig4B", "Columba": "Fig4C"}
 
 # ==========================================
@@ -51,13 +50,23 @@ target_mapping = {
     }
 }
 
-# 使用 NPG (Nature Publishing Group) 经典配色方案
-colors = {
-    'OVAL': '#6BA3E8',   # 蓝色 (匹配底色 #CADCF8)
-    'OC116': '#E8A040',  # 橙色 (匹配底色 #FFE0B2)
-    'TRFE': '#5BAF6B',   # 绿色 (匹配底色 #C8E6C9)
-    'OC17': '#D96BA0'    # 粉色 (匹配底色 #F8BBD0)
-}
+SPECIES_COLORS = {'Gallus': '#B54664', 'Anas': '#7895C1', 'Columba': '#F0C284'}
+MUTED_SPECIES_COLORS = {'Gallus': '#E3B7C1', 'Anas': '#CDD8EA', 'Columba': '#F0DDAE'}
+BACKGROUND_PROTEIN_COLOR = '#C7C7C7'
+OVAL_COLOR = '#C62828'
+OC116_COLOR = '#66A96B'
+TRFE_COLOR = '#5A5A5A'
+LABEL_GRAY = '#4A4A4A'
+
+
+def target_color(species, target_name):
+    if target_name == 'OVAL':
+        return OVAL_COLOR
+    if target_name == 'OC116':
+        return OC116_COLOR
+    if target_name == 'TRFE':
+        return TRFE_COLOR
+    return MUTED_SPECIES_COLORS[species]
 
 species_list = ["Gallus", "Anas", "Columba"]
 
@@ -135,18 +144,31 @@ for species in species_list:
     plt.scatter(
         df_merged.loc[mask_other, 'Log2_Protein_Intensity'],
         df_merged.loc[mask_other, 'Log2_Glycan_Intensity'],
-        color='#DFDFDF', alpha=0.6, s=80, edgecolor='white', linewidth=0.5, label='Other Proteins', zorder=2
+        color=BACKGROUND_PROTEIN_COLOR, alpha=0.65, s=80, edgecolor='white', linewidth=0.5, label='Other Proteins', zorder=2
     )
     
     # 2. 绘制目标蛋白点 (高亮颜色，大尺寸)
     for target_name in ['OVAL', 'OC116', 'TRFE', 'OC17']:
         mask_target = df_merged['Target'] == target_name
         if mask_target.sum() > 0:
-            plt.scatter(
-                df_merged.loc[mask_target, 'Log2_Protein_Intensity'],
-                df_merged.loc[mask_target, 'Log2_Glycan_Intensity'],
-                color=colors[target_name], alpha=0.9, s=200, edgecolor='black', linewidth=1.5, label=target_name, zorder=5
-            )
+            highlight_color = target_color(species, target_name)
+            if target_name == 'OVAL':
+                ax = plt.gca()
+                for _, oval_row in df_merged[mask_target].iterrows():
+                    ax.text(
+                        oval_row['Log2_Protein_Intensity'],
+                        oval_row['Log2_Glycan_Intensity'],
+                        '⭐', color=highlight_color, ha='center', va='center',
+                        fontsize=17, zorder=7, fontfamily='Segoe UI Emoji'
+                    )
+            else:
+                plt.scatter(
+                    df_merged.loc[mask_target, 'Log2_Protein_Intensity'],
+                    df_merged.loc[mask_target, 'Log2_Glycan_Intensity'],
+                    color=highlight_color, alpha=0.85, s=180,
+                    marker='o', edgecolor='none', linewidth=0,
+                    label=target_name, zorder=5
+                )
             
             rows = df_merged[mask_target].sort_values('Log2_Glycan_Intensity').reset_index(drop=True)
             n = len(rows)
@@ -167,9 +189,9 @@ for species in species_list:
                     f"{target_name}\n({row['Position']}N)",
                     xy=(row['Log2_Protein_Intensity'], row['Log2_Glycan_Intensity']),
                     xytext=(dx, dy), textcoords='offset points',
-                    fontsize=10, fontweight='bold', color=colors[target_name],
+                    fontsize=10, fontweight='bold', color=OVAL_COLOR if target_name == 'OVAL' else LABEL_GRAY,
                     va='center', ha=ha,
-                    bbox=dict(boxstyle="round,pad=0.25", fc="white", ec=colors[target_name],
+                    bbox=dict(boxstyle="round,pad=0.25", fc="white", ec=highlight_color if target_name == 'OVAL' else LABEL_GRAY,
                               linewidth=0.8, alpha=0.90),
                     zorder=6
                 )
@@ -190,9 +212,6 @@ for species in species_list:
     plt.text(0.05, 0.95, stats_text, transform=plt.gca().transAxes, fontsize=13, fontweight='bold',
              verticalalignment='top', bbox=dict(boxstyle='round,pad=0.5', facecolor='#F8F9FA', alpha=0.9, edgecolor='#CCCCCC'))
              
-    # 6. 图例设置
-    if not NOLEG:
-        plt.legend(loc='lower right', frameon=True, fontsize=12, edgecolor='#CCCCCC', title="Highlighted Proteins", title_fontsize=13)
     plt.tight_layout()
     
     # 保存图片
