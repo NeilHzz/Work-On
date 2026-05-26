@@ -29,8 +29,17 @@ FILE_PATH = r'D:\system_folder\Desktop\Work On\01_数据与计算\乳突层形�
 OUT_DIR   = r'D:\system_folder\Desktop\Work On\02_可视化\Figure\png'
 os.makedirs(OUT_DIR, exist_ok=True)
 
-# ─── NPG 配色 ──────────────────────────────────────────────────────────────
-COLORS = {'Chicken': '#B54664', 'Duck': '#7895C1', 'Pigeon': '#F0C284'}
+# ─── Standard species colors ──────────────────────────────────────────────
+STANDARD_SPECIES_COLORS = {
+    'Gallus': '#B54664',
+    'Anas': '#7895C1',
+    'Columba': '#F0C284',
+}
+COLORS = {
+    'Chicken': STANDARD_SPECIES_COLORS['Gallus'],
+    'Duck': STANDARD_SPECIES_COLORS['Anas'],
+    'Pigeon': STANDARD_SPECIES_COLORS['Columba'],
+}
 ORDER  = ['Chicken', 'Duck', 'Pigeon']
 
 
@@ -229,7 +238,7 @@ def plot_microstructure_panels(df_plot, metric_arrays: dict):
 
         ax.set_title(
             f"{titles[i]}\n"
-            f"Duncan ANOVA: F={res['f_stat']:.2f}, p={res['p_anova']:.2e}",
+            f"p = {res['p_anova']:.2e}",
             fontsize=20, fontweight='bold')
         ax.set_xlabel('')
         ax.set_ylabel(col, fontsize=20)

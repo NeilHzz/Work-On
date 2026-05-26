@@ -15,7 +15,8 @@ Panel mapping (source image → manuscript figure / panel):
   eggtooth/鸡.png + 鸭.png + 鸽子.png (top row)
   + 鸡（喙）.png + 鸭（喙）.png + 鸽子（喙）.png (bottom row)
                      → Fig1  B  (2×3 bird illustration grid)
-    eggtooth/乳突层结构.jpg → Fig1  C  (SEM + egg shell + mammilla structure)
+    eggtooth/Gallus.jpg + Anas.jpg + Columba.jpg
+                                         → Fig1  C  (SEM + egg shell + mammilla structure)
   Fig1D.png          → Fig1  D  (Mammilla density + volume boxplots)
   Fig3A.png          → Fig2     (Glycotype radial network, no letter)
   Fig3B.png          → Fig3  A  (Chord diagram)
@@ -93,6 +94,12 @@ FONT_MD  = _load_font(80)    # third-width panels
 FONT_SM  = _load_font(64)    # quarter-width panels
 FONT_FIG4_LABEL = _load_font(120)
 FONT_PUB_LABEL = _load_font(120)
+
+SPECIES_COLORS = {
+    "Gallus": "#B54664",
+    "Anas": "#7895C1",
+    "Columba": "#F0C284",
+}
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Image utilities
@@ -175,6 +182,31 @@ def save_fig(img: Image.Image, name: str, dpi: int = PUBLICATION_DPI):
     out = OUT / f"{name}.png"
     bg.save(out, dpi=(dpi, dpi))
     print(f"  Saved → {out}")
+
+
+def make_fig1c_triptych(target_w: int) -> Image.Image:
+    """Build Fig. 1C from the three species-specific mammillary structure panels."""
+    inner_gap = 32
+    col_w = (target_w - 2 * inner_gap) // 3
+    panels = []
+    for species in ["Gallus", "Anas", "Columba"]:
+        raw = load_img(EGGTOOTH / f"{species}.jpg")
+        if raw is None:
+            img = make_placeholder(col_w, int(col_w * 1.15), species)
+        else:
+            img = scale_to_w(raw, col_w)
+        draw = ImageDraw.Draw(img)
+        draw.text((col_w // 2, 18), species,
+                  fill=SPECIES_COLORS[species], font=FONT_MD, anchor="mt")
+        panels.append(img)
+
+    panel_h = max(img.height for img in panels)
+    triptych = Image.new("RGBA", (target_w, panel_h), (255, 255, 255, 0))
+    x = 0
+    for img in panels:
+        triptych.paste(img, (x, (panel_h - img.height) // 2), img)
+        x += col_w + inner_gap
+    return triptych
 
 
 def row_images(files_labels: list[tuple[str, str]], ncols: int,
@@ -288,24 +320,20 @@ def compose_fig1():
     top_strip.paste(A, (0, (top_h - A.height) // 2), A)
     top_strip.paste(B, (top_left_w + GAP, (top_h - B.height) // 2), B)
 
-    bottom_col_w = (inner_w - GAP) // 2
+    bottom_left_w = int(inner_w * 0.56)
+    bottom_right_w = inner_w - bottom_left_w - GAP
 
-    # Panel C: SEM + egg shell + mammilla microstructure
-    raw_c = load_img(EGGTOOTH / "乳突层结构.jpg")
-    if raw_c is None:
-        raw_c = make_placeholder(bottom_col_w, int(bottom_col_w * 0.6),
-                                 "Panel C — mammilla microstructure\n"
-                                 "(02_可视化/eggtooth/乳突层结构.jpg)")
-    C = scale_to_w(raw_c, bottom_col_w)
+    # Panel C: species-specific SEM + egg shell + mammilla microstructure panels
+    C = make_fig1c_triptych(bottom_left_w)
     C = add_label(C, "C", font=FONT_PUB_LABEL)
 
     # Panel D: Mammilla density + unit volume ratio boxplots
-    D = panel("Fig1D.png", "D", bottom_col_w)
+    D = panel("Fig1D.png", "D", bottom_right_w)
 
     bottom_h = max(C.height, D.height)
     bottom_strip = Image.new("RGBA", (inner_w, bottom_h), (255, 255, 255, 0))
     bottom_strip.paste(C, (0, (bottom_h - C.height) // 2), C)
-    bottom_strip.paste(D, (bottom_col_w + GAP, (bottom_h - D.height) // 2), D)
+    bottom_strip.paste(D, (bottom_left_w + GAP, (bottom_h - D.height) // 2), D)
 
     rows = [top_strip, bottom_strip]
     total_h = (2 * MARGIN

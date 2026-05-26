@@ -37,7 +37,12 @@ OUT_TS     = os.path.join(OUT_DIR, "Fig_force_timeseries.png")
 SPECIES  = ["Gallus",   "Columba",  "Anas"]
 T_MMS    = [0.29,       0.19,       0.3462]   # shell thickness mm
 D_SHELL  = 2.0   # mm
-COLORS   = ["#B54664",  "#F0C284",  "#7895C1"]
+STANDARD_SPECIES_COLORS = {
+    "Gallus": "#B54664",
+    "Anas": "#7895C1",
+    "Columba": "#F0C284",
+}
+COLORS   = [STANDARD_SPECIES_COLORS[sp] for sp in SPECIES]
 
 CASES = [
     "pos_p1_p1", "pos_p1_n1", "pos_n1_p1", "pos_n1_n1",
