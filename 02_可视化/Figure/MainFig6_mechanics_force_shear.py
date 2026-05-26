@@ -168,7 +168,7 @@ def plot_dmrt(ax, res, data_orig, metric_label, unit):
     x = np.arange(len(SPECIES))
 
     bars = ax.bar(x, orig_means, width=0.5,
-                  color=COLORS, alpha=0.70,
+                  color=COLORS, alpha=1.0,
                   edgecolor="k", linewidth=1.0, zorder=2)
     ax.errorbar(x, orig_means, yerr=orig_stds,
                 fmt="none", ecolor="k",
@@ -177,7 +177,7 @@ def plot_dmrt(ax, res, data_orig, metric_label, unit):
         jitter = rng.uniform(-0.14, 0.14, size=len(sp_data))
         ax.scatter(xi + jitter, sp_data, s=36,
                    color=color, edgecolors="k",
-                   linewidths=0.5, zorder=4, alpha=0.90)
+                   linewidths=0.5, zorder=4, alpha=1.0)
 
     # Duncan letter labels only
     y_top = orig_means + orig_stds
