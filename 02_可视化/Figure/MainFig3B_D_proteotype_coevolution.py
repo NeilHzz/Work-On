@@ -51,13 +51,17 @@ target_mapping = {
 }
 
 SPECIES_COLORS = {'Gallus': '#B54664', 'Anas': '#7895C1', 'Columba': '#F0C284'}
-TARGET_COLORS = {'OC116': '#000000', 'TRFE': '#000000', 'OC17': '#2E8B57'}
+OVAL_COLOR = '#C62828'
 
 
 def target_color(species, target_name):
     if target_name == 'OVAL':
-        return SPECIES_COLORS[species]
-    return TARGET_COLORS[target_name]
+        return OVAL_COLOR
+    return SPECIES_COLORS[species]
+
+
+def target_marker(target_name):
+    return '*' if target_name == 'OVAL' else 'o'
 
 species_list = ["Gallus", "Anas", "Columba"]
 
@@ -146,7 +150,9 @@ for species in species_list:
             plt.scatter(
                 df_merged.loc[mask_target, 'Log2_Protein_Intensity'],
                 df_merged.loc[mask_target, 'Log2_Glycan_Intensity'],
-                color=highlight_color, alpha=0.9, s=200, edgecolor='black', linewidth=1.5, label=target_name, zorder=5
+                color=highlight_color, alpha=0.9, s=260 if target_name == 'OVAL' else 200,
+                marker=target_marker(target_name), edgecolor='black', linewidth=1.5,
+                label=target_name, zorder=5
             )
             
             rows = df_merged[mask_target].sort_values('Log2_Glycan_Intensity').reset_index(drop=True)
