@@ -627,14 +627,6 @@ def plot_2d_enrichment(sp_ref, sp_comp):
                     expand=(1.2, 1.4),
                     arrowprops=dict(arrowstyle='-', color='#AAAAAA', lw=0.5))
 
-    # 象限文字
-    ax.text(vmax - 0.3, vmin + 0.4, f'Glycan suppressed\nin {sp_ref}',
-            fontsize=7.5, color='#C0392B', ha='right', va='bottom',
-            style='italic', alpha=0.75)
-    ax.text(vmin + 0.3, vmax - 0.4, f'Glycan enriched\nin {sp_ref}',
-            fontsize=7.5, color='#1565C0', ha='left', va='top',
-            style='italic', alpha=0.75)
-
     # 坐标轴
     ax.set_xlabel(f'Protein  $\\log_2$FC  ({sp_ref} / {sp_comp})',
                   fontsize=12, fontweight='bold', labelpad=6)
