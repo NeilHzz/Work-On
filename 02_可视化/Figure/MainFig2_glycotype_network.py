@@ -204,7 +204,7 @@ gt_prot_count = {
 
 # 各糖型各物种蛋白数（用于外圈饼环）
 _SP_RING_ORDER = ["Gallus", "Anas", "Columba"]
-_SP_RING_COLOR = {"Gallus": "#B54664", "Anas": "#7895C1", "Columba": "#F0C284"}
+_SP_RING_COLOR = {"Gallus": "#C46B83", "Anas": "#93AACD", "Columba": "#F3CE9D"}
 gt_sp_prot_count = {
     gt: {sp: sum(1 for acc in prot_to_gtypes
                  if gt in prot_to_gtypes[acc] and acc_species.get(acc) == sp)
@@ -290,18 +290,18 @@ def glycan_draw_radius(gt):
 
 # 各物种/组合的边框色（用于节点描边和背景色块）
 SP_COLOR = {
-    frozenset(["Gallus"]):            "#B54664",
-    frozenset(["Anas"]):              "#7895C1",
-    frozenset(["Columba"]):           "#F0C284",
+    frozenset(["Gallus"]):            "#C46B83",
+    frozenset(["Anas"]):              "#93AACD",
+    frozenset(["Columba"]):           "#F3CE9D",
     frozenset(["Gallus", "Anas"]):    "#682487",
     frozenset(["Anas", "Columba"]):   "#84BA42",
     frozenset(["Gallus", "Columba"]): "#D4563E",
 }
 # 各扇形背景填充色（物种代表色的淡化版）
 SP_FACECOLOR = {
-    frozenset(["Gallus"]):            "#B54664",
-    frozenset(["Anas"]):              "#7895C1",
-    frozenset(["Columba"]):           "#F0C284",
+    frozenset(["Gallus"]):            "#C46B83",
+    frozenset(["Anas"]):              "#93AACD",
+    frozenset(["Columba"]):           "#F3CE9D",
     frozenset(["Gallus", "Anas"]):    "#682487",
     frozenset(["Anas", "Columba"]):   "#84BA42",
     frozenset(["Gallus", "Columba"]): "#D4563E",

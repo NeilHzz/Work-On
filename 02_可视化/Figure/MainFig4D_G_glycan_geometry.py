@@ -86,7 +86,7 @@ CSV_DIR = Path(r'D:\system_folder\Desktop\Work On\01_数据与计算\ReGlyco_Ens
 OUT_DIR = Path(r'D:\system_folder\Desktop\Work On\02_可视化\Figure\png')
 
 SPECIES_ORDER  = ['Gallus', 'Anas', 'Columba']
-SPECIES_COLORS = {'Gallus': '#B54664', 'Anas': '#7895C1', 'Columba': '#F0C284'}
+SPECIES_COLORS = {'Gallus': '#C46B83', 'Anas': '#93AACD', 'Columba': '#F3CE9D'}
 METRICS = {
     'glycan_rg':             'Glycan Rg (Å)',
     'glycan_end2end':        'End-to-End Distance (Å)',
@@ -120,7 +120,7 @@ def violin_one(ax, metric, ylabel, subtitle=''):
                           showmedians=True, showextrema=False, widths=0.6)
     for pc, c in zip(parts['bodies'], colors):
         pc.set_facecolor(c)
-        pc.set_alpha(0.75)
+        pc.set_alpha(1.0)
         pc.set_edgecolor('white')
         pc.set_linewidth(0.5)
     parts['cmedians'].set_color('black')
@@ -132,7 +132,7 @@ def violin_one(ax, metric, ylabel, subtitle=''):
         idx = rng.choice(len(d), size=min(100, len(d)), replace=False)
         jitter = rng.uniform(-0.08, 0.08, size=len(idx))
         ax.scatter(i + jitter, d[idx], s=8,
-                   color=SPECIES_COLORS[sp], alpha=0.5, linewidths=0, zorder=3)
+                   color=SPECIES_COLORS[sp], alpha=1.0, linewidths=0, zorder=3)
 
     ax.set_xticks(range(len(SPECIES_ORDER)))
     ax.set_xticklabels([f'{sp}\n(n={len(d)})' for sp, d in zip(SPECIES_ORDER, data)],

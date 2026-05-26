@@ -42,9 +42,9 @@ DPI     = 300
 VCLIP   = 20.0    # strip chart ± kT/e 截断
 
 SPECIES_COLOR = {
-    'Gallus':  '#B54664',
-    'Anas':    '#7895C1',
-    'Columba': '#F0C284',
+    'Gallus':  '#C46B83',
+    'Anas':    '#93AACD',
+    'Columba': '#F3CE9D',
 }
 
 TITLE_FS = 20
@@ -177,7 +177,7 @@ def draw_strip(ax, csv_map):
 
     # 物种图例
     sp_legend = [
-        mpatches.Patch(facecolor=SPECIES_COLOR[sp], label=sp, alpha=0.85)
+        mpatches.Patch(facecolor=SPECIES_COLOR[sp], label=sp, alpha=1.0)
         for sp in ['Gallus', 'Anas', 'Columba']
     ]
     ax.legend(handles=sp_legend, loc='upper left',
@@ -265,7 +265,7 @@ def draw_hotspot(ax, summary):
 
         # 条形 (均值)
         if len(g_vals):
-            ax.bar(xi - 0.2, g_vals.mean(), 0.35, color=col, alpha=0.80, zorder=2)
+            ax.bar(xi - 0.2, g_vals.mean(), 0.35, color=col, alpha=1.0, zorder=2)
             # 误差棒（≥2个样本）
             if len(g_vals) > 1:
                 ax.errorbar(xi - 0.2, g_vals.mean(), yerr=g_vals.std(),
@@ -278,7 +278,7 @@ def draw_hotspot(ax, summary):
         if len(g_vals):
             jit = rng.uniform(-0.08, 0.08, len(g_vals))
             ax.scatter(xi - 0.2 + jit, g_vals, s=28, color=col,
-                       edgecolors='white', linewidths=0.5, zorder=4, alpha=0.9)
+                       edgecolors='white', linewidths=0.5, zorder=4, alpha=1.0)
         if len(a_vals):
             jit = rng.uniform(-0.08, 0.08, len(a_vals))
             ax.scatter(xi + 0.2 + jit, a_vals, s=28, color=col,
@@ -316,7 +316,7 @@ def draw_hotspot(ax, summary):
 
     # 图例
     legend_els = [
-        mpatches.Patch(facecolor='#888', alpha=0.80, label='Glycosylated'),
+        mpatches.Patch(facecolor='#888', alpha=1.0, label='Glycosylated'),
         mpatches.Patch(facecolor='#888', alpha=0.28,
                    edgecolor='#888', label='Apo'),
     ]
@@ -365,13 +365,13 @@ def draw_ca2_sasa(ax, csv_map):
         if len(g_vals):
             gm   = g_vals.mean()
             gstd = g_vals.std() if len(g_vals) > 1 else 0
-            ax.bar(xi - 0.2, gm, 0.35, color=col, alpha=0.80, zorder=2)
+            ax.bar(xi - 0.2, gm, 0.35, color=col, alpha=1.0, zorder=2)
             if len(g_vals) > 1:
                 ax.errorbar(xi - 0.2, gm, yerr=gstd,
                             fmt='none', color='#333', elinewidth=1.2, capsize=4, zorder=3)
             jit = rng.uniform(-0.08, 0.08, len(g_vals))
             ax.scatter(xi - 0.2 + jit, g_vals, s=28, color=col,
-                       edgecolors='white', linewidths=0.5, zorder=4, alpha=0.9)
+                       edgecolors='white', linewidths=0.5, zorder=4, alpha=1.0)
             max_y = max(max_y, gm + gstd + 30)
 
         if len(a_vals):

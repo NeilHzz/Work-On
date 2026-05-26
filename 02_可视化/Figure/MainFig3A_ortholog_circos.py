@@ -1,6 +1,6 @@
 """
 BLAST Ortholog Mapping – Chord Diagram
-Three species: Gallus (#B54664), Anas (#7895C1), Columba (#F0C284)
+Three species: Gallus (#C46B83), Anas (#93AACD), Columba (#F3CE9D)
 Data source: Blast_Ortholog_Mapping.xlsx  (GvsC_, GvsA_, AvsC_入图数据)
 """
 
@@ -21,9 +21,9 @@ from collections import defaultdict
 
 # ── 0. 配色 ────────────────────────────────────────────────────────────────────
 COL = {
-    "Gallus":  "#B54664",
-    "Anas":    "#7895C1",
-    "Columba": "#F0C284",
+    "Gallus":  "#C46B83",
+    "Anas":    "#93AACD",
+    "Columba": "#F3CE9D",
 }
 ALPHA_CHORD = 0.45          # 弦半透明度
 ALPHA_CHORD_HIGHLIGHT = 0.7 # 目标蛋白弦高亮透明度

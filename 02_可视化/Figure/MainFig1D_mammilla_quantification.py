@@ -31,9 +31,9 @@ os.makedirs(OUT_DIR, exist_ok=True)
 
 # ─── Standard species colors ──────────────────────────────────────────────
 STANDARD_SPECIES_COLORS = {
-    'Gallus': '#B54664',
-    'Anas': '#7895C1',
-    'Columba': '#F0C284',
+    'Gallus': '#C46B83',
+    'Anas': '#93AACD',
+    'Columba': '#F3CE9D',
 }
 COLORS = {
     'Chicken': STANDARD_SPECIES_COLORS['Gallus'],
