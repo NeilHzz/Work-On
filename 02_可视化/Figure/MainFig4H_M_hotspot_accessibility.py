@@ -167,7 +167,7 @@ def draw_stacked_bar(ax, df):
         # Shielded bar on top (hatched)
         ax.bar(xs[i], sh, bar_w, bottom=net, color=col, alpha=0.28,
                hatch='///', edgecolor=col, linewidth=0.6,
-               label='Glycan-Shielded (blocked)' if i == 0 else '')
+             label='Glycan-Shielded' if i == 0 else '')
 
         # Error bar on net
         ax.errorbar(xs[i], net, yerr=err, fmt='none',
@@ -230,10 +230,10 @@ def draw_sasa_bar(ax, df):
         err  = stds[sp]
 
         ax.bar(xs[i], net, bar_w, color=col, alpha=0.80,
-            label='Net Accessible SASA' if i == 0 else '')
+            label='Net Accessible' if i == 0 else '')
         ax.bar(xs[i], sh, bar_w, bottom=net, color=col, alpha=0.28,
             hatch='///', edgecolor=col, linewidth=0.6,
-            label='Glycan-Shielded SASA' if i == 0 else '')
+            label='Glycan-Shielded' if i == 0 else '')
         ax.errorbar(xs[i], net, yerr=err, fmt='none',
                     color='#333', elinewidth=1.4, capsize=5, zorder=5)
         ax.text(xs[i], net / 2, f'{net:.1f}',
