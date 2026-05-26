@@ -141,8 +141,6 @@ def draw_violin_panel(ax, groups_dict, ylabel, title, panel_label,
     ax.set_ylim(y_min - y_range * ypad_bot, letter_y + y_range * 0.20)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.text(-0.12, 1.04, panel_label, transform=ax.transAxes,
-            fontsize=13, fontweight='bold', va='top')
 
 
 # ── 堆叠柱状图 ────────────────────────────────────────────────────────────────
@@ -212,8 +210,6 @@ def draw_stacked_bar(ax, df):
               framealpha=0.8, edgecolor='none')
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.text(-0.07, 1.04, 'E', transform=ax.transAxes,
-            fontsize=13, fontweight='bold', va='top')
 
 
 # ── Panel F: 热点残基 SASA 堆叠柱图（iface_full_sasa vs. iface_shielding）─────
@@ -282,8 +278,6 @@ def draw_sasa_bar(ax, df):
               framealpha=0.8, edgecolor='none')
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.text(-0.07, 1.04, 'F', transform=ax.transAxes,
-            fontsize=13, fontweight='bold', va='top')
 
 
 # ══════════════════════════════════════════════════════════════════════════════
