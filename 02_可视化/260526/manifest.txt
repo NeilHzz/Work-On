@@ -1,165 +1,42 @@
-260526 figure export manifest
-Generated: 2026-05-26 12:04:55
-Workspace: d:\system_folder\Desktop\Work On
+260526 final figure export manifest
+Generated: 2026-05-26 14:28:46
+Rule: main subfigure filenames follow the final composed manuscript figures, not legacy source panel names.
+Supplementary figures follow 03_文章撰写/supplementary_materials260520.docx / build_supplementary_en.py order.
 
-[single_panels/PNG]
-Source: d:\system_folder\Desktop\Work On\02_可视化\Figure\PNG
-Count: 52
-- Fig1_barplot_panel.png
-- Fig1A.png
-- Fig1B.png
-- Fig1D.png
-- Fig2_bubble_single.png
-- Fig2A.png
-- Fig2B.png
-- Fig2C.png
-- Fig2D.png
-- Fig2E.png
-- Fig2F.png
-- Fig2G.png
-- Fig2H.png
-- Fig3_bubble_pairwise.png
-- Fig3A.png
-- Fig3B.png
-- Fig4_Legend.png
-- Fig4_venn.png
-- Fig4A.png
-- Fig4B.png
-- Fig4C.png
-- Fig4D.png
-- Fig4D_G.png
-- Fig4E.png
-- Fig4F.png
-- Fig4G.png
-- Fig4H-J_Legend.png
-- Fig4H.png
-- Fig4I.png
-- Fig4J.png
-- Fig5_summary_bar.png
-- Fig5A.png
-- Fig5B.png
-- Fig5C.png
-- Fig5D.png
-- Fig5E.png
-- Fig5F.png
-- Fig5G.png
-- Fig5H.png
-- Fig5I.png
-- Fig5J.png
-- Fig5K.png
-- Fig5L.png
-- Fig5M.png
-- Fig5N.png
-- Fig6_heatmap.png
-- Fig6A.png
-- Fig6A_Force.png
-- Fig6A_Shear.png
-- Fig6B.png
-- Fig6B_Fmax.png
-- Fig6B_Taumax.png
+[01_main_subfigures_matched_to_composed]
+Count: 30
+- Fig1A.png <= Fig1A.png
+- Fig1B.png <= eggtooth 2x3 grid
+- Fig1C.png <= Sci_Adv_Figure/PNG/Fig1/2-2Fig_mammilla_microstructure_panels.png
+- Fig1D.png <= Fig1D.png
+- Fig2.png <= Fig3A.png
+- Fig3A.png <= Fig3B.png
+- Fig3B.png <= Fig4A.png
+- Fig3C.png <= Fig4B.png
+- Fig3D.png <= Fig4C.png
+- Fig3E.png <= Fig4H.png
+- Fig3F.png <= Fig4I.png
+- Fig3G.png <= Fig4J.png
+- Fig4A.png <= Fig5B.png
+- Fig4B.png <= Fig5C.png
+- Fig4C.png <= Fig5D.png
+- Fig4D.png <= Fig5E.png
+- Fig4E.png <= Fig5F.png
+- Fig4F.png <= Fig5G.png
+- Fig4G.png <= Fig5H.png
+- Fig4H.png <= Fig5I.png
+- Fig4I.png <= Fig5J.png
+- Fig4J.png <= Fig5K.png
+- Fig4K.png <= Fig5L.png
+- Fig4L.png <= Fig5M.png
+- Fig4M.png <= Fig5N.png
+- Fig5A.png <= 鸡（喙）.png + chicken_model_render.png
+- Fig5B.png <= 鸭（喙）.png + duck_model_render.png
+- Fig5C.png <= 鸽子（喙）.png + pigeon_model_render.png
+- Fig6A.png <= Fig6A_Force.png + Fig6B_Fmax.png
+- Fig6B.png <= Fig6A_Shear.png + Fig6B_Taumax.png
 
-[single_panels/PDF]
-Source: d:\system_folder\Desktop\Work On\02_可视化\Figure\PDF
-Count: 46
-- Fig1A.pdf
-- Fig1B.pdf
-- Fig1D.pdf
-- Fig2A.pdf
-- Fig2B.pdf
-- Fig2C.pdf
-- Fig2D.pdf
-- Fig2E.pdf
-- Fig2F.pdf
-- Fig2G.pdf
-- Fig2H.pdf
-- Fig3A.pdf
-- Fig3B.pdf
-- Fig4_Legend.pdf
-- Fig4A.pdf
-- Fig4B.pdf
-- Fig4C.pdf
-- Fig4D.pdf
-- Fig4D_G.pdf
-- Fig4E.pdf
-- Fig4F.pdf
-- Fig4G.pdf
-- Fig4H-J_Legend.pdf
-- Fig4H.pdf
-- Fig4I.pdf
-- Fig4J.pdf
-- Fig5A.pdf
-- Fig5B.pdf
-- Fig5C.pdf
-- Fig5D.pdf
-- Fig5E.pdf
-- Fig5F.pdf
-- Fig5G.pdf
-- Fig5H.pdf
-- Fig5I.pdf
-- Fig5J.pdf
-- Fig5K.pdf
-- Fig5L.pdf
-- Fig5M.pdf
-- Fig5N.pdf
-- Fig6A.pdf
-- Fig6A_Force.pdf
-- Fig6A_Shear.pdf
-- Fig6B.pdf
-- Fig6B_Fmax.pdf
-- Fig6B_Taumax.pdf
-
-[single_panels/SVG]
-Source: d:\system_folder\Desktop\Work On\02_可视化\Figure\SVG
-Count: 46
-- Fig1A.svg
-- Fig1B.svg
-- Fig1D.svg
-- Fig2A.svg
-- Fig2B.svg
-- Fig2C.svg
-- Fig2D.svg
-- Fig2E.svg
-- Fig2F.svg
-- Fig2G.svg
-- Fig2H.svg
-- Fig3A.svg
-- Fig3B.svg
-- Fig4_Legend.svg
-- Fig4A.svg
-- Fig4B.svg
-- Fig4C.svg
-- Fig4D.svg
-- Fig4D_G.svg
-- Fig4E.svg
-- Fig4F.svg
-- Fig4G.svg
-- Fig4H-J_Legend.svg
-- Fig4H.svg
-- Fig4I.svg
-- Fig4J.svg
-- Fig5A.svg
-- Fig5B.svg
-- Fig5C.svg
-- Fig5D.svg
-- Fig5E.svg
-- Fig5F.svg
-- Fig5G.svg
-- Fig5H.svg
-- Fig5I.svg
-- Fig5J.svg
-- Fig5K.svg
-- Fig5L.svg
-- Fig5M.svg
-- Fig5N.svg
-- Fig6A.svg
-- Fig6A_Force.svg
-- Fig6A_Shear.svg
-- Fig6B.svg
-- Fig6B_Fmax.svg
-- Fig6B_Taumax.svg
-
-[composed_figures/PNG]
-Source: d:\system_folder\Desktop\Work On\02_可视化\Composed
+[02_main_composed_figures]
 Count: 6
 - Fig1_composed.png
 - Fig2_composed.png
@@ -167,3 +44,23 @@ Count: 6
 - Fig4_composed.png
 - Fig5_composed.png
 - Fig6_composed.png
+
+[03_supplementary_figures_from_docx]
+Count: 11 top-level FigS PNG files + 6 FigS11 component panels
+- FigS1.png <= Supplementary\Figures\SuppFig1_Species_Selection\Sensitivity_Analysis_Results.png
+- FigS2.png <= 02_可视化\Figure\PNG\Fig1B.png
+- FigS3.png <= Supplementary\Figures\SuppFig2_Venn_Orthogroups\Fig_venn_orthogroups.png
+- FigS4.png <= Supplementary\Figures\SuppFig3_Phylo_Tree\Fig_phylo_tree.png
+- FigS5.png <= Supplementary\Figures\SuppFig4_GO_Enrichment\图2.jpg
+- FigS6.png <= 02_可视化\Figure\PNG\Fig2H.png
+- FigS7.png <= 02_可视化\Figure\PNG\Fig4D_G.png
+- FigS8.png <= 02_可视化\Figure\PNG\Fig5A.png
+- FigS9.png <= Supplementary\Figures\SuppFig5_CAFE5_Gene_Family_Turnover\Fig_cafe5_expansion_contraction.png
+- FigS10.png <= Supplementary\Figures\SuppFig7_Glycosylation_Hotspot\Fig_hotspot_ensemble_1.png
+- FigS11.png <= combined 3x2 from Supplementary/Figures/SuppFig8_FEA_Force_Analysis
+- FigS11A.png <= Supplementary\Figures\SuppFig8_FEA_Force_Analysis\chicken_rcforc_3x3.png
+- FigS11D.png <= Supplementary\Figures\SuppFig8_FEA_Force_Analysis\chicken_rcforc_yforce.png
+- FigS11B.png <= Supplementary\Figures\SuppFig8_FEA_Force_Analysis\duck_rcforc_3x3.png
+- FigS11E.png <= Supplementary\Figures\SuppFig8_FEA_Force_Analysis\duck_rcforc_yforce.png
+- FigS11C.png <= Supplementary\Figures\SuppFig8_FEA_Force_Analysis\pigeon_rcforc_3x3.png
+- FigS11F.png <= Supplementary\Figures\SuppFig8_FEA_Force_Analysis\pigeon_rcforc_yforce.png
