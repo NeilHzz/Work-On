@@ -68,8 +68,8 @@ OUT.mkdir(exist_ok=True)
 CANVAS_W = 7200   # total canvas width (px) – matches 600 DPI × 12 cm
 MARGIN   = 80     # outer margin (px)
 GAP      = 50     # gap between adjacent panels in a row
-DPI      = 300    # output DPI tag
-FIG4_PUBLICATION_DPI = 1000  # 7200 px wide → ~18.3 cm at native size
+DPI      = 300    # output DPI tag for individual subfigures
+PUBLICATION_DPI = 1000  # 7200 px wide -> ~18.3 cm at native size
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Font helpers
@@ -94,6 +94,7 @@ FONT_LG  = _load_font(100)   # half-width panels
 FONT_MD  = _load_font(80)    # third-width panels
 FONT_SM  = _load_font(64)    # quarter-width panels
 FONT_FIG4_LABEL = _load_font(120)
+FONT_PUB_LABEL = _load_font(120)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Image utilities
@@ -169,7 +170,7 @@ def paste(canvas: Image.Image, img: Image.Image, x: int, y: int):
     canvas.paste(img, (x, y), img)
 
 
-def save_fig(img: Image.Image, name: str, dpi: int = DPI):
+def save_fig(img: Image.Image, name: str, dpi: int = PUBLICATION_DPI):
     """Flatten to RGB (white background) and save as PNG."""
     bg = Image.new("RGB", img.size, (255, 255, 255))
     bg.paste(img, mask=img.split()[3])
@@ -242,20 +243,23 @@ def compose_fig1():
     print("\n=== Composing Fig 1 ===")
     inner_w = CANVAS_W - 2 * MARGIN
 
-    def full(fname, label, font=FONT_XL):
+    def panel(fname, label, target_w, font=FONT_PUB_LABEL):
         raw = load_img(PNG / fname) if fname else None
         if raw is None:
-            raw = make_placeholder(inner_w, int(inner_w * 0.3), f"Panel {label}")
-        img = scale_to_w(raw, inner_w)
+            raw = make_placeholder(target_w, int(target_w * 0.7), f"Panel {label}")
+        img = scale_to_w(raw, target_w)
         return add_label(img, label, font=font)
 
+    top_left_w = int(inner_w * 0.58)
+    top_right_w = inner_w - top_left_w - GAP
+
     # Panel A: CVA 3D scatter (no pre-existing corner label from script)
-    A = full("Fig1A.png", "A")
+    A = panel("Fig1A.png", "A", top_left_w)
 
     # Panel B: 2×3 bird illustration grid
     #   Row 1 (top)    = full bird head portraits  (鸡 / 鸭 / 鸽子)
     #   Row 2 (bottom) = beak / egg-tooth closeups (鸡（喙）/ 鸭（喙）/ 鸽子（喙）)
-    col_w_b = (inner_w - 2 * GAP) // 3
+    col_w_b = (top_right_w - 2 * GAP) // 3
     top_names = ["鸡.png", "鸭.png", "鸽子.png"]
     bot_names = ["鸡（喙）.png", "鸭（喙）.png", "鸽子（喙）.png"]
 
@@ -270,7 +274,7 @@ def compose_fig1():
     top_row_h = max(img.height for img in row_top_imgs)
     bot_row_h = max(img.height for img in row_bot_imgs)
     b_h = top_row_h + GAP + bot_row_h
-    B = Image.new("RGBA", (inner_w, b_h), (255, 255, 255, 0))
+    B = Image.new("RGBA", (top_right_w, b_h), (255, 255, 255, 0))
     x = 0
     for img in row_top_imgs:
         B.paste(img, (x, 0), img)
@@ -279,22 +283,34 @@ def compose_fig1():
     for img in row_bot_imgs:
         B.paste(img, (x, top_row_h + GAP), img)
         x += col_w_b + GAP
-    B = add_label(B, "B", font=FONT_XL)
+    B = add_label(B, "B", font=FONT_PUB_LABEL)
+
+    top_h = max(A.height, B.height)
+    top_strip = Image.new("RGBA", (inner_w, top_h), (255, 255, 255, 0))
+    top_strip.paste(A, (0, (top_h - A.height) // 2), A)
+    top_strip.paste(B, (top_left_w + GAP, (top_h - B.height) // 2), B)
+
+    bottom_col_w = (inner_w - GAP) // 2
 
     # Panel C: SEM + egg shell + mammilla microstructure (from old Sci_Adv panel)
     raw_c = load_img(OLD_F1 / "2-2Fig_mammilla_microstructure_panels.png")
     if raw_c is None:
-        raw_c = make_placeholder(inner_w, int(inner_w * 0.25),
+        raw_c = make_placeholder(bottom_col_w, int(bottom_col_w * 0.6),
                                  "Panel C — mammilla microstructure\n"
                                  "(02_可视化/Sci_Adv_Figure/PNG/Fig1/"
                                  "2-2Fig_mammilla_microstructure_panels.png)")
-    C = scale_to_w(raw_c, inner_w)
-    C = add_label(C, "C", font=FONT_XL)
+    C = scale_to_w(raw_c, bottom_col_w)
+    C = add_label(C, "C", font=FONT_PUB_LABEL)
 
     # Panel D: Mammilla density + unit volume ratio boxplots
-    D = full("Fig1D.png", "D")
+    D = panel("Fig1D.png", "D", bottom_col_w)
 
-    rows = [A, B, C, D]
+    bottom_h = max(C.height, D.height)
+    bottom_strip = Image.new("RGBA", (inner_w, bottom_h), (255, 255, 255, 0))
+    bottom_strip.paste(C, (0, (bottom_h - C.height) // 2), C)
+    bottom_strip.paste(D, (bottom_col_w + GAP, (bottom_h - D.height) // 2), D)
+
+    rows = [top_strip, bottom_strip]
     total_h = (2 * MARGIN
                + sum(r.height for r in rows)
                + GAP * (len(rows) - 1))
@@ -378,7 +394,7 @@ def compose_fig3():
         else:
             # Crop to right_h from top
             A = A_nat.crop((0, 0, left_w, right_h))
-    A = add_label(A, "A", font=FONT_LG)
+    A = add_label(A, "A", font=FONT_PUB_LABEL)
 
     total_h = 2 * MARGIN + right_h
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
@@ -473,7 +489,7 @@ def compose_fig4():
     row4_x = (CANVAS_W - row4_w) // 2
     y = paste_row(canvas, r4, cw4, y, x_start=row4_x)
 
-    save_fig(canvas, "Fig4_composed", dpi=FIG4_PUBLICATION_DPI)
+    save_fig(canvas, "Fig4_composed")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -569,8 +585,8 @@ def compose_fig6():
     row_B_h = shear_s.height
 
     # ── panel labels ─────────────────────────────────────────────────────────
-    force_s = add_label(force_s, "A", font=FONT_LG)
-    shear_s = add_label(shear_s, "B", font=FONT_LG)
+    force_s = add_label(force_s, "A", font=FONT_PUB_LABEL)
+    shear_s = add_label(shear_s, "B", font=FONT_PUB_LABEL)
 
     # ── scale right (bar) panels to match row heights ─────────────────────────
     fmax_s   = scale_to_h(raw_fmax,   row_A_h)
