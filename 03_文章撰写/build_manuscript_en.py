@@ -785,6 +785,44 @@ mixed([
      "Table\u00a01.", False, False),
 ])
 
+head("Integrated protein-glycan abundance comparison")
+
+para(
+    "For Fig. 3B to D, protein-level and glycan-site quantification tables were "
+    "loaded separately for each species from the Protein_quant and Site_quant sheets. "
+    "When the Number Comparable field was present, protein entries with values < 2 "
+    "and glycan-site entries with values < 1 were excluded. Mean protein intensity "
+    "was calculated across all species-matched intensity columns for each accession, "
+    "and mean glycan intensity was calculated for each quantified glycosylation site "
+    "across the corresponding site-intensity columns. Only positive-intensity entries "
+    "were retained. Glycan-site rows were then inner-joined to protein rows by protein "
+    "accession so that each point represented one quantified glycosylated sequon with "
+    "a matched protein-abundance measurement. Protein and glycan intensities were "
+    "log2-transformed, and within-species protein-glycan coupling was summarized by "
+    "Spearman rank correlation with two-sided p values. OVAL, OC116, TRFE, and OC17 "
+    "were highlighted by the strict ortholog assignments used in Fig. 3A, and labels "
+    "were annotated with the corresponding glycosylated Asn position.")
+
+para(
+    "For Fig. 3E to G, pairwise glycan-protein enrichment plots were built from "
+    "ortholog-mapped protein and glycan abundance differences between species. Protein "
+    "abundance for each accession was defined as the mean of nonzero replicate "
+    "intensities after excluding proteins with Number Comparable < 2 when available. "
+    "Glycan abundance was defined at the protein level as the sum of mean nonzero site "
+    "intensities across all quantified glycosylation sites assigned to that accession. "
+    "Gallus-versus-Anas and Gallus-versus-Columba comparison spaces were built from "
+    "blastp outfmt 6 mappings, retaining the best hit per query when the mean E value "
+    "was <= 1 × 10⁻⁵ and the average sequence identity was >= 0.40; when query and "
+    "subject had different numbers of non-overlapping HSPs, the maximum identity "
+    "threshold >= 0.40 was applied instead. The Anas-versus-Columba plane was bridged "
+    "through shared Gallus orthologs that passed the same filter in both datasets. For "
+    "each retained ortholog pair, the x coordinate was calculated as log2(I_ref) - "
+    "log2(I_comp) and the y coordinate as log2(G_ref) - log2(G_comp), where I and G "
+    "denote protein and glycan abundance, respectively. The y = x diagonal therefore "
+    "marked matched protein-glycan change, whereas displacement toward the glycan-rich "
+    "side identified proteins whose glycan shift exceeded the corresponding change in "
+    "bulk protein abundance.")
+
 head("N-glycan structural ensemble modeling")
 
 p_m_reglyco = mixed([
@@ -895,9 +933,7 @@ mixed([
      "total Asp/Glu SASA differences between glycosylated and apo structures were "
      "evaluated by one-sample t test against the apo reference value; shifts in "
      "median surface electrostatic potential were assessed by one-sample t test "
-     "against the apo reference value. Protein\u2013glycan abundance "
-     "coupling was quantified by Spearman rank correlation of log2-transformed "
-     "protein and glycan-site intensities. Finite-element simulation outcomes "
+    "against the apo reference value. Finite-element simulation outcomes "
      "(F_max, \u03c4_max) were compared among species by one-way ANOVA with Duncan's "
      "multiple range test (DMRT; \u03b1\u202f=\u202f0.05). All statistical analyses were "
      "conducted in Python using scipy.stats and statsmodels.", False, False),
