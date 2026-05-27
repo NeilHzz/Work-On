@@ -232,6 +232,7 @@ def pymol_jobs(models: list[ExtremeModel]) -> list[dict]:
             "species_color": hex_to_rgb01(SPECIES_COLORS.get(model.species, "#777777")),
             "glycan_center": [float(x) for x in model.glycan_atoms.mean(axis=0)],
             "glycan_radius": float(np.max(np.linalg.norm(model.glycan_atoms - model.glycan_atoms.mean(axis=0), axis=1))),
+            "overview_turns": [-24, -12, -78] if model.role.startswith("Compact") else [-24, -12, 10],
             "metrics": [
                 {
                     "name": name,
@@ -345,13 +346,16 @@ def write_pymol_script(jobs: list[dict]) -> Path:
             setup_scene(job)
             cmd.show('surface', 'oval and chain A')
             cmd.color('gray85', 'oval and chain A')
-            cmd.set('transparency', 0.42, 'oval and chain A')
+            cmd.set('transparency', 0.50, 'oval and chain A')
+            cmd.select('protein_anchor', 'byres (oval and chain A within 4 of (oval and chain B))')
+            cmd.color('gray62', 'protein_anchor')
+            cmd.set('transparency', 0.32, 'protein_anchor')
             cmd.color('gray65', 'oval and chain A')
             color_full_glycan()
             cmd.orient('oval and chain B')
-            cmd.turn('x', -24)
-            cmd.turn('y', -12)
-            cmd.turn('z', 10)
+            cmd.turn('x', job['overview_turns'][0])
+            cmd.turn('y', job['overview_turns'][1])
+            cmd.turn('z', job['overview_turns'][2])
             cmd.zoom('oval and chain A', buffer=46, complete=1)
             cmd.clip('slab', 420)
             add_camera_circle('glycan_locator', job['glycan_center'], max(9.0, job['glycan_radius'] * 1.75), color=(0.18, 0.18, 0.18))
