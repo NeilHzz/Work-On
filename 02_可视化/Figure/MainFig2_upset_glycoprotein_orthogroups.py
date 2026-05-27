@@ -31,10 +31,35 @@ SPECIES_COLORS = {
     "GlyColumba": "#F3CE9D",
 }
 DISPLAY_LABELS = {
-    "GlyGallus": "GlyGallus",
-    "GlyColumba": "GlyColumba",
-    "GlyAnas": "GlyAnas",
+    "GlyGallus": "Gallus",
+    "GlyColumba": "Columba",
+    "GlyAnas": "Anas",
 }
+
+ALL_INTERSECTIONS = [
+    frozenset(["GlyGallus", "GlyColumba", "GlyAnas"]),
+    frozenset(["GlyColumba", "GlyAnas"]),
+    frozenset(["GlyGallus", "GlyAnas"]),
+    frozenset(["GlyGallus", "GlyColumba"]),
+    frozenset(["GlyAnas"]),
+    frozenset(["GlyColumba"]),
+    frozenset(["GlyGallus"]),
+]
+
+
+def _hex_to_rgb(color):
+    color = color.lstrip("#")
+    return tuple(int(color[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def _rgb_to_hex(rgb):
+    return "#" + "".join(f"{value:02X}" for value in rgb)
+
+
+def mixed_species_color(group):
+    rgb_values = [_hex_to_rgb(SPECIES_COLORS[species]) for species in group]
+    mixed = tuple(round(sum(channel) / len(rgb_values)) for channel in zip(*rgb_values))
+    return _rgb_to_hex(mixed)
 
 
 def load_memberships(path: Path):
@@ -56,11 +81,7 @@ def load_memberships(path: Path):
 
 def ordered_intersections(memberships):
     counts = Counter(memberships)
-    keys = sorted(
-        counts,
-        key=lambda key: (-len(key), -counts[key], [SPECIES_ORDER.index(sp) for sp in key]),
-    )
-    return [(key, counts[key]) for key in keys]
+    return [(group, counts.get(group, 0)) for group in ALL_INTERSECTIONS]
 
 
 def draw_upset(memberships):
@@ -90,7 +111,8 @@ def draw_upset(memberships):
         zorder=3,
     )
     for xi, value in zip(x, top_counts):
-        ax_top.text(xi, value + max(top_counts) * 0.025, str(value),
+        offset = max(top_counts) * 0.025
+        ax_top.text(xi, value + offset, str(value),
                     ha="center", va="bottom", fontsize=10)
     ax_top.set_ylabel("Cluster Count", fontsize=13)
     ax_top.set_xlim(-0.7, len(intersections) - 0.35)
@@ -112,7 +134,8 @@ def draw_upset(memberships):
         present_y = [y_positions[species] for species in SPECIES_ORDER if species in group]
         if len(present_y) > 1:
             ax_matrix.plot([xi, xi], [min(present_y), max(present_y)],
-                           color="#555555", linewidth=2.6, zorder=1, solid_capstyle="round")
+                           color=mixed_species_color(group), linewidth=2.6,
+                           zorder=1, solid_capstyle="round")
         for species in SPECIES_ORDER:
             y = y_positions[species]
             if species in group:
