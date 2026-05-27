@@ -130,7 +130,7 @@ def draw_upset(memberships):
         width_ratios=[1.45, 5.9],
         height_ratios=[3.25, 1.65],
         left=0.075, right=0.985, bottom=0.14, top=0.94,
-        wspace=0.12, hspace=0.07,
+        wspace=0.06, hspace=0.07,
     )
     ax_top = fig.add_subplot(gs[0, 1])
     ax_left = fig.add_subplot(gs[1, 0])
@@ -171,8 +171,8 @@ def draw_upset(memberships):
     ax_matrix.set_yticklabels([])
     ax_matrix.tick_params(axis="y", length=0, pad=7)
     ax_matrix.tick_params(axis="x", bottom=False, labelbottom=False)
-    label_x = -1.03
-    icon_x = -1.28
+    label_x = -0.58
+    icon_x = -0.78
     for species in SPECIES_ORDER:
         y = y_positions[species]
         icon_path = SPECIES_ICONS[species]
@@ -215,7 +215,7 @@ def draw_upset(memberships):
             else:
                 ax_matrix.scatter(xi, y, s=260, color="#D8D8D8",
                                   edgecolor="white", linewidth=0.8, zorder=2)
-    ax_matrix.set_xlim(-1.35, len(intersections) - 0.35)
+    ax_matrix.set_xlim(-0.9, len(intersections) - 0.35)
     ax_matrix.spines["top"].set_visible(False)
     ax_matrix.spines["right"].set_visible(False)
     ax_matrix.spines["left"].set_visible(False)
