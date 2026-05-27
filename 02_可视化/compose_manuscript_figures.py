@@ -143,6 +143,28 @@ def scale_to_h(img: Image.Image, target_h: int) -> Image.Image:
     return img.resize((nw, target_h), Image.LANCZOS)
 
 
+def trim_white(img: Image.Image, pad: int = 24, threshold: int = 248) -> Image.Image:
+    """Trim near-white margins while preserving a small publication-safe pad."""
+    rgba = img.convert("RGBA")
+    rgb = rgba.convert("RGB")
+    pixels = rgb.load()
+    xs = []
+    ys = []
+    for y in range(rgb.height):
+        for x in range(rgb.width):
+            r, g, b = pixels[x, y]
+            if r < threshold or g < threshold or b < threshold:
+                xs.append(x)
+                ys.append(y)
+    if not xs:
+        return rgba
+    left = max(0, min(xs) - pad)
+    top = max(0, min(ys) - pad)
+    right = min(rgba.width, max(xs) + pad + 1)
+    bottom = min(rgba.height, max(ys) + pad + 1)
+    return rgba.crop((left, top, right, bottom))
+
+
 def add_label(img: Image.Image, label: str,
               font: ImageFont.FreeTypeFont | None = None,
               offset: tuple[int, int] = (14, 8),
@@ -350,89 +372,86 @@ def compose_fig1():
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Fig 2  (single panel, no panel letter)
+# Fig 2  (A-E: UpSet, glycan network, and glycan-type summaries)
 # ─────────────────────────────────────────────────────────────────────────────
 
 def compose_fig2():
     print("\n=== Composing Fig 2 ===")
     inner_w = CANVAS_W - 2 * MARGIN
 
-    # The glycoprotein orthogroup UpSet plot is saved as "Fig2.png".
-    raw = load_img(PNG / "Fig2.png")
-    if raw is None:
-        raw = make_placeholder(inner_w, inner_w,
-                               "Fig 2 — Glycoprotein orthogroup UpSet plot\n"
-                               "(02_可视化/Figure/PNG/Fig2.png)")
-    img = scale_to_w(raw, inner_w)
+    def panel(fname, label, target_w, font=FONT_PUB_LABEL, trim=False):
+        raw = load_img(PNG / fname)
+        if raw is None:
+            raw = make_placeholder(target_w, int(target_w * 0.65), f"Panel {label}\n{fname}")
+        if trim:
+            raw = trim_white(raw)
+        img = scale_to_w(raw, target_w)
+        return add_label(img, label, font=font)
 
-    # No panel letter for Fig 2
-    total_h = 2 * MARGIN + img.height
+    # A: current glycoprotein orthogroup UpSet plot, full width for readability.
+    A = panel("Fig2.png", "A", inner_w, trim=False)
+
+    # B-C: old Fig3A network plus within-cluster glycan-type consistency.
+    left_w = int(inner_w * 0.47)
+    right_w = inner_w - left_w - GAP
+    B = panel("Fig3A.png", "B", left_w, trim=True)
+    C = panel("Fig2_cluster_glycotype_consistency.png", "C", right_w, trim=False)
+    row2_h = max(B.height, C.height)
+    row2 = Image.new("RGBA", (inner_w, row2_h), (255, 255, 255, 0))
+    row2.paste(B, (0, (row2_h - B.height) // 2), B)
+    row2.paste(C, (left_w + GAP, (row2_h - C.height) // 2), C)
+
+    # D-E: keep composition and heatmap separated, each wide enough for readable text.
+    col_w = (inner_w - GAP) // 2
+    D = panel("Fig2_species_glycotype_proportion.png", "D", col_w, trim=False)
+    E = panel("Fig2_species_glycotype_heatmap.png", "E", col_w, trim=False)
+    row3_h = max(D.height, E.height)
+    row3 = Image.new("RGBA", (inner_w, row3_h), (255, 255, 255, 0))
+    row3.paste(D, (0, (row3_h - D.height) // 2), D)
+    row3.paste(E, (col_w + GAP, (row3_h - E.height) // 2), E)
+
+    rows = [A, row2, row3]
+    total_h = 2 * MARGIN + sum(row.height for row in rows) + GAP * (len(rows) - 1)
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
-    paste(canvas, img, MARGIN, MARGIN)
+
+    y = MARGIN
+    for row in rows:
+        paste(canvas, row, MARGIN, y)
+        y += row.height + GAP
     save_fig(canvas, "Fig2_composed")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Fig 3  (A = left ~38 %, full height; B-G = right ~62 %, 3 rows x 2 cols)
+# Fig 3  (B-G only; B-C-D first row, E-F-G second row)
 # ─────────────────────────────────────────────────────────────────────────────
 
 def compose_fig3():
     print("\n=== Composing Fig 3 ===")
     inner_w = CANVAS_W - 2 * MARGIN
-    left_frac = 0.38
-    left_w  = int(inner_w * left_frac)
-    right_w = inner_w - left_w - GAP
-    col_w   = (right_w - GAP) // 2     # 2 equal columns on the right
+    col_w = (inner_w - 2 * GAP) // 3
 
-    def rp(fname, label):
-        """Right-side panel: scale to col_w, add label."""
+    def panel(fname, label):
         raw = load_img(PNG / fname)
         if raw is None:
-            raw = make_placeholder(col_w, int(col_w * 1.05), label)
+            raw = make_placeholder(col_w, int(col_w * 0.92), f"Panel {label}\n{fname}")
         img = scale_to_w(raw, col_w)
         return add_label(img, label, font=FONT_PUB_LABEL)
 
-    # Right grid: 3 rows x 2 columns for readable source text at publication width.
-    B = rp("Fig4A.png", "B")
-    C = rp("Fig4B.png", "C")
-    D = rp("Fig4C.png", "D")
-    E = rp("Fig4H.png", "E")
-    F = rp("Fig4I.png", "F")
-    G = rp("Fig4J.png", "G")
-
-    right_rows = [[B, C], [D, E], [F, G]]
-    row_heights = [max(img.height for img in row) for row in right_rows]
-    right_h = sum(row_heights) + GAP * (len(right_rows) - 1)
-
-    # Panel A: chord diagram — scale to left_w preserving aspect ratio
-    raw_a = load_img(PNG / "Fig3B.png")
-    if raw_a is None:
-        A = make_placeholder(left_w, right_h, "A")
-    else:
-        # Scale proportionally to left_w; if shorter than right_h, pad at bottom
-        A_nat = scale_to_w(raw_a, left_w)
-        if A_nat.height < right_h:
-            A = Image.new("RGBA", (left_w, right_h), (255, 255, 255, 0))
-            A.paste(A_nat, (0, 0), A_nat)
-        else:
-            # Crop to right_h from top
-            A = A_nat.crop((0, 0, left_w, right_h))
-    A = add_label(A, "A", font=FONT_PUB_LABEL)
-
-    total_h = 2 * MARGIN + right_h
+    rows = [
+        [panel("Fig4A.png", "B"), panel("Fig4B.png", "C"), panel("Fig4C.png", "D")],
+        [panel("Fig4H.png", "E"), panel("Fig4I.png", "F"), panel("Fig4J.png", "G")],
+    ]
+    row_heights = [max(img.height for img in row) for row in rows]
+    total_h = 2 * MARGIN + sum(row_heights) + GAP * (len(rows) - 1)
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
 
-    # Paste A (left column)
-    paste(canvas, A, MARGIN, MARGIN)
-
-    # Paste right 3 x 2 grid
-    y_row = MARGIN
-    for row, row_h in zip(right_rows, row_heights):
-        x_right = MARGIN + left_w + GAP
+    y = MARGIN
+    for row, row_h in zip(rows, row_heights):
+        x = MARGIN
         for img in row:
-            paste(canvas, img, x_right, y_row + (row_h - img.height) // 2)
-            x_right += col_w + GAP
-        y_row += row_h + GAP
+            paste(canvas, img, x, y + (row_h - img.height) // 2)
+            x += col_w + GAP
+        y += row_h + GAP
 
     save_fig(canvas, "Fig3_composed")
 
