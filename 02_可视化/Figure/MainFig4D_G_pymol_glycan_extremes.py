@@ -569,8 +569,8 @@ def draw_2d_arrow(draw: ImageDraw.ImageDraw, start: tuple[int, int], end: tuple[
     length = max((dx * dx + dy * dy) ** 0.5, 1.0)
     ux, uy = dx / length, dy / length
     px, py = -uy, ux
-    head_len = width * 3.0
-    head_w = width * 2.0
+    head_len = width * 3.4
+    head_w = width * 1.9
     tip = (ex, ey)
     left = (int(ex - ux * head_len + px * head_w), int(ey - uy * head_len + py * head_w))
     right = (int(ex - ux * head_len - px * head_w), int(ey - uy * head_len - py * head_w))
@@ -578,12 +578,10 @@ def draw_2d_arrow(draw: ImageDraw.ImageDraw, start: tuple[int, int], end: tuple[
 
 
 def draw_2d_metric_label(draw: ImageDraw.ImageDraw, xy: tuple[int, int], label: str, color: str) -> None:
-    font = read_font(54, bold=True)
+    font = read_font(42, bold=True)
     x, y = xy
-    tw, th = text_size(draw, label, font)
-    pad_x, pad_y = 10, 6
-    box = (x - pad_x, y - pad_y, x + tw + pad_x, y + th + pad_y)
-    draw.rounded_rectangle(box, radius=8, fill="white")
+    for dx, dy in [(-2, 0), (2, 0), (0, -2), (0, 2)]:
+        draw.text((x + dx, y + dy), label, fill="white", font=font)
     draw.text((x, y), label, fill=color, font=font)
 
 
@@ -594,14 +592,14 @@ def annotate_focus_panel(panel: Image.Image) -> Image.Image:
     green = METRIC_COLORS["Glycan-Protein"]
     magenta = METRIC_COLORS["Glycan-Backbone"]
 
-    draw_2d_arrow(draw, (455, 940), (1305, 575), blue, width=13)
-    draw_2d_metric_label(draw, (1132, 575), "E", blue)
+    draw_2d_arrow(draw, (665, 695), (1308, 570), blue, width=8)
+    draw_2d_metric_label(draw, (1138, 572), "E", blue)
 
-    draw_2d_arrow(draw, (505, 930), (720, 570), green, width=13)
-    draw_2d_metric_label(draw, (650, 672), "F", green)
+    draw_2d_arrow(draw, (528, 940), (710, 575), green, width=8)
+    draw_2d_metric_label(draw, (646, 698), "F", green)
 
-    draw_2d_arrow(draw, (505, 950), (575, 1040), magenta, width=14)
-    draw_2d_metric_label(draw, (590, 1010), "G", magenta)
+    draw_2d_arrow(draw, (527, 952), (590, 1030), magenta, width=8)
+    draw_2d_metric_label(draw, (602, 1012), "G", magenta)
     return canvas.convert("RGB")
 
 
