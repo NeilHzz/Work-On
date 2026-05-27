@@ -572,10 +572,189 @@ def render_clean_hk(structures: list[Structure]) -> None:
     print(f"Saved {out}")
 
 
+def rgba(hex_color: str, alpha: int = 255) -> tuple[int, int, int, int]:
+    text = hex_color.lstrip("#")
+    return (int(text[0:2], 16), int(text[2:4], 16), int(text[4:6], 16), alpha)
+
+
+def projection_mapper(points: np.ndarray, width: int, height: int, pad: int = 70):
+    xy = points[:, [0, 1]].astype(float)
+    xy[:, 1] *= -1
+    mins = xy.min(axis=0)
+    maxs = xy.max(axis=0)
+    span = np.maximum(maxs - mins, 1e-6)
+    scale = min((width - 2 * pad) / span[0], (height - 2 * pad) / span[1])
+    center = (mins + maxs) / 2
+    target = np.array([width / 2, height / 2])
+
+    def map_points(raw: np.ndarray) -> np.ndarray:
+        arr = np.asarray(raw, dtype=float).reshape(-1, 3)[:, [0, 1]]
+        arr[:, 1] *= -1
+        mapped = (arr - center) * scale + target
+        return mapped
+
+    return map_points
+
+
+def draw_polyline(draw: ImageDraw.ImageDraw, coords: np.ndarray, fill, width: int) -> None:
+    pts = [tuple(map(float, p)) for p in coords]
+    if len(pts) >= 2:
+        draw.line(pts, fill=fill, width=width, joint="curve")
+
+
+def draw_atom_points(draw: ImageDraw.ImageDraw, coords: np.ndarray, fill, radius: int) -> None:
+    for x, y in coords:
+        draw.ellipse((x - radius, y - radius, x + radius, y + radius), fill=fill)
+
+
+def local_ca_subset(ca: np.ndarray, center: np.ndarray, radius: float = 34.0) -> np.ndarray:
+    distances = np.linalg.norm(ca - center, axis=1)
+    mask = distances <= radius
+    if mask.sum() < 30:
+        return ca
+    return ca[mask]
+
+
+def draw_projected_structure(
+    draw: ImageDraw.ImageDraw,
+    mapper,
+    ca: np.ndarray,
+    glycan: np.ndarray,
+    species_color: str,
+    metric_line: tuple[np.ndarray, np.ndarray, str] | None = None,
+    accessible: np.ndarray | None = None,
+    shielded: np.ndarray | None = None,
+) -> None:
+    ca_2d = mapper(ca)
+    glycan_2d = mapper(glycan)
+    draw_polyline(draw, ca_2d, (172, 172, 172, 160), 8)
+    if len(glycan_2d) >= 2:
+        draw_polyline(draw, glycan_2d, rgba(species_color, 150), 4)
+    draw_atom_points(draw, glycan_2d, rgba(species_color, 210), 10)
+
+    if metric_line is not None:
+        point_a, point_b, color = metric_line
+        mapped = mapper(np.vstack([point_a, point_b]))
+        draw.line([tuple(mapped[0]), tuple(mapped[1])], fill=rgba(color, 255), width=12)
+        draw_atom_points(draw, mapped, rgba(color, 255), 15)
+
+    if accessible is not None and len(accessible):
+        draw_atom_points(draw, mapper(accessible), (209, 31, 26, 220), 13)
+    if shielded is not None and len(shielded):
+        draw_atom_points(draw, mapper(shielded), (17, 17, 17, 230), 15)
+
+
+def render_projected_dg(structures: list[Structure]) -> None:
+    gallus = next(s for s in structures if s.species == "Gallus")
+    apply = transform_points(gallus)
+    ca = apply(gallus.ca)
+    glycan = apply(gallus.glycan_atoms)
+    residue_centers = [apply(center) for center in gallus.glycan_residue_centers]
+
+    glycan_center = glycan.mean(axis=0)
+    protein_center = ca.mean(axis=0)
+    rg = math.sqrt(float(np.mean(np.sum((glycan - glycan_center) ** 2, axis=1))))
+    rg_edge = closest_point_to_radius(glycan, glycan_center, rg)
+    end_a = residue_centers[0]
+    end_b = residue_centers[-1]
+    glycan_near_ca, ca_near_glycan = nearest_pair(glycan, ca)
+
+    specs = [
+        ("D", "Glycan Rg", "centroid to Rg shell", glycan_center, rg_edge, "#D69200"),
+        ("E", "End-to-end", "terminal residue centers", end_a, end_b, "#0072B2"),
+        ("F", "Glycan-protein distance", "glycan centroid to protein C-alpha centroid", glycan_center, protein_center, "#009E73"),
+        ("G", "Min. glycan-C-alpha", "nearest glycan atom to backbone C-alpha", glycan_near_ca, ca_near_glycan, "#CC79A7"),
+    ]
+
+    panel_w, panel_h = 1650, 980
+    title_h = 150
+    gap = 36
+    canvas = Image.new("RGBA", (panel_w * 4 + gap * 3, panel_h + title_h), (255, 255, 255, 255))
+    title_font = read_font(62, bold=True)
+    subtitle_font = read_font(36, bold=False)
+
+    for index, (panel, title, subtitle, point_a, point_b, color) in enumerate(specs):
+        x0 = index * (panel_w + gap)
+        sub = Image.new("RGBA", (panel_w, panel_h + title_h), (255, 255, 255, 255))
+        draw = ImageDraw.Draw(sub, "RGBA")
+        text = f"{panel}  {title}"
+        tw, _ = text_size(draw, text, title_font)
+        sw, _ = text_size(draw, subtitle, subtitle_font)
+        draw.text(((panel_w - tw) / 2, 18), text, fill=(0, 0, 0, 255), font=title_font)
+        draw.text(((panel_w - sw) / 2, 88), subtitle, fill=(70, 70, 70, 255), font=subtitle_font)
+
+        body = Image.new("RGBA", (panel_w, panel_h), (255, 255, 255, 255))
+        body_draw = ImageDraw.Draw(body, "RGBA")
+        subset = local_ca_subset(ca, glycan_center, radius=42.0)
+        fit_points = np.vstack([subset, glycan, point_a.reshape(1, 3), point_b.reshape(1, 3)])
+        mapper = projection_mapper(fit_points, panel_w, panel_h, pad=70)
+        draw_projected_structure(
+            body_draw,
+            mapper,
+            subset,
+            glycan,
+            SPECIES_COLORS["Gallus"],
+            metric_line=(point_a, point_b, color),
+        )
+        sub.alpha_composite(body, (0, title_h))
+        canvas.alpha_composite(sub, (x0, 0))
+
+    out = OUT_DIR / "Fig4_model_D_G.png"
+    canvas.convert("RGB").save(out, dpi=(300, 300))
+    print(f"Saved {out}")
+
+
+def render_projected_hk(structures: list[Structure]) -> None:
+    panel_w, panel_h = 1550, 980
+    top_h = 230
+    gap = 52
+    canvas = Image.new("RGBA", (panel_w * 3 + gap * 2, panel_h + top_h), (255, 255, 255, 255))
+    draw = ImageDraw.Draw(canvas, "RGBA")
+    title_font = read_font(72, bold=True)
+    legend_font = read_font(42, bold=False)
+    species_font = read_font(62, bold=True)
+    draw.text((34, 22), "H-K  Glycan shielding and hotspot accessibility", fill=(0, 0, 0, 255), font=title_font)
+    draw.ellipse((44, 118, 86, 160), fill=(209, 31, 26, 230))
+    draw.text((104, 112), "accessible Ca2+ hotspot", fill=(35, 35, 35, 255), font=legend_font)
+    draw.ellipse((728, 118, 770, 160), fill=(17, 17, 17, 235))
+    draw.text((788, 112), "glycan-shielded hotspot", fill=(35, 35, 35, 255), font=legend_font)
+
+    for index, structure in enumerate(structures):
+        x0 = index * (panel_w + gap)
+        panel = Image.new("RGBA", (panel_w, panel_h), (255, 255, 255, 255))
+        panel_draw = ImageDraw.Draw(panel, "RGBA")
+        apply = transform_points(structure)
+        ca = apply(structure.ca)
+        glycan = apply(structure.glycan_atoms)
+        accessible, shielded = split_hotspots(structure)
+        accessible = apply(accessible) if len(accessible) else np.empty((0, 3))
+        shielded = apply(shielded) if len(shielded) else np.empty((0, 3))
+        subset = local_ca_subset(ca, glycan.mean(axis=0), radius=58.0)
+        fit_points = np.vstack([subset, glycan, accessible, shielded])
+        mapper = projection_mapper(fit_points, panel_w, panel_h, pad=80)
+        draw_projected_structure(
+            panel_draw,
+            mapper,
+            subset,
+            glycan,
+            SPECIES_COLORS[structure.species],
+            accessible=accessible,
+            shielded=shielded,
+        )
+        label = structure.species
+        lw, _ = text_size(panel_draw, label, species_font)
+        panel_draw.text(((panel_w - lw) / 2, 8), label, fill=rgba(SPECIES_COLORS[structure.species], 255), font=species_font)
+        canvas.alpha_composite(panel, (x0, top_h))
+
+    out = OUT_DIR / "Fig4_model_H_K.png"
+    canvas.convert("RGB").save(out, dpi=(300, 300))
+    print(f"Saved {out}")
+
+
 def main() -> None:
     structures = load_structures()
-    render_clean_dg(structures)
-    render_clean_hk(structures)
+    render_projected_dg(structures)
+    render_projected_hk(structures)
 
 
 if __name__ == "__main__":
