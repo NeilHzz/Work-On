@@ -268,7 +268,7 @@ def write_pymol_script(jobs: list[dict]) -> Path:
         def set_color(name, rgb):
             cmd.set_color(name, [float(x) for x in rgb])
 
-        def add_arrow(name, start, end, color, radius=0.055, head_radius=0.22, head_length=0.75):
+        def add_arrow(name, start, end, color, radius=0.026, head_radius=0.095, head_length=0.34):
             sx, sy, sz = [float(v) for v in start]
             ex, ey, ez = [float(v) for v in end]
             vx, vy, vz = ex - sx, ey - sy, ez - sz
@@ -285,7 +285,7 @@ def write_pymol_script(jobs: list[dict]) -> Path:
             ]
             cmd.load_cgo(obj, name)
 
-        def add_line(name, start, end, color, radius=0.045):
+        def add_line(name, start, end, color, radius=0.024):
             sx, sy, sz = [float(v) for v in start]
             ex, ey, ez = [float(v) for v in end]
             r, g, b = [float(c) for c in color]
@@ -326,6 +326,8 @@ def write_pymol_script(jobs: list[dict]) -> Path:
             cmd.set('stick_quality', 18)
             cmd.set('sphere_quality', 2)
             cmd.set('surface_quality', 1)
+            cmd.set('ray_trace_mode', 1)
+            cmd.set('ray_opaque_background', 1)
             cmd.set('orthoscopic', 1)
             cmd.set('two_sided_lighting', 1)
             cmd.set('transparency_mode', 3)
@@ -337,8 +339,8 @@ def write_pymol_script(jobs: list[dict]) -> Path:
             cmd.color('red', 'oval and chain B and elem O')
             cmd.color('blue', 'oval and chain B and elem N')
             cmd.color('white', 'oval and chain B and elem H')
-            cmd.set('stick_radius', 0.13, 'oval and chain B')
-            cmd.set('sphere_scale', 0.16, 'oval and chain B')
+            cmd.set('stick_radius', 0.10, 'oval and chain B')
+            cmd.set('sphere_scale', 0.12, 'oval and chain B')
             cmd.set('stick_ball', 1, 'oval and chain B')
             cmd.set('stick_ball_ratio', 1.55, 'oval and chain B')
 
@@ -355,34 +357,34 @@ def write_pymol_script(jobs: list[dict]) -> Path:
             cmd.turn('x', -12)
             cmd.turn('y', 26)
             cmd.turn('z', -6)
-            cmd.zoom('oval and chain A or oval and chain B', 10)
+            cmd.zoom('oval and chain A or oval and chain B', 22)
             cmd.clip('slab', 220)
             add_camera_circle('glycan_locator', job['glycan_center'], max(6.0, job['glycan_radius'] * 1.35))
-            cmd.png(job['overview_out'], width=1800, height=1600, dpi=300, ray=0)
+            cmd.png(job['overview_out'], width=2200, height=1800, dpi=300, ray=1)
 
         def scene_zoom(job, out_path, rotate_y=0, show_metrics=True):
             setup_scene(job)
 
-            cmd.select('protein_context', 'byres (oval and chain A within 10 of (oval and chain B))')
+            cmd.select('protein_context', 'byres (oval and chain A within 8 of (oval and chain B))')
             cmd.show('lines', 'protein_context')
             cmd.color('gray70', 'protein_context')
             cmd.set('line_width', 1.35, 'protein_context')
             color_full_glycan()
-            cmd.orient('(oval and chain B) or protein_context')
+            cmd.orient('oval and chain B')
             cmd.turn('x', -14)
             cmd.turn('y', 18 + float(rotate_y))
             cmd.turn('z', -8)
-            cmd.zoom('(oval and chain B) or protein_context', 9)
+            cmd.zoom('oval and chain B', 14)
             cmd.clip('slab', 160)
 
             if show_metrics:
                 for index, metric in enumerate(job['metrics']):
                     if metric['name'] == 'Glycan-Protein':
-                        add_line('metric_' + str(index), metric['start'], metric['end'], metric['color'], radius=0.040)
+                        add_line('metric_' + str(index), metric['start'], metric['end'], metric['color'], radius=0.018)
                     else:
                         add_arrow('metric_' + str(index), metric['start'], metric['end'], metric['color'])
 
-            cmd.png(out_path, width=1700, height=1700, dpi=300, ray=0)
+            cmd.png(out_path, width=2200, height=2200, dpi=300, ray=1)
 
         for item in JOBS:
             scene_overview(item)
