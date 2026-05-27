@@ -229,6 +229,7 @@ def pymol_jobs(models: list[ExtremeModel]) -> list[dict]:
             "score": model.score,
             "pdb": str(model.extracted_pdb),
             "overview_out": str(TMP_DIR / f"pymol_extreme_{index}_overview.png"),
+            "marker_out": str(TMP_DIR / f"pymol_extreme_{index}_markers.png"),
             "species_color": hex_to_rgb01(SPECIES_COLORS.get(model.species, "#777777")),
             "glycan_center": [float(x) for x in model.glycan_atoms.mean(axis=0)],
             "glycan_radius": float(np.max(np.linalg.norm(model.glycan_atoms - model.glycan_atoms.mean(axis=0), axis=1))),
@@ -380,6 +381,32 @@ def write_pymol_script(jobs: list[dict]) -> Path:
                     shift=spec['shift'],
                 )
 
+        def render_focus_markers(job):
+            marker_colors = {
+                'End-to-End': {'start': [1.0, 0.0, 0.0], 'end': [0.0, 1.0, 0.0]},
+                'Glycan-Protein': {'start': [0.0, 0.0, 1.0], 'end': [1.0, 0.0, 1.0]},
+                'Glycan-Backbone': {'start': [0.0, 1.0, 1.0], 'end': [1.0, 1.0, 0.0]},
+            }
+            cmd.hide('everything')
+            cmd.delete('rg_centroid')
+            cmd.delete('rg_shell')
+            cmd.bg_color('black')
+            cmd.set('opaque_background', 1)
+            for metric in job['metrics']:
+                name = metric['name']
+                if name not in marker_colors:
+                    continue
+                safe = name.replace('-', '_').replace(' ', '_')
+                for end_name in ['start', 'end']:
+                    color_name = safe + '_' + end_name + '_marker_color'
+                    object_name = safe + '_' + end_name + '_marker'
+                    set_color(color_name, marker_colors[name][end_name])
+                    cmd.pseudoatom(object_name, pos=metric[end_name], vdw=0.65)
+                    cmd.show('spheres', object_name)
+                    cmd.color(color_name, object_name)
+                    cmd.set('sphere_transparency', 0.0, object_name)
+            cmd.png(job['marker_out'], width=2200, height=1800, dpi=300, ray=1)
+
         def setup_scene(job):
             cmd.reinitialize()
             set_color('species_color', job['species_color'])
@@ -440,6 +467,8 @@ def write_pymol_script(jobs: list[dict]) -> Path:
                 cmd.clip('slab', 420)
                 add_camera_circle('glycan_locator', job['glycan_center'], max(9.0, job['glycan_radius'] * 1.75), color=(0.18, 0.18, 0.18))
             cmd.png(job['overview_out'], width=2200, height=1800, dpi=300, ray=1)
+            if job.get('is_focus'):
+                render_focus_markers(job)
 
         def scene_zoom(job, out_path, rotate_y=0, show_metrics=True):
             setup_scene(job)
