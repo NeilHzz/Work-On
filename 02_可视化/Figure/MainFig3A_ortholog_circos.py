@@ -3,6 +3,7 @@ BLAST Ortholog Mapping – Chord Diagram
 Three species: Gallus (#C46B83), Anas (#93AACD), Columba (#F3CE9D)
 Data source: Blast_Ortholog_Mapping.xlsx  (GvsC_, GvsA_, AvsC_入图数据)
 Protein arc width: full sequence length from Gly*.fasta
+Within-species order: highest mapped BLAST bitscore
 Chord endpoints: best BLAST HSP sequence regions on each protein arc
 """
 
@@ -34,7 +35,7 @@ ARC_WIDTH   = 0.08          # 外环宽度（radius单位）
 RADIUS      = 1.16
 GAP_DEG     = 6             # 物种间隔（度）
 PROTEIN_GAP_DEG = 0.8       # 蛋白间隔（度）
-LABEL_PAD   = 0.19          # 标签离外环距离
+LABEL_PAD   = 0.095         # 标签离外环距离
 FONT_FAMILY = "Times New Roman"
 
 # ── 1. 蛋白名称映射 ──────────────────────────────────────────────────────────────
@@ -51,14 +52,14 @@ with open(os.path.join(_SCRIPT_DIR, "acc_name_map.json"),
 _OVERRIDES = {
     # 目标蛋白
     "P01012":     "Ovalbumin",      # OVAL (Gallus)
-    "A0A8B9QNT8": "OVAL",           # OVAL (Anas)
+    "A0A8B9QNT8": "Ovalbumin",      # OVAL (Anas)
     "A0A2I0MWA2": "Ovalbumin-like", # OVAL ortholog (Columba)
     "A0A8V0XA58": "Ovocleidin-116", # OC116 (Gallus)
     "A0A8B9ZY54": "Ovocleidin-116", # OC116 (Anas)
     "A0A2I0MGY6": "Ovocleidin-116", # OC116 (Columba)
     "A0A8V1A6Y9": "Ovotransferrin", # TRFE (Gallus)
-    "A0A493TBB4": "LTF",            # TRFE ortholog (Anas)
-    "A0A2I0LUS7": "TF",             # TRFE ortholog (Columba)
+    "A0A493TBB4": "Lactotransferrin", # TRFE ortholog (Anas)
+    "A0A2I0LUS7": "Transferrin",    # TRFE ortholog (Columba)
     # Ovalbumin-related
     "A0A8V0Y614": "OVALX",
     "A0A8V0YJ25": "OVALY",
@@ -240,7 +241,7 @@ all_links = pd.concat([gvc_links, gva_links, avc_links], ignore_index=True)
 all_links["score"] = pd.to_numeric(all_links["score"], errors="coerce").fillna(50)
 all_links["is_target"] = all_links["target"].notna()
 
-# ── 2. 各物种蛋白列表（按序列长度降序）────────────────────────────────────────
+# ── 2. 各物种蛋白列表（按最高 bitscore 降序；弧宽仍按序列长度）───────────────
 # ── 灰色 Gallus 蛋白（原始 HSP 有记录但未通过筛选）───────────────────────────
 COL_GREY   = "#aaaaaa"   # 无匹配 Gallus 蛋白颜色
 INCLUDE_NO_ORTHOLOG_GALLUS = False
@@ -254,7 +255,7 @@ GREY_SCORE  = 180   # 灰色蛋白统一小定宽（代表无有效比对）
 GREY_GAP_DEG = 0    # 红色区与灰色区无额外间隙，连在一起
 
 def build_protein_list(species: str):
-    """Each protein arc width is proportional to full sequence length."""
+    """Sort proteins by best bitscore; arc width remains full sequence length."""
     srcs = all_links[all_links["src_sp"] == species][["src", "score"]].rename(
         columns={"src": "acc"})
     dsts = all_links[all_links["dst_sp"] == species][["dst", "score"]].rename(
@@ -263,7 +264,9 @@ def build_protein_list(species: str):
     accs = sorted(set(combined["acc"].dropna()))
     df = pd.DataFrame({"acc": accs})
     df["total"] = df["acc"].map(lambda acc: max(int(SEQ_LEN.get(acc, 1)), 1))
-    return df.sort_values("total", ascending=False).reset_index(drop=True)
+    best_score = combined.groupby("acc")["score"].max()
+    df["sort_score"] = df["acc"].map(best_score).fillna(0)
+    return df.sort_values(["sort_score", "total"], ascending=[False, False]).reset_index(drop=True)
 
 g_prots = build_protein_list("Gallus")
 
@@ -278,7 +281,7 @@ if INCLUDE_NO_ORTHOLOG_GALLUS and not grey_df.empty:
 a_prots = build_protein_list("Anas")
 c_prots = build_protein_list("Columba")
 
-TOP_N = 5   # 每物种额外显示序列最长的前5个非目标蛋白
+TOP_N = 5   # 每物种额外显示 bitscore 最高的前5个非目标蛋白
 
 # 目标蛋白始终显示
 # 并额外展示 OC17
@@ -295,9 +298,9 @@ a_targets = _target_accs("Anas")
 c_targets = _target_accs("Columba")
 
 def pick_top(df, targets, n=TOP_N, extra=None):
-    """Show the longest non-target proteins, plus all targets and extras."""
+    """Show the highest-bitscore non-target proteins, plus all targets and extras."""
     must = targets | (extra or set())
-    # 非目标、非灰色蛋白中按序列长度取前 n
+    # 非目标、非灰色蛋白中按当前 bitscore 排序取前 n
     rest = df[~df["acc"].isin(must) & ~df["acc"].isin(GREY_G_ACCS)]
     top_regular = set(rest.head(n)["acc"].tolist())
     # 灰色蛋白中只取 extra（如 OC17）
@@ -401,8 +404,8 @@ matplotlib.rcParams["font.serif"]  = ["Times New Roman"]
 fig, ax = plt.subplots(figsize=(8.4, 8.4), facecolor="white")
 ax.set_aspect("equal")
 ax.axis("off")
-ax.set_xlim(-1.72, 1.72)
-ax.set_ylim(-1.76, 1.70)
+ax.set_xlim(-1.88, 1.90)
+ax.set_ylim(-2.05, 1.78)
 
 # ── 辅助函数 ──────────────────────────────────────────────────────────────────
 def polar_xy(r, angle_rad):
@@ -558,14 +561,10 @@ for sp, ang_dict in [("Gallus", g_angles), ("Anas", a_angles), ("Columba", c_ang
     top_set = sp_top_map[sp]
     label_items = [(acc, values) for acc, values in ang_dict.items() if acc in top_set]
     label_items.sort(key=lambda item: item[1][0])
-    placed_angles = []
-
     for acc, (mid, start, end) in label_items:
         if acc not in top_set:
             continue   # 非 top10 不贴标签
-        nearby = sum(1 for prev in placed_angles if _angular_distance(mid, prev) < math.radians(12))
-        r_label = RADIUS + LABEL_PAD + min(nearby, 4) * 0.085
-        placed_angles.append(mid)
+        r_label = RADIUS + LABEL_PAD
         x, y    = polar_xy(r_label, mid)
 
         angle_deg = math.degrees(mid)
@@ -603,6 +602,14 @@ for sp, ang_dict in [("Gallus", g_angles), ("Anas", a_angles), ("Columba", c_ang
         if is_target_prot:
             txt.set_path_effects([
                 pe.withStroke(linewidth=2, foreground="white")])
+            x_arc, y_arc = polar_xy(RADIUS + 0.012, mid)
+            x_tip, y_tip = polar_xy(r_label - 0.024, mid)
+            ax.annotate("", xy=(x_arc, y_arc), xytext=(x_tip, y_tip),
+                        arrowprops=dict(arrowstyle="-|>", color=label_color,
+                                        lw=0.75, alpha=0.85,
+                                        mutation_scale=6,
+                                        shrinkA=0, shrinkB=0),
+                        zorder=9)
 
 # 物种大字标签已移除，仅用图例表示物种 ─────────────────────────────────────
 
