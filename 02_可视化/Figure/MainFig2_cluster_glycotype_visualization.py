@@ -305,7 +305,7 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
     )
     proportions = matrix.div(matrix.sum(axis=1), axis=0) * 100
 
-    fig, ax = plt.subplots(figsize=(7.2, 3.45))
+    fig, ax = plt.subplots(figsize=(7.6, 3.45))
     y = np.arange(len(SPECIES_ORDER))
     left = np.zeros(len(SPECIES_ORDER))
     for glycan_type in GLYCAN_TYPES_ORDER:
@@ -344,7 +344,7 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
         tick.set_fontweight("bold")
     ax.invert_yaxis()
     ax.set_xlabel("Protein-glycan type assignments (%)", fontsize=10)
-    ax.set_title("Species-level glycan-type composition in Fig. 2 orthogroups", fontsize=11, pad=8)
+    ax.set_title("Species-level glycan-type composition", fontsize=11, pad=8)
     ax.grid(axis="x", color="#D9D9D9", linewidth=0.6)
     ax.set_axisbelow(True)
     clean_axes(ax)
@@ -355,14 +355,15 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
         ax.text(101.0, idx, f"n={totals.loc[species]}", ha="left", va="center", fontsize=8.5)
     ax.set_xlim(0, 112)
 
+    fig.subplots_adjust(right=0.70)
     legend = ax.legend(
-        loc="lower center",
-        bbox_to_anchor=(0.5, -0.44),
-        ncol=3,
+        loc="center left",
+        bbox_to_anchor=(1.02, 0.5),
+        ncol=1,
         frameon=False,
         fontsize=8.2,
         handlelength=1.0,
-        columnspacing=1.1,
+        labelspacing=0.8,
     )
     for handle in legend.legend_handles:
         handle.set_linewidth(0)

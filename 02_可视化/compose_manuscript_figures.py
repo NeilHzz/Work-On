@@ -393,20 +393,20 @@ def compose_fig2():
     # A: current glycoprotein orthogroup UpSet plot, full width for readability.
     A = panel("Fig2.png", "A", inner_w, trim=False)
 
-    # B-C: requested BLAST ortholog chord diagram plus within-cluster glycan-type consistency.
-    left_w = int(inner_w * 0.40)
+    # B-C: glycan-type consistency followed by the species/type count heatmap.
+    left_w = int(inner_w * 0.48)
     right_w = inner_w - left_w - GAP
-    B = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "B", left_w, trim=False)
-    C = panel("Fig2_cluster_glycotype_consistency.png", "C", right_w, trim=False)
+    B = panel("Fig2_cluster_glycotype_consistency.png", "B", left_w, trim=False)
+    C = panel("Fig2_species_glycotype_heatmap.png", "C", right_w, trim=False)
     row2_h = max(B.height, C.height)
     row2 = Image.new("RGBA", (inner_w, row2_h), (255, 255, 255, 0))
     row2.paste(B, (0, (row2_h - B.height) // 2), B)
     row2.paste(C, (left_w + GAP, (row2_h - C.height) // 2), C)
 
-    # D-E: keep composition and heatmap separated, each wide enough for readable text.
+    # D-E: species composition first, then the BLAST ortholog chord diagram as the final narrative panel.
     col_w = (inner_w - GAP) // 2
     D = panel("Fig2_species_glycotype_proportion.png", "D", col_w, trim=False)
-    E = panel("Fig2_species_glycotype_heatmap.png", "E", col_w, trim=False)
+    E = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", col_w, trim=False)
     row3_h = max(D.height, E.height)
     row3 = Image.new("RGBA", (inner_w, row3_h), (255, 255, 255, 0))
     row3.paste(D, (0, (row3_h - D.height) // 2), D)
