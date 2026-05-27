@@ -16,6 +16,7 @@ from pathlib import Path
 
 import matplotlib
 import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
 import numpy as np
 import pandas as pd
 
@@ -58,19 +59,25 @@ GLYCAN_TYPES_ORDER = [
     "Other",
 ]
 GLYCAN_TYPE_COLORS = {
-    "High Mannose": "#0072B2",
-    "Pauci-mannose": "#E69F00",
-    "Hybrid": "#009E73",
-    "Complex-Plain": "#CC79A7",
-    "Complex-Fucosylated": "#D55E00",
-    "Complex-Sialylated": "#56B4E9",
-    "Other": "#666666",
+    "High Mannose": "#4F7F9F",
+    "Pauci-mannose": "#D9B56F",
+    "Hybrid": "#7FAE9B",
+    "Complex-Plain": "#C46B83",
+    "Complex-Fucosylated": "#B98362",
+    "Complex-Sialylated": "#93AACD",
+    "Other": "#777777",
 }
 CONSISTENCY_COLORS = {
-    "Single glycan type": "#4C9F70",
-    "Same multi-type set": "#4C78A8",
-    "Mixed type sets": "#C44E52",
+    "Single glycan type": "#7FAE9B",
+    "Same multi-type set": "#93AACD",
+    "Mixed type sets": "#C46B83",
 }
+DIVERSITY_CMAP = mcolors.LinearSegmentedColormap.from_list(
+    "fig2_diversity", ["#EEF3F0", "#93AACD", "#5B9198", "#1B4D59"]
+)
+HEATMAP_CMAP = mcolors.LinearSegmentedColormap.from_list(
+    "fig2_heatmap", ["#F8F2E6", "#D8E6D5", "#93AACD", "#4F7F9F", "#1B4D59"]
+)
 
 MS_FILES = {
     "Gallus": MS_DIR / "Glycan_MS_Gallus.xlsx",
@@ -267,7 +274,7 @@ def plot_cluster_consistency(cluster_df: pd.DataFrame) -> None:
     union_counts = Counter(cluster_df["union_type_count"])
     union_x = np.arange(1, len(GLYCAN_TYPES_ORDER) + 1)
     union_y = [union_counts.get(value, 0) for value in union_x]
-    colors = plt.cm.YlOrRd(np.linspace(0.28, 0.86, len(union_x)))
+    colors = DIVERSITY_CMAP(np.linspace(0.16, 0.92, len(union_x)))
     bars = ax_right.bar(
         union_x,
         union_y,
@@ -322,7 +329,7 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
         )
         for idx, (bar, value) in enumerate(zip(bars, values)):
             if value >= 7.0:
-                red, green, blue, _ = matplotlib.colors.to_rgba(GLYCAN_TYPE_COLORS[glycan_type])
+                red, green, blue, _ = mcolors.to_rgba(GLYCAN_TYPE_COLORS[glycan_type])
                 luminance = 0.299 * red + 0.587 * green + 0.114 * blue
                 text_color = "black" if luminance > 0.62 else "white"
                 ax.text(
@@ -382,7 +389,7 @@ def plot_species_type_heatmap(type_count_df: pd.DataFrame) -> None:
     percentages = counts.div(counts.sum(axis=1), axis=0) * 100
 
     fig, ax = plt.subplots(figsize=(7.6, 3.45))
-    image = ax.imshow(percentages.to_numpy(), cmap="YlGnBu", aspect="auto", vmin=0)
+    image = ax.imshow(percentages.to_numpy(), cmap=HEATMAP_CMAP, aspect="auto", vmin=0)
     ax.set_xticks(np.arange(len(GLYCAN_TYPES_ORDER)))
     ax.set_xticklabels(
         [label.replace("Complex-", "Complex\n") for label in GLYCAN_TYPES_ORDER],
