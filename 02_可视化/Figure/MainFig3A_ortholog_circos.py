@@ -586,8 +586,10 @@ for sp, ang_dict in [("Gallus", g_angles), ("Anas", a_angles), ("Columba", c_ang
 
         if is_oc17:
             label_color = COL_GREY
+        elif is_target_prot:
+            label_color = color   # OVAL / OC116 / TRFE use the species color
         else:
-            label_color = color   # 所有蛋白名均使用所属物种代表色
+            label_color = "black"
 
         txt = ax.text(x, y, label_text,
                       ha=ha, va="center",
