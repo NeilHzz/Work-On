@@ -361,10 +361,20 @@ def write_pymol_script(jobs: list[dict]) -> Path:
             if rg_metric:
                 target = rg_metric['end']
                 if job.get('is_focus'):
-                    target = [center[0] - 0.82 * rg, center[1] + 0.30 * rg, center[2] + 0.48 * rg]
-                    add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.052, head_radius=0.17, head_length=0.42)
+                    pass
                 else:
                     add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.030, head_radius=0.115, head_length=0.34)
+
+        def add_focus_rg_camera_arrow(job, angle_degrees=55.0):
+            center = [float(v) for v in job['glycan_center']]
+            rg = float(job['glycan_rg'])
+            view = cmd.get_view()
+            right = [view[0], view[1], view[2]]
+            up = [view[3], view[4], view[5]]
+            angle = math.radians(angle_degrees)
+            direction = [math.cos(angle) * right[i] + math.sin(angle) * up[i] for i in range(3)]
+            target = [center[i] + rg * direction[i] for i in range(3)]
+            add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.052, head_radius=0.17, head_length=0.42)
 
         def add_focus_glycan_protein_distance(job):
             metric = next((item for item in job['metrics'] if item['name'] == 'Glycan-Protein'), None)
@@ -476,8 +486,6 @@ def write_pymol_script(jobs: list[dict]) -> Path:
             cmd.color('gray65', 'oval and chain A')
             color_full_glycan()
             add_rg_sphere(job)
-            if job.get('is_focus'):
-                add_focus_glycan_protein_distance(job)
             cmd.orient('oval and chain B')
             cmd.turn('x', job['overview_turns'][0])
             cmd.turn('y', job['overview_turns'][1])
@@ -485,11 +493,14 @@ def write_pymol_script(jobs: list[dict]) -> Path:
             if job.get('is_focus'):
                 cmd.zoom('oval and chain B', buffer=3, complete=1)
                 cmd.clip('slab', 125)
+                add_focus_rg_camera_arrow(job, angle_degrees=-78.0)
             else:
                 cmd.zoom('oval and chain A', buffer=46, complete=1)
                 cmd.clip('slab', 420)
                 add_camera_circle('glycan_locator', job['glycan_center'], max(9.0, job['glycan_radius'] * 1.75), color=(0.18, 0.18, 0.18))
             cmd.png(job['overview_out'], width=2200, height=1800, dpi=300, ray=1)
+            if job.get('is_focus'):
+                render_focus_markers(job)
 
         def scene_zoom(job, out_path, rotate_y=0, show_metrics=True):
             setup_scene(job)
@@ -653,6 +664,21 @@ def draw_2d_arrow(draw: ImageDraw.ImageDraw, start: tuple[int, int], end: tuple[
     draw.polygon([tip, left, right], fill=color)
 
 
+def draw_2d_dashed_line(draw: ImageDraw.ImageDraw, start: tuple[int, int], end: tuple[int, int], color: str, width: int = 11, segments: int = 13) -> None:
+    sx, sy = start
+    ex, ey = end
+    for index in range(segments):
+        if index % 2 == 1:
+            continue
+        t0 = index / segments
+        t1 = (index + 0.72) / segments
+        x0 = int(round(sx + (ex - sx) * t0))
+        y0 = int(round(sy + (ey - sy) * t0))
+        x1 = int(round(sx + (ex - sx) * t1))
+        y1 = int(round(sy + (ey - sy) * t1))
+        draw.line((x0, y0, x1, y1), fill=color, width=width)
+
+
 def draw_2d_metric_label(draw: ImageDraw.ImageDraw, xy: tuple[int, int], label: str, color: str) -> None:
     font = read_font(42, bold=True)
     x, y = xy
@@ -705,29 +731,22 @@ def label_near_line(start: tuple[int, int], end: tuple[int, int], along: float, 
 def annotate_focus_panel(panel: Image.Image, points: dict[str, tuple[int, int]]) -> Image.Image:
     canvas = panel.convert("RGBA")
     draw = ImageDraw.Draw(canvas)
-    blue = METRIC_COLORS["End-to-End"]
     green = METRIC_COLORS["Glycan-Protein"]
-    magenta = METRIC_COLORS["Glycan-Backbone"]
 
-    required = {"E_start", "E_end", "F_start", "F_end", "G_start", "G_end"}
+    required = {"F_start", "F_end"}
     if not required.issubset(points):
         return canvas.convert("RGB")
 
-    draw_2d_arrow(draw, points["E_start"], points["E_end"], blue, width=9)
-    draw_2d_metric_label(draw, label_near_line(points["E_start"], points["E_end"], 0.72, -34), "E", blue)
-
-    draw_2d_arrow(draw, points["F_end"], points["F_start"], green, width=9)
-    draw_2d_metric_label(draw, label_near_line(points["F_end"], points["F_start"], 0.60, 36), "F", green)
-
-    draw_2d_arrow(draw, points["G_end"], points["G_start"], magenta, width=9)
-    draw_2d_metric_label(draw, label_near_line(points["G_end"], points["G_start"], 0.58, -34), "G", magenta)
+    draw_2d_dashed_line(draw, points["F_start"], points["F_end"], green, width=12, segments=11)
     return canvas.convert("RGB")
 
 
 def panel_with_title(job: dict) -> Image.Image:
     target_w, target_h = 1550, 1250
     if job.get("is_focus"):
-        return fit_image(job["overview_out"], 1200, 900, pad=18)
+        panel, crop_box, scale, offset = fit_image_with_layout(job["overview_out"], 1200, 900, pad=18)
+        points = projected_marker_points(job["marker_out"], crop_box, scale, offset)
+        return annotate_focus_panel(panel, points)
 
     panel = Image.new("RGB", (target_w, target_h), "white")
     draw = ImageDraw.Draw(panel)

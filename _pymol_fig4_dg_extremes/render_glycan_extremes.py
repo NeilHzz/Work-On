@@ -106,10 +106,20 @@ def add_rg_sphere(job):
     if rg_metric:
         target = rg_metric['end']
         if job.get('is_focus'):
-            target = [center[0] - 0.82 * rg, center[1] + 0.30 * rg, center[2] + 0.48 * rg]
-            add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.052, head_radius=0.17, head_length=0.42)
+            pass
         else:
             add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.030, head_radius=0.115, head_length=0.34)
+
+def add_focus_rg_camera_arrow(job, angle_degrees=55.0):
+    center = [float(v) for v in job['glycan_center']]
+    rg = float(job['glycan_rg'])
+    view = cmd.get_view()
+    right = [view[0], view[1], view[2]]
+    up = [view[3], view[4], view[5]]
+    angle = math.radians(angle_degrees)
+    direction = [math.cos(angle) * right[i] + math.sin(angle) * up[i] for i in range(3)]
+    target = [center[i] + rg * direction[i] for i in range(3)]
+    add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.052, head_radius=0.17, head_length=0.42)
 
 def add_focus_glycan_protein_distance(job):
     metric = next((item for item in job['metrics'] if item['name'] == 'Glycan-Protein'), None)
@@ -221,8 +231,6 @@ def scene_overview(job):
     cmd.color('gray65', 'oval and chain A')
     color_full_glycan()
     add_rg_sphere(job)
-    if job.get('is_focus'):
-        add_focus_glycan_protein_distance(job)
     cmd.orient('oval and chain B')
     cmd.turn('x', job['overview_turns'][0])
     cmd.turn('y', job['overview_turns'][1])
@@ -230,11 +238,14 @@ def scene_overview(job):
     if job.get('is_focus'):
         cmd.zoom('oval and chain B', buffer=3, complete=1)
         cmd.clip('slab', 125)
+        add_focus_rg_camera_arrow(job, angle_degrees=-78.0)
     else:
         cmd.zoom('oval and chain A', buffer=46, complete=1)
         cmd.clip('slab', 420)
         add_camera_circle('glycan_locator', job['glycan_center'], max(9.0, job['glycan_radius'] * 1.75), color=(0.18, 0.18, 0.18))
     cmd.png(job['overview_out'], width=2200, height=1800, dpi=300, ray=1)
+    if job.get('is_focus'):
+        render_focus_markers(job)
 
 def scene_zoom(job, out_path, rotate_y=0, show_metrics=True):
     setup_scene(job)
