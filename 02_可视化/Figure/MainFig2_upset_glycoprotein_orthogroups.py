@@ -96,7 +96,7 @@ def draw_upset(memberships):
     ax_top.set_xlim(-0.7, len(intersections) - 0.35)
     ax_top.set_ylim(0, max(top_counts) * 1.22)
     ax_top.yaxis.set_major_locator(ticker.MaxNLocator(5, integer=True))
-    ax_top.grid(axis="y", linestyle="--", linewidth=0.45, alpha=0.35, zorder=0)
+    ax_top.grid(False)
     ax_top.tick_params(axis="x", bottom=False, labelbottom=False)
     ax_top.spines["top"].set_visible(False)
     ax_top.spines["right"].set_visible(False)
@@ -121,8 +121,6 @@ def draw_upset(memberships):
             else:
                 ax_matrix.scatter(xi, y, s=260, color="#D8D8D8",
                                   edgecolor="white", linewidth=0.8, zorder=2)
-    for y in y_ticks:
-        ax_matrix.axhline(y, color="#EEEEEE", linewidth=0.55, zorder=0)
     ax_matrix.spines["top"].set_visible(False)
     ax_matrix.spines["right"].set_visible(False)
     ax_matrix.spines["left"].set_visible(False)
