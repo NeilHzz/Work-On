@@ -14,7 +14,7 @@ JOBS = json.loads((HERE / 'jobs.json').read_text(encoding='utf-8'))
 def set_color(name, rgb):
     cmd.set_color(name, [float(x) for x in rgb])
 
-def add_arrow(name, start, end, color, radius=0.026, head_radius=0.095, head_length=0.34):
+def add_arrow(name, start, end, color, radius=0.018, head_radius=0.065, head_length=0.24):
     sx, sy, sz = [float(v) for v in start]
     ex, ey, ez = [float(v) for v in end]
     vx, vy, vz = ex - sx, ey - sy, ez - sz
@@ -31,7 +31,7 @@ def add_arrow(name, start, end, color, radius=0.026, head_radius=0.095, head_len
     ]
     cmd.load_cgo(obj, name)
 
-def add_line(name, start, end, color, radius=0.024):
+def add_line(name, start, end, color, radius=0.016):
     sx, sy, sz = [float(v) for v in start]
     ex, ey, ez = [float(v) for v in end]
     r, g, b = [float(c) for c in color]
@@ -94,23 +94,18 @@ def scene_overview(job):
     setup_scene(job)
     cmd.show('surface', 'oval and chain A')
     cmd.color('gray85', 'oval and chain A')
-    cmd.set('transparency', 0.42, 'oval and chain A')
+    cmd.set('transparency', 0.28, 'oval and chain A')
     cmd.show('lines', 'oval and chain A')
     cmd.color('gray65', 'oval and chain A')
-    cmd.set('line_width', 0.65, 'oval and chain A')
+    cmd.set('line_width', 0.45, 'oval and chain A')
     color_full_glycan()
     cmd.orient('oval and chain A or oval and chain B')
-    cmd.turn('x', -12)
-    cmd.turn('y', 26)
-    cmd.turn('z', -6)
-    cmd.zoom('oval and chain A or oval and chain B', 22)
-    cmd.clip('slab', 220)
+    cmd.turn('x', -6)
+    cmd.turn('y', 18)
+    cmd.turn('z', -4)
+    cmd.zoom('oval and chain A or oval and chain B', 42)
+    cmd.clip('slab', 260)
     add_camera_circle('glycan_locator', job['glycan_center'], max(6.0, job['glycan_radius'] * 1.35))
-    for index, metric in enumerate(job['metrics']):
-        if metric['name'] == 'Glycan-Protein':
-            add_line('overview_metric_' + str(index), metric['start'], metric['end'], metric['color'], radius=0.018)
-        else:
-            add_arrow('overview_metric_' + str(index), metric['start'], metric['end'], metric['color'])
     cmd.png(job['overview_out'], width=2200, height=1800, dpi=300, ray=1)
 
 def scene_zoom(job, out_path, rotate_y=0, show_metrics=True):
@@ -131,7 +126,7 @@ def scene_zoom(job, out_path, rotate_y=0, show_metrics=True):
     if show_metrics:
         for index, metric in enumerate(job['metrics']):
             if metric['name'] == 'Glycan-Protein':
-                add_line('metric_' + str(index), metric['start'], metric['end'], metric['color'], radius=0.018)
+                add_line('metric_' + str(index), metric['start'], metric['end'], metric['color'], radius=0.012)
             else:
                 add_arrow('metric_' + str(index), metric['start'], metric['end'], metric['color'])
 
@@ -139,6 +134,6 @@ def scene_zoom(job, out_path, rotate_y=0, show_metrics=True):
 
 for item in JOBS:
     scene_overview(item)
-    scene_zoom(item, item['zoom_front_out'], rotate_y=0, show_metrics=False)
+    scene_zoom(item, item['zoom_front_out'], rotate_y=0, show_metrics=True)
     scene_zoom(item, item['zoom_back_out'], rotate_y=180, show_metrics=False)
 cmd.quit()
