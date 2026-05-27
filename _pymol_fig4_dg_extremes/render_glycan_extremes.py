@@ -106,7 +106,7 @@ def scene_overview(job):
     cmd.turn('z', 10)
     cmd.zoom('oval and chain A', buffer=46, complete=1)
     cmd.clip('slab', 420)
-    add_camera_circle('glycan_locator', job['glycan_center'], max(6.5, job['glycan_radius'] * 1.28))
+    add_camera_circle('glycan_locator', job['glycan_center'], max(9.0, job['glycan_radius'] * 1.75), color=(0.18, 0.18, 0.18))
     cmd.png(job['overview_out'], width=2200, height=1800, dpi=300, ray=1)
 
 def scene_zoom(job, out_path, rotate_y=0, show_metrics=True):
