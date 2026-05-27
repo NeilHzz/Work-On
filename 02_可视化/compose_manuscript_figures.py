@@ -144,6 +144,16 @@ def scale_to_h(img: Image.Image, target_h: int) -> Image.Image:
     return img.resize((nw, target_h), Image.LANCZOS)
 
 
+def scale_to_fit(img: Image.Image, max_w: int, max_h: int) -> Image.Image:
+    """Proportionally resize *img* to fit inside max_w × max_h."""
+    if img is None:
+        return None
+    scale = min(max_w / img.width, max_h / img.height)
+    nw = max(1, round(img.width * scale))
+    nh = max(1, round(img.height * scale))
+    return img.resize((nw, nh), Image.LANCZOS)
+
+
 def trim_white(img: Image.Image, pad: int = 24, threshold: int = 248) -> Image.Image:
     """Trim near-white margins while preserving a small publication-safe pad."""
     rgba = img.convert("RGBA")
@@ -194,6 +204,75 @@ def smooth_fem_render(img: Image.Image) -> Image.Image:
     out = out_rgb.convert("RGBA")
     out.putalpha(rgba.getchannel("A"))
     return out
+
+
+def _stress_color(t: float) -> tuple[int, int, int]:
+    stops = [
+        (0.00, (0, 0, 190)),
+        (0.25, (0, 105, 255)),
+        (0.50, (0, 235, 220)),
+        (0.67, (130, 255, 80)),
+        (0.78, (255, 240, 0)),
+        (0.90, (255, 115, 0)),
+        (1.00, (185, 0, 0)),
+    ]
+    t = max(0.0, min(1.0, t))
+    for (t0, c0), (t1, c1) in zip(stops, stops[1:]):
+        if t <= t1:
+            f = 0 if t1 == t0 else (t - t0) / (t1 - t0)
+            return tuple(round(c0[i] + f * (c1[i] - c0[i])) for i in range(3))
+    return stops[-1][1]
+
+
+def make_stress_legend_bottom(width: int, height: int) -> Image.Image:
+    legend = Image.new("RGBA", (width, height), (255, 255, 255, 255))
+    draw = ImageDraw.Draw(legend)
+    title_font = _load_font(max(34, height // 4))
+    tick_font = _load_font(max(28, height // 5))
+
+    title = "Von Mises Stress (MPa)"
+    bar_w = int(width * 0.58)
+    bar_h = max(28, height // 7)
+    bar_x = (width - bar_w) // 2
+    title_y = max(8, height // 16)
+    bar_y = int(height * 0.42)
+
+    draw.text((width // 2, title_y), title, fill=(35, 35, 35, 255),
+              font=title_font, anchor="ma")
+    for i in range(bar_w):
+        color = _stress_color(i / max(1, bar_w - 1))
+        draw.line([(bar_x + i, bar_y), (bar_x + i, bar_y + bar_h)], fill=color + (255,))
+    draw.rectangle((bar_x, bar_y, bar_x + bar_w, bar_y + bar_h),
+                   outline=(70, 70, 70, 255), width=2)
+
+    ticks = [(0.00, "0.00"), (0.25, "3.75"), (0.50, "7.50"),
+             (0.75, "11.25"), (1.00, "15.00")]
+    tick_top = bar_y + bar_h
+    for pos, label in ticks:
+        x = bar_x + round(pos * bar_w)
+        draw.line([(x, tick_top), (x, tick_top + 12)], fill=(70, 70, 70, 255), width=2)
+        draw.text((x, tick_top + 16), label, fill=(55, 55, 55, 255),
+                  font=tick_font, anchor="ma")
+    return legend
+
+
+def make_fem_panel_with_bottom_legend(img: Image.Image, target_w: int, target_h: int) -> Image.Image:
+    model_limit_x = int(img.width * 0.78)
+    model = smooth_fem_render(img).crop((0, 0, model_limit_x, img.height))
+    model = trim_white(model, pad=28, threshold=248)
+
+    legend_h = min(280, max(210, int(target_h * 0.11)))
+    model_area_h = target_h - legend_h
+    panel = Image.new("RGBA", (target_w, target_h), (255, 255, 255, 255))
+
+    model = scale_to_fit(model, int(target_w * 0.88), int(model_area_h * 0.96))
+    model_x = (target_w - model.width) // 2
+    model_y = max(0, (model_area_h - model.height) // 2)
+    panel.paste(model, (model_x, model_y), model)
+
+    legend = make_stress_legend_bottom(target_w, legend_h)
+    panel.paste(legend, (0, target_h - legend_h), legend)
+    return panel
 
 
 def add_label(img: Image.Image, label: str,
@@ -619,10 +698,7 @@ def compose_fig5():
         if fem_raw is None:
             fem_img = make_placeholder(right_w, row_h, f"{sp_name} FEM render\n(file not found)")
         else:
-            fem_raw = smooth_fem_render(fem_raw)
-            fem_img = scale_to_w(fem_raw, right_w)
-            if fem_img.height > row_h:
-                fem_img = fem_img.crop((0, 0, right_w, row_h))
+            fem_img = make_fem_panel_with_bottom_legend(fem_raw, right_w, row_h)
 
         # Add panel letter to the illustration (top-left)
         illus_img = add_label(illus_img, lbl, font=FONT_LG)

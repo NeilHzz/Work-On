@@ -130,8 +130,8 @@ def setup_scene(job):
     cmd.turn('x', -14)
     cmd.turn('y', 30)
     cmd.turn('z', -8)
-    cmd.zoom('oval', buffer=8, complete=1)
-    cmd.clip('slab', 300)
+    cmd.zoom('oval', buffer=18, complete=1)
+    cmd.clip('slab', 360)
     add_camera_dashed_envelope(job)
 
 for item in JOBS:

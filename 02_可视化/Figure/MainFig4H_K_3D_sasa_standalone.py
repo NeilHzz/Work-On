@@ -369,8 +369,8 @@ def write_pymol_renderer(jobs: list[dict]) -> Path:
             cmd.turn('x', -14)
             cmd.turn('y', 30)
             cmd.turn('z', -8)
-            cmd.zoom('oval', buffer=8, complete=1)
-            cmd.clip('slab', 300)
+            cmd.zoom('oval', buffer=18, complete=1)
+            cmd.clip('slab', 360)
             add_camera_dashed_envelope(job)
 
         for item in JOBS:
@@ -409,14 +409,14 @@ def text_size(draw: ImageDraw.ImageDraw, text: str, font: ImageFont.ImageFont) -
     return box[2] - box[0], box[3] - box[1]
 
 
-def fit_panel(path: str | Path, species: str, width: int = 1320, height: int = 1040) -> Image.Image:
+def fit_panel(path: str | Path, species: str, width: int = 1180, height: int = 900) -> Image.Image:
     panel = Image.new("RGB", (width, height), "white")
     body = trim_white(Image.open(path).convert("RGB"), pad=54)
-    scale = min((width - 80) / body.width, (height - 170) / body.height)
+    scale = min((width - 96) / body.width, (height - 150) / body.height)
     resized = body.resize((int(body.width * scale), int(body.height * scale)), Image.LANCZOS)
-    panel.paste(resized, ((width - resized.width) // 2, 130 + (height - 170 - resized.height) // 2))
+    panel.paste(resized, ((width - resized.width) // 2, 108 + (height - 150 - resized.height) // 2))
     draw = ImageDraw.Draw(panel)
-    font = read_font(58, bold=True)
+    font = read_font(50, bold=True)
     tw, _ = text_size(draw, species, font)
     draw.text(((width - tw) // 2, 30), species, fill=SPECIES_COLORS[species], font=font)
     return panel
@@ -424,38 +424,33 @@ def fit_panel(path: str | Path, species: str, width: int = 1320, height: int = 1
 
 def combine_outputs(jobs: list[dict]) -> None:
     panels = [fit_panel(job["out"], job["species"]) for job in jobs]
-    gap = 54
-    top_h = 190
-    legend_h = 130
+    gap = 34
+    top_h = 154
+    legend_h = 18
     width = sum(panel.width for panel in panels) + gap * (len(panels) - 1)
     height = top_h + panels[0].height + legend_h
     canvas = Image.new("RGB", (width, height), "white")
     draw = ImageDraw.Draw(canvas)
-    title_font = read_font(66, bold=True)
-    legend_font = read_font(36, bold=False)
-    title = "Fig. 4H-K  3D Ca2+ hotspot accessibility and SASA schematic"
-    draw.text((34, 26), title, fill="#171717", font=title_font)
+    title_font = read_font(50, bold=True)
+    legend_font = read_font(29, bold=False)
+    draw.text((28, 18), "Fig. 4H-K  OVAL Ca2+ binding accessibility and SASA", fill="#171717", font=title_font)
 
-    y = 112
-    x = 44
     entries = [
-        ("species-colored Ca2+ binding region", "#C46B83", "square"),
-        ("glycan-shielded region", "#111111", "circle"),
-        ("remaining protein surface", "#AFAFAF", "circle"),
-        ("dashed SASA envelope", "#111111", "dash"),
-        ("square glycan blocks", "#C46B83", "square"),
+        (34, 86, "species-colored Ca2+ binding region", "#C46B83", "square"),
+        (770, 86, "glycan-shielded region", "#111111", "circle"),
+        (1185, 86, "remaining protein surface", "#AFAFAF", "circle"),
+        (1760, 86, "dashed SASA envelope", "#111111", "dash"),
+        (2220, 86, "square glycan blocks", "#C46B83", "square"),
     ]
-    for label, color, kind in entries:
+    for x, y, label, color, kind in entries:
         if kind == "square":
-            draw.rectangle((x, y + 10, x + 38, y + 48), fill=color)
+            draw.rectangle((x, y + 7, x + 31, y + 38), fill=color)
         elif kind == "dash":
-            for offset in range(0, 72, 24):
-                draw.line((x + offset, y + 30, x + offset + 14, y + 30), fill=color, width=6)
+            for offset in range(0, 64, 22):
+                draw.line((x + offset, y + 23, x + offset + 13, y + 23), fill=color, width=5)
         else:
-            draw.ellipse((x, y + 10, x + 38, y + 48), fill=color)
-        draw.text((x + 54, y + 5), label, fill="#303030", font=legend_font)
-        lw, _ = text_size(draw, label, legend_font)
-        x += 112 + lw
+            draw.ellipse((x, y + 7, x + 31, y + 38), fill=color)
+        draw.text((x + 44, y + 2), label, fill="#303030", font=legend_font)
 
     x = 0
     for panel in panels:
