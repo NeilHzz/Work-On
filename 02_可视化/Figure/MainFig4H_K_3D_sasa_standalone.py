@@ -353,7 +353,7 @@ def write_pymol_renderer(jobs: list[dict]) -> Path:
 
         for item in JOBS:
             setup_scene(item)
-            cmd.png(item['out'], width=1900, height=1450, dpi=300, ray=1)
+            cmd.png(item['out'], width=1900, height=1450, dpi=300, ray=0)
         cmd.quit()
     '''), encoding="utf-8")
     return script_path
