@@ -37,6 +37,13 @@ def add_line(name, start, end, color, radius=0.016):
     r, g, b = [float(c) for c in color]
     cmd.load_cgo([CYLINDER, sx, sy, sz, ex, ey, ez, radius, r, g, b, r, g, b], name)
 
+def add_endpoint_spheres(name, start, end, color, radius=0.22):
+    set_color(name + '_color', color)
+    cmd.pseudoatom(name + '_start', pos=[float(v) for v in start], vdw=radius)
+    cmd.pseudoatom(name + '_end', pos=[float(v) for v in end], vdw=radius)
+    cmd.show('spheres', name + '_start or ' + name + '_end')
+    cmd.color(name + '_color', name + '_start or ' + name + '_end')
+
 def add_camera_circle(name, center, radius, color=(0.0, 0.0, 0.0), segments=144):
     view = cmd.get_view()
     right = [view[0], view[1], view[2]]
@@ -82,8 +89,8 @@ def add_rg_sphere(job):
 def add_focus_metrics(job):
     metric_specs = {
         'End-to-End': {'radius': 0.070, 'head_radius': 0.210, 'head_length': 0.56, 'color': [0.00, 0.44, 0.70]},
-        'Glycan-Protein': {'radius': 0.060, 'head_radius': 0.185, 'head_length': 0.46, 'color': [0.00, 0.62, 0.36]},
-        'Glycan-Backbone': {'radius': 0.060, 'head_radius': 0.185, 'head_length': 0.46, 'color': [0.80, 0.25, 0.55]},
+        'Glycan-Protein': {'radius': 0.075, 'head_radius': 0.220, 'head_length': 0.50, 'color': [0.00, 0.62, 0.36]},
+        'Glycan-Backbone': {'radius': 0.095, 'head_radius': 0.270, 'head_length': 0.58, 'color': [0.80, 0.25, 0.55]},
     }
     for metric in job['metrics']:
         name = metric['name']
@@ -99,6 +106,8 @@ def add_focus_metrics(job):
             head_radius=spec['head_radius'],
             head_length=spec['head_length'],
         )
+        if name in {'Glycan-Protein', 'Glycan-Backbone'}:
+            add_endpoint_spheres('endpoint_' + name.replace('-', '_').replace(' ', '_'), metric['start'], metric['end'], spec['color'])
 
 def setup_scene(job):
     cmd.reinitialize()
@@ -144,7 +153,7 @@ def scene_overview(job):
     cmd.set('transparency', 0.50, 'oval and chain A')
     cmd.select('protein_anchor', 'byres (oval and chain A within 4 of (oval and chain B))')
     cmd.color('gray62', 'protein_anchor')
-    cmd.set('transparency', 0.32, 'protein_anchor')
+    cmd.set('transparency', 0.68 if job.get('is_focus') else 0.32, 'protein_anchor')
     cmd.color('gray65', 'oval and chain A')
     color_full_glycan()
     add_rg_sphere(job)
