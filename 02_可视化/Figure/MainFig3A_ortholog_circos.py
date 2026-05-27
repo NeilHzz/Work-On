@@ -493,13 +493,21 @@ for _, row in sorted_links.iterrows():
     src_width = max(math.radians(0.22), src_end - src_start)
     dst_width = max(math.radians(0.22), dst_end - dst_start)
 
-    chord_color = COL[src_sp] if row["is_target"] else COL_CHORD_BACKGROUND
-    bezier_chord(ax, mid_src, mid_dst,
-                 w1=src_width, w2=dst_width,
-                 color=chord_color,
-                 alpha=ALPHA_CHORD_HIGHLIGHT if row["is_target"] else 0.34,
-                 zorder=1,
-                 is_target=row["is_target"])
+    if row["is_target"]:
+        for chord_color in [COL[src_sp], COL[row["dst_sp"]]]:
+            bezier_chord(ax, mid_src, mid_dst,
+                         w1=src_width, w2=dst_width,
+                         color=chord_color,
+                         alpha=0.42,
+                         zorder=2,
+                         is_target=False)
+    else:
+        bezier_chord(ax, mid_src, mid_dst,
+                     w1=src_width, w2=dst_width,
+                     color=COL_CHORD_BACKGROUND,
+                     alpha=0.34,
+                     zorder=1,
+                     is_target=False)
 
 # ── 4b. 画外环弧段（蛋白级和物种级）──────────────────────────────────────────
 # 先画物种级大弧（颜色块背景 + 细线）
