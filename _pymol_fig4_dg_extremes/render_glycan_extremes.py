@@ -70,18 +70,21 @@ def add_rg_sphere(job):
     if rg_metric:
         target = rg_metric['end']
         if job.get('is_focus'):
-            vx, vy, vz = target[0] - center[0], target[1] - center[1], target[2] - center[2]
+            vx = target[0] - center[0] + 0.65 * rg
+            vy = target[1] - center[1] - 0.18 * rg
+            vz = target[2] - center[2] + 0.45 * rg
             length = math.sqrt(vx * vx + vy * vy + vz * vz) or 1.0
             target = [center[0] + rg * vx / length, center[1] + rg * vy / length, center[2] + rg * vz / length]
-            add_arrow('rg_radius_arrow', center, target, [0.95, 0.34, 0.00], radius=0.055, head_radius=0.18, head_length=0.48)
+            add_arrow('rg_radius_arrow_shadow', center, target, [0.08, 0.08, 0.08], radius=0.073, head_radius=0.21, head_length=0.52)
+            add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.052, head_radius=0.17, head_length=0.47)
         else:
             add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.030, head_radius=0.115, head_length=0.34)
 
 def add_focus_metrics(job):
     metric_specs = {
-        'End-to-End': {'radius': 0.040, 'head_radius': 0.145, 'head_length': 0.42},
-        'Glycan-Protein': {'radius': 0.034, 'head_radius': 0.125, 'head_length': 0.34},
-        'Glycan-Backbone': {'radius': 0.034, 'head_radius': 0.125, 'head_length': 0.34},
+        'End-to-End': {'radius': 0.070, 'head_radius': 0.210, 'head_length': 0.56, 'color': [0.00, 0.44, 0.70]},
+        'Glycan-Protein': {'radius': 0.060, 'head_radius': 0.185, 'head_length': 0.46, 'color': [0.00, 0.62, 0.36]},
+        'Glycan-Backbone': {'radius': 0.060, 'head_radius': 0.185, 'head_length': 0.46, 'color': [0.80, 0.25, 0.55]},
     }
     for metric in job['metrics']:
         name = metric['name']
@@ -89,10 +92,19 @@ def add_focus_metrics(job):
             continue
         spec = metric_specs[name]
         add_arrow(
+            'focus_shadow_' + name.replace('-', '_').replace(' ', '_'),
+            metric['start'],
+            metric['end'],
+            [0.06, 0.06, 0.06],
+            radius=spec['radius'] * 1.34,
+            head_radius=spec['head_radius'] * 1.18,
+            head_length=spec['head_length'],
+        )
+        add_arrow(
             'focus_' + name.replace('-', '_').replace(' ', '_'),
             metric['start'],
             metric['end'],
-            metric['color'],
+            spec['color'],
             radius=spec['radius'],
             head_radius=spec['head_radius'],
             head_length=spec['head_length'],
