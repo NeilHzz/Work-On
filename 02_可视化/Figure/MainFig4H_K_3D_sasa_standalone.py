@@ -1,11 +1,10 @@
 #!/usr/bin/env python
-"""Standalone 3D OVAL Ca2+ hotspot / glycan / SASA schematic for Fig. 4H-K.
+"""Standalone 3D OVAL Ca2+ hotspot / glycan schematic for Fig. 4H-K.
 
 This script renders three representative ReGlyco OVAL models as transparent
 protein surfaces. Accessible Ca2+-relevant acidic hotspot residues are colored
 with the species color, glycan-shielded hotspots are black, the remaining
-surface is gray, glycan residues are simplified as square blocks, and a dashed
-outer envelope marks the whole protein+glycan SASA schematic.
+surface is gray, and glycans are shown as line models.
 
 Outputs are written to 02_可视化/Figure/PNG and are intentionally not wired into
 compose_manuscript_figures.py.
@@ -230,6 +229,10 @@ def build_jobs(structures: list[Structure]) -> list[dict]:
             "envelope_center": [float(v) for v in center],
             "envelope_radius": radius,
         })
+    if jobs:
+        ref_pdb = jobs[0]["pdb"]
+        for job in jobs:
+            job["ref_pdb"] = ref_pdb
     return jobs
 
 
@@ -322,6 +325,14 @@ def write_pymol_renderer(jobs: list[dict]) -> Path:
                 obj.extend([CYLINDER, p0[0], p0[1], p0[2], p1[0], p1[1], p1[2], 0.055, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06])
             cmd.load_cgo(obj, name, zoom=0)
 
+        def show_line_glycan():
+            cmd.show('lines', 'oval and chain B')
+            cmd.color('species_color', 'oval and chain B and elem C')
+            cmd.color('red', 'oval and chain B and elem O')
+            cmd.color('blue', 'oval and chain B and elem N')
+            cmd.color('gray45', 'oval and chain B and not elem C+O+N')
+            cmd.set('line_width', 1.30, 'oval and chain B')
+
         def select_regions(job):
             accessible = 'oval and chain A and resi ' + job['accessible_resi'] if job['accessible_resi'] != 'none' else 'none'
             shielded = 'oval and chain A and resi ' + job['shielded_resi'] if job['shielded_resi'] != 'none' else 'none'
@@ -334,7 +345,9 @@ def write_pymol_renderer(jobs: list[dict]) -> Path:
             set_color('species_color', job['species_color'])
             set_color('neutral_gray', [0.70, 0.70, 0.70])
             set_color('shield_black', [0.02, 0.02, 0.02])
+            cmd.load(job['ref_pdb'], 'ref')
             cmd.load(job['pdb'], 'oval')
+            cmd.align('oval and chain A', 'ref and chain A', cycles=0, transform=1)
             cmd.remove('hydrogens')
             cmd.hide('everything')
             cmd.bg_color('white')
@@ -352,26 +365,25 @@ def write_pymol_renderer(jobs: list[dict]) -> Path:
             cmd.set('sphere_quality', 3)
             cmd.show('surface', 'oval and chain A')
             cmd.color('neutral_gray', 'oval and chain A')
-            cmd.set('transparency', 0.58, 'oval and chain A')
+            cmd.set('transparency', 0.74, 'oval and chain A')
             select_regions(job)
             cmd.color('species_color', 'accessible_region')
             cmd.color('shield_black', 'shielded_region')
-            cmd.set('transparency', 0.20, 'accessible_region')
-            cmd.set('transparency', 0.04, 'shielded_region')
+            cmd.set('transparency', 0.08, 'accessible_region')
+            cmd.set('transparency', 0.00, 'shielded_region')
             cmd.show('sticks', 'accessible_region or shielded_region')
             cmd.set('stick_radius', 0.13, 'accessible_region or shielded_region')
             cmd.show('spheres', 'accessible_region and name CA')
             cmd.show('spheres', 'shielded_region and name CA')
             cmd.set('sphere_scale', 0.38, 'accessible_region and name CA')
             cmd.set('sphere_scale', 0.44, 'shielded_region and name CA')
-            add_square_glycan(job)
-            cmd.orient('oval')
-            cmd.turn('x', -14)
-            cmd.turn('y', 30)
-            cmd.turn('z', -8)
+            show_line_glycan()
+            cmd.orient('ref and chain A')
+            cmd.turn('x', -18)
+            cmd.turn('y', 26)
+            cmd.turn('z', -4)
             cmd.zoom('oval', buffer=18, complete=1)
             cmd.clip('slab', 360)
-            add_camera_dashed_envelope(job)
 
         for item in JOBS:
             setup_scene(item)
@@ -433,21 +445,19 @@ def combine_outputs(jobs: list[dict]) -> None:
     draw = ImageDraw.Draw(canvas)
     title_font = read_font(50, bold=True)
     legend_font = read_font(29, bold=False)
-    draw.text((28, 18), "Fig. 4H-K  OVAL Ca2+ binding accessibility and SASA", fill="#171717", font=title_font)
+    draw.text((28, 18), "Fig. 4H-K  OVAL Ca2+ binding accessibility", fill="#171717", font=title_font)
 
     entries = [
         (34, 86, "species-colored Ca2+ binding region", "#C46B83", "square"),
         (770, 86, "glycan-shielded region", "#111111", "circle"),
         (1185, 86, "remaining protein surface", "#AFAFAF", "circle"),
-        (1760, 86, "dashed SASA envelope", "#111111", "dash"),
-        (2220, 86, "square glycan blocks", "#C46B83", "square"),
+        (1760, 86, "line-mode glycan", "#C46B83", "line"),
     ]
     for x, y, label, color, kind in entries:
         if kind == "square":
             draw.rectangle((x, y + 7, x + 31, y + 38), fill=color)
-        elif kind == "dash":
-            for offset in range(0, 64, 22):
-                draw.line((x + offset, y + 23, x + offset + 13, y + 23), fill=color, width=5)
+        elif kind == "line":
+            draw.line((x, y + 23, x + 66, y + 23), fill=color, width=5)
         else:
             draw.ellipse((x, y + 7, x + 31, y + 38), fill=color)
         draw.text((x + 44, y + 2), label, fill="#303030", font=legend_font)
