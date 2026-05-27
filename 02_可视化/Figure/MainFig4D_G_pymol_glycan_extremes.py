@@ -526,6 +526,20 @@ def trim_white(img: Image.Image, pad: int = 30, threshold: int = 248) -> Image.I
     return rgb.crop((left, top, right, bottom))
 
 
+def trim_white_box(img: Image.Image, pad: int = 30, threshold: int = 248) -> tuple[int, int, int, int]:
+    rgb = img.convert("RGB")
+    data = np.asarray(rgb)
+    mask = np.any(data < threshold, axis=2)
+    if not mask.any():
+        return (0, 0, rgb.width, rgb.height)
+    ys, xs = np.where(mask)
+    left = max(0, int(xs.min()) - pad)
+    right = min(rgb.width, int(xs.max()) + pad + 1)
+    top = max(0, int(ys.min()) - pad)
+    bottom = min(rgb.height, int(ys.max()) + pad + 1)
+    return (left, top, right, bottom)
+
+
 def fit_image(path: str | Path, width: int, height: int, pad: int = 60) -> Image.Image:
     image = trim_white(Image.open(path).convert("RGB"), pad=pad)
     scale = min(width / image.width, height / image.height)
@@ -533,6 +547,18 @@ def fit_image(path: str | Path, width: int, height: int, pad: int = 60) -> Image
     canvas = Image.new("RGB", (width, height), "white")
     canvas.paste(resized, ((width - resized.width) // 2, (height - resized.height) // 2))
     return canvas
+
+
+def fit_image_with_layout(path: str | Path, width: int, height: int, pad: int = 60):
+    raw = Image.open(path).convert("RGB")
+    crop_box = trim_white_box(raw, pad=pad)
+    image = raw.crop(crop_box)
+    scale = min(width / image.width, height / image.height)
+    resized = image.resize((int(image.width * scale), int(image.height * scale)), Image.LANCZOS)
+    canvas = Image.new("RGB", (width, height), "white")
+    offset = ((width - resized.width) // 2, (height - resized.height) // 2)
+    canvas.paste(resized, offset)
+    return canvas, crop_box, scale, offset
 
 
 def circular_view(path: str | Path, diameter: int, pad: int = 130) -> Image.Image:
@@ -614,28 +640,75 @@ def draw_2d_metric_label(draw: ImageDraw.ImageDraw, xy: tuple[int, int], label: 
     draw.text((x, y), label, fill=color, font=font)
 
 
-def annotate_focus_panel(panel: Image.Image) -> Image.Image:
+def marker_masks(data: np.ndarray) -> dict[str, np.ndarray]:
+    red = data[:, :, 0]
+    green = data[:, :, 1]
+    blue = data[:, :, 2]
+    return {
+        "E_start": (red > 120) & (green < 95) & (blue < 95),
+        "E_end": (green > 120) & (red < 95) & (blue < 95),
+        "F_start": (blue > 120) & (red < 95) & (green < 95),
+        "F_end": (red > 120) & (blue > 120) & (green < 120),
+        "G_start": (green > 120) & (blue > 120) & (red < 120),
+        "G_end": (red > 120) & (green > 120) & (blue < 120),
+    }
+
+
+def projected_marker_points(marker_path: str | Path, crop_box: tuple[int, int, int, int], scale: float, offset: tuple[int, int]) -> dict[str, tuple[int, int]]:
+    marker = Image.open(marker_path).convert("RGB").crop(crop_box)
+    data = np.asarray(marker)
+    points: dict[str, tuple[int, int]] = {}
+    for name, mask in marker_masks(data).items():
+        if not mask.any():
+            continue
+        ys, xs = np.where(mask)
+        x = int(round(float(xs.mean()) * scale + offset[0]))
+        y = int(round(float(ys.mean()) * scale + offset[1]))
+        points[name] = (x, y)
+    return points
+
+
+def label_near_line(start: tuple[int, int], end: tuple[int, int], along: float, normal_shift: float) -> tuple[int, int]:
+    sx, sy = start
+    ex, ey = end
+    dx = ex - sx
+    dy = ey - sy
+    length = max((dx * dx + dy * dy) ** 0.5, 1.0)
+    nx, ny = -dy / length, dx / length
+    return (
+        int(round(sx + dx * along + nx * normal_shift)),
+        int(round(sy + dy * along + ny * normal_shift)),
+    )
+
+
+def annotate_focus_panel(panel: Image.Image, points: dict[str, tuple[int, int]]) -> Image.Image:
     canvas = panel.convert("RGBA")
     draw = ImageDraw.Draw(canvas)
     blue = METRIC_COLORS["End-to-End"]
     green = METRIC_COLORS["Glycan-Protein"]
     magenta = METRIC_COLORS["Glycan-Backbone"]
 
-    draw_2d_arrow(draw, (665, 695), (1308, 570), blue, width=8)
-    draw_2d_metric_label(draw, (1138, 572), "E", blue)
+    required = {"E_start", "E_end", "F_start", "F_end", "G_start", "G_end"}
+    if not required.issubset(points):
+        return canvas.convert("RGB")
 
-    draw_2d_arrow(draw, (528, 940), (710, 575), green, width=8)
-    draw_2d_metric_label(draw, (646, 698), "F", green)
+    draw_2d_arrow(draw, points["E_start"], points["E_end"], blue, width=9)
+    draw_2d_metric_label(draw, label_near_line(points["E_start"], points["E_end"], 0.72, -34), "E", blue)
 
-    draw_2d_arrow(draw, (527, 952), (590, 1030), magenta, width=8)
-    draw_2d_metric_label(draw, (602, 1012), "G", magenta)
+    draw_2d_arrow(draw, points["F_end"], points["F_start"], green, width=9)
+    draw_2d_metric_label(draw, label_near_line(points["F_end"], points["F_start"], 0.60, 36), "F", green)
+
+    draw_2d_arrow(draw, points["G_end"], points["G_start"], magenta, width=9)
+    draw_2d_metric_label(draw, label_near_line(points["G_end"], points["G_start"], 0.58, -34), "G", magenta)
     return canvas.convert("RGB")
 
 
 def panel_with_title(job: dict) -> Image.Image:
     target_w, target_h = 1550, 1250
     if job.get("is_focus"):
-        return annotate_focus_panel(fit_image(job["overview_out"], target_w, target_h, pad=45))
+        panel, crop_box, scale, offset = fit_image_with_layout(job["overview_out"], target_w, target_h, pad=45)
+        points = projected_marker_points(job["marker_out"], crop_box, scale, offset)
+        return annotate_focus_panel(panel, points)
 
     panel = Image.new("RGB", (target_w, target_h), "white")
     draw = ImageDraw.Draw(panel)
