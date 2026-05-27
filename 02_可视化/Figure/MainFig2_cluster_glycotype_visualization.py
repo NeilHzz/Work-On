@@ -59,21 +59,24 @@ GLYCAN_TYPES_ORDER = [
     "Other",
 ]
 GLYCAN_TYPE_COLORS = {
-    "High Mannose": "#0072B2",
-    "Pauci-mannose": "#E69F00",
-    "Hybrid": "#009E73",
-    "Complex-Plain": "#CC79A7",
-    "Complex-Fucosylated": "#D55E00",
-    "Complex-Sialylated": "#56B4E9",
-    "Other": "#666666",
+    "High Mannose": "#4F8FB5",
+    "Pauci-mannose": "#D6A64A",
+    "Hybrid": "#4FA582",
+    "Complex-Plain": "#BE7EA5",
+    "Complex-Fucosylated": "#C9793C",
+    "Complex-Sialylated": "#7DB8D8",
+    "Other": "#777777",
 }
 CONSISTENCY_COLORS = {
-    "Single glycan type": "#4C9F70",
-    "Same multi-type set": "#4C78A8",
-    "Mixed type sets": "#C44E52",
+    "Single glycan type": "#6BA982",
+    "Same multi-type set": "#6E8EAD",
+    "Mixed type sets": "#B96B70",
 }
+DIVERSITY_CMAP = mcolors.LinearSegmentedColormap.from_list(
+    "fig2_diversity_muted", ["#F4D57B", "#E8B45B", "#D98C4D", "#C9694A", "#B64D57"]
+)
 HEATMAP_CMAP = mcolors.LinearSegmentedColormap.from_list(
-    "fig2_heatmap_option3", ["#FFF3C4", "#F6C85F", "#E98A70", "#D15A8A", "#A8499A", "#6F3C8F"]
+    "fig2_heatmap_option3", ["#FFF5D6", "#EFD37A", "#DFA078", "#C5798E", "#9B6A9E", "#70578B"]
 )
 
 MS_FILES = {
@@ -271,7 +274,7 @@ def plot_cluster_consistency(cluster_df: pd.DataFrame) -> None:
     union_counts = Counter(cluster_df["union_type_count"])
     union_x = np.arange(1, len(GLYCAN_TYPES_ORDER) + 1)
     union_y = [union_counts.get(value, 0) for value in union_x]
-    colors = plt.cm.YlOrRd(np.linspace(0.28, 0.86, len(union_x)))
+    colors = DIVERSITY_CMAP(np.linspace(0.08, 0.92, len(union_x)))
     bars = ax_right.bar(
         union_x,
         union_y,

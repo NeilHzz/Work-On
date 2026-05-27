@@ -1,0 +1,406 @@
+#!/usr/bin/env python
+"""Generate standalone PyMOL glycan-geometry examples for Fig. 4D-G.
+
+This script selects two geometry-extreme ReGlyco models from
+csv/glycan_conformation_detail.csv, extracts the target MODEL records, and uses
+PyMOL to render glycan-focused stick views with CGO arrows for the four D-G
+geometry quantities.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from pathlib import Path
+import json
+import shutil
+import subprocess
+import textwrap
+
+import numpy as np
+import pandas as pd
+from PIL import Image, ImageDraw, ImageFont
+
+
+ROOT = Path(__file__).resolve().parents[2]
+REGLYCO = ROOT / "01_数据与计算" / "ReGlyco_Ensemble"
+PDB_DIR = REGLYCO / "PDB"
+CSV_DIR = REGLYCO / "csv"
+OUT_DIR = Path(__file__).resolve().parent / "PNG"
+OUT_DIR.mkdir(exist_ok=True)
+
+PYMOL_PYTHON = Path(r"D:\PYMOL\python.exe")
+TMP_DIR = ROOT / "_pymol_fig4_dg_extremes"
+TMP_DIR.mkdir(exist_ok=True)
+
+AA_RESNAMES = {
+    "ALA", "ARG", "ASN", "ASP", "CYS", "GLN", "GLU", "GLY", "HIS", "ILE",
+    "LEU", "LYS", "MET", "PHE", "PRO", "SER", "THR", "TRP", "TYR", "VAL",
+}
+GLYCAN_CHAIN = "B"
+
+SPECIES_COLORS = {
+    "Gallus": "#C46B83",
+    "Anas": "#93AACD",
+    "Columba": "#F3CE9D",
+}
+
+METRIC_COLORS = {
+    "Rg turn": "#D69200",
+    "End-to-End": "#0072B2",
+    "Glycan-Protein": "#009E73",
+    "Glycan-Backbone": "#CC79A7",
+}
+
+
+@dataclass
+class ExtremeModel:
+    role: str
+    structure: str
+    species: str
+    model: int
+    score: float
+    pdb_path: Path
+    extracted_pdb: Path
+    protein_atoms: np.ndarray
+    ca_atoms: np.ndarray
+    glycan_atoms: np.ndarray
+    glycan_residue_centers: list[np.ndarray]
+    metrics: dict[str, tuple[np.ndarray, np.ndarray]]
+
+
+def hex_to_rgb01(hex_color: str) -> list[float]:
+    text = hex_color.lstrip("#")
+    return [int(text[i:i + 2], 16) / 255.0 for i in (0, 2, 4)]
+
+
+def read_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
+    candidates = [
+        "C:/Windows/Fonts/timesbd.ttf" if bold else "C:/Windows/Fonts/times.ttf",
+        "C:/Windows/Fonts/arialbd.ttf" if bold else "C:/Windows/Fonts/arial.ttf",
+    ]
+    for candidate in candidates:
+        if Path(candidate).exists():
+            return ImageFont.truetype(candidate, size)
+    return ImageFont.load_default()
+
+
+def choose_extremes() -> pd.DataFrame:
+    df = pd.read_csv(CSV_DIR / "glycan_conformation_detail.csv")
+    metric_cols = ["glycan_rg", "glycan_end2end", "glycan_dist", "glycan_min_dist_to_ca"]
+    z = df[metric_cols].apply(lambda s: (s - s.mean()) / s.std())
+    df = df.copy()
+    df["extreme_score"] = z["glycan_rg"] + z["glycan_end2end"] + z["glycan_dist"] - z["glycan_min_dist_to_ca"]
+    compact = df.nsmallest(1, "extreme_score").copy()
+    compact["role"] = "Compact / near-backbone glycan"
+    extended = df.nlargest(1, "extreme_score").copy()
+    extended["role"] = "Extended / far-reaching glycan"
+    return pd.concat([compact, extended], ignore_index=True)
+
+
+def extract_model(source: Path, model_number: int, destination: Path) -> None:
+    lines: list[str] = []
+    in_target = False
+    with source.open("r", encoding="utf-8", errors="replace") as handle:
+        for line in handle:
+            if line.startswith("MODEL"):
+                parts = line.split()
+                current = int(parts[1]) if len(parts) > 1 else 1
+                in_target = current == model_number
+                if in_target:
+                    lines.append("MODEL        1\n")
+                continue
+            if line.startswith("ENDMDL"):
+                if in_target:
+                    lines.append("ENDMDL\n")
+                    break
+                in_target = False
+                continue
+            if in_target:
+                lines.append(line)
+    destination.write_text("".join(lines), encoding="utf-8")
+
+
+def parse_model(pdb_path: Path) -> tuple[np.ndarray, np.ndarray, np.ndarray, list[np.ndarray]]:
+    protein_atoms: list[list[float]] = []
+    ca_atoms: list[list[float]] = []
+    glycan_atoms: list[list[float]] = []
+    glycan_residues: dict[tuple[str, str, str], list[list[float]]] = {}
+
+    with pdb_path.open("r", encoding="utf-8", errors="replace") as handle:
+        for line in handle:
+            if not line.startswith(("ATOM", "HETATM")) or len(line) < 54:
+                continue
+            chain = line[21].strip()
+            atom = line[12:16].strip()
+            resname = line[17:20].strip()
+            element = (line[76:78].strip() or atom[0]).upper()
+            if element in {"H", "D"} or atom.startswith("H"):
+                continue
+            xyz = [float(line[30:38]), float(line[38:46]), float(line[46:54])]
+            if chain == GLYCAN_CHAIN:
+                glycan_atoms.append(xyz)
+                key = (chain, resname, line[22:26].strip())
+                glycan_residues.setdefault(key, []).append(xyz)
+            elif resname in AA_RESNAMES:
+                protein_atoms.append(xyz)
+                if atom == "CA":
+                    ca_atoms.append(xyz)
+
+    residue_centers = [np.asarray(coords, dtype=float).mean(axis=0) for coords in glycan_residues.values()]
+    return (
+        np.asarray(protein_atoms, dtype=float),
+        np.asarray(ca_atoms, dtype=float),
+        np.asarray(glycan_atoms, dtype=float),
+        residue_centers,
+    )
+
+
+def nearest_pair(a: np.ndarray, b: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    distances = np.sum((a[:, None, :] - b[None, :, :]) ** 2, axis=2)
+    i, j = np.unravel_index(int(np.argmin(distances)), distances.shape)
+    return a[i], b[j]
+
+
+def closest_point_to_radius(points: np.ndarray, center: np.ndarray, radius: float) -> np.ndarray:
+    distances = np.linalg.norm(points - center, axis=1)
+    return points[int(np.argmin(np.abs(distances - radius)))]
+
+
+def metric_segments(protein_atoms: np.ndarray, ca_atoms: np.ndarray, glycan_atoms: np.ndarray, residue_centers: list[np.ndarray]):
+    glycan_center = glycan_atoms.mean(axis=0)
+    protein_center = ca_atoms.mean(axis=0)
+    rg = float(np.sqrt(np.mean(np.sum((glycan_atoms - glycan_center) ** 2, axis=1))))
+    rg_edge = closest_point_to_radius(glycan_atoms, glycan_center, rg)
+    end_a = residue_centers[0]
+    end_b = residue_centers[-1]
+    glycan_near_ca, ca_near_glycan = nearest_pair(glycan_atoms, ca_atoms)
+    return {
+        "Rg turn": (glycan_center, rg_edge),
+        "End-to-End": (end_a, end_b),
+        "Glycan-Protein": (glycan_center, protein_center),
+        "Glycan-Backbone": (glycan_near_ca, ca_near_glycan),
+    }
+
+
+def build_models() -> list[ExtremeModel]:
+    for old in TMP_DIR.glob("*"):
+        if old.is_file():
+            old.unlink()
+    selected = choose_extremes()
+    models: list[ExtremeModel] = []
+    for _, row in selected.iterrows():
+        source = PDB_DIR / f"{row['structure']}.pdb"
+        extracted = TMP_DIR / f"{row['structure']}_model{int(row['model'])}.pdb"
+        extract_model(source, int(row["model"]), extracted)
+        protein_atoms, ca_atoms, glycan_atoms, residue_centers = parse_model(extracted)
+        models.append(
+            ExtremeModel(
+                role=str(row["role"]),
+                structure=str(row["structure"]),
+                species=str(row["species"]),
+                model=int(row["model"]),
+                score=float(row["extreme_score"]),
+                pdb_path=source,
+                extracted_pdb=extracted,
+                protein_atoms=protein_atoms,
+                ca_atoms=ca_atoms,
+                glycan_atoms=glycan_atoms,
+                glycan_residue_centers=residue_centers,
+                metrics=metric_segments(protein_atoms, ca_atoms, glycan_atoms, residue_centers),
+            )
+        )
+    return models
+
+
+def pymol_jobs(models: list[ExtremeModel]) -> list[dict]:
+    jobs = []
+    for index, model in enumerate(models, start=1):
+        jobs.append({
+            "role": model.role,
+            "structure": model.structure,
+            "species": model.species,
+            "model": model.model,
+            "score": model.score,
+            "pdb": str(model.extracted_pdb),
+            "out": str(TMP_DIR / f"pymol_extreme_{index}.png"),
+            "species_color": hex_to_rgb01(SPECIES_COLORS.get(model.species, "#777777")),
+            "metrics": [
+                {
+                    "name": name,
+                    "color": hex_to_rgb01(METRIC_COLORS[name]),
+                    "start": [float(x) for x in points[0]],
+                    "end": [float(x) for x in points[1]],
+                }
+                for name, points in model.metrics.items()
+            ],
+        })
+    return jobs
+
+
+def write_pymol_script(jobs: list[dict]) -> Path:
+    jobs_path = TMP_DIR / "jobs.json"
+    jobs_path.write_text(json.dumps(jobs, ensure_ascii=False), encoding="utf-8")
+    script_path = TMP_DIR / "render_glycan_extremes.py"
+    script_path.write_text(textwrap.dedent(r'''
+        from pathlib import Path
+        import json
+        import math
+        import pymol
+        from pymol.cgo import CYLINDER, CONE
+
+        pymol.finish_launching(['pymol', '-cq'])
+        from pymol import cmd
+
+        HERE = Path(__file__).resolve().parent
+        JOBS = json.loads((HERE / 'jobs.json').read_text(encoding='utf-8'))
+
+        def set_color(name, rgb):
+            cmd.set_color(name, [float(x) for x in rgb])
+
+        def add_arrow(name, start, end, color, radius=0.24, head_radius=0.72, head_length=2.2):
+            sx, sy, sz = [float(v) for v in start]
+            ex, ey, ez = [float(v) for v in end]
+            vx, vy, vz = ex - sx, ey - sy, ez - sz
+            length = math.sqrt(vx * vx + vy * vy + vz * vz)
+            if length < 1e-6:
+                return
+            ux, uy, uz = vx / length, vy / length, vz / length
+            shaft_end = [ex - ux * head_length, ey - uy * head_length, ez - uz * head_length]
+            r, g, b = [float(c) for c in color]
+            obj = [
+                CYLINDER, sx, sy, sz, shaft_end[0], shaft_end[1], shaft_end[2], radius, r, g, b, r, g, b,
+                CONE, shaft_end[0], shaft_end[1], shaft_end[2], ex, ey, ez, head_radius, 0.0, r, g, b, r, g, b, 1.0, 0.0,
+            ]
+            cmd.load_cgo(obj, name)
+
+        def midpoint(a, b):
+            return [(float(a[i]) + float(b[i])) / 2.0 for i in range(3)]
+
+        def add_label(name, text, pos, color_name):
+            cmd.pseudoatom(name, pos=pos)
+            cmd.hide('nonbonded', name)
+            cmd.set('label_font_id', 7, name)
+            cmd.set('label_size', 22, name)
+            cmd.set('label_color', color_name, name)
+            cmd.label(name, repr(text))
+
+        def scene(job):
+            cmd.reinitialize()
+            set_color('species_color', job['species_color'])
+            for metric in job['metrics']:
+                set_color('metric_' + metric['name'].replace('-', '_').replace(' ', '_'), metric['color'])
+            cmd.load(job['pdb'], 'oval')
+            cmd.remove('hydrogens')
+            cmd.hide('everything')
+            cmd.bg_color('white')
+            cmd.set('opaque_background', 1)
+            cmd.set('antialias', 2)
+            cmd.set('ambient', 0.62)
+            cmd.set('specular', 0.12)
+            cmd.set('shininess', 10)
+            cmd.set('depth_cue', 0)
+            cmd.set('line_smooth', 1)
+            cmd.set('stick_quality', 18)
+            cmd.set('sphere_quality', 2)
+
+            cmd.show('cartoon', 'oval and chain A')
+            cmd.color('gray85', 'oval and chain A')
+            cmd.set('cartoon_transparency', 0.62, 'oval and chain A')
+            cmd.show('sticks', 'oval and chain B')
+            cmd.show('spheres', 'oval and chain B')
+            cmd.color('species_color', 'oval and chain B')
+            cmd.set('stick_radius', 0.28, 'oval and chain B')
+            cmd.set('sphere_scale', 0.28, 'oval and chain B')
+
+            cmd.orient('oval and chain B')
+            cmd.zoom('oval and chain B', 9)
+            cmd.turn('x', -18)
+            cmd.turn('y', 24)
+            cmd.turn('z', -8)
+
+            for index, metric in enumerate(job['metrics']):
+                color_name = 'metric_' + metric['name'].replace('-', '_').replace(' ', '_')
+                add_arrow('arrow_' + str(index), metric['start'], metric['end'], metric['color'])
+                label_pos = midpoint(metric['start'], metric['end'])
+                label_pos[2] += 4.0 + index * 0.8
+                add_label('label_' + str(index), metric['name'], label_pos, color_name)
+
+            cmd.png(job['out'], width=2600, height=2100, dpi=300, ray=0)
+
+        for item in JOBS:
+            scene(item)
+        cmd.quit()
+    '''), encoding="utf-8")
+    return script_path
+
+
+def run_pymol(script_path: Path) -> None:
+    if not PYMOL_PYTHON.exists():
+        raise FileNotFoundError(f"PyMOL Python was not found: {PYMOL_PYTHON}")
+    subprocess.run([str(PYMOL_PYTHON), str(script_path)], cwd=str(TMP_DIR), check=True)
+
+
+def text_size(draw: ImageDraw.ImageDraw, text: str, font: ImageFont.ImageFont) -> tuple[int, int]:
+    box = draw.textbbox((0, 0), text, font=font)
+    return box[2] - box[0], box[3] - box[1]
+
+
+def trim_white(img: Image.Image, pad: int = 30, threshold: int = 248) -> Image.Image:
+    rgb = img.convert("RGB")
+    data = np.asarray(rgb)
+    mask = np.any(data < threshold, axis=2)
+    if not mask.any():
+        return rgb
+    ys, xs = np.where(mask)
+    left = max(0, int(xs.min()) - pad)
+    right = min(rgb.width, int(xs.max()) + pad + 1)
+    top = max(0, int(ys.min()) - pad)
+    bottom = min(rgb.height, int(ys.max()) + pad + 1)
+    return rgb.crop((left, top, right, bottom))
+
+
+def panel_with_title(job: dict) -> Image.Image:
+    image = trim_white(Image.open(job["out"]).convert("RGB"), pad=40)
+    target_w, target_h = 2600, 2100
+    scale = min(target_w / image.width, target_h / image.height)
+    resized = image.resize((int(image.width * scale), int(image.height * scale)), Image.LANCZOS)
+    title_h = 250
+    panel = Image.new("RGB", (target_w, target_h + title_h), "white")
+    panel.paste(resized, ((target_w - resized.width) // 2, title_h + (target_h - resized.height) // 2))
+    draw = ImageDraw.Draw(panel)
+    title_font = read_font(72, bold=True)
+    sub_font = read_font(48, bold=False)
+    title = job["role"]
+    subtitle = f"{job['species']} | {job['structure']} model {job['model']}"
+    tw, _ = text_size(draw, title, title_font)
+    sw, _ = text_size(draw, subtitle, sub_font)
+    draw.text(((target_w - tw) // 2, 38), title, fill="#111111", font=title_font)
+    draw.text(((target_w - sw) // 2, 126), subtitle, fill=SPECIES_COLORS.get(job["species"], "#555555"), font=sub_font)
+    return panel
+
+
+def combine_outputs(jobs: list[dict]) -> None:
+    panels = [panel_with_title(job) for job in jobs]
+    gap = 80
+    canvas = Image.new("RGB", (panels[0].width * 2 + gap, panels[0].height), "white")
+    canvas.paste(panels[0], (0, 0))
+    canvas.paste(panels[1], (panels[0].width + gap, 0))
+    combined = OUT_DIR / "Fig4D_G_pymol_glycan_extremes.png"
+    canvas.save(combined, dpi=(300, 300))
+    print(f"Saved {combined}")
+    for index, panel in enumerate(panels, start=1):
+        path = OUT_DIR / f"Fig4D_G_pymol_glycan_extreme_{index}.png"
+        panel.save(path, dpi=(300, 300))
+        print(f"Saved {path}")
+
+
+def main() -> None:
+    models = build_models()
+    jobs = pymol_jobs(models)
+    script_path = write_pymol_script(jobs)
+    run_pymol(script_path)
+    combine_outputs(jobs)
+
+
+if __name__ == "__main__":
+    main()
