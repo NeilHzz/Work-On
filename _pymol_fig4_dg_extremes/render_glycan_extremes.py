@@ -106,14 +106,15 @@ def add_rg_sphere(job):
     if rg_metric:
         target = rg_metric['end']
         if job.get('is_focus'):
-            add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.055, head_radius=0.18, head_length=0.44)
+            target = [center[0] - 0.82 * rg, center[1] + 0.30 * rg, center[2] + 0.48 * rg]
+            add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.052, head_radius=0.17, head_length=0.42)
         else:
             add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.030, head_radius=0.115, head_length=0.34)
 
-def add_focus_end_to_end(job):
-    metric = next((item for item in job['metrics'] if item['name'] == 'End-to-End'), None)
+def add_focus_glycan_protein_distance(job):
+    metric = next((item for item in job['metrics'] if item['name'] == 'Glycan-Protein'), None)
     if metric:
-        add_dashed_line('focus_end_to_end_dashed', metric['start'], metric['end'], [0.0, 0.62, 0.36], radius=0.065, segments=22)
+        add_dashed_line('focus_glycan_protein_dashed', metric['start'], metric['end'], [0.0, 0.62, 0.36], radius=0.095, segments=12)
 
 def add_focus_metrics(job):
     metric_specs = {
@@ -221,14 +222,14 @@ def scene_overview(job):
     color_full_glycan()
     add_rg_sphere(job)
     if job.get('is_focus'):
-        add_focus_end_to_end(job)
+        add_focus_glycan_protein_distance(job)
     cmd.orient('oval and chain B')
     cmd.turn('x', job['overview_turns'][0])
     cmd.turn('y', job['overview_turns'][1])
     cmd.turn('z', job['overview_turns'][2])
     if job.get('is_focus'):
-        cmd.zoom('(oval and chain B) or protein_anchor', buffer=5, complete=1)
-        cmd.clip('slab', 150)
+        cmd.zoom('oval and chain B', buffer=3, complete=1)
+        cmd.clip('slab', 125)
     else:
         cmd.zoom('oval and chain A', buffer=46, complete=1)
         cmd.clip('slab', 420)
