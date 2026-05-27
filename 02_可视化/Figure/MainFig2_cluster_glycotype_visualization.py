@@ -66,6 +66,16 @@ GLYCAN_TYPE_COLORS = {
     "Complex-Sialylated": "#56B4E9",
     "Other": "#666666",
 }
+
+GLYCAN_TYPE_LABELS_WRAPPED = {
+    "High Mannose": "High\nMannose",
+    "Pauci-mannose": "Pauci-\nmannose",
+    "Hybrid": "Hybrid",
+    "Complex-Plain": "Complex\nPlain",
+    "Complex-Fucosylated": "Complex\nFucosylated",
+    "Complex-Sialylated": "Complex\nSialylated",
+    "Other": "Other",
+}
 CONSISTENCY_COLORS = {
     "Single glycan type": "#4C9F70",
     "Same multi-type set": "#4C78A8",
@@ -506,7 +516,7 @@ def plot_species_glycotype_combined(type_count_df: pd.DataFrame) -> None:
     image = ax_heat.imshow(percentages.to_numpy(), cmap="YlGnBu", aspect="auto", vmin=0)
     ax_heat.set_xticks(np.arange(len(GLYCAN_TYPES_ORDER)))
     ax_heat.set_xticklabels(
-        [label.replace("Complex-", "Complex\n") for label in GLYCAN_TYPES_ORDER],
+        [GLYCAN_TYPE_LABELS_WRAPPED[label] for label in GLYCAN_TYPES_ORDER],
         rotation=0,
         ha="center",
         fontsize=7.8,
