@@ -3,8 +3,8 @@
 
 This script selects two geometry-extreme ReGlyco models from
 csv/glycan_conformation_detail.csv, extracts the target MODEL records, and uses
-PyMOL to render glycan-focused stick views with CGO arrows for the four D-G
-geometry quantities.
+PyMOL to render overview-plus-zoom panels with full glycan views and CGO arrows
+for the four D-G geometry quantities.
 """
 
 from __future__ import annotations
@@ -175,16 +175,16 @@ def closest_point_to_radius(points: np.ndarray, center: np.ndarray, radius: floa
 
 def metric_segments(protein_atoms: np.ndarray, ca_atoms: np.ndarray, glycan_atoms: np.ndarray, residue_centers: list[np.ndarray]):
     glycan_center = glycan_atoms.mean(axis=0)
-    protein_center = ca_atoms.mean(axis=0)
     rg = float(np.sqrt(np.mean(np.sum((glycan_atoms - glycan_center) ** 2, axis=1))))
     rg_edge = closest_point_to_radius(glycan_atoms, glycan_center, rg)
     end_a = residue_centers[0]
     end_b = residue_centers[-1]
+    glycan_near_protein, protein_near_glycan = nearest_pair(glycan_atoms, protein_atoms)
     glycan_near_ca, ca_near_glycan = nearest_pair(glycan_atoms, ca_atoms)
     return {
         "Rg turn": (glycan_center, rg_edge),
         "End-to-End": (end_a, end_b),
-        "Glycan-Protein": (glycan_center, protein_center),
+        "Glycan-Protein": (glycan_center, protein_near_glycan),
         "Glycan-Backbone": (glycan_near_ca, ca_near_glycan),
     }
 
@@ -229,8 +229,12 @@ def pymol_jobs(models: list[ExtremeModel]) -> list[dict]:
             "model": model.model,
             "score": model.score,
             "pdb": str(model.extracted_pdb),
-            "out": str(TMP_DIR / f"pymol_extreme_{index}.png"),
+            "overview_out": str(TMP_DIR / f"pymol_extreme_{index}_overview.png"),
+            "zoom_front_out": str(TMP_DIR / f"pymol_extreme_{index}_zoom_front.png"),
+            "zoom_back_out": str(TMP_DIR / f"pymol_extreme_{index}_zoom_back.png"),
             "species_color": hex_to_rgb01(SPECIES_COLORS.get(model.species, "#777777")),
+            "glycan_center": [float(x) for x in model.glycan_atoms.mean(axis=0)],
+            "glycan_radius": float(np.max(np.linalg.norm(model.glycan_atoms - model.glycan_atoms.mean(axis=0), axis=1))),
             "metrics": [
                 {
                     "name": name,
