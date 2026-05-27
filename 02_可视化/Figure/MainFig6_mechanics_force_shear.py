@@ -228,10 +228,9 @@ def plot_dmrt(ax, res, data_orig, metric_label, unit):
     ax.grid(axis="y", linestyle="--", linewidth=0.6, alpha=0.5, zorder=0)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.set_title(
-        f"{metric_label}\np = {res['p_anova']:.2e}",
-        fontsize=20, pad=10
-    )
+    ax.set_title(metric_label, fontsize=20, pad=18)
+    ax.text(0.5, 1.01, f"p = {res['p_anova']:.2e}",
+            transform=ax.transAxes, ha="center", va="bottom", fontsize=18)
 
 plot_dmrt(axes[0], res_F,   F_DATA,   "F_max",  "N")
 plot_dmrt(axes[1], res_tau, TAU_DATA, "τ_max",  "MPa")

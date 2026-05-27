@@ -458,6 +458,8 @@ def combine_outputs(jobs: list[dict]) -> None:
             draw.rectangle((x, y + 7, x + 31, y + 38), fill=color)
         elif kind == "line":
             draw.line((x, y + 23, x + 66, y + 23), fill=color, width=5)
+            draw.text((x + 86, y + 2), label, fill="#303030", font=legend_font)
+            continue
         else:
             draw.ellipse((x, y + 7, x + 31, y + 38), fill=color)
         draw.text((x + 44, y + 2), label, fill="#303030", font=legend_font)

@@ -256,12 +256,13 @@ def make_stress_legend_bottom(width: int, height: int) -> Image.Image:
     return legend
 
 
-def make_fem_panel_with_bottom_legend(img: Image.Image, target_w: int, target_h: int) -> Image.Image:
+def make_fem_panel_with_bottom_legend(img: Image.Image, target_w: int, target_h: int,
+                                      show_legend: bool = True) -> Image.Image:
     model_limit_x = int(img.width * 0.78)
     model = smooth_fem_render(img).crop((0, 0, model_limit_x, img.height))
     model = trim_white(model, pad=28, threshold=248)
 
-    legend_h = min(280, max(210, int(target_h * 0.11)))
+    legend_h = min(280, max(210, int(target_h * 0.11))) if show_legend else 0
     model_area_h = target_h - legend_h
     panel = Image.new("RGBA", (target_w, target_h), (255, 255, 255, 255))
 
@@ -270,8 +271,9 @@ def make_fem_panel_with_bottom_legend(img: Image.Image, target_w: int, target_h:
     model_y = max(0, (model_area_h - model.height) // 2)
     panel.paste(model, (model_x, model_y), model)
 
-    legend = make_stress_legend_bottom(target_w, legend_h)
-    panel.paste(legend, (0, target_h - legend_h), legend)
+    if show_legend:
+        legend = make_stress_legend_bottom(target_w, legend_h)
+        panel.paste(legend, (0, target_h - legend_h), legend)
     return panel
 
 
@@ -683,7 +685,7 @@ def compose_fig5():
     ]
 
     rows = []
-    for lbl, illus_path, fem_path, sp_name in species_data:
+    for idx, (lbl, illus_path, fem_path, sp_name) in enumerate(species_data):
         # Scale illustration to left_w; it is 2048×2048 so height == left_w → row height
         illus_raw = load_img(illus_path)
         if illus_raw is None:
@@ -698,7 +700,9 @@ def compose_fig5():
         if fem_raw is None:
             fem_img = make_placeholder(right_w, row_h, f"{sp_name} FEM render\n(file not found)")
         else:
-            fem_img = make_fem_panel_with_bottom_legend(fem_raw, right_w, row_h)
+            fem_img = make_fem_panel_with_bottom_legend(
+                fem_raw, right_w, row_h, show_legend=(idx == len(species_data) - 1)
+            )
 
         # Add panel letter to the illustration (top-left)
         illus_img = add_label(illus_img, lbl, font=FONT_LG)
