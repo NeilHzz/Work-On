@@ -135,7 +135,7 @@ def draw_upset(memberships):
         if len(present_y) > 1:
             ax_matrix.plot([xi, xi], [min(present_y), max(present_y)],
                            color=mixed_species_color(group), linewidth=2.6,
-                           zorder=1, solid_capstyle="round")
+                           zorder=2.5, solid_capstyle="round")
         for species in SPECIES_ORDER:
             y = y_positions[species]
             if species in group:
