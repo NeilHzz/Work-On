@@ -419,6 +419,7 @@ def plot_species_type_heatmap(type_count_df: pd.DataFrame) -> None:
     ax.set_xticks(np.arange(-0.5, len(GLYCAN_TYPES_ORDER), 1), minor=True)
     ax.set_yticks(np.arange(-0.5, len(SPECIES_ORDER), 1), minor=True)
     ax.grid(which="minor", color="white", linewidth=1.2)
+    ax.tick_params(which="minor", bottom=False, left=False)
 
     cbar = fig.colorbar(image, ax=ax, fraction=0.032, pad=0.025)
     cbar.set_label("Within-species percentage", fontsize=9)
