@@ -405,7 +405,7 @@ fig, ax = plt.subplots(figsize=(8.4, 8.4), facecolor="white")
 ax.set_aspect("equal")
 ax.axis("off")
 ax.set_xlim(-1.88, 1.90)
-ax.set_ylim(-2.05, 1.78)
+ax.set_ylim(-2.42, 1.78)
 
 # ── 辅助函数 ──────────────────────────────────────────────────────────────────
 def polar_xy(r, angle_rad):
