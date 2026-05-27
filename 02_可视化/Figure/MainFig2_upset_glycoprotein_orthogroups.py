@@ -144,11 +144,6 @@ def draw_upset(memberships):
                 color=SPECIES_COLORS[species], edgecolor="none", zorder=3,
             )
             bottom += segment_h
-        ax_top.bar(
-            xi, value, width=bar_width,
-            facecolor="none", edgecolor="#222222",
-            linewidth=1.15, zorder=4,
-        )
     for xi, value in zip(x, top_counts):
         offset = max(top_counts) * 0.025
         ax_top.text(xi, value + offset, str(value),
