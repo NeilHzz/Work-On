@@ -17,7 +17,6 @@ from dataclasses import dataclass
 from pathlib import Path
 import json
 import math
-import shutil
 import subprocess
 import textwrap
 
@@ -176,6 +175,28 @@ def split_hotspot_residues(structure: Structure) -> tuple[list[int], list[int]]:
     return sorted(int(x) for x in accessible), sorted(int(x) for x in shielded)
 
 
+def extract_first_model(source: Path, destination: Path) -> None:
+    lines: list[str] = []
+    in_model = False
+    saw_model = False
+    with source.open("r", encoding="utf-8", errors="replace") as handle:
+        for line in handle:
+            if line.startswith("MODEL"):
+                if saw_model:
+                    break
+                saw_model = True
+                in_model = True
+                lines.append("MODEL        1\n")
+                continue
+            if line.startswith("ENDMDL") and in_model:
+                lines.append("ENDMDL\n")
+                break
+            if in_model or not saw_model:
+                if line.startswith(("ATOM", "HETATM", "TER", "END")):
+                    lines.append(line)
+    destination.write_text("".join(lines), encoding="utf-8")
+
+
 def residue_selection(residues: list[int]) -> str:
     if not residues:
         return "none"
@@ -190,7 +211,7 @@ def build_jobs(structures: list[Structure]) -> list[dict]:
     jobs = []
     for structure in structures:
         pdb_path = TMP_DIR / f"{structure.species}.pdb"
-        shutil.copyfile(structure.source_pdb, pdb_path)
+        extract_first_model(structure.source_pdb, pdb_path)
         accessible, shielded = split_hotspot_residues(structure)
         all_points = np.vstack([structure.protein_atoms, structure.glycan_atoms])
         center = all_points.mean(axis=0)
