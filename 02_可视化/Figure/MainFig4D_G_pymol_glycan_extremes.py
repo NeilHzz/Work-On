@@ -418,14 +418,56 @@ def trim_white(img: Image.Image, pad: int = 30, threshold: int = 248) -> Image.I
     return rgb.crop((left, top, right, bottom))
 
 
-def panel_with_title(job: dict) -> Image.Image:
-    image = trim_white(Image.open(job["out"]).convert("RGB"), pad=40)
-    target_w, target_h = 2600, 2100
-    scale = min(target_w / image.width, target_h / image.height)
+def fit_image(path: str | Path, width: int, height: int, pad: int = 60) -> Image.Image:
+    image = trim_white(Image.open(path).convert("RGB"), pad=pad)
+    scale = min(width / image.width, height / image.height)
     resized = image.resize((int(image.width * scale), int(image.height * scale)), Image.LANCZOS)
-    title_h = 250
-    panel = Image.new("RGB", (target_w, target_h + title_h), "white")
-    panel.paste(resized, ((target_w - resized.width) // 2, title_h + (target_h - resized.height) // 2))
+    canvas = Image.new("RGB", (width, height), "white")
+    canvas.paste(resized, ((width - resized.width) // 2, (height - resized.height) // 2))
+    return canvas
+
+
+def circular_view(path: str | Path, diameter: int, pad: int = 130) -> Image.Image:
+    image = trim_white(Image.open(path).convert("RGB"), pad=pad)
+    content_d = int(diameter * 0.90)
+    scale = min(content_d / image.width, content_d / image.height)
+    resized = image.resize((int(image.width * scale), int(image.height * scale)), Image.LANCZOS)
+    square = Image.new("RGB", (diameter, diameter), "white")
+    square.paste(resized, ((diameter - resized.width) // 2, (diameter - resized.height) // 2))
+    mask = Image.new("L", (diameter, diameter), 0)
+    ImageDraw.Draw(mask).ellipse((0, 0, diameter - 1, diameter - 1), fill=255)
+    result = Image.new("RGBA", (diameter, diameter), (255, 255, 255, 0))
+    result.paste(square.convert("RGBA"), (0, 0), mask)
+    return result
+
+
+def draw_rotation_marker(draw: ImageDraw.ImageDraw, center_x: int, center_y: int) -> None:
+    font = read_font(54, bold=False)
+    label = "180 deg"
+    lw, lh = text_size(draw, label, font)
+    draw.text((center_x - lw // 2, center_y - 88), label, fill="#111111", font=font)
+    arc_box = (center_x - 48, center_y - 30, center_x + 48, center_y + 66)
+    draw.arc(arc_box, start=45, end=330, fill="#111111", width=6)
+    draw.polygon(
+        [(center_x + 27, center_y - 28), (center_x + 63, center_y - 24), (center_x + 43, center_y + 5)],
+        fill="#111111",
+    )
+
+
+def draw_metric_legend(draw: ImageDraw.ImageDraw, y: int, x: int = 120) -> None:
+    legend_font = read_font(38, bold=True)
+    for name, color in METRIC_COLORS.items():
+        draw.line((x, y + 20, x + 98, y + 20), fill=color, width=10)
+        draw.polygon([(x + 98, y + 20), (x + 72, y + 6), (x + 72, y + 34)], fill=color)
+        label = METRIC_SHORT_LABELS[name]
+        draw.text((x + 118, y - 5), label, fill="#222222", font=legend_font)
+        lw, _ = text_size(draw, label, legend_font)
+        x += 170 + lw
+
+
+def panel_with_title(job: dict) -> Image.Image:
+    target_w, target_h = 4400, 2200
+    panel = Image.new("RGB", (target_w, target_h), "white")
     draw = ImageDraw.Draw(panel)
     title_font = read_font(72, bold=True)
     sub_font = read_font(48, bold=False)
@@ -433,27 +475,36 @@ def panel_with_title(job: dict) -> Image.Image:
     subtitle = f"{job['species']} | {job['structure']} model {job['model']}"
     tw, _ = text_size(draw, title, title_font)
     sw, _ = text_size(draw, subtitle, sub_font)
-    draw.text(((target_w - tw) // 2, 38), title, fill="#111111", font=title_font)
-    draw.text(((target_w - sw) // 2, 126), subtitle, fill=SPECIES_COLORS.get(job["species"], "#555555"), font=sub_font)
-    legend_font = read_font(36, bold=True)
-    x = 70
-    y = target_h + title_h - 104
-    for name, color in METRIC_COLORS.items():
-        draw.line((x, y + 18, x + 92, y + 18), fill=color, width=10)
-        draw.polygon([(x + 92, y + 18), (x + 68, y + 5), (x + 68, y + 31)], fill=color)
-        label = METRIC_SHORT_LABELS[name]
-        draw.text((x + 112, y - 5), label, fill="#222222", font=legend_font)
-        lw, _ = text_size(draw, label, legend_font)
-        x += 152 + lw
+    draw.text(((target_w - tw) // 2, 45), title, fill="#111111", font=title_font)
+    draw.text(((target_w - sw) // 2, 135), subtitle, fill=SPECIES_COLORS.get(job["species"], "#555555"), font=sub_font)
+
+    overview = fit_image(job["overview_out"], 1500, 1450, pad=80)
+    front = circular_view(job["zoom_front_out"], 1160, pad=150)
+    back = circular_view(job["zoom_back_out"], 1160, pad=150)
+
+    overview_x, overview_y = 80, 350
+    front_x, zoom_y = 1760, 380
+    back_x = 3060
+    circle_d = 1160
+
+    panel.paste(overview, (overview_x, overview_y))
+    panel.paste(front.convert("RGB"), (front_x, zoom_y), front.split()[-1])
+    panel.paste(back.convert("RGB"), (back_x, zoom_y), back.split()[-1])
+
+    draw.ellipse((front_x, zoom_y, front_x + circle_d, zoom_y + circle_d), outline="#111111", width=10)
+    draw.ellipse((back_x, zoom_y, back_x + circle_d, zoom_y + circle_d), outline="#111111", width=10)
+    draw.line((overview_x + 1320, overview_y + 650, front_x, zoom_y + circle_d // 2), fill="#111111", width=8)
+    draw_rotation_marker(draw, (front_x + circle_d + back_x) // 2, zoom_y + circle_d // 2)
+    draw_metric_legend(draw, target_h - 190)
     return panel
 
 
 def combine_outputs(jobs: list[dict]) -> None:
     panels = [panel_with_title(job) for job in jobs]
-    gap = 80
-    canvas = Image.new("RGB", (panels[0].width * 2 + gap, panels[0].height), "white")
+    gap = 100
+    canvas = Image.new("RGB", (panels[0].width, panels[0].height * 2 + gap), "white")
     canvas.paste(panels[0], (0, 0))
-    canvas.paste(panels[1], (panels[0].width + gap, 0))
+    canvas.paste(panels[1], (0, panels[0].height + gap))
     combined = OUT_DIR / "Fig4D_G_pymol_glycan_extremes.png"
     canvas.save(combined, dpi=(300, 300))
     print(f"Saved {combined}")

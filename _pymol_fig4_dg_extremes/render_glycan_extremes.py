@@ -3,7 +3,7 @@ from pathlib import Path
 import json
 import math
 import pymol
-from pymol.cgo import CYLINDER, CONE, BEGIN, LINES, VERTEX, END
+from pymol.cgo import CYLINDER, CONE, BEGIN, LINES, COLOR, VERTEX, END
 
 pymol.finish_launching(['pymol', '-cq'])
 from pymol import cmd
@@ -37,10 +37,23 @@ def add_line(name, start, end, color, radius=0.045):
     r, g, b = [float(c) for c in color]
     cmd.load_cgo([CYLINDER, sx, sy, sz, ex, ey, ez, radius, r, g, b, r, g, b], name)
 
-def midpoint(a, b):
-    return [(float(a[i]) + float(b[i])) / 2.0 for i in range(3)]
+def add_camera_circle(name, center, radius, color=(0.0, 0.0, 0.0), segments=144):
+    view = cmd.get_view()
+    right = [view[0], view[1], view[2]]
+    up = [view[3], view[4], view[5]]
+    center = [float(v) for v in center]
+    r, g, b = [float(c) for c in color]
+    obj = [BEGIN, LINES, COLOR, r, g, b]
+    for i in range(segments):
+        a0 = 2.0 * math.pi * i / segments
+        a1 = 2.0 * math.pi * (i + 1) / segments
+        p0 = [center[j] + radius * math.cos(a0) * right[j] + radius * math.sin(a0) * up[j] for j in range(3)]
+        p1 = [center[j] + radius * math.cos(a1) * right[j] + radius * math.sin(a1) * up[j] for j in range(3)]
+        obj.extend([VERTEX, p0[0], p0[1], p0[2], VERTEX, p1[0], p1[1], p1[2]])
+    obj.append(END)
+    cmd.load_cgo(obj, name)
 
-def scene(job):
+def setup_scene(job):
     cmd.reinitialize()
     set_color('species_color', job['species_color'])
     for metric in job['metrics']:
@@ -58,14 +71,12 @@ def scene(job):
     cmd.set('line_smooth', 1)
     cmd.set('stick_quality', 18)
     cmd.set('sphere_quality', 2)
+    cmd.set('surface_quality', 1)
     cmd.set('orthoscopic', 1)
     cmd.set('two_sided_lighting', 1)
     cmd.set('transparency_mode', 3)
 
-    cmd.select('protein_context', 'byres (oval and chain A within 10 of (oval and chain B))')
-    cmd.show('lines', 'protein_context')
-    cmd.color('gray70', 'protein_context')
-    cmd.set('line_width', 1.8, 'protein_context')
+def color_full_glycan():
     cmd.show('sticks', 'oval and chain B')
     cmd.show('spheres', 'oval and chain B')
     cmd.color('species_color', 'oval and chain B and elem C')
@@ -77,21 +88,50 @@ def scene(job):
     cmd.set('stick_ball', 1, 'oval and chain B')
     cmd.set('stick_ball_ratio', 1.55, 'oval and chain B')
 
-    cmd.orient('oval and chain B')
-    cmd.turn('x', -16)
-    cmd.turn('y', 22)
-    cmd.turn('z', -12)
-    cmd.zoom('oval and chain B', 16)
-    cmd.clip('slab', 120)
+def scene_overview(job):
+    setup_scene(job)
+    cmd.show('surface', 'oval and chain A')
+    cmd.color('gray85', 'oval and chain A')
+    cmd.set('transparency', 0.42, 'oval and chain A')
+    cmd.show('lines', 'oval and chain A')
+    cmd.color('gray65', 'oval and chain A')
+    cmd.set('line_width', 0.65, 'oval and chain A')
+    color_full_glycan()
+    cmd.orient('oval and chain A or oval and chain B')
+    cmd.turn('x', -12)
+    cmd.turn('y', 26)
+    cmd.turn('z', -6)
+    cmd.zoom('oval and chain A or oval and chain B', 10)
+    cmd.clip('slab', 220)
+    add_camera_circle('glycan_locator', job['glycan_center'], max(6.0, job['glycan_radius'] * 1.35))
+    cmd.png(job['overview_out'], width=1800, height=1600, dpi=300, ray=0)
 
-    for index, metric in enumerate(job['metrics']):
-        if metric['name'] == 'Glycan-Protein':
-            add_line('metric_' + str(index), metric['start'], metric['end'], metric['color'], radius=0.040)
-        else:
-            add_arrow('metric_' + str(index), metric['start'], metric['end'], metric['color'])
+def scene_zoom(job, out_path, rotate_y=0, show_metrics=True):
+    setup_scene(job)
 
-    cmd.png(job['out'], width=2600, height=2100, dpi=300, ray=0)
+    cmd.select('protein_context', 'byres (oval and chain A within 10 of (oval and chain B))')
+    cmd.show('lines', 'protein_context')
+    cmd.color('gray70', 'protein_context')
+    cmd.set('line_width', 1.35, 'protein_context')
+    color_full_glycan()
+    cmd.orient('(oval and chain B) or protein_context')
+    cmd.turn('x', -14)
+    cmd.turn('y', 18 + float(rotate_y))
+    cmd.turn('z', -8)
+    cmd.zoom('(oval and chain B) or protein_context', 9)
+    cmd.clip('slab', 160)
+
+    if show_metrics:
+        for index, metric in enumerate(job['metrics']):
+            if metric['name'] == 'Glycan-Protein':
+                add_line('metric_' + str(index), metric['start'], metric['end'], metric['color'], radius=0.040)
+            else:
+                add_arrow('metric_' + str(index), metric['start'], metric['end'], metric['color'])
+
+    cmd.png(out_path, width=1700, height=1700, dpi=300, ray=0)
 
 for item in JOBS:
-    scene(item)
+    scene_overview(item)
+    scene_zoom(item, item['zoom_front_out'], rotate_y=0, show_metrics=True)
+    scene_zoom(item, item['zoom_back_out'], rotate_y=180, show_metrics=False)
 cmd.quit()
