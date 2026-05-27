@@ -293,8 +293,6 @@ def plot_cluster_consistency(cluster_df: pd.DataFrame) -> None:
     ax_right.set_ylim(0, max(union_y) * 1.18)
     clean_axes(ax_right)
 
-    fig.text(0.01, 0.98, "A", fontsize=14, fontweight="bold", ha="left", va="top")
-    fig.text(0.515, 0.98, "B", fontsize=14, fontweight="bold", ha="left", va="top")
     save_fig(fig, "Fig2_cluster_glycotype_consistency")
     plt.close(fig)
 
