@@ -10,7 +10,7 @@ Count: 30 legacy matched panel PNGs; current Fig2_composed now includes addition
 - Fig1C.png <= eggtooth/Gallus.jpg + eggtooth/Anas.jpg + eggtooth/Columba.jpg
 - Fig1D.png <= Fig1D.png
 - Fig2A <= Figure/PNG/Fig2.png (glycoprotein orthogroup UpSet)
-- Fig2B <= 260526/01_main_subfigures_matched_to_composed/Fig3A.png (BLAST ortholog chord diagram)
+- Fig2B <= 260526/01_main_subfigures_matched_to_composed/Fig3A.png (BLAST ortholog chord diagram; arc width = sequence length; chord endpoints = HSP regions; no no-ortholog sector)
 - Fig2C <= Figure/PNG/Fig2_cluster_glycotype_consistency.png
 - Fig2D <= Figure/PNG/Fig2_species_glycotype_proportion.png
 - Fig2E <= Figure/PNG/Fig2_species_glycotype_heatmap.png
