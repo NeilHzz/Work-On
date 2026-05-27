@@ -54,7 +54,7 @@ def add_metric_label(name, label, start, end, color, shift=(0.0, 0.0, 0.0)):
     cmd.pseudoatom(name + '_label', pos=pos)
     cmd.label(name + '_label', repr(label))
     cmd.set('label_color', color_name, name + '_label')
-    cmd.set('label_size', 38, name + '_label')
+    cmd.set('label_size', 22, name + '_label')
     cmd.set('label_font_id', 7, name + '_label')
     cmd.set('label_position', [0, 0, 0], name + '_label')
 
@@ -97,9 +97,9 @@ def add_rg_sphere(job):
 
 def add_focus_metrics(job):
     metric_specs = {
-        'End-to-End': {'letter': 'E', 'radius': 0.115, 'head_radius': 0.300, 'head_length': 0.70, 'color': [0.00, 0.44, 0.70], 'shift': [0.70, 0.30, 0.10]},
-        'Glycan-Protein': {'letter': 'F', 'radius': 0.100, 'head_radius': 0.270, 'head_length': 0.58, 'color': [0.00, 0.62, 0.36], 'shift': [-0.25, 0.50, 0.20]},
-        'Glycan-Backbone': {'letter': 'G', 'radius': 0.125, 'head_radius': 0.330, 'head_length': 0.58, 'color': [0.80, 0.25, 0.55], 'shift': [0.30, -0.15, 0.28]},
+        'End-to-End': {'letter': 'E', 'radius': 0.115, 'head_radius': 0.300, 'head_length': 0.70, 'color': [0.00, 0.44, 0.70], 'shift': [1.10, 0.82, 0.18]},
+        'Glycan-Protein': {'letter': 'F', 'radius': 0.100, 'head_radius': 0.270, 'head_length': 0.58, 'color': [0.00, 0.62, 0.36], 'shift': [-0.95, 0.72, 0.22]},
+        'Glycan-Backbone': {'letter': 'G', 'radius': 0.125, 'head_radius': 0.330, 'head_length': 0.58, 'color': [0.80, 0.25, 0.55], 'shift': [0.70, -0.68, 0.32]},
     }
     for metric in job['metrics']:
         name = metric['name']
@@ -116,7 +116,7 @@ def add_focus_metrics(job):
             head_length=spec['head_length'],
         )
         if name in {'Glycan-Protein', 'Glycan-Backbone'}:
-            add_endpoint_spheres('endpoint_' + name.replace('-', '_').replace(' ', '_'), metric['start'], metric['end'], spec['color'], radius=0.24)
+            add_endpoint_spheres('endpoint_' + name.replace('-', '_').replace(' ', '_'), metric['start'], metric['end'], spec['color'], radius=0.15)
         add_metric_label(
             'label_' + name.replace('-', '_').replace(' ', '_'),
             spec['letter'],
