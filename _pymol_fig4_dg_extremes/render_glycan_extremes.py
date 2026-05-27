@@ -53,6 +53,26 @@ def add_camera_circle(name, center, radius, color=(0.0, 0.0, 0.0), segments=144)
     obj.append(END)
     cmd.load_cgo(obj, name)
 
+def add_rg_sphere(job):
+    center = [float(v) for v in job['glycan_center']]
+    rg = float(job['glycan_rg'])
+    set_color('rg_gold', [1.0, 0.58, 0.04])
+    cmd.pseudoatom('rg_centroid', pos=center, vdw=0.30)
+    cmd.show('spheres', 'rg_centroid')
+    cmd.color('rg_gold', 'rg_centroid')
+    cmd.pseudoatom('rg_shell', pos=center, vdw=rg)
+    cmd.show('spheres', 'rg_shell')
+    cmd.color('rg_gold', 'rg_shell')
+    cmd.set('sphere_transparency', 0.82, 'rg_shell')
+    cmd.set('sphere_quality', 3, 'rg_shell')
+    target = None
+    for metric in job['metrics']:
+        if metric['name'] == 'Rg turn':
+            target = metric['end']
+            break
+    if target:
+        add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.030, head_radius=0.115, head_length=0.34)
+
 def setup_scene(job):
     cmd.reinitialize()
     set_color('species_color', job['species_color'])
@@ -100,6 +120,7 @@ def scene_overview(job):
     cmd.set('transparency', 0.32, 'protein_anchor')
     cmd.color('gray65', 'oval and chain A')
     color_full_glycan()
+    add_rg_sphere(job)
     cmd.orient('oval and chain B')
     cmd.turn('x', job['overview_turns'][0])
     cmd.turn('y', job['overview_turns'][1])
