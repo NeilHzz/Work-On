@@ -510,8 +510,10 @@ def species_range(angle_dict):
 
 for sp, ang_dict in [("Gallus", g_angles), ("Anas", a_angles), ("Columba", c_angles)]:
     # 用物种颜色先画常规弧段
-    regular_arcs = {acc: v for acc, v in ang_dict.items() if acc not in GREY_G_ACCS}
-    grey_arcs    = {acc: v for acc, v in ang_dict.items() if acc in GREY_G_ACCS}
+    regular_arcs = {acc: v for acc, v in ang_dict.items()
+                    if not (INCLUDE_NO_ORTHOLOG_GALLUS and acc in GREY_G_ACCS)}
+    grey_arcs    = {acc: v for acc, v in ang_dict.items()
+                    if INCLUDE_NO_ORTHOLOG_GALLUS and acc in GREY_G_ACCS}
 
     if regular_arcs:
         s_rad = min(v[1] for v in regular_arcs.values())
@@ -543,15 +545,26 @@ for ang_dict in [g_angles, a_angles, c_angles]:
 # 在外圈刻度位置标注 bitscore 区间内某几个代表数字
 # 这里简化：只在物种弧的中点位置画物种标签
 
-# ── 4d. 标签（每物种 top10，目标蛋白必显示）────────────────────────────────────
+# ── 4d. 标签（每物种最长的非目标蛋白 + 目标蛋白必显示）───────────────────────────
+def _angular_distance(a, b):
+    diff = abs((a - b + math.pi) % (2 * math.pi) - math.pi)
+    return diff
+
+
 sp_top_map = {"Gallus": g_top, "Anas": a_top, "Columba": c_top}
 for sp, ang_dict in [("Gallus", g_angles), ("Anas", a_angles), ("Columba", c_angles)]:
     color   = COL[sp]
     top_set = sp_top_map[sp]
-    for acc, (mid, start, end) in ang_dict.items():
+    label_items = [(acc, values) for acc, values in ang_dict.items() if acc in top_set]
+    label_items.sort(key=lambda item: item[1][0])
+    placed_angles = []
+
+    for acc, (mid, start, end) in label_items:
         if acc not in top_set:
             continue   # 非 top10 不贴标签
-        r_label = RADIUS + LABEL_PAD
+        nearby = sum(1 for prev in placed_angles if _angular_distance(mid, prev) < math.radians(12))
+        r_label = RADIUS + LABEL_PAD + min(nearby, 4) * 0.085
+        placed_angles.append(mid)
         x, y    = polar_xy(r_label, mid)
 
         angle_deg = math.degrees(mid)
@@ -606,11 +619,6 @@ ax.legend(handles=legend_patches,
           prop={"family": "Times New Roman", "size": 10},
           bbox_to_anchor=(0.02, 0.02))
 
-# ── 4g. 标题 ──────────────────────────────────────────────────────────────────
-ax.set_title("BLAST Ortholog Mapping – Chord Diagram",
-             fontsize=18, fontweight="bold", pad=8, color="#222222",
-             fontfamily="Times New Roman")
-
-plt.tight_layout()
+plt.subplots_adjust(left=0.02, right=0.98, bottom=0.02, top=0.98)
 save_fig(plt.gcf(), "Fig3B")
 plt.close()
