@@ -30,10 +30,10 @@ COL = {
 ALPHA_CHORD = 0.45          # 弦半透明度
 ALPHA_CHORD_HIGHLIGHT = 0.7 # 目标蛋白弦高亮透明度
 ARC_WIDTH   = 0.08          # 外环宽度（radius单位）
-RADIUS      = 1.0
+RADIUS      = 1.16
 GAP_DEG     = 6             # 物种间隔（度）
 PROTEIN_GAP_DEG = 0.8       # 蛋白间隔（度）
-LABEL_PAD   = 0.13          # 标签离外环距离
+LABEL_PAD   = 0.19          # 标签离外环距离
 FONT_FAMILY = "Times New Roman"
 
 # ── 1. 蛋白名称映射 ──────────────────────────────────────────────────────────────
@@ -242,6 +242,7 @@ all_links["is_target"] = all_links["target"].notna()
 # ── 2. 各物种蛋白列表（按序列长度降序）────────────────────────────────────────
 # ── 灰色 Gallus 蛋白（原始 HSP 有记录但未通过筛选）───────────────────────────
 COL_GREY   = "#aaaaaa"   # 无匹配 Gallus 蛋白颜色
+INCLUDE_NO_ORTHOLOG_GALLUS = False
 GREY_G_ACCS = {
     'A0A1D5PMF7','A0A1D5PT25','A0A3Q2TZZ7','A0A8V0X4N4','A0A8V0Y248',
     'A0A8V0Y614','A0A8V0YB27','A0A8V0YUU0','A0A8V0YYS9','A0A8V0Z1W6',
@@ -265,12 +266,12 @@ def build_protein_list(species: str):
 
 g_prots = build_protein_list("Gallus")
 
-# 添加灰色 Gallus 到 g_prots 末尾
+# 可选：添加灰色 Gallus no-ortholog 区段。当前主图不展示该非同源部分。
 grey_df = pd.DataFrame([
     {"acc": acc, "total": max(int(SEQ_LEN.get(acc, GREY_SCORE)), 1)} for acc in sorted(GREY_G_ACCS)
     if acc not in set(g_prots["acc"])
 ])
-if not grey_df.empty:
+if INCLUDE_NO_ORTHOLOG_GALLUS and not grey_df.empty:
     g_prots = pd.concat([g_prots, grey_df], ignore_index=True)
 
 a_prots = build_protein_list("Anas")
@@ -280,7 +281,7 @@ TOP_N = 5   # 每物种额外显示序列最长的前5个非目标蛋白
 
 # 目标蛋白始终显示
 # 并额外展示 OC17
-G_EXTRA_LABELS = {'V5NUE7'}   # OC17 必展示
+G_EXTRA_LABELS = set()
 def _target_accs(species):
     mask = ((all_links["src_sp"] == species) | (all_links["dst_sp"] == species)) & all_links["is_target"]
     accs = set()
@@ -395,12 +396,12 @@ def acc_species(acc):
 matplotlib.rcParams["font.family"] = "Times New Roman"
 matplotlib.rcParams["font.serif"]  = ["Times New Roman"]
 
-# 双栏宽度 7英寸，给名称留足够边距
-fig, ax = plt.subplots(figsize=(8, 8), facecolor="white")
+# 双栏宽度，给名称留足够边距
+fig, ax = plt.subplots(figsize=(8.4, 8.4), facecolor="white")
 ax.set_aspect("equal")
 ax.axis("off")
-ax.set_xlim(-2.0, 2.0)
-ax.set_ylim(-2.0, 2.0)
+ax.set_xlim(-1.72, 1.72)
+ax.set_ylim(-1.76, 1.70)
 
 # ── 辅助函数 ──────────────────────────────────────────────────────────────────
 def polar_xy(r, angle_rad):
@@ -568,14 +569,12 @@ for sp, ang_dict in [("Gallus", g_angles), ("Anas", a_angles), ("Columba", c_ang
 
         label_text = all_display_names.get(acc, acc)
         fw = "bold" if is_target_prot else "normal"
-        fs = 16 if is_target_prot else 10
+        fs = 13 if is_target_prot else 9
 
         if is_oc17:
             label_color = COL_GREY
-        elif is_target_prot:
-            label_color = color   # 物种代表色
         else:
-            label_color = "black"
+            label_color = color   # 所有蛋白名均使用所属物种代表色
 
         txt = ax.text(x, y, label_text,
                       ha=ha, va="center",
@@ -596,7 +595,6 @@ legend_patches = [
     mpatches.Patch(color=COL["Gallus"],  label=r"$\it{Gallus}$",  alpha=1.0),
     mpatches.Patch(color=COL["Anas"],    label=r"$\it{Anas}$",    alpha=1.0),
     mpatches.Patch(color=COL["Columba"], label=r"$\it{Columba}$", alpha=1.0),
-    mpatches.Patch(color=COL_GREY,        label=r"$\it{Gallus}$ (no ortholog)", alpha=0.85),
 ]
 ax.legend(handles=legend_patches,
           loc="lower left",
