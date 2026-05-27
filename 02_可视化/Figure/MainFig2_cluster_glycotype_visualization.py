@@ -66,16 +66,6 @@ GLYCAN_TYPE_COLORS = {
     "Complex-Sialylated": "#56B4E9",
     "Other": "#666666",
 }
-
-GLYCAN_TYPE_LABELS_WRAPPED = {
-    "High Mannose": "High\nMannose",
-    "Pauci-mannose": "Pauci-\nmannose",
-    "Hybrid": "Hybrid",
-    "Complex-Plain": "Complex\nPlain",
-    "Complex-Fucosylated": "Complex\nFucosylated",
-    "Complex-Sialylated": "Complex\nSialylated",
-    "Other": "Other",
-}
 CONSISTENCY_COLORS = {
     "Single glycan type": "#4C9F70",
     "Same multi-type set": "#4C78A8",
@@ -439,135 +429,6 @@ def plot_species_type_heatmap(type_count_df: pd.DataFrame) -> None:
     plt.close(fig)
 
 
-def plot_species_glycotype_combined(type_count_df: pd.DataFrame) -> None:
-    counts = (
-        type_count_df.pivot(index="species", columns="glycan_type", values="protein_count")
-        .reindex(index=SPECIES_ORDER, columns=GLYCAN_TYPES_ORDER)
-        .fillna(0)
-        .astype(int)
-    )
-    percentages = counts.div(counts.sum(axis=1), axis=0) * 100
-
-    fig = plt.figure(figsize=(9.4, 4.35))
-    gs = fig.add_gridspec(
-        1,
-        3,
-        width_ratios=[1.24, 1.74, 0.045],
-        left=0.075,
-        right=0.965,
-        bottom=0.26,
-        top=0.82,
-        wspace=0.18,
-    )
-    ax_bar = fig.add_subplot(gs[0, 0])
-    ax_heat = fig.add_subplot(gs[0, 1])
-    ax_cbar = fig.add_subplot(gs[0, 2])
-
-    y = np.arange(len(SPECIES_ORDER))
-    left = np.zeros(len(SPECIES_ORDER))
-    for glycan_type in GLYCAN_TYPES_ORDER:
-        values = percentages[glycan_type].to_numpy()
-        bars = ax_bar.barh(
-            y,
-            values,
-            left=left,
-            height=0.58,
-            color=GLYCAN_TYPE_COLORS[glycan_type],
-            edgecolor="white",
-            linewidth=0.9,
-            label=glycan_type,
-        )
-        for idx, (bar, value) in enumerate(zip(bars, values)):
-            if value >= 9.0:
-                red, green, blue, _ = matplotlib.colors.to_rgba(GLYCAN_TYPE_COLORS[glycan_type])
-                luminance = 0.299 * red + 0.587 * green + 0.114 * blue
-                text_color = "black" if luminance > 0.62 else "white"
-                ax_bar.text(
-                    left[idx] + value / 2,
-                    bar.get_y() + bar.get_height() / 2,
-                    f"{value:.0f}%",
-                    ha="center",
-                    va="center",
-                    fontsize=7.8,
-                    color=text_color,
-                )
-        left += values
-
-    ax_bar.set_xlim(0, 100)
-    ax_bar.set_ylim(-0.5, len(SPECIES_ORDER) - 0.5)
-    ax_bar.set_yticks(y)
-    ax_bar.set_yticklabels(SPECIES_ORDER, fontsize=10)
-    for tick, species in zip(ax_bar.get_yticklabels(), SPECIES_ORDER):
-        tick.set_color(SPECIES_COLORS[species])
-        tick.set_fontweight("bold")
-    ax_bar.invert_yaxis()
-    ax_bar.set_xlabel("Composition (%)", fontsize=9.5)
-    ax_bar.set_title("Glycan-type composition", fontsize=10.5, pad=7)
-    ax_bar.grid(axis="x", color="#D8D8D8", linewidth=0.55)
-    ax_bar.set_axisbelow(True)
-    clean_axes(ax_bar)
-    ax_bar.spines["left"].set_visible(False)
-
-    totals = counts.sum(axis=1).astype(int)
-    for idx, species in enumerate(SPECIES_ORDER):
-        ax_bar.text(101.5, idx, f"n={totals.loc[species]}", ha="left", va="center", fontsize=8.2)
-    ax_bar.set_xlim(0, 116)
-
-    image = ax_heat.imshow(percentages.to_numpy(), cmap="YlGnBu", aspect="auto", vmin=0)
-    ax_heat.set_xticks(np.arange(len(GLYCAN_TYPES_ORDER)))
-    ax_heat.set_xticklabels(
-        [GLYCAN_TYPE_LABELS_WRAPPED[label] for label in GLYCAN_TYPES_ORDER],
-        rotation=0,
-        ha="center",
-        fontsize=7.8,
-    )
-    ax_heat.set_yticks(y)
-    ax_heat.set_yticklabels([])
-    ax_heat.tick_params(axis="y", length=0)
-    ax_heat.set_title("Count and within-species percentage", fontsize=10.5, pad=7)
-    for row_idx, species in enumerate(SPECIES_ORDER):
-        for col_idx, glycan_type in enumerate(GLYCAN_TYPES_ORDER):
-            count = counts.loc[species, glycan_type]
-            pct = percentages.loc[species, glycan_type]
-            text_color = "white" if pct >= percentages.to_numpy().max() * 0.52 else "#1F1F1F"
-            ax_heat.text(
-                col_idx,
-                row_idx,
-                f"{count}\n{pct:.1f}%",
-                ha="center",
-                va="center",
-                fontsize=7.1,
-                color=text_color,
-                linespacing=1.05,
-            )
-    ax_heat.set_xticks(np.arange(-0.5, len(GLYCAN_TYPES_ORDER), 1), minor=True)
-    ax_heat.set_yticks(np.arange(-0.5, len(SPECIES_ORDER), 1), minor=True)
-    ax_heat.grid(which="minor", color="white", linewidth=1.0)
-    ax_heat.tick_params(which="minor", bottom=False, left=False)
-    for spine in ax_heat.spines.values():
-        spine.set_visible(False)
-
-    cbar = fig.colorbar(image, cax=ax_cbar)
-    cbar.set_label("Within-species %", fontsize=8.5)
-    cbar.ax.tick_params(labelsize=7.8, length=2)
-
-    fig.suptitle("Species-level glycan-type composition in Fig. 2 orthogroups", fontsize=13, y=0.94)
-    legend = fig.legend(
-        loc="lower center",
-        bbox_to_anchor=(0.5, 0.035),
-        ncol=4,
-        frameon=False,
-        fontsize=8.2,
-        handlelength=1.05,
-        columnspacing=1.2,
-    )
-    for handle in legend.legend_handles:
-        handle.set_linewidth(0)
-
-    save_fig(fig, "Fig2_species_glycotype_combined")
-    plt.close(fig)
-
-
 def main() -> None:
     orthogroup_path = locate_glycoprotein_orthogroups()
     protein_to_types, _ = load_glycan_type_annotations()
@@ -585,7 +446,6 @@ def main() -> None:
     plot_cluster_consistency(cluster_df)
     plot_species_proportions(type_count_df)
     plot_species_type_heatmap(type_count_df)
-    plot_species_glycotype_combined(type_count_df)
 
 
 if __name__ == "__main__":
