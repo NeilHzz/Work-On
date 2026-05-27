@@ -20,9 +20,11 @@ matplotlib.rcParams["font.size"] = 11
 matplotlib.rcParams["axes.linewidth"] = 1.0
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
+from matplotlib.offsetbox import AnnotationBbox, OffsetImage
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "01_数据与计算" / "糖蛋白Ortho" / "Orthogroups.txt.gz.txt"
+ICON_DIR = ROOT / "02_可视化" / "eggtooth"
 
 SPECIES_ORDER = ["GlyGallus", "GlyColumba", "GlyAnas"]
 SPECIES_COLORS = {
@@ -36,6 +38,11 @@ DISPLAY_LABELS = {
     "GlyGallus": "Gallus",
     "GlyColumba": "Columba",
     "GlyAnas": "Anas",
+}
+SPECIES_ICONS = {
+    "GlyGallus": ICON_DIR / "icon_Gallus.jpg",
+    "GlyColumba": ICON_DIR / "icon_Columba.jpg",
+    "GlyAnas": ICON_DIR / "icon_Anas.jpg",
 }
 
 ALL_INTERSECTIONS = [
@@ -161,9 +168,32 @@ def draw_upset(memberships):
     y_ticks = [y_positions[species] for species in SPECIES_ORDER]
     ax_matrix.set_ylim(-0.65, len(SPECIES_ORDER) - 0.35)
     ax_matrix.set_yticks(y_ticks)
-    ax_matrix.set_yticklabels([DISPLAY_LABELS[species] for species in SPECIES_ORDER], fontsize=10)
+    ax_matrix.set_yticklabels([])
     ax_matrix.tick_params(axis="y", length=0, pad=7)
     ax_matrix.tick_params(axis="x", bottom=False, labelbottom=False)
+    label_x = -1.03
+    icon_x = -1.28
+    for species in SPECIES_ORDER:
+        y = y_positions[species]
+        icon_path = SPECIES_ICONS[species]
+        if icon_path.exists():
+            icon = plt.imread(icon_path)
+            image_box = OffsetImage(icon, zoom=0.105)
+            ax_matrix.add_artist(
+                AnnotationBbox(
+                    image_box,
+                    (icon_x, y),
+                    frameon=False,
+                    box_alignment=(0.5, 0.5),
+                    pad=0,
+                    zorder=5,
+                )
+            )
+        ax_matrix.text(
+            label_x, y, DISPLAY_LABELS[species],
+            ha="left", va="center", fontsize=10,
+            color=SPECIES_COLORS[species], fontweight="bold",
+        )
     for xi, (group, _) in zip(x, intersections):
         present_y = [y_positions[species] for species in SPECIES_ORDER if species in group]
         if len(present_y) > 1:
@@ -185,6 +215,7 @@ def draw_upset(memberships):
             else:
                 ax_matrix.scatter(xi, y, s=260, color="#D8D8D8",
                                   edgecolor="white", linewidth=0.8, zorder=2)
+    ax_matrix.set_xlim(-1.35, len(intersections) - 0.35)
     ax_matrix.spines["top"].set_visible(False)
     ax_matrix.spines["right"].set_visible(False)
     ax_matrix.spines["left"].set_visible(False)
