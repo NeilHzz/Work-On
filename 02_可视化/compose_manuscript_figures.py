@@ -486,17 +486,6 @@ def compose_fig4():
     print("\n=== Composing Fig 4 ===")
     inner_w = CANVAS_W - 2 * MARGIN
 
-    def build_model_strip(fname):
-        target_h = 860
-        raw = load_img(PNG / fname)
-        if raw is None:
-            return make_placeholder(inner_w, target_h, fname)
-        img = scale_to_h(raw, target_h)
-        strip = Image.new("RGBA", (inner_w, target_h), (255, 255, 255, 255))
-        x = max(0, (inner_w - img.width) // 2)
-        paste(strip, img, x, 0)
-        return strip
-
     def build_row(files_labels, ncols, cover_old=False):
         col_w = (inner_w - (ncols - 1) * GAP) // ncols
         font  = FONT_FIG4_LABEL
@@ -544,28 +533,17 @@ def compose_fig4():
         ("Fig5N.png", "M"),
     ], ncols=4, cover_old=True)
 
-    m2 = build_model_strip("Fig4_model_D_G.png")
-    m3 = build_model_strip("Fig4_model_H_K.png")
-
     def row_h(panels):
         return max(p.height for p in panels if p is not None)
 
     total_h = (2 * MARGIN
-               + m2.height + m3.height
                + row_h(r1) + row_h(r2) + row_h(r3) + row_h(r4)
-               + 5 * GAP)
+               + 3 * GAP)
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
 
     y = MARGIN
-    y = paste_row(canvas, r1, cw1, y)
-
-    paste(canvas, m2, MARGIN, y)
-    y += m2.height + GAP
-    y = paste_row(canvas, r2, cw2, y)
-
-    paste(canvas, m3, MARGIN, y)
-    y += m3.height + GAP
-    y = paste_row(canvas, r3, cw3, y)
+    for row, cw in [(r1, cw1), (r2, cw2), (r3, cw3)]:
+        y = paste_row(canvas, row, cw, y)
 
     row4_w = 2 * cw4 + GAP
     row4_x = (CANVAS_W - row4_w) // 2

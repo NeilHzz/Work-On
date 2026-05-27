@@ -72,6 +72,9 @@ CONSISTENCY_COLORS = {
     "Same multi-type set": "#4C78A8",
     "Mixed type sets": "#C44E52",
 }
+HEATMAP_CMAP = mcolors.LinearSegmentedColormap.from_list(
+    "fig2_heatmap_option3", ["#FFF3C4", "#F6C85F", "#E98A70", "#D15A8A", "#A8499A", "#6F3C8F"]
+)
 
 MS_FILES = {
     "Gallus": MS_DIR / "Glycan_MS_Gallus.xlsx",
@@ -383,7 +386,7 @@ def plot_species_type_heatmap(type_count_df: pd.DataFrame) -> None:
     percentages = counts.div(counts.sum(axis=1), axis=0) * 100
 
     fig, ax = plt.subplots(figsize=(7.6, 3.45))
-    image = ax.imshow(percentages.to_numpy(), cmap="YlGnBu", aspect="auto", vmin=0)
+    image = ax.imshow(percentages.to_numpy(), cmap=HEATMAP_CMAP, aspect="auto", vmin=0)
     ax.set_xticks(np.arange(len(GLYCAN_TYPES_ORDER)))
     ax.set_xticklabels(
         [label.replace("Complex-", "Complex\n") for label in GLYCAN_TYPES_ORDER],
