@@ -47,7 +47,7 @@ Panel mapping (source image → manuscript figure / panel):
 """
 
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 import sys
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -164,6 +164,32 @@ def trim_white(img: Image.Image, pad: int = 24, threshold: int = 248) -> Image.I
     right = min(rgba.width, max(xs) + pad + 1)
     bottom = min(rgba.height, max(ys) + pad + 1)
     return rgba.crop((left, top, right, bottom))
+
+
+def smooth_fem_render(img: Image.Image) -> Image.Image:
+    """Soften FEM mesh speckle while preserving the colorbar and labels."""
+    rgba = img.convert("RGBA")
+    rgb = rgba.convert("RGB")
+    width, height = rgba.size
+
+    # The model occupies the left/middle of each render; the right edge contains
+    # the colorbar and text, which should stay crisp.
+    model_limit_x = int(width * 0.78)
+    mask = Image.new("L", (width, height), 0)
+    mask_px = mask.load()
+    rgb_px = rgb.load()
+    for y in range(height):
+        for x in range(model_limit_x):
+            r, g, b = rgb_px[x, y]
+            if r < 248 or g < 248 or b < 248:
+                mask_px[x, y] = 255
+
+    mask = mask.filter(ImageFilter.MaxFilter(5)).filter(ImageFilter.GaussianBlur(1.4))
+    softened = rgb.filter(ImageFilter.MedianFilter(3)).filter(ImageFilter.GaussianBlur(0.65))
+    out_rgb = Image.composite(softened, rgb, mask)
+    out = out_rgb.convert("RGBA")
+    out.putalpha(rgba.getchannel("A"))
+    return out
 
 
 def add_label(img: Image.Image, label: str,
@@ -589,6 +615,7 @@ def compose_fig5():
         if fem_raw is None:
             fem_img = make_placeholder(right_w, row_h, f"{sp_name} FEM render\n(file not found)")
         else:
+            fem_raw = smooth_fem_render(fem_raw)
             fem_img = scale_to_w(fem_raw, right_w)
             if fem_img.height > row_h:
                 fem_img = fem_img.crop((0, 0, right_w, row_h))

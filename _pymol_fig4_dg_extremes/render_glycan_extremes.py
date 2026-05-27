@@ -121,6 +121,22 @@ def add_focus_rg_camera_arrow(job, angle_degrees=55.0):
     target = [center[i] + rg * direction[i] for i in range(3)]
     add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.068, head_radius=0.22, head_length=0.48)
 
+def zoom_fixed_focus_window(job, half_width=18.5, half_height=15.0):
+    center = [float(v) for v in job['glycan_center']]
+    view = cmd.get_view()
+    right = [view[0], view[1], view[2]]
+    up = [view[3], view[4], view[5]]
+    cmd.delete('fixed_focus_frame')
+    for sx in [-1.0, 1.0]:
+        for sy in [-1.0, 1.0]:
+            pos = [
+                center[i] + sx * half_width * right[i] + sy * half_height * up[i]
+                for i in range(3)
+            ]
+            cmd.pseudoatom('fixed_focus_frame', pos=pos, vdw=0.1)
+    cmd.zoom('fixed_focus_frame', buffer=0, complete=1)
+    cmd.hide('everything', 'fixed_focus_frame')
+
 def add_focus_glycan_protein_distance(job):
     metric = next((item for item in job['metrics'] if item['name'] == 'Glycan-Protein'), None)
     if metric:
@@ -237,7 +253,7 @@ def scene_overview(job):
     cmd.turn('y', job['overview_turns'][1])
     cmd.turn('z', job['overview_turns'][2])
     if job.get('is_focus'):
-        cmd.zoom('oval and chain B', buffer=3, complete=1)
+        zoom_fixed_focus_window(job)
         cmd.clip('slab', 125)
         add_focus_rg_camera_arrow(job, angle_degrees=92.0)
     else:
