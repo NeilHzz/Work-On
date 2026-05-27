@@ -57,21 +57,46 @@ def add_rg_sphere(job):
     center = [float(v) for v in job['glycan_center']]
     rg = float(job['glycan_rg'])
     set_color('rg_gold', [1.0, 0.58, 0.04])
+    set_color('rg_orange', [0.95, 0.34, 0.00])
     cmd.pseudoatom('rg_centroid', pos=center, vdw=0.30)
     cmd.show('spheres', 'rg_centroid')
     cmd.color('rg_gold', 'rg_centroid')
     cmd.pseudoatom('rg_shell', pos=center, vdw=rg)
     cmd.show('spheres', 'rg_shell')
     cmd.color('rg_gold', 'rg_shell')
-    cmd.set('sphere_transparency', 0.82, 'rg_shell')
+    cmd.set('sphere_transparency', 0.90 if job.get('is_focus') else 0.86, 'rg_shell')
     cmd.set('sphere_quality', 3, 'rg_shell')
-    target = None
+    rg_metric = next((metric for metric in job['metrics'] if metric['name'] == 'Rg turn'), None)
+    if rg_metric:
+        target = rg_metric['end']
+        if job.get('is_focus'):
+            vx, vy, vz = target[0] - center[0], target[1] - center[1], target[2] - center[2]
+            length = math.sqrt(vx * vx + vy * vy + vz * vz) or 1.0
+            target = [center[0] + rg * vx / length, center[1] + rg * vy / length, center[2] + rg * vz / length]
+            add_arrow('rg_radius_arrow', center, target, [0.95, 0.34, 0.00], radius=0.055, head_radius=0.18, head_length=0.48)
+        else:
+            add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.030, head_radius=0.115, head_length=0.34)
+
+def add_focus_metrics(job):
+    metric_specs = {
+        'End-to-End': {'radius': 0.040, 'head_radius': 0.145, 'head_length': 0.42},
+        'Glycan-Protein': {'radius': 0.034, 'head_radius': 0.125, 'head_length': 0.34},
+        'Glycan-Backbone': {'radius': 0.034, 'head_radius': 0.125, 'head_length': 0.34},
+    }
     for metric in job['metrics']:
-        if metric['name'] == 'Rg turn':
-            target = metric['end']
-            break
-    if target:
-        add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.030, head_radius=0.115, head_length=0.34)
+        name = metric['name']
+        if name not in metric_specs:
+            continue
+        spec = metric_specs[name]
+        add_arrow(
+            'focus_' + name.replace('-', '_').replace(' ', '_'),
+            metric['start'],
+            metric['end'],
+            metric['color'],
+            radius=spec['radius'],
+            head_radius=spec['head_radius'],
+            head_length=spec['head_length'],
+        )
 
 def setup_scene(job):
     cmd.reinitialize()
@@ -121,6 +146,8 @@ def scene_overview(job):
     cmd.color('gray65', 'oval and chain A')
     color_full_glycan()
     add_rg_sphere(job)
+    if job.get('is_focus'):
+        add_focus_metrics(job)
     cmd.orient('oval and chain B')
     cmd.turn('x', job['overview_turns'][0])
     cmd.turn('y', job['overview_turns'][1])
