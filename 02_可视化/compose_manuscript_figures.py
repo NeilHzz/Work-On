@@ -60,6 +60,7 @@ ILLUS    = BASE / "01_数据与计算" / "乳突层形态结构"
 EGGTOOTH = Path(__file__).resolve().parent / "eggtooth"
 OUT    = Path(__file__).resolve().parent / "Composed"
 OUT.mkdir(exist_ok=True)
+FINAL_MAIN_SUBFIGS = Path(__file__).resolve().parent / "260526" / "01_main_subfigures_matched_to_composed"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Layout constants
@@ -379,10 +380,11 @@ def compose_fig2():
     print("\n=== Composing Fig 2 ===")
     inner_w = CANVAS_W - 2 * MARGIN
 
-    def panel(fname, label, target_w, font=FONT_PUB_LABEL, trim=False):
-        raw = load_img(PNG / fname)
+    def panel(source, label, target_w, font=FONT_PUB_LABEL, trim=False):
+        source_path = source if isinstance(source, Path) else PNG / source
+        raw = load_img(source_path)
         if raw is None:
-            raw = make_placeholder(target_w, int(target_w * 0.65), f"Panel {label}\n{fname}")
+            raw = make_placeholder(target_w, int(target_w * 0.65), f"Panel {label}\n{source_path.name}")
         if trim:
             raw = trim_white(raw)
         img = scale_to_w(raw, target_w)
@@ -391,10 +393,10 @@ def compose_fig2():
     # A: current glycoprotein orthogroup UpSet plot, full width for readability.
     A = panel("Fig2.png", "A", inner_w, trim=False)
 
-    # B-C: old Fig3A network plus within-cluster glycan-type consistency.
-    left_w = int(inner_w * 0.47)
+    # B-C: requested BLAST ortholog chord diagram plus within-cluster glycan-type consistency.
+    left_w = int(inner_w * 0.40)
     right_w = inner_w - left_w - GAP
-    B = panel("Fig3A.png", "B", left_w, trim=True)
+    B = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "B", left_w, trim=False)
     C = panel("Fig2_cluster_glycotype_consistency.png", "C", right_w, trim=False)
     row2_h = max(B.height, C.height)
     row2 = Image.new("RGBA", (inner_w, row2_h), (255, 255, 255, 0))
