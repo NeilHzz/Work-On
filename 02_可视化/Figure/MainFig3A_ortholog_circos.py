@@ -130,10 +130,88 @@ def _dedup_names(acc_list):
 
 # ── 2. 读取数据 ────────────────────────────────────────────────────────────────
 XLSX = os.path.join(_SCRIPT_DIR, "Blast_Ortholog_Mapping.xlsx")
+_DATA_DIR = os.path.dirname(_SCRIPT_DIR)
+_FASTA_DIR = os.path.join(_DATA_DIR, "Raw_Data", "原始fasta")
 
 gvc = pd.read_excel(XLSX, sheet_name="GvsC_入图数据")
 gva = pd.read_excel(XLSX, sheet_name="GvsA_入图数据")
 avc = pd.read_excel(XLSX, sheet_name="AvsC_入图数据")
+cvg_hsp = pd.read_excel(XLSX, sheet_name="CvsG_原始HSP")
+avg_hsp = pd.read_excel(XLSX, sheet_name="AvsG_原始HSP")
+
+
+def _load_fasta_lengths(path):
+    """Return accession -> sequence length from a UniProt-style FASTA file."""
+    lengths = {}
+    acc = None
+    chunks = []
+    with open(path, encoding="utf-8", errors="ignore") as handle:
+        for line in handle:
+            line = line.strip()
+            if not line:
+                continue
+            if line.startswith(">"):
+                if acc is not None:
+                    lengths[acc] = sum(len(seq) for seq in chunks)
+                header = line[1:].split()[0]
+                parts = header.split("|")
+                acc = parts[1] if len(parts) >= 2 else parts[0]
+                chunks = []
+            else:
+                chunks.append(line)
+        if acc is not None:
+            lengths[acc] = sum(len(seq) for seq in chunks)
+    return lengths
+
+
+SEQ_LEN = {}
+for _fname in ["GlyGallus.fasta", "GlyGallus_New.fasta", "GlyGallus_Reference.fasta",
+               "GlyAnas.fasta", "GlyColumba.fasta"]:
+    _path = os.path.join(_FASTA_DIR, _fname)
+    if os.path.exists(_path):
+        SEQ_LEN.update(_load_fasta_lengths(_path))
+
+
+def _best_hsp(df, query_acc, subject_acc):
+    """Pick the highest-bitscore HSP for a query/subject accession pair."""
+    query_col = [c for c in df.columns if "query" in c][0]
+    subject_col = [c for c in df.columns if "subject" in c][0]
+    subset = df[(df[query_col] == query_acc) & (df[subject_col] == subject_acc)]
+    if subset.empty:
+        return None
+    return subset.sort_values("bitscore", ascending=False).iloc[0]
+
+
+def _fallback_region(acc):
+    length = int(SEQ_LEN.get(acc, 1))
+    return 1, max(length, 1)
+
+
+def _region_for_link(row):
+    """Return sequence regions for the source and destination proteins in a link."""
+    src, dst = row["src"], row["dst"]
+    src_sp, dst_sp = row["src_sp"], row["dst_sp"]
+
+    if src_sp == "Gallus" and dst_sp == "Columba":
+        hsp = _best_hsp(cvg_hsp, dst, src)
+        if hsp is not None:
+            return ((hsp["subject_start"], hsp["subject_end"]),
+                    (hsp["query_start"], hsp["query_end"]))
+    elif src_sp == "Gallus" and dst_sp == "Anas":
+        hsp = _best_hsp(avg_hsp, dst, src)
+        if hsp is not None:
+            return ((hsp["subject_start"], hsp["subject_end"]),
+                    (hsp["query_start"], hsp["query_end"]))
+    elif src_sp == "Anas" and dst_sp == "Columba":
+        bridge = row.get("bridge")
+        if pd.notna(bridge):
+            hsp_a = _best_hsp(avg_hsp, src, bridge)
+            hsp_c = _best_hsp(cvg_hsp, dst, bridge)
+            if hsp_a is not None and hsp_c is not None:
+                return ((hsp_a["query_start"], hsp_a["query_end"]),
+                        (hsp_c["query_start"], hsp_c["query_end"]))
+
+    return _fallback_region(src), _fallback_region(dst)
 
 # 统一列名
 gvc_links = gvc[["Gallus_acc", "Columba_acc", "max_bitscore", "目标蛋白"]].rename(
@@ -153,6 +231,7 @@ avc_links = avc[["anas_acc", "columba_acc", "AvsG_max_bitscore", "target_name"]]
              "AvsG_max_bitscore": "score", "target_name": "target"})
 avc_links["src_sp"] = "Anas"
 avc_links["dst_sp"] = "Columba"
+avc_links["bridge"] = avc["gallus_bridge_acc"]
 
 all_links = pd.concat([gvc_links, gva_links, avc_links], ignore_index=True)
 all_links["score"] = pd.to_numeric(all_links["score"], errors="coerce").fillna(50)
@@ -171,22 +250,22 @@ GREY_SCORE  = 180   # 灰色蛋白统一小定宽（代表无有效比对）
 GREY_GAP_DEG = 0    # 红色区与灰色区无额外间隙，连在一起
 
 def build_protein_list(species: str):
-    """每个蛋白的弧宽 = 该蛋白参与的所有比较中最高 bitscore（最佳比对质量）"""
+    """Each protein arc width is proportional to full sequence length."""
     srcs = all_links[all_links["src_sp"] == species][["src", "score"]].rename(
         columns={"src": "acc"})
     dsts = all_links[all_links["dst_sp"] == species][["dst", "score"]].rename(
         columns={"dst": "acc"})
     combined = pd.concat([srcs, dsts])
-    return (combined.groupby("acc")["score"].max()   # 用 max 代替 sum
-                    .reset_index()
-                    .sort_values("score", ascending=False)
-                    .rename(columns={"score": "total"}))
+    accs = sorted(set(combined["acc"].dropna()))
+    df = pd.DataFrame({"acc": accs})
+    df["total"] = df["acc"].map(lambda acc: max(int(SEQ_LEN.get(acc, 1)), 1))
+    return df.sort_values("total", ascending=False).reset_index(drop=True)
 
 g_prots = build_protein_list("Gallus")
 
 # 添加灰色 Gallus 到 g_prots 末尾
 grey_df = pd.DataFrame([
-    {"acc": acc, "total": GREY_SCORE} for acc in sorted(GREY_G_ACCS)
+    {"acc": acc, "total": max(int(SEQ_LEN.get(acc, GREY_SCORE)), 1)} for acc in sorted(GREY_G_ACCS)
     if acc not in set(g_prots["acc"])
 ])
 if not grey_df.empty:
@@ -212,9 +291,9 @@ a_targets = _target_accs("Anas")
 c_targets = _target_accs("Columba")
 
 def pick_top(df, targets, n=TOP_N, extra=None):
-    """先取非目标蛋白中 bitscore 最高的前 n 个，再加上全部目标蛋白和 extra 蛋白"""
+    """Show the longest non-target proteins, plus all targets and extras."""
     must = targets | (extra or set())
-    # 非目标、非灰色蛋白中按 bitscore 取前 n
+    # 非目标、非灰色蛋白中按序列长度取前 n
     rest = df[~df["acc"].isin(must) & ~df["acc"].isin(GREY_G_ACCS)]
     top_regular = set(rest.head(n)["acc"].tolist())
     # 灰色蛋白中只取 extra（如 OC17）
@@ -267,6 +346,28 @@ def assign_angles(df, start_deg, grey_set=None, grey_gap=0):
         )
         cur += span + PROTEIN_GAP_DEG
     return result, cur
+
+
+def region_to_angles(acc, region, min_width_deg=0.22):
+    """Map a 1-based sequence region to the protein arc angles."""
+    if acc not in all_angles:
+        return None, None, None
+    _, start, end = all_angles[acc]
+    seq_len = max(float(SEQ_LEN.get(acc, 1)), 1.0)
+    r0, r1 = sorted([float(region[0]), float(region[1])])
+    r0 = max(1.0, min(seq_len, r0))
+    r1 = max(1.0, min(seq_len, r1))
+    if r1 < r0:
+        r0, r1 = r1, r0
+    a0 = start + (r0 - 1.0) / seq_len * (end - start)
+    a1 = start + r1 / seq_len * (end - start)
+    min_width = math.radians(min_width_deg)
+    if abs(a1 - a0) < min_width:
+        mid = (a0 + a1) / 2
+        a0 = mid - min_width / 2
+        a1 = mid + min_width / 2
+    mid = (a0 + a1) / 2
+    return mid, min(a0, a1), max(a0, a1)
 
 # 物种起始角度（从正上方顺时针）：Gallus 上方偏左，Anas 下方，Columba 右
 #  使图像类似参考图（Gallus 在左上，Columba 在右，Anas 在下/左下）
@@ -370,7 +471,7 @@ def bezier_chord(ax, mid1, mid2, w1=0.02, w2=0.02, color="gray",
             zorder=zorder, linewidth=0)
 
 # ── 4a. 画弦（先画，在弧下方）─────────────────────────────────────────────────
-# 按 score 升序绘制，高分弦在前
+# 弦端点映射到最佳 HSP 的序列区间；按 score 升序绘制，高分弦在前
 sorted_links = all_links.sort_values("score", ascending=True)
 
 for _, row in sorted_links.iterrows():
@@ -379,17 +480,18 @@ for _, row in sorted_links.iterrows():
         continue
     src_sp = row["src_sp"]
 
-    mid_src = all_angles[src][0]
-    mid_dst = all_angles[dst][0]
+    src_region, dst_region = _region_for_link(row)
+    mid_src, src_start, src_end = region_to_angles(src, src_region)
+    mid_dst, dst_start, dst_end = region_to_angles(dst, dst_region)
+    if mid_src is None or mid_dst is None:
+        continue
 
-    # 弦宽度 ∝ bitscore；限制最小/最大
-    max_bs  = all_links["score"].max()
-    w_frac  = max(0.003, min(0.06, row["score"] / max_bs * 0.05))
-    half_w  = math.radians(w_frac * 60)   # 转为弧度
+    src_width = max(math.radians(0.22), src_end - src_start)
+    dst_width = max(math.radians(0.22), dst_end - dst_start)
 
     chord_color = COL[src_sp]
     bezier_chord(ax, mid_src, mid_dst,
-                 w1=half_w, w2=half_w,
+                 w1=src_width, w2=dst_width,
                  color=chord_color,
                  alpha=ALPHA_CHORD,
                  zorder=1,
