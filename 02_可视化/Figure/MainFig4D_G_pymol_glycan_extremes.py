@@ -284,13 +284,13 @@ def write_pymol_script(jobs: list[dict]) -> Path:
                 CYLINDER, sx, sy, sz, shaft_end[0], shaft_end[1], shaft_end[2], radius, r, g, b, r, g, b,
                 CONE, shaft_end[0], shaft_end[1], shaft_end[2], ex, ey, ez, head_radius, 0.0, r, g, b, r, g, b, 1.0, 0.0,
             ]
-            cmd.load_cgo(obj, name)
+            cmd.load_cgo(obj, name, zoom=0)
 
         def add_line(name, start, end, color, radius=0.016):
             sx, sy, sz = [float(v) for v in start]
             ex, ey, ez = [float(v) for v in end]
             r, g, b = [float(c) for c in color]
-            cmd.load_cgo([CYLINDER, sx, sy, sz, ex, ey, ez, radius, r, g, b, r, g, b], name)
+            cmd.load_cgo([CYLINDER, sx, sy, sz, ex, ey, ez, radius, r, g, b, r, g, b], name, zoom=0)
 
         def add_dashed_line(name, start, end, color, radius=0.055, segments=18):
             sx, sy, sz = [float(v) for v in start]
@@ -305,7 +305,7 @@ def write_pymol_script(jobs: list[dict]) -> Path:
                 x0, y0, z0 = sx + (ex - sx) * t0, sy + (ey - sy) * t0, sz + (ez - sz) * t0
                 x1, y1, z1 = sx + (ex - sx) * t1, sy + (ey - sy) * t1, sz + (ez - sz) * t1
                 obj.extend([CYLINDER, x0, y0, z0, x1, y1, z1, radius, r, g, b, r, g, b])
-            cmd.load_cgo(obj, name)
+            cmd.load_cgo(obj, name, zoom=0)
 
         def add_endpoint_spheres(name, start, end, color, radius=0.22):
             set_color(name + '_color', color)
@@ -342,7 +342,7 @@ def write_pymol_script(jobs: list[dict]) -> Path:
                 p1 = [center[j] + radius * math.cos(a1) * right[j] + radius * math.sin(a1) * up[j] for j in range(3)]
                 obj.extend([VERTEX, p0[0], p0[1], p0[2], VERTEX, p1[0], p1[1], p1[2]])
             obj.append(END)
-            cmd.load_cgo(obj, name)
+            cmd.load_cgo(obj, name, zoom=0)
 
         def add_rg_sphere(job):
             center = [float(v) for v in job['glycan_center']]
@@ -444,6 +444,7 @@ def write_pymol_script(jobs: list[dict]) -> Path:
             for metric in job['metrics']:
                 set_color('metric_' + metric['name'].replace('-', '_').replace(' ', '_'), metric['color'])
             cmd.load(job['pdb'], 'oval')
+            cmd.set('auto_zoom', 0)
             cmd.remove('hydrogens')
             cmd.hide('everything')
             cmd.bg_color('white')
@@ -493,7 +494,7 @@ def write_pymol_script(jobs: list[dict]) -> Path:
             if job.get('is_focus'):
                 cmd.zoom('oval and chain B', buffer=3, complete=1)
                 cmd.clip('slab', 125)
-                add_focus_rg_camera_arrow(job, angle_degrees=-78.0)
+                add_focus_rg_camera_arrow(job, angle_degrees=102.0)
             else:
                 cmd.zoom('oval and chain A', buffer=46, complete=1)
                 cmd.clip('slab', 420)
@@ -587,6 +588,17 @@ def fit_image_with_layout(path: str | Path, width: int, height: int, pad: int = 
     image = raw.crop(crop_box)
     scale = min(width / image.width, height / image.height)
     resized = image.resize((int(image.width * scale), int(image.height * scale)), Image.LANCZOS)
+    canvas = Image.new("RGB", (width, height), "white")
+    offset = ((width - resized.width) // 2, (height - resized.height) // 2)
+    canvas.paste(resized, offset)
+    return canvas, crop_box, scale, offset
+
+
+def fit_raw_image_with_layout(path: str | Path, width: int, height: int):
+    raw = Image.open(path).convert("RGB")
+    crop_box = (0, 0, raw.width, raw.height)
+    scale = min(width / raw.width, height / raw.height)
+    resized = raw.resize((int(raw.width * scale), int(raw.height * scale)), Image.LANCZOS)
     canvas = Image.new("RGB", (width, height), "white")
     offset = ((width - resized.width) // 2, (height - resized.height) // 2)
     canvas.paste(resized, offset)
@@ -744,7 +756,7 @@ def annotate_focus_panel(panel: Image.Image, points: dict[str, tuple[int, int]])
 def panel_with_title(job: dict) -> Image.Image:
     target_w, target_h = 1550, 1250
     if job.get("is_focus"):
-        panel, crop_box, scale, offset = fit_image_with_layout(job["overview_out"], 1200, 900, pad=18)
+        panel, crop_box, scale, offset = fit_raw_image_with_layout(job["overview_out"], 1200, 900)
         points = projected_marker_points(job["marker_out"], crop_box, scale, offset)
         return annotate_focus_panel(panel, points)
 
