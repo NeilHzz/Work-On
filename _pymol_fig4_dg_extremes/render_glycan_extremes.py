@@ -44,6 +44,20 @@ def add_endpoint_spheres(name, start, end, color, radius=0.22):
     cmd.show('spheres', name + '_start or ' + name + '_end')
     cmd.color(name + '_color', name + '_start or ' + name + '_end')
 
+def add_metric_label(name, label, start, end, color, shift=(0.0, 0.0, 0.0)):
+    pos = [
+        (float(start[i]) + float(end[i])) * 0.5 + float(shift[i])
+        for i in range(3)
+    ]
+    color_name = name + '_label_color'
+    set_color(color_name, color)
+    cmd.pseudoatom(name + '_label', pos=pos)
+    cmd.label(name + '_label', repr(label))
+    cmd.set('label_color', color_name, name + '_label')
+    cmd.set('label_size', 38, name + '_label')
+    cmd.set('label_font_id', 7, name + '_label')
+    cmd.set('label_position', [0, 0, 0], name + '_label')
+
 def add_camera_circle(name, center, radius, color=(0.0, 0.0, 0.0), segments=144):
     view = cmd.get_view()
     right = [view[0], view[1], view[2]]
@@ -77,20 +91,15 @@ def add_rg_sphere(job):
     if rg_metric:
         target = rg_metric['end']
         if job.get('is_focus'):
-            vx = target[0] - center[0] + 0.65 * rg
-            vy = target[1] - center[1] - 0.18 * rg
-            vz = target[2] - center[2] + 0.45 * rg
-            length = math.sqrt(vx * vx + vy * vy + vz * vz) or 1.0
-            target = [center[0] + rg * vx / length, center[1] + rg * vy / length, center[2] + rg * vz / length]
-            add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.082, head_radius=0.25, head_length=0.58)
+            pass
         else:
             add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.030, head_radius=0.115, head_length=0.34)
 
 def add_focus_metrics(job):
     metric_specs = {
-        'End-to-End': {'radius': 0.070, 'head_radius': 0.210, 'head_length': 0.56, 'color': [0.00, 0.44, 0.70]},
-        'Glycan-Protein': {'radius': 0.075, 'head_radius': 0.220, 'head_length': 0.50, 'color': [0.00, 0.62, 0.36]},
-        'Glycan-Backbone': {'radius': 0.095, 'head_radius': 0.270, 'head_length': 0.58, 'color': [0.80, 0.25, 0.55]},
+        'End-to-End': {'letter': 'E', 'radius': 0.115, 'head_radius': 0.300, 'head_length': 0.70, 'color': [0.00, 0.44, 0.70], 'shift': [0.70, 0.30, 0.10]},
+        'Glycan-Protein': {'letter': 'F', 'radius': 0.100, 'head_radius': 0.270, 'head_length': 0.58, 'color': [0.00, 0.62, 0.36], 'shift': [-0.25, 0.50, 0.20]},
+        'Glycan-Backbone': {'letter': 'G', 'radius': 0.125, 'head_radius': 0.330, 'head_length': 0.58, 'color': [0.80, 0.25, 0.55], 'shift': [0.30, -0.15, 0.28]},
     }
     for metric in job['metrics']:
         name = metric['name']
@@ -107,7 +116,15 @@ def add_focus_metrics(job):
             head_length=spec['head_length'],
         )
         if name in {'Glycan-Protein', 'Glycan-Backbone'}:
-            add_endpoint_spheres('endpoint_' + name.replace('-', '_').replace(' ', '_'), metric['start'], metric['end'], spec['color'])
+            add_endpoint_spheres('endpoint_' + name.replace('-', '_').replace(' ', '_'), metric['start'], metric['end'], spec['color'], radius=0.24)
+        add_metric_label(
+            'label_' + name.replace('-', '_').replace(' ', '_'),
+            spec['letter'],
+            metric['start'],
+            metric['end'],
+            spec['color'],
+            shift=spec['shift'],
+        )
 
 def setup_scene(job):
     cmd.reinitialize()
@@ -163,9 +180,13 @@ def scene_overview(job):
     cmd.turn('x', job['overview_turns'][0])
     cmd.turn('y', job['overview_turns'][1])
     cmd.turn('z', job['overview_turns'][2])
-    cmd.zoom('oval and chain A', buffer=46, complete=1)
-    cmd.clip('slab', 420)
-    add_camera_circle('glycan_locator', job['glycan_center'], max(9.0, job['glycan_radius'] * 1.75), color=(0.18, 0.18, 0.18))
+    if job.get('is_focus'):
+        cmd.zoom('(oval and chain B) or protein_anchor', buffer=5, complete=1)
+        cmd.clip('slab', 150)
+    else:
+        cmd.zoom('oval and chain A', buffer=46, complete=1)
+        cmd.clip('slab', 420)
+        add_camera_circle('glycan_locator', job['glycan_center'], max(9.0, job['glycan_radius'] * 1.75), color=(0.18, 0.18, 0.18))
     cmd.png(job['overview_out'], width=2200, height=1800, dpi=300, ray=1)
 
 def scene_zoom(job, out_path, rotate_y=0, show_metrics=True):
