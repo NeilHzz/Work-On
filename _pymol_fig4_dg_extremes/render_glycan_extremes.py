@@ -119,7 +119,7 @@ def add_focus_rg_camera_arrow(job, angle_degrees=55.0):
     angle = math.radians(angle_degrees)
     direction = [math.cos(angle) * right[i] + math.sin(angle) * up[i] for i in range(3)]
     target = [center[i] + rg * direction[i] for i in range(3)]
-    add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.052, head_radius=0.17, head_length=0.42)
+    add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.068, head_radius=0.22, head_length=0.48)
 
 def add_focus_glycan_protein_distance(job):
     metric = next((item for item in job['metrics'] if item['name'] == 'Glycan-Protein'), None)
@@ -239,7 +239,7 @@ def scene_overview(job):
     if job.get('is_focus'):
         cmd.zoom('oval and chain B', buffer=3, complete=1)
         cmd.clip('slab', 125)
-        add_focus_rg_camera_arrow(job, angle_degrees=102.0)
+        add_focus_rg_camera_arrow(job, angle_degrees=92.0)
     else:
         cmd.zoom('oval and chain A', buffer=46, complete=1)
         cmd.clip('slab', 420)
