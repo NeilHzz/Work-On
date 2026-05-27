@@ -135,6 +135,4 @@ def scene_zoom(job, out_path, rotate_y=0, show_metrics=True):
 
 for item in JOBS:
     scene_overview(item)
-    scene_zoom(item, item['zoom_front_out'], rotate_y=0, show_metrics=False)
-    scene_zoom(item, item['zoom_back_out'], rotate_y=180, show_metrics=False)
 cmd.quit()

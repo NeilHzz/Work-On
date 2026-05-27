@@ -1,10 +1,9 @@
 #!/usr/bin/env python
-"""Generate standalone PyMOL glycan-geometry examples for Fig. 4D-G.
+"""Generate standalone PyMOL glycan-overview examples for Fig. 4D-G.
 
 This script selects two geometry-extreme ReGlyco models from
 csv/glycan_conformation_detail.csv, extracts the target MODEL records, and uses
-PyMOL to render overview-plus-zoom panels with full glycan views and CGO arrows
-for the four D-G geometry quantities.
+PyMOL to render overview panels that locate the glycan on the protein surface.
 """
 
 from __future__ import annotations
@@ -230,8 +229,6 @@ def pymol_jobs(models: list[ExtremeModel]) -> list[dict]:
             "score": model.score,
             "pdb": str(model.extracted_pdb),
             "overview_out": str(TMP_DIR / f"pymol_extreme_{index}_overview.png"),
-            "zoom_front_out": str(TMP_DIR / f"pymol_extreme_{index}_zoom_front.png"),
-            "zoom_back_out": str(TMP_DIR / f"pymol_extreme_{index}_zoom_back.png"),
             "species_color": hex_to_rgb01(SPECIES_COLORS.get(model.species, "#777777")),
             "glycan_center": [float(x) for x in model.glycan_atoms.mean(axis=0)],
             "glycan_radius": float(np.max(np.linalg.norm(model.glycan_atoms - model.glycan_atoms.mean(axis=0), axis=1))),
@@ -389,8 +386,6 @@ def write_pymol_script(jobs: list[dict]) -> Path:
 
         for item in JOBS:
             scene_overview(item)
-            scene_zoom(item, item['zoom_front_out'], rotate_y=0, show_metrics=False)
-            scene_zoom(item, item['zoom_back_out'], rotate_y=180, show_metrics=False)
         cmd.quit()
     '''), encoding="utf-8")
     return script_path
@@ -470,36 +465,21 @@ def draw_metric_legend(draw: ImageDraw.ImageDraw, y: int, x: int = 120) -> None:
 
 
 def panel_with_title(job: dict) -> Image.Image:
-    target_w, target_h = 3600, 1350
+    target_w, target_h = 1550, 1250
     panel = Image.new("RGB", (target_w, target_h), "white")
     draw = ImageDraw.Draw(panel)
-    title_font = read_font(58, bold=True)
-    sub_font = read_font(36, bold=False)
+    title_font = read_font(48, bold=True)
+    sub_font = read_font(30, bold=False)
     title = job["role"]
     subtitle = f"{job['species']} | {job['structure']} model {job['model']}"
     tw, _ = text_size(draw, title, title_font)
     sw, _ = text_size(draw, subtitle, sub_font)
-    draw.text(((target_w - tw) // 2, 26), title, fill="#111111", font=title_font)
-    draw.text(((target_w - sw) // 2, 100), subtitle, fill=SPECIES_COLORS.get(job["species"], "#555555"), font=sub_font)
+    draw.text(((target_w - tw) // 2, 28), title, fill="#111111", font=title_font)
+    draw.text(((target_w - sw) // 2, 88), subtitle, fill=SPECIES_COLORS.get(job["species"], "#555555"), font=sub_font)
 
-    overview = fit_image(job["overview_out"], 1120, 880, pad=120)
-    front = circular_view(job["zoom_front_out"], 820, pad=190)
-    back = circular_view(job["zoom_back_out"], 820, pad=190)
-
-    overview_x, overview_y = 70, 220
-    front_x, zoom_y = 1330, 250
-    back_x = 2410
-    circle_d = 820
-
+    overview = fit_image(job["overview_out"], 1370, 970, pad=140)
+    overview_x, overview_y = 90, 200
     panel.paste(overview, (overview_x, overview_y))
-    panel.paste(front.convert("RGB"), (front_x, zoom_y), front.split()[-1])
-    panel.paste(back.convert("RGB"), (back_x, zoom_y), back.split()[-1])
-
-    draw.ellipse((front_x, zoom_y, front_x + circle_d, zoom_y + circle_d), outline="#111111", width=7)
-    draw.ellipse((back_x, zoom_y, back_x + circle_d, zoom_y + circle_d), outline="#111111", width=7)
-    draw.line((overview_x + 1040, overview_y + 430, front_x, zoom_y + circle_d // 2), fill="#111111", width=6)
-    draw_rotation_marker(draw, (front_x + circle_d + back_x) // 2, zoom_y + circle_d // 2)
-    draw_metric_legend(draw, target_h - 105, x=95)
     return panel
 
 
