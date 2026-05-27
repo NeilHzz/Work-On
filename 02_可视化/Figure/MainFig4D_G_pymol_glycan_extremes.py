@@ -103,6 +103,14 @@ def choose_extremes() -> pd.DataFrame:
     return pd.concat([compact, extended], ignore_index=True)
 
 
+def choose_gallus_low_rg() -> pd.DataFrame:
+    df = pd.read_csv(CSV_DIR / "glycan_conformation_detail.csv")
+    selected = df[df["species"].eq("Gallus")].nsmallest(1, "glycan_rg").copy()
+    selected["role"] = "Gallus low-Rg glycan"
+    selected["extreme_score"] = selected["glycan_rg"]
+    return selected.reset_index(drop=True)
+
+
 def extract_model(source: Path, model_number: int, destination: Path) -> None:
     lines: list[str] = []
     in_target = False
@@ -218,7 +226,38 @@ def build_models() -> list[ExtremeModel]:
     return models
 
 
-def pymol_jobs(models: list[ExtremeModel]) -> list[dict]:
+def build_model_from_row(row: pd.Series, suffix: str) -> ExtremeModel:
+    source = PDB_DIR / f"{row['structure']}.pdb"
+    extracted = TMP_DIR / f"{row['structure']}_model{int(row['model'])}_{suffix}.pdb"
+    extract_model(source, int(row["model"]), extracted)
+    protein_atoms, ca_atoms, glycan_atoms, residue_centers = parse_model(extracted)
+    return ExtremeModel(
+        role=str(row["role"]),
+        structure=str(row["structure"]),
+        species=str(row["species"]),
+        model=int(row["model"]),
+        score=float(row.get("extreme_score", row.get("glycan_rg", 0.0))),
+        pdb_path=source,
+        extracted_pdb=extracted,
+        protein_atoms=protein_atoms,
+        ca_atoms=ca_atoms,
+        glycan_atoms=glycan_atoms,
+        glycan_residue_centers=residue_centers,
+        metrics=metric_segments(protein_atoms, ca_atoms, glycan_atoms, residue_centers),
+    )
+
+
+def build_gallus_low_rg_model() -> ExtremeModel:
+    return build_model_from_row(choose_gallus_low_rg().iloc[0], "gallus_low_rg")
+
+
+def pymol_jobs(
+    models: list[ExtremeModel],
+    prefix: str = "extreme",
+    focus_indices: set[int] | None = None,
+    use_species_rg_color: bool = False,
+) -> list[dict]:
+    focus_indices = focus_indices or set()
     jobs = []
     for index, model in enumerate(models, start=1):
         jobs.append({
@@ -228,14 +267,15 @@ def pymol_jobs(models: list[ExtremeModel]) -> list[dict]:
             "model": model.model,
             "score": model.score,
             "pdb": str(model.extracted_pdb),
-            "overview_out": str(TMP_DIR / f"pymol_extreme_{index}_overview.png"),
-            "marker_out": str(TMP_DIR / f"pymol_extreme_{index}_markers.png"),
+            "overview_out": str(TMP_DIR / f"pymol_{prefix}_{index}_overview.png"),
+            "marker_out": str(TMP_DIR / f"pymol_{prefix}_{index}_markers.png"),
             "species_color": hex_to_rgb01(SPECIES_COLORS.get(model.species, "#777777")),
+            "rg_color": hex_to_rgb01(SPECIES_COLORS.get(model.species, "#D69200")) if use_species_rg_color else [1.0, 0.58, 0.04],
             "glycan_center": [float(x) for x in model.glycan_atoms.mean(axis=0)],
             "glycan_radius": float(np.max(np.linalg.norm(model.glycan_atoms - model.glycan_atoms.mean(axis=0), axis=1))),
             "glycan_rg": float(np.linalg.norm(model.metrics["Rg turn"][1] - model.metrics["Rg turn"][0])),
-            "overview_turns": [-24, -12, -78] if model.role.startswith("Compact") else [-24, -12, 10],
-            "is_focus": index == 2,
+            "overview_turns": [-24, -12, -80] if model.role.startswith("Gallus low-Rg") else ([-24, -12, -78] if model.role.startswith("Compact") else [-24, -12, 10]),
+            "is_focus": index in focus_indices,
             "metrics": [
                 {
                     "name": name,
@@ -347,7 +387,7 @@ def write_pymol_script(jobs: list[dict]) -> Path:
         def add_rg_sphere(job):
             center = [float(v) for v in job['glycan_center']]
             rg = float(job['glycan_rg'])
-            set_color('rg_gold', [1.0, 0.58, 0.04])
+            set_color('rg_gold', job.get('rg_color', [1.0, 0.58, 0.04]))
             set_color('rg_orange', [0.95, 0.34, 0.00])
             cmd.pseudoatom('rg_centroid', pos=center, vdw=0.30)
             cmd.show('spheres', 'rg_centroid')
@@ -794,12 +834,22 @@ def combine_outputs(jobs: list[dict]) -> None:
         print(f"Saved {path}")
 
 
+def save_gallus_low_rg_output(job: dict) -> None:
+    panel = panel_with_title(job)
+    path = OUT_DIR / "Fig4D_G_pymol_gallus_low_rg.png"
+    panel.save(path, dpi=(300, 300))
+    print(f"Saved {path}")
+
+
 def main() -> None:
     models = build_models()
-    jobs = pymol_jobs(models)
-    script_path = write_pymol_script(jobs)
+    gallus_low_rg = build_gallus_low_rg_model()
+    jobs = pymol_jobs(models, prefix="extreme", focus_indices={2})
+    gallus_jobs = pymol_jobs([gallus_low_rg], prefix="gallus_low_rg", focus_indices={1}, use_species_rg_color=True)
+    script_path = write_pymol_script(jobs + gallus_jobs)
     run_pymol(script_path)
     combine_outputs(jobs)
+    save_gallus_low_rg_output(gallus_jobs[0])
 
 
 if __name__ == "__main__":

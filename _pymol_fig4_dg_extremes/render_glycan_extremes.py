@@ -92,7 +92,7 @@ def add_camera_circle(name, center, radius, color=(0.0, 0.0, 0.0), segments=144)
 def add_rg_sphere(job):
     center = [float(v) for v in job['glycan_center']]
     rg = float(job['glycan_rg'])
-    set_color('rg_gold', [1.0, 0.58, 0.04])
+    set_color('rg_gold', job.get('rg_color', [1.0, 0.58, 0.04]))
     set_color('rg_orange', [0.95, 0.34, 0.00])
     cmd.pseudoatom('rg_centroid', pos=center, vdw=0.30)
     cmd.show('spheres', 'rg_centroid')
