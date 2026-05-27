@@ -473,36 +473,36 @@ def draw_metric_legend(draw: ImageDraw.ImageDraw, y: int, x: int = 120) -> None:
 
 
 def panel_with_title(job: dict) -> Image.Image:
-    target_w, target_h = 4400, 2200
+    target_w, target_h = 3600, 1350
     panel = Image.new("RGB", (target_w, target_h), "white")
     draw = ImageDraw.Draw(panel)
-    title_font = read_font(72, bold=True)
-    sub_font = read_font(48, bold=False)
+    title_font = read_font(58, bold=True)
+    sub_font = read_font(36, bold=False)
     title = job["role"]
     subtitle = f"{job['species']} | {job['structure']} model {job['model']}"
     tw, _ = text_size(draw, title, title_font)
     sw, _ = text_size(draw, subtitle, sub_font)
-    draw.text(((target_w - tw) // 2, 45), title, fill="#111111", font=title_font)
-    draw.text(((target_w - sw) // 2, 135), subtitle, fill=SPECIES_COLORS.get(job["species"], "#555555"), font=sub_font)
+    draw.text(((target_w - tw) // 2, 26), title, fill="#111111", font=title_font)
+    draw.text(((target_w - sw) // 2, 100), subtitle, fill=SPECIES_COLORS.get(job["species"], "#555555"), font=sub_font)
 
-    overview = fit_image(job["overview_out"], 1500, 1450, pad=80)
-    front = circular_view(job["zoom_front_out"], 1160, pad=150)
-    back = circular_view(job["zoom_back_out"], 1160, pad=150)
+    overview = fit_image(job["overview_out"], 1120, 880, pad=120)
+    front = circular_view(job["zoom_front_out"], 820, pad=190)
+    back = circular_view(job["zoom_back_out"], 820, pad=190)
 
-    overview_x, overview_y = 80, 350
-    front_x, zoom_y = 1760, 380
-    back_x = 3060
-    circle_d = 1160
+    overview_x, overview_y = 70, 220
+    front_x, zoom_y = 1330, 250
+    back_x = 2410
+    circle_d = 820
 
     panel.paste(overview, (overview_x, overview_y))
     panel.paste(front.convert("RGB"), (front_x, zoom_y), front.split()[-1])
     panel.paste(back.convert("RGB"), (back_x, zoom_y), back.split()[-1])
 
-    draw.ellipse((front_x, zoom_y, front_x + circle_d, zoom_y + circle_d), outline="#111111", width=10)
-    draw.ellipse((back_x, zoom_y, back_x + circle_d, zoom_y + circle_d), outline="#111111", width=10)
-    draw.line((overview_x + 1320, overview_y + 650, front_x, zoom_y + circle_d // 2), fill="#111111", width=8)
+    draw.ellipse((front_x, zoom_y, front_x + circle_d, zoom_y + circle_d), outline="#111111", width=7)
+    draw.ellipse((back_x, zoom_y, back_x + circle_d, zoom_y + circle_d), outline="#111111", width=7)
+    draw.line((overview_x + 1040, overview_y + 430, front_x, zoom_y + circle_d // 2), fill="#111111", width=6)
     draw_rotation_marker(draw, (front_x + circle_d + back_x) // 2, zoom_y + circle_d // 2)
-    draw_metric_legend(draw, target_h - 190)
+    draw_metric_legend(draw, target_h - 105, x=95)
     return panel
 
 

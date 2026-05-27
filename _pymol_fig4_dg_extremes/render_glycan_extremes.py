@@ -106,6 +106,11 @@ def scene_overview(job):
     cmd.zoom('oval and chain A or oval and chain B', 22)
     cmd.clip('slab', 220)
     add_camera_circle('glycan_locator', job['glycan_center'], max(6.0, job['glycan_radius'] * 1.35))
+    for index, metric in enumerate(job['metrics']):
+        if metric['name'] == 'Glycan-Protein':
+            add_line('overview_metric_' + str(index), metric['start'], metric['end'], metric['color'], radius=0.018)
+        else:
+            add_arrow('overview_metric_' + str(index), metric['start'], metric['end'], metric['color'])
     cmd.png(job['overview_out'], width=2200, height=1800, dpi=300, ray=1)
 
 def scene_zoom(job, out_path, rotate_y=0, show_metrics=True):
@@ -134,6 +139,6 @@ def scene_zoom(job, out_path, rotate_y=0, show_metrics=True):
 
 for item in JOBS:
     scene_overview(item)
-    scene_zoom(item, item['zoom_front_out'], rotate_y=0, show_metrics=True)
+    scene_zoom(item, item['zoom_front_out'], rotate_y=0, show_metrics=False)
     scene_zoom(item, item['zoom_back_out'], rotate_y=180, show_metrics=False)
 cmd.quit()
