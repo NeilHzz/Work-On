@@ -2,6 +2,8 @@
 BLAST Ortholog Mapping – Chord Diagram
 Three species: Gallus (#C46B83), Anas (#93AACD), Columba (#F3CE9D)
 Data source: Blast_Ortholog_Mapping.xlsx  (GvsC_, GvsA_, AvsC_入图数据)
+Protein arc width: full sequence length from Gly*.fasta
+Chord endpoints: best BLAST HSP sequence regions on each protein arc
 """
 
 import math
@@ -237,7 +239,7 @@ all_links = pd.concat([gvc_links, gva_links, avc_links], ignore_index=True)
 all_links["score"] = pd.to_numeric(all_links["score"], errors="coerce").fillna(50)
 all_links["is_target"] = all_links["target"].notna()
 
-# ── 2. 各物种蛋白列表（按总bitscore降序）─────────────────────────────────────
+# ── 2. 各物种蛋白列表（按序列长度降序）────────────────────────────────────────
 # ── 灰色 Gallus 蛋白（原始 HSP 有记录但未通过筛选）───────────────────────────
 COL_GREY   = "#aaaaaa"   # 无匹配 Gallus 蛋白颜色
 GREY_G_ACCS = {
@@ -274,7 +276,7 @@ if not grey_df.empty:
 a_prots = build_protein_list("Anas")
 c_prots = build_protein_list("Columba")
 
-TOP_N = 5   # 每物种额外显示 bitscore 最高的前5个非目标蛋白
+TOP_N = 5   # 每物种额外显示序列最长的前5个非目标蛋白
 
 # 目标蛋白始终显示
 # 并额外展示 OC17
@@ -313,12 +315,12 @@ all_display_names = {**g_names, **a_names, **c_names}
 all_display_names['V5NUE7'] = 'Ovocleidin-17'
 
 # ── 3. 分配弧度 ────────────────────────────────────────────────────────────────
-# 每个物种总角度 = 按蛋白数量比例分配（扣除间隔）
+# 每个物种总角度 = 按蛋白序列长度总和分配（扣除间隔）
 TOTAL_DEG    = 360 - 3 * GAP_DEG
 n_g, n_a, n_c = len(g_prots), len(a_prots), len(c_prots)
 n_total      = n_g + n_a + n_c
 
-# 计算每个物种分配到的总角度（按蛋白数量比）
+# 计算每个物种分配到的总角度（按蛋白长度总和）
 total_prots_gap = (n_g - 1) * PROTEIN_GAP_DEG + (n_a - 1) * PROTEIN_GAP_DEG + (n_c - 1) * PROTEIN_GAP_DEG
 net_deg = TOTAL_DEG - total_prots_gap
 
