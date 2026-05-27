@@ -103,7 +103,7 @@ def scene_overview(job):
     cmd.turn('x', -6)
     cmd.turn('y', 18)
     cmd.turn('z', -4)
-    cmd.zoom('oval and chain A or oval and chain B', 85)
+    cmd.zoom('oval', buffer=24, complete=1)
     cmd.clip('slab', 260)
     add_camera_circle('glycan_locator', job['glycan_center'], max(6.0, job['glycan_radius'] * 1.35))
     cmd.png(job['overview_out'], width=2200, height=1800, dpi=300, ray=1)
@@ -120,7 +120,7 @@ def scene_zoom(job, out_path, rotate_y=0, show_metrics=True):
     cmd.turn('x', -14)
     cmd.turn('y', 18 + float(rotate_y))
     cmd.turn('z', -8)
-    cmd.zoom('oval and chain B', 14)
+    cmd.zoom('oval and chain B', buffer=10, complete=1)
     cmd.clip('slab', 160)
 
     if show_metrics:
@@ -130,8 +130,7 @@ def scene_zoom(job, out_path, rotate_y=0, show_metrics=True):
             else:
                 add_arrow('metric_' + str(index), metric['start'], metric['end'], metric['color'])
 
-    cmd.translate([0.0, 34.0, 0.0], 'all', camera=1)
-    cmd.png(out_path, width=2200, height=5200, dpi=300, ray=1)
+    cmd.png(out_path, width=2200, height=2200, dpi=300, ray=1)
 
 for item in JOBS:
     scene_overview(item)
