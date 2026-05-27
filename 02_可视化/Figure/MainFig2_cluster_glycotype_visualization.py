@@ -225,7 +225,7 @@ def build_summary_tables(
 def clean_axes(ax: plt.Axes) -> None:
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
-    ax.tick_params(axis="both", labelsize=9, length=3, width=0.7)
+    ax.tick_params(axis="both", labelsize=9.5, length=3.2, width=0.75)
 
 
 def plot_cluster_consistency(cluster_df: pd.DataFrame) -> None:
@@ -233,8 +233,8 @@ def plot_cluster_consistency(cluster_df: pd.DataFrame) -> None:
     fig, (ax_left, ax_right) = plt.subplots(
         1,
         2,
-        figsize=(7.4, 3.8),
-        gridspec_kw={"width_ratios": [1.08, 1.0], "wspace": 0.34},
+        figsize=(7.8, 4.0),
+        gridspec_kw={"width_ratios": [1.08, 1.0], "wspace": 0.32},
     )
 
     category_order = ["Single glycan type", "Same multi-type set", "Mixed type sets"]
@@ -255,12 +255,12 @@ def plot_cluster_consistency(cluster_df: pd.DataFrame) -> None:
             f"{count}\n{count / total * 100:.1f}%",
             ha="center",
             va="bottom",
-            fontsize=8.5,
+            fontsize=9.0,
         )
     ax_left.set_xticks(x)
-    ax_left.set_xticklabels(["Single\ntype", "Same\nmulti-type set", "Mixed\ntype sets"], fontsize=8.5)
-    ax_left.set_ylabel("Cluster count", fontsize=10)
-    ax_left.set_title("Within-cluster glycan-type consistency", fontsize=11, pad=8)
+    ax_left.set_xticklabels(["Single\ntype", "Same\nmulti-type set", "Mixed\ntype sets"], fontsize=9.0)
+    ax_left.set_ylabel("Cluster count", fontsize=10.5)
+    ax_left.set_title("Within-cluster glycan-type consistency", fontsize=12, pad=8)
     ax_left.set_ylim(0, max(counts.values) * 1.18)
     clean_axes(ax_left)
 
@@ -284,12 +284,12 @@ def plot_cluster_consistency(cluster_df: pd.DataFrame) -> None:
                 str(count),
                 ha="center",
                 va="bottom",
-                fontsize=8.5,
+                fontsize=9.0,
             )
     ax_right.set_xticks(union_x)
-    ax_right.set_xlabel("Glycan types observed per cluster", fontsize=10)
-    ax_right.set_ylabel("Cluster count", fontsize=10)
-    ax_right.set_title("Cluster glycan-type diversity", fontsize=11, pad=8)
+    ax_right.set_xlabel("Glycan types observed per cluster", fontsize=10.5)
+    ax_right.set_ylabel("Cluster count", fontsize=10.5)
+    ax_right.set_title("Cluster glycan-type diversity", fontsize=12, pad=8)
     ax_right.set_ylim(0, max(union_y) * 1.18)
     clean_axes(ax_right)
 
@@ -305,7 +305,7 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
     )
     proportions = matrix.div(matrix.sum(axis=1), axis=0) * 100
 
-    fig, ax = plt.subplots(figsize=(7.6, 3.45))
+    fig, ax = plt.subplots(figsize=(7.8, 3.6))
     y = np.arange(len(SPECIES_ORDER))
     left = np.zeros(len(SPECIES_ORDER))
     for glycan_type in GLYCAN_TYPES_ORDER:
@@ -331,20 +331,20 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
                     f"{value:.0f}%",
                     ha="center",
                     va="center",
-                    fontsize=8,
+                    fontsize=8.5,
                     color=text_color,
                 )
         left += values
 
     ax.set_xlim(0, 100)
     ax.set_yticks(y)
-    ax.set_yticklabels(SPECIES_ORDER, fontsize=10)
+    ax.set_yticklabels(SPECIES_ORDER, fontsize=10.5)
     for tick, species in zip(ax.get_yticklabels(), SPECIES_ORDER):
         tick.set_color(SPECIES_COLORS[species])
         tick.set_fontweight("bold")
     ax.invert_yaxis()
-    ax.set_xlabel("Protein-glycan type assignments (%)", fontsize=10)
-    ax.set_title("Species-level glycan-type composition", fontsize=11, pad=8)
+    ax.set_xlabel("Protein-glycan type assignments (%)", fontsize=10.5)
+    ax.set_title("Species-level glycan-type composition", fontsize=12, pad=8)
     ax.grid(axis="x", color="#D9D9D9", linewidth=0.6)
     ax.set_axisbelow(True)
     clean_axes(ax)
@@ -352,18 +352,18 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
 
     totals = matrix.sum(axis=1).astype(int)
     for idx, species in enumerate(SPECIES_ORDER):
-        ax.text(101.0, idx, f"n={totals.loc[species]}", ha="left", va="center", fontsize=8.5)
+        ax.text(101.0, idx, f"n={totals.loc[species]}", ha="left", va="center", fontsize=9)
     ax.set_xlim(0, 112)
 
-    fig.subplots_adjust(right=0.70)
+    fig.subplots_adjust(right=0.74)
     legend = ax.legend(
         loc="center left",
-        bbox_to_anchor=(1.02, 0.5),
+        bbox_to_anchor=(1.0, 0.5),
         ncol=1,
         frameon=False,
-        fontsize=8.2,
+        fontsize=8.8,
         handlelength=1.0,
-        labelspacing=0.8,
+        labelspacing=0.72,
     )
     for handle in legend.legend_handles:
         handle.set_linewidth(0)
@@ -381,17 +381,17 @@ def plot_species_type_heatmap(type_count_df: pd.DataFrame) -> None:
     )
     percentages = counts.div(counts.sum(axis=1), axis=0) * 100
 
-    fig, ax = plt.subplots(figsize=(7.4, 3.2))
+    fig, ax = plt.subplots(figsize=(7.6, 3.45))
     image = ax.imshow(percentages.to_numpy(), cmap="YlGnBu", aspect="auto", vmin=0)
     ax.set_xticks(np.arange(len(GLYCAN_TYPES_ORDER)))
     ax.set_xticklabels(
         [label.replace("Complex-", "Complex\n") for label in GLYCAN_TYPES_ORDER],
         rotation=0,
         ha="center",
-        fontsize=8,
+        fontsize=8.6,
     )
     ax.set_yticks(np.arange(len(SPECIES_ORDER)))
-    ax.set_yticklabels(SPECIES_ORDER, fontsize=10)
+    ax.set_yticklabels(SPECIES_ORDER, fontsize=10.5)
     for tick, species in zip(ax.get_yticklabels(), SPECIES_ORDER):
         tick.set_color(SPECIES_COLORS[species])
         tick.set_fontweight("bold")
@@ -407,11 +407,11 @@ def plot_species_type_heatmap(type_count_df: pd.DataFrame) -> None:
                 f"{value}\n{pct:.1f}%",
                 ha="center",
                 va="center",
-                fontsize=7.5,
+                fontsize=8.0,
                 color=text_color,
             )
 
-    ax.set_title("Protein counts and within-species percentages", fontsize=11, pad=8)
+    ax.set_title("Protein counts and within-species percentages", fontsize=12, pad=8)
     ax.tick_params(axis="both", length=0)
     for spine in ax.spines.values():
         spine.set_visible(False)
@@ -421,8 +421,8 @@ def plot_species_type_heatmap(type_count_df: pd.DataFrame) -> None:
     ax.tick_params(which="minor", bottom=False, left=False)
 
     cbar = fig.colorbar(image, ax=ax, fraction=0.032, pad=0.025)
-    cbar.set_label("Within-species percentage", fontsize=9)
-    cbar.ax.tick_params(labelsize=8, length=2)
+    cbar.set_label("Within-species percentage", fontsize=9.5)
+    cbar.ax.tick_params(labelsize=8.5, length=2)
 
     save_fig(fig, "Fig2_species_glycotype_heatmap")
     plt.close(fig)

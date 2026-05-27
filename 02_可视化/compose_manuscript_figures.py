@@ -380,37 +380,57 @@ def compose_fig2():
     print("\n=== Composing Fig 2 ===")
     inner_w = CANVAS_W - 2 * MARGIN
 
-    def panel(source, label, target_w, font=FONT_PUB_LABEL, trim=False):
+    def panel(source, label, target_w=None, target_h=None, font=FONT_PUB_LABEL, trim=False):
         source_path = source if isinstance(source, Path) else PNG / source
         raw = load_img(source_path)
         if raw is None:
-            raw = make_placeholder(target_w, int(target_w * 0.65), f"Panel {label}\n{source_path.name}")
+            placeholder_w = target_w or max(800, int((target_h or 800) * 1.15))
+            placeholder_h = target_h or int(placeholder_w * 0.65)
+            raw = make_placeholder(placeholder_w, placeholder_h, f"Panel {label}\n{source_path.name}")
         if trim:
             raw = trim_white(raw)
-        img = scale_to_w(raw, target_w)
+        if target_h is not None:
+            img = scale_to_h(raw, target_h)
+        else:
+            img = scale_to_w(raw, target_w)
         return add_label(img, label, font=font)
+
+    def fit_row(panel_specs, target_row_w):
+        raws = []
+        aspect_sum = 0.0
+        for source, label, trim in panel_specs:
+            source_path = source if isinstance(source, Path) else PNG / source
+            raw = load_img(source_path)
+            if raw is None:
+                raw = make_placeholder(1200, 900, f"Panel {label}\n{source_path.name}")
+            if trim:
+                raw = trim_white(raw)
+            raws.append((raw, label))
+            aspect_sum += raw.width / raw.height
+        row_h = max(1, int((target_row_w - GAP * (len(panel_specs) - 1)) / aspect_sum))
+        panels = [add_label(scale_to_h(raw, row_h), label, font=FONT_PUB_LABEL) for raw, label in raws]
+        row_w = sum(panel.width for panel in panels) + GAP * (len(panels) - 1)
+        row = Image.new("RGBA", (inner_w, row_h), (255, 255, 255, 0))
+        x = max(0, (inner_w - row_w) // 2)
+        for panel_img in panels:
+            row.paste(panel_img, (x, 0), panel_img)
+            x += panel_img.width + GAP
+        return row
 
     # A: current glycoprotein orthogroup UpSet plot, full width for readability.
     A = panel("Fig2.png", "A", inner_w, trim=False)
 
-    # B-C: glycan-type consistency followed by the species/type count heatmap.
-    left_w = int(inner_w * 0.48)
-    right_w = inner_w - left_w - GAP
-    B = panel("Fig2_cluster_glycotype_consistency.png", "B", left_w, trim=False)
-    C = panel("Fig2_species_glycotype_heatmap.png", "C", right_w, trim=False)
-    row2_h = max(B.height, C.height)
-    row2 = Image.new("RGBA", (inner_w, row2_h), (255, 255, 255, 0))
-    row2.paste(B, (0, (row2_h - B.height) // 2), B)
-    row2.paste(C, (left_w + GAP, (row2_h - C.height) // 2), C)
+    # B-C: equal-height analytical panels to keep the middle row compact and balanced.
+    row2 = fit_row([
+        ("Fig2_cluster_glycotype_consistency.png", "B", True),
+        ("Fig2_species_glycotype_heatmap.png", "C", True),
+    ], inner_w)
 
-    # D-E: species composition first, then the BLAST ortholog chord diagram as the final narrative panel.
-    col_w = (inner_w - GAP) // 2
-    D = panel("Fig2_species_glycotype_proportion.png", "D", col_w, trim=False)
-    E = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", col_w, trim=False)
-    row3_h = max(D.height, E.height)
-    row3 = Image.new("RGBA", (inner_w, row3_h), (255, 255, 255, 0))
-    row3.paste(D, (0, (row3_h - D.height) // 2), D)
-    row3.paste(E, (col_w + GAP, (row3_h - E.height) // 2), E)
+    # D-E: keep the narrative order but scale both panels to the same height so the final row reads as one unit.
+    row3 = fit_row([
+        ("Fig2_species_glycotype_proportion.png", "D", True),
+        (FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", True),
+    ], inner_w)
 
     rows = [A, row2, row3]
     total_h = 2 * MARGIN + sum(row.height for row in rows) + GAP * (len(rows) - 1)
