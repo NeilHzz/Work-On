@@ -171,8 +171,8 @@ def draw_upset(memberships):
     ax_matrix.set_yticklabels([])
     ax_matrix.tick_params(axis="y", length=0, pad=7)
     ax_matrix.tick_params(axis="x", bottom=False, labelbottom=False)
-    label_x = -0.58
-    icon_x = -0.78
+    label_x = -0.66
+    icon_x = -0.86
     for species in SPECIES_ORDER:
         y = y_positions[species]
         icon_path = SPECIES_ICONS[species]
