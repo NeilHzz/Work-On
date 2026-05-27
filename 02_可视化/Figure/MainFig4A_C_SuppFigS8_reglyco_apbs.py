@@ -320,7 +320,16 @@ def draw_hotspot(ax, summary):
         mpatches.Patch(facecolor='#888', alpha=0.28,
                    edgecolor='#888', label='Apo'),
     ]
-    ax.legend(handles=legend_els, fontsize=LEGEND_FS, framealpha=0.6)
+    ax.legend(handles=legend_els,
+              fontsize=LEGEND_FS - 4,
+              loc='upper left',
+              bbox_to_anchor=(0.03, 0.98),
+              framealpha=0.72,
+              edgecolor='#d8d8d8',
+              borderpad=0.35,
+              labelspacing=0.3,
+              handlelength=1.7,
+              handletextpad=0.55)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.yaxis.set_major_locator(ticker.MaxNLocator(integer=True))

@@ -597,68 +597,130 @@ def compose_fig4():
     print("\n=== Composing Fig 4 ===")
     inner_w = CANVAS_W - 2 * MARGIN
 
-    def build_row(files_labels, ncols, cover_old=False):
-        col_w = (inner_w - (ncols - 1) * GAP) // ncols
-        font  = FONT_FIG4_LABEL
-        imgs  = []
-        for fname, lbl in files_labels:
-            raw = load_img(PNG / fname)
-            if raw is None:
-                img = make_placeholder(col_w, int(col_w * 0.9), lbl)
-            else:
-                img = scale_to_w(raw, col_w)
-            img = add_label(img, lbl, font=font, cover=cover_old)
-            imgs.append(img)
-        return imgs, col_w
+    group_gap = 90
+    sub_gap = 36
 
-    # Row 1 (A, B, C) — 3 panels each 1/3 width
-    # Source panels Fig5B/C/D already have embedded B/C/D labels → cover and relabel
-    r1, cw1 = build_row([
-        ("Fig5B.png", "A"),   # Ca²⁺ hotspot bar    (script label B)
-        ("Fig5C.png", "B"),   # Carboxylate SASA bar (script label C)
-        ("Fig5D.png", "C"),   # Surface potential    (script label D)
-    ], ncols=3, cover_old=True)
+    def make_panel(fname, label=None, *, ncols=None, cover_old=False,
+                   trim=False, max_h=None, label_offset=(14, 8),
+                   cover_px=(90, 110)):
+        target_w = None
+        if ncols is not None:
+            target_w = (inner_w - (ncols - 1) * GAP) // ncols
+        raw = load_img(PNG / fname)
+        if raw is None:
+            placeholder_w = target_w or 1200
+            placeholder_h = max_h or int(placeholder_w * 0.8)
+            raw = make_placeholder(placeholder_w, placeholder_h, fname)
+        if trim:
+            raw = trim_white(raw, pad=24, threshold=250)
+        if target_w is not None and max_h is not None:
+            img = scale_to_fit(raw, target_w, max_h)
+        elif target_w is not None:
+            img = scale_to_w(raw, target_w)
+        elif max_h is not None:
+            img = scale_to_h(raw, max_h)
+        else:
+            img = raw
+        if label is not None:
+            img = add_label(img, label, font=FONT_FIG4_LABEL,
+                            offset=label_offset, cover=cover_old,
+                            cover_px=cover_px)
+        return img
 
-    # Row 2 (D, E, F, G) — 4 panels each 1/4 width
-    # Source panels Fig5E–H have NO embedded corner labels (labels were removed)
-    r2, cw2 = build_row([
-        ("Fig5E.png", "D"),   # Glycan Rg
-        ("Fig5F.png", "E"),   # Glycan end-to-end
-        ("Fig5G.png", "F"),   # Glycan–protein distance
-        ("Fig5H.png", "G"),   # Glycan–backbone proximity
-    ], ncols=4, cover_old=False)
+    def compose_centered_row(images, gap=GAP):
+        row_h = max(img.height for img in images if img is not None)
+        row_w = sum(img.width for img in images if img is not None) + gap * (len(images) - 1)
+        row = Image.new("RGBA", (inner_w, row_h), (255, 255, 255, 0))
+        x = max(0, (inner_w - row_w) // 2)
+        for img in images:
+            paste(row, img, x, (row_h - img.height) // 2)
+            x += img.width + gap
+        return row
 
-    # Row 3 (H, I, J, K) — 4 panels
-    # Source panels Fig5I–L have embedded labels I/J/K/L → cover and relabel
-    r3, cw3 = build_row([
-        ("Fig5I.png", "H"),
-        ("Fig5J.png", "I"),
-        ("Fig5K.png", "J"),
-        ("Fig5L.png", "K"),
-    ], ncols=4, cover_old=True)
+    def make_shared_final_legend():
+        legend_w = min(1900, inner_w // 2)
+        legend_h = 120
+        legend = Image.new("RGBA", (legend_w, legend_h), (255, 255, 255, 0))
+        draw = ImageDraw.Draw(legend)
+        font = _load_font(52)
+        text_color = (40, 40, 40, 255)
+        swatch_w = 88
+        swatch_h = 40
+        y = 34
 
-    # Row 4 (L, M) — center two panels on the same four-column grid
-    # Source panels Fig5M/N have embedded labels M/N → cover and relabel
-    r4, cw4 = build_row([
-        ("Fig5M.png", "L"),
-        ("Fig5N.png", "M"),
-    ], ncols=4, cover_old=True)
+        draw.rectangle((20, y, 20 + swatch_w, y + swatch_h), fill=(170, 170, 170, 255))
+        draw.text((20 + swatch_w + 24, y - 4), "Net Accessible", fill=text_color, font=font)
 
-    def row_h(panels):
-        return max(p.height for p in panels if p is not None)
+        x2 = legend_w // 2 + 12
+        draw.rectangle((x2, y, x2 + swatch_w, y + swatch_h),
+                       fill=(235, 235, 235, 255), outline=(145, 145, 145, 255), width=2)
+        step = 12
+        for offset in range(-swatch_h, swatch_w, step):
+            draw.line((x2 + offset, y + swatch_h, x2 + offset + swatch_h, y),
+                      fill=(160, 160, 160, 255), width=2)
+        draw.text((x2 + swatch_w + 24, y - 4), "Glycan-Shielded", fill=text_color, font=font)
+        return legend
 
-    total_h = (2 * MARGIN
-               + row_h(r1) + row_h(r2) + row_h(r3) + row_h(r4)
-               + 3 * GAP)
+    abc_row = compose_centered_row([
+        make_panel("Fig5B.png", "A", ncols=3, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig5C.png", "B", ncols=3, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig5D.png", "C", ncols=3, cover_old=True, cover_px=(120, 130)),
+    ])
+
+    dg_context_row = compose_centered_row([
+        make_panel("Fig4D-G_Gallus.png", ncols=2, trim=True, max_h=1040),
+        make_panel("Fig4D-G_Columba.png", ncols=2, trim=True, max_h=1040),
+    ])
+    dg_plot_row = compose_centered_row([
+        make_panel("Fig5E.png", "D", ncols=4),
+        make_panel("Fig5F.png", "E", ncols=4),
+        make_panel("Fig5G.png", "F", ncols=4),
+        make_panel("Fig5H.png", "G", ncols=4),
+    ])
+
+    hk_context_row = compose_centered_row([
+        make_panel("Fig4H_K_3D_sasa_Gallus.png", ncols=3, trim=True, max_h=920),
+        make_panel("Fig4H_K_3D_sasa_Anas.png", ncols=3, trim=True, max_h=920),
+        make_panel("Fig4H_K_3D_sasa_Columba.png", ncols=3, trim=True, max_h=920),
+    ])
+    hk_plot_row = compose_centered_row([
+        make_panel("Fig5I.png", "H", ncols=4, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig5J.png", "I", ncols=4, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig5K.png", "J", ncols=4, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig5L.png", "K", ncols=4, cover_old=True, cover_px=(120, 130)),
+    ])
+
+    final_row = compose_centered_row([
+        make_panel("Fig5M.png", "L", ncols=2, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig5N.png", "M", ncols=2, cover_old=True, cover_px=(120, 130)),
+    ])
+    final_legend = make_shared_final_legend()
+    final_block = Image.new(
+        "RGBA",
+        (inner_w, final_legend.height + sub_gap + final_row.height),
+        (255, 255, 255, 0),
+    )
+    paste(final_block, final_legend, (inner_w - final_legend.width) // 2, 0)
+    paste(final_block, final_row, 0, final_legend.height + sub_gap)
+
+    rows = [
+        abc_row,
+        dg_context_row,
+        dg_plot_row,
+        hk_context_row,
+        hk_plot_row,
+        final_block,
+    ]
+    gaps = [group_gap, sub_gap, group_gap, sub_gap, group_gap]
+    total_h = 2 * MARGIN + sum(row.height for row in rows) + sum(gaps)
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
 
     y = MARGIN
-    for row, cw in [(r1, cw1), (r2, cw2), (r3, cw3)]:
-        y = paste_row(canvas, row, cw, y)
-
-    row4_w = 2 * cw4 + GAP
-    row4_x = (CANVAS_W - row4_w) // 2
-    y = paste_row(canvas, r4, cw4, y, x_start=row4_x)
+    for idx, row in enumerate(rows):
+        paste(canvas, row, MARGIN, y)
+        y += row.height
+        if idx < len(gaps):
+            y += gaps[idx]
 
     save_fig(canvas, "Fig4_composed")
 

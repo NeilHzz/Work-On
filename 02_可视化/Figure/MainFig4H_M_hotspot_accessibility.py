@@ -157,7 +157,7 @@ def draw_violin_panel(ax, groups_dict, ylabel, title, panel_label,
 
 
 # ── 堆叠柱状图 ────────────────────────────────────────────────────────────────
-def draw_stacked_bar(ax, df):
+def draw_stacked_bar(ax, df, show_legend=True):
     means, stds, shielded_means = {}, {}, {}
     for sp in SPECIES_ORDER:
         g = df[df.species == sp]
@@ -214,19 +214,23 @@ def draw_stacked_bar(ax, df):
     ax.set_ylim(0, letter_y + y_top * 0.22)
     ax.set_xlim(-0.6, len(SPECIES_ORDER) - 0.4)
 
-    legend_handles = [
-        mpatches.Patch(facecolor='#aaa', label='Net Accessible'),
-        mpatches.Patch(facecolor='#ddd', hatch='///', edgecolor='#888',
-                       label='Glycan-Shielded'),
-    ]
-    ax.legend(handles=legend_handles, fontsize=LEGEND_FS, loc='upper right',
-              framealpha=0.8, edgecolor='none')
+    if show_legend:
+        legend_handles = [
+            mpatches.Patch(facecolor='#aaa', label='Net Accessible'),
+            mpatches.Patch(facecolor='#ddd', hatch='///', edgecolor='#888',
+                           label='Glycan-Shielded'),
+        ]
+        ax.legend(handles=legend_handles, fontsize=LEGEND_FS - 2,
+                  loc='upper left', bbox_to_anchor=(0.52, 0.98),
+                  framealpha=0.78, edgecolor='none',
+                  borderpad=0.25, labelspacing=0.3,
+                  handlelength=1.6, handletextpad=0.5)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
 
 
 # ── Panel F: 热点残基 SASA 堆叠柱图（iface_full_sasa vs. iface_shielding）─────
-def draw_sasa_bar(ax, df):
+def draw_sasa_bar(ax, df, show_legend=True):
     means, stds, shielded_means = {}, {}, {}
     for sp in SPECIES_ORDER:
         g = df[df.species == sp]
@@ -281,13 +285,17 @@ def draw_sasa_bar(ax, df):
         fontsize=TITLE_FS, pad=8)
     ax.set_ylim(0, letter_y + y_top * 0.22)
     ax.set_xlim(-0.6, len(SPECIES_ORDER) - 0.4)
-    legend_handles = [
-        mpatches.Patch(facecolor='#aaa', label='Net Accessible'),
-        mpatches.Patch(facecolor='#ddd', hatch='///', edgecolor='#888',
-                       label='Glycan-Shielded'),
-    ]
-    ax.legend(handles=legend_handles, fontsize=LEGEND_FS, loc='upper right',
-              framealpha=0.8, edgecolor='none')
+    if show_legend:
+        legend_handles = [
+            mpatches.Patch(facecolor='#aaa', label='Net Accessible'),
+            mpatches.Patch(facecolor='#ddd', hatch='///', edgecolor='#888',
+                           label='Glycan-Shielded'),
+        ]
+        ax.legend(handles=legend_handles, fontsize=LEGEND_FS - 2,
+                  loc='upper left', bbox_to_anchor=(0.52, 0.98),
+                  framealpha=0.78, edgecolor='none',
+                  borderpad=0.25, labelspacing=0.3,
+                  handlelength=1.6, handletextpad=0.5)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
 
@@ -328,7 +336,7 @@ def main():
     # Panel E: stacked bar
     fig, ax = plt.subplots(figsize=(5.9, 5.5))
     fig.patch.set_facecolor('white')
-    draw_stacked_bar(ax, df)
+    draw_stacked_bar(ax, df, show_legend=False)
     fig.tight_layout()
     save_panel(fig, 'Fig5M')
     plt.close(fig)
@@ -336,7 +344,7 @@ def main():
     # Panel F: SASA bar
     fig, ax = plt.subplots(figsize=(5.9, 5.5))
     fig.patch.set_facecolor('white')
-    draw_sasa_bar(ax, df)
+    draw_sasa_bar(ax, df, show_legend=False)
     fig.tight_layout()
     save_panel(fig, 'Fig5N')
     plt.close(fig)
