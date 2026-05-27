@@ -18,6 +18,11 @@ import textwrap
 
 import numpy as np
 import pandas as pd
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d.art3d import Line3DCollection
 from PIL import Image, ImageDraw, ImageFont
 
 
@@ -446,13 +451,131 @@ def combine_hk(hk_jobs: list[dict]) -> None:
     print(f"Saved {OUT_DIR / 'Fig4_model_H_K.png'}")
 
 
+def transform_points(structure: Structure):
+    center = structure.ca.mean(axis=0)
+    _, _, vh = np.linalg.svd(structure.ca - center, full_matrices=False)
+    rot = vh.T
+
+    def apply(points):
+        arr = np.asarray(points, dtype=float)
+        original_shape = arr.shape
+        arr = arr.reshape(-1, 3)
+        out = (arr - center) @ rot
+        if len(structure.glycan_atoms):
+            glycan = (structure.glycan_atoms - center) @ rot
+            ca = (structure.ca - center) @ rot
+            if glycan[:, 1].mean() < ca[:, 1].mean():
+                out[:, 1] *= -1
+            if glycan[:, 2].mean() < ca[:, 2].mean():
+                out[:, 2] *= -1
+        return out.reshape(original_shape)
+
+    return apply
+
+
+def setup_clean_axis(ax, points: np.ndarray, elev: float = 18, azim: float = -62) -> None:
+    mins = points.min(axis=0)
+    maxs = points.max(axis=0)
+    centers = (mins + maxs) / 2
+    radius = max(maxs - mins) / 2 + 4
+    ax.set_xlim(centers[0] - radius, centers[0] + radius)
+    ax.set_ylim(centers[1] - radius, centers[1] + radius)
+    ax.set_zlim(centers[2] - radius, centers[2] + radius)
+    ax.set_box_aspect((1, 1, 1))
+    ax.view_init(elev=elev, azim=azim)
+    ax.set_axis_off()
+    ax.set_facecolor("white")
+
+
+def draw_clean_structure(ax, ca: np.ndarray, glycan: np.ndarray, species_color: str, alpha: float = 0.74) -> None:
+    segments = np.stack([ca[:-1], ca[1:]], axis=1)
+    ax.add_collection3d(Line3DCollection(segments, colors="#B8B8B8", linewidths=2.2, alpha=alpha))
+    if len(glycan):
+        ax.scatter(glycan[:, 0], glycan[:, 1], glycan[:, 2], s=22, c=species_color, alpha=0.90, depthshade=True)
+        gly_segments = np.stack([glycan[:-1], glycan[1:]], axis=1)
+        ax.add_collection3d(Line3DCollection(gly_segments, colors=species_color, linewidths=1.1, alpha=0.38))
+
+
+def render_clean_dg(structures: list[Structure]) -> None:
+    gallus = next(s for s in structures if s.species == "Gallus")
+    apply = transform_points(gallus)
+    ca = apply(gallus.ca)
+    glycan = apply(gallus.glycan_atoms)
+    residue_centers = [apply(center) for center in gallus.glycan_residue_centers]
+
+    glycan_center = glycan.mean(axis=0)
+    protein_center = ca.mean(axis=0)
+    rg = math.sqrt(float(np.mean(np.sum((glycan - glycan_center) ** 2, axis=1))))
+    rg_edge = closest_point_to_radius(glycan, glycan_center, rg)
+    end_a = residue_centers[0]
+    end_b = residue_centers[-1]
+    glycan_near_ca, ca_near_glycan = nearest_pair(glycan, ca)
+
+    specs = [
+        ("D", "Glycan Rg", "centroid to Rg shell", glycan_center, rg_edge, "#D69200"),
+        ("E", "End-to-end", "terminal residue centers", end_a, end_b, "#0072B2"),
+        ("F", "Glycan-protein distance", "glycan centroid to protein C-alpha centroid", glycan_center, protein_center, "#009E73"),
+        ("G", "Min. glycan-C-alpha", "nearest glycan atom to backbone C-alpha", glycan_near_ca, ca_near_glycan, "#CC79A7"),
+    ]
+
+    plt.rcParams["font.family"] = "Times New Roman"
+    fig = plt.figure(figsize=(19.2, 4.6), dpi=300)
+    fig.patch.set_facecolor("white")
+    for index, (panel, title, subtitle, point_a, point_b, color) in enumerate(specs, start=1):
+        ax = fig.add_subplot(1, 4, index, projection="3d")
+        draw_clean_structure(ax, ca, glycan, SPECIES_COLORS["Gallus"])
+        ax.plot([point_a[0], point_b[0]], [point_a[1], point_b[1]], [point_a[2], point_b[2]],
+                color=color, linewidth=4.2, solid_capstyle="round")
+        ax.scatter([point_a[0], point_b[0]], [point_a[1], point_b[1]], [point_a[2], point_b[2]],
+                   s=70, c=color, depthshade=True)
+        setup_clean_axis(ax, np.vstack([ca, glycan, point_a.reshape(1, 3), point_b.reshape(1, 3)]))
+        ax.set_title(f"{panel}  {title}\n{subtitle}", fontsize=16, fontweight="bold", pad=8)
+    plt.subplots_adjust(left=0.01, right=0.99, top=0.86, bottom=0.02, wspace=0.00)
+    out = OUT_DIR / "Fig4_model_D_G.png"
+    fig.savefig(out, dpi=300, facecolor="white")
+    plt.close(fig)
+    print(f"Saved {out}")
+
+
+def render_clean_hk(structures: list[Structure]) -> None:
+    plt.rcParams["font.family"] = "Times New Roman"
+    fig = plt.figure(figsize=(16.5, 5.2), dpi=300)
+    fig.patch.set_facecolor("white")
+    fig.text(0.018, 0.965, "H-K  glycan shielding and hotspot accessibility examples",
+             ha="left", va="top", fontsize=23, fontweight="bold")
+    fig.text(0.025, 0.875, "●", color="#D11F1A", fontsize=22, ha="left", va="center")
+    fig.text(0.047, 0.875, "accessible Ca2+ hotspot", color="#222222", fontsize=15, ha="left", va="center")
+    fig.text(0.265, 0.875, "●", color="#111111", fontsize=22, ha="left", va="center")
+    fig.text(0.287, 0.875, "glycan-shielded hotspot", color="#222222", fontsize=15, ha="left", va="center")
+
+    for index, structure in enumerate(structures, start=1):
+        apply = transform_points(structure)
+        ca = apply(structure.ca)
+        glycan = apply(structure.glycan_atoms)
+        accessible, shielded = split_hotspots(structure)
+        accessible = apply(accessible) if len(accessible) else np.empty((0, 3))
+        shielded = apply(shielded) if len(shielded) else np.empty((0, 3))
+
+        ax = fig.add_subplot(1, 3, index, projection="3d")
+        draw_clean_structure(ax, ca, glycan, SPECIES_COLORS[structure.species], alpha=0.70)
+        if len(accessible):
+            ax.scatter(accessible[:, 0], accessible[:, 1], accessible[:, 2], s=58, c="#D11F1A", depthshade=True)
+        if len(shielded):
+            ax.scatter(shielded[:, 0], shielded[:, 1], shielded[:, 2], s=72, c="#111111", depthshade=True)
+        all_points = np.vstack([ca, glycan, accessible, shielded])
+        setup_clean_axis(ax, all_points)
+        ax.set_title(structure.species, color=SPECIES_COLORS[structure.species], fontsize=22, fontweight="bold", pad=4)
+    plt.subplots_adjust(left=0.01, right=0.99, top=0.78, bottom=0.02, wspace=-0.06)
+    out = OUT_DIR / "Fig4_model_H_K.png"
+    fig.savefig(out, dpi=300, facecolor="white")
+    plt.close(fig)
+    print(f"Saved {out}")
+
+
 def main() -> None:
     structures = load_structures()
-    dg_jobs, hk_jobs = build_jobs(structures)
-    script_path = write_pymol_renderer(dg_jobs, hk_jobs)
-    run_pymol(script_path)
-    combine_dg(dg_jobs)
-    combine_hk(hk_jobs)
+    render_clean_dg(structures)
+    render_clean_hk(structures)
 
 
 if __name__ == "__main__":
