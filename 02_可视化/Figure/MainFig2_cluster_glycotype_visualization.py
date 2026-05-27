@@ -59,25 +59,19 @@ GLYCAN_TYPES_ORDER = [
     "Other",
 ]
 GLYCAN_TYPE_COLORS = {
-    "High Mannose": "#5699A5",
-    "Pauci-mannose": "#CDB45A",
-    "Hybrid": "#65AD86",
-    "Complex-Plain": "#9676B6",
-    "Complex-Fucosylated": "#D59655",
-    "Complex-Sialylated": "#86B9D9",
-    "Other": "#9A9A9A",
+    "High Mannose": "#0072B2",
+    "Pauci-mannose": "#E69F00",
+    "Hybrid": "#009E73",
+    "Complex-Plain": "#CC79A7",
+    "Complex-Fucosylated": "#D55E00",
+    "Complex-Sialylated": "#56B4E9",
+    "Other": "#666666",
 }
 CONSISTENCY_COLORS = {
-    "Single glycan type": "#3F9B6D",
-    "Same multi-type set": "#5967B1",
-    "Mixed type sets": "#7A5BA6",
+    "Single glycan type": "#4C9F70",
+    "Same multi-type set": "#4C78A8",
+    "Mixed type sets": "#C44E52",
 }
-DIVERSITY_CMAP = mcolors.LinearSegmentedColormap.from_list(
-    "fig2_diversity", ["#F2E8C9", "#C8A03A", "#3F9B6D", "#275C6B"]
-)
-HEATMAP_CMAP = mcolors.LinearSegmentedColormap.from_list(
-    "fig2_heatmap", ["#FFF8DD", "#F5DC66", "#F2B95C", "#E77A68", "#C85A8C", "#8A4EA3"]
-)
 
 MS_FILES = {
     "Gallus": MS_DIR / "Glycan_MS_Gallus.xlsx",
@@ -274,7 +268,7 @@ def plot_cluster_consistency(cluster_df: pd.DataFrame) -> None:
     union_counts = Counter(cluster_df["union_type_count"])
     union_x = np.arange(1, len(GLYCAN_TYPES_ORDER) + 1)
     union_y = [union_counts.get(value, 0) for value in union_x]
-    colors = DIVERSITY_CMAP(np.linspace(0.16, 0.92, len(union_x)))
+    colors = plt.cm.YlOrRd(np.linspace(0.28, 0.86, len(union_x)))
     bars = ax_right.bar(
         union_x,
         union_y,
@@ -389,7 +383,7 @@ def plot_species_type_heatmap(type_count_df: pd.DataFrame) -> None:
     percentages = counts.div(counts.sum(axis=1), axis=0) * 100
 
     fig, ax = plt.subplots(figsize=(7.6, 3.45))
-    image = ax.imshow(percentages.to_numpy(), cmap=HEATMAP_CMAP, aspect="auto", vmin=0)
+    image = ax.imshow(percentages.to_numpy(), cmap="YlGnBu", aspect="auto", vmin=0)
     ax.set_xticks(np.arange(len(GLYCAN_TYPES_ORDER)))
     ax.set_xticklabels(
         [label.replace("Complex-", "Complex\n") for label in GLYCAN_TYPES_ORDER],
