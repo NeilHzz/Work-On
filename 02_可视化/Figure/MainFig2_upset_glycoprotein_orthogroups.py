@@ -30,6 +30,8 @@ SPECIES_COLORS = {
     "GlyAnas": "#93AACD",
     "GlyColumba": "#F3CE9D",
 }
+NODE_SIZE_MIN = 210
+NODE_SIZE_MAX = 620
 DISPLAY_LABELS = {
     "GlyGallus": "Gallus",
     "GlyColumba": "Columba",
@@ -100,12 +102,26 @@ def draw_upset(memberships):
     intersections = ordered_intersections(memberships)
     protein_counts = intersection_protein_counts(memberships)
     set_counts = {species: sum(species in group for group, _ in memberships) for species in SPECIES_ORDER}
+    avg_proteins = {
+        (group, species): (protein_counts[group][species] / count if count else 0)
+        for group, count in intersections
+        for species in SPECIES_ORDER
+        if species in group
+    }
+    max_avg_protein = max([value for value in avg_proteins.values() if value > 0] or [1])
+
+    def node_size(group, species):
+        avg = avg_proteins.get((group, species), 0)
+        if avg <= 0:
+            return NODE_SIZE_MIN
+        scale = (avg - 1) / max(max_avg_protein - 1, 1)
+        return NODE_SIZE_MIN + scale * (NODE_SIZE_MAX - NODE_SIZE_MIN)
 
     fig = plt.figure(figsize=(13.8, 6.2), dpi=300)
     gs = fig.add_gridspec(
         2, 2,
         width_ratios=[1.45, 5.9],
-        height_ratios=[2.45, 1.95],
+        height_ratios=[3.25, 1.65],
         left=0.075, right=0.985, bottom=0.14, top=0.94,
         wspace=0.12, hspace=0.07,
     )
@@ -162,8 +178,15 @@ def draw_upset(memberships):
         for species in SPECIES_ORDER:
             y = y_positions[species]
             if species in group:
-                ax_matrix.scatter(xi, y, s=260, color=SPECIES_COLORS[species],
+                ax_matrix.scatter(xi, y, s=node_size(group, species), color=SPECIES_COLORS[species],
                                   edgecolor="white", linewidth=0.8, zorder=3)
+                protein_count = protein_counts[group][species]
+                ax_matrix.text(
+                    xi, y, str(protein_count),
+                    ha="center", va="center", fontsize=7.2,
+                    fontweight="bold", color="white",
+                    zorder=4,
+                )
             else:
                 ax_matrix.scatter(xi, y, s=260, color="#D8D8D8",
                                   edgecolor="white", linewidth=0.8, zorder=2)
