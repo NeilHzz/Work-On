@@ -59,13 +59,13 @@ GLYCAN_TYPES_ORDER = [
     "Other",
 ]
 GLYCAN_TYPE_COLORS = {
-    "High Mannose": "#275C6B",
-    "Pauci-mannose": "#C8A03A",
-    "Hybrid": "#3F9B6D",
-    "Complex-Plain": "#7A5BA6",
-    "Complex-Fucosylated": "#C76F3A",
-    "Complex-Sialylated": "#2697A8",
-    "Other": "#8A8A8A",
+    "High Mannose": "#5699A5",
+    "Pauci-mannose": "#CDB45A",
+    "Hybrid": "#65AD86",
+    "Complex-Plain": "#9676B6",
+    "Complex-Fucosylated": "#D59655",
+    "Complex-Sialylated": "#86B9D9",
+    "Other": "#9A9A9A",
 }
 CONSISTENCY_COLORS = {
     "Single glycan type": "#3F9B6D",
@@ -76,7 +76,7 @@ DIVERSITY_CMAP = mcolors.LinearSegmentedColormap.from_list(
     "fig2_diversity", ["#F2E8C9", "#C8A03A", "#3F9B6D", "#275C6B"]
 )
 HEATMAP_CMAP = mcolors.LinearSegmentedColormap.from_list(
-    "fig2_heatmap", ["#FAF7EC", "#E5E9C9", "#A7D0A9", "#55A98A", "#217987", "#173E5A"]
+    "fig2_heatmap", ["#FAFAF5", "#E8E8D4", "#C8DDB5", "#91C7A6", "#5AA3AD", "#3D6E99"]
 )
 
 MS_FILES = {
