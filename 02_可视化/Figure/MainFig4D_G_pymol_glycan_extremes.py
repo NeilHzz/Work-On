@@ -312,9 +312,10 @@ def write_pymol_script(jobs: list[dict]) -> Path:
             cmd.set('two_sided_lighting', 1)
             cmd.set('transparency_mode', 3)
 
-            cmd.show('cartoon', 'oval and chain A')
-            cmd.color('gray90', 'oval and chain A')
-            cmd.set('cartoon_transparency', 0.78, 'oval and chain A')
+            cmd.select('protein_context', 'byres (oval and chain A within 10 of (oval and chain B))')
+            cmd.show('lines', 'protein_context')
+            cmd.color('gray70', 'protein_context')
+            cmd.set('line_width', 1.8, 'protein_context')
             cmd.show('sticks', 'oval and chain B')
             cmd.show('spheres', 'oval and chain B')
             cmd.color('species_color', 'oval and chain B and elem C')
@@ -327,10 +328,11 @@ def write_pymol_script(jobs: list[dict]) -> Path:
             cmd.set('stick_ball_ratio', 1.55, 'oval and chain B')
 
             cmd.orient('oval and chain B')
-            cmd.zoom('oval and chain B', 5)
             cmd.turn('x', -16)
             cmd.turn('y', 22)
             cmd.turn('z', -12)
+            cmd.zoom('oval and chain B', 16)
+            cmd.clip('slab', 120)
 
             for index, metric in enumerate(job['metrics']):
                 if metric['name'] == 'Glycan-Protein':
