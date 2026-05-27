@@ -428,8 +428,6 @@ def write_pymol_script(jobs: list[dict]) -> Path:
             cmd.color('gray65', 'oval and chain A')
             color_full_glycan()
             add_rg_sphere(job)
-            if job.get('is_focus'):
-                add_focus_metrics(job)
             cmd.orient('oval and chain B')
             cmd.turn('x', job['overview_turns'][0])
             cmd.turn('y', job['overview_turns'][1])
@@ -562,10 +560,55 @@ def draw_focus_metric_key(draw: ImageDraw.ImageDraw, y: int, x: int = 95) -> Non
         x += 108 + lw
 
 
+def draw_2d_arrow(draw: ImageDraw.ImageDraw, start: tuple[int, int], end: tuple[int, int], color: str, width: int = 12) -> None:
+    sx, sy = start
+    ex, ey = end
+    draw.line((sx, sy, ex, ey), fill=color, width=width)
+    dx = ex - sx
+    dy = ey - sy
+    length = max((dx * dx + dy * dy) ** 0.5, 1.0)
+    ux, uy = dx / length, dy / length
+    px, py = -uy, ux
+    head_len = width * 3.0
+    head_w = width * 2.0
+    tip = (ex, ey)
+    left = (int(ex - ux * head_len + px * head_w), int(ey - uy * head_len + py * head_w))
+    right = (int(ex - ux * head_len - px * head_w), int(ey - uy * head_len - py * head_w))
+    draw.polygon([tip, left, right], fill=color)
+
+
+def draw_2d_metric_label(draw: ImageDraw.ImageDraw, xy: tuple[int, int], label: str, color: str) -> None:
+    font = read_font(54, bold=True)
+    x, y = xy
+    tw, th = text_size(draw, label, font)
+    pad_x, pad_y = 10, 6
+    box = (x - pad_x, y - pad_y, x + tw + pad_x, y + th + pad_y)
+    draw.rounded_rectangle(box, radius=8, fill="white")
+    draw.text((x, y), label, fill=color, font=font)
+
+
+def annotate_focus_panel(panel: Image.Image) -> Image.Image:
+    canvas = panel.convert("RGBA")
+    draw = ImageDraw.Draw(canvas)
+    blue = METRIC_COLORS["End-to-End"]
+    green = METRIC_COLORS["Glycan-Protein"]
+    magenta = METRIC_COLORS["Glycan-Backbone"]
+
+    draw_2d_arrow(draw, (455, 940), (1305, 575), blue, width=13)
+    draw_2d_metric_label(draw, (1132, 575), "E", blue)
+
+    draw_2d_arrow(draw, (505, 930), (720, 570), green, width=13)
+    draw_2d_metric_label(draw, (650, 672), "F", green)
+
+    draw_2d_arrow(draw, (505, 950), (575, 1040), magenta, width=14)
+    draw_2d_metric_label(draw, (590, 1010), "G", magenta)
+    return canvas.convert("RGB")
+
+
 def panel_with_title(job: dict) -> Image.Image:
     target_w, target_h = 1550, 1250
     if job.get("is_focus"):
-        return fit_image(job["overview_out"], target_w, target_h, pad=45)
+        return annotate_focus_panel(fit_image(job["overview_out"], target_w, target_h, pad=45))
 
     panel = Image.new("RGB", (target_w, target_h), "white")
     draw = ImageDraw.Draw(panel)

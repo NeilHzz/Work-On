@@ -174,8 +174,6 @@ def scene_overview(job):
     cmd.color('gray65', 'oval and chain A')
     color_full_glycan()
     add_rg_sphere(job)
-    if job.get('is_focus'):
-        add_focus_metrics(job)
     cmd.orient('oval and chain B')
     cmd.turn('x', job['overview_turns'][0])
     cmd.turn('y', job['overview_turns'][1])
