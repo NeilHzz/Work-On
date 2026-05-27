@@ -275,6 +275,7 @@ def write_pymol_renderer(dg_jobs: list[dict], hk_jobs: list[dict]) -> Path:
             cmd.remove('hydrogens')
             cmd.hide('everything')
             cmd.bg_color('white')
+            cmd.set('opaque_background', 1)
             cmd.set('ray_opaque_background', 1)
             cmd.set('antialias', 2)
             cmd.set('ambient', 0.55)
@@ -295,14 +296,6 @@ def write_pymol_renderer(dg_jobs: list[dict], hk_jobs: list[dict]) -> Path:
             cmd.turn('z', -8)
             cmd.zoom('oval', 8)
 
-        def add_label(name, text, pos, color='black'):
-            cmd.pseudoatom(name, pos=[float(x) for x in pos])
-            cmd.hide('nonbonded', name)
-            cmd.set('label_color', color, name)
-            cmd.set('label_size', 21, name)
-            cmd.set('label_font_id', 7, name)
-            cmd.label(name, repr(text))
-
         def render_metric(job):
             base_scene(job)
             set_color('metric_color', job['metric_color'])
@@ -316,8 +309,7 @@ def write_pymol_renderer(dg_jobs: list[dict], hk_jobs: list[dict]) -> Path:
             cmd.set('dash_color', 'metric_color', 'metric_line')
             cmd.set('dash_width', 4.5, 'metric_line')
             cmd.set('dash_gap', 0.20, 'metric_line')
-            add_label('metric_text', job['label'], midpoint(job['point_a'], job['point_b']))
-            cmd.png(job['out'], width=1800, height=1250, dpi=300, ray=1)
+            cmd.png(job['out'], width=1800, height=1250, dpi=300, ray=0)
 
         def add_points(object_name, points, color_name, scale):
             for point in points:
@@ -333,8 +325,7 @@ def write_pymol_renderer(dg_jobs: list[dict], hk_jobs: list[dict]) -> Path:
             set_color('shielded_black', [0.05, 0.05, 0.05])
             add_points('accessible_hotspots', job.get('accessible', []), 'accessible_red', 0.62)
             add_points('shielded_hotspots', job.get('shielded', []), 'shielded_black', 0.70)
-            add_label('species_label', job['species'], [-45, 35, 35], 'black')
-            cmd.png(job['out'], width=1800, height=1250, dpi=300, ray=1)
+            cmd.png(job['out'], width=1800, height=1250, dpi=300, ray=0)
 
         for item in JOBS['dg']:
             render_metric(item)
@@ -367,12 +358,55 @@ def add_header(panel: Image.Image, title: str, color: str) -> Image.Image:
     return out
 
 
+def trim_white(img: Image.Image, pad: int = 48, threshold: int = 248) -> Image.Image:
+    rgb = img.convert("RGB")
+    data = np.asarray(rgb)
+    mask = np.any(data < threshold, axis=2)
+    if not mask.any():
+        return rgb
+    ys, xs = np.where(mask)
+    left = max(0, int(xs.min()) - pad)
+    right = min(rgb.width, int(xs.max()) + pad + 1)
+    top = max(0, int(ys.min()) - pad)
+    bottom = min(rgb.height, int(ys.max()) + pad + 1)
+    return rgb.crop((left, top, right, bottom))
+
+
+def fit_to_box(img: Image.Image, width: int, height: int) -> Image.Image:
+    fitted = Image.new("RGB", (width, height), "white")
+    scale = min(width / img.width, height / img.height)
+    new_size = (max(1, int(img.width * scale)), max(1, int(img.height * scale)))
+    resized = img.resize(new_size, Image.LANCZOS)
+    fitted.paste(resized, ((width - new_size[0]) // 2, (height - new_size[1]) // 2))
+    return fitted
+
+
+def metric_panel(job: dict, width: int = 1180, body_h: int = 760) -> Image.Image:
+    body = fit_to_box(trim_white(Image.open(job["out"]).convert("RGB")), width, body_h)
+    top = 124
+    panel = Image.new("RGB", (width, body_h + top), "white")
+    panel.paste(body, (0, top))
+    draw = ImageDraw.Draw(panel)
+    title_font = read_font(52, bold=True)
+    subtitle_font = read_font(34, bold=False)
+    title = f"{job['panel']}  {job['label']}"
+    tw, _ = text_size(draw, title, title_font)
+    draw.text(((width - tw) // 2, 26), title, fill="#222222", font=title_font)
+    if job["panel"] == "D":
+        subtitle = "distance from glycan centroid to Rg shell"
+    elif job["panel"] == "E":
+        subtitle = "terminal residue-center distance"
+    elif job["panel"] == "F":
+        subtitle = "glycan centroid to protein C-alpha centroid"
+    else:
+        subtitle = "nearest glycan atom to backbone C-alpha"
+    sw, _ = text_size(draw, subtitle, subtitle_font)
+    draw.text(((width - sw) // 2, 82), subtitle, fill="#555555", font=subtitle_font)
+    return panel
+
+
 def combine_dg(dg_jobs: list[dict]) -> None:
-    panels = []
-    for job in dg_jobs:
-        img = Image.open(job["out"]).convert("RGB")
-        title = f"{job['panel']}  {job['label']}"
-        panels.append(add_header(img, title, "#222222"))
+    panels = [metric_panel(job) for job in dg_jobs]
     gap = 34
     width = sum(p.width for p in panels) + gap * (len(panels) - 1)
     height = max(p.height for p in panels)
@@ -388,7 +422,7 @@ def combine_dg(dg_jobs: list[dict]) -> None:
 def combine_hk(hk_jobs: list[dict]) -> None:
     panels = []
     for job in hk_jobs:
-        img = Image.open(job["out"]).convert("RGB")
+        img = fit_to_box(trim_white(Image.open(job["out"]).convert("RGB")), 1320, 820)
         panels.append(add_header(img, job["species"], SPECIES_COLORS[job["species"]]))
     gap = 44
     legend_h = 180

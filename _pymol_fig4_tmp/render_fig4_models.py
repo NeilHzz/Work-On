@@ -22,6 +22,7 @@ def base_scene(job):
     cmd.remove('hydrogens')
     cmd.hide('everything')
     cmd.bg_color('white')
+    cmd.set('opaque_background', 1)
     cmd.set('ray_opaque_background', 1)
     cmd.set('antialias', 2)
     cmd.set('ambient', 0.55)
@@ -42,14 +43,6 @@ def base_scene(job):
     cmd.turn('z', -8)
     cmd.zoom('oval', 8)
 
-def add_label(name, text, pos, color='black'):
-    cmd.pseudoatom(name, pos=[float(x) for x in pos])
-    cmd.hide('nonbonded', name)
-    cmd.set('label_color', color, name)
-    cmd.set('label_size', 21, name)
-    cmd.set('label_font_id', 7, name)
-    cmd.label(name, repr(text))
-
 def render_metric(job):
     base_scene(job)
     set_color('metric_color', job['metric_color'])
@@ -63,8 +56,7 @@ def render_metric(job):
     cmd.set('dash_color', 'metric_color', 'metric_line')
     cmd.set('dash_width', 4.5, 'metric_line')
     cmd.set('dash_gap', 0.20, 'metric_line')
-    add_label('metric_text', job['label'], midpoint(job['point_a'], job['point_b']))
-    cmd.png(job['out'], width=1800, height=1250, dpi=300, ray=1)
+    cmd.png(job['out'], width=1800, height=1250, dpi=300, ray=0)
 
 def add_points(object_name, points, color_name, scale):
     for point in points:
@@ -80,8 +72,7 @@ def render_shielding(job):
     set_color('shielded_black', [0.05, 0.05, 0.05])
     add_points('accessible_hotspots', job.get('accessible', []), 'accessible_red', 0.62)
     add_points('shielded_hotspots', job.get('shielded', []), 'shielded_black', 0.70)
-    add_label('species_label', job['species'], [-45, 35, 35], 'black')
-    cmd.png(job['out'], width=1800, height=1250, dpi=300, ray=1)
+    cmd.png(job['out'], width=1800, height=1250, dpi=300, ray=0)
 
 for item in JOBS['dg']:
     render_metric(item)

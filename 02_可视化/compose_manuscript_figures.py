@@ -544,28 +544,29 @@ def compose_fig4():
         ("Fig5N.png", "M"),
     ], ncols=4, cover_old=True)
 
-    m1 = build_model_strip("Fig4_model_A_C.png")
     m2 = build_model_strip("Fig4_model_D_G.png")
     m3 = build_model_strip("Fig4_model_H_K.png")
-    m4 = build_model_strip("Fig4_model_L_M.png")
 
     def row_h(panels):
         return max(p.height for p in panels if p is not None)
 
     total_h = (2 * MARGIN
-               + m1.height + m2.height + m3.height + m4.height
+               + m2.height + m3.height
                + row_h(r1) + row_h(r2) + row_h(r3) + row_h(r4)
-               + 7 * GAP)
+               + 5 * GAP)
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
 
     y = MARGIN
-    for model, row, cw in [(m1, r1, cw1), (m2, r2, cw2), (m3, r3, cw3)]:
-        paste(canvas, model, MARGIN, y)
-        y += model.height + GAP
-        y = paste_row(canvas, row, cw, y)
+    y = paste_row(canvas, r1, cw1, y)
 
-    paste(canvas, m4, MARGIN, y)
-    y += m4.height + GAP
+    paste(canvas, m2, MARGIN, y)
+    y += m2.height + GAP
+    y = paste_row(canvas, r2, cw2, y)
+
+    paste(canvas, m3, MARGIN, y)
+    y += m3.height + GAP
+    y = paste_row(canvas, r3, cw3, y)
+
     row4_w = 2 * cw4 + GAP
     row4_x = (CANVAS_W - row4_w) // 2
     y = paste_row(canvas, r4, cw4, y, x_start=row4_x)
