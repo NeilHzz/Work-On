@@ -308,6 +308,7 @@ def write_pymol_renderer(jobs: list[dict]) -> Path:
             cmd.select('shielded_region', shielded)
 
         def setup_scene(job):
+            print('setup ' + job['species'], flush=True)
             cmd.reinitialize()
             set_color('species_color', job['species_color'])
             set_color('neutral_gray', [0.70, 0.70, 0.70])
@@ -353,7 +354,9 @@ def write_pymol_renderer(jobs: list[dict]) -> Path:
 
         for item in JOBS:
             setup_scene(item)
-            cmd.png(item['out'], width=1900, height=1450, dpi=300, ray=0)
+            print('png ' + item['species'], flush=True)
+            cmd.png(item['out'], width=1200, height=920, dpi=220, ray=0)
+            print('saved ' + item['species'], flush=True)
         cmd.quit()
     '''), encoding="utf-8")
     return script_path
@@ -362,6 +365,7 @@ def write_pymol_renderer(jobs: list[dict]) -> Path:
 def run_pymol(script_path: Path) -> None:
     if not PYMOL_PYTHON.exists():
         raise FileNotFoundError(f"PyMOL Python was not found: {PYMOL_PYTHON}")
+    print(f"Running PyMOL renderer: {script_path}", flush=True)
     subprocess.run([str(PYMOL_PYTHON), str(script_path)], cwd=str(TMP_DIR), check=True)
 
 

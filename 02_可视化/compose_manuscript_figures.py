@@ -175,8 +175,8 @@ def smooth_fem_render(img: Image.Image) -> Image.Image:
     # The model occupies the left/middle of each render; the right edge contains
     # the colorbar and text, which should stay crisp.
     model_limit_x = int(width * 0.78)
-    mask = Image.new("L", (width, height), 0)
-    mask_px = mask.load()
+    hard_mask = Image.new("L", (width, height), 0)
+    mask_px = hard_mask.load()
     rgb_px = rgb.load()
     for y in range(height):
         for x in range(model_limit_x):
@@ -184,9 +184,13 @@ def smooth_fem_render(img: Image.Image) -> Image.Image:
             if r < 248 or g < 248 or b < 248:
                 mask_px[x, y] = 255
 
-    mask = mask.filter(ImageFilter.MaxFilter(5)).filter(ImageFilter.GaussianBlur(1.4))
+    mask = hard_mask.filter(ImageFilter.MinFilter(5)).filter(ImageFilter.MaxFilter(9))
+    mask = mask.filter(ImageFilter.GaussianBlur(1.3))
     softened = rgb.filter(ImageFilter.MedianFilter(3)).filter(ImageFilter.GaussianBlur(0.65))
-    out_rgb = Image.composite(softened, rgb, mask)
+    out_rgb = Image.composite(softened, Image.new("RGB", (width, height), (255, 255, 255)), mask)
+
+    # Put the untouched legend/colorbar strip back on top.
+    out_rgb.paste(rgb.crop((model_limit_x, 0, width, height)), (model_limit_x, 0))
     out = out_rgb.convert("RGBA")
     out.putalpha(rgba.getchannel("A"))
     return out

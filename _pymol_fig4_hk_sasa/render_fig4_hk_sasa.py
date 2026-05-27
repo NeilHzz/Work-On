@@ -90,6 +90,7 @@ def select_regions(job):
     cmd.select('shielded_region', shielded)
 
 def setup_scene(job):
+    print('setup ' + job['species'], flush=True)
     cmd.reinitialize()
     set_color('species_color', job['species_color'])
     set_color('neutral_gray', [0.70, 0.70, 0.70])
@@ -135,5 +136,7 @@ def setup_scene(job):
 
 for item in JOBS:
     setup_scene(item)
-    cmd.png(item['out'], width=1900, height=1450, dpi=300, ray=0)
+    print('png ' + item['species'], flush=True)
+    cmd.png(item['out'], width=1200, height=920, dpi=220, ray=0)
+    print('saved ' + item['species'], flush=True)
 cmd.quit()

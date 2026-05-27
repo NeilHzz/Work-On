@@ -850,9 +850,9 @@ def combine_outputs(jobs: list[dict]) -> None:
         print(f"Saved {path}")
 
 
-def save_gallus_low_rg_output(job: dict) -> None:
+def save_species_focus_output(job: dict) -> None:
     panel = panel_with_title(job)
-    path = OUT_DIR / "Fig4D_G_pymol_gallus_low_rg.png"
+    path = OUT_DIR / f"Fig4D-G_{job['species']}.png"
     panel.save(path, dpi=(300, 300))
     print(f"Saved {path}")
 
@@ -864,8 +864,8 @@ def main() -> None:
     gallus_jobs = pymol_jobs([gallus_low_rg], prefix="gallus_low_rg", focus_indices={1}, use_species_rg_color=True)
     script_path = write_pymol_script(jobs + gallus_jobs)
     run_pymol(script_path)
-    combine_outputs(jobs)
-    save_gallus_low_rg_output(gallus_jobs[0])
+    save_species_focus_output(jobs[1])
+    save_species_focus_output(gallus_jobs[0])
 
 
 if __name__ == "__main__":
