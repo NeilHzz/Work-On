@@ -75,8 +75,7 @@ def add_rg_sphere(job):
             vz = target[2] - center[2] + 0.45 * rg
             length = math.sqrt(vx * vx + vy * vy + vz * vz) or 1.0
             target = [center[0] + rg * vx / length, center[1] + rg * vy / length, center[2] + rg * vz / length]
-            add_arrow('rg_radius_arrow_shadow', center, target, [0.08, 0.08, 0.08], radius=0.073, head_radius=0.21, head_length=0.52)
-            add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.052, head_radius=0.17, head_length=0.47)
+            add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.082, head_radius=0.25, head_length=0.58)
         else:
             add_arrow('rg_radius_arrow', center, target, [1.0, 0.47, 0.0], radius=0.030, head_radius=0.115, head_length=0.34)
 
@@ -91,15 +90,6 @@ def add_focus_metrics(job):
         if name not in metric_specs:
             continue
         spec = metric_specs[name]
-        add_arrow(
-            'focus_shadow_' + name.replace('-', '_').replace(' ', '_'),
-            metric['start'],
-            metric['end'],
-            [0.06, 0.06, 0.06],
-            radius=spec['radius'] * 1.34,
-            head_radius=spec['head_radius'] * 1.18,
-            head_length=spec['head_length'],
-        )
         add_arrow(
             'focus_' + name.replace('-', '_').replace(' ', '_'),
             metric['start'],
