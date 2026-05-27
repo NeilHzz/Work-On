@@ -75,18 +75,31 @@ def load_memberships(path: Path):
                 if any(token.startswith(f"{species}|") for token in tokens)
             )
             if present:
-                memberships.append(present)
+                protein_counts = Counter(
+                    token.split("|", 1)[0]
+                    for token in tokens
+                    if "|" in token and token.split("|", 1)[0] in SPECIES_ORDER
+                )
+                memberships.append((present, protein_counts))
     return memberships
 
 
 def ordered_intersections(memberships):
-    counts = Counter(memberships)
+    counts = Counter(group for group, _ in memberships)
     return [(group, counts.get(group, 0)) for group in ALL_INTERSECTIONS]
+
+
+def intersection_protein_counts(memberships):
+    protein_counts = {group: Counter() for group in ALL_INTERSECTIONS}
+    for group, counts in memberships:
+        protein_counts.setdefault(group, Counter()).update(counts)
+    return protein_counts
 
 
 def draw_upset(memberships):
     intersections = ordered_intersections(memberships)
-    set_counts = {species: sum(species in group for group in memberships) for species in SPECIES_ORDER}
+    protein_counts = intersection_protein_counts(memberships)
+    set_counts = {species: sum(species in group for group, _ in memberships) for species in SPECIES_ORDER}
 
     fig = plt.figure(figsize=(13.8, 6.2), dpi=300)
     gs = fig.add_gridspec(
@@ -102,14 +115,24 @@ def draw_upset(memberships):
 
     x = list(range(len(intersections)))
     top_counts = [count for _, count in intersections]
-    ax_top.bar(
-        x, top_counts,
-        width=0.66,
-        facecolor="white",
-        edgecolor="#222222",
-        linewidth=1.15,
-        zorder=3,
-    )
+    bar_width = 0.66
+    for xi, (group, value) in zip(x, intersections):
+        total_proteins = sum(protein_counts[group].values())
+        bottom = 0
+        for species in SPECIES_ORDER:
+            if value <= 0 or total_proteins <= 0:
+                continue
+            segment_h = value * protein_counts[group][species] / total_proteins
+            ax_top.bar(
+                xi, segment_h, bottom=bottom, width=bar_width,
+                color=SPECIES_COLORS[species], edgecolor="none", zorder=3,
+            )
+            bottom += segment_h
+        ax_top.bar(
+            xi, value, width=bar_width,
+            facecolor="none", edgecolor="#222222",
+            linewidth=1.15, zorder=4,
+        )
     for xi, value in zip(x, top_counts):
         offset = max(top_counts) * 0.025
         ax_top.text(xi, value + offset, str(value),
@@ -161,7 +184,6 @@ def draw_upset(memberships):
                      ha="left", va="center", fontsize=10)
     ax_left.set_yticks(y_ticks)
     ax_left.set_yticklabels([])
-    ax_left.set_xlabel("Cluster count", fontsize=11)
     ax_left.set_xlim(max(left_values) * 1.20, 0)
     ax_left.xaxis.set_major_locator(ticker.MaxNLocator(4, integer=True))
     ax_left.tick_params(axis="x", labelsize=9)
