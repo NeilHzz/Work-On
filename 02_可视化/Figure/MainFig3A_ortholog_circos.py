@@ -27,6 +27,7 @@ COL = {
     "Anas":    "#93AACD",
     "Columba": "#F3CE9D",
 }
+COL_CHORD_BACKGROUND = "#D8D8D8"
 ALPHA_CHORD = 0.45          # 弦半透明度
 ALPHA_CHORD_HIGHLIGHT = 0.7 # 目标蛋白弦高亮透明度
 ARC_WIDTH   = 0.08          # 外环宽度（radius单位）
@@ -492,11 +493,11 @@ for _, row in sorted_links.iterrows():
     src_width = max(math.radians(0.22), src_end - src_start)
     dst_width = max(math.radians(0.22), dst_end - dst_start)
 
-    chord_color = COL[src_sp]
+    chord_color = COL[src_sp] if row["is_target"] else COL_CHORD_BACKGROUND
     bezier_chord(ax, mid_src, mid_dst,
                  w1=src_width, w2=dst_width,
                  color=chord_color,
-                 alpha=ALPHA_CHORD,
+                 alpha=ALPHA_CHORD_HIGHLIGHT if row["is_target"] else 0.34,
                  zorder=1,
                  is_target=row["is_target"])
 
@@ -509,29 +510,21 @@ def species_range(angle_dict):
     return min(starts), max(ends)
 
 for sp, ang_dict in [("Gallus", g_angles), ("Anas", a_angles), ("Columba", c_angles)]:
-    # 用物种颜色先画常规弧段
+    # 逐蛋白绘制弧段，保留蛋白间空白分隔，避免连续色块填满间隔。
     regular_arcs = {acc: v for acc, v in ang_dict.items()
                     if not (INCLUDE_NO_ORTHOLOG_GALLUS and acc in GREY_G_ACCS)}
     grey_arcs    = {acc: v for acc, v in ang_dict.items()
                     if INCLUDE_NO_ORTHOLOG_GALLUS and acc in GREY_G_ACCS}
 
-    if regular_arcs:
-        s_rad = min(v[1] for v in regular_arcs.values())
-        e_rad = max(v[2] for v in regular_arcs.values())
+    for acc, (_, s_rad, e_rad) in regular_arcs.items():
         draw_filled_arc(ax, RADIUS - ARC_WIDTH, RADIUS, s_rad, e_rad, COL[sp], alpha=1.0, zorder=4)
-        angles_arr = np.linspace(s_rad, e_rad, 300)
-        ax.plot(RADIUS * np.cos(angles_arr), RADIUS * np.sin(angles_arr), color=COL[sp], lw=1.2, zorder=6)
-        ax.plot((RADIUS-ARC_WIDTH)*np.cos(angles_arr), (RADIUS-ARC_WIDTH)*np.sin(angles_arr),
-                color="white", lw=0.6, zorder=6, alpha=0.6)
+        angles_arr = np.linspace(s_rad, e_rad, 80)
+        ax.plot(RADIUS * np.cos(angles_arr), RADIUS * np.sin(angles_arr), color=COL[sp], lw=1.0, zorder=6)
 
-    if grey_arcs:
-        s_rad = min(v[1] for v in grey_arcs.values())
-        e_rad = max(v[2] for v in grey_arcs.values())
+    for acc, (_, s_rad, e_rad) in grey_arcs.items():
         draw_filled_arc(ax, RADIUS - ARC_WIDTH, RADIUS, s_rad, e_rad, COL_GREY, alpha=0.90, zorder=4)
-        angles_arr = np.linspace(s_rad, e_rad, 300)
-        ax.plot(RADIUS * np.cos(angles_arr), RADIUS * np.sin(angles_arr), color=COL_GREY, lw=1.2, zorder=6)
-        ax.plot((RADIUS-ARC_WIDTH)*np.cos(angles_arr), (RADIUS-ARC_WIDTH)*np.sin(angles_arr),
-                color="white", lw=0.6, zorder=6, alpha=0.6)
+        angles_arr = np.linspace(s_rad, e_rad, 80)
+        ax.plot(RADIUS * np.cos(angles_arr), RADIUS * np.sin(angles_arr), color=COL_GREY, lw=1.0, zorder=6)
 
 # 蛋白分隔线（细白线）
 for ang_dict in [g_angles, a_angles, c_angles]:
