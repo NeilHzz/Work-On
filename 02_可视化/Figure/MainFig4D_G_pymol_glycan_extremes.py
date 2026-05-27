@@ -51,6 +51,13 @@ METRIC_COLORS = {
     "Glycan-Backbone": "#CC79A7",
 }
 
+METRIC_SHORT_LABELS = {
+    "Rg turn": "Rg turn",
+    "End-to-End": "End-to-End",
+    "Glycan-Protein": "Glycan-Protein",
+    "Glycan-Backbone": "Glycan-Backbone",
+}
+
 
 @dataclass
 class ExtremeModel:
@@ -246,7 +253,7 @@ def write_pymol_script(jobs: list[dict]) -> Path:
         import json
         import math
         import pymol
-        from pymol.cgo import CYLINDER, CONE
+        from pymol.cgo import CYLINDER, CONE, BEGIN, LINES, VERTEX, END
 
         pymol.finish_launching(['pymol', '-cq'])
         from pymol import cmd
@@ -257,13 +264,14 @@ def write_pymol_script(jobs: list[dict]) -> Path:
         def set_color(name, rgb):
             cmd.set_color(name, [float(x) for x in rgb])
 
-        def add_arrow(name, start, end, color, radius=0.24, head_radius=0.72, head_length=2.2):
+        def add_arrow(name, start, end, color, radius=0.055, head_radius=0.22, head_length=0.75):
             sx, sy, sz = [float(v) for v in start]
             ex, ey, ez = [float(v) for v in end]
             vx, vy, vz = ex - sx, ey - sy, ez - sz
             length = math.sqrt(vx * vx + vy * vy + vz * vz)
             if length < 1e-6:
                 return
+            head_length = min(head_length, length * 0.32)
             ux, uy, uz = vx / length, vy / length, vz / length
             shaft_end = [ex - ux * head_length, ey - uy * head_length, ez - uz * head_length]
             r, g, b = [float(c) for c in color]
@@ -273,16 +281,14 @@ def write_pymol_script(jobs: list[dict]) -> Path:
             ]
             cmd.load_cgo(obj, name)
 
+        def add_line(name, start, end, color, radius=0.045):
+            sx, sy, sz = [float(v) for v in start]
+            ex, ey, ez = [float(v) for v in end]
+            r, g, b = [float(c) for c in color]
+            cmd.load_cgo([CYLINDER, sx, sy, sz, ex, ey, ez, radius, r, g, b, r, g, b], name)
+
         def midpoint(a, b):
             return [(float(a[i]) + float(b[i])) / 2.0 for i in range(3)]
-
-        def add_label(name, text, pos, color_name):
-            cmd.pseudoatom(name, pos=pos)
-            cmd.hide('nonbonded', name)
-            cmd.set('label_font_id', 7, name)
-            cmd.set('label_size', 22, name)
-            cmd.set('label_color', color_name, name)
-            cmd.label(name, repr(text))
 
         def scene(job):
             cmd.reinitialize()
@@ -302,28 +308,35 @@ def write_pymol_script(jobs: list[dict]) -> Path:
             cmd.set('line_smooth', 1)
             cmd.set('stick_quality', 18)
             cmd.set('sphere_quality', 2)
+            cmd.set('orthoscopic', 1)
+            cmd.set('two_sided_lighting', 1)
+            cmd.set('transparency_mode', 3)
 
             cmd.show('cartoon', 'oval and chain A')
-            cmd.color('gray85', 'oval and chain A')
-            cmd.set('cartoon_transparency', 0.62, 'oval and chain A')
+            cmd.color('gray90', 'oval and chain A')
+            cmd.set('cartoon_transparency', 0.78, 'oval and chain A')
             cmd.show('sticks', 'oval and chain B')
             cmd.show('spheres', 'oval and chain B')
-            cmd.color('species_color', 'oval and chain B')
-            cmd.set('stick_radius', 0.28, 'oval and chain B')
-            cmd.set('sphere_scale', 0.28, 'oval and chain B')
+            cmd.color('species_color', 'oval and chain B and elem C')
+            cmd.color('red', 'oval and chain B and elem O')
+            cmd.color('blue', 'oval and chain B and elem N')
+            cmd.color('white', 'oval and chain B and elem H')
+            cmd.set('stick_radius', 0.13, 'oval and chain B')
+            cmd.set('sphere_scale', 0.16, 'oval and chain B')
+            cmd.set('stick_ball', 1, 'oval and chain B')
+            cmd.set('stick_ball_ratio', 1.55, 'oval and chain B')
 
             cmd.orient('oval and chain B')
-            cmd.zoom('oval and chain B', 9)
-            cmd.turn('x', -18)
-            cmd.turn('y', 24)
-            cmd.turn('z', -8)
+            cmd.zoom('oval and chain B', 5)
+            cmd.turn('x', -16)
+            cmd.turn('y', 22)
+            cmd.turn('z', -12)
 
             for index, metric in enumerate(job['metrics']):
-                color_name = 'metric_' + metric['name'].replace('-', '_').replace(' ', '_')
-                add_arrow('arrow_' + str(index), metric['start'], metric['end'], metric['color'])
-                label_pos = midpoint(metric['start'], metric['end'])
-                label_pos[2] += 4.0 + index * 0.8
-                add_label('label_' + str(index), metric['name'], label_pos, color_name)
+                if metric['name'] == 'Glycan-Protein':
+                    add_line('metric_' + str(index), metric['start'], metric['end'], metric['color'], radius=0.040)
+                else:
+                    add_arrow('metric_' + str(index), metric['start'], metric['end'], metric['color'])
 
             cmd.png(job['out'], width=2600, height=2100, dpi=300, ray=0)
 
@@ -376,6 +389,16 @@ def panel_with_title(job: dict) -> Image.Image:
     sw, _ = text_size(draw, subtitle, sub_font)
     draw.text(((target_w - tw) // 2, 38), title, fill="#111111", font=title_font)
     draw.text(((target_w - sw) // 2, 126), subtitle, fill=SPECIES_COLORS.get(job["species"], "#555555"), font=sub_font)
+    legend_font = read_font(36, bold=True)
+    x = 70
+    y = target_h + title_h - 104
+    for name, color in METRIC_COLORS.items():
+        draw.line((x, y + 18, x + 92, y + 18), fill=color, width=10)
+        draw.polygon([(x + 92, y + 18), (x + 68, y + 5), (x + 68, y + 31)], fill=color)
+        label = METRIC_SHORT_LABELS[name]
+        draw.text((x + 112, y - 5), label, fill="#222222", font=legend_font)
+        lw, _ = text_size(draw, label, legend_font)
+        x += 152 + lw
     return panel
 
 
