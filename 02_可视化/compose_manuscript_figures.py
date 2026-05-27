@@ -487,10 +487,15 @@ def compose_fig4():
     inner_w = CANVAS_W - 2 * MARGIN
 
     def build_model_strip(fname):
+        target_h = 860
         raw = load_img(PNG / fname)
         if raw is None:
-            return make_placeholder(inner_w, int(inner_w * 0.18), fname)
-        return scale_to_w(raw, inner_w)
+            return make_placeholder(inner_w, target_h, fname)
+        img = scale_to_h(raw, target_h)
+        strip = Image.new("RGBA", (inner_w, target_h), (255, 255, 255, 255))
+        x = max(0, (inner_w - img.width) // 2)
+        paste(strip, img, x, 0)
+        return strip
 
     def build_row(files_labels, ncols, cover_old=False):
         col_w = (inner_w - (ncols - 1) * GAP) // ncols
