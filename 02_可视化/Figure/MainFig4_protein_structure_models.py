@@ -241,15 +241,15 @@ def draw_structure(ax, structure: Structure, mode: str) -> None:
 
 def render_group(filename: str, title: str, mode: str, structures: list[Structure]) -> None:
     plt.rcParams["font.family"] = "Times New Roman"
-    fig = plt.figure(figsize=(4.0, 5.05), dpi=300)
+    fig = plt.figure(figsize=(11.0, 2.05), dpi=300)
     fig.patch.set_facecolor("white")
-    fig.text(0.5, 0.985, title, ha="center", va="top", fontsize=11, fontweight="bold")
+    fig.text(0.5, 0.98, title, ha="center", va="top", fontsize=13, fontweight="bold")
 
     for index, structure in enumerate(structures, start=1):
-        ax = fig.add_subplot(3, 1, index, projection="3d")
+        ax = fig.add_subplot(1, 3, index, projection="3d")
         draw_structure(ax, structure, mode)
 
-    plt.subplots_adjust(left=0.02, right=0.98, bottom=0.01, top=0.94, hspace=-0.20)
+    plt.subplots_adjust(left=0.01, right=0.99, bottom=0.01, top=0.89, wspace=-0.18)
     out = OUT_DIR / filename
     fig.savefig(out, dpi=300, facecolor="white", bbox_inches="tight", pad_inches=0.02)
     plt.close(fig)
