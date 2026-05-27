@@ -4,13 +4,17 @@ Rule: main subfigure filenames follow the final composed manuscript figures, not
 Supplementary figures follow 03_文章撰写/supplementary_materials260520.docx / build_supplementary_en.py order.
 
 [01_main_subfigures_matched_to_composed]
-Count: 30
+Count: 30 legacy matched panel PNGs; current Fig2_composed now includes additional generated Fig2 panels listed below.
 - Fig1A.png <= Fig1A.png
 - Fig1B.png <= eggtooth 2x3 grid
 - Fig1C.png <= eggtooth/Gallus.jpg + eggtooth/Anas.jpg + eggtooth/Columba.jpg
 - Fig1D.png <= Fig1D.png
-- Fig2.png <= Figure/PNG/Fig2.png (glycoprotein orthogroup UpSet); previous circle version archived as Fig2 Circle.png
-- Fig3A.png <= Fig3B.png
+- Fig2A <= Figure/PNG/Fig2.png (glycoprotein orthogroup UpSet)
+- Fig2B <= Figure/PNG/Fig3A.png (glycan-type network moved from previous Fig3A)
+- Fig2C <= Figure/PNG/Fig2_cluster_glycotype_consistency.png
+- Fig2D <= Figure/PNG/Fig2_species_glycotype_proportion.png
+- Fig2E <= Figure/PNG/Fig2_species_glycotype_heatmap.png
+- Fig2 Circle.png <= archived previous circle version
 - Fig3B.png <= Fig4A.png
 - Fig3C.png <= Fig4B.png
 - Fig3D.png <= Fig4C.png
