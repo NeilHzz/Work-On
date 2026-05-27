@@ -357,7 +357,7 @@ def write_pymol_script(jobs: list[dict]) -> Path:
             cmd.turn('x', -6)
             cmd.turn('y', 18)
             cmd.turn('z', -4)
-            cmd.zoom('oval and chain A or oval and chain B', 85)
+            cmd.zoom('oval', buffer=24, complete=1)
             cmd.clip('slab', 260)
             add_camera_circle('glycan_locator', job['glycan_center'], max(6.0, job['glycan_radius'] * 1.35))
             cmd.png(job['overview_out'], width=2200, height=1800, dpi=300, ray=1)
@@ -374,7 +374,7 @@ def write_pymol_script(jobs: list[dict]) -> Path:
             cmd.turn('x', -14)
             cmd.turn('y', 18 + float(rotate_y))
             cmd.turn('z', -8)
-            cmd.zoom('oval and chain B', 14)
+            cmd.zoom('oval and chain B', buffer=10, complete=1)
             cmd.clip('slab', 160)
 
             if show_metrics:
@@ -384,8 +384,7 @@ def write_pymol_script(jobs: list[dict]) -> Path:
                     else:
                         add_arrow('metric_' + str(index), metric['start'], metric['end'], metric['color'])
 
-            cmd.translate([0.0, 34.0, 0.0], 'all', camera=1)
-            cmd.png(out_path, width=2200, height=5200, dpi=300, ray=1)
+            cmd.png(out_path, width=2200, height=2200, dpi=300, ray=1)
 
         for item in JOBS:
             scene_overview(item)
@@ -432,8 +431,6 @@ def fit_image(path: str | Path, width: int, height: int, pad: int = 60) -> Image
 
 def circular_view(path: str | Path, diameter: int, pad: int = 130) -> Image.Image:
     raw = Image.open(path).convert("RGB")
-    if raw.height > raw.width * 1.6:
-        raw = raw.crop((0, 0, raw.width, raw.width))
     image = trim_white(raw, pad=pad)
     content_d = int(diameter * 0.90)
     scale = min(content_d / image.width, content_d / image.height)
