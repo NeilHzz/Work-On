@@ -16,8 +16,8 @@ from _save import save_fig
 import matplotlib
 matplotlib.use("Agg")
 matplotlib.rcParams["font.family"] = "Times New Roman"
-matplotlib.rcParams["font.size"] = 18
-matplotlib.rcParams["axes.linewidth"] = 1.25
+matplotlib.rcParams["font.size"] = 11
+matplotlib.rcParams["axes.linewidth"] = 1.0
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
@@ -67,13 +67,13 @@ def draw_upset(memberships):
     intersections = ordered_intersections(memberships)
     set_counts = {species: sum(species in group for group in memberships) for species in SPECIES_ORDER}
 
-    fig = plt.figure(figsize=(15.5, 7.2), dpi=300)
+    fig = plt.figure(figsize=(13.8, 6.2), dpi=300)
     gs = fig.add_gridspec(
         2, 2,
-        width_ratios=[1.25, 5.6],
-        height_ratios=[2.65, 2.25],
-        left=0.055, right=0.985, bottom=0.11, top=0.94,
-        wspace=0.08, hspace=0.06,
+        width_ratios=[1.45, 5.9],
+        height_ratios=[2.45, 1.95],
+        left=0.075, right=0.985, bottom=0.14, top=0.94,
+        wspace=0.12, hspace=0.07,
     )
     ax_top = fig.add_subplot(gs[0, 1])
     ax_left = fig.add_subplot(gs[1, 0])
@@ -86,17 +86,17 @@ def draw_upset(memberships):
         width=0.66,
         facecolor="white",
         edgecolor="#222222",
-        linewidth=1.6,
+        linewidth=1.15,
         zorder=3,
     )
     for xi, value in zip(x, top_counts):
         ax_top.text(xi, value + max(top_counts) * 0.025, str(value),
-                    ha="center", va="bottom", fontsize=15)
-    ax_top.set_ylabel("Cluster count", fontsize=20)
+                    ha="center", va="bottom", fontsize=10)
+    ax_top.set_ylabel("Cluster Count", fontsize=13)
     ax_top.set_xlim(-0.7, len(intersections) - 0.35)
     ax_top.set_ylim(0, max(top_counts) * 1.22)
     ax_top.yaxis.set_major_locator(ticker.MaxNLocator(5, integer=True))
-    ax_top.grid(axis="y", linestyle="--", linewidth=0.6, alpha=0.35, zorder=0)
+    ax_top.grid(axis="y", linestyle="--", linewidth=0.45, alpha=0.35, zorder=0)
     ax_top.tick_params(axis="x", bottom=False, labelbottom=False)
     ax_top.spines["top"].set_visible(False)
     ax_top.spines["right"].set_visible(False)
@@ -105,24 +105,24 @@ def draw_upset(memberships):
     y_ticks = [y_positions[species] for species in SPECIES_ORDER]
     ax_matrix.set_ylim(-0.65, len(SPECIES_ORDER) - 0.35)
     ax_matrix.set_yticks(y_ticks)
-    ax_matrix.set_yticklabels([DISPLAY_LABELS[species] for species in SPECIES_ORDER], fontsize=18)
-    ax_matrix.tick_params(axis="y", length=0, pad=8)
+    ax_matrix.set_yticklabels([DISPLAY_LABELS[species] for species in SPECIES_ORDER], fontsize=10)
+    ax_matrix.tick_params(axis="y", length=0, pad=7)
     ax_matrix.tick_params(axis="x", bottom=False, labelbottom=False)
     for xi, (group, _) in zip(x, intersections):
         present_y = [y_positions[species] for species in SPECIES_ORDER if species in group]
         if len(present_y) > 1:
             ax_matrix.plot([xi, xi], [min(present_y), max(present_y)],
-                           color="#555555", linewidth=4.2, zorder=1, solid_capstyle="round")
+                           color="#555555", linewidth=2.6, zorder=1, solid_capstyle="round")
         for species in SPECIES_ORDER:
             y = y_positions[species]
             if species in group:
-                ax_matrix.scatter(xi, y, s=520, color=SPECIES_COLORS[species],
-                                  edgecolor="white", linewidth=1.2, zorder=3)
+                ax_matrix.scatter(xi, y, s=260, color=SPECIES_COLORS[species],
+                                  edgecolor="white", linewidth=0.8, zorder=3)
             else:
-                ax_matrix.scatter(xi, y, s=520, color="#D8D8D8",
-                                  edgecolor="white", linewidth=1.2, zorder=2)
+                ax_matrix.scatter(xi, y, s=260, color="#D8D8D8",
+                                  edgecolor="white", linewidth=0.8, zorder=2)
     for y in y_ticks:
-        ax_matrix.axhline(y, color="#EEEEEE", linewidth=0.8, zorder=0)
+        ax_matrix.axhline(y, color="#EEEEEE", linewidth=0.55, zorder=0)
     ax_matrix.spines["top"].set_visible(False)
     ax_matrix.spines["right"].set_visible(False)
     ax_matrix.spines["left"].set_visible(False)
@@ -136,13 +136,14 @@ def draw_upset(memberships):
         edgecolor="none",
     )
     for y, value in zip(y_ticks, left_values):
-        ax_left.text(value + max(left_values) * 0.025, y, str(value),
-                     ha="left", va="center", fontsize=15)
+        ax_left.text(value + max(left_values) * 0.035, y, str(value),
+                     ha="left", va="center", fontsize=10)
     ax_left.set_yticks(y_ticks)
     ax_left.set_yticklabels([])
-    ax_left.set_xlabel("Cluster count", fontsize=18)
+    ax_left.set_xlabel("Cluster count", fontsize=11)
     ax_left.set_xlim(max(left_values) * 1.20, 0)
     ax_left.xaxis.set_major_locator(ticker.MaxNLocator(4, integer=True))
+    ax_left.tick_params(axis="x", labelsize=9)
     ax_left.tick_params(axis="y", length=0)
     ax_left.spines["top"].set_visible(False)
     ax_left.spines["right"].set_visible(False)

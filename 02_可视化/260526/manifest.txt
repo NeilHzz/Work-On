@@ -9,7 +9,7 @@ Count: 30
 - Fig1B.png <= eggtooth 2x3 grid
 - Fig1C.png <= eggtooth/Gallus.jpg + eggtooth/Anas.jpg + eggtooth/Columba.jpg
 - Fig1D.png <= Fig1D.png
-- Fig2.png <= Fig3A.png
+- Fig2.png <= Figure/PNG/Fig2.png (glycoprotein orthogroup UpSet); previous circle version archived as Fig2 Circle.png
 - Fig3A.png <= Fig3B.png
 - Fig3B.png <= Fig4A.png
 - Fig3C.png <= Fig4B.png
@@ -37,9 +37,10 @@ Count: 30
 - Fig6B.png <= Fig6A_Shear.png + Fig6B_Taumax.png
 
 [02_main_composed_figures]
-Count: 6
+Count: 6 current main figures + 1 archived previous Fig2 circle version
 - Fig1_composed.png
 - Fig2_composed.png
+- Fig2 Circle_composed.png (archived previous circle version)
 - Fig3_composed.png
 - Fig4_composed.png
 - Fig5_composed.png
