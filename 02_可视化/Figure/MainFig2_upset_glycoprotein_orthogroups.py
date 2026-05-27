@@ -180,10 +180,11 @@ def draw_upset(memberships):
         edgecolor="none",
     )
     for y, value in zip(y_ticks, left_values):
-        ax_left.text(value + max(left_values) * 0.035, y, str(value),
-                     ha="left", va="center", fontsize=10)
+        ax_left.text(value + max(left_values) * 0.065, y, str(value),
+                     ha="right", va="center", fontsize=10)
     ax_left.set_yticks(y_ticks)
     ax_left.set_yticklabels([])
+    ax_left.set_xlabel("Cluster count", fontsize=11)
     ax_left.set_xlim(max(left_values) * 1.20, 0)
     ax_left.xaxis.set_major_locator(ticker.MaxNLocator(4, integer=True))
     ax_left.tick_params(axis="x", labelsize=9)
