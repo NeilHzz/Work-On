@@ -18,7 +18,7 @@ Panel mapping (source image → manuscript figure / panel):
     eggtooth/Gallus.jpg + Anas.jpg + Columba.jpg
                                          → Fig1  C  (SEM + egg shell + mammilla structure)
   Fig1D.png          → Fig1  D  (Mammilla density + volume boxplots)
-  Fig3A.png          → Fig2     (Glycotype radial network, no letter)
+    Fig2.png           → Fig2     (Glycoprotein orthogroup UpSet plot, no letter)
   Fig3B.png          → Fig3  A  (Chord diagram)
   Fig4A.png          → Fig3  B  (Gallus Proteotype Coevolution scatter)
   Fig4B.png          → Fig3  C  (Anas Proteotype Coevolution scatter)
@@ -357,12 +357,12 @@ def compose_fig2():
     print("\n=== Composing Fig 2 ===")
     inner_w = CANVAS_W - 2 * MARGIN
 
-    # The glycotype radial network is saved by MainFig2_glycotype_network.py as "Fig3A.png"
-    raw = load_img(PNG / "Fig3A.png")
+    # The glycoprotein orthogroup UpSet plot is saved as "Fig2.png".
+    raw = load_img(PNG / "Fig2.png")
     if raw is None:
         raw = make_placeholder(inner_w, inner_w,
-                               "Fig 2 — Glycotype radial network\n"
-                               "(02_可视化/Figure/PNG/Fig3A.png)")
+                               "Fig 2 — Glycoprotein orthogroup UpSet plot\n"
+                               "(02_可视化/Figure/PNG/Fig2.png)")
     img = scale_to_w(raw, inner_w)
 
     # No panel letter for Fig 2
