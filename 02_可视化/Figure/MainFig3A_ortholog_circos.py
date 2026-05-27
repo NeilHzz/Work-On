@@ -46,18 +46,18 @@ with open(os.path.join(_SCRIPT_DIR, "acc_name_map.json"),
           encoding="utf-8") as _f:
     _raw_map = json.load(_f)
 
-# 手动修正：目标蛋白用常用名
+# 手动修正：目标蛋白按各物种自身注释名显示，同时保留目标高亮
 _OVERRIDES = {
     # 目标蛋白
     "P01012":     "Ovalbumin",      # OVAL (Gallus)
-    "A0A8B9QNT8": "Ovalbumin",      # OVAL (Anas)
-    "A0A2I0MWA2": "Ovalbumin",      # OVAL (Columba)
+    "A0A8B9QNT8": "OVAL",           # OVAL (Anas)
+    "A0A2I0MWA2": "Ovalbumin-like", # OVAL ortholog (Columba)
     "A0A8V0XA58": "Ovocleidin-116", # OC116 (Gallus)
     "A0A8B9ZY54": "Ovocleidin-116", # OC116 (Anas)
     "A0A2I0MGY6": "Ovocleidin-116", # OC116 (Columba)
     "A0A8V1A6Y9": "Ovotransferrin", # TRFE (Gallus)
-    "A0A493TBB4": "Ovotransferrin", # TRFE (Anas)
-    "A0A2I0LUS7": "Ovotransferrin", # TRFE (Columba)
+    "A0A493TBB4": "LTF",            # TRFE ortholog (Anas)
+    "A0A2I0LUS7": "TF",             # TRFE ortholog (Columba)
     # Ovalbumin-related
     "A0A8V0Y614": "OVALX",
     "A0A8V0YJ25": "OVALY",
