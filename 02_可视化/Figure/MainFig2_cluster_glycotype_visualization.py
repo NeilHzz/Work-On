@@ -76,7 +76,7 @@ DIVERSITY_CMAP = mcolors.LinearSegmentedColormap.from_list(
     "fig2_diversity", ["#F2E8C9", "#C8A03A", "#3F9B6D", "#275C6B"]
 )
 HEATMAP_CMAP = mcolors.LinearSegmentedColormap.from_list(
-    "fig2_heatmap", ["#FAFAF5", "#E8E8D4", "#C8DDB5", "#91C7A6", "#5AA3AD", "#3D6E99"]
+    "fig2_heatmap", ["#FFF9E6", "#F0EFA6", "#B8DD78", "#66C89B", "#3DB9C6", "#2F86BD"]
 )
 
 MS_FILES = {
