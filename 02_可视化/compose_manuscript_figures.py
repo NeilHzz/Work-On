@@ -685,7 +685,7 @@ def compose_fig4():
             max_h=shared_panel_h,
             cover_old=cover_old,
             cover_px=cover_px,
-            trim=True,
+            trim=False,
         )
         return frame_panels_uniform(
             [panel],
