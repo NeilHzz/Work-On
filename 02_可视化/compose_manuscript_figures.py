@@ -719,8 +719,9 @@ def compose_fig4():
 
     def make_top_model_block():
         model_gap = 24
-        left_model_content_h = int(shared_panel_h * 0.70)
-        left_model_y_offset = 26
+        left_model_content_w = int(shared_panel_w * 0.92)
+        left_model_content_max_h = int(shared_panel_h * 0.68)
+        left_model_y_offset = 30
         right_model_w = (right_col_w - 2 * model_gap) // 3
 
         left_models = []
@@ -730,7 +731,9 @@ def compose_fig4():
                 panel = make_placeholder(shared_panel_w, shared_panel_h, fname)
             else:
                 panel = trim_white(raw, pad=24, threshold=250)
-                panel = scale_to_h(panel, left_model_content_h)
+                panel = scale_to_w(panel, left_model_content_w)
+                if panel.height > left_model_content_max_h:
+                    panel = scale_to_fit(panel, left_model_content_w, left_model_content_max_h)
             left_models.append(panel)
 
         left_models = frame_panels_uniform(
