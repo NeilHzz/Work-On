@@ -32,7 +32,12 @@ AXIS_LABEL_FS = 20
 TICK_FS = 20
 STAT_FS = 20
 PANEL_FIGSIZE = (5.9, 5.5)
-PANEL_ADJUST = dict(left=0.22, right=0.98, bottom=0.20, top=0.86)
+TITLE_PAD = 6
+TITLE_LINESPACING = 1.0
+YLABEL_X = -0.30
+YLABEL_PAD = 18
+XTICK_PAD = 6
+PANEL_ADJUST = dict(left=0.24, right=0.98, bottom=0.21, top=0.83)
 
 
 def format_p_value(p_value: float) -> str:
@@ -110,6 +115,16 @@ def significance_label(p: float) -> str:
     return 'ns'
 
 
+def style_panel_axes(ax, ylabel: str, title: str) -> None:
+    ax.set_ylabel(ylabel, fontsize=AXIS_LABEL_FS, labelpad=YLABEL_PAD)
+    ax.yaxis.set_label_coords(YLABEL_X, 0.5)
+    ax.set_title(title, fontsize=TITLE_FS, color='black', pad=TITLE_PAD,
+                 linespacing=TITLE_LINESPACING)
+    ax.tick_params(axis='x', pad=XTICK_PAD)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+
+
 def violin_one(ax, metric, ylabel, subtitle=''):
     data = [detail.loc[detail.species==sp, metric].dropna().values
             for sp in SPECIES_ORDER]
@@ -139,7 +154,6 @@ def violin_one(ax, metric, ylabel, subtitle=''):
     ax.set_xticks(range(len(SPECIES_ORDER)))
     ax.set_xticklabels([f'{sp}\n(n={len(d)})' for sp, d in zip(SPECIES_ORDER, data)],
                        fontsize=TICK_FS)
-    ax.set_ylabel(ylabel, fontsize=AXIS_LABEL_FS)
 
     # Duncan CLD 字母标注
     ymax = max(d.max() for d in data if len(d))
@@ -154,10 +168,7 @@ def violin_one(ax, metric, ylabel, subtitle=''):
     title_str = (f"{subtitle}\n{p_text}"
                 if subtitle else
                 p_text)
-    ax.set_title(title_str, fontsize=TITLE_FS, color='black', pad=4)
-
-    ax.spines['top'].set_visible(False)
-    ax.spines['right'].set_visible(False)
+    style_panel_axes(ax, ylabel, title_str)
 
 
 # ─── 保存工具函数 ────────────────────────────────────────────────────────
