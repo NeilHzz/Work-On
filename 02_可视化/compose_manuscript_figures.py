@@ -598,14 +598,10 @@ def compose_fig4():
     inner_w = CANVAS_W - 2 * MARGIN
 
     group_gap = 90
-    sub_gap = 36
-    column_gap = 120
-    right_model_gap = 30
+    sub_gap = 24
+    column_gap = 80
     column_w = (inner_w - column_gap) // 2
-    shared_panel_w = min(
-        (column_w - GAP) // 2,
-        (column_w - 2 * right_model_gap) // 3,
-    )
+    shared_panel_w = (column_w - GAP) // 2
     left_col_w = column_w
     right_col_w = column_w
 
@@ -731,10 +727,6 @@ def compose_fig4():
         make_panel("Fig5D.png", "C", ncols=3, cover_old=True, cover_px=(120, 130)),
     ])
 
-    left_model_row = compose_column_row([
-        make_panel("Fig4D-G_Gallus.png", trim=True, max_h=760, target_w=shared_panel_w),
-        make_panel("Fig4D-G_Columba.png", trim=True, max_h=760, target_w=shared_panel_w),
-    ], left_col_w)
     d_to_k_panels = frame_panels_uniform([
         make_panel("Fig5E.png", "D", target_w=shared_panel_w),
         make_panel("Fig5F.png", "E", target_w=shared_panel_w),
@@ -747,18 +739,12 @@ def compose_fig4():
     ], width=shared_panel_w)
     left_de_row = compose_column_row(d_to_k_panels[0:2], left_col_w)
     left_fg_row = compose_column_row(d_to_k_panels[2:4], left_col_w)
-
-    right_model_row = compose_column_row([
-        make_panel("Fig4H_K_3D_sasa_Gallus.png", trim=True, max_h=760, target_w=shared_panel_w),
-        make_panel("Fig4H_K_3D_sasa_Anas.png", trim=True, max_h=760, target_w=shared_panel_w),
-        make_panel("Fig4H_K_3D_sasa_Columba.png", trim=True, max_h=760, target_w=shared_panel_w),
-    ], right_col_w, gap=right_model_gap)
     right_hi_row = compose_column_row(d_to_k_panels[4:6], right_col_w)
     right_jk_row = compose_column_row(d_to_k_panels[6:8], right_col_w)
 
     middle_block = make_middle_block(
-        [left_model_row, left_de_row, left_fg_row],
-        [right_model_row, right_hi_row, right_jk_row],
+        [left_de_row, left_fg_row],
+        [right_hi_row, right_jk_row],
     )
 
     final_row = compose_centered_row([
