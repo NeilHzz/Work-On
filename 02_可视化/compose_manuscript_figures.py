@@ -719,19 +719,18 @@ def compose_fig4():
 
     def make_top_model_block():
         model_gap = 24
-        left_model_w = (left_col_w - model_gap) // 2
         right_model_w = (right_col_w - 2 * model_gap) // 3
-        left_models = [
-            make_panel("Fig4D-G_Gallus.png", target_w=left_model_w, max_h=620, trim=True),
-            make_panel("Fig4D-G_Columba.png", target_w=left_model_w, max_h=620, trim=True),
-        ]
+        left_models = frame_panels_uniform([
+            make_panel("Fig4D-G_Gallus.png", target_w=shared_panel_w, max_h=shared_panel_h, trim=True),
+            make_panel("Fig4D-G_Columba.png", target_w=shared_panel_w, max_h=shared_panel_h, trim=True),
+        ], width=shared_panel_w, height=shared_panel_h)
         right_models = [
             make_panel("Fig4H_K_3D_sasa_Gallus.png", target_w=right_model_w, max_h=620, trim=True),
             make_panel("Fig4H_K_3D_sasa_Anas.png", target_w=right_model_w, max_h=620, trim=True),
             make_panel("Fig4H_K_3D_sasa_Columba.png", target_w=right_model_w, max_h=620, trim=True),
         ]
 
-        left_model = compose_column_row(left_models, left_col_w, gap=model_gap)
+        left_model = compose_column_row(left_models, left_col_w, gap=GAP)
         right_model = compose_column_row(right_models, right_col_w, gap=model_gap)
 
         block_h = max(left_model.height, right_model.height)
