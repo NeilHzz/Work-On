@@ -662,14 +662,16 @@ def compose_fig4():
                 y += gap
         return column
 
-    def frame_panels_uniform(panels, width=None, height=None):
+    def frame_panels_uniform(panels, width=None, height=None, y_offsets=None):
         box_w = width or max(panel.width for panel in panels if panel is not None)
         box_h = height or max(panel.height for panel in panels if panel is not None)
+        offsets = y_offsets or [0] * len(panels)
         framed = []
-        for panel in panels:
+        for panel, y_offset in zip(panels, offsets):
             frame = Image.new("RGBA", (box_w, box_h), (255, 255, 255, 255))
             x = (box_w - panel.width) // 2
-            y = (box_h - panel.height) // 2
+            y = (box_h - panel.height) // 2 + y_offset
+            y = max(0, min(box_h - panel.height, y))
             paste(frame, panel, x, y)
             framed.append(frame)
         return framed
@@ -727,16 +729,21 @@ def compose_fig4():
         make_panel("Fig5D.png", "C", ncols=3, cover_old=True, cover_px=(120, 130)),
     ])
 
-    d_to_k_panels = frame_panels_uniform([
-        make_panel("Fig5E.png", "D", target_w=shared_panel_w),
-        make_panel("Fig5F.png", "E", target_w=shared_panel_w),
-        make_panel("Fig5G.png", "F", target_w=shared_panel_w),
-        make_panel("Fig5H.png", "G", target_w=shared_panel_w),
+    d_to_k_raw_panels = [
+        make_panel("Fig5E.png", "D", target_w=shared_panel_w, trim=True),
+        make_panel("Fig5F.png", "E", target_w=shared_panel_w, trim=True),
+        make_panel("Fig5G.png", "F", target_w=shared_panel_w, trim=True),
+        make_panel("Fig5H.png", "G", target_w=shared_panel_w, trim=True),
         make_panel("Fig5I.png", "H", target_w=shared_panel_w, cover_old=True, cover_px=(120, 130)),
         make_panel("Fig5J.png", "I", target_w=shared_panel_w, cover_old=True, cover_px=(120, 130)),
         make_panel("Fig5K.png", "J", target_w=shared_panel_w, cover_old=True, cover_px=(120, 130)),
         make_panel("Fig5L.png", "K", target_w=shared_panel_w, cover_old=True, cover_px=(120, 130)),
-    ], width=shared_panel_w)
+    ]
+    d_to_k_panels = frame_panels_uniform(
+        d_to_k_raw_panels,
+        width=shared_panel_w,
+        y_offsets=[-36, -36, -36, -36, 0, 0, 0, 0],
+    )
     left_de_row = compose_column_row(d_to_k_panels[0:2], left_col_w)
     left_fg_row = compose_column_row(d_to_k_panels[2:4], left_col_w)
     right_hi_row = compose_column_row(d_to_k_panels[4:6], right_col_w)
