@@ -600,13 +600,15 @@ def compose_fig4():
     group_gap = 90
     sub_gap = 36
     column_gap = 120
-    column_w = (inner_w - column_gap) // 2
+    right_model_gap = 30
+    shared_panel_w = (inner_w - column_gap - GAP - 2 * right_model_gap) // 5
+    left_col_w = 2 * shared_panel_w + GAP
+    right_col_w = 3 * shared_panel_w + 2 * right_model_gap
 
-    def make_panel(fname, label=None, *, ncols=None, cover_old=False,
+    def make_panel(fname, label=None, *, ncols=None, target_w=None, cover_old=False,
                    trim=False, max_h=None, label_offset=(14, 8),
                    cover_px=(90, 110)):
-        target_w = None
-        if ncols is not None:
+        if target_w is None and ncols is not None:
             target_w = (inner_w - (ncols - 1) * GAP) // ncols
         raw = load_img(PNG / fname)
         if raw is None:
@@ -661,18 +663,19 @@ def compose_fig4():
         return column
 
     def make_middle_block(left_rows, right_rows):
-        left_col = compose_column(left_rows, column_w)
-        right_col = compose_column(right_rows, column_w)
+        left_col = compose_column(left_rows, left_col_w)
+        right_col = compose_column(right_rows, right_col_w)
         block_h = max(left_col.height, right_col.height)
         block = Image.new("RGBA", (inner_w, block_h), (255, 255, 255, 0))
 
         left_y = (block_h - left_col.height) // 2
         right_y = (block_h - right_col.height) // 2
         paste(block, left_col, 0, left_y)
-        paste(block, right_col, column_w + column_gap, right_y)
+        right_x = left_col_w + column_gap
+        paste(block, right_col, right_x, right_y)
 
         draw = ImageDraw.Draw(block)
-        line_x = column_w + column_gap // 2
+        line_x = left_col_w + column_gap // 2
         dash = 34
         gap = 22
         y = 0
@@ -713,31 +716,31 @@ def compose_fig4():
     ])
 
     left_model_row = compose_column_row([
-        make_panel("Fig4D-G_Gallus.png", trim=True, max_h=820, ncols=4),
-        make_panel("Fig4D-G_Columba.png", trim=True, max_h=820, ncols=4),
-    ], column_w)
+        make_panel("Fig4D-G_Gallus.png", trim=True, max_h=760, target_w=shared_panel_w),
+        make_panel("Fig4D-G_Columba.png", trim=True, max_h=760, target_w=shared_panel_w),
+    ], left_col_w)
     left_de_row = compose_column_row([
-        make_panel("Fig5E.png", "D", ncols=4),
-        make_panel("Fig5F.png", "E", ncols=4),
-    ], column_w)
+        make_panel("Fig5E.png", "D", target_w=shared_panel_w),
+        make_panel("Fig5F.png", "E", target_w=shared_panel_w),
+    ], left_col_w)
     left_fg_row = compose_column_row([
-        make_panel("Fig5G.png", "F", ncols=4),
-        make_panel("Fig5H.png", "G", ncols=4),
-    ], column_w)
+        make_panel("Fig5G.png", "F", target_w=shared_panel_w),
+        make_panel("Fig5H.png", "G", target_w=shared_panel_w),
+    ], left_col_w)
 
     right_model_row = compose_column_row([
-        make_panel("Fig4H_K_3D_sasa_Gallus.png", trim=True, max_h=700, ncols=6),
-        make_panel("Fig4H_K_3D_sasa_Anas.png", trim=True, max_h=700, ncols=6),
-        make_panel("Fig4H_K_3D_sasa_Columba.png", trim=True, max_h=700, ncols=6),
-    ], column_w, gap=30)
+        make_panel("Fig4H_K_3D_sasa_Gallus.png", trim=True, max_h=760, target_w=shared_panel_w),
+        make_panel("Fig4H_K_3D_sasa_Anas.png", trim=True, max_h=760, target_w=shared_panel_w),
+        make_panel("Fig4H_K_3D_sasa_Columba.png", trim=True, max_h=760, target_w=shared_panel_w),
+    ], right_col_w, gap=right_model_gap)
     right_hi_row = compose_column_row([
-        make_panel("Fig5I.png", "H", ncols=4, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5J.png", "I", ncols=4, cover_old=True, cover_px=(120, 130)),
-    ], column_w)
+        make_panel("Fig5I.png", "H", target_w=shared_panel_w, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig5J.png", "I", target_w=shared_panel_w, cover_old=True, cover_px=(120, 130)),
+    ], right_col_w)
     right_jk_row = compose_column_row([
-        make_panel("Fig5K.png", "J", ncols=4, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5L.png", "K", ncols=4, cover_old=True, cover_px=(120, 130)),
-    ], column_w)
+        make_panel("Fig5K.png", "J", target_w=shared_panel_w, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig5L.png", "K", target_w=shared_panel_w, cover_old=True, cover_px=(120, 130)),
+    ], right_col_w)
 
     middle_block = make_middle_block(
         [left_model_row, left_de_row, left_fg_row],
