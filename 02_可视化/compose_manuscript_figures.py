@@ -677,7 +677,8 @@ def compose_fig4():
             framed.append(frame)
         return framed
 
-    def make_uniform_panel(fname, label, *, cover_old=False, cover_px=(90, 110), y_offset=0):
+    def make_uniform_panel(fname, label, *, cover_old=False, cover_px=(90, 110), y_offset=0,
+                           label_offset=(14, 8)):
         panel = make_panel(
             fname,
             label,
@@ -686,6 +687,7 @@ def compose_fig4():
             cover_old=cover_old,
             cover_px=cover_px,
             trim=False,
+            label_offset=label_offset,
         )
         return frame_panels_uniform(
             [panel],
@@ -794,8 +796,10 @@ def compose_fig4():
     d_to_k_panels = [
         make_uniform_panel("Fig5E.png", "C", y_offset=dk_y_offset),
         make_uniform_panel("Fig5F.png", "D", y_offset=dk_y_offset),
-        make_uniform_panel("Fig5I.png", "E", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset),
-        make_uniform_panel("Fig5J.png", "F", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset),
+        make_uniform_panel("Fig5I.png", "E", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset,
+                   label_offset=(80, 8)),
+        make_uniform_panel("Fig5J.png", "F", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset,
+                   label_offset=(80, 8)),
         make_uniform_panel("Fig5G.png", "G", y_offset=dk_y_offset),
         make_uniform_panel("Fig5H.png", "H", y_offset=dk_y_offset),
         make_uniform_panel("Fig5K.png", "I", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset),
