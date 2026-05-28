@@ -79,6 +79,7 @@ LEFT_PROTS = {
 DY_OVERRIDE = {
     ('Anas', 'TRFE'):  14,
     ('Anas', 'OVAL'): -14,
+    ('Columba', 'OVAL'): -18,
 }
 # 逐点 dy 微调: (species, protein, position) -> dy 叠加值
 POINT_DY_ADJUST = {
