@@ -571,8 +571,8 @@ def compose_fig3():
         return add_label(img, label, font=FONT_PUB_LABEL)
 
     rows = [
-        [panel("Fig4A.png", "B"), panel("Fig4B.png", "C"), panel("Fig4C.png", "D")],
-        [panel("Fig4H.png", "E"), panel("Fig4I.png", "F"), panel("Fig4J.png", "G")],
+        [panel("Fig4A.png", "A"), panel("Fig4B.png", "B"), panel("Fig4C.png", "C")],
+        [panel("Fig4H.png", "D"), panel("Fig4I.png", "E"), panel("Fig4J.png", "F")],
     ]
     row_heights = [max(img.height for img in row) for row in rows]
     total_h = 2 * MARGIN + sum(row_heights) + GAP * (len(rows) - 1)
