@@ -40,12 +40,10 @@ VALUE_FS = 18
 PANEL_FIGSIZE = (5.9, 5.5)
 TITLE_PAD = 6
 TITLE_LINESPACING = 1.0
-YLABEL_X = -0.08
+YLABEL_X = -0.09
 YLABEL_PAD = 0
 XTICK_PAD = 6
-PANEL_ADJUST = dict(left=0.18, right=0.98, bottom=0.21, top=0.83)
-LONG_YLABEL_X = -0.16
-LONG_YLABEL_FS = 18
+PANEL_ADJUST = dict(left=0.20, right=0.98, bottom=0.21, top=0.83)
 
 
 def format_p_value(p_value: float) -> str:
@@ -169,10 +167,7 @@ def draw_violin_panel(ax, groups_dict, ylabel, title, panel_label,
     ax.set_xticks(positions)
     ax.set_xticklabels([sp + n for sp, n in zip(SPECIES_ORDER, n_labels)],
                        fontsize=TICK_FS)
-    ylabel_x = LONG_YLABEL_X if panel_label == 'C' else None
-    ylabel_fs = LONG_YLABEL_FS if panel_label == 'C' else None
-    style_panel_axes(ax, ylabel, f"{title}\n{format_p_value(res['p_anova'])}",
-                     ylabel_x=ylabel_x, ylabel_fs=ylabel_fs)
+    style_panel_axes(ax, ylabel, f"{title}\n{format_p_value(res['p_anova'])}")
     ax.set_ylim(y_min - y_range * ypad_bot, letter_y + y_range * 0.20)
 
 
