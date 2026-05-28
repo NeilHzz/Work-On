@@ -40,10 +40,10 @@ VALUE_FS = 18
 PANEL_FIGSIZE = (5.9, 5.5)
 TITLE_PAD = 6
 TITLE_LINESPACING = 1.0
-YLABEL_X = -0.02
+YLABEL_X = -0.045
 YLABEL_PAD = 0
 XTICK_PAD = 6
-PANEL_ADJUST = dict(left=0.16, right=0.98, bottom=0.21, top=0.83)
+PANEL_ADJUST = dict(left=0.18, right=0.98, bottom=0.21, top=0.83)
 
 
 def format_p_value(p_value: float) -> str:
