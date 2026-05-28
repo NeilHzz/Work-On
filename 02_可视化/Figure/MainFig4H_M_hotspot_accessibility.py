@@ -44,6 +44,8 @@ YLABEL_X = -0.06
 YLABEL_PAD = 0
 XTICK_PAD = 6
 PANEL_ADJUST = dict(left=0.18, right=0.98, bottom=0.21, top=0.83)
+LONG_YLABEL_X = -0.13
+LONG_YLABEL_FS = 18
 
 
 def format_p_value(p_value: float) -> str:
@@ -115,9 +117,11 @@ def add_significance_brackets(ax, x1, x2, y, h, label, fs=STAT_FS):
             ha='center', va='bottom', fontsize=fs, color='#333')
 
 
-def style_panel_axes(ax, ylabel: str, title: str) -> None:
-    ax.set_ylabel(ylabel, fontsize=AXIS_LABEL_FS, labelpad=YLABEL_PAD)
-    ax.yaxis.set_label_coords(YLABEL_X, 0.5)
+def style_panel_axes(ax, ylabel: str, title: str,
+                     ylabel_x: float | None = None,
+                     ylabel_fs: int | None = None) -> None:
+    ax.set_ylabel(ylabel, fontsize=ylabel_fs or AXIS_LABEL_FS, labelpad=YLABEL_PAD)
+    ax.yaxis.set_label_coords(ylabel_x if ylabel_x is not None else YLABEL_X, 0.5)
     ax.set_title(title, fontsize=TITLE_FS, pad=TITLE_PAD,
                  linespacing=TITLE_LINESPACING)
     ax.tick_params(axis='x', pad=XTICK_PAD)
@@ -165,7 +169,10 @@ def draw_violin_panel(ax, groups_dict, ylabel, title, panel_label,
     ax.set_xticks(positions)
     ax.set_xticklabels([sp + n for sp, n in zip(SPECIES_ORDER, n_labels)],
                        fontsize=TICK_FS)
-    style_panel_axes(ax, ylabel, f"{title}\n{format_p_value(res['p_anova'])}")
+    ylabel_x = LONG_YLABEL_X if panel_label == 'C' else None
+    ylabel_fs = LONG_YLABEL_FS if panel_label == 'C' else None
+    style_panel_axes(ax, ylabel, f"{title}\n{format_p_value(res['p_anova'])}",
+                     ylabel_x=ylabel_x, ylabel_fs=ylabel_fs)
     ax.set_ylim(y_min - y_range * ypad_bot, letter_y + y_range * 0.20)
 
 
