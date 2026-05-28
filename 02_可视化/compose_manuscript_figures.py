@@ -796,12 +796,12 @@ def compose_fig4():
     d_to_k_panels = [
         make_uniform_panel("Fig5E.png", "C", y_offset=dk_y_offset),
         make_uniform_panel("Fig5F.png", "D", y_offset=dk_y_offset),
-        make_uniform_panel("Fig5I.png", "E", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset,
+        make_uniform_panel("Fig5I.png", "G", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset,
                    label_offset=(80, 8)),
-        make_uniform_panel("Fig5J.png", "F", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset,
+        make_uniform_panel("Fig5J.png", "H", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset,
                    label_offset=(80, 8)),
-        make_uniform_panel("Fig5G.png", "G", y_offset=dk_y_offset),
-        make_uniform_panel("Fig5H.png", "H", y_offset=dk_y_offset),
+        make_uniform_panel("Fig5G.png", "E", y_offset=dk_y_offset),
+        make_uniform_panel("Fig5H.png", "F", y_offset=dk_y_offset),
         make_uniform_panel("Fig5K.png", "I", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset),
         make_uniform_panel("Fig5L.png", "J", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset),
     ]
