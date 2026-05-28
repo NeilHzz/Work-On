@@ -330,7 +330,7 @@ def main():
         ('B', {sp: g[sp]['hotspot_sasa_mean'].dropna().values for sp in SPECIES_ORDER},
          r'Hotspot Residue Mean SASA (Å$^{-2}$)', 'Hotspot Residue SASA'),
         ('C', {sp: g[sp]['hotspot_frac'].dropna().values for sp in SPECIES_ORDER},
-         'Hotspot Fraction\n(hotspots / candidates)', 'Hotspot Fraction'),
+            'Hotspot Fraction', 'Hotspot Fraction'),
         ('D', {sp: g[sp]['net_accessible'].dropna().values for sp in SPECIES_ORDER},
          r'Net Accessible Ca$^{2+}$ Hotspots', r'Net Accessible Ca$^{2+}$ Hotspots'),
     ]
