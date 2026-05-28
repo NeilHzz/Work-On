@@ -750,6 +750,8 @@ def compose_fig4():
 
         left_model = compose_column_row(left_models, left_col_w, gap=GAP)
         right_model = compose_column_row(right_models, right_col_w, gap=model_gap)
+        left_model = add_label(left_model, "A", font=FONT_FIG4_LABEL)
+        right_model = add_label(right_model, "B", font=FONT_FIG4_LABEL)
 
         block_h = max(left_model.height, right_model.height)
         block = Image.new("RGBA", (inner_w, block_h), (255, 255, 255, 0))
@@ -782,26 +784,26 @@ def compose_fig4():
         return legend
 
     abc_row = compose_centered_row([
-        make_panel("Fig5B.png", "A", ncols=3, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5C.png", "B", ncols=3, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5D.png", "C", ncols=3, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig5B.png", "K", ncols=3, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig5C.png", "L", ncols=3, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig5D.png", "M", ncols=3, cover_old=True, cover_px=(120, 130)),
     ])
     top_model_block = make_top_model_block()
 
     dk_y_offset = -24
     d_to_k_panels = [
-        make_uniform_panel("Fig5E.png", "D", y_offset=dk_y_offset),
-        make_uniform_panel("Fig5F.png", "E", y_offset=dk_y_offset),
-        make_uniform_panel("Fig5G.png", "F", y_offset=dk_y_offset),
-        make_uniform_panel("Fig5H.png", "G", y_offset=dk_y_offset),
-        make_uniform_panel("Fig5I.png", "H", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset),
-        make_uniform_panel("Fig5J.png", "I", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset),
-        make_uniform_panel("Fig5K.png", "J", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset),
-        make_uniform_panel("Fig5L.png", "K", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset),
+        make_uniform_panel("Fig5E.png", "C", y_offset=dk_y_offset),
+        make_uniform_panel("Fig5F.png", "D", y_offset=dk_y_offset),
+        make_uniform_panel("Fig5I.png", "E", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset),
+        make_uniform_panel("Fig5J.png", "F", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset),
+        make_uniform_panel("Fig5G.png", "G", y_offset=dk_y_offset),
+        make_uniform_panel("Fig5H.png", "H", y_offset=dk_y_offset),
+        make_uniform_panel("Fig5K.png", "I", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset),
+        make_uniform_panel("Fig5L.png", "J", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset),
     ]
     left_de_row = compose_column_row(d_to_k_panels[0:2], left_col_w)
-    left_fg_row = compose_column_row(d_to_k_panels[2:4], left_col_w)
-    right_hi_row = compose_column_row(d_to_k_panels[4:6], right_col_w)
+    left_fg_row = compose_column_row(d_to_k_panels[4:6], left_col_w)
+    right_hi_row = compose_column_row(d_to_k_panels[2:4], right_col_w)
     right_jk_row = compose_column_row(d_to_k_panels[6:8], right_col_w)
 
     middle_block = make_middle_block(
@@ -810,8 +812,8 @@ def compose_fig4():
     )
 
     final_row = compose_centered_row([
-        make_panel("Fig5M.png", "L", ncols=2, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5N.png", "M", ncols=2, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig5M.png", "N", ncols=2, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig5N.png", "O", ncols=2, cover_old=True, cover_px=(120, 130)),
     ])
     final_legend = make_shared_final_legend()
     final_block = Image.new(
