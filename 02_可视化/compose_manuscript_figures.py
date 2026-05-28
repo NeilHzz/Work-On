@@ -602,6 +602,7 @@ def compose_fig4():
     column_gap = 80
     column_w = (inner_w - column_gap) // 2
     shared_panel_w = (column_w - GAP) // 2
+    shared_panel_h = int(shared_panel_w * 1.08)
     left_col_w = column_w
     right_col_w = column_w
 
@@ -676,6 +677,23 @@ def compose_fig4():
             framed.append(frame)
         return framed
 
+    def make_uniform_panel(fname, label, *, cover_old=False, cover_px=(90, 110), y_offset=0):
+        panel = make_panel(
+            fname,
+            label,
+            target_w=shared_panel_w,
+            max_h=shared_panel_h,
+            cover_old=cover_old,
+            cover_px=cover_px,
+            trim=True,
+        )
+        return frame_panels_uniform(
+            [panel],
+            width=shared_panel_w,
+            height=shared_panel_h,
+            y_offsets=[y_offset],
+        )[0]
+
     def make_middle_block(left_rows, right_rows):
         left_col = compose_column(left_rows, left_col_w)
         right_col = compose_column(right_rows, right_col_w)
@@ -729,21 +747,16 @@ def compose_fig4():
         make_panel("Fig5D.png", "C", ncols=3, cover_old=True, cover_px=(120, 130)),
     ])
 
-    d_to_k_raw_panels = [
-        make_panel("Fig5E.png", "D", target_w=shared_panel_w, trim=True),
-        make_panel("Fig5F.png", "E", target_w=shared_panel_w, trim=True),
-        make_panel("Fig5G.png", "F", target_w=shared_panel_w, trim=True),
-        make_panel("Fig5H.png", "G", target_w=shared_panel_w, trim=True),
-        make_panel("Fig5I.png", "H", target_w=shared_panel_w, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5J.png", "I", target_w=shared_panel_w, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5K.png", "J", target_w=shared_panel_w, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5L.png", "K", target_w=shared_panel_w, cover_old=True, cover_px=(120, 130)),
+    d_to_k_panels = [
+        make_uniform_panel("Fig5E.png", "D", y_offset=-24),
+        make_uniform_panel("Fig5F.png", "E", y_offset=-24),
+        make_uniform_panel("Fig5G.png", "F", y_offset=-24),
+        make_uniform_panel("Fig5H.png", "G", y_offset=-24),
+        make_uniform_panel("Fig5I.png", "H", cover_old=True, cover_px=(120, 130)),
+        make_uniform_panel("Fig5J.png", "I", cover_old=True, cover_px=(120, 130)),
+        make_uniform_panel("Fig5K.png", "J", cover_old=True, cover_px=(120, 130)),
+        make_uniform_panel("Fig5L.png", "K", cover_old=True, cover_px=(120, 130)),
     ]
-    d_to_k_panels = frame_panels_uniform(
-        d_to_k_raw_panels,
-        width=shared_panel_w,
-        y_offsets=[-36, -36, -36, -36, 0, 0, 0, 0],
-    )
     left_de_row = compose_column_row(d_to_k_panels[0:2], left_col_w)
     left_fg_row = compose_column_row(d_to_k_panels[2:4], left_col_w)
     right_hi_row = compose_column_row(d_to_k_panels[4:6], right_col_w)
