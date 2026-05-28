@@ -40,8 +40,7 @@ VALUE_FS = 18
 PANEL_FIGSIZE = (5.9, 5.5)
 TITLE_PAD = 6
 TITLE_LINESPACING = 1.0
-YLABEL_X = -0.18
-YLABEL_PAD = 10
+YLABEL_PAD = 4
 XTICK_PAD = 6
 PANEL_ADJUST = dict(left=0.24, right=0.98, bottom=0.21, top=0.83)
 
@@ -117,7 +116,6 @@ def add_significance_brackets(ax, x1, x2, y, h, label, fs=STAT_FS):
 
 def style_panel_axes(ax, ylabel: str, title: str) -> None:
     ax.set_ylabel(ylabel, fontsize=AXIS_LABEL_FS, labelpad=YLABEL_PAD)
-    ax.yaxis.set_label_coords(YLABEL_X, 0.5)
     ax.set_title(title, fontsize=TITLE_FS, pad=TITLE_PAD,
                  linespacing=TITLE_LINESPACING)
     ax.tick_params(axis='x', pad=XTICK_PAD)
