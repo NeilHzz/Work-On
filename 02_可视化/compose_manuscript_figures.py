@@ -601,9 +601,13 @@ def compose_fig4():
     sub_gap = 36
     column_gap = 120
     right_model_gap = 30
-    shared_panel_w = (inner_w - column_gap - GAP - 2 * right_model_gap) // 5
-    left_col_w = 2 * shared_panel_w + GAP
-    right_col_w = 3 * shared_panel_w + 2 * right_model_gap
+    column_w = (inner_w - column_gap) // 2
+    shared_panel_w = min(
+        (column_w - GAP) // 2,
+        (column_w - 2 * right_model_gap) // 3,
+    )
+    left_col_w = column_w
+    right_col_w = column_w
 
     def make_panel(fname, label=None, *, ncols=None, target_w=None, cover_old=False,
                    trim=False, max_h=None, label_offset=(14, 8),
