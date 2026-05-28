@@ -806,8 +806,8 @@ def compose_fig4():
 
     rows = [
         top_model_block,
-        abc_row,
         middle_block,
+        abc_row,
         final_block,
     ]
     gaps = [group_gap, 42, 42]
