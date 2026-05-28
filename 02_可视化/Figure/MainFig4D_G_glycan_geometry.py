@@ -34,9 +34,10 @@ STAT_FS = 20
 PANEL_FIGSIZE = (5.9, 5.5)
 TITLE_PAD = 6
 TITLE_LINESPACING = 1.0
-YLABEL_PAD = 4
+YLABEL_X = -0.055
+YLABEL_PAD = 0
 XTICK_PAD = 6
-PANEL_ADJUST = dict(left=0.24, right=0.98, bottom=0.21, top=0.83)
+PANEL_ADJUST = dict(left=0.18, right=0.98, bottom=0.21, top=0.83)
 
 
 def format_p_value(p_value: float) -> str:
@@ -116,6 +117,7 @@ def significance_label(p: float) -> str:
 
 def style_panel_axes(ax, ylabel: str, title: str) -> None:
     ax.set_ylabel(ylabel, fontsize=AXIS_LABEL_FS, labelpad=YLABEL_PAD)
+    ax.yaxis.set_label_coords(YLABEL_X, 0.5)
     ax.set_title(title, fontsize=TITLE_FS, color='black', pad=TITLE_PAD,
                  linespacing=TITLE_LINESPACING)
     ax.tick_params(axis='x', pad=XTICK_PAD)
