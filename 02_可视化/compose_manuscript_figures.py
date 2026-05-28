@@ -599,6 +599,8 @@ def compose_fig4():
 
     group_gap = 90
     sub_gap = 36
+    column_gap = 120
+    column_w = (inner_w - column_gap) // 2
 
     def make_panel(fname, label=None, *, ncols=None, cover_old=False,
                    trim=False, max_h=None, label_offset=(14, 8),
@@ -637,6 +639,49 @@ def compose_fig4():
             x += img.width + gap
         return row
 
+    def compose_column_row(images, width, gap=GAP):
+        row_h = max(img.height for img in images if img is not None)
+        row_w = sum(img.width for img in images if img is not None) + gap * (len(images) - 1)
+        row = Image.new("RGBA", (width, row_h), (255, 255, 255, 0))
+        x = max(0, (width - row_w) // 2)
+        for img in images:
+            paste(row, img, x, (row_h - img.height) // 2)
+            x += img.width + gap
+        return row
+
+    def compose_column(rows, width, gap=sub_gap):
+        total_h = sum(row.height for row in rows) + gap * (len(rows) - 1)
+        column = Image.new("RGBA", (width, total_h), (255, 255, 255, 0))
+        y = 0
+        for idx, row in enumerate(rows):
+            paste(column, row, 0, y)
+            y += row.height
+            if idx < len(rows) - 1:
+                y += gap
+        return column
+
+    def make_middle_block(left_rows, right_rows):
+        left_col = compose_column(left_rows, column_w)
+        right_col = compose_column(right_rows, column_w)
+        block_h = max(left_col.height, right_col.height)
+        block = Image.new("RGBA", (inner_w, block_h), (255, 255, 255, 0))
+
+        left_y = (block_h - left_col.height) // 2
+        right_y = (block_h - right_col.height) // 2
+        paste(block, left_col, 0, left_y)
+        paste(block, right_col, column_w + column_gap, right_y)
+
+        draw = ImageDraw.Draw(block)
+        line_x = column_w + column_gap // 2
+        dash = 34
+        gap = 22
+        y = 0
+        while y < block_h:
+            y2 = min(block_h, y + dash)
+            draw.line((line_x, y, line_x, y2), fill=(155, 155, 155, 255), width=6)
+            y += dash + gap
+        return block
+
     def make_shared_final_legend():
         legend_w = min(1900, inner_w // 2)
         legend_h = 120
@@ -667,28 +712,37 @@ def compose_fig4():
         make_panel("Fig5D.png", "C", ncols=3, cover_old=True, cover_px=(120, 130)),
     ])
 
-    dg_context_row = compose_centered_row([
-        make_panel("Fig4D-G_Gallus.png", ncols=2, trim=True, max_h=1040),
-        make_panel("Fig4D-G_Columba.png", ncols=2, trim=True, max_h=1040),
-    ])
-    dg_plot_row = compose_centered_row([
+    left_model_row = compose_column_row([
+        make_panel("Fig4D-G_Gallus.png", trim=True, max_h=820, ncols=4),
+        make_panel("Fig4D-G_Columba.png", trim=True, max_h=820, ncols=4),
+    ], column_w)
+    left_de_row = compose_column_row([
         make_panel("Fig5E.png", "D", ncols=4),
         make_panel("Fig5F.png", "E", ncols=4),
+    ], column_w)
+    left_fg_row = compose_column_row([
         make_panel("Fig5G.png", "F", ncols=4),
         make_panel("Fig5H.png", "G", ncols=4),
-    ])
+    ], column_w)
 
-    hk_context_row = compose_centered_row([
-        make_panel("Fig4H_K_3D_sasa_Gallus.png", ncols=3, trim=True, max_h=920),
-        make_panel("Fig4H_K_3D_sasa_Anas.png", ncols=3, trim=True, max_h=920),
-        make_panel("Fig4H_K_3D_sasa_Columba.png", ncols=3, trim=True, max_h=920),
-    ])
-    hk_plot_row = compose_centered_row([
+    right_model_row = compose_column_row([
+        make_panel("Fig4H_K_3D_sasa_Gallus.png", trim=True, max_h=700, ncols=6),
+        make_panel("Fig4H_K_3D_sasa_Anas.png", trim=True, max_h=700, ncols=6),
+        make_panel("Fig4H_K_3D_sasa_Columba.png", trim=True, max_h=700, ncols=6),
+    ], column_w, gap=30)
+    right_hi_row = compose_column_row([
         make_panel("Fig5I.png", "H", ncols=4, cover_old=True, cover_px=(120, 130)),
         make_panel("Fig5J.png", "I", ncols=4, cover_old=True, cover_px=(120, 130)),
+    ], column_w)
+    right_jk_row = compose_column_row([
         make_panel("Fig5K.png", "J", ncols=4, cover_old=True, cover_px=(120, 130)),
         make_panel("Fig5L.png", "K", ncols=4, cover_old=True, cover_px=(120, 130)),
-    ])
+    ], column_w)
+
+    middle_block = make_middle_block(
+        [left_model_row, left_de_row, left_fg_row],
+        [right_model_row, right_hi_row, right_jk_row],
+    )
 
     final_row = compose_centered_row([
         make_panel("Fig5M.png", "L", ncols=2, cover_old=True, cover_px=(120, 130)),
@@ -705,13 +759,10 @@ def compose_fig4():
 
     rows = [
         abc_row,
-        dg_context_row,
-        dg_plot_row,
-        hk_context_row,
-        hk_plot_row,
+        middle_block,
         final_block,
     ]
-    gaps = [group_gap, sub_gap, group_gap, sub_gap, group_gap]
+    gaps = [group_gap, group_gap]
     total_h = 2 * MARGIN + sum(row.height for row in rows) + sum(gaps)
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
 
