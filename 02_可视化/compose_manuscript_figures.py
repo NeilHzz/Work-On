@@ -718,8 +718,21 @@ def compose_fig4():
         return block
 
     def make_top_model_block():
-        left_model = make_panel("Fig4_model_D_G.png", target_w=left_col_w, max_h=900, trim=True)
-        right_model = make_panel("Fig4_model_H_K.png", target_w=right_col_w, max_h=900, trim=True)
+        model_gap = 24
+        left_model_w = (left_col_w - model_gap) // 2
+        right_model_w = (right_col_w - 2 * model_gap) // 3
+        left_models = [
+            make_panel("Fig4D-G_Gallus.png", target_w=left_model_w, max_h=620, trim=True),
+            make_panel("Fig4D-G_Columba.png", target_w=left_model_w, max_h=620, trim=True),
+        ]
+        right_models = [
+            make_panel("Fig4H_K_3D_sasa_Gallus.png", target_w=right_model_w, max_h=620, trim=True),
+            make_panel("Fig4H_K_3D_sasa_Anas.png", target_w=right_model_w, max_h=620, trim=True),
+            make_panel("Fig4H_K_3D_sasa_Columba.png", target_w=right_model_w, max_h=620, trim=True),
+        ]
+
+        left_model = compose_column_row(left_models, left_col_w, gap=model_gap)
+        right_model = compose_column_row(right_models, right_col_w, gap=model_gap)
 
         block_h = max(left_model.height, right_model.height)
         block = Image.new("RGBA", (inner_w, block_h), (255, 255, 255, 0))
