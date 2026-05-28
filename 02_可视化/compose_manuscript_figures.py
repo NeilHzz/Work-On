@@ -717,6 +717,16 @@ def compose_fig4():
             y += dash + gap
         return block
 
+    def make_top_model_block():
+        left_model = make_panel("Fig4_model_D_G.png", target_w=left_col_w, max_h=900, trim=True)
+        right_model = make_panel("Fig4_model_H_K.png", target_w=right_col_w, max_h=900, trim=True)
+
+        block_h = max(left_model.height, right_model.height)
+        block = Image.new("RGBA", (inner_w, block_h), (255, 255, 255, 0))
+        paste(block, left_model, 0, (block_h - left_model.height) // 2)
+        paste(block, right_model, left_col_w + column_gap, (block_h - right_model.height) // 2)
+        return block
+
     def make_shared_final_legend():
         legend_w = min(1900, inner_w // 2)
         legend_h = 120
@@ -746,6 +756,7 @@ def compose_fig4():
         make_panel("Fig5C.png", "B", ncols=3, cover_old=True, cover_px=(120, 130)),
         make_panel("Fig5D.png", "C", ncols=3, cover_old=True, cover_px=(120, 130)),
     ])
+    top_model_block = make_top_model_block()
 
     d_to_k_panels = [
         make_uniform_panel("Fig5E.png", "D", y_offset=-24),
@@ -781,11 +792,12 @@ def compose_fig4():
     paste(final_block, final_row, 0, final_legend.height + sub_gap)
 
     rows = [
+        top_model_block,
         abc_row,
         middle_block,
         final_block,
     ]
-    gaps = [group_gap, group_gap]
+    gaps = [group_gap, 42, 42]
     total_h = 2 * MARGIN + sum(row.height for row in rows) + sum(gaps)
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
 
