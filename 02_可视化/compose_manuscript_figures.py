@@ -597,7 +597,7 @@ def compose_fig4():
     print("\n=== Composing Fig 4 ===")
     inner_w = CANVAS_W - 2 * MARGIN
 
-    group_gap = 90
+    group_gap = 42
     sub_gap = 24
     column_gap = 80
     column_w = (inner_w - column_gap) // 2
@@ -719,11 +719,26 @@ def compose_fig4():
 
     def make_top_model_block():
         model_gap = 24
+        left_model_content_h = int(shared_panel_h * 0.70)
+        left_model_y_offset = 26
         right_model_w = (right_col_w - 2 * model_gap) // 3
-        left_models = frame_panels_uniform([
-            make_panel("Fig4D-G_Gallus.png", target_w=shared_panel_w, max_h=shared_panel_h, trim=True),
-            make_panel("Fig4D-G_Columba.png", target_w=shared_panel_w, max_h=shared_panel_h, trim=True),
-        ], width=shared_panel_w, height=shared_panel_h)
+
+        left_models = []
+        for fname in ["Fig4D-G_Gallus.png", "Fig4D-G_Columba.png"]:
+            raw = load_img(PNG / fname)
+            if raw is None:
+                panel = make_placeholder(shared_panel_w, shared_panel_h, fname)
+            else:
+                panel = trim_white(raw, pad=24, threshold=250)
+                panel = scale_to_h(panel, left_model_content_h)
+            left_models.append(panel)
+
+        left_models = frame_panels_uniform(
+            left_models,
+            width=shared_panel_w,
+            height=shared_panel_h,
+            y_offsets=[left_model_y_offset, left_model_y_offset],
+        )
         right_models = [
             make_panel("Fig4H_K_3D_sasa_Gallus.png", target_w=right_model_w, max_h=620, trim=True),
             make_panel("Fig4H_K_3D_sasa_Anas.png", target_w=right_model_w, max_h=620, trim=True),
@@ -810,7 +825,7 @@ def compose_fig4():
         abc_row,
         final_block,
     ]
-    gaps = [group_gap, 42, 42]
+    gaps = [group_gap, group_gap, group_gap]
     total_h = 2 * MARGIN + sum(row.height for row in rows) + sum(gaps)
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
 
