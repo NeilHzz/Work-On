@@ -771,15 +771,16 @@ def compose_fig4():
     ])
     top_model_block = make_top_model_block()
 
+    dk_y_offset = -24
     d_to_k_panels = [
-        make_uniform_panel("Fig5E.png", "D", y_offset=-24),
-        make_uniform_panel("Fig5F.png", "E", y_offset=-24),
-        make_uniform_panel("Fig5G.png", "F", y_offset=-24),
-        make_uniform_panel("Fig5H.png", "G", y_offset=-24),
-        make_uniform_panel("Fig5I.png", "H", cover_old=True, cover_px=(120, 130)),
-        make_uniform_panel("Fig5J.png", "I", cover_old=True, cover_px=(120, 130)),
-        make_uniform_panel("Fig5K.png", "J", cover_old=True, cover_px=(120, 130)),
-        make_uniform_panel("Fig5L.png", "K", cover_old=True, cover_px=(120, 130)),
+        make_uniform_panel("Fig5E.png", "D", y_offset=dk_y_offset),
+        make_uniform_panel("Fig5F.png", "E", y_offset=dk_y_offset),
+        make_uniform_panel("Fig5G.png", "F", y_offset=dk_y_offset),
+        make_uniform_panel("Fig5H.png", "G", y_offset=dk_y_offset),
+        make_uniform_panel("Fig5I.png", "H", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset),
+        make_uniform_panel("Fig5J.png", "I", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset),
+        make_uniform_panel("Fig5K.png", "J", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset),
+        make_uniform_panel("Fig5L.png", "K", cover_old=True, cover_px=(120, 130), y_offset=dk_y_offset),
     ]
     left_de_row = compose_column_row(d_to_k_panels[0:2], left_col_w)
     left_fg_row = compose_column_row(d_to_k_panels[2:4], left_col_w)
