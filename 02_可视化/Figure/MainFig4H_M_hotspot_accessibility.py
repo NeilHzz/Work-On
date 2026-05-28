@@ -37,6 +37,8 @@ TICK_FS = 20
 LEGEND_FS = 18
 STAT_FS = 20
 VALUE_FS = 18
+PANEL_FIGSIZE = (5.9, 5.5)
+PANEL_ADJUST = dict(left=0.22, right=0.98, bottom=0.20, top=0.86)
 
 
 def format_p_value(p_value: float) -> str:
@@ -326,26 +328,26 @@ def main():
 
     # Panels A-D: individual violin plots
     for lbl, gd, ylabel, title in panels_violin:
-        fig, ax = plt.subplots(figsize=(5.9, 5.5))
+        fig, ax = plt.subplots(figsize=PANEL_FIGSIZE)
         fig.patch.set_facecolor('white')
         draw_violin_panel(ax, gd, ylabel, title, lbl)
-        fig.tight_layout()
+        fig.subplots_adjust(**PANEL_ADJUST)
         save_panel(fig, f'Fig5{chr(ord("I") + ord(lbl) - ord("A"))}')
         plt.close(fig)
 
     # Panel E: stacked bar
-    fig, ax = plt.subplots(figsize=(5.9, 5.5))
+    fig, ax = plt.subplots(figsize=PANEL_FIGSIZE)
     fig.patch.set_facecolor('white')
     draw_stacked_bar(ax, df, show_legend=False)
-    fig.tight_layout()
+    fig.subplots_adjust(**PANEL_ADJUST)
     save_panel(fig, 'Fig5M')
     plt.close(fig)
 
     # Panel F: SASA bar
-    fig, ax = plt.subplots(figsize=(5.9, 5.5))
+    fig, ax = plt.subplots(figsize=PANEL_FIGSIZE)
     fig.patch.set_facecolor('white')
     draw_sasa_bar(ax, df, show_legend=False)
-    fig.tight_layout()
+    fig.subplots_adjust(**PANEL_ADJUST)
     save_panel(fig, 'Fig5N')
     plt.close(fig)
 

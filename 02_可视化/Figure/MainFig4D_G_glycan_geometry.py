@@ -31,6 +31,8 @@ TITLE_FS = 20
 AXIS_LABEL_FS = 20
 TICK_FS = 20
 STAT_FS = 20
+PANEL_FIGSIZE = (5.9, 5.5)
+PANEL_ADJUST = dict(left=0.22, right=0.98, bottom=0.20, top=0.86)
 
 
 def format_p_value(p_value: float) -> str:
@@ -181,9 +183,9 @@ metric_labels = list(METRICS.values())
 panel_labels  = list('ABCD')
 
 for mk, ml, lbl in zip(metric_keys, metric_labels, panel_labels):
-    fig, ax = plt.subplots(figsize=(5.85, 5))
+    fig, ax = plt.subplots(figsize=PANEL_FIGSIZE)
     fig.patch.set_facecolor('white')
     violin_one(ax, mk, ml, subtitle=SUBTITLES.get(mk, ''))
-    fig.tight_layout()
+    fig.subplots_adjust(**PANEL_ADJUST)
     save_panel(fig, f'Fig5{chr(ord("E") + ord(lbl) - ord("A"))}')
     plt.close(fig)
