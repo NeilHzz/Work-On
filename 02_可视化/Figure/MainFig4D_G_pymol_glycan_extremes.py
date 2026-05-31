@@ -272,10 +272,17 @@ def pymol_jobs(
             "species_color": hex_to_rgb01(SPECIES_COLORS.get(model.species, "#777777")),
             "rg_color": hex_to_rgb01(SPECIES_COLORS.get(model.species, "#D69200")) if use_species_rg_color else [1.0, 0.58, 0.04],
             "glycan_center": [float(x) for x in model.glycan_atoms.mean(axis=0)],
+            "protein_ca_center": [float(x) for x in model.ca_atoms.mean(axis=0)],
             "glycan_radius": float(np.max(np.linalg.norm(model.glycan_atoms - model.glycan_atoms.mean(axis=0), axis=1))),
             "glycan_rg": float(np.linalg.norm(model.metrics["Rg turn"][1] - model.metrics["Rg turn"][0])),
             "overview_turns": [-24, -12, -80] if model.role.startswith("Gallus low-Rg") else ([-24, -12, -78] if model.role.startswith("Compact") else [-24, -12, 10]),
             "is_focus": index in focus_indices,
+            "minimal_points": {
+                "point_1": [float(x) for x in model.metrics["End-to-End"][0]],
+                "point_2": [float(x) for x in model.metrics["End-to-End"][1]],
+                "point_3": [float(x) for x in model.glycan_atoms.mean(axis=0)],
+                "point_4": [float(x) for x in model.ca_atoms.mean(axis=0)],
+            },
             "metrics": [
                 {
                     "name": name,
@@ -470,28 +477,26 @@ def write_pymol_script(jobs: list[dict]) -> Path:
 
         def render_focus_markers(job):
             marker_colors = {
-                'End-to-End': {'start': [1.0, 0.0, 0.0], 'end': [0.0, 1.0, 0.0]},
-                'Glycan-Protein': {'start': [0.0, 0.0, 1.0], 'end': [1.0, 0.0, 1.0]},
-                'Glycan-Backbone': {'start': [0.0, 1.0, 1.0], 'end': [1.0, 1.0, 0.0]},
+                'point_1': [1.0, 0.0, 0.0],
+                'point_2': [0.0, 1.0, 0.0],
+                'point_3': [1.0, 0.5, 0.0],
+                'point_4': [0.0, 0.0, 1.0],
             }
             cmd.hide('everything')
             cmd.delete('rg_centroid')
             cmd.delete('rg_shell')
             cmd.bg_color('black')
             cmd.set('opaque_background', 1)
-            for metric in job['metrics']:
-                name = metric['name']
+            for name, point in job.get('minimal_points', {}).items():
                 if name not in marker_colors:
                     continue
-                safe = name.replace('-', '_').replace(' ', '_')
-                for end_name in ['start', 'end']:
-                    color_name = safe + '_' + end_name + '_marker_color'
-                    object_name = safe + '_' + end_name + '_marker'
-                    set_color(color_name, marker_colors[name][end_name])
-                    cmd.pseudoatom(object_name, pos=metric[end_name], vdw=0.65)
-                    cmd.show('spheres', object_name)
-                    cmd.color(color_name, object_name)
-                    cmd.set('sphere_transparency', 0.0, object_name)
+                color_name = name + '_marker_color'
+                object_name = name + '_marker'
+                set_color(color_name, marker_colors[name])
+                cmd.pseudoatom(object_name, pos=point, vdw=0.72)
+                cmd.show('spheres', object_name)
+                cmd.color(color_name, object_name)
+                cmd.set('sphere_transparency', 0.0, object_name)
             cmd.png(job['marker_out'], width=2200, height=1800, dpi=300, ray=1)
 
         def setup_scene(job):
@@ -759,12 +764,10 @@ def marker_masks(data: np.ndarray) -> dict[str, np.ndarray]:
     green = data[:, :, 1]
     blue = data[:, :, 2]
     return {
-        "E_start": (red > 120) & (green < 95) & (blue < 95),
-        "E_end": (green > 120) & (red < 95) & (blue < 95),
-        "F_start": (blue > 120) & (red < 95) & (green < 95),
-        "F_end": (red > 120) & (blue > 120) & (green < 120),
-        "G_start": (green > 120) & (blue > 120) & (red < 120),
-        "G_end": (red > 120) & (green > 120) & (blue < 120),
+        "point_1": (red > 150) & (green < 95) & (blue < 95),
+        "point_2": (green > 150) & (red < 95) & (blue < 95),
+        "point_3": (red > 150) & (green > 70) & (green < 210) & (blue < 95),
+        "point_4": (blue > 150) & (red < 95) & (green < 95),
     }
 
 
@@ -796,7 +799,38 @@ def label_near_line(start: tuple[int, int], end: tuple[int, int], along: float, 
 
 
 def annotate_focus_panel(panel: Image.Image, points: dict[str, tuple[int, int]]) -> Image.Image:
-    return panel.convert("RGB")
+    canvas = panel.convert("RGBA")
+    draw = ImageDraw.Draw(canvas)
+    label_font = read_font(26, bold=True)
+    point_colors = {
+        "point_1": "#D62828",
+        "point_2": "#2A9D46",
+        "point_3": "#F4A100",
+        "point_4": "#2060D8",
+    }
+    label_offsets = {
+        "point_1": (-34, 18),
+        "point_2": (18, -34),
+        "point_3": (18, -34),
+        "point_4": (18, 14),
+    }
+    for name in ["point_1", "point_2", "point_3", "point_4"]:
+        if name not in points:
+            continue
+        x, y = points[name]
+        radius = 14
+        fill = point_colors[name]
+        draw.ellipse((x - radius, y - radius, x + radius, y + radius), fill=fill, outline="#111111", width=3)
+        dx, dy = label_offsets[name]
+        tx, ty = x + dx, y + dy
+        text = name.split("_")[-1]
+        tw, th = text_size(draw, text, label_font)
+        pad_x = 9
+        pad_y = 4
+        draw.rounded_rectangle((tx - pad_x, ty - pad_y, tx + tw + pad_x, ty + th + pad_y), radius=10,
+                               fill=(255, 255, 255, 225), outline=fill, width=2)
+        draw.text((tx, ty), text, fill="#111111", font=label_font)
+    return canvas.convert("RGB")
 
 
 def panel_with_title(job: dict) -> Image.Image:

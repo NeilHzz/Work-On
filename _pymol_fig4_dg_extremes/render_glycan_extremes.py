@@ -175,28 +175,26 @@ def add_focus_metrics(job):
 
 def render_focus_markers(job):
     marker_colors = {
-        'End-to-End': {'start': [1.0, 0.0, 0.0], 'end': [0.0, 1.0, 0.0]},
-        'Glycan-Protein': {'start': [0.0, 0.0, 1.0], 'end': [1.0, 0.0, 1.0]},
-        'Glycan-Backbone': {'start': [0.0, 1.0, 1.0], 'end': [1.0, 1.0, 0.0]},
+        'point_1': [1.0, 0.0, 0.0],
+        'point_2': [0.0, 1.0, 0.0],
+        'point_3': [1.0, 0.5, 0.0],
+        'point_4': [0.0, 0.0, 1.0],
     }
     cmd.hide('everything')
     cmd.delete('rg_centroid')
     cmd.delete('rg_shell')
     cmd.bg_color('black')
     cmd.set('opaque_background', 1)
-    for metric in job['metrics']:
-        name = metric['name']
+    for name, point in job.get('minimal_points', {}).items():
         if name not in marker_colors:
             continue
-        safe = name.replace('-', '_').replace(' ', '_')
-        for end_name in ['start', 'end']:
-            color_name = safe + '_' + end_name + '_marker_color'
-            object_name = safe + '_' + end_name + '_marker'
-            set_color(color_name, marker_colors[name][end_name])
-            cmd.pseudoatom(object_name, pos=metric[end_name], vdw=0.65)
-            cmd.show('spheres', object_name)
-            cmd.color(color_name, object_name)
-            cmd.set('sphere_transparency', 0.0, object_name)
+        color_name = name + '_marker_color'
+        object_name = name + '_marker'
+        set_color(color_name, marker_colors[name])
+        cmd.pseudoatom(object_name, pos=point, vdw=0.72)
+        cmd.show('spheres', object_name)
+        cmd.color(color_name, object_name)
+        cmd.set('sphere_transparency', 0.0, object_name)
     cmd.png(job['marker_out'], width=2200, height=1800, dpi=300, ray=1)
 
 def setup_scene(job):
