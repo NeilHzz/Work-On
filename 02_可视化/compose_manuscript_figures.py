@@ -661,26 +661,31 @@ def compose_fig4():
         draw.text((x2 + swatch_w + 24, y - 4), "Glycan-Shielded", fill=text_color, font=font)
         return legend
 
-    abc_row = compose_centered_row([
+    ab_row = compose_centered_row([
         make_panel("Fig5B.png", "A", ncols=3, cover_old=True, cover_px=(120, 130)),
         make_panel("Fig5C.png", "B", ncols=3, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5D.png", "C", ncols=3, cover_old=True, cover_px=(120, 130)),
     ])
 
     dg_context_row = compose_centered_row([
         make_panel("Fig4D-G_Gallus.png", ncols=2, trim=True, max_h=1040),
         make_panel("Fig4D-G_Columba.png", ncols=2, trim=True, max_h=1040),
     ])
-    cf_gi_plot_row = compose_centered_row([
+    cf_plot_row = compose_centered_row([
         make_panel("Fig5E.png", "C", ncols=4, cover_old=True, cover_px=(120, 130)),
         make_panel("Fig5H.png", "D", ncols=4, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5I.png", "E", ncols=4, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5K.png", "F", ncols=4, cover_old=True, cover_px=(120, 130)),
     ])
 
-    de_hj_plot_row = compose_centered_row([
-        make_panel("Fig5F.png", "G", ncols=4, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5G.png", "H", ncols=4, cover_old=True, cover_px=(120, 130)),
+    de_plot_row = compose_centered_row([
+        make_panel("Fig5F.png", "E", ncols=4, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig5G.png", "F", ncols=4, cover_old=True, cover_px=(120, 130)),
+    ])
+
+    gi_plot_row = compose_centered_row([
+        make_panel("Fig5I.png", "G", ncols=4, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig5K.png", "H", ncols=4, cover_old=True, cover_px=(120, 130)),
+    ])
+
+    hj_plot_row = compose_centered_row([
         make_panel("Fig5J.png", "I", ncols=4, cover_old=True, cover_px=(120, 130)),
         make_panel("Fig5L.png", "J", ncols=4, cover_old=True, cover_px=(120, 130)),
     ])
@@ -704,14 +709,16 @@ def compose_fig4():
     paste(final_block, final_row, 0, final_legend.height + sub_gap)
 
     rows = [
-        abc_row,
+        ab_row,
         dg_context_row,
+        cf_plot_row,
+        de_plot_row,
         hk_context_row,
-        cf_gi_plot_row,
-        de_hj_plot_row,
+        gi_plot_row,
+        hj_plot_row,
         final_block,
     ]
-    gaps = [group_gap, sub_gap, group_gap, sub_gap, group_gap]
+    gaps = [group_gap, sub_gap, sub_gap, group_gap, sub_gap, sub_gap, group_gap]
     total_h = 2 * MARGIN + sum(row.height for row in rows) + sum(gaps)
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
 
