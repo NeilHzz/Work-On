@@ -255,7 +255,6 @@ def scene_overview(job):
     if job.get('is_focus'):
         zoom_fixed_focus_window(job)
         cmd.clip('slab', 125)
-        add_focus_rg_camera_arrow(job, angle_degrees=92.0)
     else:
         cmd.zoom('oval and chain A', buffer=46, complete=1)
         cmd.clip('slab', 420)
