@@ -801,18 +801,12 @@ def label_near_line(start: tuple[int, int], end: tuple[int, int], along: float, 
 def annotate_focus_panel(panel: Image.Image, points: dict[str, tuple[int, int]]) -> Image.Image:
     canvas = panel.convert("RGBA")
     draw = ImageDraw.Draw(canvas)
-    label_font = read_font(26, bold=True)
+    label_font = read_font(24, bold=True)
     point_colors = {
         "point_1": "#D62828",
         "point_2": "#2A9D46",
         "point_3": "#F4A100",
         "point_4": "#2060D8",
-    }
-    label_offsets = {
-        "point_1": (-34, 18),
-        "point_2": (18, -34),
-        "point_3": (18, -34),
-        "point_4": (18, 14),
     }
     for name in ["point_1", "point_2", "point_3", "point_4"]:
         if name in points:
@@ -822,18 +816,11 @@ def annotate_focus_panel(panel: Image.Image, points: dict[str, tuple[int, int]])
             draw.line((x, y - 56, x, y - 12), fill=point_colors[name], width=4)
         else:
             continue
-        radius = 14
+        radius = 16
         fill = point_colors[name]
         draw.ellipse((x - radius, y - radius, x + radius, y + radius), fill=fill, outline="#111111", width=3)
-        dx, dy = label_offsets[name]
-        tx, ty = x + dx, y + dy
         text = name.split("_")[-1]
-        tw, th = text_size(draw, text, label_font)
-        pad_x = 9
-        pad_y = 4
-        draw.rounded_rectangle((tx - pad_x, ty - pad_y, tx + tw + pad_x, ty + th + pad_y), radius=10,
-                               fill=(255, 255, 255, 225), outline=fill, width=2)
-        draw.text((tx, ty), text, fill="#111111", font=label_font)
+        draw.text((x, y - 1), text, fill="#FFFFFF", font=label_font, anchor="mm")
     return canvas.convert("RGB")
 
 
