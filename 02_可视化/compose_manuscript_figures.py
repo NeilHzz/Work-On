@@ -571,7 +571,7 @@ def compose_fig2():
     content_h = max(left_block.height, E.height)
     content = Image.new("RGBA", (inner_w, content_h), (255, 255, 255, 0))
     paste(content, left_block, 0, 0)
-    paste(content, E, left_w + fig2_gap, 0)
+    paste(content, E, left_w + fig2_gap, max(0, (content_h - E.height) // 2))
 
     total_h = 2 * fig2_margin + content.height
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
