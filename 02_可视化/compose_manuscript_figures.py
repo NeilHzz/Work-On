@@ -573,13 +573,14 @@ def compose_fig2():
     x1 = MARGIN
     x2 = x1 + col1_w + fig2_gap
     x3 = x2 + col2_w + fig2_gap
+    e_x_shift = 24
     y1 = MARGIN
     y2 = y1 + row1_h + fig2_gap
     paste(canvas, A, x1, y1)
     paste(canvas, B, x2, y1)
     paste(canvas, D, x1, y2)
     paste(canvas, C, x2, y2)
-    paste(canvas, E, x3, y1)
+    paste(canvas, E, x3 + e_x_shift, y1)
     save_fig(canvas, "Fig2_composed")
 
 
