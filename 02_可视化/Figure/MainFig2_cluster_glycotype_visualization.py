@@ -600,7 +600,7 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
     legend = ax.legend(
         loc="center left",
         bbox_to_anchor=(1.02, 0.50),
-        ncol=2,
+        ncol=1,
         frameon=False,
         fontsize=9.4,
         handlelength=1.0,
