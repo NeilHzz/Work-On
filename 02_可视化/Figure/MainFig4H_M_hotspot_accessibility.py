@@ -171,6 +171,89 @@ def draw_violin_panel(ax, groups_dict, ylabel, title, panel_label,
     ax.set_ylim(y_min - y_range * ypad_bot, letter_y + y_range * 0.20)
 
 
+def draw_box_jitter_panel(ax, groups_dict, ylabel, title):
+    positions = list(range(len(SPECIES_ORDER)))
+    data_lists = [groups_dict[species] for species in SPECIES_ORDER]
+    all_vals = np.concatenate(data_lists)
+    y_min, y_max = np.nanmin(all_vals), np.nanmax(all_vals)
+    y_range = max(y_max - y_min, 1e-9)
+
+    res = duncan_mrt(data_lists, SPECIES_ORDER)
+    box = ax.boxplot(
+        data_lists,
+        positions=positions,
+        widths=0.48,
+        patch_artist=True,
+        showfliers=False,
+        medianprops=dict(color='#222222', linewidth=1.7),
+        whiskerprops=dict(color='#555555', linewidth=1.2),
+        capprops=dict(color='#555555', linewidth=1.2),
+    )
+    for patch, species in zip(box['boxes'], SPECIES_ORDER):
+        patch.set_facecolor(SPECIES_COLOR[species])
+        patch.set_alpha(0.45)
+        patch.set_edgecolor(SPECIES_COLOR[species])
+        patch.set_linewidth(1.3)
+
+    rng = np.random.default_rng(42)
+    for index, species in enumerate(SPECIES_ORDER):
+        vals = groups_dict[species]
+        shown = vals
+        if len(vals) > 140:
+            shown = rng.choice(vals, size=140, replace=False)
+        jitter = rng.uniform(-0.10, 0.10, len(shown))
+        ax.scatter(index + jitter, shown, s=12,
+                   color=SPECIES_COLOR[species], alpha=0.72,
+                   edgecolors='none', zorder=3)
+
+    letter_y = y_max + y_range * 0.05
+    for index, species in enumerate(SPECIES_ORDER):
+        label = res['letters'].get(species, '')
+        ax.text(index, letter_y, label, ha='center', va='bottom',
+                fontsize=STAT_FS, fontweight='bold', color='#333')
+
+    n_labels = [f'\n(n={len(groups_dict[species])})' for species in SPECIES_ORDER]
+    ax.set_xticks(positions)
+    ax.set_xticklabels([species + n for species, n in zip(SPECIES_ORDER, n_labels)],
+                       fontsize=TICK_FS)
+    style_panel_axes(ax, ylabel, f"{title}\n{format_p_value(res['p_anova'])}")
+    ax.set_ylim(y_min - y_range * 0.04, letter_y + y_range * 0.18)
+
+
+def draw_dot_ci_panel(ax, groups_dict, ylabel, title):
+    positions = np.arange(len(SPECIES_ORDER))
+    data_lists = [groups_dict[species] for species in SPECIES_ORDER]
+    all_vals = np.concatenate(data_lists)
+    y_min, y_max = np.nanmin(all_vals), np.nanmax(all_vals)
+    y_range = max(y_max - y_min, 1e-9)
+    means = np.array([np.mean(values) for values in data_lists])
+    ci95 = np.array([
+        1.96 * np.std(values, ddof=1) / np.sqrt(len(values)) if len(values) > 1 else 0.0
+        for values in data_lists
+    ])
+
+    res = duncan_mrt(data_lists, SPECIES_ORDER)
+    for index, species in enumerate(SPECIES_ORDER):
+        ax.errorbar(index, means[index], yerr=ci95[index], fmt='o',
+                    markersize=10, markerfacecolor=SPECIES_COLOR[species],
+                    markeredgecolor='#222222', markeredgewidth=0.9,
+                    ecolor='#333333', elinewidth=1.5, capsize=6, zorder=4)
+
+    letter_y = max(means + ci95) + y_range * 0.08
+    for index, species in enumerate(SPECIES_ORDER):
+        label = res['letters'].get(species, '')
+        ax.text(index, letter_y, label, ha='center', va='bottom',
+                fontsize=STAT_FS, fontweight='bold', color='#333')
+
+    n_labels = [f'\n(n={len(groups_dict[species])})' for species in SPECIES_ORDER]
+    ax.set_xticks(positions)
+    ax.set_xticklabels([species + n for species, n in zip(SPECIES_ORDER, n_labels)],
+                       fontsize=TICK_FS)
+    style_panel_axes(ax, ylabel, f"{title}\n{format_p_value(res['p_anova'])}")
+    ax.set_xlim(-0.45, len(SPECIES_ORDER) - 0.55)
+    ax.set_ylim(y_min - y_range * 0.08, letter_y + y_range * 0.20)
+
+
 # ── 堆叠柱状图 ────────────────────────────────────────────────────────────────
 def draw_stacked_bar(ax, df, show_legend=True):
     means, stds, shielded_means = {}, {}, {}
@@ -335,11 +418,22 @@ def main():
          r'Net Accessible Ca$^{2+}$ Hotspots', r'Net Accessible Ca$^{2+}$ Hotspots'),
     ]
 
-    # Panels A-D: individual violin plots
+    panel_drawers = {
+        'A': draw_box_jitter_panel,
+        'B': draw_dot_ci_panel,
+        'C': draw_dot_ci_panel,
+        'D': draw_violin_panel,
+    }
+
+    # Panels A-D: semantic plot styles, with unchanged panel size and filenames
     for lbl, gd, ylabel, title in panels_violin:
         fig, ax = plt.subplots(figsize=PANEL_FIGSIZE)
         fig.patch.set_facecolor('white')
-        draw_violin_panel(ax, gd, ylabel, title, lbl)
+        drawer = panel_drawers[lbl]
+        if drawer is draw_violin_panel:
+            drawer(ax, gd, ylabel, title, lbl)
+        else:
+            drawer(ax, gd, ylabel, title)
         fig.subplots_adjust(**PANEL_ADJUST)
         save_panel(fig, f'Fig5{chr(ord("I") + ord(lbl) - ord("A"))}')
         plt.close(fig)

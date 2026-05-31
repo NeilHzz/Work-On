@@ -171,6 +171,58 @@ def violin_one(ax, metric, ylabel, subtitle=''):
     style_panel_axes(ax, ylabel, title_str)
 
 
+def box_jitter_one(ax, metric, ylabel, subtitle=''):
+    data = [detail.loc[detail.species == species, metric].dropna().values
+            for species in SPECIES_ORDER]
+    colors = [SPECIES_COLORS[species] for species in SPECIES_ORDER]
+    res = duncan_mrt(data, SPECIES_ORDER)
+
+    box = ax.boxplot(
+        data,
+        positions=range(len(SPECIES_ORDER)),
+        widths=0.48,
+        patch_artist=True,
+        showfliers=False,
+        medianprops=dict(color='#222222', linewidth=1.7),
+        whiskerprops=dict(color='#555555', linewidth=1.2),
+        capprops=dict(color='#555555', linewidth=1.2),
+    )
+    for patch, color in zip(box['boxes'], colors):
+        patch.set_facecolor(color)
+        patch.set_alpha(0.45)
+        patch.set_edgecolor(color)
+        patch.set_linewidth(1.3)
+
+    rng = np.random.default_rng(42)
+    for index, (species, values) in enumerate(zip(SPECIES_ORDER, data)):
+        shown = values
+        if len(values) > 140:
+            shown = rng.choice(values, size=140, replace=False)
+        jitter = rng.uniform(-0.10, 0.10, size=len(shown))
+        ax.scatter(index + jitter, shown, s=10,
+                   color=SPECIES_COLORS[species], alpha=0.72,
+                   linewidths=0, zorder=3)
+
+    ax.set_xticks(range(len(SPECIES_ORDER)))
+    ax.set_xticklabels([f'{species}\n(n={len(values)})'
+                        for species, values in zip(SPECIES_ORDER, data)],
+                       fontsize=TICK_FS)
+
+    ymax = max(values.max() for values in data if len(values))
+    ymin = min(values.min() for values in data if len(values))
+    span = ymax - ymin
+    letter_y = ymax + span * 0.05
+    for index, species in enumerate(SPECIES_ORDER):
+        label = res['letters'].get(species, '')
+        ax.text(index, letter_y, label, ha='center', va='bottom',
+                fontsize=STAT_FS, fontweight='bold', color='#333')
+    ax.set_ylim(ymin - span * 0.04, letter_y + span * 0.18)
+    title_str = (f"{subtitle}\n{format_p_value(res['p_anova'])}"
+                 if subtitle else
+                 format_p_value(res['p_anova']))
+    style_panel_axes(ax, ylabel, title_str)
+
+
 # ─── 保存工具函数 ────────────────────────────────────────────────────────
 
 DPI_OUT = 300
@@ -196,7 +248,10 @@ panel_labels  = list('ABCD')
 for mk, ml, lbl in zip(metric_keys, metric_labels, panel_labels):
     fig, ax = plt.subplots(figsize=PANEL_FIGSIZE)
     fig.patch.set_facecolor('white')
-    violin_one(ax, mk, ml, subtitle=SUBTITLES.get(mk, ''))
+    if mk == 'glycan_rg':
+        violin_one(ax, mk, ml, subtitle=SUBTITLES.get(mk, ''))
+    else:
+        box_jitter_one(ax, mk, ml, subtitle=SUBTITLES.get(mk, ''))
     fig.subplots_adjust(**PANEL_ADJUST)
     save_panel(fig, f'Fig5{chr(ord("E") + ord(lbl) - ord("A"))}')
     plt.close(fig)
