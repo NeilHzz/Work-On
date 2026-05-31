@@ -412,37 +412,42 @@ def plot_cluster_consistency(
 
     metric_keys = ["glycoproteins", "glycosites", "glycan_compositions"]
     metric_labels = ["Glycoproteins", "Glycosites", "Glycan\ncompositions"]
-    x = np.arange(len(metric_keys), dtype=float)
-    bar_width = 0.22
-    max_value = overview_df[metric_keys].to_numpy().max()
-    for index, species in enumerate(SPECIES_ORDER):
-        values = overview_df.set_index("species").loc[species, metric_keys].to_numpy(dtype=float)
-        bars = ax_left.bar(
-            x + (index - 1) * bar_width,
-            values,
-            width=bar_width,
-            color=SPECIES_COLORS[species],
-            edgecolor="white",
-            linewidth=0.8,
-            label=species,
-        )
-        for bar, value in zip(bars, values):
+    overview_matrix = overview_df.set_index("species").reindex(SPECIES_ORDER)
+    y = np.arange(len(metric_keys), dtype=float)
+    max_value = overview_matrix[metric_keys].to_numpy().max()
+    for row_index, metric_key in enumerate(metric_keys):
+        values = overview_matrix[metric_key].to_numpy(dtype=float)
+        ax_left.hlines(y[row_index], values.min(), values.max(), color="#D9D9D9", linewidth=1.0, zorder=1)
+        for species, value in zip(SPECIES_ORDER, values):
+            ax_left.scatter(
+                value,
+                y[row_index],
+                s=64,
+                color=SPECIES_COLORS[species],
+                edgecolors="white",
+                linewidths=0.8,
+                zorder=3,
+                label=species if row_index == 0 else None,
+            )
             ax_left.text(
-                bar.get_x() + bar.get_width() / 2,
-                bar.get_height() + max(max_value * 0.015, 1.2),
+                value,
+                y[row_index] - 0.16,
                 f"{int(value)}",
                 ha="center",
                 va="bottom",
-                fontsize=8.3,
+                fontsize=8.1,
             )
-    ax_left.set_xticks(x)
-    ax_left.set_xticklabels(metric_labels, fontsize=8.9)
-    ax_left.set_ylabel("Count", fontsize=10.5)
+    ax_left.set_yticks(y)
+    ax_left.set_yticklabels(metric_labels, fontsize=8.9)
+    ax_left.set_xlabel("Count", fontsize=10.5)
     ax_left.set_title("Coverage", fontsize=11.2, pad=6)
-    ax_left.grid(axis="y", color="#D9D9D9", linewidth=0.6)
+    ax_left.grid(axis="x", color="#E2E2E2", linewidth=0.6)
     ax_left.set_axisbelow(True)
-    ax_left.set_ylim(0, max_value * 1.16)
+    ax_left.set_xlim(0, max_value * 1.10)
+    ax_left.set_ylim(-0.55, len(metric_keys) - 0.45)
+    ax_left.invert_yaxis()
     clean_axes(ax_left)
+    ax_left.spines["left"].set_visible(False)
     legend = ax_left.legend(
         loc="upper center",
         bbox_to_anchor=(0.5, 1.10),
