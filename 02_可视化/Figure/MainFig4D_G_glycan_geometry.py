@@ -223,6 +223,120 @@ def box_jitter_one(ax, metric, ylabel, subtitle=''):
     style_panel_axes(ax, ylabel, title_str)
 
 
+def raincloud_one(ax, metric, ylabel, subtitle=''):
+    data = [detail.loc[detail.species == species, metric].dropna().values
+            for species in SPECIES_ORDER]
+    colors = [SPECIES_COLORS[species] for species in SPECIES_ORDER]
+    res = duncan_mrt(data, SPECIES_ORDER)
+    positions = np.arange(len(SPECIES_ORDER))
+
+    parts = ax.violinplot(data, positions=positions,
+                          showmedians=False, showextrema=False, widths=0.72)
+    for index, (body, color) in enumerate(zip(parts['bodies'], colors)):
+        vertices = body.get_paths()[0].vertices
+        vertices[:, 0] = np.minimum(vertices[:, 0], positions[index])
+        body.set_facecolor(color)
+        body.set_alpha(0.72)
+        body.set_edgecolor('none')
+
+    box = ax.boxplot(
+        data,
+        positions=positions + 0.12,
+        widths=0.18,
+        patch_artist=True,
+        showfliers=False,
+        medianprops=dict(color='#222222', linewidth=1.4),
+        whiskerprops=dict(color='#555555', linewidth=1.0),
+        capprops=dict(color='#555555', linewidth=1.0),
+    )
+    for patch, color in zip(box['boxes'], colors):
+        patch.set_facecolor('white')
+        patch.set_alpha(0.88)
+        patch.set_edgecolor(color)
+        patch.set_linewidth(1.2)
+
+    rng = np.random.default_rng(42)
+    for index, (species, values) in enumerate(zip(SPECIES_ORDER, data)):
+        shown = values if len(values) <= 150 else rng.choice(values, size=150, replace=False)
+        jitter = rng.uniform(0.17, 0.34, size=len(shown))
+        ax.scatter(index + jitter, shown, s=10,
+                   color=SPECIES_COLORS[species], alpha=0.66,
+                   linewidths=0, zorder=3)
+
+    ax.set_xticks(positions)
+    ax.set_xticklabels([f'{species}\n(n={len(values)})'
+                        for species, values in zip(SPECIES_ORDER, data)],
+                       fontsize=TICK_FS)
+
+    ymax = max(values.max() for values in data if len(values))
+    ymin = min(values.min() for values in data if len(values))
+    span = ymax - ymin
+    letter_y = ymax + span * 0.05
+    for index, species in enumerate(SPECIES_ORDER):
+        label = res['letters'].get(species, '')
+        ax.text(index, letter_y, label, ha='center', va='bottom',
+                fontsize=STAT_FS, fontweight='bold', color='#333')
+    ax.set_xlim(-0.55, len(SPECIES_ORDER) - 0.45)
+    ax.set_ylim(ymin - span * 0.04, letter_y + span * 0.18)
+    title_str = (f"{subtitle}\n{format_p_value(res['p_anova'])}"
+                 if subtitle else
+                 format_p_value(res['p_anova']))
+    style_panel_axes(ax, ylabel, title_str)
+
+
+def half_violin_box_one(ax, metric, ylabel, subtitle=''):
+    data = [detail.loc[detail.species == species, metric].dropna().values
+            for species in SPECIES_ORDER]
+    colors = [SPECIES_COLORS[species] for species in SPECIES_ORDER]
+    res = duncan_mrt(data, SPECIES_ORDER)
+    positions = np.arange(len(SPECIES_ORDER))
+
+    parts = ax.violinplot(data, positions=positions,
+                          showmedians=False, showextrema=False, widths=0.72)
+    for index, (body, color) in enumerate(zip(parts['bodies'], colors)):
+        vertices = body.get_paths()[0].vertices
+        vertices[:, 0] = np.minimum(vertices[:, 0], positions[index])
+        body.set_facecolor(color)
+        body.set_alpha(0.82)
+        body.set_edgecolor('none')
+
+    box = ax.boxplot(
+        data,
+        positions=positions + 0.12,
+        widths=0.22,
+        patch_artist=True,
+        showfliers=False,
+        medianprops=dict(color='#222222', linewidth=1.5),
+        whiskerprops=dict(color='#555555', linewidth=1.1),
+        capprops=dict(color='#555555', linewidth=1.1),
+    )
+    for patch, color in zip(box['boxes'], colors):
+        patch.set_facecolor('white')
+        patch.set_alpha(0.90)
+        patch.set_edgecolor(color)
+        patch.set_linewidth(1.3)
+
+    ax.set_xticks(positions)
+    ax.set_xticklabels([f'{species}\n(n={len(values)})'
+                        for species, values in zip(SPECIES_ORDER, data)],
+                       fontsize=TICK_FS)
+
+    ymax = max(values.max() for values in data if len(values))
+    ymin = min(values.min() for values in data if len(values))
+    span = ymax - ymin
+    letter_y = ymax + span * 0.05
+    for index, species in enumerate(SPECIES_ORDER):
+        label = res['letters'].get(species, '')
+        ax.text(index, letter_y, label, ha='center', va='bottom',
+                fontsize=STAT_FS, fontweight='bold', color='#333')
+    ax.set_xlim(-0.55, len(SPECIES_ORDER) - 0.45)
+    ax.set_ylim(ymin - span * 0.04, letter_y + span * 0.18)
+    title_str = (f"{subtitle}\n{format_p_value(res['p_anova'])}"
+                 if subtitle else
+                 format_p_value(res['p_anova']))
+    style_panel_axes(ax, ylabel, title_str)
+
+
 # ─── 保存工具函数 ────────────────────────────────────────────────────────
 
 DPI_OUT = 300
@@ -249,9 +363,13 @@ for mk, ml, lbl in zip(metric_keys, metric_labels, panel_labels):
     fig, ax = plt.subplots(figsize=PANEL_FIGSIZE)
     fig.patch.set_facecolor('white')
     if mk == 'glycan_rg':
+        raincloud_one(ax, mk, ml, subtitle=SUBTITLES.get(mk, ''))
+    elif mk in {'glycan_end2end', 'glycan_dist'}:
         violin_one(ax, mk, ml, subtitle=SUBTITLES.get(mk, ''))
+    elif mk == 'glycan_min_dist_to_ca':
+        raincloud_one(ax, mk, ml, subtitle=SUBTITLES.get(mk, ''))
     else:
-        box_jitter_one(ax, mk, ml, subtitle=SUBTITLES.get(mk, ''))
+        half_violin_box_one(ax, mk, ml, subtitle=SUBTITLES.get(mk, ''))
     fig.subplots_adjust(**PANEL_ADJUST)
     save_panel(fig, f'Fig5{chr(ord("E") + ord(lbl) - ord("A"))}')
     plt.close(fig)
