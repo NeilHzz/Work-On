@@ -528,32 +528,62 @@ def compose_fig2():
             x += panel_img.width + GAP
         return row
 
-    # Row 1: keep A dominant and demote B to a smaller support module.
-    A = panel("Fig2.png", "A", target_w=int(inner_w * 0.68), trim=False)
-    B = panel("Fig2_coverage_overview.png", "B", target_w=int(inner_w * 0.17), trim=True)
-    row1_h = A.height
-    row1 = Image.new("RGBA", (inner_w, row1_h), (255, 255, 255, 0))
-    paste(row1, A, 0, 0)
-    paste(row1, B, inner_w - B.width, max(0, int(row1_h * 0.08)))
+    def _load_panel_raw(source, trim):
+        source_path = source if isinstance(source, Path) else PNG / source
+        raw = load_img(source_path)
+        if raw is None:
+            raw = make_placeholder(1200, 900, f"Panel\n{source_path.name}")
+        return trim_white(raw) if trim else raw
 
-    # Row 2: shared-core JS (C), composition (D), and ortholog chord (E).
-    row2 = fit_row(
-        [
-            ("Fig2_shared_core_js.png", "C", True),
-            ("Fig2_species_glycotype_proportion.png", "D", True),
-            (FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", True),
-        ],
-        inner_w,
-    )
+    raw_a = _load_panel_raw("Fig2.png", False)
+    raw_b = _load_panel_raw("Fig2_coverage_overview.png", True)
+    raw_c = _load_panel_raw("Fig2_shared_core_js.png", True)
+    raw_d = _load_panel_raw("Fig2_species_glycotype_proportion.png", True)
+    raw_e = _load_panel_raw(FINAL_MAIN_SUBFIGS / "Fig3A.png", True)
 
-    rows = [row1, row2]
-    total_h = 2 * MARGIN + sum(row.height for row in rows) + GAP * (len(rows) - 1)
+    aspect_a = raw_a.width / raw_a.height
+    aspect_b = raw_b.width / raw_b.height
+    aspect_c = raw_c.width / raw_c.height
+    aspect_d = raw_d.width / raw_d.height
+    aspect_e = raw_e.width / raw_e.height
+
+    left_stack_factor = (1 / aspect_a) + (1 / aspect_d)
+    mid_stack_factor = (1 / aspect_b) + (1 / aspect_c)
+    mid_width_factor = left_stack_factor / mid_stack_factor
+    col1_w = int(round(
+        (inner_w - GAP * (2 + aspect_e))
+        / (1 + mid_width_factor + left_stack_factor * aspect_e)
+    ))
+    col2_w = int(round(col1_w * mid_width_factor))
+    left_col_h = int(round(col1_w * left_stack_factor + GAP))
+
+    A = panel("Fig2.png", "A", target_w=col1_w, trim=False)
+    D = panel("Fig2_species_glycotype_proportion.png", "D", target_w=col1_w, trim=True)
+    B = panel("Fig2_coverage_overview.png", "B", target_w=col2_w, trim=True)
+    C = panel("Fig2_shared_core_js.png", "C", target_w=col2_w, trim=True)
+    E = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", target_h=left_col_h, trim=True)
+
+    left_col_h = A.height + GAP + D.height
+    mid_col_h = B.height + GAP + C.height
+    total_h = 2 * MARGIN + max(left_col_h, mid_col_h, E.height)
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
 
-    y = MARGIN
-    for row in rows:
-        paste(canvas, row, MARGIN, y)
-        y += row.height + GAP
+    left_col = Image.new("RGBA", (col1_w, left_col_h), (255, 255, 255, 0))
+    paste(left_col, A, 0, 0)
+    paste(left_col, D, 0, A.height + GAP)
+
+    mid_col = Image.new("RGBA", (col2_w, mid_col_h), (255, 255, 255, 0))
+    paste(mid_col, B, 0, 0)
+    paste(mid_col, C, 0, B.height + GAP)
+
+    x1 = MARGIN
+    x2 = x1 + left_col.width + GAP
+    x3 = x2 + mid_col.width + GAP
+    content_h = max(left_col.height, mid_col.height, E.height)
+    y_top = MARGIN
+    paste(canvas, left_col, x1, y_top)
+    paste(canvas, mid_col, x2, y_top + max(0, (content_h - mid_col.height) // 2))
+    paste(canvas, E, x3, y_top + max(0, (content_h - E.height) // 2))
     save_fig(canvas, "Fig2_composed")
 
 
