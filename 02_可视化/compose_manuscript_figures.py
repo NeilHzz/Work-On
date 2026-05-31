@@ -540,6 +540,7 @@ def compose_fig2():
     raw_c = _load_panel_raw("Fig2_shared_core_js.png", True)
     raw_d = _load_panel_raw("Fig2_species_glycotype_proportion.png", True)
     raw_e = _load_panel_raw(FINAL_MAIN_SUBFIGS / "Fig3A.png", True)
+    fig2_gap = 36
 
     aspect_a = raw_a.width / raw_a.height
     aspect_b = raw_b.width / raw_b.height
@@ -552,11 +553,11 @@ def compose_fig2():
     # Keep three columns visually balanced instead of over-compressing the middle support column.
     mid_width_factor = min(left_stack_factor / mid_stack_factor, 0.45)
     col1_w = int(round(
-        (inner_w - GAP * (2 + aspect_e))
+        (inner_w - fig2_gap * (2 + aspect_e))
         / (1 + mid_width_factor + left_stack_factor * aspect_e)
     ))
     col2_w = int(round(col1_w * mid_width_factor))
-    left_col_h = int(round(col1_w * left_stack_factor + GAP))
+    left_col_h = int(round(col1_w * left_stack_factor + fig2_gap))
 
     A = panel("Fig2.png", "A", target_w=col1_w, trim=False)
     D = panel("Fig2_species_glycotype_proportion.png", "D", target_w=col1_w, trim=True)
@@ -564,27 +565,28 @@ def compose_fig2():
     C = panel("Fig2_shared_core_js.png", "C", target_w=col2_w, trim=True)
     E = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", target_h=left_col_h, trim=True)
 
-    left_col_h = A.height + GAP + D.height
-    mid_col_h = B.height + GAP + C.height
+    left_col_h = A.height + fig2_gap + D.height
+    mid_col_h = B.height + fig2_gap + C.height
     total_h = 2 * MARGIN + max(left_col_h, mid_col_h, E.height)
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
 
     left_col = Image.new("RGBA", (col1_w, left_col_h), (255, 255, 255, 0))
     paste(left_col, A, 0, 0)
-    paste(left_col, D, 0, A.height + GAP)
+    paste(left_col, D, 0, A.height + fig2_gap)
 
     mid_col = Image.new("RGBA", (col2_w, mid_col_h), (255, 255, 255, 0))
     paste(mid_col, B, 0, 0)
-    paste(mid_col, C, 0, B.height + GAP)
+    paste(mid_col, C, 0, B.height + fig2_gap)
 
-    x1 = MARGIN
-    x2 = x1 + left_col.width + GAP
-    x3 = x2 + mid_col.width + GAP
+    block_w = left_col.width + fig2_gap + mid_col.width + fig2_gap + E.width
+    x1 = MARGIN + max(0, (inner_w - block_w) // 2)
+    x2 = x1 + left_col.width + fig2_gap
+    x3 = x2 + mid_col.width + fig2_gap
     content_h = max(left_col.height, mid_col.height, E.height)
     y_top = MARGIN
     paste(canvas, left_col, x1, y_top)
-    paste(canvas, mid_col, x2, y_top + max(0, (content_h - mid_col.height) // 2))
-    paste(canvas, E, x3, y_top + max(0, (content_h - E.height) // 2))
+    paste(canvas, mid_col, x2, y_top)
+    paste(canvas, E, x3, y_top)
     save_fig(canvas, "Fig2_composed")
 
 
