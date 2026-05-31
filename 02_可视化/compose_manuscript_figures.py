@@ -538,39 +538,45 @@ def compose_fig2():
 
     fig2_gap = 42
 
-    # Row 1: A stands alone.
-    row1 = fit_row([
-        ("Fig2.png", "A", False),
-    ], inner_w)
+    # Fig 2 uses a two-column composition: A over B/C/D on the left, E on the right.
+    right_w = int((inner_w - fig2_gap) * 0.33)
+    left_w = inner_w - right_w - fig2_gap
+
+    A = panel("Fig2.png", "A", target_w=left_w, trim=False)
+    row1 = Image.new("RGBA", (left_w, A.height), (255, 255, 255, 0))
+    paste(row1, A, 0, 0)
 
     # Row 2: glycan-type composition sits on the left half, with the two compact panels on the right.
     d_raw = _load_panel_raw("Fig2_species_glycotype_proportion.png", trim=True)
-    d_w = int((inner_w - 2 * fig2_gap) * 0.5)
+    d_w = int((left_w - 2 * fig2_gap) * 0.5)
     d_target_h = max(1, int(d_raw.height * d_w / d_raw.width))
     D = panel("Fig2_species_glycotype_proportion.png", "B", target_w=d_w, trim=True)
     B = panel("Fig2_coverage_overview.png", "C", target_h=d_target_h, trim=True)
     C = panel("Fig2_shared_core_js.png", "D", target_h=d_target_h, trim=True)
     row2_h = max(D.height, B.height, C.height)
-    row2 = Image.new("RGBA", (inner_w, row2_h), (255, 255, 255, 0))
+    row2 = Image.new("RGBA", (left_w, row2_h), (255, 255, 255, 0))
     row2_total_w = D.width + B.width + C.width + 2 * fig2_gap
-    row2_x = max(0, (inner_w - row2_total_w) // 2)
+    row2_x = max(0, (left_w - row2_total_w) // 2)
     paste(row2, D, row2_x, 0)
     paste(row2, B, row2_x + D.width + fig2_gap, 0)
     paste(row2, C, row2_x + D.width + fig2_gap + B.width + fig2_gap, 0)
 
-    # Row 3: E stands alone and is centered for emphasis.
-    E = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", target_w=int(inner_w * 0.58), trim=True)
-    row3 = Image.new("RGBA", (inner_w, E.height), (255, 255, 255, 0))
-    paste(row3, E, max(0, (inner_w - E.width) // 2), 0)
+    left_block_h = row1.height + fig2_gap + row2.height
+    left_block = Image.new("RGBA", (left_w, left_block_h), (255, 255, 255, 0))
+    paste(left_block, row1, 0, 0)
+    paste(left_block, row2, 0, row1.height + fig2_gap)
 
-    rows = [row1, row2, row3]
-    total_h = 2 * fig2_margin + sum(row.height for row in rows) + fig2_gap * (len(rows) - 1)
+    E = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", target_w=right_w, trim=True)
+
+    content_h = max(left_block.height, E.height)
+    content = Image.new("RGBA", (inner_w, content_h), (255, 255, 255, 0))
+    paste(content, left_block, 0, 0)
+    paste(content, E, left_w + fig2_gap, 0)
+
+    total_h = 2 * fig2_margin + content.height
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
 
-    y = fig2_margin
-    for row in rows:
-        paste(canvas, row, fig2_margin, y)
-        y += row.height + fig2_gap
+    paste(canvas, content, fig2_margin, fig2_margin)
     save_fig(canvas, "Fig2_composed")
 
 
