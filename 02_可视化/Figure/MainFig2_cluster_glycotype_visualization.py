@@ -341,7 +341,7 @@ def build_summary_tables(
 def clean_axes(ax: plt.Axes) -> None:
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
-    ax.tick_params(axis="both", labelsize=11.0, length=3.4, width=0.8)
+    ax.tick_params(axis="both", labelsize=12.2, length=3.6, width=0.85)
 
 
 def draw_similarity_heatmap(
@@ -360,8 +360,8 @@ def draw_similarity_heatmap(
     ax.imshow(values, cmap=HEATMAP_CMAP, aspect="equal", vmin=heatmap_vmin, vmax=1.0)
     ax.set_xticks(np.arange(len(SPECIES_ORDER)))
     ax.set_yticks(np.arange(len(SPECIES_ORDER)))
-    ax.set_xticklabels(SPECIES_ORDER, fontsize=11.2)
-    ax.set_yticklabels(SPECIES_ORDER, fontsize=11.2)
+    ax.set_xticklabels(SPECIES_ORDER, fontsize=12.8)
+    ax.set_yticklabels(SPECIES_ORDER, fontsize=12.8)
     for tick, species in zip(ax.get_xticklabels(), SPECIES_ORDER):
         tick.set_color(SPECIES_COLORS[species])
         tick.set_fontweight("bold")
@@ -378,10 +378,10 @@ def draw_similarity_heatmap(
                 f"{value:.2f}",
                 ha="center",
                 va="center",
-                fontsize=10.2,
+                fontsize=11.8,
                 color=text_color,
             )
-    ax.set_title(title, fontsize=13.6, pad=7)
+    ax.set_title(title, fontsize=15.2, pad=8)
     ax.tick_params(axis="both", length=0)
     for spine in ax.spines.values():
         spine.set_visible(False)
@@ -396,7 +396,7 @@ def draw_similarity_heatmap(
         transform=ax.transAxes,
         ha="center",
         va="top",
-        fontsize=9.8,
+        fontsize=11.2,
     )
 
 
@@ -418,14 +418,14 @@ def draw_coverage_overview(ax_left: plt.Axes, overview_df: pd.DataFrame) -> None
                 0,
                 value,
                 color=SPECIES_COLORS[species],
-                linewidth=1.6,
+                linewidth=1.8,
                 alpha=0.9,
                 zorder=2,
             )
             ax_left.scatter(
                 value,
                 y_pos,
-                s=58,
+                s=74,
                 color=SPECIES_COLORS[species],
                 edgecolors="white",
                 linewidths=0.8,
@@ -438,11 +438,11 @@ def draw_coverage_overview(ax_left: plt.Axes, overview_df: pd.DataFrame) -> None
                 f"{int(value)}",
                 ha="left",
                 va="center",
-                fontsize=9.6,
+                fontsize=11.2,
             )
     ax_left.set_yticks(y)
-    ax_left.set_yticklabels(metric_labels, fontsize=10.8)
-    ax_left.set_xlabel("Count", fontsize=12.5)
+    ax_left.set_yticklabels(metric_labels, fontsize=12.6)
+    ax_left.set_xlabel("Count", fontsize=14.0)
     ax_left.grid(axis="x", color="#E2E2E2", linewidth=0.6)
     ax_left.set_axisbelow(True)
     ax_left.set_xlim(0, max_value * 1.22)
@@ -452,35 +452,35 @@ def draw_coverage_overview(ax_left: plt.Axes, overview_df: pd.DataFrame) -> None
     ax_left.spines["left"].set_visible(False)
     legend = ax_left.legend(
         loc="upper center",
-        bbox_to_anchor=(0.48, 1.06),
+        bbox_to_anchor=(0.49, 1.08),
         ncol=3,
         frameon=False,
-        fontsize=9.4,
-        handlelength=1.0,
-        handletextpad=0.35,
-        columnspacing=0.9,
+        fontsize=10.6,
+        handlelength=1.1,
+        handletextpad=0.4,
+        columnspacing=1.0,
     )
     for handle in legend.legend_handles:
         handle.set_linewidth(0)
 
 
 def plot_coverage_overview(overview_df: pd.DataFrame) -> None:
-    fig, ax = plt.subplots(figsize=(4.2, 3.7))
+    fig, ax = plt.subplots(figsize=(4.5, 3.95))
     draw_coverage_overview(ax, overview_df)
-    fig.subplots_adjust(top=0.90, bottom=0.16, left=0.26, right=0.98)
+    fig.subplots_adjust(top=0.90, bottom=0.18, left=0.28, right=0.99)
     save_fig(fig, "Fig2_coverage_overview")
     plt.close(fig)
 
 
 def plot_shared_core_similarity(similarity_df: pd.DataFrame, shared_group_count: int) -> None:
-    fig, ax = plt.subplots(figsize=(3.75, 3.75))
+    fig, ax = plt.subplots(figsize=(4.1, 4.1))
     draw_similarity_heatmap(
         ax,
         similarity_df,
         title="Shared-core JS",
         note=f"1 - Jensen-Shannon distance; n={shared_group_count}",
     )
-    fig.subplots_adjust(top=0.88, bottom=0.20, left=0.20, right=0.98)
+    fig.subplots_adjust(top=0.89, bottom=0.22, left=0.18, right=0.99)
     save_fig(fig, "Fig2_shared_core_js")
     plt.close(fig)
 
@@ -546,7 +546,7 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
     )
     proportions = matrix.div(matrix.sum(axis=1), axis=0) * 100
 
-    fig, ax = plt.subplots(figsize=(8.0, 4.2))
+    fig, ax = plt.subplots(figsize=(8.4, 4.55))
     y = np.arange(len(SPECIES_ORDER))
     left = np.zeros(len(SPECIES_ORDER))
     for glycan_type in GLYCAN_TYPES_ORDER:
@@ -572,19 +572,19 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
                     f"{value:.0f}%",
                     ha="center",
                     va="center",
-                    fontsize=10.0,
+                    fontsize=11.0,
                     color=text_color,
                 )
         left += values
 
     ax.set_xlim(0, 100)
     ax.set_yticks(y)
-    ax.set_yticklabels(SPECIES_ORDER, fontsize=12.2)
+    ax.set_yticklabels(SPECIES_ORDER, fontsize=13.2)
     for tick, species in zip(ax.get_yticklabels(), SPECIES_ORDER):
         tick.set_color(SPECIES_COLORS[species])
         tick.set_fontweight("bold")
     ax.invert_yaxis()
-    ax.set_xlabel("Protein-glycan type assignments (%)", fontsize=12.6)
+    ax.set_xlabel("Protein-glycan type assignments (%)", fontsize=13.8)
     ax.grid(axis="x", color="#D9D9D9", linewidth=0.6)
     ax.set_axisbelow(True)
     clean_axes(ax)
@@ -592,20 +592,20 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
 
     totals = matrix.sum(axis=1).astype(int)
     for idx, species in enumerate(SPECIES_ORDER):
-        ax.text(101.0, idx, f"n={totals.loc[species]}", ha="left", va="center", fontsize=10.5)
+        ax.text(101.0, idx, f"n={totals.loc[species]}", ha="left", va="center", fontsize=11.4)
     ax.set_xlim(0, 112)
 
-    fig.subplots_adjust(left=0.10, right=0.98, bottom=0.16, top=0.84)
+    fig.subplots_adjust(left=0.10, right=0.985, bottom=0.15, top=0.82)
     legend = ax.legend(
         loc="upper center",
-        bbox_to_anchor=(0.5, 1.10),
+        bbox_to_anchor=(0.5, 1.08),
         ncol=len(GLYCAN_TYPES_ORDER),
         frameon=False,
-        fontsize=8.8,
-        handlelength=1.0,
+        fontsize=9.8,
+        handlelength=1.1,
         handletextpad=0.45,
         labelspacing=0.6,
-        columnspacing=1.0,
+        columnspacing=1.1,
         borderaxespad=0.0,
     )
     for handle in legend.legend_handles:

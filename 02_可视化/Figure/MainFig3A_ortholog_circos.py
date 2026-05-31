@@ -35,7 +35,7 @@ ARC_WIDTH   = 0.08          # 外环宽度（radius单位）
 RADIUS      = 1.16
 GAP_DEG     = 6             # 物种间隔（度）
 PROTEIN_GAP_DEG = 0.8       # 蛋白间隔（度）
-LABEL_PAD   = 0.095         # 标签离外环距离
+LABEL_PAD   = 0.105         # 标签离外环距离
 FONT_FAMILY = "Times New Roman"
 
 # ── 1. 蛋白名称映射 ──────────────────────────────────────────────────────────────
@@ -401,7 +401,7 @@ matplotlib.rcParams["font.family"] = "Times New Roman"
 matplotlib.rcParams["font.serif"]  = ["Times New Roman"]
 
 # 双栏宽度，给名称留足够边距
-fig, ax = plt.subplots(figsize=(8.4, 8.4), facecolor="white")
+fig, ax = plt.subplots(figsize=(8.8, 8.8), facecolor="white")
 ax.set_aspect("equal")
 ax.axis("off")
 ax.set_xlim(-1.88, 1.90)
@@ -582,7 +582,7 @@ for sp, ang_dict in [("Gallus", g_angles), ("Anas", a_angles), ("Columba", c_ang
 
         label_text = all_display_names.get(acc, acc)
         fw = "bold" if is_target_prot else "normal"
-        fs = 15 if is_target_prot else 11
+        fs = 16.5 if is_target_prot else 12.5
 
         if is_oc17:
             label_color = COL_GREY
@@ -606,8 +606,8 @@ for sp, ang_dict in [("Gallus", g_angles), ("Anas", a_angles), ("Columba", c_ang
             x_tip, y_tip = polar_xy(r_label - 0.024, mid)
             ax.annotate("", xy=(x_arc, y_arc), xytext=(x_tip, y_tip),
                         arrowprops=dict(arrowstyle="-|>", color=label_color,
-                                        lw=0.75, alpha=0.85,
-                                        mutation_scale=7,
+                                        lw=0.9, alpha=0.88,
+                                        mutation_scale=8.5,
                                         shrinkA=0, shrinkB=0),
                         zorder=9)
 
@@ -623,10 +623,10 @@ ax.legend(handles=legend_patches,
           loc="lower right",
           frameon=True, framealpha=0.9,
           edgecolor="#bbbbbb",
-          fontsize=10.5,
+          fontsize=11.6,
           title="Species",
-          title_fontsize=10.5,
-          prop={"family": "Times New Roman", "size": 10.5},
+          title_fontsize=11.6,
+          prop={"family": "Times New Roman", "size": 11.6},
           bbox_to_anchor=(0.98, 0.02))
 
 plt.subplots_adjust(left=0.02, right=0.98, bottom=0.02, top=0.98)

@@ -124,12 +124,12 @@ def draw_upset(memberships):
         scale = (avg - 1) / max(max_avg_protein - 1, 1)
         return NODE_SIZE_MIN + scale * (NODE_SIZE_MAX - NODE_SIZE_MIN)
 
-    fig = plt.figure(figsize=(13.8, 6.2), dpi=300)
+    fig = plt.figure(figsize=(14.8, 6.9), dpi=300)
     gs = fig.add_gridspec(
         2, 2,
         width_ratios=[1.45, 5.9],
         height_ratios=[3.25, 1.65],
-        left=0.075, right=0.985, bottom=0.14, top=0.94,
+        left=0.068, right=0.988, bottom=0.13, top=0.948,
         wspace=0.06, hspace=0.07,
     )
     ax_top = fig.add_subplot(gs[0, 1])
@@ -154,8 +154,8 @@ def draw_upset(memberships):
     for xi, value in zip(x, top_counts):
         offset = max(top_counts) * 0.025
         ax_top.text(xi, value + offset, str(value),
-                    ha="center", va="bottom", fontsize=12)
-    ax_top.set_ylabel("Cluster Count", fontsize=15)
+                    ha="center", va="bottom", fontsize=13.8)
+    ax_top.set_ylabel("Cluster Count", fontsize=17.0)
     ax_top.set_xlim(-0.7, len(intersections) - 0.35)
     ax_top.set_ylim(0, max(top_counts) * 1.22)
     ax_top.yaxis.set_major_locator(ticker.MaxNLocator(5, integer=True))
@@ -178,7 +178,7 @@ def draw_upset(memberships):
         icon_path = SPECIES_ICONS[species]
         if icon_path.exists():
             icon = plt.imread(icon_path)
-            image_box = OffsetImage(icon, zoom=0.105)
+            image_box = OffsetImage(icon, zoom=0.115)
             ax_matrix.add_artist(
                 AnnotationBbox(
                     image_box,
@@ -191,7 +191,7 @@ def draw_upset(memberships):
             )
         ax_matrix.text(
             label_x, y, DISPLAY_LABELS[species],
-            ha="left", va="center", fontsize=12,
+            ha="left", va="center", fontsize=13.6,
             color=SPECIES_COLORS[species], fontweight="bold",
         )
     for xi, (group, _) in zip(x, intersections):
@@ -208,7 +208,7 @@ def draw_upset(memberships):
                 protein_count = protein_counts[group][species]
                 ax_matrix.text(
                     xi, y, str(protein_count),
-                    ha="center", va="center", fontsize=8.6,
+                    ha="center", va="center", fontsize=10.2,
                     fontweight="bold", color="white",
                     zorder=4,
                 )
@@ -230,13 +230,13 @@ def draw_upset(memberships):
     )
     for y, value in zip(y_ticks, left_values):
         ax_left.text(value + max(left_values) * 0.065, y, str(value),
-                     ha="right", va="center", fontsize=12)
+                 ha="right", va="center", fontsize=13.6)
     ax_left.set_yticks(y_ticks)
     ax_left.set_yticklabels([])
-    ax_left.set_xlabel("Cluster count", fontsize=13)
+    ax_left.set_xlabel("Cluster count", fontsize=14.6)
     ax_left.set_xlim(max(left_values) * 1.20, 0)
     ax_left.xaxis.set_major_locator(ticker.MaxNLocator(4, integer=True))
-    ax_left.tick_params(axis="x", labelsize=11)
+    ax_left.tick_params(axis="x", labelsize=12.4)
     ax_left.tick_params(axis="y", length=0)
     ax_left.spines["top"].set_visible(False)
     ax_left.spines["right"].set_visible(False)

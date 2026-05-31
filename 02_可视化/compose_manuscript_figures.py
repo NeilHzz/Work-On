@@ -489,7 +489,7 @@ def compose_fig1():
 
 def compose_fig2():
     print("\n=== Composing Fig 2 ===")
-    fig2_margin = 60
+    fig2_margin = 40
     inner_w = CANVAS_W - 2 * fig2_margin
 
     def panel(source, label, target_w=None, target_h=None, font=FONT_PUB_LABEL, trim=False):
@@ -536,7 +536,7 @@ def compose_fig2():
             raw = make_placeholder(1200, 900, f"Panel\n{source_path.name}")
         return trim_white(raw) if trim else raw
 
-    fig2_gap = 42
+    fig2_gap = 34
 
     # Fig 2 uses a two-column composition: A over B/C/D on the left, E on the right.
     right_w = int((inner_w - fig2_gap) * 0.36)
