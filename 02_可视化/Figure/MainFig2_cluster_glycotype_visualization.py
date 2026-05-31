@@ -585,7 +585,6 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
         tick.set_fontweight("bold")
     ax.invert_yaxis()
     ax.set_xlabel("Protein-glycan type assignments (%)", fontsize=12.6)
-    ax.set_title("Glycan-type composition", fontsize=13.8, pad=7)
     ax.grid(axis="x", color="#D9D9D9", linewidth=0.6)
     ax.set_axisbelow(True)
     clean_axes(ax)
@@ -596,10 +595,10 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
         ax.text(101.0, idx, f"n={totals.loc[species]}", ha="left", va="center", fontsize=10.5)
     ax.set_xlim(0, 112)
 
-    fig.subplots_adjust(left=0.10, right=0.98, bottom=0.26, top=0.88)
+    fig.subplots_adjust(left=0.10, right=0.98, bottom=0.16, top=0.84)
     legend = ax.legend(
         loc="upper center",
-        bbox_to_anchor=(0.5, -0.14),
+        bbox_to_anchor=(0.5, 1.10),
         ncol=len(GLYCAN_TYPES_ORDER),
         frameon=False,
         fontsize=8.8,
