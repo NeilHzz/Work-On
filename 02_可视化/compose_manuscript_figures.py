@@ -554,9 +554,9 @@ def compose_fig2():
     row2 = Image.new("RGBA", (inner_w, row2_h), (255, 255, 255, 0))
     row2_total_w = D.width + B.width + C.width + 2 * fig2_gap
     row2_x = max(0, (inner_w - row2_total_w) // 2)
-    paste(row2, D, row2_x, max(0, (row2_h - D.height) // 2))
-    paste(row2, B, row2_x + D.width + fig2_gap, max(0, (row2_h - B.height) // 2))
-    paste(row2, C, row2_x + D.width + fig2_gap + B.width + fig2_gap, max(0, (row2_h - C.height) // 2))
+    paste(row2, D, row2_x, 0)
+    paste(row2, B, row2_x + D.width + fig2_gap, 0)
+    paste(row2, C, row2_x + D.width + fig2_gap + B.width + fig2_gap, 0)
 
     # Row 3: E stands alone and is centered for emphasis.
     E = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", target_w=int(inner_w * 0.58), trim=True)
