@@ -348,6 +348,46 @@ def draw_slim_bar_jitter_panel(ax, groups_dict, ylabel, title):
     ax.set_ylim(min(0, y_min - y_range * 0.05), letter_y + y_range * 0.20)
 
 
+def draw_fraction_bar_jitter_panel(ax, groups_dict, ylabel, title):
+    draw_slim_bar_jitter_panel(ax, groups_dict, ylabel, title)
+    ax.set_ylim(0, 1)
+
+
+def draw_line_panel(ax, groups_dict, ylabel, title):
+    positions = np.arange(len(SPECIES_ORDER))
+    data_lists = [groups_dict[species] for species in SPECIES_ORDER]
+    all_vals = np.concatenate(data_lists)
+    y_min, y_max = np.nanmin(all_vals), np.nanmax(all_vals)
+    y_range = max(y_max - y_min, 1e-9)
+    means = np.array([np.mean(values) for values in data_lists])
+    ci95 = np.array([
+        1.96 * np.std(values, ddof=1) / np.sqrt(len(values)) if len(values) > 1 else 0.0
+        for values in data_lists
+    ])
+
+    res = duncan_mrt(data_lists, SPECIES_ORDER)
+    ax.plot(positions, means, color='#444444', linewidth=1.8, zorder=2)
+    for index, species in enumerate(SPECIES_ORDER):
+        ax.errorbar(index, means[index], yerr=ci95[index], fmt='o',
+                    markersize=9, markerfacecolor=SPECIES_COLOR[species],
+                    markeredgecolor='#222222', markeredgewidth=0.9,
+                    ecolor='#333333', elinewidth=1.3, capsize=5, zorder=4)
+
+    letter_y = max(means + ci95) + y_range * 0.08
+    for index, species in enumerate(SPECIES_ORDER):
+        label = res['letters'].get(species, '')
+        ax.text(index, letter_y, label, ha='center', va='bottom',
+                fontsize=STAT_FS, fontweight='bold', color='#333')
+
+    n_labels = [f'\n(n={len(groups_dict[species])})' for species in SPECIES_ORDER]
+    ax.set_xticks(positions)
+    ax.set_xticklabels([species + n for species, n in zip(SPECIES_ORDER, n_labels)],
+                       fontsize=TICK_FS)
+    style_panel_axes(ax, ylabel, f"{title}\n{format_p_value(res['p_anova'])}")
+    ax.set_xlim(-0.45, len(SPECIES_ORDER) - 0.55)
+    ax.set_ylim(y_min - y_range * 0.08, letter_y + y_range * 0.20)
+
+
 # ── 堆叠柱状图 ────────────────────────────────────────────────────────────────
 def draw_stacked_bar(ax, df, show_legend=True):
     means, stds, shielded_means = {}, {}, {}
@@ -513,10 +553,10 @@ def main():
     ]
 
     panel_drawers = {
-        'A': draw_half_violin_box_panel,
-        'B': draw_half_violin_box_panel,
-        'C': draw_slim_bar_jitter_panel,
-        'D': draw_slim_bar_jitter_panel,
+        'A': draw_violin_panel,
+        'B': draw_line_panel,
+        'C': draw_fraction_bar_jitter_panel,
+        'D': draw_line_panel,
     }
 
     # Panels A-D: semantic plot styles, with unchanged panel size and filenames

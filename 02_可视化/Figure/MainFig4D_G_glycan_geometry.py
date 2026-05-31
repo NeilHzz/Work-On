@@ -365,7 +365,7 @@ for mk, ml, lbl in zip(metric_keys, metric_labels, panel_labels):
     if mk == 'glycan_rg':
         raincloud_one(ax, mk, ml, subtitle=SUBTITLES.get(mk, ''))
     elif mk in {'glycan_end2end', 'glycan_dist'}:
-        violin_one(ax, mk, ml, subtitle=SUBTITLES.get(mk, ''))
+        box_jitter_one(ax, mk, ml, subtitle=SUBTITLES.get(mk, ''))
     elif mk == 'glycan_min_dist_to_ca':
         raincloud_one(ax, mk, ml, subtitle=SUBTITLES.get(mk, ''))
     else:
