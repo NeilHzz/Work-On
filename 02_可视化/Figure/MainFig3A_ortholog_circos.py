@@ -620,14 +620,14 @@ legend_patches = [
     mpatches.Patch(color=COL["Columba"], label=r"$\it{Columba}$", alpha=1.0),
 ]
 ax.legend(handles=legend_patches,
-          loc="lower left",
+          loc="lower right",
           frameon=True, framealpha=0.9,
           edgecolor="#bbbbbb",
-          fontsize=10,
+          fontsize=10.5,
           title="Species",
-          title_fontsize=10,
-          prop={"family": "Times New Roman", "size": 10},
-          bbox_to_anchor=(0.02, 0.02))
+          title_fontsize=10.5,
+          prop={"family": "Times New Roman", "size": 10.5},
+          bbox_to_anchor=(0.98, 0.02))
 
 plt.subplots_adjust(left=0.02, right=0.98, bottom=0.02, top=0.98)
 save_fig(plt.gcf(), "Fig3B")

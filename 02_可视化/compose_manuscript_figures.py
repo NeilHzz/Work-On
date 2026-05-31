@@ -549,7 +549,8 @@ def compose_fig2():
 
     left_stack_factor = (1 / aspect_a) + (1 / aspect_d)
     mid_stack_factor = (1 / aspect_b) + (1 / aspect_c)
-    mid_width_factor = left_stack_factor / mid_stack_factor
+    # Keep the middle support column compact so A and D stay tall enough for reviewer-readable labels.
+    mid_width_factor = min(left_stack_factor / mid_stack_factor, 0.40)
     col1_w = int(round(
         (inner_w - GAP * (2 + aspect_e))
         / (1 + mid_width_factor + left_stack_factor * aspect_e)
