@@ -537,15 +537,23 @@ def compose_fig2():
 
     fig2_gap = 42
 
-    # Row 1: A takes 3/4 width; B takes 1/4 width.
-    a_w = int((inner_w - fig2_gap) * 0.75)
-    b_w = inner_w - a_w - fig2_gap
-    A = panel("Fig2.png", "A", target_w=a_w, trim=False)
-    B = panel("Fig2_coverage_overview.png", "B", target_w=b_w, trim=True)
+    # Row 1: scale A and B to the same height so the pair reads as a single tier.
+    row1_a_raw = load_img(PNG / "Fig2.png")
+    if row1_a_raw is None:
+        row1_a_raw = make_placeholder(1200, 900, "Panel A\nFig2.png")
+    row1_b_raw = load_img(PNG / "Fig2_coverage_overview.png")
+    if row1_b_raw is None:
+        row1_b_raw = make_placeholder(1200, 900, "Panel B\nFig2_coverage_overview.png")
+    row1_b_raw = trim_white(row1_b_raw)
+    row1_aspect_sum = (row1_a_raw.width / row1_a_raw.height) + (row1_b_raw.width / row1_b_raw.height)
+    row1_target_h = int((inner_w - fig2_gap) / row1_aspect_sum)
+    A = panel("Fig2.png", "A", target_h=row1_target_h, trim=False)
+    B = panel("Fig2_coverage_overview.png", "B", target_h=row1_target_h, trim=True)
     row1_h = max(A.height, B.height)
     row1 = Image.new("RGBA", (inner_w, row1_h), (255, 255, 255, 0))
-    paste(row1, A, 0, max(0, (row1_h - A.height) // 2))
-    paste(row1, B, a_w + fig2_gap, max(0, (row1_h - B.height) // 2))
+    row1_x = max(0, (inner_w - (A.width + fig2_gap + B.width)) // 2)
+    paste(row1, A, row1_x, max(0, (row1_h - A.height) // 2))
+    paste(row1, B, row1_x + A.width + fig2_gap, max(0, (row1_h - B.height) // 2))
 
     # Row 2: D takes 3/4 width; C takes 1/4 width.
     d_w = int((inner_w - fig2_gap) * 0.75)
