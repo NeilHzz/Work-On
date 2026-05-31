@@ -239,8 +239,8 @@ def plot_cluster_consistency(cluster_df: pd.DataFrame) -> None:
     fig, (ax_left, ax_right) = plt.subplots(
         1,
         2,
-        figsize=(7.8, 4.0),
-        gridspec_kw={"width_ratios": [1.08, 1.0], "wspace": 0.32},
+        figsize=(7.5, 3.7),
+        gridspec_kw={"width_ratios": [1.04, 1.0], "wspace": 0.30},
     )
 
     richness_counts = cluster_df["glycan_type_richness"].value_counts().sort_index()
@@ -266,7 +266,7 @@ def plot_cluster_consistency(cluster_df: pd.DataFrame) -> None:
     ax_left.set_xticklabels([str(value) for value in x], fontsize=9.0)
     ax_left.set_xlabel("Glycan types observed per cluster", fontsize=10.5)
     ax_left.set_ylabel("Cluster count", fontsize=10.5)
-    ax_left.set_title("Cluster glycan-type richness", fontsize=12, pad=8)
+    ax_left.set_title("Richness", fontsize=11.2, pad=6)
     ax_left.set_ylim(0, max(richness_counts.values) * 1.18)
     clean_axes(ax_left)
 
@@ -294,11 +294,12 @@ def plot_cluster_consistency(cluster_df: pd.DataFrame) -> None:
                 fontsize=9.0,
             )
     ax_right.set_xlabel("Shannon diversity index", fontsize=10.5)
-    ax_right.set_ylabel("Cluster count", fontsize=10.5)
-    ax_right.set_title("Cluster glycan-type Shannon diversity", fontsize=12, pad=8)
+    ax_right.set_ylabel("")
+    ax_right.set_title("Shannon index", fontsize=11.2, pad=6)
     ax_right.set_ylim(0, max(counts) * 1.18)
     clean_axes(ax_right)
 
+    fig.subplots_adjust(top=0.88, bottom=0.18)
     save_fig(fig, "Fig2_cluster_glycotype_consistency")
     plt.close(fig)
 
@@ -350,7 +351,7 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
         tick.set_fontweight("bold")
     ax.invert_yaxis()
     ax.set_xlabel("Protein-glycan type assignments (%)", fontsize=10.5)
-    ax.set_title("Species-level glycan-type composition", fontsize=12, pad=8)
+    ax.set_title("Glycan-type composition", fontsize=11.2, pad=6)
     ax.grid(axis="x", color="#D9D9D9", linewidth=0.6)
     ax.set_axisbelow(True)
     clean_axes(ax)
@@ -361,15 +362,16 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
         ax.text(101.0, idx, f"n={totals.loc[species]}", ha="left", va="center", fontsize=9)
     ax.set_xlim(0, 112)
 
-    fig.subplots_adjust(right=0.74)
+    fig.subplots_adjust(right=0.98, bottom=0.24, top=0.88)
     legend = ax.legend(
-        loc="center left",
-        bbox_to_anchor=(1.0, 0.5),
-        ncol=1,
+        loc="upper center",
+        bbox_to_anchor=(0.5, -0.14),
+        ncol=4,
         frameon=False,
-        fontsize=8.8,
+        fontsize=8.2,
         handlelength=1.0,
-        labelspacing=0.72,
+        labelspacing=0.62,
+        columnspacing=0.95,
     )
     for handle in legend.legend_handles:
         handle.set_linewidth(0)

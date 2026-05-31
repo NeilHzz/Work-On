@@ -531,16 +531,20 @@ def compose_fig2():
     # A: current glycoprotein orthogroup UpSet plot, full width for readability.
     A = panel("Fig2.png", "A", inner_w, trim=False)
 
-    # B-C: diversity summary plus species-level composition.
-    row2 = fit_row([
-        ("Fig2_cluster_glycotype_consistency.png", "B", True),
-        ("Fig2_species_glycotype_proportion.png", "C", True),
-    ], inner_w)
+    # B-C: narrow support panel plus wider composition panel, matching publication-style emphasis.
+    b_w = int(inner_w * 0.34)
+    c_w = inner_w - b_w - GAP
+    B = panel("Fig2_cluster_glycotype_consistency.png", "B", target_w=b_w, trim=True)
+    C = panel("Fig2_species_glycotype_proportion.png", "C", target_w=c_w, trim=True)
+    row2_h = max(B.height, C.height)
+    row2 = Image.new("RGBA", (inner_w, row2_h), (255, 255, 255, 0))
+    paste(row2, B, 0, max(0, (row2_h - B.height) // 2))
+    paste(row2, C, b_w + GAP, max(0, (row2_h - C.height) // 2))
 
-    # D: centered ortholog chord panel after removing the redundant heatmap panel.
-    row3 = fit_row([
-        (FINAL_MAIN_SUBFIGS / "Fig3A.png", "D", True),
-    ], int(inner_w * 0.72))
+    # D: enlarged and centered as the lower focal panel.
+    D = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "D", target_w=int(inner_w * 0.84), trim=True)
+    row3 = Image.new("RGBA", (inner_w, D.height), (255, 255, 255, 0))
+    paste(row3, D, max(0, (inner_w - D.width) // 2), 0)
 
     rows = [A, row2, row3]
     total_h = 2 * MARGIN + sum(row.height for row in rows) + GAP * (len(rows) - 1)
