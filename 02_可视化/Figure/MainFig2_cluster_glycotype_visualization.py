@@ -596,16 +596,18 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
         ax.text(101.0, idx, f"n={totals.loc[species]}", ha="left", va="center", fontsize=10.5)
     ax.set_xlim(0, 112)
 
-    fig.subplots_adjust(right=0.98, bottom=0.24, top=0.88)
+    fig.subplots_adjust(left=0.12, right=0.76, bottom=0.14, top=0.88)
     legend = ax.legend(
-        loc="upper center",
-        bbox_to_anchor=(0.5, -0.14),
-        ncol=4,
+        loc="center left",
+        bbox_to_anchor=(1.02, 0.50),
+        ncol=2,
         frameon=False,
         fontsize=9.4,
         handlelength=1.0,
-        labelspacing=0.62,
-        columnspacing=0.95,
+        handletextpad=0.45,
+        labelspacing=0.75,
+        columnspacing=1.0,
+        borderaxespad=0.0,
     )
     for handle in legend.legend_handles:
         handle.set_linewidth(0)
