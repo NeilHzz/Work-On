@@ -582,7 +582,7 @@ for sp, ang_dict in [("Gallus", g_angles), ("Anas", a_angles), ("Columba", c_ang
 
         label_text = all_display_names.get(acc, acc)
         fw = "bold" if is_target_prot else "normal"
-        fs = 13 if is_target_prot else 9
+        fs = 15 if is_target_prot else 11
 
         if is_oc17:
             label_color = COL_GREY
@@ -607,7 +607,7 @@ for sp, ang_dict in [("Gallus", g_angles), ("Anas", a_angles), ("Columba", c_ang
             ax.annotate("", xy=(x_arc, y_arc), xytext=(x_tip, y_tip),
                         arrowprops=dict(arrowstyle="-|>", color=label_color,
                                         lw=0.75, alpha=0.85,
-                                        mutation_scale=6,
+                                        mutation_scale=7,
                                         shrinkA=0, shrinkB=0),
                         zorder=9)
 

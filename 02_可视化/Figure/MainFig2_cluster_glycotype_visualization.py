@@ -341,7 +341,7 @@ def build_summary_tables(
 def clean_axes(ax: plt.Axes) -> None:
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
-    ax.tick_params(axis="both", labelsize=9.5, length=3.2, width=0.75)
+    ax.tick_params(axis="both", labelsize=11.0, length=3.4, width=0.8)
 
 
 def draw_similarity_heatmap(
@@ -360,8 +360,8 @@ def draw_similarity_heatmap(
     ax.imshow(values, cmap=HEATMAP_CMAP, aspect="equal", vmin=heatmap_vmin, vmax=1.0)
     ax.set_xticks(np.arange(len(SPECIES_ORDER)))
     ax.set_yticks(np.arange(len(SPECIES_ORDER)))
-    ax.set_xticklabels(SPECIES_ORDER, fontsize=9.2)
-    ax.set_yticklabels(SPECIES_ORDER, fontsize=9.2)
+    ax.set_xticklabels(SPECIES_ORDER, fontsize=11.2)
+    ax.set_yticklabels(SPECIES_ORDER, fontsize=11.2)
     for tick, species in zip(ax.get_xticklabels(), SPECIES_ORDER):
         tick.set_color(SPECIES_COLORS[species])
         tick.set_fontweight("bold")
@@ -378,10 +378,10 @@ def draw_similarity_heatmap(
                 f"{value:.2f}",
                 ha="center",
                 va="center",
-                fontsize=8.8,
+                fontsize=10.2,
                 color=text_color,
             )
-    ax.set_title(title, fontsize=11.2, pad=6)
+    ax.set_title(title, fontsize=13.6, pad=7)
     ax.tick_params(axis="both", length=0)
     for spine in ax.spines.values():
         spine.set_visible(False)
@@ -396,7 +396,7 @@ def draw_similarity_heatmap(
         transform=ax.transAxes,
         ha="center",
         va="top",
-        fontsize=8.2,
+        fontsize=9.8,
     )
 
 
@@ -438,11 +438,11 @@ def draw_coverage_overview(ax_left: plt.Axes, overview_df: pd.DataFrame) -> None
                 f"{int(value)}",
                 ha="left",
                 va="center",
-                fontsize=8.1,
+                fontsize=9.6,
             )
     ax_left.set_yticks(y)
-    ax_left.set_yticklabels(metric_labels, fontsize=8.9)
-    ax_left.set_xlabel("Count", fontsize=10.5)
+    ax_left.set_yticklabels(metric_labels, fontsize=10.8)
+    ax_left.set_xlabel("Count", fontsize=12.5)
     ax_left.grid(axis="x", color="#E2E2E2", linewidth=0.6)
     ax_left.set_axisbelow(True)
     ax_left.set_xlim(0, max_value * 1.22)
@@ -455,7 +455,7 @@ def draw_coverage_overview(ax_left: plt.Axes, overview_df: pd.DataFrame) -> None
         bbox_to_anchor=(0.48, 1.06),
         ncol=3,
         frameon=False,
-        fontsize=7.8,
+        fontsize=9.4,
         handlelength=1.0,
         handletextpad=0.35,
         columnspacing=0.9,
@@ -465,7 +465,7 @@ def draw_coverage_overview(ax_left: plt.Axes, overview_df: pd.DataFrame) -> None
 
 
 def plot_coverage_overview(overview_df: pd.DataFrame) -> None:
-    fig, ax = plt.subplots(figsize=(3.9, 3.45))
+    fig, ax = plt.subplots(figsize=(4.2, 3.7))
     draw_coverage_overview(ax, overview_df)
     fig.subplots_adjust(top=0.90, bottom=0.16, left=0.26, right=0.98)
     save_fig(fig, "Fig2_coverage_overview")
@@ -473,7 +473,7 @@ def plot_coverage_overview(overview_df: pd.DataFrame) -> None:
 
 
 def plot_shared_core_similarity(similarity_df: pd.DataFrame, shared_group_count: int) -> None:
-    fig, ax = plt.subplots(figsize=(3.35, 3.35))
+    fig, ax = plt.subplots(figsize=(3.75, 3.75))
     draw_similarity_heatmap(
         ax,
         similarity_df,
@@ -572,20 +572,20 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
                     f"{value:.0f}%",
                     ha="center",
                     va="center",
-                    fontsize=8.5,
+                    fontsize=10.0,
                     color=text_color,
                 )
         left += values
 
     ax.set_xlim(0, 100)
     ax.set_yticks(y)
-    ax.set_yticklabels(SPECIES_ORDER, fontsize=10.5)
+    ax.set_yticklabels(SPECIES_ORDER, fontsize=12.2)
     for tick, species in zip(ax.get_yticklabels(), SPECIES_ORDER):
         tick.set_color(SPECIES_COLORS[species])
         tick.set_fontweight("bold")
     ax.invert_yaxis()
-    ax.set_xlabel("Protein-glycan type assignments (%)", fontsize=10.5)
-    ax.set_title("Glycan-type composition", fontsize=11.2, pad=6)
+    ax.set_xlabel("Protein-glycan type assignments (%)", fontsize=12.6)
+    ax.set_title("Glycan-type composition", fontsize=13.8, pad=7)
     ax.grid(axis="x", color="#D9D9D9", linewidth=0.6)
     ax.set_axisbelow(True)
     clean_axes(ax)
@@ -593,7 +593,7 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
 
     totals = matrix.sum(axis=1).astype(int)
     for idx, species in enumerate(SPECIES_ORDER):
-        ax.text(101.0, idx, f"n={totals.loc[species]}", ha="left", va="center", fontsize=9)
+        ax.text(101.0, idx, f"n={totals.loc[species]}", ha="left", va="center", fontsize=10.5)
     ax.set_xlim(0, 112)
 
     fig.subplots_adjust(right=0.98, bottom=0.24, top=0.88)
@@ -602,7 +602,7 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
         bbox_to_anchor=(0.5, -0.14),
         ncol=4,
         frameon=False,
-        fontsize=8.2,
+        fontsize=9.4,
         handlelength=1.0,
         labelspacing=0.62,
         columnspacing=0.95,
