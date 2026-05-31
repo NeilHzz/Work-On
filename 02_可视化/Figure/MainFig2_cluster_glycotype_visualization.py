@@ -117,6 +117,12 @@ def classify_glycan(glycan: str) -> str:
     return "Other"
 
 
+def clean_text(value: object) -> str:
+    """Return a stripped string while normalizing empty Excel cells."""
+    text = str(value).strip()
+    return "" if not text or text.lower() == "nan" else text
+
+
 def load_glycan_type_annotations() -> tuple[dict[str, set[str]], dict[str, str]]:
     """Load accession-to-glycan-type annotations from the three MS workbooks."""
     protein_to_types: dict[str, set[str]] = defaultdict(set)
@@ -124,9 +130,9 @@ def load_glycan_type_annotations() -> tuple[dict[str, set[str]], dict[str, str]]
     for species, path in MS_FILES.items():
         df_igp = pd.read_excel(path, sheet_name="IGP_quant")
         for _, row in df_igp.iterrows():
-            accession = str(row.get("Protein accession", "")).strip()
-            modification = str(row.get("Observed Modification", "")).strip()
-            if accession and modification and modification != "nan":
+            accession = clean_text(row.get("Protein accession", ""))
+            modification = clean_text(row.get("Observed Modification", ""))
+            if accession and modification:
                 protein_to_types[accession].add(classify_glycan(modification))
                 protein_to_species[accession] = species
 
@@ -134,15 +140,105 @@ def load_glycan_type_annotations() -> tuple[dict[str, set[str]], dict[str, str]]
         if "N-glycan modifications" not in df_site.columns:
             continue
         for _, row in df_site.iterrows():
-            accession = str(row.get("Protein accession", "")).strip()
-            modifications = str(row.get("N-glycan modifications", "")).strip()
-            if not accession or not modifications or modifications == "nan":
+            accession = clean_text(row.get("Protein accession", ""))
+            modifications = clean_text(row.get("N-glycan modifications", ""))
+            if not accession or not modifications:
                 continue
             for entry in re.split(r";\s*", modifications):
-                if entry.strip():
-                    protein_to_types[accession].add(classify_glycan(entry.strip()))
+                entry = clean_text(entry)
+                if entry:
+                    protein_to_types[accession].add(classify_glycan(entry))
                     protein_to_species[accession] = species
     return dict(protein_to_types), protein_to_species
+
+
+def build_identification_overview() -> pd.DataFrame:
+    """Summarize per-species glycoprotein, glycosite, and glycan coverage."""
+    rows = []
+    for species, path in MS_FILES.items():
+        df_igp = pd.read_excel(path, sheet_name="IGP_quant")
+        df_site = pd.read_excel(path, sheet_name="Site_quant")
+
+        glycoproteins: set[str] = set()
+        glycosites: set[tuple[str, str]] = set()
+        glycan_compositions: set[str] = set()
+
+        for _, row in df_igp.iterrows():
+            accession = clean_text(row.get("Protein accession", ""))
+            position = clean_text(row.get("Position", ""))
+            modification = clean_text(row.get("Observed Modification", ""))
+            if not accession or not modification:
+                continue
+            glycoproteins.add(accession)
+            glycan_compositions.add(modification)
+            if position:
+                glycosites.add((accession, position))
+
+        if "N-glycan modifications" in df_site.columns:
+            for _, row in df_site.iterrows():
+                accession = clean_text(row.get("Protein accession", ""))
+                position = clean_text(row.get("Position", ""))
+                modifications = clean_text(row.get("N-glycan modifications", ""))
+                if not accession or not modifications:
+                    continue
+                glycoproteins.add(accession)
+                if position:
+                    glycosites.add((accession, position))
+                for entry in re.split(r";\s*", modifications):
+                    entry = clean_text(entry)
+                    if entry:
+                        glycan_compositions.add(entry)
+
+        rows.append(
+            {
+                "species": species,
+                "glycoproteins": len(glycoproteins),
+                "glycosites": len(glycosites),
+                "glycan_compositions": len(glycan_compositions),
+            }
+        )
+
+    return pd.DataFrame(rows)
+
+
+def build_shared_core_similarity(
+    groups: list[dict[str, object]], protein_to_types: dict[str, set[str]]
+) -> tuple[pd.DataFrame, int]:
+    """Measure shared-core glycan-state similarity across orthogroup-type profiles."""
+    species_vectors = {species: [] for species in SPECIES_ORDER}
+    shared_group_count = 0
+
+    for group in groups:
+        species_type_counts = {species: Counter() for species in SPECIES_ORDER}
+        for species, accession, _ in group["members"]:
+            if accession not in protein_to_types:
+                continue
+            for glycan_type in protein_to_types[accession]:
+                species_type_counts[species][glycan_type] += 1
+
+        if not all(sum(species_type_counts[species].values()) > 0 for species in SPECIES_ORDER):
+            continue
+
+        shared_group_count += 1
+        for species in SPECIES_ORDER:
+            species_vectors[species].extend(
+                species_type_counts[species][glycan_type] for glycan_type in GLYCAN_TYPES_ORDER
+            )
+
+    if shared_group_count == 0:
+        raise ValueError("No shared orthogroups with annotated glycan types were found across all species.")
+
+    similarity = pd.DataFrame(index=SPECIES_ORDER, columns=SPECIES_ORDER, dtype=float)
+    for species_a in SPECIES_ORDER:
+        vector_a = pd.Series(species_vectors[species_a], dtype=float)
+        for species_b in SPECIES_ORDER:
+            if species_a == species_b:
+                similarity.loc[species_a, species_b] = 1.0
+                continue
+            vector_b = pd.Series(species_vectors[species_b], dtype=float)
+            rho = vector_a.corr(vector_b, method="spearman")
+            similarity.loc[species_a, species_b] = 0.0 if pd.isna(rho) else float(rho)
+    return similarity, shared_group_count
 
 
 def parse_orthogroups(path: Path) -> list[dict[str, object]]:
@@ -235,7 +331,9 @@ def clean_axes(ax: plt.Axes) -> None:
     ax.tick_params(axis="both", labelsize=9.5, length=3.2, width=0.75)
 
 
-def plot_cluster_consistency(cluster_df: pd.DataFrame) -> None:
+def plot_cluster_consistency(
+    overview_df: pd.DataFrame, similarity_df: pd.DataFrame, shared_group_count: int
+) -> None:
     fig, (ax_left, ax_right) = plt.subplots(
         1,
         2,
@@ -243,61 +341,96 @@ def plot_cluster_consistency(cluster_df: pd.DataFrame) -> None:
         gridspec_kw={"width_ratios": [1.04, 1.0], "wspace": 0.30},
     )
 
-    richness_counts = cluster_df["glycan_type_richness"].value_counts().sort_index()
-    x = richness_counts.index.to_numpy()
-    bars = ax_left.bar(
-        x,
-        richness_counts.values,
-        width=0.64,
-        color=DIVERSITY_CMAP(np.linspace(0.12, 0.92, len(x))),
-        edgecolor="#2E2E2E",
-        linewidth=0.7,
-    )
-    for bar, count in zip(bars, richness_counts.values):
-        ax_left.text(
-            bar.get_x() + bar.get_width() / 2,
-            bar.get_height() + max(cluster_df.shape[0] * 0.018, 1.0),
-            f"{count}",
-            ha="center",
-            va="bottom",
-            fontsize=9.0,
+    metric_keys = ["glycoproteins", "glycosites", "glycan_compositions"]
+    metric_labels = ["Glycoproteins", "Glycosites", "Glycan\ncompositions"]
+    x = np.arange(len(metric_keys), dtype=float)
+    bar_width = 0.22
+    max_value = overview_df[metric_keys].to_numpy().max()
+    for index, species in enumerate(SPECIES_ORDER):
+        values = overview_df.set_index("species").loc[species, metric_keys].to_numpy(dtype=float)
+        bars = ax_left.bar(
+            x + (index - 1) * bar_width,
+            values,
+            width=bar_width,
+            color=SPECIES_COLORS[species],
+            edgecolor="white",
+            linewidth=0.8,
+            label=species,
         )
-    ax_left.set_xticks(x)
-    ax_left.set_xticklabels([str(value) for value in x], fontsize=9.0)
-    ax_left.set_xlabel("Glycan types observed per cluster", fontsize=10.5)
-    ax_left.set_ylabel("Cluster count", fontsize=10.5)
-    ax_left.set_title("Richness", fontsize=11.2, pad=6)
-    ax_left.set_ylim(0, max(richness_counts.values) * 1.18)
-    clean_axes(ax_left)
-
-    shannon_values = cluster_df["shannon_index"].to_numpy()
-    bin_edges = np.linspace(0, max(shannon_values.max(), 0.5), 8)
-    counts, edges = np.histogram(shannon_values, bins=bin_edges)
-    centers = (edges[:-1] + edges[1:]) / 2
-    widths = np.diff(edges) * 0.88
-    bars = ax_right.bar(
-        centers,
-        counts,
-        width=widths,
-        color="#C9877B",
-        edgecolor="#2E2E2E",
-        linewidth=0.7,
-    )
-    for bar, count in zip(bars, counts):
-        if count:
-            ax_right.text(
+        for bar, value in zip(bars, values):
+            ax_left.text(
                 bar.get_x() + bar.get_width() / 2,
-                bar.get_height() + max(max(counts) * 0.025, 0.45),
-                str(count),
+                bar.get_height() + max(max_value * 0.015, 1.2),
+                f"{int(value)}",
                 ha="center",
                 va="bottom",
-                fontsize=9.0,
+                fontsize=8.3,
             )
-    ax_right.set_xlabel("Shannon diversity index", fontsize=10.5)
-    ax_right.set_ylabel("")
-    ax_right.set_title("Shannon index", fontsize=11.2, pad=6)
-    ax_right.set_ylim(0, max(counts) * 1.18)
-    clean_axes(ax_right)
+    ax_left.set_xticks(x)
+    ax_left.set_xticklabels(metric_labels, fontsize=8.9)
+    ax_left.set_ylabel("Count", fontsize=10.5)
+    ax_left.set_title("Identification overview", fontsize=11.2, pad=6)
+    ax_left.grid(axis="y", color="#D9D9D9", linewidth=0.6)
+    ax_left.set_axisbelow(True)
+    ax_left.set_ylim(0, max_value * 1.16)
+    clean_axes(ax_left)
+    legend = ax_left.legend(
+        loc="upper center",
+        bbox_to_anchor=(0.5, 1.10),
+        ncol=3,
+        frameon=False,
+        fontsize=8.2,
+        handlelength=1.2,
+        columnspacing=1.0,
+    )
+    for handle in legend.legend_handles:
+        handle.set_linewidth(0)
+
+    similarity_matrix = similarity_df.reindex(index=SPECIES_ORDER, columns=SPECIES_ORDER)
+    values = similarity_matrix.to_numpy(dtype=float)
+    off_diagonal = values[~np.eye(len(SPECIES_ORDER), dtype=bool)]
+    vmin = min(float(off_diagonal.min()), 0.55) if off_diagonal.size else 0.0
+    image = ax_right.imshow(values, cmap=HEATMAP_CMAP, aspect="equal", vmin=vmin, vmax=1.0)
+    ax_right.set_xticks(np.arange(len(SPECIES_ORDER)))
+    ax_right.set_yticks(np.arange(len(SPECIES_ORDER)))
+    ax_right.set_xticklabels(SPECIES_ORDER, fontsize=9.2)
+    ax_right.set_yticklabels(SPECIES_ORDER, fontsize=9.2)
+    for tick, species in zip(ax_right.get_xticklabels(), SPECIES_ORDER):
+        tick.set_color(SPECIES_COLORS[species])
+        tick.set_fontweight("bold")
+    for tick, species in zip(ax_right.get_yticklabels(), SPECIES_ORDER):
+        tick.set_color(SPECIES_COLORS[species])
+        tick.set_fontweight("bold")
+    for row_index in range(len(SPECIES_ORDER)):
+        for col_index in range(len(SPECIES_ORDER)):
+            value = values[row_index, col_index]
+            text_color = "white" if value >= vmin + (1.0 - vmin) * 0.58 else "#1F1F1F"
+            ax_right.text(
+                col_index,
+                row_index,
+                f"{value:.2f}",
+                ha="center",
+                va="center",
+                fontsize=8.8,
+                color=text_color,
+            )
+    ax_right.set_title("Shared-core similarity", fontsize=11.2, pad=6)
+    ax_right.tick_params(axis="both", length=0)
+    for spine in ax_right.spines.values():
+        spine.set_visible(False)
+    ax_right.set_xticks(np.arange(-0.5, len(SPECIES_ORDER), 1), minor=True)
+    ax_right.set_yticks(np.arange(-0.5, len(SPECIES_ORDER), 1), minor=True)
+    ax_right.grid(which="minor", color="white", linewidth=1.2)
+    ax_right.tick_params(which="minor", bottom=False, left=False)
+    ax_right.text(
+        0.5,
+        -0.16,
+        f"Spearman rho across orthogroup-type profiles; n={shared_group_count}",
+        transform=ax_right.transAxes,
+        ha="center",
+        va="top",
+        fontsize=8.2,
+    )
 
     fig.subplots_adjust(top=0.88, bottom=0.18)
     save_fig(fig, "Fig2_cluster_glycotype_consistency")
@@ -441,16 +574,21 @@ def main() -> None:
     protein_to_types, _ = load_glycan_type_annotations()
     groups = parse_orthogroups(orthogroup_path)
     cluster_df, type_count_df, protein_df = build_summary_tables(groups, protein_to_types)
+    overview_df = build_identification_overview()
+    similarity_df, shared_group_count = build_shared_core_similarity(groups, protein_to_types)
 
     print(f"Orthogroup file: {orthogroup_path}")
     print(f"Annotated clusters: {len(cluster_df)}")
-    print("Richness distribution:", dict(sorted(Counter(cluster_df["glycan_type_richness"]).items())))
-    print("Shannon index summary:", cluster_df["shannon_index"].describe().round(3).to_dict())
     print(f"Annotated proteins in current orthogroups: {len(protein_df)}")
+    print("Identification overview:")
+    print(overview_df.set_index("species"))
+    print(f"Shared annotated orthogroups across all three species: {shared_group_count}")
+    print("Shared-core similarity matrix:")
+    print(similarity_df.round(3))
     print("Species protein-type assignment counts:")
     print(type_count_df.pivot(index="species", columns="glycan_type", values="protein_count").fillna(0).astype(int))
 
-    plot_cluster_consistency(cluster_df)
+    plot_cluster_consistency(overview_df, similarity_df, shared_group_count)
     plot_species_proportions(type_count_df)
 
 
