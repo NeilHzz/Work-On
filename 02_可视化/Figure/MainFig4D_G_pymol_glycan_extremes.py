@@ -550,7 +550,6 @@ def write_pymol_script(jobs: list[dict]) -> Path:
             if job.get('is_focus'):
                 zoom_fixed_focus_window(job)
                 cmd.clip('slab', 125)
-                add_focus_rg_camera_arrow(job, angle_degrees=92.0)
             else:
                 cmd.zoom('oval and chain A', buffer=46, complete=1)
                 cmd.clip('slab', 420)
@@ -797,16 +796,7 @@ def label_near_line(start: tuple[int, int], end: tuple[int, int], along: float, 
 
 
 def annotate_focus_panel(panel: Image.Image, points: dict[str, tuple[int, int]]) -> Image.Image:
-    canvas = panel.convert("RGBA")
-    draw = ImageDraw.Draw(canvas)
-    green = METRIC_COLORS["Glycan-Protein"]
-
-    required = {"F_start", "F_end"}
-    if not required.issubset(points):
-        return canvas.convert("RGB")
-
-    draw_2d_dashed_line(draw, points["F_start"], points["F_end"], green, width=12, segments=11)
-    return canvas.convert("RGB")
+    return panel.convert("RGB")
 
 
 def panel_with_title(job: dict) -> Image.Image:
