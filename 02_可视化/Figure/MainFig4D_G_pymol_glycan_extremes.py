@@ -815,9 +815,13 @@ def annotate_focus_panel(panel: Image.Image, points: dict[str, tuple[int, int]])
         "point_4": (18, 14),
     }
     for name in ["point_1", "point_2", "point_3", "point_4"]:
-        if name not in points:
+        if name in points:
+            x, y = points[name]
+        elif name == "point_4":
+            x, y = canvas.width // 2, canvas.height - 26
+            draw.line((x, y - 56, x, y - 12), fill=point_colors[name], width=4)
+        else:
             continue
-        x, y = points[name]
         radius = 14
         fill = point_colors[name]
         draw.ellipse((x - radius, y - radius, x + radius, y + radius), fill=fill, outline="#111111", width=3)
