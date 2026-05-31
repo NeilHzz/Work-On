@@ -360,20 +360,20 @@ def draw_line_panel(ax, groups_dict, ylabel, title):
     y_min, y_max = np.nanmin(all_vals), np.nanmax(all_vals)
     y_range = max(y_max - y_min, 1e-9)
     means = np.array([np.mean(values) for values in data_lists])
-    ci95 = np.array([
-        1.96 * np.std(values, ddof=1) / np.sqrt(len(values)) if len(values) > 1 else 0.0
+    stds = np.array([
+        np.std(values, ddof=1) if len(values) > 1 else 0.0
         for values in data_lists
     ])
 
     res = duncan_mrt(data_lists, SPECIES_ORDER)
     ax.plot(positions, means, color='#444444', linewidth=1.8, zorder=2)
     for index, species in enumerate(SPECIES_ORDER):
-        ax.errorbar(index, means[index], yerr=ci95[index], fmt='o',
+        ax.errorbar(index, means[index], yerr=stds[index], fmt='o',
                     markersize=9, markerfacecolor=SPECIES_COLOR[species],
                     markeredgecolor='#222222', markeredgewidth=0.9,
                     ecolor='#333333', elinewidth=1.3, capsize=5, zorder=4)
 
-    letter_y = max(means + ci95) + y_range * 0.08
+    letter_y = max(means + stds) + y_range * 0.08
     for index, species in enumerate(SPECIES_ORDER):
         label = res['letters'].get(species, '')
         ax.text(index, letter_y, label, ha='center', va='bottom',
