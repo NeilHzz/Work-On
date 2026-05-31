@@ -541,52 +541,45 @@ def compose_fig2():
     raw_d = _load_panel_raw("Fig2_species_glycotype_proportion.png", True)
     raw_e = _load_panel_raw(FINAL_MAIN_SUBFIGS / "Fig3A.png", True)
     fig2_gap = 36
+    col1_w = int(inner_w * 0.435)
+    col2_w = int(inner_w * 0.195)
+    col3_w = inner_w - col1_w - col2_w - 2 * fig2_gap
+    row1_h = int(round(col1_w * raw_a.height / raw_a.width))
+    row2_h = int(round(col1_w * raw_d.height / raw_d.width))
+    total_content_h = row1_h + fig2_gap + row2_h
 
-    aspect_a = raw_a.width / raw_a.height
-    aspect_b = raw_b.width / raw_b.height
-    aspect_c = raw_c.width / raw_c.height
-    aspect_d = raw_d.width / raw_d.height
-    aspect_e = raw_e.width / raw_e.height
+    def fixed_cell_panel(source, label, cell_w, cell_h, trim=False):
+        source_path = source if isinstance(source, Path) else PNG / source
+        raw = load_img(source_path)
+        if raw is None:
+            raw = make_placeholder(cell_w, cell_h, f"Panel {label}\n{source_path.name}")
+        elif trim:
+            raw = trim_white(raw)
+        img = scale_to_fit(raw, cell_w, cell_h)
+        img = add_label(img, label, font=FONT_PUB_LABEL)
+        cell = Image.new("RGBA", (cell_w, cell_h), (255, 255, 255, 0))
+        paste(cell, img, (cell_w - img.width) // 2, (cell_h - img.height) // 2)
+        return cell
 
-    left_stack_factor = (1 / aspect_a) + (1 / aspect_d)
-    mid_stack_factor = (1 / aspect_b) + (1 / aspect_c)
-    # Keep three columns visually balanced instead of over-compressing the middle support column.
-    mid_width_factor = min(left_stack_factor / mid_stack_factor, 0.45)
-    col1_w = int(round(
-        (inner_w - fig2_gap * (2 + aspect_e))
-        / (1 + mid_width_factor + left_stack_factor * aspect_e)
-    ))
-    col2_w = int(round(col1_w * mid_width_factor))
-    left_col_h = int(round(col1_w * left_stack_factor + fig2_gap))
+    A = fixed_cell_panel("Fig2.png", "A", col1_w, row1_h, trim=False)
+    B = fixed_cell_panel("Fig2_coverage_overview.png", "B", col2_w, row1_h, trim=True)
+    D = fixed_cell_panel("Fig2_species_glycotype_proportion.png", "D", col1_w, row2_h, trim=True)
+    C = fixed_cell_panel("Fig2_shared_core_js.png", "C", col2_w, row2_h, trim=True)
+    E = fixed_cell_panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", col3_w, total_content_h, trim=True)
 
-    A = panel("Fig2.png", "A", target_w=col1_w, trim=False)
-    D = panel("Fig2_species_glycotype_proportion.png", "D", target_w=col1_w, trim=True)
-    B = panel("Fig2_coverage_overview.png", "B", target_w=col2_w, trim=True)
-    C = panel("Fig2_shared_core_js.png", "C", target_w=col2_w, trim=True)
-    E = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", target_h=left_col_h, trim=True)
-
-    left_col_h = A.height + fig2_gap + D.height
-    mid_col_h = B.height + fig2_gap + C.height
-    total_h = 2 * MARGIN + max(left_col_h, mid_col_h, E.height)
+    total_h = 2 * MARGIN + total_content_h
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
 
-    left_col = Image.new("RGBA", (col1_w, left_col_h), (255, 255, 255, 0))
-    paste(left_col, A, 0, 0)
-    paste(left_col, D, 0, A.height + fig2_gap)
-
-    mid_col = Image.new("RGBA", (col2_w, mid_col_h), (255, 255, 255, 0))
-    paste(mid_col, B, 0, 0)
-    paste(mid_col, C, 0, B.height + fig2_gap)
-
-    block_w = left_col.width + fig2_gap + mid_col.width + fig2_gap + E.width
-    x1 = MARGIN + max(0, (inner_w - block_w) // 2)
-    x2 = x1 + left_col.width + fig2_gap
-    x3 = x2 + mid_col.width + fig2_gap
-    content_h = max(left_col.height, mid_col.height, E.height)
-    y_top = MARGIN
-    paste(canvas, left_col, x1, y_top)
-    paste(canvas, mid_col, x2, y_top)
-    paste(canvas, E, x3, y_top)
+    x1 = MARGIN
+    x2 = x1 + col1_w + fig2_gap
+    x3 = x2 + col2_w + fig2_gap
+    y1 = MARGIN
+    y2 = y1 + row1_h + fig2_gap
+    paste(canvas, A, x1, y1)
+    paste(canvas, B, x2, y1)
+    paste(canvas, D, x1, y2)
+    paste(canvas, C, x2, y2)
+    paste(canvas, E, x3, y1)
     save_fig(canvas, "Fig2_composed")
 
 
