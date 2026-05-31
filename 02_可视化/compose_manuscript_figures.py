@@ -528,14 +528,13 @@ def compose_fig2():
             x += panel_img.width + GAP
         return row
 
-    # Row 1: A plus the newly independent coverage panel B.
-    row1 = fit_row(
-        [
-            ("Fig2.png", "A", False),
-            ("Fig2_coverage_overview.png", "B", True),
-        ],
-        inner_w,
-    )
+    # Row 1: keep A dominant and demote B to a smaller support module.
+    A = panel("Fig2.png", "A", target_w=int(inner_w * 0.68), trim=False)
+    B = panel("Fig2_coverage_overview.png", "B", target_w=int(inner_w * 0.17), trim=True)
+    row1_h = A.height
+    row1 = Image.new("RGBA", (inner_w, row1_h), (255, 255, 255, 0))
+    paste(row1, A, 0, 0)
+    paste(row1, B, inner_w - B.width, max(0, int(row1_h * 0.08)))
 
     # Row 2: shared-core JS (C), composition (D), and ortholog chord (E).
     row2 = fit_row(
