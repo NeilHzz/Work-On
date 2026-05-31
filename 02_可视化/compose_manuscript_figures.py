@@ -531,22 +531,21 @@ def compose_fig2():
     # A: current glycoprotein orthogroup UpSet plot, full width for readability.
     A = panel("Fig2.png", "A", inner_w, trim=False)
 
-    # B-C: keep C dominant, but give B enough room to read both overview and similarity.
-    b_w = int(inner_w * 0.39)
-    c_w = inner_w - b_w - GAP
+    # B-C-D: non-equal widths keep the full figure compact while giving D enough room to read.
+    d_w = int(inner_w * 0.22)
+    c_w = int(inner_w * 0.43)
+    b_w = inner_w - c_w - d_w - 2 * GAP
     B = panel("Fig2_cluster_glycotype_consistency.png", "B", target_w=b_w, trim=True)
     C = panel("Fig2_species_glycotype_proportion.png", "C", target_w=c_w, trim=True)
-    row2_h = max(B.height, C.height)
+    D = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "D", target_w=d_w, trim=True)
+    row2_h = max(B.height, C.height, D.height)
     row2 = Image.new("RGBA", (inner_w, row2_h), (255, 255, 255, 0))
-    paste(row2, B, 0, max(0, (row2_h - B.height) // 2))
-    paste(row2, C, b_w + GAP, max(0, (row2_h - C.height) // 2))
+    x = 0
+    for panel_img in (B, C, D):
+        paste(row2, panel_img, x, max(0, (row2_h - panel_img.height) // 2))
+        x += panel_img.width + GAP
 
-    # D: enlarged and centered as the lower focal panel.
-    D = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "D", target_w=int(inner_w * 0.84), trim=True)
-    row3 = Image.new("RGBA", (inner_w, D.height), (255, 255, 255, 0))
-    paste(row3, D, max(0, (inner_w - D.width) // 2), 0)
-
-    rows = [A, row2, row3]
+    rows = [A, row2]
     total_h = 2 * MARGIN + sum(row.height for row in rows) + GAP * (len(rows) - 1)
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
 
