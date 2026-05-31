@@ -542,12 +542,19 @@ def compose_fig2():
         ("Fig2.png", "A", False),
     ], inner_w)
 
-    # Row 2: B, D, and C share one row.
-    row2 = fit_row([
-        ("Fig2_coverage_overview.png", "B", True),
-        ("Fig2_species_glycotype_proportion.png", "D", True),
-        ("Fig2_shared_core_js.png", "C", True),
-    ], inner_w)
+    # Row 2: glycan-type composition sits on the left half, with the two compact panels on the right.
+    unit_w = (inner_w - 2 * fig2_gap) / 4.0
+    d_w = int(unit_w * 2)
+    b_w = int(unit_w)
+    c_w = inner_w - b_w - d_w - 2 * fig2_gap
+    D = panel("Fig2_species_glycotype_proportion.png", "B", target_w=d_w, trim=True)
+    B = panel("Fig2_coverage_overview.png", "C", target_w=b_w, trim=True)
+    C = panel("Fig2_shared_core_js.png", "D", target_w=c_w, trim=True)
+    row2_h = max(D.height, B.height, C.height)
+    row2 = Image.new("RGBA", (inner_w, row2_h), (255, 255, 255, 0))
+    paste(row2, D, 0, max(0, (row2_h - D.height) // 2))
+    paste(row2, B, d_w + fig2_gap, max(0, (row2_h - B.height) // 2))
+    paste(row2, C, d_w + fig2_gap + b_w + fig2_gap, max(0, (row2_h - C.height) // 2))
 
     # Row 3: E stands alone and is centered for emphasis.
     E = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", target_w=int(inner_w * 0.58), trim=True)
