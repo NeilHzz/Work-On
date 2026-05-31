@@ -433,7 +433,7 @@ def draw_coverage_overview(ax_left: plt.Axes, overview_df: pd.DataFrame) -> None
                 label=species if row_index == 0 else None,
             )
             ax_left.text(
-                value + max_value * 0.030,
+                value + max_value * 0.035,
                 y_pos,
                 f"{int(value)}",
                 ha="left",
@@ -445,7 +445,7 @@ def draw_coverage_overview(ax_left: plt.Axes, overview_df: pd.DataFrame) -> None
     ax_left.set_xlabel("Count", fontsize=14.0)
     ax_left.grid(axis="x", color="#E2E2E2", linewidth=0.6)
     ax_left.set_axisbelow(True)
-    ax_left.set_xlim(0, max_value * 1.28)
+    ax_left.set_xlim(0, max_value * 1.30)
     ax_left.set_ylim(-0.55, len(metric_keys) - 0.45)
     ax_left.invert_yaxis()
     clean_axes(ax_left)

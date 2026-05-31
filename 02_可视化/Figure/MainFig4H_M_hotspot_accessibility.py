@@ -407,7 +407,7 @@ def draw_hotspot_lollipop(ax, df, show_legend=True):
                        showmedians=False, showextrema=False, widths=0.34)
     for body, sp in zip(vp['bodies'], SPECIES_ORDER):
         body.set_facecolor(SPECIES_COLOR[sp])
-        body.set_alpha(0.20)
+        body.set_alpha(0.36)
         body.set_edgecolor('none')
 
     for i, sp in enumerate(SPECIES_ORDER):
@@ -490,7 +490,7 @@ def draw_sasa_dumbbell(ax, df, show_legend=True):
                        showmedians=False, showextrema=False, widths=0.34)
     for body, sp in zip(vp['bodies'], SPECIES_ORDER):
         body.set_facecolor(SPECIES_COLOR[sp])
-        body.set_alpha(0.20)
+        body.set_alpha(0.36)
         body.set_edgecolor('none')
 
     for i, sp in enumerate(SPECIES_ORDER):

@@ -672,8 +672,8 @@ def compose_fig4():
     bottom_panel_w = (inner_w - 3 * GAP) // 4
 
     dg_context_row = compose_centered_row([
-        make_panel("Fig4D-G_Gallus.png", target_w=group_panel_w, trim=True, max_h=620),
-        make_panel("Fig4D-G_Columba.png", target_w=group_panel_w, trim=True, max_h=620),
+        make_panel("Fig4D-G_Gallus.png", target_w=group_panel_w, trim=True),
+        make_panel("Fig4D-G_Columba.png", target_w=group_panel_w, trim=True),
     ], gap=sub_gap, row_width=group_w)
     cf_plot_row = compose_centered_row([
         make_panel("Fig5E.png", "C", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
@@ -698,9 +698,9 @@ def compose_fig4():
     ], gap=sub_gap, row_width=group_w)
 
     hk_context_row = compose_centered_row([
-        make_panel("Fig4H_K_3D_sasa_Gallus.png", target_w=group_three_panel_w, trim=True, max_h=560),
-        make_panel("Fig4H_K_3D_sasa_Anas.png", target_w=group_three_panel_w, trim=True, max_h=560),
-        make_panel("Fig4H_K_3D_sasa_Columba.png", target_w=group_three_panel_w, trim=True, max_h=560),
+        make_panel("Fig4H_K_3D_sasa_Gallus.png", target_w=group_three_panel_w, trim=True),
+        make_panel("Fig4H_K_3D_sasa_Anas.png", target_w=group_three_panel_w, trim=True),
+        make_panel("Fig4H_K_3D_sasa_Columba.png", target_w=group_three_panel_w, trim=True),
     ], gap=sub_gap, row_width=group_w)
     group_b = compose_vertical_block([hk_context_row, gi_plot_row, hj_plot_row], group_w)
 
