@@ -19,6 +19,7 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 import numpy as np
 import pandas as pd
+from scipy.spatial.distance import braycurtis, jensenshannon
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _save import save_fig
@@ -201,10 +202,10 @@ def build_identification_overview() -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def build_shared_core_similarity(
+def build_shared_core_similarity_matrices(
     groups: list[dict[str, object]], protein_to_types: dict[str, set[str]]
-) -> tuple[pd.DataFrame, int]:
-    """Measure shared-core glycan-state similarity across orthogroup-type profiles."""
+) -> tuple[dict[str, pd.DataFrame], int]:
+    """Measure composition-aware shared-core similarity across orthogroup-type profiles."""
     species_vectors = {species: [] for species in SPECIES_ORDER}
     shared_group_count = 0
 
@@ -221,24 +222,36 @@ def build_shared_core_similarity(
 
         shared_group_count += 1
         for species in SPECIES_ORDER:
-            species_vectors[species].extend(
-                species_type_counts[species][glycan_type] for glycan_type in GLYCAN_TYPES_ORDER
+            counts = np.array(
+                [species_type_counts[species][glycan_type] for glycan_type in GLYCAN_TYPES_ORDER],
+                dtype=float,
             )
+            counts /= counts.sum()
+            species_vectors[species].extend(counts.tolist())
 
     if shared_group_count == 0:
         raise ValueError("No shared orthogroups with annotated glycan types were found across all species.")
 
-    similarity = pd.DataFrame(index=SPECIES_ORDER, columns=SPECIES_ORDER, dtype=float)
+    normalized_vectors = {}
+    for species in SPECIES_ORDER:
+        vector = np.array(species_vectors[species], dtype=float)
+        normalized_vectors[species] = vector / vector.sum()
+
+    js_similarity = pd.DataFrame(index=SPECIES_ORDER, columns=SPECIES_ORDER, dtype=float)
+    bc_similarity = pd.DataFrame(index=SPECIES_ORDER, columns=SPECIES_ORDER, dtype=float)
     for species_a in SPECIES_ORDER:
-        vector_a = pd.Series(species_vectors[species_a], dtype=float)
+        vector_a = normalized_vectors[species_a]
         for species_b in SPECIES_ORDER:
             if species_a == species_b:
-                similarity.loc[species_a, species_b] = 1.0
+                js_similarity.loc[species_a, species_b] = 1.0
+                bc_similarity.loc[species_a, species_b] = 1.0
                 continue
-            vector_b = pd.Series(species_vectors[species_b], dtype=float)
-            rho = vector_a.corr(vector_b, method="spearman")
-            similarity.loc[species_a, species_b] = 0.0 if pd.isna(rho) else float(rho)
-    return similarity, shared_group_count
+            vector_b = normalized_vectors[species_b]
+            js_similarity.loc[species_a, species_b] = 1.0 - float(
+                jensenshannon(vector_a, vector_b, base=2.0)
+            )
+            bc_similarity.loc[species_a, species_b] = 1.0 - float(braycurtis(vector_a, vector_b))
+    return {"js": js_similarity, "bc": bc_similarity}, shared_group_count
 
 
 def parse_orthogroups(path: Path) -> list[dict[str, object]]:
@@ -331,6 +344,62 @@ def clean_axes(ax: plt.Axes) -> None:
     ax.tick_params(axis="both", labelsize=9.5, length=3.2, width=0.75)
 
 
+def draw_similarity_heatmap(
+    ax: plt.Axes,
+    similarity_df: pd.DataFrame,
+    title: str,
+    note: str,
+    vmin: float | None = None,
+) -> None:
+    """Render a small species-by-species similarity heatmap."""
+    similarity_matrix = similarity_df.reindex(index=SPECIES_ORDER, columns=SPECIES_ORDER)
+    values = similarity_matrix.to_numpy(dtype=float)
+    off_diagonal = values[~np.eye(len(SPECIES_ORDER), dtype=bool)]
+    min_value = float(off_diagonal.min()) if off_diagonal.size else 0.0
+    heatmap_vmin = min(min_value, 0.55) if vmin is None else vmin
+    ax.imshow(values, cmap=HEATMAP_CMAP, aspect="equal", vmin=heatmap_vmin, vmax=1.0)
+    ax.set_xticks(np.arange(len(SPECIES_ORDER)))
+    ax.set_yticks(np.arange(len(SPECIES_ORDER)))
+    ax.set_xticklabels(SPECIES_ORDER, fontsize=9.2)
+    ax.set_yticklabels(SPECIES_ORDER, fontsize=9.2)
+    for tick, species in zip(ax.get_xticklabels(), SPECIES_ORDER):
+        tick.set_color(SPECIES_COLORS[species])
+        tick.set_fontweight("bold")
+    for tick, species in zip(ax.get_yticklabels(), SPECIES_ORDER):
+        tick.set_color(SPECIES_COLORS[species])
+        tick.set_fontweight("bold")
+    for row_index in range(len(SPECIES_ORDER)):
+        for col_index in range(len(SPECIES_ORDER)):
+            value = values[row_index, col_index]
+            text_color = "white" if value >= heatmap_vmin + (1.0 - heatmap_vmin) * 0.58 else "#1F1F1F"
+            ax.text(
+                col_index,
+                row_index,
+                f"{value:.2f}",
+                ha="center",
+                va="center",
+                fontsize=8.8,
+                color=text_color,
+            )
+    ax.set_title(title, fontsize=11.2, pad=6)
+    ax.tick_params(axis="both", length=0)
+    for spine in ax.spines.values():
+        spine.set_visible(False)
+    ax.set_xticks(np.arange(-0.5, len(SPECIES_ORDER), 1), minor=True)
+    ax.set_yticks(np.arange(-0.5, len(SPECIES_ORDER), 1), minor=True)
+    ax.grid(which="minor", color="white", linewidth=1.2)
+    ax.tick_params(which="minor", bottom=False, left=False)
+    ax.text(
+        0.5,
+        -0.16,
+        note,
+        transform=ax.transAxes,
+        ha="center",
+        va="top",
+        fontsize=8.2,
+    )
+
+
 def plot_cluster_consistency(
     overview_df: pd.DataFrame, similarity_df: pd.DataFrame, shared_group_count: int
 ) -> None:
@@ -386,54 +455,44 @@ def plot_cluster_consistency(
     for handle in legend.legend_handles:
         handle.set_linewidth(0)
 
-    similarity_matrix = similarity_df.reindex(index=SPECIES_ORDER, columns=SPECIES_ORDER)
-    values = similarity_matrix.to_numpy(dtype=float)
-    off_diagonal = values[~np.eye(len(SPECIES_ORDER), dtype=bool)]
-    vmin = min(float(off_diagonal.min()), 0.55) if off_diagonal.size else 0.0
-    image = ax_right.imshow(values, cmap=HEATMAP_CMAP, aspect="equal", vmin=vmin, vmax=1.0)
-    ax_right.set_xticks(np.arange(len(SPECIES_ORDER)))
-    ax_right.set_yticks(np.arange(len(SPECIES_ORDER)))
-    ax_right.set_xticklabels(SPECIES_ORDER, fontsize=9.2)
-    ax_right.set_yticklabels(SPECIES_ORDER, fontsize=9.2)
-    for tick, species in zip(ax_right.get_xticklabels(), SPECIES_ORDER):
-        tick.set_color(SPECIES_COLORS[species])
-        tick.set_fontweight("bold")
-    for tick, species in zip(ax_right.get_yticklabels(), SPECIES_ORDER):
-        tick.set_color(SPECIES_COLORS[species])
-        tick.set_fontweight("bold")
-    for row_index in range(len(SPECIES_ORDER)):
-        for col_index in range(len(SPECIES_ORDER)):
-            value = values[row_index, col_index]
-            text_color = "white" if value >= vmin + (1.0 - vmin) * 0.58 else "#1F1F1F"
-            ax_right.text(
-                col_index,
-                row_index,
-                f"{value:.2f}",
-                ha="center",
-                va="center",
-                fontsize=8.8,
-                color=text_color,
-            )
-    ax_right.set_title("Shared-core rho", fontsize=11.2, pad=6)
-    ax_right.tick_params(axis="both", length=0)
-    for spine in ax_right.spines.values():
-        spine.set_visible(False)
-    ax_right.set_xticks(np.arange(-0.5, len(SPECIES_ORDER), 1), minor=True)
-    ax_right.set_yticks(np.arange(-0.5, len(SPECIES_ORDER), 1), minor=True)
-    ax_right.grid(which="minor", color="white", linewidth=1.2)
-    ax_right.tick_params(which="minor", bottom=False, left=False)
-    ax_right.text(
-        0.5,
-        -0.16,
-        f"Spearman rho across orthogroup-type profiles; n={shared_group_count}",
-        transform=ax_right.transAxes,
-        ha="center",
-        va="top",
-        fontsize=8.2,
+    draw_similarity_heatmap(
+        ax_right,
+        similarity_df,
+        title="Shared-core JS",
+        note=f"1 - Jensen-Shannon distance; n={shared_group_count}",
     )
 
     fig.subplots_adjust(top=0.88, bottom=0.18)
     save_fig(fig, "Fig2_cluster_glycotype_consistency")
+    plt.close(fig)
+
+
+def plot_similarity_metric_comparison(
+    js_similarity_df: pd.DataFrame, bc_similarity_df: pd.DataFrame, shared_group_count: int
+) -> None:
+    """Export a side-by-side metric comparison for selecting the main-panel distance."""
+    fig, axes = plt.subplots(1, 2, figsize=(6.6, 3.2), gridspec_kw={"wspace": 0.32})
+    shared_vmin = min(
+        float(js_similarity_df.to_numpy()[~np.eye(len(SPECIES_ORDER), dtype=bool)].min()),
+        float(bc_similarity_df.to_numpy()[~np.eye(len(SPECIES_ORDER), dtype=bool)].min()),
+        0.55,
+    )
+    draw_similarity_heatmap(
+        axes[0],
+        js_similarity_df,
+        title="Jensen-Shannon",
+        note=f"1 - JS distance; n={shared_group_count}",
+        vmin=shared_vmin,
+    )
+    draw_similarity_heatmap(
+        axes[1],
+        bc_similarity_df,
+        title="Bray-Curtis",
+        note="1 - Bray-Curtis distance",
+        vmin=shared_vmin,
+    )
+    fig.subplots_adjust(top=0.88, bottom=0.22)
+    save_fig(fig, "Fig2_shared_core_metric_comparison")
     plt.close(fig)
 
 
@@ -575,7 +634,9 @@ def main() -> None:
     groups = parse_orthogroups(orthogroup_path)
     cluster_df, type_count_df, protein_df = build_summary_tables(groups, protein_to_types)
     overview_df = build_identification_overview()
-    similarity_df, shared_group_count = build_shared_core_similarity(groups, protein_to_types)
+    similarity_matrices, shared_group_count = build_shared_core_similarity_matrices(groups, protein_to_types)
+    js_similarity_df = similarity_matrices["js"]
+    bc_similarity_df = similarity_matrices["bc"]
 
     print(f"Orthogroup file: {orthogroup_path}")
     print(f"Annotated clusters: {len(cluster_df)}")
@@ -583,12 +644,15 @@ def main() -> None:
     print("Identification overview:")
     print(overview_df.set_index("species"))
     print(f"Shared annotated orthogroups across all three species: {shared_group_count}")
-    print("Shared-core similarity matrix:")
-    print(similarity_df.round(3))
+    print("Shared-core Jensen-Shannon similarity matrix:")
+    print(js_similarity_df.round(3))
+    print("Shared-core Bray-Curtis similarity matrix:")
+    print(bc_similarity_df.round(3))
     print("Species protein-type assignment counts:")
     print(type_count_df.pivot(index="species", columns="glycan_type", values="protein_count").fillna(0).astype(int))
 
-    plot_cluster_consistency(overview_df, similarity_df, shared_group_count)
+    plot_cluster_consistency(overview_df, js_similarity_df, shared_group_count)
+    plot_similarity_metric_comparison(js_similarity_df, bc_similarity_df, shared_group_count)
     plot_species_proportions(type_count_df)
 
 
