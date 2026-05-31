@@ -637,27 +637,24 @@ def compose_fig4():
         return row
 
     def make_shared_final_legend():
-        legend_w = min(1900, inner_w // 2)
+        legend_w = min(2600, inner_w // 2)
         legend_h = 120
         legend = Image.new("RGBA", (legend_w, legend_h), (255, 255, 255, 0))
         draw = ImageDraw.Draw(legend)
         font = _load_font(52)
         text_color = (40, 40, 40, 255)
-        swatch_w = 88
-        swatch_h = 40
-        y = 34
+        y = 58
 
-        draw.rectangle((20, y, 20 + swatch_w, y + swatch_h), fill=(170, 170, 170, 255))
-        draw.text((20 + swatch_w + 24, y - 4), "Net Accessible", fill=text_color, font=font)
+        draw.line((28, y, 128, y), fill=(120, 120, 120, 255), width=10)
+        draw.ellipse((22, y - 16, 54, y + 16), fill=(120, 120, 120, 255),
+                     outline=(35, 35, 35, 255), width=2)
+        draw.text((152, y - 28), "retained / accessible", fill=text_color, font=font)
 
         x2 = legend_w // 2 + 12
-        draw.rectangle((x2, y, x2 + swatch_w, y + swatch_h),
-                       fill=(235, 235, 235, 255), outline=(145, 145, 145, 255), width=2)
-        step = 12
-        for offset in range(-swatch_h, swatch_w, step):
-            draw.line((x2 + offset, y + swatch_h, x2 + offset + swatch_h, y),
-                      fill=(160, 160, 160, 255), width=2)
-        draw.text((x2 + swatch_w + 24, y - 4), "Glycan-Shielded", fill=text_color, font=font)
+        draw.line((x2, y, x2 + 100, y), fill=(120, 120, 120, 255), width=10)
+        draw.ellipse((x2 + 70, y - 16, x2 + 102, y + 16), fill=(255, 255, 255, 255),
+                     outline=(120, 120, 120, 255), width=3)
+        draw.text((x2 + 126, y - 28), "total / full state", fill=text_color, font=font)
         return legend
 
     ab_row = compose_centered_row([

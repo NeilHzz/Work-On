@@ -22,6 +22,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+from matplotlib.lines import Line2D
 matplotlib.rcParams["font.family"] = "Times New Roman"
 matplotlib.rcParams["font.sans-serif"] = ["Times New Roman", "DejaVu Sans"]
 matplotlib.rcParams["mathtext.fontset"] = "stix"
@@ -389,44 +390,35 @@ def draw_line_panel(ax, groups_dict, ylabel, title):
 
 
 # ── 堆叠柱状图 ────────────────────────────────────────────────────────────────
-def draw_stacked_bar(ax, df, show_legend=True):
-    means, stds, shielded_means = {}, {}, {}
+def draw_hotspot_lollipop(ax, df, show_legend=True):
+    net_means, net_ci95, total_means, shielded_means = {}, {}, {}, {}
     for sp in SPECIES_ORDER:
         g = df[df.species == sp]
-        means[sp]         = g['net_accessible'].mean()
-        stds[sp]          = g['net_accessible'].std() / np.sqrt(len(g)) * 1.96
+        net_means[sp]      = g['net_accessible'].mean()
+        net_ci95[sp]       = g['net_accessible'].std() / np.sqrt(len(g)) * 1.96
+        total_means[sp]    = g['n_hotspots'].mean()
         shielded_means[sp] = g['n_shielded_cands'].mean()
 
     xs = np.arange(len(SPECIES_ORDER))
-    bar_w = 0.52
-
     for i, sp in enumerate(SPECIES_ORDER):
-        col  = SPECIES_COLOR[sp]
-        net  = means[sp]
-        sh   = shielded_means[sp]
-        err  = stds[sp]
-
-        # Net accessible bar (solid)
-        ax.bar(xs[i], net, bar_w, color=col, alpha=1.0,
-               label='Net Accessible' if i == 0 else '')
-
-        # Shielded bar on top (hatched)
-        ax.bar(xs[i], sh, bar_w, bottom=net, color=col, alpha=0.28,
-               hatch='///', edgecolor=col, linewidth=0.6,
-             label='Glycan-Shielded' if i == 0 else '')
-
-        # Error bar on net
-        ax.errorbar(xs[i], net, yerr=err, fmt='none',
-                    color='#333', elinewidth=1.4, capsize=5, zorder=5)
-
-        # Text labels
-        ax.text(xs[i], net / 2, f'{net:.1f}', ha='center', va='center',
-            fontsize=VALUE_FS, color='white')
-        ax.text(xs[i], net + sh / 2, f'{sh:.1f}', ha='center', va='center',
-            fontsize=VALUE_FS, color='#555')
+        color = SPECIES_COLOR[sp]
+        net = net_means[sp]
+        total = total_means[sp]
+        loss = shielded_means[sp]
+        ax.vlines(xs[i], net, total, color=color, linewidth=8, alpha=0.32, zorder=1)
+        ax.scatter(xs[i], total, s=120, facecolor='white', edgecolor=color,
+                   linewidth=2.0, zorder=4)
+        ax.errorbar(xs[i], net, yerr=net_ci95[sp], fmt='o', markersize=10,
+                    markerfacecolor=color, markeredgecolor='#222222',
+                    markeredgewidth=0.9, ecolor='#333333', elinewidth=1.4,
+                    capsize=5, zorder=5)
+        ax.text(xs[i] + 0.06, total, f'{total:.1f}', ha='left', va='center',
+                fontsize=VALUE_FS - 2, color='#555')
+        ax.text(xs[i] + 0.06, (net + total) / 2, f'-{loss:.1f}', ha='left',
+                va='center', fontsize=VALUE_FS - 3, color='#555')
 
     # Duncan's MRT CLD letters on net_accessible
-    y_top = max(means[sp] + shielded_means[sp] for sp in SPECIES_ORDER)
+    y_top = max(total_means[sp] for sp in SPECIES_ORDER)
     res_bar = duncan_mrt(
         [df[df.species == sp]['net_accessible'].values for sp in SPECIES_ORDER],
         SPECIES_ORDER)
@@ -440,7 +432,7 @@ def draw_stacked_bar(ax, df, show_legend=True):
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
     style_panel_axes(
         ax,
-        'Hotspot Count (mean ± 95% CI)',
+        'Hotspot Count',
         f'Ca$^{{2+}}$ Hotspot Accessibility\n{format_p_value(res_bar["p_anova"])}',
     )
     ax.set_ylim(0, letter_y + y_top * 0.22)
@@ -448,9 +440,10 @@ def draw_stacked_bar(ax, df, show_legend=True):
 
     if show_legend:
         legend_handles = [
-            mpatches.Patch(facecolor='#aaa', label='Net Accessible'),
-            mpatches.Patch(facecolor='#ddd', hatch='///', edgecolor='#888',
-                           label='Glycan-Shielded'),
+            Line2D([0], [0], marker='o', color='none', markerfacecolor='#777',
+                   markeredgecolor='#222', markersize=8, label='Net Accessible'),
+            Line2D([0], [0], marker='o', color='none', markerfacecolor='white',
+                   markeredgecolor='#777', markersize=8, label='Total Candidate'),
         ]
         ax.legend(handles=legend_handles, fontsize=LEGEND_FS - 2,
                   loc='upper left', bbox_to_anchor=(0.52, 0.98),
@@ -460,45 +453,41 @@ def draw_stacked_bar(ax, df, show_legend=True):
 
 
 # ── Panel F: 热点残基 SASA 堆叠柱图（iface_full_sasa vs. iface_shielding）─────
-def draw_sasa_bar(ax, df, show_legend=True):
-    means, stds, shielded_means = {}, {}, {}
+def draw_sasa_dumbbell(ax, df, show_legend=True):
+    full_means, residual_means, residual_ci95, shielded_means = {}, {}, {}, {}
     for sp in SPECIES_ORDER:
         g = df[df.species == sp]
-        means[sp]          = g['iface_full_sasa'].mean()
-        stds[sp]           = g['iface_full_sasa'].std() / np.sqrt(len(g)) * 1.96
+        residual = g['iface_full_sasa'] - g['iface_shielding']
+        full_means[sp]     = g['iface_full_sasa'].mean()
+        residual_means[sp] = residual.mean()
+        residual_ci95[sp]  = residual.std() / np.sqrt(len(residual)) * 1.96
         shielded_means[sp] = g['iface_shielding'].mean()
 
     xs    = np.arange(len(SPECIES_ORDER))
-    bar_w = 0.52
-
+    y_top = max(full_means[sp] for sp in SPECIES_ORDER)
     for i, sp in enumerate(SPECIES_ORDER):
-        col  = SPECIES_COLOR[sp]
-        net  = means[sp]
-        sh   = shielded_means[sp]
-        err  = stds[sp]
+        color = SPECIES_COLOR[sp]
+        full = full_means[sp]
+        residual = residual_means[sp]
+        shielded = shielded_means[sp]
+        ax.vlines(xs[i], residual, full, color=color, linewidth=8,
+                  alpha=0.32, zorder=1)
+        ax.scatter(xs[i], full, s=120, facecolor='white', edgecolor=color,
+                   linewidth=2.0, zorder=4)
+        ax.errorbar(xs[i], residual, yerr=residual_ci95[sp], fmt='o', markersize=10,
+                    markerfacecolor=color, markeredgecolor='#222222',
+                    markeredgewidth=0.9, ecolor='#333333', elinewidth=1.4,
+                    capsize=5, zorder=5)
+        ax.text(xs[i] + 0.07, full, f'{full:.1f}', ha='left', va='center',
+                fontsize=VALUE_FS - 2, color='#555')
+        loss_label_y = residual - max(0.7, y_top * 0.018)
+        ax.text(xs[i] + 0.07, loss_label_y, f'-{shielded:.1f}',
+            ha='left', va='center', fontsize=VALUE_FS - 3, color='#555')
 
-        ax.bar(xs[i], net, bar_w, color=col, alpha=1.0,
-            label='Net Accessible' if i == 0 else '')
-        ax.bar(xs[i], sh, bar_w, bottom=net, color=col, alpha=0.28,
-            hatch='///', edgecolor=col, linewidth=0.6,
-            label='Glycan-Shielded' if i == 0 else '')
-        ax.errorbar(xs[i], net, yerr=err, fmt='none',
-                    color='#333', elinewidth=1.4, capsize=5, zorder=5)
-        ax.text(xs[i], net / 2, f'{net:.1f}',
-            ha='center', va='center', fontsize=VALUE_FS, color='white')
-        # shielded 段太窄时将标注移到柱顶上方避免遗挮
-        min_inside = (net + sh) * 0.09
-        if sh >= min_inside:
-            ax.text(xs[i], net + sh / 2, f'{sh:.1f}',
-                    ha='center', va='center', fontsize=VALUE_FS, color='#555')
-        else:
-            ax.text(xs[i], net + sh + (net + sh) * 0.015, f'{sh:.1f}',
-                    ha='center', va='bottom', fontsize=VALUE_FS, color='#555')
-
-    y_top = max(means[sp] + shielded_means[sp] for sp in SPECIES_ORDER)
-    # Duncan's MRT CLD letters on iface_full_sasa
+    # Duncan's MRT CLD letters on residual hotspot SASA
     res_sasa = duncan_mrt(
-        [df[df.species == sp]['iface_full_sasa'].values for sp in SPECIES_ORDER],
+        [(df[df.species == sp]['iface_full_sasa'] -
+          df[df.species == sp]['iface_shielding']).values for sp in SPECIES_ORDER],
         SPECIES_ORDER)
     letter_y = y_top + (y_top * 0.08)
     for xi, sp in enumerate(SPECIES_ORDER):
@@ -517,9 +506,10 @@ def draw_sasa_bar(ax, df, show_legend=True):
     ax.set_xlim(-0.6, len(SPECIES_ORDER) - 0.4)
     if show_legend:
         legend_handles = [
-            mpatches.Patch(facecolor='#aaa', label='Net Accessible'),
-            mpatches.Patch(facecolor='#ddd', hatch='///', edgecolor='#888',
-                           label='Glycan-Shielded'),
+             Line2D([0], [0], marker='o', color='none', markerfacecolor='#777',
+                 markeredgecolor='#222', markersize=8, label='Residual'),
+             Line2D([0], [0], marker='o', color='none', markerfacecolor='white',
+                 markeredgecolor='#777', markersize=8, label='Full'),
         ]
         ax.legend(handles=legend_handles, fontsize=LEGEND_FS - 2,
                   loc='upper left', bbox_to_anchor=(0.52, 0.98),
@@ -572,18 +562,18 @@ def main():
         save_panel(fig, f'Fig5{chr(ord("I") + ord(lbl) - ord("A"))}')
         plt.close(fig)
 
-    # Panel E: stacked bar
+    # Panel E: total-to-net lollipop
     fig, ax = plt.subplots(figsize=PANEL_FIGSIZE)
     fig.patch.set_facecolor('white')
-    draw_stacked_bar(ax, df, show_legend=False)
+    draw_hotspot_lollipop(ax, df, show_legend=False)
     fig.subplots_adjust(**PANEL_ADJUST)
     save_panel(fig, 'Fig5M')
     plt.close(fig)
 
-    # Panel F: SASA bar
+    # Panel F: full-to-residual SASA dumbbell
     fig, ax = plt.subplots(figsize=PANEL_FIGSIZE)
     fig.patch.set_facecolor('white')
-    draw_sasa_bar(ax, df, show_legend=False)
+    draw_sasa_dumbbell(ax, df, show_legend=False)
     fig.subplots_adjust(**PANEL_ADJUST)
     save_panel(fig, 'Fig5N')
     plt.close(fig)
