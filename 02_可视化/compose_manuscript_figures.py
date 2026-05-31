@@ -531,17 +531,16 @@ def compose_fig2():
     # A: current glycoprotein orthogroup UpSet plot, full width for readability.
     A = panel("Fig2.png", "A", inner_w, trim=False)
 
-    # B-C: equal-height analytical panels to keep the middle row compact and balanced.
+    # B-C: diversity summary plus species-level composition.
     row2 = fit_row([
         ("Fig2_cluster_glycotype_consistency.png", "B", True),
-        ("Fig2_species_glycotype_heatmap.png", "C", True),
+        ("Fig2_species_glycotype_proportion.png", "C", True),
     ], inner_w)
 
-    # D-E: keep the narrative order but scale both panels to the same height so the final row reads as one unit.
+    # D: centered ortholog chord panel after removing the redundant heatmap panel.
     row3 = fit_row([
-        ("Fig2_species_glycotype_proportion.png", "D", True),
-        (FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", True),
-    ], inner_w)
+        (FINAL_MAIN_SUBFIGS / "Fig3A.png", "D", True),
+    ], int(inner_w * 0.72))
 
     rows = [A, row2, row3]
     total_h = 2 * MARGIN + sum(row.height for row in rows) + GAP * (len(rows) - 1)

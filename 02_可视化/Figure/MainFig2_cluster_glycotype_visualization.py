@@ -1,9 +1,9 @@
-"""Visualize glycan-type consistency within Fig. 2 glycoprotein orthogroups.
+"""Visualize glycan-type diversity within Fig. 2 glycoprotein orthogroups.
 
 The script reuses the seven glycan-type classes from the original Fig2 Circle
 analysis and summarizes two related questions:
-  1. Are proteins within an orthogroup assigned to the same glycan-type set?
-  2. What is the glycan-type composition within each species?
+    1. How diverse are glycan-type assignments within each orthogroup?
+    2. What is the glycan-type composition within each species?
 """
 
 from __future__ import annotations
@@ -66,11 +66,6 @@ GLYCAN_TYPE_COLORS = {
     "Complex-Fucosylated": "#C9793C",
     "Complex-Sialylated": "#7DB8D8",
     "Other": "#777777",
-}
-CONSISTENCY_COLORS = {
-    "Single glycan type": "#6BA982",
-    "Same multi-type set": "#6E8EAD",
-    "Mixed type sets": "#B96B70",
 }
 DIVERSITY_CMAP = mcolors.LinearSegmentedColormap.from_list(
     "fig2_diversity_muted", ["#F4D57B", "#E8B45B", "#D98C4D", "#C9694A", "#B64D57"]
@@ -186,12 +181,16 @@ def build_summary_tables(
 
         type_sets = [types for _, _, types in annotated]
         union_types = set().union(*type_sets)
-        if len(union_types) == 1:
-            category = "Single glycan type"
-        elif len(set(type_sets)) == 1:
-            category = "Same multi-type set"
-        else:
-            category = "Mixed type sets"
+        assignment_counts = Counter(
+            glycan_type
+            for _, _, types in annotated
+            for glycan_type in types
+        )
+        total_assignments = sum(assignment_counts.values())
+        shannon_index = 0.0
+        if total_assignments:
+            proportions = np.array(list(assignment_counts.values()), dtype=float) / total_assignments
+            shannon_index = float(-(proportions * np.log2(proportions)).sum())
 
         cluster_rows.append(
             {
@@ -199,8 +198,9 @@ def build_summary_tables(
                 "annotated_proteins": len(annotated),
                 "species_count": len({species for species, _, _ in annotated}),
                 "union_type_count": len(union_types),
+                "glycan_type_richness": len(union_types),
+                "shannon_index": shannon_index,
                 "union_types": "; ".join(gt for gt in GLYCAN_TYPES_ORDER if gt in union_types),
-                "consistency_category": category,
             }
         )
 
@@ -236,7 +236,6 @@ def clean_axes(ax: plt.Axes) -> None:
 
 
 def plot_cluster_consistency(cluster_df: pd.DataFrame) -> None:
-    total = len(cluster_df)
     fig, (ax_left, ax_right) = plt.subplots(
         1,
         2,
@@ -244,60 +243,60 @@ def plot_cluster_consistency(cluster_df: pd.DataFrame) -> None:
         gridspec_kw={"width_ratios": [1.08, 1.0], "wspace": 0.32},
     )
 
-    category_order = ["Single glycan type", "Same multi-type set", "Mixed type sets"]
-    counts = cluster_df["consistency_category"].value_counts().reindex(category_order, fill_value=0)
-    x = np.arange(len(category_order))
+    richness_counts = cluster_df["glycan_type_richness"].value_counts().sort_index()
+    x = richness_counts.index.to_numpy()
     bars = ax_left.bar(
         x,
-        counts.values,
+        richness_counts.values,
         width=0.64,
-        color=[CONSISTENCY_COLORS[item] for item in category_order],
+        color=DIVERSITY_CMAP(np.linspace(0.12, 0.92, len(x))),
         edgecolor="#2E2E2E",
         linewidth=0.7,
     )
-    for bar, count in zip(bars, counts.values):
+    for bar, count in zip(bars, richness_counts.values):
         ax_left.text(
             bar.get_x() + bar.get_width() / 2,
-            bar.get_height() + max(total * 0.018, 1.0),
-            f"{count}\n{count / total * 100:.1f}%",
+            bar.get_height() + max(cluster_df.shape[0] * 0.018, 1.0),
+            f"{count}",
             ha="center",
             va="bottom",
             fontsize=9.0,
         )
     ax_left.set_xticks(x)
-    ax_left.set_xticklabels(["Single\ntype", "Same\nmulti-type set", "Mixed\ntype sets"], fontsize=9.0)
+    ax_left.set_xticklabels([str(value) for value in x], fontsize=9.0)
+    ax_left.set_xlabel("Glycan types observed per cluster", fontsize=10.5)
     ax_left.set_ylabel("Cluster count", fontsize=10.5)
-    ax_left.set_title("Within-cluster glycan-type consistency", fontsize=12, pad=8)
-    ax_left.set_ylim(0, max(counts.values) * 1.18)
+    ax_left.set_title("Cluster glycan-type richness", fontsize=12, pad=8)
+    ax_left.set_ylim(0, max(richness_counts.values) * 1.18)
     clean_axes(ax_left)
 
-    union_counts = Counter(cluster_df["union_type_count"])
-    union_x = np.arange(1, len(GLYCAN_TYPES_ORDER) + 1)
-    union_y = [union_counts.get(value, 0) for value in union_x]
-    colors = DIVERSITY_CMAP(np.linspace(0.08, 0.92, len(union_x)))
+    shannon_values = cluster_df["shannon_index"].to_numpy()
+    bin_edges = np.linspace(0, max(shannon_values.max(), 0.5), 8)
+    counts, edges = np.histogram(shannon_values, bins=bin_edges)
+    centers = (edges[:-1] + edges[1:]) / 2
+    widths = np.diff(edges) * 0.88
     bars = ax_right.bar(
-        union_x,
-        union_y,
-        width=0.68,
-        color=colors,
+        centers,
+        counts,
+        width=widths,
+        color="#C9877B",
         edgecolor="#2E2E2E",
         linewidth=0.7,
     )
-    for bar, count in zip(bars, union_y):
+    for bar, count in zip(bars, counts):
         if count:
             ax_right.text(
                 bar.get_x() + bar.get_width() / 2,
-                bar.get_height() + max(max(union_y) * 0.025, 0.45),
+                bar.get_height() + max(max(counts) * 0.025, 0.45),
                 str(count),
                 ha="center",
                 va="bottom",
                 fontsize=9.0,
             )
-    ax_right.set_xticks(union_x)
-    ax_right.set_xlabel("Glycan types observed per cluster", fontsize=10.5)
+    ax_right.set_xlabel("Shannon diversity index", fontsize=10.5)
     ax_right.set_ylabel("Cluster count", fontsize=10.5)
-    ax_right.set_title("Cluster glycan-type diversity", fontsize=12, pad=8)
-    ax_right.set_ylim(0, max(union_y) * 1.18)
+    ax_right.set_title("Cluster glycan-type Shannon diversity", fontsize=12, pad=8)
+    ax_right.set_ylim(0, max(counts) * 1.18)
     clean_axes(ax_right)
 
     save_fig(fig, "Fig2_cluster_glycotype_consistency")
@@ -443,15 +442,14 @@ def main() -> None:
 
     print(f"Orthogroup file: {orthogroup_path}")
     print(f"Annotated clusters: {len(cluster_df)}")
-    print("Consistency categories:", cluster_df["consistency_category"].value_counts().to_dict())
-    print("Union type-count distribution:", dict(sorted(Counter(cluster_df["union_type_count"]).items())))
+    print("Richness distribution:", dict(sorted(Counter(cluster_df["glycan_type_richness"]).items())))
+    print("Shannon index summary:", cluster_df["shannon_index"].describe().round(3).to_dict())
     print(f"Annotated proteins in current orthogroups: {len(protein_df)}")
     print("Species protein-type assignment counts:")
     print(type_count_df.pivot(index="species", columns="glycan_type", values="protein_count").fillna(0).astype(int))
 
     plot_cluster_consistency(cluster_df)
     plot_species_proportions(type_count_df)
-    plot_species_type_heatmap(type_count_df)
 
 
 if __name__ == "__main__":
