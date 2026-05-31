@@ -514,9 +514,9 @@ def main():
 
     panel_drawers = {
         'A': draw_half_violin_box_panel,
-        'B': draw_slim_bar_jitter_panel,
+        'B': draw_half_violin_box_panel,
         'C': draw_slim_bar_jitter_panel,
-        'D': draw_violin_panel,
+        'D': draw_slim_bar_jitter_panel,
     }
 
     # Panels A-D: semantic plot styles, with unchanged panel size and filenames

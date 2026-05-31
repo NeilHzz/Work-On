@@ -423,12 +423,11 @@ def draw_ca2_sasa(ax, csv_map):
 
 # ─── Panel D: APBS 中位值 strip ───────────────────────────────────────────
 def draw_apbs_strip(ax, summary, csv_map):
-    """Panel D: raincloud 展示表面 APBS 所有残基电位分布，
-    糖基化为主 raincloud，叠加 apo 中位值参考点 + 统计括号。
+    """Panel D: 小提琴图展示表面 APBS 所有残基电位分布，
+    糖基化并列，叠加 apo 单点 + 统计括号。
     """
     species_order = ['Gallus', 'Anas', 'Columba']
     x_map = {sp: i for i, sp in enumerate(species_order)}
-    rng = np.random.default_rng(42)
 
     # 收集小提琴数据（每结构所有表面残基 APBS 值）
     datasets_glyc = {sp: [] for sp in species_order}
@@ -457,38 +456,32 @@ def draw_apbs_strip(ax, summary, csv_map):
         all_vals.extend(gd.tolist())
         if len(ad): all_vals.extend(ad.tolist())
 
-        # Raincloud: half violin + slim box + sparse jitter for glycosylated surfaces
+        # 小提琴：糖基化（实心）
         if len(gd) > 1:
-            vp = ax.violinplot([gd], positions=[xi],
-                               showmedians=False, showextrema=False, widths=0.72)
+            vp = ax.violinplot([gd], positions=[xi - 0.15],
+                               showmedians=True, showextrema=False, widths=0.55)
             for body in vp['bodies']:
-                vertices = body.get_paths()[0].vertices
-                vertices[:, 0] = np.minimum(vertices[:, 0], xi)
                 body.set_facecolor(col)
-                body.set_alpha(0.70)
+                body.set_alpha(0.60)
                 body.set_edgecolor('none')
+            vp['cmedians'].set_color('white')
+            vp['cmedians'].set_linewidth(1.5)
 
-            box = ax.boxplot([gd], positions=[xi + 0.12], widths=0.18,
-                             patch_artist=True, showfliers=False,
-                             medianprops=dict(color='#222222', linewidth=1.3),
-                             whiskerprops=dict(color='#555555', linewidth=0.9),
-                             capprops=dict(color='#555555', linewidth=0.9))
-            box['boxes'][0].set_facecolor('white')
-            box['boxes'][0].set_alpha(0.88)
-            box['boxes'][0].set_edgecolor(col)
-            box['boxes'][0].set_linewidth(1.1)
-
-            shown = gd if len(gd) <= 180 else rng.choice(gd, size=180, replace=False)
-            jitter = rng.uniform(0.17, 0.34, size=len(shown))
-            ax.scatter(xi + jitter, shown, s=8, color=col,
-                       alpha=0.52, linewidths=0, zorder=3)
-
-        if len(ad):
-            apo_y = np.median(ad)
-            ax.scatter([xi + 0.36], [apo_y], s=58, color='white', marker='D',
-                       edgecolors=col, linewidths=1.4, alpha=0.95, zorder=6)
-            ax.hlines(apo_y, xi + 0.29, xi + 0.43,
-                      color=col, lw=1.1, alpha=0.85, zorder=5)
+        # 小提琴：apo（半透明虚线轮廓）
+        if len(ad) > 1:
+            vp2 = ax.violinplot([ad], positions=[xi + 0.15],
+                                showmedians=True, showextrema=False, widths=0.55)
+            for body in vp2['bodies']:
+                body.set_facecolor(col)
+                body.set_alpha(0.28)
+                body.set_edgecolor(col)
+                body.set_linewidth(1)
+            vp2['cmedians'].set_color(col)
+            vp2['cmedians'].set_linewidth(1.5)
+            vp2['cmedians'].set_alpha(0.7)
+        elif len(ad) == 1:
+            ax.scatter([xi + 0.15], ad, s=60, color=col, marker='D',
+                       edgecolors=col, linewidths=1, alpha=0.65, zorder=5)
 
     ax.axhline(0, color='#666', lw=0.8, ls=':', alpha=0.5)
     ax.axhline(-5, color='#e53935', lw=0.9, ls='--', alpha=0.6)
@@ -512,13 +505,12 @@ def draw_apbs_strip(ax, summary, csv_map):
             tick_h   = rng_span * 0.04
             y0_base  = max(all_vals) + rng_span * 0.06
             for xi, lbl in stat_queue_d:
-                _stat_bracket(ax, xi + 0.02, xi + 0.36, y0_base, tick_h, lbl)
+                _stat_bracket(ax, xi - 0.15, xi + 0.15, y0_base, tick_h, lbl)
 
     ax.set_xticks(range(len(species_order)))
     ax.set_xticklabels(species_order, fontsize=TICK_FS)
     ax.set_ylabel('Surface APBS potential (kT/e)', fontsize=AXIS_LABEL_FS)
     ax.set_title('Surface Potential Distribution', fontsize=TITLE_FS, pad=8)
-    ax.set_xlim(-0.55, len(species_order) - 0.45)
     if all_vals:
         ax.set_ylim(min(all_vals) - 1, max(all_vals) * 1.3 + 1)
 
