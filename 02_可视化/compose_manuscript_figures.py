@@ -531,8 +531,8 @@ def compose_fig2():
     # A: current glycoprotein orthogroup UpSet plot, full width for readability.
     A = panel("Fig2.png", "A", inner_w, trim=False)
 
-    # B-C: narrow support panel plus wider composition panel, matching publication-style emphasis.
-    b_w = int(inner_w * 0.34)
+    # B-C: keep C dominant, but give B enough room to read both overview and similarity.
+    b_w = int(inner_w * 0.39)
     c_w = inner_w - b_w - GAP
     B = panel("Fig2_cluster_glycotype_consistency.png", "B", target_w=b_w, trim=True)
     C = panel("Fig2_species_glycotype_proportion.png", "C", target_w=c_w, trim=True)

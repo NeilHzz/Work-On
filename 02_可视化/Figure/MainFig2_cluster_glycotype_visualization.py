@@ -369,7 +369,7 @@ def plot_cluster_consistency(
     ax_left.set_xticks(x)
     ax_left.set_xticklabels(metric_labels, fontsize=8.9)
     ax_left.set_ylabel("Count", fontsize=10.5)
-    ax_left.set_title("Identification overview", fontsize=11.2, pad=6)
+    ax_left.set_title("Coverage", fontsize=11.2, pad=6)
     ax_left.grid(axis="y", color="#D9D9D9", linewidth=0.6)
     ax_left.set_axisbelow(True)
     ax_left.set_ylim(0, max_value * 1.16)
@@ -414,7 +414,7 @@ def plot_cluster_consistency(
                 fontsize=8.8,
                 color=text_color,
             )
-    ax_right.set_title("Shared-core similarity", fontsize=11.2, pad=6)
+    ax_right.set_title("Shared-core rho", fontsize=11.2, pad=6)
     ax_right.tick_params(axis="both", length=0)
     for spine in ax_right.spines.values():
         spine.set_visible(False)
