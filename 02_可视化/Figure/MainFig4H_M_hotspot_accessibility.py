@@ -410,7 +410,7 @@ def draw_hotspot_lollipop(ax, df, show_legend=True):
         vertices = body.get_paths()[0].vertices
         vertices[:, 0] = np.minimum(vertices[:, 0], center)
         body.set_facecolor(SPECIES_COLOR[sp])
-        body.set_alpha(0.36)
+        body.set_alpha(0.52)
         body.set_edgecolor('none')
 
     for i, sp in enumerate(SPECIES_ORDER):
@@ -423,7 +423,7 @@ def draw_hotspot_lollipop(ax, df, show_legend=True):
             shown = rng.choice(shown, size=160, replace=False)
         jitter = rng.uniform(-0.28, -0.12, len(shown))
         ax.scatter(xs[i] + jitter, shown, s=10, color=color,
-                   alpha=0.45, edgecolors='none', zorder=2)
+               alpha=0.26, edgecolors='none', zorder=2)
         ax.vlines(xs[i], net, total, color=color, linewidth=8, alpha=0.32, zorder=1)
         ax.scatter(xs[i], total, s=120, facecolor='white', edgecolor=color,
                    linewidth=2.0, zorder=4)
@@ -496,7 +496,7 @@ def draw_sasa_dumbbell(ax, df, show_legend=True):
         vertices = body.get_paths()[0].vertices
         vertices[:, 0] = np.minimum(vertices[:, 0], center)
         body.set_facecolor(SPECIES_COLOR[sp])
-        body.set_alpha(0.36)
+        body.set_alpha(0.52)
         body.set_edgecolor('none')
 
     for i, sp in enumerate(SPECIES_ORDER):
@@ -509,7 +509,7 @@ def draw_sasa_dumbbell(ax, df, show_legend=True):
             shown = rng.choice(shown, size=160, replace=False)
         jitter = rng.uniform(-0.28, -0.12, len(shown))
         ax.scatter(xs[i] + jitter, shown, s=10, color=color,
-                   alpha=0.45, edgecolors='none', zorder=2)
+               alpha=0.26, edgecolors='none', zorder=2)
         ax.vlines(xs[i], residual, full, color=color, linewidth=8,
                   alpha=0.32, zorder=1)
         ax.scatter(xs[i], full, s=120, facecolor='white', edgecolor=color,
