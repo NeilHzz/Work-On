@@ -527,29 +527,36 @@ def compose_fig2():
             x += panel_img.width + GAP
         return row
 
-    # A: current glycoprotein orthogroup UpSet plot, full width for readability.
-    A = panel("Fig2.png", "A", inner_w, trim=False)
+    # C is omitted in the current layout. A/B/D stay together on the left; E moves to the right.
+    right_w = int((inner_w - GAP) * 0.34)
+    left_w = inner_w - right_w - GAP
 
-    # B-C: equal-height analytical panels to keep the middle row compact and balanced.
-    row2 = fit_row([
-        ("Fig2_cluster_glycotype_consistency.png", "B", True),
-        ("Fig2_species_glycotype_heatmap.png", "C", True),
-    ], inner_w)
+    A = panel("Fig2.png", "A", left_w, trim=False)
 
-    # D-E: keep the narrative order but scale both panels to the same height so the final row reads as one unit.
-    row3 = fit_row([
-        ("Fig2_species_glycotype_proportion.png", "D", True),
-        (FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", True),
-    ], inner_w)
+    bd_w = (left_w - GAP) // 2
+    B = panel("Fig2_cluster_glycotype_consistency.png", "B", bd_w, trim=True)
+    D = panel("Fig2_species_glycotype_proportion.png", "D", left_w - bd_w - GAP, trim=True)
+    row_bd_h = max(B.height, D.height)
+    row_bd = Image.new("RGBA", (left_w, row_bd_h), (255, 255, 255, 0))
+    paste(row_bd, B, 0, 0)
+    paste(row_bd, D, bd_w + GAP, 0)
 
-    rows = [A, row2, row3]
-    total_h = 2 * MARGIN + sum(row.height for row in rows) + GAP * (len(rows) - 1)
+    left_block_h = A.height + GAP + row_bd.height
+    left_block = Image.new("RGBA", (left_w, left_block_h), (255, 255, 255, 0))
+    paste(left_block, A, 0, 0)
+    paste(left_block, row_bd, 0, A.height + GAP)
+
+    E = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", right_w, trim=True)
+
+    content_h = max(left_block.height, E.height)
+    content = Image.new("RGBA", (inner_w, content_h), (255, 255, 255, 0))
+    paste(content, left_block, 0, 0)
+    paste(content, E, left_w + GAP, max(0, (content_h - E.height) // 2))
+
+    total_h = 2 * MARGIN + content.height
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
 
-    y = MARGIN
-    for row in rows:
-        paste(canvas, row, MARGIN, y)
-        y += row.height + GAP
+    paste(canvas, content, MARGIN, MARGIN)
     save_fig(canvas, "Fig2_composed")
 
 

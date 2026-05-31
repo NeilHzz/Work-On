@@ -10,9 +10,9 @@ Count: 30 legacy matched panel PNGs; current Fig2_composed now includes addition
 - Fig1C.png <= eggtooth/Gallus.jpg + eggtooth/Anas.jpg + eggtooth/Columba.jpg
 - Fig1D.png <= Fig1D.png
 - Fig2A <= Figure/PNG/Fig2.png (glycoprotein orthogroup UpSet)
-- Fig2B <= Figure/PNG/Fig2_species_glycotype_proportion.png (species-level glycan-type composition)
-- Fig2C <= Figure/PNG/Fig2_coverage_overview.png (per-species identification coverage overview)
-- Fig2D <= Figure/PNG/Fig2_shared_core_js.png (shared-core Jensen-Shannon similarity heatmap)
+- Fig2B <= Figure/PNG/Fig2_cluster_glycotype_consistency.png (coverage overview + shared-core Jensen-Shannon similarity)
+- Fig2C <= omitted from current composed layout
+- Fig2D <= Figure/PNG/Fig2_species_glycotype_proportion.png (species-level glycan-type composition)
 - Fig2E <= 260526/01_main_subfigures_matched_to_composed/Fig3A.png (BLAST ortholog chord diagram; within-species order = bitscore; arc width = sequence length; chord endpoints = HSP regions; target matrix proteins use full-name arrow labels; no no-ortholog sector)
 - Fig2 Circle.png <= archived previous circle version
 - Fig3B.png <= Fig4A.png
