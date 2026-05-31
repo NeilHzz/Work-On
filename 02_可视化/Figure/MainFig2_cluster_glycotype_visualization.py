@@ -415,32 +415,37 @@ def plot_cluster_consistency(
     overview_matrix = overview_df.set_index("species").reindex(SPECIES_ORDER)
     y = np.arange(len(metric_keys), dtype=float)
     max_value = overview_matrix[metric_keys].to_numpy().max()
-    label_offsets = {
-        "Gallus": (0.0, -0.17, "center"),
-        "Columba": (-8.0, -0.08, "right"),
-        "Anas": (8.0, -0.08, "left"),
-    }
+    species_offsets = {"Gallus": -0.18, "Columba": 0.0, "Anas": 0.18}
     for row_index, metric_key in enumerate(metric_keys):
+        ax_left.hlines(y[row_index], 0, max_value * 1.02, color="#E7E7E7", linewidth=0.8, zorder=0)
         values = overview_matrix[metric_key].to_numpy(dtype=float)
-        ax_left.hlines(y[row_index], values.min(), values.max(), color="#D9D9D9", linewidth=1.0, zorder=1)
         for species, value in zip(SPECIES_ORDER, values):
+            y_pos = y[row_index] + species_offsets[species]
+            ax_left.hlines(
+                y_pos,
+                0,
+                value,
+                color=SPECIES_COLORS[species],
+                linewidth=1.6,
+                alpha=0.9,
+                zorder=2,
+            )
             ax_left.scatter(
                 value,
-                y[row_index],
-                s=64,
+                y_pos,
+                s=58,
                 color=SPECIES_COLORS[species],
                 edgecolors="white",
                 linewidths=0.8,
                 zorder=3,
                 label=species if row_index == 0 else None,
             )
-            x_offset, y_offset, align = label_offsets[species]
             ax_left.text(
-                value + x_offset,
-                y[row_index] + y_offset,
+                value + max_value * 0.015,
+                y_pos,
                 f"{int(value)}",
-                ha=align,
-                va="bottom",
+                ha="left",
+                va="center",
                 fontsize=8.1,
             )
     ax_left.set_yticks(y)
@@ -448,7 +453,7 @@ def plot_cluster_consistency(
     ax_left.set_xlabel("Count", fontsize=10.5)
     ax_left.grid(axis="x", color="#E2E2E2", linewidth=0.6)
     ax_left.set_axisbelow(True)
-    ax_left.set_xlim(0, max_value * 1.10)
+    ax_left.set_xlim(0, max_value * 1.22)
     ax_left.set_ylim(-0.55, len(metric_keys) - 0.45)
     ax_left.invert_yaxis()
     clean_axes(ax_left)
