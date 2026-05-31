@@ -537,8 +537,8 @@ def compose_fig2():
 
     fig2_gap = 42
 
-    # Row 1: A remains dominant; B is a narrower support panel.
-    a_w = int(inner_w * 0.72)
+    # Row 1: A takes 3/4 width; B takes 1/4 width.
+    a_w = int((inner_w - fig2_gap) * 0.75)
     b_w = inner_w - a_w - fig2_gap
     A = panel("Fig2.png", "A", target_w=a_w, trim=False)
     B = panel("Fig2_coverage_overview.png", "B", target_w=b_w, trim=True)
@@ -547,15 +547,15 @@ def compose_fig2():
     paste(row1, A, 0, max(0, (row1_h - A.height) // 2))
     paste(row1, B, a_w + fig2_gap, max(0, (row1_h - B.height) // 2))
 
-    # Row 2: C remains compact; D gets more horizontal room for the main composition panel.
-    c_w = int(inner_w * 0.34)
-    d_w = inner_w - c_w - fig2_gap
-    C = panel("Fig2_shared_core_js.png", "C", target_w=c_w, trim=True)
+    # Row 2: D takes 3/4 width; C takes 1/4 width.
+    d_w = int((inner_w - fig2_gap) * 0.75)
+    c_w = inner_w - d_w - fig2_gap
     D = panel("Fig2_species_glycotype_proportion.png", "D", target_w=d_w, trim=True)
+    C = panel("Fig2_shared_core_js.png", "C", target_w=c_w, trim=True)
     row2_h = max(C.height, D.height)
     row2 = Image.new("RGBA", (inner_w, row2_h), (255, 255, 255, 0))
-    paste(row2, C, 0, max(0, (row2_h - C.height) // 2))
-    paste(row2, D, c_w + fig2_gap, max(0, (row2_h - D.height) // 2))
+    paste(row2, D, 0, max(0, (row2_h - D.height) // 2))
+    paste(row2, C, d_w + fig2_gap, max(0, (row2_h - C.height) // 2))
 
     # Row 3: E stands alone and is centered for emphasis.
     E = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", target_w=int(inner_w * 0.58), trim=True)
