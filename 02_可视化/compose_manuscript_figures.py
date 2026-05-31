@@ -539,7 +539,7 @@ def compose_fig2():
     fig2_gap = 42
 
     # Fig 2 uses a two-column composition: A over B/C/D on the left, E on the right.
-    right_w = int((inner_w - fig2_gap) * 0.33)
+    right_w = int((inner_w - fig2_gap) * 0.36)
     left_w = inner_w - right_w - fig2_gap
 
     A = panel("Fig2.png", "A", target_w=left_w, trim=False)
