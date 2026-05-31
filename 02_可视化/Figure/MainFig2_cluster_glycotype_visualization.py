@@ -415,6 +415,11 @@ def plot_cluster_consistency(
     overview_matrix = overview_df.set_index("species").reindex(SPECIES_ORDER)
     y = np.arange(len(metric_keys), dtype=float)
     max_value = overview_matrix[metric_keys].to_numpy().max()
+    label_offsets = {
+        "Gallus": (0.0, -0.17, "center"),
+        "Columba": (-8.0, -0.08, "right"),
+        "Anas": (8.0, -0.08, "left"),
+    }
     for row_index, metric_key in enumerate(metric_keys):
         values = overview_matrix[metric_key].to_numpy(dtype=float)
         ax_left.hlines(y[row_index], values.min(), values.max(), color="#D9D9D9", linewidth=1.0, zorder=1)
@@ -429,18 +434,18 @@ def plot_cluster_consistency(
                 zorder=3,
                 label=species if row_index == 0 else None,
             )
+            x_offset, y_offset, align = label_offsets[species]
             ax_left.text(
-                value,
-                y[row_index] - 0.16,
+                value + x_offset,
+                y[row_index] + y_offset,
                 f"{int(value)}",
-                ha="center",
+                ha=align,
                 va="bottom",
                 fontsize=8.1,
             )
     ax_left.set_yticks(y)
     ax_left.set_yticklabels(metric_labels, fontsize=8.9)
     ax_left.set_xlabel("Count", fontsize=10.5)
-    ax_left.set_title("Coverage", fontsize=11.2, pad=6)
     ax_left.grid(axis="x", color="#E2E2E2", linewidth=0.6)
     ax_left.set_axisbelow(True)
     ax_left.set_xlim(0, max_value * 1.10)
@@ -450,12 +455,13 @@ def plot_cluster_consistency(
     ax_left.spines["left"].set_visible(False)
     legend = ax_left.legend(
         loc="upper center",
-        bbox_to_anchor=(0.5, 1.10),
+        bbox_to_anchor=(0.48, 1.06),
         ncol=3,
         frameon=False,
-        fontsize=8.2,
-        handlelength=1.2,
-        columnspacing=1.0,
+        fontsize=7.8,
+        handlelength=1.0,
+        handletextpad=0.35,
+        columnspacing=0.9,
     )
     for handle in legend.legend_handles:
         handle.set_linewidth(0)
