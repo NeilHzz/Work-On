@@ -392,19 +392,35 @@ def draw_line_panel(ax, groups_dict, ylabel, title):
 # ── 堆叠柱状图 ────────────────────────────────────────────────────────────────
 def draw_hotspot_lollipop(ax, df, show_legend=True):
     net_means, net_ci95, total_means, shielded_means = {}, {}, {}, {}
+    net_values = {}
     for sp in SPECIES_ORDER:
         g = df[df.species == sp]
+        net_values[sp]     = g['net_accessible'].dropna().values
         net_means[sp]      = g['net_accessible'].mean()
         net_ci95[sp]       = g['net_accessible'].std() / np.sqrt(len(g)) * 1.96
         total_means[sp]    = g['n_hotspots'].mean()
         shielded_means[sp] = g['n_shielded_cands'].mean()
 
     xs = np.arange(len(SPECIES_ORDER))
+    rng = np.random.default_rng(42)
+    vp = ax.violinplot([net_values[sp] for sp in SPECIES_ORDER], positions=xs - 0.12,
+                       showmedians=False, showextrema=False, widths=0.34)
+    for body, sp in zip(vp['bodies'], SPECIES_ORDER):
+        body.set_facecolor(SPECIES_COLOR[sp])
+        body.set_alpha(0.20)
+        body.set_edgecolor('none')
+
     for i, sp in enumerate(SPECIES_ORDER):
         color = SPECIES_COLOR[sp]
         net = net_means[sp]
         total = total_means[sp]
         loss = shielded_means[sp]
+        shown = net_values[sp]
+        if len(shown) > 160:
+            shown = rng.choice(shown, size=160, replace=False)
+        jitter = rng.uniform(-0.23, -0.04, len(shown))
+        ax.scatter(xs[i] + jitter, shown, s=10, color=color,
+                   alpha=0.45, edgecolors='none', zorder=2)
         ax.vlines(xs[i], net, total, color=color, linewidth=8, alpha=0.32, zorder=1)
         ax.scatter(xs[i], total, s=120, facecolor='white', edgecolor=color,
                    linewidth=2.0, zorder=4)
@@ -419,6 +435,8 @@ def draw_hotspot_lollipop(ax, df, show_legend=True):
 
     # Duncan's MRT CLD letters on net_accessible
     y_top = max(total_means[sp] for sp in SPECIES_ORDER)
+    y_min = min(np.nanmin(net_values[sp]) for sp in SPECIES_ORDER)
+    y_span = max(y_top - y_min, 1e-9)
     res_bar = duncan_mrt(
         [df[df.species == sp]['net_accessible'].values for sp in SPECIES_ORDER],
         SPECIES_ORDER)
@@ -435,7 +453,7 @@ def draw_hotspot_lollipop(ax, df, show_legend=True):
         'Hotspot Count',
         f'Ca$^{{2+}}$ Hotspot Accessibility\n{format_p_value(res_bar["p_anova"])}',
     )
-    ax.set_ylim(0, letter_y + y_top * 0.22)
+    ax.set_ylim(max(0, y_min - y_span * 0.28), letter_y + y_span * 0.30)
     ax.set_xlim(-0.6, len(SPECIES_ORDER) - 0.4)
 
     if show_legend:
@@ -455,9 +473,11 @@ def draw_hotspot_lollipop(ax, df, show_legend=True):
 # ── Panel F: 热点残基 SASA 堆叠柱图（iface_full_sasa vs. iface_shielding）─────
 def draw_sasa_dumbbell(ax, df, show_legend=True):
     full_means, residual_means, residual_ci95, shielded_means = {}, {}, {}, {}
+    residual_values = {}
     for sp in SPECIES_ORDER:
         g = df[df.species == sp]
         residual = g['iface_full_sasa'] - g['iface_shielding']
+        residual_values[sp] = residual.dropna().values
         full_means[sp]     = g['iface_full_sasa'].mean()
         residual_means[sp] = residual.mean()
         residual_ci95[sp]  = residual.std() / np.sqrt(len(residual)) * 1.96
@@ -465,11 +485,25 @@ def draw_sasa_dumbbell(ax, df, show_legend=True):
 
     xs    = np.arange(len(SPECIES_ORDER))
     y_top = max(full_means[sp] for sp in SPECIES_ORDER)
+    rng = np.random.default_rng(42)
+    vp = ax.violinplot([residual_values[sp] for sp in SPECIES_ORDER], positions=xs - 0.12,
+                       showmedians=False, showextrema=False, widths=0.34)
+    for body, sp in zip(vp['bodies'], SPECIES_ORDER):
+        body.set_facecolor(SPECIES_COLOR[sp])
+        body.set_alpha(0.20)
+        body.set_edgecolor('none')
+
     for i, sp in enumerate(SPECIES_ORDER):
         color = SPECIES_COLOR[sp]
         full = full_means[sp]
         residual = residual_means[sp]
         shielded = shielded_means[sp]
+        shown = residual_values[sp]
+        if len(shown) > 160:
+            shown = rng.choice(shown, size=160, replace=False)
+        jitter = rng.uniform(-0.23, -0.04, len(shown))
+        ax.scatter(xs[i] + jitter, shown, s=10, color=color,
+                   alpha=0.45, edgecolors='none', zorder=2)
         ax.vlines(xs[i], residual, full, color=color, linewidth=8,
                   alpha=0.32, zorder=1)
         ax.scatter(xs[i], full, s=120, facecolor='white', edgecolor=color,
@@ -502,7 +536,9 @@ def draw_sasa_dumbbell(ax, df, show_legend=True):
         r'Hotspot Residue SASA (Å²)',
         r'Ca$^{2+}$ Hotspot Residue SASA' + f'\n{format_p_value(res_sasa["p_anova"])}',
     )
-    ax.set_ylim(0, letter_y + y_top * 0.22)
+    y_min = min(np.nanmin(residual_values[sp]) for sp in SPECIES_ORDER)
+    y_span = max(y_top - y_min, 1e-9)
+    ax.set_ylim(max(0, y_min - y_span * 0.28), letter_y + y_span * 0.30)
     ax.set_xlim(-0.6, len(SPECIES_ORDER) - 0.4)
     if show_legend:
         legend_handles = [
