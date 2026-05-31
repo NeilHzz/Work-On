@@ -403,9 +403,12 @@ def draw_hotspot_lollipop(ax, df, show_legend=True):
 
     xs = np.arange(len(SPECIES_ORDER))
     rng = np.random.default_rng(42)
-    vp = ax.violinplot([net_values[sp] for sp in SPECIES_ORDER], positions=xs - 0.12,
-                       showmedians=False, showextrema=False, widths=0.34)
-    for body, sp in zip(vp['bodies'], SPECIES_ORDER):
+    half_positions = xs - 0.10
+    vp = ax.violinplot([net_values[sp] for sp in SPECIES_ORDER], positions=half_positions,
+                       showmedians=False, showextrema=False, widths=0.42)
+    for body, sp, center in zip(vp['bodies'], SPECIES_ORDER, half_positions):
+        vertices = body.get_paths()[0].vertices
+        vertices[:, 0] = np.minimum(vertices[:, 0], center)
         body.set_facecolor(SPECIES_COLOR[sp])
         body.set_alpha(0.36)
         body.set_edgecolor('none')
@@ -418,7 +421,7 @@ def draw_hotspot_lollipop(ax, df, show_legend=True):
         shown = net_values[sp]
         if len(shown) > 160:
             shown = rng.choice(shown, size=160, replace=False)
-        jitter = rng.uniform(-0.23, -0.04, len(shown))
+        jitter = rng.uniform(-0.28, -0.12, len(shown))
         ax.scatter(xs[i] + jitter, shown, s=10, color=color,
                    alpha=0.45, edgecolors='none', zorder=2)
         ax.vlines(xs[i], net, total, color=color, linewidth=8, alpha=0.32, zorder=1)
@@ -486,9 +489,12 @@ def draw_sasa_dumbbell(ax, df, show_legend=True):
     xs    = np.arange(len(SPECIES_ORDER))
     y_top = max(full_means[sp] for sp in SPECIES_ORDER)
     rng = np.random.default_rng(42)
-    vp = ax.violinplot([residual_values[sp] for sp in SPECIES_ORDER], positions=xs - 0.12,
-                       showmedians=False, showextrema=False, widths=0.34)
-    for body, sp in zip(vp['bodies'], SPECIES_ORDER):
+    half_positions = xs - 0.10
+    vp = ax.violinplot([residual_values[sp] for sp in SPECIES_ORDER], positions=half_positions,
+                       showmedians=False, showextrema=False, widths=0.42)
+    for body, sp, center in zip(vp['bodies'], SPECIES_ORDER, half_positions):
+        vertices = body.get_paths()[0].vertices
+        vertices[:, 0] = np.minimum(vertices[:, 0], center)
         body.set_facecolor(SPECIES_COLOR[sp])
         body.set_alpha(0.36)
         body.set_edgecolor('none')
@@ -501,7 +507,7 @@ def draw_sasa_dumbbell(ax, df, show_legend=True):
         shown = residual_values[sp]
         if len(shown) > 160:
             shown = rng.choice(shown, size=160, replace=False)
-        jitter = rng.uniform(-0.23, -0.04, len(shown))
+        jitter = rng.uniform(-0.28, -0.12, len(shown))
         ax.scatter(xs[i] + jitter, shown, s=10, color=color,
                    alpha=0.45, edgecolors='none', zorder=2)
         ax.vlines(xs[i], residual, full, color=color, linewidth=8,
