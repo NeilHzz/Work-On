@@ -400,16 +400,8 @@ def draw_similarity_heatmap(
     )
 
 
-def plot_cluster_consistency(
-    overview_df: pd.DataFrame, similarity_df: pd.DataFrame, shared_group_count: int
-) -> None:
-    fig, (ax_left, ax_right) = plt.subplots(
-        1,
-        2,
-        figsize=(7.5, 3.7),
-        gridspec_kw={"width_ratios": [1.04, 1.0], "wspace": 0.30},
-    )
-
+def draw_coverage_overview(ax_left: plt.Axes, overview_df: pd.DataFrame) -> None:
+    """Render the per-species identification coverage as a compact lollipop chart."""
     metric_keys = ["glycoproteins", "glycosites", "glycan_compositions"]
     metric_labels = ["Glycoproteins", "Glycosites", "Glycan\ncompositions"]
     overview_matrix = overview_df.set_index("species").reindex(SPECIES_ORDER)
@@ -470,6 +462,40 @@ def plot_cluster_consistency(
     )
     for handle in legend.legend_handles:
         handle.set_linewidth(0)
+
+
+def plot_coverage_overview(overview_df: pd.DataFrame) -> None:
+    fig, ax = plt.subplots(figsize=(3.9, 3.45))
+    draw_coverage_overview(ax, overview_df)
+    fig.subplots_adjust(top=0.90, bottom=0.16, left=0.26, right=0.98)
+    save_fig(fig, "Fig2_coverage_overview")
+    plt.close(fig)
+
+
+def plot_shared_core_similarity(similarity_df: pd.DataFrame, shared_group_count: int) -> None:
+    fig, ax = plt.subplots(figsize=(3.35, 3.35))
+    draw_similarity_heatmap(
+        ax,
+        similarity_df,
+        title="Shared-core JS",
+        note=f"1 - Jensen-Shannon distance; n={shared_group_count}",
+    )
+    fig.subplots_adjust(top=0.88, bottom=0.20, left=0.20, right=0.98)
+    save_fig(fig, "Fig2_shared_core_js")
+    plt.close(fig)
+
+
+def plot_cluster_consistency(
+    overview_df: pd.DataFrame, similarity_df: pd.DataFrame, shared_group_count: int
+) -> None:
+    fig, (ax_left, ax_right) = plt.subplots(
+        1,
+        2,
+        figsize=(7.5, 3.7),
+        gridspec_kw={"width_ratios": [1.04, 1.0], "wspace": 0.30},
+    )
+
+    draw_coverage_overview(ax_left, overview_df)
 
     draw_similarity_heatmap(
         ax_right,
@@ -667,6 +693,8 @@ def main() -> None:
     print("Species protein-type assignment counts:")
     print(type_count_df.pivot(index="species", columns="glycan_type", values="protein_count").fillna(0).astype(int))
 
+    plot_coverage_overview(overview_df)
+    plot_shared_core_similarity(js_similarity_df, shared_group_count)
     plot_cluster_consistency(overview_df, js_similarity_df, shared_group_count)
     plot_similarity_metric_comparison(js_similarity_df, bc_similarity_df, shared_group_count)
     plot_species_proportions(type_count_df)

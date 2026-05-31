@@ -528,24 +528,26 @@ def compose_fig2():
             x += panel_img.width + GAP
         return row
 
-    # A: current glycoprotein orthogroup UpSet plot, full width for readability.
-    A = panel("Fig2.png", "A", inner_w, trim=False)
+    # Row 1: A plus the newly independent coverage panel B.
+    row1 = fit_row(
+        [
+            ("Fig2.png", "A", False),
+            ("Fig2_coverage_overview.png", "B", True),
+        ],
+        inner_w,
+    )
 
-    # B-C-D: non-equal widths keep the full figure compact while giving D enough room to read.
-    d_w = int(inner_w * 0.22)
-    c_w = int(inner_w * 0.43)
-    b_w = inner_w - c_w - d_w - 2 * GAP
-    B = panel("Fig2_cluster_glycotype_consistency.png", "B", target_w=b_w, trim=True)
-    C = panel("Fig2_species_glycotype_proportion.png", "C", target_w=c_w, trim=True)
-    D = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "D", target_w=d_w, trim=True)
-    row2_h = max(B.height, C.height, D.height)
-    row2 = Image.new("RGBA", (inner_w, row2_h), (255, 255, 255, 0))
-    x = 0
-    for panel_img in (B, C, D):
-        paste(row2, panel_img, x, max(0, (row2_h - panel_img.height) // 2))
-        x += panel_img.width + GAP
+    # Row 2: shared-core JS (C), composition (D), and ortholog chord (E).
+    row2 = fit_row(
+        [
+            ("Fig2_shared_core_js.png", "C", True),
+            ("Fig2_species_glycotype_proportion.png", "D", True),
+            (FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", True),
+        ],
+        inner_w,
+    )
 
-    rows = [A, row2]
+    rows = [row1, row2]
     total_h = 2 * MARGIN + sum(row.height for row in rows) + GAP * (len(rows) - 1)
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
 
