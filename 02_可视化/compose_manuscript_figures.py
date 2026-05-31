@@ -535,56 +535,41 @@ def compose_fig2():
             raw = make_placeholder(1200, 900, f"Panel\n{source_path.name}")
         return trim_white(raw) if trim else raw
 
-    raw_a = _load_panel_raw("Fig2.png", False)
-    raw_b = _load_panel_raw("Fig2_coverage_overview.png", True)
-    raw_c = _load_panel_raw("Fig2_shared_core_js.png", True)
-    raw_d = _load_panel_raw("Fig2_species_glycotype_proportion.png", True)
-    raw_e = _load_panel_raw(FINAL_MAIN_SUBFIGS / "Fig3A.png", True)
-    fig2_gap = 36
-    aspect_a = raw_a.width / raw_a.height
-    aspect_b = raw_b.width / raw_b.height
-    aspect_c = raw_c.width / raw_c.height
-    aspect_d = raw_d.width / raw_d.height
-    aspect_e = raw_e.width / raw_e.height
+    fig2_gap = 42
 
-    left_stack_factor = (1 / aspect_a) + (1 / aspect_d)
-    mid_stack_factor = (1 / aspect_b) + (1 / aspect_c)
-    mid_width_factor = min(left_stack_factor / mid_stack_factor, 0.45)
-    col1_w = int(round(
-        (inner_w - fig2_gap * (2 + aspect_e))
-        / (1 + mid_width_factor + left_stack_factor * aspect_e)
-    ))
-    col2_w = int(round(col1_w * mid_width_factor))
-    left_col_h = int(round(col1_w * left_stack_factor + fig2_gap))
+    # Row 1: A remains dominant; B is a narrower support panel.
+    a_w = int(inner_w * 0.72)
+    b_w = inner_w - a_w - fig2_gap
+    A = panel("Fig2.png", "A", target_w=a_w, trim=False)
+    B = panel("Fig2_coverage_overview.png", "B", target_w=b_w, trim=True)
+    row1_h = max(A.height, B.height)
+    row1 = Image.new("RGBA", (inner_w, row1_h), (255, 255, 255, 0))
+    paste(row1, A, 0, max(0, (row1_h - A.height) // 2))
+    paste(row1, B, a_w + fig2_gap, max(0, (row1_h - B.height) // 2))
 
-    A = panel("Fig2.png", "A", target_w=col1_w, trim=False)
-    D = panel("Fig2_species_glycotype_proportion.png", "D", target_w=col1_w, trim=True)
-    B = panel("Fig2_coverage_overview.png", "B", target_w=col2_w, trim=True)
-    C = panel("Fig2_shared_core_js.png", "C", target_w=col2_w, trim=True)
-    E = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", target_h=left_col_h, trim=True)
+    # Row 2: C remains compact; D gets more horizontal room for the main composition panel.
+    c_w = int(inner_w * 0.34)
+    d_w = inner_w - c_w - fig2_gap
+    C = panel("Fig2_shared_core_js.png", "C", target_w=c_w, trim=True)
+    D = panel("Fig2_species_glycotype_proportion.png", "D", target_w=d_w, trim=True)
+    row2_h = max(C.height, D.height)
+    row2 = Image.new("RGBA", (inner_w, row2_h), (255, 255, 255, 0))
+    paste(row2, C, 0, max(0, (row2_h - C.height) // 2))
+    paste(row2, D, c_w + fig2_gap, max(0, (row2_h - D.height) // 2))
 
-    left_col_h = A.height + fig2_gap + D.height
-    mid_col_h = B.height + fig2_gap + C.height
-    total_h = 2 * MARGIN + max(left_col_h, mid_col_h, E.height)
+    # Row 3: E stands alone and is centered for emphasis.
+    E = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", target_w=int(inner_w * 0.58), trim=True)
+    row3 = Image.new("RGBA", (inner_w, E.height), (255, 255, 255, 0))
+    paste(row3, E, max(0, (inner_w - E.width) // 2), 0)
+
+    rows = [row1, row2, row3]
+    total_h = 2 * MARGIN + sum(row.height for row in rows) + fig2_gap * (len(rows) - 1)
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
 
-    left_col = Image.new("RGBA", (col1_w, left_col_h), (255, 255, 255, 0))
-    paste(left_col, A, 0, 0)
-    paste(left_col, D, 0, A.height + fig2_gap)
-
-    mid_col = Image.new("RGBA", (col2_w, mid_col_h), (255, 255, 255, 0))
-    paste(mid_col, B, 0, 0)
-    paste(mid_col, C, 0, B.height + fig2_gap)
-
-    block_w = left_col.width + fig2_gap + mid_col.width + fig2_gap + E.width
-    x1 = MARGIN + max(0, (inner_w - block_w) // 2)
-    x2 = x1 + left_col.width + fig2_gap
-    x3 = x2 + mid_col.width + fig2_gap
-    e_x_shift = 24
-    y_top = MARGIN
-    paste(canvas, left_col, x1, y_top)
-    paste(canvas, mid_col, x2, y_top)
-    paste(canvas, E, x3 + e_x_shift, y_top)
+    y = MARGIN
+    for row in rows:
+        paste(canvas, row, MARGIN, y)
+        y += row.height + fig2_gap
     save_fig(canvas, "Fig2_composed")
 
 
