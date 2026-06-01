@@ -332,7 +332,7 @@ p_s0b = mixed([
     ("A. platyrhynchos", False, True),
     (" (0.4413 ± 0.0249), and lowest in ", False, False),
     ("G. gallus", False, True),
-    (" (0.3975 ± 0.0127). Quantitatively, chicken showed the densest early mineralization pattern. Pigeon devoted the largest share of shell volume to crystal units grown from individual mammillary knobs, and duck remained intermediate in crystal-unit proportion while resembling pigeon in density. The two metrics did not collapse into one monotonic axis, but both showed that mammillary organization had already diverged before later shell traits were considered. Because this layer is the earliest structural level governing eggshell mechanics and is controlled by matrix proteins, we asked a narrower question: did the contrast reflect wholesale toolkit replacement or differential use of a largely shared system?", False, False),
+    (" (0.3975 ± 0.0127). Quantitatively, chicken showed the densest early mineralization pattern. Pigeon devoted the largest share of shell volume to crystal units grown from individual mammillary knobs, and duck remained intermediate in crystal-unit proportion while resembling pigeon in density. The two metrics did not collapse into one monotonic axis, but both showed that mammillary organization had already diverged before later shell traits were considered. This layer is the earliest structural level governing eggshell mechanics and is controlled by matrix proteins. We therefore asked a narrower question: did the contrast reflect wholesale toolkit replacement or differential use of a largely shared system?", False, False),
 ])
 cite(p_s0b, [1, 4, 28])
 
@@ -462,7 +462,7 @@ add_main_figure_legend(
     "Fig. 5.",
     "Finite-element setup and local hatching resistance at the mammillary interface.",
     [
-        ("(A) Species-specific dorsal beak views with dashed boxes marking the egg-tooth position, paired with micro-CT-derived finite-element setups and summary box plots of peak contact force (F_max) and peak shear stress (τ_max) for ", False, False),
+        ("(A) Species-specific dorsal beak views with dashed boxes marking the egg-tooth position. The panel is paired with micro-CT-derived finite-element setups and summary box plots of peak contact force (F_max) and peak shear stress (τ_max). Species are ", False, False),
         ("Gallus gallus", False, True),
         (", ", False, False),
         ("Anas platyrhynchos", False, True),
@@ -492,7 +492,7 @@ mixed([
 ])
 
 mixed([
-    ("The difference between F_max and τ_max showed that duck's higher raw contact force was driven mainly by its greater shell thickness (0.35 mm versus 0.19 mm in pigeon). It did not indicate superior unit-area material resistance. By contrast, ", False, False),
+    ("The difference between F_max and τ_max clarified the duck result. Its higher raw contact force was driven mainly by greater shell thickness (0.35 mm versus 0.19 mm in pigeon). It did not indicate superior unit-area material resistance. By contrast, ", False, False),
     ("G. gallus", False, True),
     (" exhibited a 36-40% increase in τ_max relative to the two other species, indicating higher local hatching resistance independent of shell thickness. This high-versus-low grouping, with ", False, False),
     ("G. gallus", False, True),
@@ -538,7 +538,7 @@ p_disc_axis = spara([
 p_disc_mam2 = spara([
     ("Among the molecular layers examined here, OVAL N-glycan architecture most closely tracked the cross-species structural differences.", []),
     (" Orthogroup turnover, gene-family change, and glycoprotein-network divergence still matter, but they mainly define comparative background rather than the nearest explanation. OVAL glycan state is more informative because it is shared across species, chemically interpretable, and located on an abundant matrix protein already implicated in mineralization.", [4, 18, 27]),
-    (" Earlier work had already kept OVAL in view as an abundant eggshell glycoprotein and mineralization candidate, and prior glycoproteomic studies showed that eggshell-matrix proteins can occupy different N-glycosylation states. The advance here is not simply that additional glycopeptides were detected. Rather, the ortholog-resolved cross-species comparison identified which glycan states aligned most clearly with phenotype and carried those assignments into structural and mechanical interpretation.", [4, 18]),
+    (" Earlier work had already kept OVAL in view as an abundant eggshell glycoprotein and mineralization candidate. Prior glycoproteomic studies also showed that eggshell-matrix proteins can occupy different N-glycosylation states. The advance here is not simply that additional glycopeptides were detected. Rather, the ortholog-resolved cross-species comparison identified which glycan states aligned most clearly with phenotype and carried those assignments into structural and mechanical interpretation.", [4, 18]),
     (" Earlier chicken studies established a glycosite foundation for OVAL and identified glycosylated Asn in OC116. The present dataset resolved dominant glycan classes on the corresponding OVAL ortholog sequons carried into structural modeling (G. gallus N293; A. platyrhynchos and C. livia N97). Relative to earlier site-detection studies, the present comparison extends breadth across species and into glycan-class interpretation rather than merely lengthening a within-species site inventory. OVAL is useful not because it is unique, but because it remains comparable across species while retaining interpretable chemical divergence at the level of specific glycan classes.", [8, 18, 21]),
 ])
 
