@@ -673,7 +673,7 @@ p_m_ct = para(
     "equatorial region of each species and scanned using a Phoenix V|tome|x\u00a0M "
     "microfocus CT system (GE Sensing and Inspection Technologies GmbH, Wunstorf, "
     "Germany). The X-ray source was operated at 85 kV tube voltage and 160 \u03bcA current without a beam filter; scan settings were held "
-    "constant across all specimens, and a total of 1,800 projection images were collected for each eggshell. Reconstructed image volumes were exported as 16-bit unsigned isotropic datasets with a sampling distance of approximately 0.003836 mm along the x, y, and z axes (about 3.84 \u03bcm voxel size). Volumetric data were reconstructed in 3D Slicer, and the eggshell region was automatically selected with the Threshold module in the Segmentation workflow. Acquisition noise was suppressed by a 5 \u00d7 5 \u00d7 5 "
+    "constant across all specimens, and a total of 1,800 projection images were collected for each eggshell. Reconstructed image volumes were exported as 16-bit unsigned isotropic datasets with a sampling distance of approximately 0.003836 mm along the x, y, and z axes (about 3.84 \u03bcm voxel size). Volumetric data were reconstructed in 3D Slicer, and the eggshell region was segmented with the Threshold module in the Segmentation workflow using per-sample manual adjustment guided by grayscale contrast. Acquisition noise was suppressed by a 5 \u00d7 5 \u00d7 5 "
     "median filter, followed by largest-island isolation and 9 \u00d7 9 \u00d7 9 hole-filling. "
     "Within the same region of interest, three morphometric parameters were then calculated from the labelmap. "
     "The segmented shell model was first duplicated as a single-copy volume and solid-filled with the Fill Holes operation; "
@@ -839,8 +839,8 @@ p_m_reglyco = mixed([
      "to the GlycoShape glycan library by monoisotopic mass matching "
      "(tolerance \u00b10.5\u00a0Da), using per-residue masses of 203.0794\u00a0Da (HexNAc), "
      "162.0528\u00a0Da (Hex), 291.0954\u00a0Da (NeuAc), 146.0579\u00a0Da (dHex), and "
-     "132.0423\u00a0Da (Pen) with an 18.0106\u00a0Da water correction; matched entries "
-     "were retrieved as GlyTouCan accession identifiers. "
+    "132.0423\u00a0Da (Pen) with an 18.0106\u00a0Da water correction; matched entries "
+    "were retrieved as GlyTouCan accession identifiers. All experimentally detected glycoforms that could be matched to the GlycoShape library were retained for downstream modeling rather than pre-filtering to a dominant subset. "
      "Full conformational ensembles were then generated with the GlycoShape "
      "Re-Glyco Ensemble tool (glycoshape.org/ensemble), which restores missing "
      "glycans by aligning them to torsion angles from Privateer crystallographic "
@@ -892,7 +892,7 @@ head("Finite-element analysis")
 
 p_m_fea = mixed([
     ("The region of interest used for downstream finite-element analysis was defined as a cylindrical volume of 1 mm radius during micro-CT reconstruction. ", False, False),
-    ("Surface models derived from micro-CT were first exported as STL files and reverse-engineered in Geomagic Wrap for finite-element pre-processing by sequential de-noising (strength 2), triangle simplification to approximately 300,000 faces, mesh re-gridding at 0.01 mm, iterative defect correction to zero residual faults, and organic parametric surface fitting at minimum tolerance. The resulting eggshell surface models were then imported into Ansys Workbench 2023 R1 and solved with the explicit LS-DYNA module (unit system: mm/kg/N/s). In the solver keyword deck, the eggshell was modeled with *MAT_PLASTIC_KINEMATIC and *SECTION_SOLID, using density 2770 kg/m^3, Young's modulus 3.0 \u00d7 10\u00b9\u2070 Pa, Poisson's ratio 0.33, yield strength 1.5 \u00d7 10\u2077 Pa, tangent modulus 0, and maximum equivalent plastic strain at failure 0.05. This explicit impact setup followed the general logic of crash-deformation simulations, but was rescaled to the local eggshell loading geometry studied here. The impactor, used to simulate the egg tooth, was a frustum (base radius 0.1 mm; top radius 0.5 mm; height 0.5 mm) assigned the library IRON-ARMCO explicit material and meshed as a separate solid part. Contact between the impactor and eggshell was defined with *CONTACT_AUTOMATIC_SURFACE_TO_SURFACE using a friction coefficient of 0.2. Eggshell mesh element sizes were 0.05 mm (", False, False),
+    ("Surface models derived from micro-CT were first exported as STL files and reverse-engineered in Geomagic Wrap for finite-element pre-processing by sequential de-noising (strength 2), triangle simplification to approximately 300,000 faces, mesh re-gridding at 0.01 mm, iterative defect correction to zero residual faults, and organic parametric surface fitting at minimum tolerance. The resulting eggshell surface models were then imported into Ansys Workbench 2023 R1 and solved with the explicit LS-DYNA module (unit system: mm/kg/N/s). To isolate structure-driven mechanical differences, identical eggshell material properties were assigned across species; parameter values were adopted from a published MDPI report rather than re-estimated separately for each species. In the solver keyword deck, the eggshell was modeled with *MAT_PLASTIC_KINEMATIC and *SECTION_SOLID, using density 2770 kg/m^3, Young's modulus 3.0 \u00d7 10\u00b9\u2070 Pa, Poisson's ratio 0.33, yield strength 1.5 \u00d7 10\u2077 Pa, tangent modulus 0, and maximum equivalent plastic strain at failure 0.05. This explicit impact setup followed the general logic of crash-deformation simulations, but was rescaled to the local eggshell loading geometry studied here. The impactor, used to simulate the egg tooth, was a frustum (base radius 0.1 mm; top radius 0.5 mm; height 0.5 mm) assigned the library IRON-ARMCO explicit material and meshed as a separate solid part. Contact between the impactor and eggshell was defined with *CONTACT_AUTOMATIC_SURFACE_TO_SURFACE using a friction coefficient of 0.2. Eggshell mesh element sizes were 0.05 mm (", False, False),
     ("G. gallus", False, True),
     ("), 0.05 mm (", False, False),
     ("A. platyrhynchos", False, True),
@@ -921,7 +921,7 @@ mixed([
      "median surface electrostatic potential were assessed by one-sample t test "
     "against the apo reference value. Finite-element simulation outcomes "
      "(F_max, \u03c4_max) were compared among species by one-way ANOVA with Duncan's "
-     "multiple range test (DMRT; \u03b1\u202f=\u202f0.05). All statistical analyses were "
+     "multiple range test (DMRT; \u03b1\u202f=\u202f0.05). No formal tests of normality or homoscedasticity were performed, no multiple-testing correction was applied, and no outliers were removed. All statistical analyses were "
      "conducted in Python using scipy.stats and statsmodels.", False, False),
 ])
 

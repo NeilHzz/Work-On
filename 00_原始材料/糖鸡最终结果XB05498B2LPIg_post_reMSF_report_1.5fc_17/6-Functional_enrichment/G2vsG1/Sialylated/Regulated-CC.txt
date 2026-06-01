@@ -1,0 +1,6 @@
+GO Terms Level 1	GO Terms Description	GO Terms Level	GO Terms ID	Mapping	Background	All Mapping	All Background	Fold Enrichment	Fisher's exact test p value	-log10(p value)	Related proteins	Log2 Fold enrichment
+Cellular Component	platelet alpha granule	9	GO:0031091	2	4	3	43	7.17	0.01928530913216114	1.71	A0A8V0Y0J2 A0A8V0Y248	2.84197311892718
+Cellular Component	platelet alpha granule lumen	7	GO:0031093	2	4	3	43	7.17	0.01928530913216114	1.71	A0A8V0Y0J2 A0A8V0Y248	2.84197311892718
+Cellular Component	cytoplasmic vesicle lumen	5	GO:0060205	2	6	3	43	4.78	0.046592658617616065	1.33	A0A8V0Y0J2 A0A8V0Y248	2.257010618206024
+Cellular Component	secretory granule lumen	6	GO:0034774	2	6	3	43	4.78	0.046592658617616065	1.33	A0A8V0Y0J2 A0A8V0Y248	2.257010618206024
+Cellular Component	vesicle lumen	4	GO:0031983	2	6	3	43	4.78	0.046592658617616065	1.33	A0A8V0Y0J2 A0A8V0Y248	2.257010618206024

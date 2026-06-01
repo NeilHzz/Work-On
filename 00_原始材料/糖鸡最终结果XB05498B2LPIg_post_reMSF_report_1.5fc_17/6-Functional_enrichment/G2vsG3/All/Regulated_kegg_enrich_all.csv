@@ -1,0 +1,12 @@
+KEGG pathway,Mapping,Background,All Mapping,All Background,Fold Enrichment,Fisher's exact test p value,-log10(p value),Related proteins
+map00310 Lysine degradation,1,2,6,22,1.83,0.4805194805194808,0.32,A0A8V0Z1W6
+map00600 Sphingolipid metabolism,2,2,6,22,3.67,0.0649350649350651,1.19,A0A8V0Z5X2 A0A8V0YUU0
+map01100 Metabolic pathways,2,4,6,22,1.83,0.29186602870813444,0.53,A0A8V0YUU0 A0A8V0Z1W6
+map04071 Sphingolipid signaling pathway,1,1,6,22,3.67,0.27272727272727204,0.56,A0A8V0YUU0
+map04142 Lysosome,2,3,6,22,2.44,0.1688311688311687,0.77,A0A8V0Z5X2 A0A8V0YUU0
+map04151 PI3K-Akt signaling pathway,1,4,6,22,0.92,1.0,-0.0,A0A8V0YDD6
+map04350 TGF-beta signaling pathway,1,1,6,22,3.67,0.27272727272727204,0.56,A0A8V0YMM6
+map04510 Focal adhesion,1,4,6,22,0.92,1.0,-0.0,A0A8V0YDD6
+map04512 ECM-receptor interaction,1,5,6,22,0.73,1.0,-0.0,A0A8V0YDD6
+map04610 Complement and coagulation cascades,1,1,6,22,3.67,0.27272727272727204,0.56,A0A8V0Y0J2
+map04810 Regulation of actin cytoskeleton,1,1,6,22,3.67,0.27272727272727204,0.56,A0A8V0YDD6

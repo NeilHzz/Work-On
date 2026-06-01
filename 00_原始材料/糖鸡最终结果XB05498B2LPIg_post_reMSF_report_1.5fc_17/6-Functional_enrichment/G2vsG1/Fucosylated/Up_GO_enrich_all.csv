@@ -1,0 +1,61 @@
+GO Terms Level 1,GO Terms Description,GO Terms Level,GO Terms ID,Mapping,Background,All Mapping,All Background,Fold Enrichment,Fisher's exact test p value,-log10(p value),Related proteins
+Cellular Component,nucleus,5,GO:0005634,2,7,2,43,6.14,0.023255813953488434,1.63,A0A8V0X522 A0A8V0Y0J2
+Cellular Component,Golgi apparatus,5,GO:0005794,2,7,2,43,6.14,0.023255813953488434,1.63,A0A8V0X522 A0A8V0Y0J2
+Cellular Component,endoplasmic reticulum lumen,5,GO:0005788,2,10,2,43,4.3,0.04983388704318934,1.3,A0A8V0X522 A0A8V0Y0J2
+Cellular Component,endoplasmic reticulum,5,GO:0005783,2,17,2,43,2.53,0.15060908084163924,0.82,A0A8V0X522 A0A8V0Y0J2
+Cellular Component,membrane-enclosed lumen,2,GO:0031974,2,20,2,43,2.15,0.21040974529346615,0.68,A0A8V0X522 A0A8V0Y0J2
+Cellular Component,organelle lumen,3,GO:0043233,2,20,2,43,2.15,0.21040974529346615,0.68,A0A8V0X522 A0A8V0Y0J2
+Cellular Component,intracellular organelle lumen,4,GO:0070013,2,20,2,43,2.15,0.21040974529346615,0.68,A0A8V0X522 A0A8V0Y0J2
+Cellular Component,endomembrane system,2,GO:0012505,2,27,2,43,1.59,0.5215946843853826,0.28,A0A8V0X522 A0A8V0Y0J2
+Cellular Component,extracellular region,2,GO:0005576,2,35,2,43,1.23,1.0,-0.0,A0A8V0X522 A0A8V0Y0J2
+Cellular Component,intracellular anatomical structure,2,GO:0005622,2,32,2,43,1.34,1.0,-0.0,A0A8V0X522 A0A8V0Y0J2
+Cellular Component,cytoplasm,2,GO:0005737,2,29,2,43,1.48,1.0,-0.0,A0A8V0X522 A0A8V0Y0J2
+Cellular Component,organelle,2,GO:0043226,2,31,2,43,1.39,1.0,-0.0,A0A8V0X522 A0A8V0Y0J2
+Cellular Component,membrane-bounded organelle,3,GO:0043227,2,31,2,43,1.39,1.0,-0.0,A0A8V0X522 A0A8V0Y0J2
+Cellular Component,intracellular organelle,3,GO:0043229,2,31,2,43,1.39,1.0,-0.0,A0A8V0X522 A0A8V0Y0J2
+Cellular Component,intracellular membrane-bounded organelle,4,GO:0043231,2,29,2,43,1.48,1.0,-0.0,A0A8V0X522 A0A8V0Y0J2
+Molecular Function,enzyme binding,3,GO:0019899,2,9,2,40,4.44,0.04615384615384631,1.34,A0A8V0X522 A0A8V0Y0J2
+Molecular Function,protein binding,2,GO:0005515,2,26,2,40,1.54,0.5333333333333345,0.27,A0A8V0X522 A0A8V0Y0J2
+Molecular Function,binding,1,GO:0005488,2,32,2,40,1.25,1.0,-0.0,A0A8V0X522 A0A8V0Y0J2
+Biological Process,positive regulation of cellular biosynthetic process,6,GO:0031328,2,3,2,43,14.33,0.0033222591362126255,2.48,A0A8V0X522 A0A8V0Y0J2
+Biological Process,positive regulation of biosynthetic process,5,GO:0009891,2,3,2,43,14.33,0.0033222591362126255,2.48,A0A8V0X522 A0A8V0Y0J2
+Biological Process,positive regulation of gene expression,7,GO:0010628,2,4,2,43,10.75,0.006644518272425264,2.18,A0A8V0X522 A0A8V0Y0J2
+Biological Process,regulation of DNA-templated transcription,7,GO:0006355,2,6,2,43,7.17,0.016611295681063117,1.78,A0A8V0X522 A0A8V0Y0J2
+Biological Process,regulation of RNA metabolic process,5,GO:0051252,2,6,2,43,7.17,0.016611295681063117,1.78,A0A8V0X522 A0A8V0Y0J2
+Biological Process,positive regulation of nitrogen compound metabolic process,5,GO:0051173,2,6,2,43,7.17,0.016611295681063117,1.78,A0A8V0X522 A0A8V0Y0J2
+Biological Process,positive regulation of macromolecule metabolic process,5,GO:0010604,2,6,2,43,7.17,0.016611295681063117,1.78,A0A8V0X522 A0A8V0Y0J2
+Biological Process,regulation of RNA biosynthetic process,6,GO:2001141,2,6,2,43,7.17,0.016611295681063117,1.78,A0A8V0X522 A0A8V0Y0J2
+Biological Process,cellular nitrogen compound metabolic process,3,GO:0034641,2,7,2,43,6.14,0.023255813953488434,1.63,A0A8V0X522 A0A8V0Y0J2
+Biological Process,regulation of macromolecule biosynthetic process,5,GO:0010556,2,7,2,43,6.14,0.023255813953488434,1.63,A0A8V0X522 A0A8V0Y0J2
+Biological Process,positive regulation of metabolic process,4,GO:0009893,2,7,2,43,6.14,0.023255813953488434,1.63,A0A8V0X522 A0A8V0Y0J2
+Biological Process,regulation of biosynthetic process,4,GO:0009889,2,7,2,43,6.14,0.023255813953488434,1.63,A0A8V0X522 A0A8V0Y0J2
+Biological Process,regulation of nucleobase-containing compound metabolic process,5,GO:0019219,2,7,2,43,6.14,0.023255813953488434,1.63,A0A8V0X522 A0A8V0Y0J2
+Biological Process,positive regulation of catalytic activity,4,GO:0043085,2,7,2,43,6.14,0.023255813953488434,1.63,A0A8V0X522 A0A8V0Y0J2
+Biological Process,regulation of cellular biosynthetic process,5,GO:0031326,2,7,2,43,6.14,0.023255813953488434,1.63,A0A8V0X522 A0A8V0Y0J2
+Biological Process,positive regulation of cellular metabolic process,5,GO:0031325,2,7,2,43,6.14,0.023255813953488434,1.63,A0A8V0X522 A0A8V0Y0J2
+Biological Process,organelle organization,4,GO:0006996,2,8,2,43,5.38,0.03100775193798452,1.51,A0A8V0X522 A0A8V0Y0J2
+Biological Process,positive regulation of molecular function,3,GO:0044093,2,8,2,43,5.38,0.03100775193798452,1.51,A0A8V0X522 A0A8V0Y0J2
+Biological Process,regulation of gene expression,6,GO:0010468,2,9,2,43,4.78,0.03986710963455147,1.4,A0A8V0X522 A0A8V0Y0J2
+Biological Process,regulation of catalytic activity,3,GO:0050790,2,12,2,43,3.58,0.07308970099667787,1.14,A0A8V0X522 A0A8V0Y0J2
+Biological Process,regulation of nitrogen compound metabolic process,4,GO:0051171,2,14,2,43,3.07,0.10077519379844962,1.0,A0A8V0X522 A0A8V0Y0J2
+Biological Process,regulation of primary metabolic process,4,GO:0080090,2,14,2,43,3.07,0.10077519379844962,1.0,A0A8V0X522 A0A8V0Y0J2
+Biological Process,regulation of cellular metabolic process,4,GO:0031323,2,14,2,43,3.07,0.10077519379844962,1.0,A0A8V0X522 A0A8V0Y0J2
+Biological Process,regulation of molecular function,2,GO:0065009,2,15,2,43,2.87,0.11627906976744198,0.93,A0A8V0X522 A0A8V0Y0J2
+Biological Process,regulation of macromolecule metabolic process,4,GO:0060255,2,16,2,43,2.69,0.13289036544850513,0.88,A0A8V0X522 A0A8V0Y0J2
+Biological Process,regulation of metabolic process,3,GO:0019222,2,17,2,43,2.53,0.15060908084163924,0.82,A0A8V0X522 A0A8V0Y0J2
+Biological Process,cellular component organization,3,GO:0016043,2,20,2,43,2.15,0.21040974529346615,0.68,A0A8V0X522 A0A8V0Y0J2
+Biological Process,cellular component organization or biogenesis,2,GO:0071840,2,20,2,43,2.15,0.21040974529346615,0.68,A0A8V0X522 A0A8V0Y0J2
+Biological Process,positive regulation of cellular process,4,GO:0048522,2,20,2,43,2.15,0.21040974529346615,0.68,A0A8V0X522 A0A8V0Y0J2
+Biological Process,protein metabolic process,3,GO:0019538,2,21,2,43,2.05,0.23255813953488316,0.63,A0A8V0X522 A0A8V0Y0J2
+Biological Process,macromolecule metabolic process,3,GO:0043170,2,22,2,43,1.95,0.4883720930232548,0.31,A0A8V0X522 A0A8V0Y0J2
+Biological Process,cellular metabolic process,2,GO:0044237,2,22,2,43,1.95,0.4883720930232548,0.31,A0A8V0X522 A0A8V0Y0J2
+Biological Process,positive regulation of biological process,3,GO:0048518,2,23,2,43,1.87,0.49058693244739715,0.31,A0A8V0X522 A0A8V0Y0J2
+Biological Process,primary metabolic process,2,GO:0044238,2,23,2,43,1.87,0.49058693244739715,0.31,A0A8V0X522 A0A8V0Y0J2
+Biological Process,nitrogen compound metabolic process,2,GO:0006807,2,24,2,43,1.79,0.4950166112956812,0.31,A0A8V0X522 A0A8V0Y0J2
+Biological Process,organonitrogen compound metabolic process,3,GO:1901564,2,24,2,43,1.79,0.4950166112956812,0.31,A0A8V0X522 A0A8V0Y0J2
+Biological Process,organic substance metabolic process,2,GO:0071704,2,24,2,43,1.79,0.4950166112956812,0.31,A0A8V0X522 A0A8V0Y0J2
+Biological Process,metabolic process,1,GO:0008152,2,25,2,43,1.72,0.5016611295681056,0.3,A0A8V0X522 A0A8V0Y0J2
+Biological Process,regulation of biological process,2,GO:0050789,2,32,2,43,1.34,1.0,-0.0,A0A8V0X522 A0A8V0Y0J2
+Biological Process,cellular process,1,GO:0009987,2,36,2,43,1.19,1.0,-0.0,A0A8V0X522 A0A8V0Y0J2
+Biological Process,biological regulation,1,GO:0065007,2,33,2,43,1.3,1.0,-0.0,A0A8V0X522 A0A8V0Y0J2
+Biological Process,regulation of cellular process,3,GO:0050794,2,30,2,43,1.43,1.0,-0.0,A0A8V0X522 A0A8V0Y0J2

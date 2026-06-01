@@ -1,0 +1,4 @@
+GO Terms Level 1	GO Terms Description	GO Terms Level	GO Terms ID	Mapping	Background	All Mapping	All Background	Fold Enrichment	Fisher's exact test p value	-log10(p value)	Related proteins	Log2 Fold enrichment
+Molecular Function	cell adhesion molecule binding	3	GO:0050839	4	6	10	40	2.67	0.025823394244446865	1.59	A0A8V0YDD6 A0A8V0Z3S9 A0A8V0ZKI3 R4GFJ0	1.4168397419128294
+Molecular Function	signaling receptor binding	3	GO:0005102	6	12	10	40	2.0	0.041089489069614904	1.39	A0A8V0Y0J2 A0A8V0YDD6 A0A8V0Z3S9 A0A8V0ZKI3 A0A8V1AC48 R4GFJ0	1.0
+Molecular Function	integrin binding	3	GO:0005178	3	4	10	40	3.0	0.04168946274209434	1.38	A0A8V0YDD6 A0A8V0Z3S9 A0A8V0ZKI3	1.584962500721156
