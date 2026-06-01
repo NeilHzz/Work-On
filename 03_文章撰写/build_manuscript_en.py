@@ -12,8 +12,8 @@ from pathlib import Path
 import re
 from shared_references import REFS
 
-OUT = str(Path(__file__).with_name("manuscript260520.docx"))
-FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
+OUT = str(Path(__file__).with_name("manuscript260601.docx"))
+FIG_BASE = Path(__file__).resolve().parent.parent / "02_可视化" / "260601" / "02_main_composed_figures"
 
 REF_TEXTS = {}
 for ref_text in REFS:
@@ -336,7 +336,7 @@ p_s0b = mixed([
 cite(p_s0b, [1, 4, 28])
 
 doc.add_page_break()
-add_centered_figure("Fig1.jpg", width_cm=10.1, before=0, after=20)
+add_centered_figure("Fig1_composed.png", width_cm=10.1, before=0, after=20)
 add_main_figure_legend(
     "Fig. 1.",
     "Shared hatching interface and mammillary divergence across the three model species.",
@@ -378,7 +378,7 @@ p_s2a = mixed([
     ("Intact glycopeptides gave a direct cross-species view of specific glycoforms on avian eggshell matrix proteins. Fig. 2 resolved a conserved three-species core together with pairwise-shared and lineage-restricted sectors. The innermost rings correspond to the three-species shared proteins, the surrounding sectors capture pairwise-shared and lineage-restricted repertoires, and the outer nodes summarize the dominant glycan classes represented in the network. Gray links connect proteins to their observed glycan classes, and darker outer glycan nodes indicate classes linked to larger numbers of proteins. High-Mannose and Fucosylated Complex/Hybrid glycans formed a broad background across many protein families, whereas more extended Sialylated Complex/Hybrid glycans concentrated in the peripheral difference nodes. This asymmetry highlighted shared glycoproteins with strongly divergent states and narrowed the candidate space for ortholog and structural analysis.", False, False),
 ])
 
-add_centered_figure("Fig2.jpg", width_cm=14.6)
+add_centered_figure("Fig2_composed.png", width_cm=14.6)
 add_main_figure_legend(
     "Fig. 2.",
     "Network view of shared and lineage-biased eggshell glycoproteins.",
@@ -403,7 +403,7 @@ p_s2d = spara([
     (" The relevant feature was how much of the acidic OVAL interface remained chemically reachable once decorated by different glycans. Ortholog control, abundance decoupling, and glycan-class progression together left OVAL as the only shared candidate that remained simultaneously comparable, chemically specific, and structurally actionable.", []),
 ])
 
-add_centered_figure("Fig3.jpg", width_cm=15.5)
+add_centered_figure("Fig3_composed.png", width_cm=15.5)
 add_main_figure_legend(
     "Fig. 3.",
     "Ortholog filtering and abundance-glycan decoupling prioritize OVAL.",
@@ -435,7 +435,7 @@ p_s3d = spara([
 ])
 
 doc.add_page_break()
-add_centered_figure("Fig4.jpg", width_cm=15.2, before=0, after=20)
+add_centered_figure("Fig4_composed.png", width_cm=15.2, before=0, after=20)
 add_main_figure_legend(
     "Fig. 4.",
     "OVAL glycan state reorganizes interface exposure and Ca²⁺-relevant accessibility.",
@@ -450,7 +450,7 @@ doc.add_page_break()
 head("Finite-element modeling recovers the same contrast in local hatching resistance")
 
 p_s4a = mixed([
-    ("Finite-element testing translated the shared egg-tooth interface into an explicit inside-out loading design. Fig. 5A summarizes the loading background of hatching. Fig. 5B to D pair species-specific dorsal beak views with the corresponding micro-CT-derived finite-element setups built from the beak-tip geometry summarized in Fig. 1B. Because the meshes preserved species-specific shell geometry, the analysis remained anchored to the same mammillary context identified morphologically. Impact loading was sampled on circular eggshell fragments (model diameter D = 2.0 mm) at nine parameterized lateral-offset positions on a 3 × 3 grid (0.5 mm spacing), yielding n = 9 independent contact shear-stress time courses per species. Both raw peak contact force (F_max) and peak contact shear stress (τ_max) were recorded to reduce the influence of model size, gross geometry, and especially eggshell thickness. Peak τ_max was used as the direct readout of local hatching resistance at the mammillary contact interface, and species means ± s.d. were calculated across the nine positions (Fig. S11A to F; eggshell thicknesses: ", False, False),
+    ("Finite-element testing translated the shared egg-tooth interface into an explicit inside-out loading design. Fig. 5A pairs species-specific dorsal beak views with the corresponding micro-CT-derived finite-element setups built from the beak-tip geometry summarized in Fig. 1B and reports the corresponding peak force and peak shear-stress summaries. Because the meshes preserved species-specific shell geometry, the analysis remained anchored to the same mammillary context identified morphologically. Impact loading was sampled on circular eggshell fragments (model diameter D = 2.0 mm) at nine parameterized lateral-offset positions on a 3 × 3 grid (0.5 mm spacing), yielding n = 9 independent contact shear-stress time courses per species. Both raw peak contact force (F_max) and peak contact shear stress (τ_max) were recorded to reduce the influence of model size, gross geometry, and especially eggshell thickness. Peak τ_max was used as the direct readout of local hatching resistance at the mammillary contact interface, and species means ± s.d. were calculated across the nine positions (Fig. S11A to F; eggshell thicknesses: ", False, False),
     ("G. gallus", False, True),
     (" 0.29 mm, ", False, False),
     ("A. platyrhynchos", False, True),
@@ -460,18 +460,18 @@ p_s4a = mixed([
 ])
 
 doc.add_page_break()
-add_centered_figure("Fig5.jpg", width_cm=13.8, before=0, after=20)
+add_centered_figure("Fig5_composed.png", width_cm=15.5, before=0, after=20)
 add_main_figure_legend(
     "Fig. 5.",
-    "Finite-element setup for hatching-relevant loading at the mammillary interface.",
+    "Finite-element setup and local hatching resistance at the mammillary interface.",
     [
-        ("(A) Schematic of the egg-tooth pressing the eggshell from the inner side during hatching. (B to D) Species-specific dorsal beak views with dashed boxes marking the egg-tooth position, paired with the corresponding micro-CT-derived finite-element setups for ", False, False),
+        ("(A) Species-specific dorsal beak views with dashed boxes marking the egg-tooth position, paired with micro-CT-derived finite-element setups and summary box plots of peak contact force (F_max) and peak shear stress (τ_max) for ", False, False),
         ("Gallus gallus", False, True),
         (", ", False, False),
         ("Anas platyrhynchos", False, True),
         (", and ", False, False),
         ("Columba livia", False, True),
-        (", respectively. In each species panel, the left image shows the dorsal beak view used to localize the egg-tooth, and the right image shows the eggshell-fragment mesh, conical impactor, and representative finite-element model output at contact. The simulations were built from reconstructed shell geometry rather than idealized shells.", False, False),
+        (". In each species set, the left image shows the dorsal beak view used to localize the egg-tooth, and the right image shows the eggshell-fragment mesh, conical impactor, and representative finite-element model output at contact. (B) Mean contact-force time courses across nine impact positions with shaded ±1σ envelopes. (C) Mean contact shear-stress time courses for the same nine positions with shaded ±1σ envelopes. Points in the box plots denote individual impact positions (n = 9 per species), p values from one-way ANOVA are shown above the box plots, and different letters indicate Duncan's multiple range test groupings. The simulations were built from reconstructed shell geometry rather than idealized shells.", False, False),
     ],
     before=20,
     after=80,
@@ -485,13 +485,13 @@ mixed([
     ("A. platyrhynchos", False, True),
     (" reached 0.898 ± 0.090 N, and ", False, False),
     ("C. livia", False, True),
-    (" reached 0.485 ± 0.039 N, with all pairwise differences significant (Fig. 6A). By contrast, τ_max resolved a two-level pattern (p = 6.644 × 10⁻¹⁰). ", False, False),
+    (" reached 0.485 ± 0.039 N, with all pairwise differences significant (Fig. 5A and B). By contrast, τ_max resolved a two-level pattern (p = 6.644 × 10⁻¹⁰). ", False, False),
     ("G. gallus", False, True),
     (" reached 551.6 ± 108.8 MPa and was significantly higher than ", False, False),
     ("A. platyrhynchos", False, True),
     (" at 404.0 ± 39.6 MPa and ", False, False),
     ("C. livia", False, True),
-    (" at 393.0 ± 35.2 MPa, whereas the latter two species did not differ significantly from each other (Fig. 6B).", False, False),
+    (" at 393.0 ± 35.2 MPa, whereas the latter two species did not differ significantly from each other (Fig. 5A and C).", False, False),
 ])
 
 mixed([
@@ -509,20 +509,6 @@ mixed([
 mixed([
     ("Whole-shell fracture force alone could make duck appear mechanically superior to chicken because of its greater shell thickness, despite the absence of the same high-density mammillary state. By focusing instead on local hatching resistance at the micro-CT-derived mammillary interface, τ_max removes that ambiguity and shows that the high-density chicken state remains distinct, whereas duck and pigeon converge at lower resistance. This functional readout preserved the same asymmetry already visible in earlier sections and linked glycosylation-associated differences to local shell-breaking mechanics across the three model species.", False, False),
 ])
-add_centered_figure("Fig6.jpg", width_cm=15.5)
-add_main_figure_legend(
-    "Fig. 6.",
-    "Local hatching resistance differs across the three model species.",
-    [
-        ("(A) Mean contact-force time courses across nine impact positions for ", False, False),
-        ("Gallus gallus", False, True),
-        (", ", False, False),
-        ("Anas platyrhynchos", False, True),
-        (", and ", False, False),
-        ("Columba livia", False, True),
-        (", shown with shaded ±1σ envelopes, together with box plots of peak contact force (F_max). (B) Mean contact shear-stress time courses for the same nine positions together with box plots of peak shear stress (τ_max). Symbols on the curves mark species mean peak values, points in the box plots denote individual impact positions (n = 9 per species), p values from one-way ANOVA are shown above the box plots, and different letters indicate Duncan's multiple range test groupings. F_max differs across all three species, whereas τ_max separates chicken from the lower-τ_max duck and pigeon group.", False, False),
-    ],
-)
 
 cite(p_s4a, [16, 37, 69])
 

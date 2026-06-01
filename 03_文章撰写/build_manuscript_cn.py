@@ -12,8 +12,8 @@ from pathlib import Path
 import re
 from shared_references import REFS
 
-OUT = str(Path(__file__).with_name("manuscript260520_cn.docx"))
-FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
+OUT = str(Path(__file__).with_name("manuscript260601_cn.docx"))
+FIG_BASE = Path(__file__).resolve().parent.parent / "02_可视化" / "260601" / "02_main_composed_figures"
 
 REF_TEXTS = {}
 for ref_text in REFS:
@@ -404,7 +404,7 @@ p_s3d_cn = spara([
 head("有限元分析把同一对比连接到局部出壳抗性")
 
 p_s4a_cn = mixed([
-    ("有限元检验把共同的破壳齿界面转化为显式的内向外加载设计。图5A给出了与出壳相关的加载背景，图5B至D则把三种鸟类喙部俯视图与对应的micro-CT有限元建模并列展示。由于网格保留了来自micro-CT的物种特异性壳体几何，这一力学检验始终锚定在前文已经识别出的乳突层背景之上，而不是理想化均质壳壁模型。冲击加载在圆形蛋壳碎片（模型直径D = 2.0 mm）的9个参数化横向偏移位置上采样（3 × 3网格；间距0.5 mm），每物种获得n = 9条独立接触剪切应力时间曲线。为尽可能降低模型尺寸、整体几何以及尤其是蛋壳厚度差异对结果的影响，我们同时记录原始峰值接触力F_max和峰值接触剪切应力τ_max。本文将τ_max视为乳突接触界面局部出壳抗性的直接读数，并从有限元单元输出中"
+    ("有限元检验把共同的破壳齿界面转化为显式的内向外加载设计。图5A将三种鸟类喙部俯视图与对应的micro-CT有限元建模并列展示，并汇总峰值接触力和峰值接触剪切应力结果。由于网格保留了来自micro-CT的物种特异性壳体几何，这一力学检验始终锚定在前文已经识别出的乳突层背景之上，而不是理想化均质壳壁模型。冲击加载在圆形蛋壳碎片（模型直径D = 2.0 mm）的9个参数化横向偏移位置上采样（3 × 3网格；间距0.5 mm），每物种获得n = 9条独立接触剪切应力时间曲线。为尽可能降低模型尺寸、整体几何以及尤其是蛋壳厚度差异对结果的影响，我们同时记录原始峰值接触力F_max和峰值接触剪切应力τ_max。本文将τ_max视为乳突接触界面局部出壳抗性的直接读数，并从有限元单元输出中"
      "直接提取各偏移位置的峰值接触剪切应力τ_max，"
      "然后计算9个位置的物种均值 ± s.d."
     "（图S11A至F；壳厚分别为", False, False),
@@ -419,18 +419,18 @@ p_s4a_cn = mixed([
 cite(p_s4a_cn, [16, 37, 69])
 
 doc.add_page_break()
-add_centered_figure("Fig5.jpg", width_cm=13.8, before=0, after=20)
+add_centered_figure("Fig5_composed.png", width_cm=15.5, before=0, after=20)
 add_main_figure_legend(
     "图5.",
-    "乳突界面出壳相关加载的有限元建模框架。",
+    "乳突界面出壳相关加载的有限元建模与局部抗性。",
     [
-        ("(A) 胚胎出壳过程中卵齿由壳内侧局部顶压蛋壳的示意图。(B至D) ", False, False),
+        ("(A) 物种特异性喙部俯视图及其对应的micro-CT有限元模型，并展示峰值接触力（F_max）和峰值剪切应力（τ_max）的汇总箱线图，包括 ", False, False),
         ("Gallus gallus", False, True),
         ("、", False, False),
         ("Anas platyrhynchos", False, True),
         (" 和 ", False, False),
         ("Columba livia", False, True),
-        (" 的物种特异性喙部俯视图及其对应的micro-CT有限元模型。在每个物种面板中，左侧为喙部俯视图，虚线框标示破壳齿位置，右侧为蛋壳碎片网格、相应锥形压头以及接触时的代表性有限元模型输出。模拟直接建立在实测重建壳体几何而非理想化壳体之上。", False, False),
+        ("。每个物种组中，左侧为喙部俯视图，虚线框标示破壳齿位置；右侧为蛋壳碎片网格、相应锥形压头以及接触时的代表性有限元模型输出。(B) 9个冲击位置的平均接触力时间曲线，阴影表示±1σ。(C) 同一9个位置的平均接触剪切应力时间曲线，阴影表示±1σ。箱线图中的点表示单个冲击位置（每物种n = 9），p值来自单因素ANOVA，不同字母表示Duncan多重范围检验分组。模拟直接建立在实测重建壳体几何而非理想化壳体之上。", False, False),
     ],
     before=20,
     after=80,
@@ -444,13 +444,13 @@ mixed([
     ("A. platyrhynchos", False, True),
     (" 为0.898 ± 0.090 N，", False, False),
     ("C. livia", False, True),
-    (" 为0.485 ± 0.039 N，且所有两两比较均显著（图6A）。相比之下，τ_max收束为两级格局（p = 6.644 × 10⁻¹⁰）。", False, False),
+    (" 为0.485 ± 0.039 N，且所有两两比较均显著（图5A和B）。相比之下，τ_max收束为两级格局（p = 6.644 × 10⁻¹⁰）。", False, False),
     ("G. gallus", False, True),
     (" 为551.6 ± 108.8 MPa，显著高于", False, False),
     ("A. platyrhynchos", False, True),
     (" 的404.0 ± 39.6 MPa和", False, False),
     ("C. livia", False, True),
-    (" 的393.0 ± 35.2 MPa，而后两者之间无统计学差异（图6B）。", False, False),
+    (" 的393.0 ± 35.2 MPa，而后两者之间无统计学差异（图5A和C）。", False, False),
 ])
 
 mixed([
