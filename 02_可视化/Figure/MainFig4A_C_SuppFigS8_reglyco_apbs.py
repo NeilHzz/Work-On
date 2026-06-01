@@ -82,6 +82,20 @@ def _stat_bracket(ax, x1, x2, y0, tick_h, label):
             color='#222', fontweight='bold', clip_on=False)
 
 
+def _one_sample_wilcoxon(sample, reference):
+    diffs = np.asarray(sample, dtype=float) - float(reference)
+    diffs = diffs[np.isfinite(diffs)]
+    if len(diffs) < 2:
+        return None
+    if np.allclose(diffs, 0.0):
+        return None
+    try:
+        _, p_value = stats.wilcoxon(diffs, alternative='two-sided', zero_method='wilcox', method='auto')
+    except ValueError:
+        return None
+    return p_value
+
+
 def species_of(name):
     n = name.split('_')[0]
     if n.startswith('A'):
@@ -291,7 +305,9 @@ def draw_hotspot(ax, summary):
             am   = a_vals[0]
             gstd = g_vals.std() if len(g_vals) > 1 else 0
             if len(g_vals) >= 2:
-                _, p  = stats.ttest_1samp(g_vals, am)
+                p = _one_sample_wilcoxon(g_vals, am)
+                if p is None:
+                    continue
                 lbl   = _pstar(p)
                 if lbl != 'ns':
                     data_top = max(g_vals.max() + gstd, am)
@@ -364,7 +380,6 @@ def draw_ca2_sasa(ax, csv_map):
         apo_sasa[species_of(name)].append(sel['SASA_A2'].sum())
 
     max_y = 0
-    stat_c_queue = []   # (xi, data_top, label, delta, sign)
 
     for sp in species_order:
         xi     = x_map[sp]
@@ -391,26 +406,6 @@ def draw_ca2_sasa(ax, csv_map):
             ax.scatter(xi + 0.2 + jit, a_vals, s=28, color=col,
                        edgecolors='white', linewidths=0.5, zorder=4, alpha=0.55)
             max_y = max(max_y, a_vals.max() + 30)
-
-        # 统计检验
-        if len(g_vals) and len(a_vals):
-            am    = a_vals[0]
-            gm    = g_vals.mean()
-            gstd  = g_vals.std() if len(g_vals) > 1 else 0
-            if len(g_vals) >= 2:
-                _, p = stats.ttest_1samp(g_vals, am)
-                lbl  = _pstar(p)
-                if lbl != 'ns':
-                    data_top = max(g_vals.max() + gstd, a_vals.max())
-                    stat_c_queue.append((xi, data_top, lbl))
-
-    # 统一高度绘제括号
-    if stat_c_queue:
-        tick_h    = 120          # Panel C y-range ~2700, font ~75 units; need gap > 80 units
-        y0_global = max(d[1] for d in stat_c_queue) + 50
-        for xi, _, lbl in stat_c_queue:
-            _stat_bracket(ax, xi - 0.2, xi + 0.2, y0_global, tick_h, lbl)
-        max_y = max(max_y, y0_global + tick_h * 2.5 + 50)
 
     ax.set_xticks(range(len(species_order)))
     ax.set_xticklabels(species_order, fontsize=TICK_FS)
@@ -487,7 +482,7 @@ def draw_apbs_strip(ax, summary, csv_map):
     ax.axhline(0, color='#666', lw=0.8, ls=':', alpha=0.5)
     ax.axhline(-5, color='#e53935', lw=0.9, ls='--', alpha=0.6)
 
-    # 统计标注（one-sample t-test: glyco 分布 vs apo 单值）
+    # 统计标注（one-sample Wilcoxon signed-rank: glyco medians vs apo reference）
     if summary is not None:
         glyc_d = summary[~summary['IsApo']]
         apo_d  = summary[ summary['IsApo']]
@@ -497,7 +492,9 @@ def draw_apbs_strip(ax, summary, csv_map):
             g_med = glyc_d[glyc_d['Species'] == sp]['APBS_median'].values
             a_med = apo_d [apo_d ['Species'] == sp]['APBS_median'].values
             if len(g_med) >= 2 and len(a_med) == 1:
-                _, p  = stats.ttest_1samp(g_med, a_med[0])
+                p = _one_sample_wilcoxon(g_med, a_med[0])
+                if p is None:
+                    continue
                 lbl   = _pstar(p)
                 if lbl != 'ns':
                     stat_queue_d.append((xi, lbl))

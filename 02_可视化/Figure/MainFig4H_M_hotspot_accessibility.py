@@ -190,19 +190,12 @@ def draw_violin_panel(ax, groups_dict, ylabel, title, panel_label,
         ax.hlines(med, i - 0.22, i + 0.22,
                   color='#222', lw=1.6, zorder=4)
 
-    # Duncan's MRT CLD 字母标注
-    grp_data = [groups_dict[sp] for sp in SPECIES_ORDER]
-    res = duncan_mrt(grp_data, SPECIES_ORDER)
-    letter_y = y_max + y_range * 0.05
-    for xi, sp in enumerate(SPECIES_ORDER):
-        ltr = res['letters'].get(sp, '')
-        ax.text(xi, letter_y, ltr, ha='center', va='bottom',
-            fontsize=STAT_FS, fontweight='bold', color='#333')
+    stat_top = add_pairwise_mwu_annotations(ax, groups_dict, y_min, y_max, y_range)
 
     ax.set_xticks(positions)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
-    style_panel_axes(ax, ylabel, f"{title}\n{format_p_value(res['p_anova'])}")
-    ax.set_ylim(y_min - y_range * ypad_bot, letter_y + y_range * 0.20)
+    style_panel_axes(ax, ylabel, f"{title}\nPairwise Mann–Whitney U")
+    ax.set_ylim(y_min - y_range * ypad_bot, stat_top + y_range * 0.12)
 
 
 def draw_box_jitter_panel(ax, groups_dict, ylabel, title):
@@ -212,7 +205,6 @@ def draw_box_jitter_panel(ax, groups_dict, ylabel, title):
     y_min, y_max = np.nanmin(all_vals), np.nanmax(all_vals)
     y_range = max(y_max - y_min, 1e-9)
 
-    res = duncan_mrt(data_lists, SPECIES_ORDER)
     box = ax.boxplot(
         data_lists,
         positions=positions,
@@ -240,16 +232,12 @@ def draw_box_jitter_panel(ax, groups_dict, ylabel, title):
                    color=SPECIES_COLOR[species], alpha=0.72,
                    edgecolors='none', zorder=3)
 
-    letter_y = y_max + y_range * 0.05
-    for index, species in enumerate(SPECIES_ORDER):
-        label = res['letters'].get(species, '')
-        ax.text(index, letter_y, label, ha='center', va='bottom',
-                fontsize=STAT_FS, fontweight='bold', color='#333')
+    stat_top = add_pairwise_mwu_annotations(ax, groups_dict, y_min, y_max, y_range)
 
     ax.set_xticks(positions)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
-    style_panel_axes(ax, ylabel, f"{title}\n{format_p_value(res['p_anova'])}")
-    ax.set_ylim(y_min - y_range * 0.04, letter_y + y_range * 0.18)
+    style_panel_axes(ax, ylabel, f"{title}\nPairwise Mann–Whitney U")
+    ax.set_ylim(y_min - y_range * 0.04, stat_top + y_range * 0.12)
 
 
 def draw_dot_ci_panel(ax, groups_dict, ylabel, title):
@@ -264,24 +252,20 @@ def draw_dot_ci_panel(ax, groups_dict, ylabel, title):
         for values in data_lists
     ])
 
-    res = duncan_mrt(data_lists, SPECIES_ORDER)
     for index, species in enumerate(SPECIES_ORDER):
         ax.errorbar(index, means[index], yerr=ci95[index], fmt='o',
                     markersize=10, markerfacecolor=SPECIES_COLOR[species],
                     markeredgecolor='#222222', markeredgewidth=0.9,
                     ecolor='#333333', elinewidth=1.5, capsize=6, zorder=4)
 
-    letter_y = max(means + ci95) + y_range * 0.08
-    for index, species in enumerate(SPECIES_ORDER):
-        label = res['letters'].get(species, '')
-        ax.text(index, letter_y, label, ha='center', va='bottom',
-                fontsize=STAT_FS, fontweight='bold', color='#333')
+    top_anchor = max(means + ci95)
+    stat_top = add_pairwise_mwu_annotations(ax, groups_dict, y_min, top_anchor, y_range)
 
     ax.set_xticks(positions)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
-    style_panel_axes(ax, ylabel, f"{title}\n{format_p_value(res['p_anova'])}")
+    style_panel_axes(ax, ylabel, f"{title}\nPairwise Mann–Whitney U")
     ax.set_xlim(-0.45, len(SPECIES_ORDER) - 0.55)
-    ax.set_ylim(y_min - y_range * 0.08, letter_y + y_range * 0.20)
+    ax.set_ylim(y_min - y_range * 0.08, stat_top + y_range * 0.12)
 
 
 def draw_half_violin_box_panel(ax, groups_dict, ylabel, title):
@@ -291,7 +275,6 @@ def draw_half_violin_box_panel(ax, groups_dict, ylabel, title):
     y_min, y_max = np.nanmin(all_vals), np.nanmax(all_vals)
     y_range = max(y_max - y_min, 1e-9)
 
-    res = duncan_mrt(data_lists, SPECIES_ORDER)
     vp = ax.violinplot(data_lists, positions=positions,
                        showmedians=False, showextrema=False, widths=0.72)
     for index, body in enumerate(vp['bodies']):
@@ -318,17 +301,13 @@ def draw_half_violin_box_panel(ax, groups_dict, ylabel, title):
         patch.set_edgecolor(SPECIES_COLOR[species])
         patch.set_linewidth(1.3)
 
-    letter_y = y_max + y_range * 0.05
-    for index, species in enumerate(SPECIES_ORDER):
-        label = res['letters'].get(species, '')
-        ax.text(index, letter_y, label, ha='center', va='bottom',
-                fontsize=STAT_FS, fontweight='bold', color='#333')
+    stat_top = add_pairwise_mwu_annotations(ax, groups_dict, y_min, y_max, y_range)
 
     ax.set_xticks(positions)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
-    style_panel_axes(ax, ylabel, f"{title}\n{format_p_value(res['p_anova'])}")
+    style_panel_axes(ax, ylabel, f"{title}\nPairwise Mann–Whitney U")
     ax.set_xlim(-0.55, len(SPECIES_ORDER) - 0.45)
-    ax.set_ylim(y_min - y_range * 0.04, letter_y + y_range * 0.18)
+    ax.set_ylim(y_min - y_range * 0.04, stat_top + y_range * 0.12)
 
 
 def draw_slim_bar_jitter_panel(ax, groups_dict, ylabel, title):
@@ -343,7 +322,6 @@ def draw_slim_bar_jitter_panel(ax, groups_dict, ylabel, title):
         for values in data_lists
     ])
 
-    res = duncan_mrt(data_lists, SPECIES_ORDER)
     bar_width = 0.28
     for index, species in enumerate(SPECIES_ORDER):
         color = SPECIES_COLOR[species]
@@ -361,22 +339,20 @@ def draw_slim_bar_jitter_panel(ax, groups_dict, ylabel, title):
                    color=SPECIES_COLOR[species], alpha=0.70,
                    edgecolors='none', zorder=3)
 
-    letter_y = max(y_max, np.nanmax(means + ci95)) + y_range * 0.06
-    for index, species in enumerate(SPECIES_ORDER):
-        label = res['letters'].get(species, '')
-        ax.text(index, letter_y, label, ha='center', va='bottom',
-                fontsize=STAT_FS, fontweight='bold', color='#333')
+    top_anchor = max(y_max, np.nanmax(means + ci95))
+    stat_top = add_pairwise_mwu_annotations(ax, groups_dict, y_min, top_anchor, y_range)
 
     ax.set_xticks(positions)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
-    style_panel_axes(ax, ylabel, f"{title}\n{format_p_value(res['p_anova'])}")
+    style_panel_axes(ax, ylabel, f"{title}\nPairwise Mann–Whitney U")
     ax.set_xlim(-0.55, len(SPECIES_ORDER) - 0.45)
-    ax.set_ylim(min(0, y_min - y_range * 0.05), letter_y + y_range * 0.20)
+    ax.set_ylim(min(0, y_min - y_range * 0.05), stat_top + y_range * 0.12)
 
 
 def draw_fraction_bar_jitter_panel(ax, groups_dict, ylabel, title):
     draw_slim_bar_jitter_panel(ax, groups_dict, ylabel, title)
-    ax.set_ylim(0, 1)
+    current_top = ax.get_ylim()[1]
+    ax.set_ylim(0, max(1.0, current_top))
 
 
 def draw_line_panel(ax, groups_dict, ylabel, title):
@@ -391,7 +367,6 @@ def draw_line_panel(ax, groups_dict, ylabel, title):
         for values in data_lists
     ])
 
-    res = duncan_mrt(data_lists, SPECIES_ORDER)
     ax.plot(positions, means, color='#444444', linewidth=1.8, zorder=2)
     for index, species in enumerate(SPECIES_ORDER):
         ax.errorbar(index, means[index], yerr=stds[index], fmt='o',
@@ -399,17 +374,14 @@ def draw_line_panel(ax, groups_dict, ylabel, title):
                     markeredgecolor='#222222', markeredgewidth=0.9,
                     ecolor='#333333', elinewidth=1.3, capsize=5, zorder=4)
 
-    letter_y = max(means + stds) + y_range * 0.08
-    for index, species in enumerate(SPECIES_ORDER):
-        label = res['letters'].get(species, '')
-        ax.text(index, letter_y, label, ha='center', va='bottom',
-                fontsize=STAT_FS, fontweight='bold', color='#333')
+    top_anchor = max(means + stds)
+    stat_top = add_pairwise_mwu_annotations(ax, groups_dict, y_min, top_anchor, y_range)
 
     ax.set_xticks(positions)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
-    style_panel_axes(ax, ylabel, f"{title}\n{format_p_value(res['p_anova'])}")
+    style_panel_axes(ax, ylabel, f"{title}\nPairwise Mann–Whitney U")
     ax.set_xlim(-0.45, len(SPECIES_ORDER) - 0.55)
-    ax.set_ylim(y_min - y_range * 0.08, letter_y + y_range * 0.20)
+    ax.set_ylim(y_min - y_range * 0.08, stat_top + y_range * 0.12)
 
 
 # ── 堆叠柱状图 ────────────────────────────────────────────────────────────────
@@ -459,27 +431,20 @@ def draw_hotspot_lollipop(ax, df, show_legend=True):
         ax.text(xs[i] + 0.06, (net + total) / 2, f'-{loss:.1f}', ha='left',
                 va='center', fontsize=VALUE_FS - 3, color='#555')
 
-    # Duncan's MRT CLD letters on net_accessible
     y_top = max(total_means[sp] for sp in SPECIES_ORDER)
     y_min = min(np.nanmin(net_values[sp]) for sp in SPECIES_ORDER)
     y_span = max(y_top - y_min, 1e-9)
-    res_bar = duncan_mrt(
-        [df[df.species == sp]['net_accessible'].values for sp in SPECIES_ORDER],
-        SPECIES_ORDER)
-    letter_y = y_top + (y_top * 0.08)
-    for xi, sp in enumerate(SPECIES_ORDER):
-        ltr = res_bar['letters'].get(sp, '')
-        ax.text(xi, letter_y, ltr, ha='center', va='bottom',
-                fontsize=STAT_FS, fontweight='bold', color='#333')
+    stat_groups = {sp: df[df.species == sp]['net_accessible'].values for sp in SPECIES_ORDER}
+    stat_top = add_pairwise_mwu_annotations(ax, stat_groups, y_min, y_top, y_span)
 
     ax.set_xticks(xs)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
     style_panel_axes(
         ax,
         'Hotspot Count',
-        f'Ca$^{{2+}}$ Hotspot Accessibility\n{format_p_value(res_bar["p_anova"])}',
+        'Ca$^{2+}$ Hotspot Accessibility\nPairwise Mann–Whitney U',
     )
-    ax.set_ylim(max(0, y_min - y_span * 0.28), letter_y + y_span * 0.30)
+    ax.set_ylim(max(0, y_min - y_span * 0.28), stat_top + y_span * 0.12)
     ax.set_xlim(-0.6, len(SPECIES_ORDER) - 0.4)
 
     if show_legend:
@@ -544,27 +509,23 @@ def draw_sasa_dumbbell(ax, df, show_legend=True):
         ax.text(xs[i] + 0.07, residual, f'{residual:.1f}', ha='left', va='center',
                 fontsize=VALUE_FS - 2, color='#555')
 
-    # Duncan's MRT CLD letters on residual hotspot SASA
-    res_sasa = duncan_mrt(
-        [(df[df.species == sp]['iface_full_sasa'] -
-          df[df.species == sp]['iface_shielding']).values for sp in SPECIES_ORDER],
-        SPECIES_ORDER)
-    letter_y = y_top + (y_top * 0.08)
-    for xi, sp in enumerate(SPECIES_ORDER):
-        ltr = res_sasa['letters'].get(sp, '')
-        ax.text(xi, letter_y, ltr, ha='center', va='bottom',
-                fontsize=STAT_FS, fontweight='bold', color='#333')
+    residual_groups = {
+        sp: (df[df.species == sp]['iface_full_sasa'] -
+             df[df.species == sp]['iface_shielding']).values
+        for sp in SPECIES_ORDER
+    }
+    y_min = min(np.nanmin(residual_values[sp]) for sp in SPECIES_ORDER)
+    y_span = max(y_top - y_min, 1e-9)
+    stat_top = add_pairwise_mwu_annotations(ax, residual_groups, y_min, y_top, y_span)
 
     ax.set_xticks(xs)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
     style_panel_axes(
         ax,
         r'Hotspot Residue SASA (Å²)',
-        r'Ca$^{2+}$ Hotspot Residue SASA' + f'\n{format_p_value(res_sasa["p_anova"])}',
+        r'Ca$^{2+}$ Hotspot Residue SASA\nPairwise Mann–Whitney U',
     )
-    y_min = min(np.nanmin(residual_values[sp]) for sp in SPECIES_ORDER)
-    y_span = max(y_top - y_min, 1e-9)
-    ax.set_ylim(max(0, y_min - y_span * 0.28), letter_y + y_span * 0.30)
+    ax.set_ylim(max(0, y_min - y_span * 0.28), stat_top + y_span * 0.12)
     ax.set_xlim(-0.6, len(SPECIES_ORDER) - 0.4)
     if show_legend:
         legend_handles = [
