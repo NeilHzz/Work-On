@@ -336,7 +336,7 @@ add_body(doc,
     "represented in saturated species colours; apo structures are shown in the "
     "same hue at reduced opacity or with hatching. Statistical comparisons "
     "between glycosylated distributions and the corresponding single-point apo "
-    "value used one-sample t-tests (*: p < 0.05; **: p < 0.01; ***: p < 0.001)."
+    "value used one-sample Wilcoxon signed-rank tests when structure-level variation was present; panels with n = 1 or invariant glycosylated values are shown descriptively (*: p < 0.05; **: p < 0.01; ***: p < 0.001)."
 )
 
 add_panel_label(doc, "(a) Full-width APBS surface potential strip chart (kT/e).",
@@ -359,7 +359,7 @@ add_panel_label(doc, "(a) Full-width APBS surface potential strip chart (kT/e)."
 add_panel_label(doc, "(b) Ca²⁺ hotspot residue count: glycosylated vs. deglycosylated (bar + scatter).",
     "Per-structure counts of acidic surface residues with APBS potential "
     "< −5 kT/e (N_hotspot), presented as mean bars with individual points. "
-    "In Gallus, the glycosylated model (N_hotspot = 15.0) showed a marginally "
+    "In Gallus, the glycosylated model (N_hotspot = 15.0) showed a slightly "
     "higher count than the apo form (14.0); the difference was not statistically "
     "significant given n = 1 in each condition. Anas glycosylated structures "
     "(mean 12.7 across three models) trended below the apo value of 14.0, "
@@ -374,12 +374,12 @@ add_panel_label(doc, "(c) Carboxylate surface SASA (Å²): glycosylated vs. degl
     "Total solvent-accessible surface area of all surface-exposed Asp and Glu "
     "residues, calculated from glycan-aware APBS models. The y-axis is truncated "
     "at 1,000 Å² to emphasise within-species differences. Gallus glycosylated "
-    "SASA (3,630 Å²) was marginally lower than apo (3,648 Å²; n = 1, no test). "
-    "Anas glycosylated structures (3,369 ± 13 Å²) showed a significant reduction "
-    "compared with the apo value (3,404 Å²; p < 0.05), consistent with partial "
+    "SASA (3,630 Å²) was slightly lower than apo (3,648 Å²; n = 1, no test). "
+    "Anas glycosylated structures (3,369 ± 13 Å²) remained below the apo value "
+    "(3,404 Å²), but the difference was not statistically significant under the corrected nonparametric test, consistent with partial "
     "steric occlusion of carboxylate groups by the glycan. Columba exhibited the "
     "largest SASA reduction: glycosylated structures averaged 3,433 ± 18 Å², "
-    "significantly below the apo value of 3,473 Å² (p < 0.01). These data "
+    "significantly below the apo value of 3,473 Å² (p < 0.001). These data "
     "indicate that N-glycans exert a measurable, species-specific reduction in "
     "carboxylate solvent exposure, with the effect being most pronounced in Columba."
 )
@@ -393,7 +393,7 @@ add_panel_label(doc, "(d) Surface electrostatic potential distribution: glycosyl
     "apo (−0.79 kT/e) conditions, indicating minimal ensemble-level electrostatic "
     "perturbation by the glycan. Anas displayed a notable shift from apo "
     "(−0.58 kT/e) to glycosylated (−0.10 kT/e), a positive (less anionic) shift "
-    "that, while not statistically significant given the limited n = 3 glyco "
+    "that was not statistically significant under the corrected nonparametric test given the limited n = 3 glyco "
     "ensemble, suggests that glycan addition partially offsets the negative "
     "surface charge density. Columba showed the opposite trend: the glycosylated "
     "ensemble (−1.29 kT/e) was more negative than apo (−1.03 kT/e; p < 0.05), "

@@ -163,6 +163,22 @@ def add_mannwhitney_block(ws, data_dict, label_row, start_col=1, title=''):
     return row + 1
 
 
+def one_sample_wilcoxon(values, reference):
+    values = np.asarray(values, dtype=float)
+    if len(values) < 2:
+        return None, 'n/a (n<2)', 'n/a'
+    diff = values - float(reference)
+    if np.allclose(diff, 0.0):
+        return None, 'descriptive only (invariant glyco values)', 'descriptive'
+    try:
+        _, p = stats.wilcoxon(diff)
+    except ValueError:
+        return None, 'descriptive only (Wilcoxon unavailable)', 'descriptive'
+    label = ('***' if p < 0.001 else '**' if p < 0.01
+             else '*' if p < 0.05 else 'ns')
+    return p, f'{p:.5f}', label
+
+
 # ════════════════════════════════════════════════════════════════════════════════
 # FIGURE 1 — Glycan Conformational Diversity
 # ════════════════════════════════════════════════════════════════════════════════
@@ -573,16 +589,10 @@ def export_figure4():
                 'Δ (Glyco − Apo)': round(glyco.N_hotspot.mean() -
                                           apo.N_hotspot.mean(), 3),
             })
-            if len(glyco) >= 2:
-                _, p = stats.ttest_1samp(glyco.N_hotspot.values,
-                                         apo.N_hotspot.values[0])
-                b_rows[-1]['t-test p-value'] = round(p, 5)
-                b_rows[-1]['Significance']   = ('***' if p<0.001 else '**'
-                                                  if p<0.01 else '*' if p<0.05
-                                                  else 'ns')
-            else:
-                b_rows[-1]['t-test p-value'] = 'n/a (n=1)'
-                b_rows[-1]['Significance']   = 'n/a'
+            p, p_text, sig = one_sample_wilcoxon(glyco.N_hotspot.values,
+                                                 apo.N_hotspot.values[0])
+            b_rows[-1]['Wilcoxon p-value'] = p_text
+            b_rows[-1]['Significance'] = sig
         dbb = pd.DataFrame(b_rows)
         dbb.to_excel(writer, sheet_name='PanelB_Hotspot_Count', index=False)
         ws = writer.sheets['PanelB_Hotspot_Count']
@@ -617,15 +627,9 @@ def export_figure4():
                 'ΔSASA (Glyco − Apo) (Å²)':    round(glyco[col].mean() -
                                                       apo[col].mean(), 1),
             })
-            if len(glyco) >= 2:
-                _, p = stats.ttest_1samp(glyco[col].values, apo[col].values[0])
-                c_rows[-1]['t-test p-value'] = round(p, 5)
-                c_rows[-1]['Significance']   = ('***' if p<0.001 else '**'
-                                                  if p<0.01 else '*'
-                                                  if p<0.05 else 'ns')
-            else:
-                c_rows[-1]['t-test p-value'] = 'n/a (n=1)'
-                c_rows[-1]['Significance']   = 'n/a'
+            p, p_text, sig = one_sample_wilcoxon(glyco[col].values, apo[col].values[0])
+            c_rows[-1]['Wilcoxon p-value'] = p_text
+            c_rows[-1]['Significance'] = sig
         dfc = pd.DataFrame(c_rows)
         dfc.to_excel(writer, sheet_name='PanelC_SASA_Comparison', index=False)
         ws = writer.sheets['PanelC_SASA_Comparison']
@@ -650,16 +654,10 @@ def export_figure4():
                 'Δ APBS Median (Glyco − Apo)':   round(glyco.APBS_median.mean() -
                                                         apo.APBS_median.mean(), 4),
             })
-            if len(glyco) >= 2:
-                _, p = stats.ttest_1samp(glyco.APBS_median.values,
-                                         apo.APBS_median.values[0])
-                d_rows[-1]['t-test p-value'] = round(p, 5)
-                d_rows[-1]['Significance']   = ('***' if p<0.001 else '**'
-                                                  if p<0.01 else '*'
-                                                  if p<0.05 else 'ns')
-            else:
-                d_rows[-1]['t-test p-value'] = 'n/a (n=1)'
-                d_rows[-1]['Significance']   = 'n/a'
+            p, p_text, sig = one_sample_wilcoxon(glyco.APBS_median.values,
+                                                 apo.APBS_median.values[0])
+            d_rows[-1]['Wilcoxon p-value'] = p_text
+            d_rows[-1]['Significance'] = sig
         # 附上各结构 APBS median 明细
         d_detail = summary[['Name','Species','State',
                              'APBS_median','APBS_mean','APBS_std',

@@ -63,6 +63,20 @@ def _pstar(p):
     return 'ns'
 
 
+def _one_sample_wilcoxon(values, reference):
+    values = np.asarray(values, dtype=float)
+    if len(values) < 2:
+        return None
+    diff = values - float(reference)
+    if np.allclose(diff, 0.0):
+        return None
+    try:
+        _, p = stats.wilcoxon(diff)
+    except ValueError:
+        return None
+    return p
+
+
 def _stat_bracket(ax, x1, x2, y0, tick_h, label):
     """在 x1~x2 之间 y=y0 处绘制带显著性标注的括号线。"""
     ax.plot([x1, x1, x2, x2], [y0, y0 + tick_h, y0 + tick_h, y0],
@@ -282,9 +296,9 @@ def draw_hotspot(ax, summary):
             gstd = g_vals.std() if len(g_vals) > 1 else 0
             delta = gm - am
             sign  = '+' if delta >= 0 else '-'
-            if len(g_vals) >= 2:
-                _, p  = stats.ttest_1samp(g_vals, am)
-                lbl   = _pstar(p)
+            p = _one_sample_wilcoxon(g_vals, am)
+            if p is not None and p < 0.05:
+                lbl = _pstar(p)
                 data_top = max(g_vals.max() + gstd, am)
                 stat_b_queue.append((xi, data_top, lbl, delta, sign))
 
@@ -384,8 +398,8 @@ def draw_ca2_sasa(ax, csv_map):
             gstd  = g_vals.std() if len(g_vals) > 1 else 0
             delta = gm - am
             sign  = '+' if delta >= 0 else '-'
-            if len(g_vals) >= 2:
-                _, p = stats.ttest_1samp(g_vals, am)
+            p = _one_sample_wilcoxon(g_vals, am)
+            if p is not None and p < 0.05:
                 lbl  = _pstar(p)
                 data_top = max(g_vals.max() + gstd, a_vals.max())
                 stat_c_queue.append((xi, data_top, lbl, delta, sign))
@@ -483,7 +497,7 @@ def draw_apbs_strip(ax, summary, csv_map):
     ax.axhline(0, color='#666', lw=0.8, ls=':', alpha=0.5)
     ax.axhline(-5, color='#e53935', lw=0.9, ls='--', alpha=0.6)
 
-    # 统计标注（one-sample t-test: glyco 分布 vs apo 单值）
+    # 统计标注（one-sample Wilcoxon: glyco distribution vs apo single value）
     if summary is not None:
         glyc_d = summary[~summary['IsApo']]
         apo_d  = summary[ summary['IsApo']]
@@ -493,11 +507,12 @@ def draw_apbs_strip(ax, summary, csv_map):
             g_med = glyc_d[glyc_d['Species'] == sp]['APBS_median'].values
             a_med = apo_d [apo_d ['Species'] == sp]['APBS_median'].values
             if len(g_med) >= 2 and len(a_med) == 1:
-                _, p  = stats.ttest_1samp(g_med, a_med[0])
-                lbl   = _pstar(p)
-                delta = g_med.mean() - a_med[0]
-                sign  = '+' if delta >= 0 else '-'
-                stat_queue_d.append((xi, lbl, delta, sign))
+                p = _one_sample_wilcoxon(g_med, a_med[0])
+                if p is not None and p < 0.05:
+                    lbl   = _pstar(p)
+                    delta = g_med.mean() - a_med[0]
+                    sign  = '+' if delta >= 0 else '-'
+                    stat_queue_d.append((xi, lbl, delta, sign))
         if stat_queue_d and all_vals:
             rng_span = max(all_vals) - min(all_vals)
             tick_h   = rng_span * 0.04
@@ -522,7 +537,7 @@ def draw_apbs_strip(ax, summary, csv_map):
         Line2D([0], [0], color='#e53935', lw=1.2, ls='--', alpha=0.8,
                label='-5 kT/e'),
     ]
-    ax.legend(handles=legend_els, fontsize=7.5, framealpha=0.6, loc='upper right')
+    ax.legend(handles=legend_els, fontsize=7.5, framealpha=0.6, loc='upper left')
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
 
