@@ -1,6 +1,6 @@
 """
 Science Advances 格式 — 力学结果图
-Fig_force_duncan.png     : Tukey HSD bar chart (F_max & τ_max)
+Fig_force_tukey.png      : Tukey HSD bar chart (F_max & τ_max)
 Fig_force_timeseries.png : Mean ± 1σ force time-series (3 species)
 
 数据源: combined_rcforc_yforce.xlsx
@@ -30,7 +30,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 XLSX       = r"D:\system_folder\Desktop\Work On\01_数据与计算\力学分析\combined_rcforc_yforce.xlsx"
 OUT_DIR    = r"D:\system_folder\Desktop\Work On\02_可视化\Figure\png"
 os.makedirs(OUT_DIR, exist_ok=True)
-OUT_DMRT   = os.path.join(OUT_DIR, "Fig_force_duncan.png")
+OUT_TUKEY  = os.path.join(OUT_DIR, "Fig_force_tukey.png")
 OUT_TS     = os.path.join(OUT_DIR, "Fig_force_timeseries.png")
 
 FIXED_PNG_DIR = os.path.join(SCRIPT_DIR, "PNG")
@@ -190,7 +190,7 @@ fig1.suptitle(
 )
 rng = np.random.default_rng(42)
 
-def plot_dmrt(ax, res, data_orig, metric_label, unit):
+def plot_tukey(ax, res, data_orig, metric_label, unit):
     orig_means = np.array([g.mean() for g in data_orig])
     orig_stds  = np.array([g.std(ddof=1) for g in data_orig])
     x = np.arange(len(SPECIES))
@@ -230,8 +230,8 @@ def plot_dmrt(ax, res, data_orig, metric_label, unit):
         pad=6,
     )
 
-plot_dmrt(axes[0], res_F,   F_DATA,   "F_max",  "N")
-plot_dmrt(axes[1], res_tau, TAU_DATA, "τ_max",  "MPa")
+plot_tukey(axes[0], res_F,   F_DATA,   "F_max",  "N")
+plot_tukey(axes[1], res_tau, TAU_DATA, "τ_max",  "MPa")
 plt.tight_layout(rect=[0, 0, 1, 0.86])
 save_fig(plt.gcf(), "Fig6B", dpi=200)
 plt.close("all")
@@ -239,14 +239,14 @@ plt.close("all")
 # ── Individual Tukey panels ────────────────────────────────────────────────
 rng = np.random.default_rng(42)
 fig_fmax, ax_fmax = plt.subplots(1, 1, figsize=(6, 5.67))
-plot_dmrt(ax_fmax, res_F, F_DATA, "F_max", "N")
+plot_tukey(ax_fmax, res_F, F_DATA, "F_max", "N")
 fig_fmax.subplots_adjust(**SINGLE_PANEL_ADJUST)
 save_fig_fixed(plt.gcf(), "Fig6B_Fmax", dpi=200)
 plt.close("all")
 
 rng = np.random.default_rng(42)
 fig_taumax, ax_taumax = plt.subplots(1, 1, figsize=(6, 5.67))
-plot_dmrt(ax_taumax, res_tau, TAU_DATA, "τ_max", "MPa")
+plot_tukey(ax_taumax, res_tau, TAU_DATA, "τ_max", "MPa")
 fig_taumax.subplots_adjust(**SINGLE_PANEL_ADJUST)
 save_fig_fixed(plt.gcf(), "Fig6B_Taumax", dpi=200)
 plt.close("all")
