@@ -112,6 +112,18 @@ def add_group_letters(ax, groups_dict, y_max, y_range):
     return top_y
 
 
+def add_group_letters_below_points(ax, groups_dict, anchors, y_range):
+    y_range = max(y_range, 1e-9)
+    letters = pairwise_mann_whitney_letters(groups_dict)
+    bottom_y = min(anchors) if len(anchors) else 0.0
+    for index, (anchor, letter) in enumerate(zip(anchors, letters)):
+        y = anchor - y_range * 0.06
+        ax.text(index, y, letter, ha='center', va='top',
+                fontsize=STAT_FS, color='#333')
+        bottom_y = min(bottom_y, y - y_range * 0.06)
+    return bottom_y
+
+
 def style_panel_axes(ax, ylabel: str, title: str,
                      ylabel_x: float | None = None,
                      ylabel_fs: int | None = None) -> None:
@@ -396,7 +408,12 @@ def draw_hotspot_lollipop(ax, df, show_legend=True):
     y_min = min(np.nanmin(net_values[sp]) for sp in SPECIES_ORDER)
     y_span = max(y_top - y_min, 1e-9)
     stat_groups = {sp: df[df.species == sp]['net_accessible'].values for sp in SPECIES_ORDER}
-    stat_top = add_group_letters(ax, stat_groups, y_top, y_span)
+    stat_bottom = add_group_letters_below_points(
+        ax,
+        stat_groups,
+        [net_means[sp] for sp in SPECIES_ORDER],
+        y_span,
+    )
 
     ax.set_xticks(xs)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
@@ -405,7 +422,7 @@ def draw_hotspot_lollipop(ax, df, show_legend=True):
         'Hotspot Count',
         'Ca$^{2+}$ Hotspot Accessibility',
     )
-    ax.set_ylim(max(0, y_min - y_span * 0.28), stat_top + y_span * 0.12)
+    ax.set_ylim(max(0, min(y_min - y_span * 0.28, stat_bottom - y_span * 0.03)), y_top + y_span * 0.12)
     ax.set_xlim(-0.6, len(SPECIES_ORDER) - 0.4)
 
     if show_legend:
@@ -477,7 +494,12 @@ def draw_sasa_dumbbell(ax, df, show_legend=True):
     }
     y_min = min(np.nanmin(residual_values[sp]) for sp in SPECIES_ORDER)
     y_span = max(y_top - y_min, 1e-9)
-    stat_top = add_group_letters(ax, residual_groups, y_top, y_span)
+    stat_bottom = add_group_letters_below_points(
+        ax,
+        residual_groups,
+        [residual_means[sp] for sp in SPECIES_ORDER],
+        y_span,
+    )
 
     ax.set_xticks(xs)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
@@ -486,7 +508,7 @@ def draw_sasa_dumbbell(ax, df, show_legend=True):
         r'Hotspot Residue SASA (Å²)',
         r'Ca$^{2+}$ Hotspot Residue SASA',
     )
-    ax.set_ylim(max(0, y_min - y_span * 0.28), stat_top + y_span * 0.12)
+    ax.set_ylim(max(0, min(y_min - y_span * 0.28, stat_bottom - y_span * 0.03)), y_top + y_span * 0.12)
     ax.set_xlim(-0.6, len(SPECIES_ORDER) - 0.4)
     if show_legend:
         legend_handles = [
