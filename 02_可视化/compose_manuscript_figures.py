@@ -901,6 +901,42 @@ def compose_fig6():
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Supplementary Fig S7  (merged glycosylation profiling + surface potential)
+# ─────────────────────────────────────────────────────────────────────────────
+
+def compose_supp_fig7():
+    print("\n=== Composing Supplementary Fig S7 ===")
+    outer_gap = 80
+
+    raw_glyco = load_img(PNG / "Fig4D_G.png")
+    raw_surface = load_img(PNG / "Fig5A.png")
+
+    if raw_glyco is None:
+        raw_glyco = make_placeholder(3563, 1774, "Fig4D_G not found")
+    if raw_surface is None:
+        raw_surface = make_placeholder(5203, 3133, "Fig5A not found")
+
+    target_w = max(raw_glyco.width, raw_surface.width)
+    glyco = scale_to_w(raw_glyco, target_w)
+    surface = scale_to_w(raw_surface, target_w)
+
+    glyco = add_label(glyco, "A", font=FONT_PUB_LABEL)
+    surface = add_label(surface, "B", font=FONT_PUB_LABEL,
+                        cover=True, cover_px=(120, 120))
+
+    canvas_w = target_w + 2 * MARGIN
+    canvas_h = glyco.height + surface.height + 2 * MARGIN + outer_gap
+    canvas = Image.new("RGBA", (canvas_w, canvas_h), (255, 255, 255, 255))
+
+    y = MARGIN
+    paste(canvas, glyco, (canvas_w - glyco.width) // 2, y)
+    y += glyco.height + outer_gap
+    paste(canvas, surface, (canvas_w - surface.width) // 2, y)
+
+    save_fig(canvas, "FigS7")
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Entry point
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -911,5 +947,6 @@ if __name__ == "__main__":
     compose_fig4()
     compose_fig5()
     compose_fig6()
+    compose_supp_fig7()
     print("\nAll manuscript figures composed successfully.")
     print(f"Output directory: {OUT}")

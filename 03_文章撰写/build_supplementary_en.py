@@ -253,10 +253,10 @@ fig_caption([
 ])
 
 doc.add_page_break()
-add_image(PANEL_FIG_BASE / "Fig5A.png", width_cm=16.0)
-fig_title("Fig. S7.", "Surface electrostatic profiles across glycosylated and apo OVAL structural ensembles.")
+add_image(PANEL_FIG_BASE / "FigS7.png", width_cm=15.8)
+fig_title("Fig. S7.", "Protein-specific glycosylation profiles and surface electrostatic context for OVAL structural ensembles.")
 fig_caption([
-    ("Per-structure strip chart of surface electrostatic potential across glycosylated OVAL models and matched apo references. Each row corresponds to a reconstructed structure, ordered by species and glycosylation state. The panel provides the full ensemble-level context behind the summarized hotspot, carboxylate-accessibility, and APBS-potential comparisons shown in the main Re-Glyco figure.", False, False),
+    ("Panel A shows stacked glycan-class profiles for recurrent eggshell matrix proteins across chicken, duck, and pigeon, including OVAL, OC116, TRFE, and OC17, providing the protein-level glycosylation background for the focused OVAL structural analysis. Panel B shows the per-structure strip chart of surface electrostatic potential across glycosylated OVAL models and matched apo references. Each row corresponds to a reconstructed structure, ordered by species and glycosylation state, and provides the full ensemble-level context behind the summarized hotspot, carboxylate-accessibility, and APBS-potential comparisons shown in the main Re-Glyco figure.", False, False),
 ])
 
 doc.add_page_break()
