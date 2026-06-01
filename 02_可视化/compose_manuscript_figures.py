@@ -598,7 +598,7 @@ def compose_fig3():
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Fig 4  (4 rows: 3 + 4 + 4 + 2 panels → labels A–M)
+# Fig 4  (grouped layout → labels A–N)
 # ─────────────────────────────────────────────────────────────────────────────
 
 def compose_fig4():
@@ -690,6 +690,7 @@ def compose_fig4():
         make_panel("Fig4D-G_Gallus.png", target_w=group_panel_w, trim=True),
         make_panel("Fig4D-G_Columba.png", target_w=group_panel_w, trim=True, zoom=0.9),
     ], gap=sub_gap, row_width=group_w)
+    dg_context_row = add_label(dg_context_row, "A", font=FONT_FIG4_LABEL)
     cf_plot_row = compose_centered_row([
         make_panel("Fig5E.png", "C", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
         make_panel("Fig5H.png", "D", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
@@ -717,14 +718,15 @@ def compose_fig4():
         make_panel("Fig4H_K_3D_sasa_Anas.png", target_w=group_three_panel_w, trim=True),
         make_panel("Fig4H_K_3D_sasa_Columba.png", target_w=group_three_panel_w, trim=True),
     ], gap=sub_gap, row_width=group_w)
+    hk_context_row = add_label(hk_context_row, "B", font=FONT_FIG4_LABEL)
     group_b = compose_vertical_block([hk_context_row, gi_plot_row, hj_plot_row], group_w)
 
     group_row = compose_centered_row([group_a, group_b], gap=GAP, row_width=inner_w)
     bottom_row = compose_centered_row([
-        make_panel("Fig5B.png", "A", target_w=bottom_panel_w, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5C.png", "B", target_w=bottom_panel_w, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5M.png", "K", target_w=bottom_panel_w, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5N.png", "L", target_w=bottom_panel_w, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig5B.png", "K", target_w=bottom_panel_w, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig5C.png", "L", target_w=bottom_panel_w, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig5M.png", "M", target_w=bottom_panel_w, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig5N.png", "N", target_w=bottom_panel_w, cover_old=True, cover_px=(120, 130)),
     ], row_width=inner_w)
 
     rows = [group_row, bottom_row]
