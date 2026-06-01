@@ -901,37 +901,38 @@ def compose_fig6():
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Supplementary Fig S7  (merged glycosylation profiling + surface potential)
+# Supplementary Fig S7  (merged surface-potential summary + per-structure map)
 # ─────────────────────────────────────────────────────────────────────────────
 
 def compose_supp_fig7():
     print("\n=== Composing Supplementary Fig S7 ===")
     outer_gap = 80
 
-    raw_glyco = load_img(PNG / "Fig4D_G.png")
-    raw_surface = load_img(PNG / "Fig5D.png")
+    raw_surface_summary = load_img(PNG / "Fig5D.png")
+    raw_surface_map = load_img(PNG / "Fig5A.png")
 
-    if raw_glyco is None:
-        raw_glyco = make_placeholder(3563, 1774, "Fig4D_G not found")
-    if raw_surface is None:
-        raw_surface = make_placeholder(2172, 1629, "Fig5D not found")
+    if raw_surface_summary is None:
+        raw_surface_summary = make_placeholder(2172, 1629, "Fig5D not found")
+    if raw_surface_map is None:
+        raw_surface_map = make_placeholder(5203, 3133, "Fig5A not found")
 
-    target_w = max(raw_glyco.width, raw_surface.width)
-    glyco = scale_to_w(raw_glyco, target_w)
-    surface = scale_to_w(raw_surface, target_w)
+    target_w = max(raw_surface_summary.width, raw_surface_map.width)
+    surface_summary = scale_to_w(raw_surface_summary, target_w)
+    surface_map = scale_to_w(raw_surface_map, target_w)
 
-    glyco = add_label(glyco, "A", font=FONT_PUB_LABEL)
-    surface = add_label(surface, "B", font=FONT_PUB_LABEL,
-                        cover=True, cover_px=(180, 160))
+    surface_summary = add_label(surface_summary, "A", font=FONT_PUB_LABEL,
+                                cover=True, cover_px=(260, 230))
+    surface_map = add_label(surface_map, "B", font=FONT_PUB_LABEL,
+                            cover=True, cover_px=(180, 160))
 
     canvas_w = target_w + 2 * MARGIN
-    canvas_h = glyco.height + surface.height + 2 * MARGIN + outer_gap
+    canvas_h = surface_summary.height + surface_map.height + 2 * MARGIN + outer_gap
     canvas = Image.new("RGBA", (canvas_w, canvas_h), (255, 255, 255, 255))
 
     y = MARGIN
-    paste(canvas, glyco, (canvas_w - glyco.width) // 2, y)
-    y += glyco.height + outer_gap
-    paste(canvas, surface, (canvas_w - surface.width) // 2, y)
+    paste(canvas, surface_summary, (canvas_w - surface_summary.width) // 2, y)
+    y += surface_summary.height + outer_gap
+    paste(canvas, surface_map, (canvas_w - surface_map.width) // 2, y)
 
     save_fig(canvas, "FigS7")
 

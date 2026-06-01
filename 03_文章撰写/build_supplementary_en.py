@@ -256,7 +256,7 @@ doc.add_page_break()
 add_image(PANEL_FIG_BASE / "FigS7.png", width_cm=15.8)
 fig_title("Fig. S7.", "Protein-specific glycosylation profiles and surface electrostatic context for OVAL structural ensembles.")
 fig_caption([
-    ("Panel A shows stacked glycan-class profiles for recurrent eggshell matrix proteins across chicken, duck, and pigeon, including OVAL, OC116, TRFE, and OC17, providing the protein-level glycosylation background for the focused OVAL structural analysis. Panel B shows the species-level surface potential distribution comparing glycosylated and apo OVAL structural ensembles, summarizing the APBS potential landscape that complements the hotspot and accessibility analyses in the main Re-Glyco figure.", False, False),
+    ("Panel A shows the species-level surface potential distribution comparing glycosylated and apo OVAL structural ensembles, summarizing the APBS potential landscape that complements the hotspot and accessibility analyses in the main Re-Glyco figure. Panel B shows the per-structure surface electrostatic map across glycosylated OVAL models and matched apo references, providing the full ensemble-level context behind the summarized APBS-potential comparison.", False, False),
 ])
 
 doc.add_page_break()
