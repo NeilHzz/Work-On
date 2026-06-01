@@ -812,7 +812,7 @@ cite(p_m_fea_cn, [16, 37, 89])
 head("统计分析")
 
 mixed([
-    ("所有数值均表示为mean ± s.d.，所有统计检验均为双侧，p < 0.05视为显著。参数性物种间比较前，先用Shapiro-Wilk检验正态性，并用Levene检验方差齐性。乳突层形态参数在满足前提后，采用单因素ANOVA结合Duncan多重范围检验（DMRT；α = 0.05）比较（每物种n = 9个子区域）。相同的前提检验同样支持对有限元结果（F_max和τ_max）采用单因素ANOVA结合Duncan多重范围检验。相比之下，糖链系综几何描述符（Rg、端到端距离、最小糖链-蛋白接触距离）和热点衍生的系综指标在物种间不满足正态性和/或方差齐性，因此这些变量的两两物种比较采用双侧Mann-Whitney U检验。在 ", False, False),
+    ("所有数值均表示为mean ± s.d.，所有统计检验均为双侧，p < 0.05视为显著。参数性物种间比较前，先用Shapiro-Wilk检验正态性，并用Levene检验方差齐性。乳突层形态参数在满足前提后，采用单因素ANOVA结合Tukey HSD检验（α = 0.05）比较（每物种n = 9个子区域）。相同的前提检验同样支持对有限元结果（F_max和τ_max）采用单因素ANOVA结合Tukey HSD。相比之下，糖链系综几何描述符（Rg、端到端距离、最小糖链-蛋白接触距离）和热点衍生的系综指标在物种间不满足正态性和/或方差齐性，因此这些变量的两两物种比较采用双侧Mann-Whitney U检验。在 ", False, False),
     ("C.\u00a0livia", False, True),
     (" 中，糖基化导致的N_hot下降通过相对于apo参考值的一样本Wilcoxon符号秩检验评估；整体界面的Asp/Glu SASA因各结构值不变而仅作描述性汇总；表面静电势中位数相对于apo参考的偏移则同样采用一样本Wilcoxon符号秩检验。未进行多重比较校正，也未剔除离群值。所有统计分析均在Python中使用scipy.stats和statsmodels完成。", False, False),
 ], before=0, after=120)

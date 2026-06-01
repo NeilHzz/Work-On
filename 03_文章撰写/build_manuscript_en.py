@@ -904,9 +904,9 @@ head("Statistical analysis")
 mixed([
     ("All values are expressed as mean \u00b1 s.d. All statistical tests were two-tailed, "
      "and p < 0.05 was considered statistically significant throughout. "
-     "Normality was evaluated by the Shapiro\u2013Wilk test and homogeneity of variance by Levene's test before parametric between-species analyses. Mammillary morphometric parameters were compared among species by one-way ANOVA "
-     "followed by Duncan's multiple range test (DMRT; \u03b1\u202f=\u202f0.05) "
-     "(n\u202f=\u202f9 subfragments per species). The same assumption checks supported one-way ANOVA with Duncan's multiple range test for finite-element outcomes (F_max and \u03c4_max). In contrast, glycan ensemble geometric descriptors (Rg, end-to-end distance, minimum glycan\u2013protein contact distance) and hotspot-derived ensemble metrics did not satisfy normality and/or homoscedasticity across species, so pairwise species contrasts for these variables were evaluated with two-sided Mann\u2013Whitney U tests. "
+    "Normality was evaluated by the Shapiro\u2013Wilk test and homogeneity of variance by Levene's test before parametric between-species analyses. Mammillary morphometric parameters were compared among species by one-way ANOVA "
+    "followed by Tukey's honestly significant difference test (Tukey HSD; \u03b1\u202f=\u202f0.05) "
+    "(n\u202f=\u202f9 subfragments per species). The same assumption checks supported one-way ANOVA with Tukey HSD for finite-element outcomes (F_max and \u03c4_max). In contrast, glycan ensemble geometric descriptors (Rg, end-to-end distance, minimum glycan\u2013protein contact distance) and hotspot-derived ensemble metrics did not satisfy normality and/or homoscedasticity across species, so pairwise species contrasts for these variables were evaluated with two-sided Mann\u2013Whitney U tests. "
      "Glycosylation-induced reduction in N_hot within ", False, False),
     ("C.\u00a0livia", False, True),
     (" was assessed by one-sample Wilcoxon signed-rank test versus the apo reference value; total Asp/Glu SASA at the whole-interface level was summarized descriptively because the structure-level values were invariant across ", False, False),
