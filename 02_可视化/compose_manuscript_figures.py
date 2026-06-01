@@ -688,7 +688,7 @@ def compose_fig4():
 
     dg_context_row = compose_centered_row([
         make_panel("Fig4D-G_Gallus.png", target_w=group_panel_w, trim=True),
-        make_panel("Fig4D-G_Columba.png", target_w=group_panel_w, trim=True, zoom=1.12),
+        make_panel("Fig4D-G_Columba.png", target_w=group_panel_w, trim=True, zoom=1.06),
     ], gap=sub_gap, row_width=group_w)
     cf_plot_row = compose_centered_row([
         make_panel("Fig5E.png", "C", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
