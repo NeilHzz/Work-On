@@ -791,8 +791,7 @@ head("Integrated protein-glycan abundance comparison")
 para(
     "For Fig. 3A to C, protein-level and glycan-site quantification tables were "
     "loaded separately for each species from the Protein_quant and Site_quant sheets. "
-    "When the Number Comparable field was present, protein entries with values < 2 "
-    "and glycan-site entries with values < 1 were excluded. Mean protein intensity "
+    "When the Number Comparable field was present, protein entries and glycan-site entries with values < 2 were excluded so that only features detected in at least two of the three pooled biological samples were retained for downstream comparable-protein analysis. Mean protein intensity "
     "was calculated across all species-matched intensity columns for each accession, "
     "and mean glycan intensity was calculated for each quantified glycosylation site "
     "across the corresponding site-intensity columns. Only positive-intensity entries "
@@ -810,7 +809,7 @@ para(
     "abundance for each accession was defined as the mean of nonzero replicate "
     "intensities after excluding proteins with Number Comparable < 2 when available. "
     "Glycan abundance was defined at the protein level as the sum of mean nonzero site "
-    "intensities across all quantified glycosylation sites assigned to that accession. "
+    "intensities across all quantified glycosylation sites assigned to that accession after the same comparable-feature filtering. "
     "Gallus-versus-Anas and Gallus-versus-Columba comparison spaces were built from "
     "blastp outfmt 6 mappings, retaining the best hit per query when the mean E value "
     "was <= 1 × 10⁻⁵ and the average sequence identity was >= 0.40; when query and "
