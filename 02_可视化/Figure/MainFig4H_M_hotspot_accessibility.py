@@ -413,6 +413,8 @@ def draw_hotspot_lollipop(ax, df, show_legend=True):
         ax.scatter(xs[i] + jitter, shown, s=10, color=color,
                alpha=0.26, edgecolors='none', zorder=2)
         ax.vlines(xs[i], net, total, color=color, linewidth=8, alpha=0.32, zorder=1)
+        ax.scatter(xs[i], total, s=120, facecolor='white', edgecolor=color,
+               linewidth=2.0, zorder=4)
         ax.errorbar(xs[i], net, yerr=net_ci95[sp], fmt='o', markersize=10,
                     markerfacecolor=color, markeredgecolor='#222222',
                     markeredgewidth=0.9, ecolor='#333333', elinewidth=1.4,
