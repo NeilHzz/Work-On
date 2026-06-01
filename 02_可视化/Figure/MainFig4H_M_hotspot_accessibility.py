@@ -164,10 +164,8 @@ def draw_violin_panel(ax, groups_dict, ylabel, title, panel_label,
         ax.text(xi, letter_y, ltr, ha='center', va='bottom',
             fontsize=STAT_FS, fontweight='bold', color='#333')
 
-    n_labels = [f'\n(n={len(groups_dict[sp])})' for sp in SPECIES_ORDER]
     ax.set_xticks(positions)
-    ax.set_xticklabels([sp + n for sp, n in zip(SPECIES_ORDER, n_labels)],
-                       fontsize=TICK_FS)
+    ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
     style_panel_axes(ax, ylabel, f"{title}\n{format_p_value(res['p_anova'])}")
     ax.set_ylim(y_min - y_range * ypad_bot, letter_y + y_range * 0.20)
 
@@ -213,10 +211,8 @@ def draw_box_jitter_panel(ax, groups_dict, ylabel, title):
         ax.text(index, letter_y, label, ha='center', va='bottom',
                 fontsize=STAT_FS, fontweight='bold', color='#333')
 
-    n_labels = [f'\n(n={len(groups_dict[species])})' for species in SPECIES_ORDER]
     ax.set_xticks(positions)
-    ax.set_xticklabels([species + n for species, n in zip(SPECIES_ORDER, n_labels)],
-                       fontsize=TICK_FS)
+    ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
     style_panel_axes(ax, ylabel, f"{title}\n{format_p_value(res['p_anova'])}")
     ax.set_ylim(y_min - y_range * 0.04, letter_y + y_range * 0.18)
 
@@ -246,10 +242,8 @@ def draw_dot_ci_panel(ax, groups_dict, ylabel, title):
         ax.text(index, letter_y, label, ha='center', va='bottom',
                 fontsize=STAT_FS, fontweight='bold', color='#333')
 
-    n_labels = [f'\n(n={len(groups_dict[species])})' for species in SPECIES_ORDER]
     ax.set_xticks(positions)
-    ax.set_xticklabels([species + n for species, n in zip(SPECIES_ORDER, n_labels)],
-                       fontsize=TICK_FS)
+    ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
     style_panel_axes(ax, ylabel, f"{title}\n{format_p_value(res['p_anova'])}")
     ax.set_xlim(-0.45, len(SPECIES_ORDER) - 0.55)
     ax.set_ylim(y_min - y_range * 0.08, letter_y + y_range * 0.20)
@@ -295,10 +289,8 @@ def draw_half_violin_box_panel(ax, groups_dict, ylabel, title):
         ax.text(index, letter_y, label, ha='center', va='bottom',
                 fontsize=STAT_FS, fontweight='bold', color='#333')
 
-    n_labels = [f'\n(n={len(groups_dict[species])})' for species in SPECIES_ORDER]
     ax.set_xticks(positions)
-    ax.set_xticklabels([species + n for species, n in zip(SPECIES_ORDER, n_labels)],
-                       fontsize=TICK_FS)
+    ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
     style_panel_axes(ax, ylabel, f"{title}\n{format_p_value(res['p_anova'])}")
     ax.set_xlim(-0.55, len(SPECIES_ORDER) - 0.45)
     ax.set_ylim(y_min - y_range * 0.04, letter_y + y_range * 0.18)
@@ -340,10 +332,8 @@ def draw_slim_bar_jitter_panel(ax, groups_dict, ylabel, title):
         ax.text(index, letter_y, label, ha='center', va='bottom',
                 fontsize=STAT_FS, fontweight='bold', color='#333')
 
-    n_labels = [f'\n(n={len(groups_dict[species])})' for species in SPECIES_ORDER]
     ax.set_xticks(positions)
-    ax.set_xticklabels([species + n for species, n in zip(SPECIES_ORDER, n_labels)],
-                       fontsize=TICK_FS)
+    ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
     style_panel_axes(ax, ylabel, f"{title}\n{format_p_value(res['p_anova'])}")
     ax.set_xlim(-0.55, len(SPECIES_ORDER) - 0.45)
     ax.set_ylim(min(0, y_min - y_range * 0.05), letter_y + y_range * 0.20)
@@ -380,10 +370,8 @@ def draw_line_panel(ax, groups_dict, ylabel, title):
         ax.text(index, letter_y, label, ha='center', va='bottom',
                 fontsize=STAT_FS, fontweight='bold', color='#333')
 
-    n_labels = [f'\n(n={len(groups_dict[species])})' for species in SPECIES_ORDER]
     ax.set_xticks(positions)
-    ax.set_xticklabels([species + n for species, n in zip(SPECIES_ORDER, n_labels)],
-                       fontsize=TICK_FS)
+    ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
     style_panel_axes(ax, ylabel, f"{title}\n{format_p_value(res['p_anova'])}")
     ax.set_xlim(-0.45, len(SPECIES_ORDER) - 0.55)
     ax.set_ylim(y_min - y_range * 0.08, letter_y + y_range * 0.20)

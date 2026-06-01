@@ -632,10 +632,7 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
     clean_axes(ax)
     ax.spines["left"].set_visible(False)
 
-    totals = matrix.sum(axis=1).astype(int)
-    for idx, species in enumerate(SPECIES_ORDER):
-        ax.text(101.0, idx, f"n={totals.loc[species]}", ha="left", va="center", fontsize=11.4)
-    ax.set_xlim(0, 112)
+    ax.set_xlim(0, 100)
 
     fig.subplots_adjust(left=0.10, right=0.985, bottom=0.15, top=0.82)
     legend = ax.legend(

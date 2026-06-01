@@ -152,8 +152,7 @@ def violin_one(ax, metric, ylabel, subtitle=''):
                    color=SPECIES_COLORS[sp], alpha=1.0, linewidths=0, zorder=3)
 
     ax.set_xticks(range(len(SPECIES_ORDER)))
-    ax.set_xticklabels([f'{sp}\n(n={len(d)})' for sp, d in zip(SPECIES_ORDER, data)],
-                       fontsize=TICK_FS)
+    ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
 
     # Duncan CLD 字母标注
     ymax = max(d.max() for d in data if len(d))
@@ -204,9 +203,7 @@ def box_jitter_one(ax, metric, ylabel, subtitle=''):
                    linewidths=0, zorder=3)
 
     ax.set_xticks(range(len(SPECIES_ORDER)))
-    ax.set_xticklabels([f'{species}\n(n={len(values)})'
-                        for species, values in zip(SPECIES_ORDER, data)],
-                       fontsize=TICK_FS)
+    ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
 
     ymax = max(values.max() for values in data if len(values))
     ymin = min(values.min() for values in data if len(values))
@@ -264,9 +261,7 @@ def raincloud_one(ax, metric, ylabel, subtitle=''):
                    linewidths=0, zorder=3)
 
     ax.set_xticks(positions)
-    ax.set_xticklabels([f'{species}\n(n={len(values)})'
-                        for species, values in zip(SPECIES_ORDER, data)],
-                       fontsize=TICK_FS)
+    ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
 
     ymax = max(values.max() for values in data if len(values))
     ymin = min(values.min() for values in data if len(values))
@@ -317,9 +312,7 @@ def half_violin_box_one(ax, metric, ylabel, subtitle=''):
         patch.set_linewidth(1.3)
 
     ax.set_xticks(positions)
-    ax.set_xticklabels([f'{species}\n(n={len(values)})'
-                        for species, values in zip(SPECIES_ORDER, data)],
-                       fontsize=TICK_FS)
+    ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
 
     ymax = max(values.max() for values in data if len(values))
     ymin = min(values.min() for values in data if len(values))
