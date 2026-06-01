@@ -21,7 +21,7 @@ import matplotlib.ticker as ticker
 from scipy.interpolate import PchipInterpolator
 from scipy import stats
 
-SINGLE_PANEL_ADJUST = dict(left=0.13, right=0.97, bottom=0.13, top=0.93)
+SINGLE_PANEL_ADJUST = dict(left=0.13, right=0.97, bottom=0.13, top=0.86)
 
 # ─────────────────────────────────────────────────────────────
 # Paths
@@ -228,11 +228,15 @@ def plot_dmrt(ax, res, data_orig, metric_label, unit):
     ax.grid(axis="y", linestyle="--", linewidth=0.6, alpha=0.5, zorder=0)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.set_title(f"p = {res['p_anova']:.2e}", fontsize=20, pad=10)
+    ax.set_title(
+        f"{metric_label} ({unit})\np = {res['p_anova']:.2e}",
+        fontsize=16,
+        pad=6,
+    )
 
 plot_dmrt(axes[0], res_F,   F_DATA,   "F_max",  "N")
 plot_dmrt(axes[1], res_tau, TAU_DATA, "τ_max",  "MPa")
-plt.tight_layout(rect=[0, 0, 1, 0.93])
+plt.tight_layout(rect=[0, 0, 1, 0.86])
 save_fig(plt.gcf(), "Fig6B", dpi=200)
 plt.close("all")
 
