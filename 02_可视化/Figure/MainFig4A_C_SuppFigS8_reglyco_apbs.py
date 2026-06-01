@@ -53,6 +53,7 @@ TICK_FS = 20
 LEGEND_FS = 18
 STAT_FS = 20
 PANEL_LABEL_FS = 20
+BOTTOM_PANEL_FIGSIZE = (7.7, 6.3)
 
 # 绘图顺序：G1 + A1-A3 + C1-C14（糖基化），再 3 个 apo
 GLYC_ORDER = ['G1', 'A1', 'A2', 'A3',
@@ -553,7 +554,7 @@ def main():
     plt.close(fig_a)
 
     # ── Panel B: Ca2+ hotspot residues ────────────────────────────────────
-    fig_b, ax_b = plt.subplots(figsize=(7.7, 5.5))
+    fig_b, ax_b = plt.subplots(figsize=BOTTOM_PANEL_FIGSIZE)
     fig_b.patch.set_facecolor('white')
     draw_hotspot(ax_b, summary)
     fig_b.text(0.01, 0.98, 'B', transform=fig_b.transFigure,
@@ -563,7 +564,7 @@ def main():
     plt.close(fig_b)
 
     # ── Panel C: Ca2+ SASA ────────────────────────────────────────────────
-    fig_c, ax_c = plt.subplots(figsize=(7.7, 5.5))
+    fig_c, ax_c = plt.subplots(figsize=BOTTOM_PANEL_FIGSIZE)
     fig_c.patch.set_facecolor('white')
     draw_ca2_sasa(ax_c, csv_map)
     fig_c.text(0.01, 0.98, 'C', transform=fig_c.transFigure,
