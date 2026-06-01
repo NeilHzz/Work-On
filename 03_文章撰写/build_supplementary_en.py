@@ -15,7 +15,7 @@ from docx.shared import Cm, Pt
 FIG_BASE = Path(r"D:\system_folder\Desktop\Work On\Supplementary\Figures")
 MAIN_FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
 PANEL_FIG_BASE = Path(__file__).resolve().parent.parent / "02_可视化" / "Figure" / "PNG"
-OUT = str(Path(__file__).with_name("supplementary_materials260520.docx"))
+OUT = str(Path(__file__).with_name("supplementary_materials0602.docx"))
 
 doc = Document()
 
@@ -132,7 +132,7 @@ def fig_caption(parts, before=0, after=240):
 para("Supplementary Materials for", size=11, before=0, after=40,
      align=WD_ALIGN_PARAGRAPH.CENTER)
 para(
-    "Glycan states of eggshell matrix proteins link mammillary organization to local hatching resistance across birds",
+    "OVAL glycan state tracks mammillary organisation and local hatching resistance across avian eggshells",
     bold=True, size=12, before=0, after=160, align=WD_ALIGN_PARAGRAPH.CENTER,
 )
 para("",
@@ -166,7 +166,7 @@ mpara([
     (" in three distinct, non-overlapping regions of avian ecological space (Fig. S1), corresponding to terrestrial ground-nesting precocial, semi-aquatic precocial, and elevated-nesting altricial life-history strategies, respectively. The three-species set was selected to sample both developmental and ecological contrasts within a common hatching framework rather than to maximize any single phylogenetic or morphological separation.", False, False),
 ])
 mpara([
-    ("To test whether this separation depended on the numerical encoding of categorical variables, we performed 500 randomized perturbation iterations in which all encoding weights were independently shifted within +/-30% of their original values. Across all iterations, the variance explained by the first two principal components and the cluster silhouette coefficient remained tightly centered on the unperturbed baseline (Fig. S1). The species assignments therefore remained stable under reasonable alternative encodings.", False, False),
+    ("To test whether this separation depended on the numerical encoding of categorical variables, we performed 500 randomized perturbation iterations in which all encoding weights were independently shifted within +/-30% of their original values. Across all iterations, the variance explained by the first two principal components and the cluster silhouette coefficient remained tightly centred on the unperturbed baseline (Fig. S1). The species assignments therefore remained stable under reasonable alternative encodings.", False, False),
 ], before=80)
 
 st_head("Supplementary Text 2. Eggshell matrix proteome orthogroup analysis.")
@@ -212,7 +212,7 @@ fig_caption([
     ("Anas platyrhynchos", False, True),
     (", and ", False, False),
     ("Columba livia", False, True),
-    (" as focal species. Categorical ecological variables were numerically encoded, and each iteration introduced independent random shifts to all encoding weights within +/-30% of the original values. The tight concentration of both metrics around the baseline shows that species-group assignments are robust to the categorical encoding scheme.", False, False),
+    (" as focal species. Categorical ecological variables were numerically encoded, and each iteration introduced independent random shifts to all encoding weights within +/-30% of the original values. The tight concentration of both metrics around the baseline indicates that species-group assignments are robust to the categorical encoding scheme.", False, False),
 ])
 
 doc.add_page_break()
@@ -226,7 +226,7 @@ doc.add_page_break()
 add_image(FIG_BASE / "SuppFig2_Venn_Orthogroups" / "Fig_venn_orthogroups.png", width_cm=12.0)
 fig_title("Fig. S3.", "Three-species Venn diagram of shared and lineage-restricted eggshell matrix orthogroups.")
 fig_caption([
-    ("OrthoFinder-based orthogroup analysis resolves the three eggshell matrix proteomes into a large three-species shared core, three pairwise-shared subsets, and three lineage-restricted subsets. Numbers indicate orthogroup counts for each subset. The large shared core shows that cross-species comparison is built on a common protein repertoire rather than on wholesale protein replacement.", False, False),
+    ("OrthoFinder-based orthogroup analysis resolves the three eggshell matrix proteomes into a large three-species shared core, three pairwise-shared subsets, and three lineage-restricted subsets. Numbers indicate orthogroup counts for each subset. The large shared core indicates that cross-species comparison is built on a common protein repertoire rather than on wholesale protein replacement.", False, False),
 ])
 
 doc.add_page_break()
@@ -256,7 +256,7 @@ doc.add_page_break()
 add_image(PANEL_FIG_BASE / "FigS7.png", width_cm=15.8)
 fig_title("Fig. S7.", "Protein-specific glycosylation profiles and surface electrostatic context for OVAL structural ensembles.")
 fig_caption([
-    ("Panel A shows the species-level surface potential distribution comparing glycosylated and apo OVAL structural ensembles, summarizing the APBS potential landscape that complements the hotspot and accessibility analyses in the main Re-Glyco figure. Panel B shows the per-structure surface electrostatic map across glycosylated OVAL models and matched apo references, providing the full ensemble-level context behind the summarized APBS-potential comparison.", False, False),
+    ("Panel A shows the species-level surface potential distribution comparing glycosylated and apo OVAL structural ensembles, summarizing the APBS potential landscape that complements the hotspot and accessibility analyses in the main Re-Glyco figure. Panel B shows the per-structure surface electrostatic map across glycosylated OVAL models and matched apo references, providing the ensemble-level context behind the summarized APBS-potential comparison.", False, False),
 ])
 
 doc.add_page_break()
@@ -297,7 +297,7 @@ fig_caption([
     ("G. gallus", False, True),
     (" showed the smallest conformational space and the weakest shielding; ", False, False),
     ("A. platyrhynchos", False, True),
-    (" was intermediate. The apo comparison provides an internal control: once N-glycans were removed, cross-species separation in hotspot count largely collapsed. Panel C contrasts were evaluated against the apo reference by one-sample t test.", False, False),
+    (" was intermediate. The apo comparison provides an internal control: once N-glycans were removed, cross-species separation in hotspot count largely collapsed. Panel C contrasts were evaluated against the apo reference by one-sample Wilcoxon signed-rank test when structure-level variation was present.", False, False),
 ])
 
 doc.add_page_break()
@@ -334,7 +334,7 @@ fig_caption([
     ("_max", False, False),
     (" and peak shear stress (τ", False, False),
     ("_max", False, False),
-    (") computed from these nine replicates per species are reported in the main text and Fig. 6. Simulations were run in LS-DYNA (Ansys) using explicit dynamic finite-element analysis, with eggshell thickness set to the species-specific value measured from micro-CT.", False, False),
+    (") computed from these nine replicates per species are reported in the main text and Fig. 5. Simulations were run in LS-DYNA (Ansys) using explicit dynamic finite-element analysis, with eggshell thickness set to the species-specific value measured from micro-CT.", False, False),
 ])
 
 doc.save(OUT)

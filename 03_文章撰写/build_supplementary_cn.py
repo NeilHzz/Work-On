@@ -15,7 +15,7 @@ from docx.shared import Cm, Pt
 FIG_BASE = Path(r"D:\system_folder\Desktop\Work On\Supplementary\Figures")
 MAIN_FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
 PANEL_FIG_BASE = Path(__file__).resolve().parent.parent / "02_可视化" / "Figure" / "PNG"
-OUT = str(Path(__file__).with_name("supplementary_materials260520_cn.docx"))
+OUT = str(Path(__file__).with_name("supplementary_materials0602_cn.docx"))
 
 doc = Document()
 
@@ -117,7 +117,7 @@ para("补充材料", bold=True, size=14,
      before=0, after=240, align=WD_ALIGN_PARAGRAPH.CENTER)
 
 para(
-    "蛋壳基质蛋白糖链状态连接鸟类乳突层组织与局部出壳抗性",
+    "OVAL糖链状态追踪鸟类蛋壳乳突层组织与局部出壳抗性",
     italic=False, size=11, before=0, after=360,
     align=WD_ALIGN_PARAGRAPH.CENTER,
 )
@@ -262,7 +262,7 @@ doc.add_page_break()
 fig_title("图S10.", "OVAL 糖链几何及 apo/糖基化对照的 Re-Glyco 系综分析。")
 add_image(FIG_BASE / "SuppFig7_Glycosylation_Hotspot" / "Fig_hotspot_ensemble_1.png", width_cm=15.5)
 fig_caption(
-    "(A) 三种物种特异性 OVAL–糖链复合物在构象系综重复中的糖链回旋半径（Rg）分布，按物种着色（G. gallus 为橙色，A. platyrhynchos 为蓝色，C. livia 为绿色）。(B) 相同三种复合物的糖链端到端距离分布。(C) 各物种糖基化与 apo OVAL 结构逐构象的 Ca²⁺ 热点计数（Nhot）比较。C. livia 具有最大的构象空间和最强的糖链遮蔽；G. gallus 具有最小的构象空间和最弱的遮蔽；A. platyrhynchos 居中。移除 N-糖链后，跨物种在热点计数上的分离明显收敛。图中 panel C 相对 apo 参考的差异采用一样本 t 检验评估。"
+    "(A) 三种物种特异性 OVAL–糖链复合物在构象系综重复中的糖链回旋半径（Rg）分布，按物种着色（G. gallus 为橙色，A. platyrhynchos 为蓝色，C. livia 为绿色）。(B) 相同三种复合物的糖链端到端距离分布。(C) 各物种糖基化与 apo OVAL 结构逐构象的 Ca²⁺ 热点计数（Nhot）比较。C. livia 具有最大的构象空间和最强的糖链遮蔽；G. gallus 具有最小的构象空间和最弱的遮蔽；A. platyrhynchos 居中。移除 N-糖链后，跨物种在热点计数上的分离明显收敛。图中 panel C 在存在结构层面变异时，采用相对于 apo 参考的一样本 Wilcoxon 符号秩检验评估。"
 )
 
 
@@ -282,7 +282,7 @@ add_images_row([
     FIG_BASE / "SuppFig8_FEA_Force_Analysis" / "pigeon_rcforc_yforce.png",
 ], width_cm=7.5)
 fig_caption(
-    "(A–C) G. gallus（A）、A. platyrhynchos（B）和 C. livia（C）在九个参数化冲击位置（3 × 3 横向偏移网格）上的接触力（F）时间历程曲线。每条曲线代表一次模拟，显示从接触开始到峰值接触力的全过程。内嵌图给出了各物种九个位置的峰值接触力（F_max）分布。(D–F) 对应的 Y 方向反力（FY）时间历程。由这九次重复计算得到的物种峰值接触力（F_max）和峰值接触剪切应力（τ_max）的均值 ± s.d. 已在正文和图6中报告。模拟采用 LS-DYNA（Ansys）显式动力有限元分析完成，蛋壳厚度设置为基于 micro-CT 测得的物种特异性数值。"
+    "(A–C) G. gallus（A）、A. platyrhynchos（B）和 C. livia（C）在九个参数化冲击位置（3 × 3 横向偏移网格）上的接触力（F）时间历程曲线。每条曲线代表一次模拟，显示从接触开始到峰值接触力的全过程。内嵌图给出了各物种九个位置的峰值接触力（F_max）分布。(D–F) 对应的 Y 方向反力（FY）时间历程。由这九次重复计算得到的物种峰值接触力（F_max）和峰值接触剪切应力（τ_max）的均值 ± s.d. 已在正文和图5中报告。模拟采用 LS-DYNA（Ansys）显式动力有限元分析完成，蛋壳厚度设置为基于 micro-CT 测得的物种特异性数值。"
 )
 
 
