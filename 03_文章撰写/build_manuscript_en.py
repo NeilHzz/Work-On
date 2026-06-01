@@ -375,27 +375,27 @@ p_sprot_focus = spara([
 head("OVAL glycosylation provides the most interpretable cross-species contrast")
 
 p_s2a = mixed([
-    ("Intact glycopeptides gave a direct cross-species view of specific glycoforms on avian eggshell matrix proteins. Fig. 2 resolved a conserved three-species core together with pairwise-shared and lineage-restricted sectors. The innermost rings correspond to the three-species shared proteins, the surrounding sectors capture pairwise-shared and lineage-restricted repertoires, and the outer nodes summarize the dominant glycan classes represented in the network. Gray links connect proteins to their observed glycan classes, and darker outer glycan nodes indicate classes linked to larger numbers of proteins. High-Mannose and Fucosylated Complex/Hybrid glycans formed a broad background across many protein families, whereas more extended Sialylated Complex/Hybrid glycans concentrated in the peripheral difference nodes. This asymmetry highlighted shared glycoproteins with strongly divergent states and narrowed the candidate space for ortholog and structural analysis.", False, False),
+    ("Intact glycopeptides gave a direct cross-species view of specific glycoforms on avian eggshell matrix proteins. Fig. 2 first summarized the species-level glycoprotein search space, showing that the three datasets differed in cluster counts, glycoprotein coverage, glycosite numbers, and glycan-composition counts while still retaining a comparable shared-core signal (Fig. 2A to C). The glycan-class composition profiles then showed that High-Mannose and Fucosylated Complex/Hybrid glycans formed a broad background across species, whereas Sialylated Complex/Hybrid and other extended classes contributed more strongly to lineage differences (Fig. 2D). The ortholog-glycan chord view retained the same message at the protein level: a shared eggshell-matrix repertoire was present, but individual shared proteins carried different dominant glycan classes across species (Fig. 2E). This asymmetry highlighted shared glycoproteins with strongly divergent states and narrowed the candidate space for ortholog and structural analysis.", False, False),
 ])
 
 add_centered_figure("Fig2_composed.png", width_cm=14.6)
 add_main_figure_legend(
     "Fig. 2.",
-    "Network view of shared and lineage-biased eggshell glycoproteins.",
+    "Shared-core glycoproteome structure and glycan-class deployment.",
     [
-        ("Circular network linking orthologous eggshell glycoproteins to the dominant glycan classes across chicken, duck, and pigeon. The innermost concentric region marks the three-species conserved glycoprotein core; surrounding sectors mark pairwise-shared and lineage-restricted repertoires; and the outer glycan-class nodes summarize the manuscript-standard glycan classes, including High-Mannose, Paucimannose/Truncated, Neutral Complex/Hybrid, Fucosylated Complex/Hybrid, Sialylated Complex/Hybrid, and Other glycans. Curved links connect protein nodes to glycan classes, and the outer callouts report the number of proteins assigned to each class.", False, False),
+        ("(A) Species-partitioned cluster counts in the glycoproteomic dataset. (B) Numbers of detected glycoproteins, glycosites, and glycan compositions in each species. (C) Shared-core Jensen-Shannon similarity among the three species. (D) Species-level distribution of manuscript-standard glycan-class assignments, including High-Mannose, Paucimannose/Truncated, Neutral Complex/Hybrid, Fucosylated Complex/Hybrid, Sialylated Complex/Hybrid, and Other glycans. (E) Ortholog-glycan chord view linking eggshell glycoproteins to dominant glycan classes across chicken, duck, and pigeon, with highlighted matrix proteins retained for downstream comparison.", False, False),
     ],
 )
 
 p_s2b = mixed([
-    ("A stricter BlastP-based filter retained an orthologous glycoprotein subset suitable for structural comparison and summarized that shared candidate space in Fig. 3A. Using ", False, False),
+    ("A stricter BlastP-based filter retained an orthologous glycoprotein subset suitable for structural comparison and summarized that shared candidate space in Fig. 2E. Using ", False, False),
     ("G. gallus", False, True),
     (" as the reference, non-reference candidates were retained only when the mean E-value was below 1 × 10⁻⁵ and sequence identity met the final comparability thresholds. This filter restricted the downstream comparison to high-confidence orthologs. Under that stricter mapping, OC17 was glycosylated only in chicken, whereas OC116, TRFE, and OVAL all retained glycosylation signals across the three species and served as shared anchors. Among them, OVAL showed the clearest cross-species glycan differences and became the main target for subsequent structural analysis.", False, False),
 ])
 p_s2c = spara([
-    ("Integrated protein and glycan abundance profiles further identified OVAL as the shared protein most closely aligned with the cross-species eggshell differences (Fig. 3B to D). Across the full dataset, protein-glycan coupling was weak in chicken but consistently positive in duck and pigeon, indicating lineage differences in how glycosylation scaled with protein output.", []),
+    ("Integrated protein and glycan abundance profiles further identified OVAL as the shared protein most closely aligned with the cross-species eggshell differences (Fig. 3A to C). Across the full dataset, protein-glycan coupling was weak in chicken but consistently positive in duck and pigeon, indicating lineage differences in how glycosylation scaled with protein output.", []),
     (" Among the highlighted eggshell-matrix proteins, OVAL remained abundant in all three species but differed sharply in glycan burden: relatively modest in chicken, stronger in duck, and strongest in pigeon. OC116 and TRFE remained informative shared proteins, but neither separated bulk protein abundance from glycan output as consistently as OVAL.", []),
-    (" Pairwise enrichment plots then showed why OVAL remained the clearest discriminator (Fig. 3E to G). In the Gallus-versus-Anas and Gallus-versus-Columba planes, OVAL fell on the glycan-skewed side of the comparison, indicating that its glycan shift outpaced or even opposed the corresponding protein-abundance shift rather than merely mirroring it. In the Anas-versus-Columba plane, OVAL again remained displaced from simple protein-glycan equivalence, preserving the same ordering beyond the chicken comparison. Intact-glycopeptide assignments therefore placed OVAL along a coherent cross-species progression from compact High-Mannose glycans in chicken to Neutral Complex/Hybrid glycans in duck and more extended Sialylated Complex/Hybrid glycans in pigeon. Together, Fig. 3B to G identified OVAL as the shared protein whose glycosylation changed in the most phenotype-relevant manner.", []),
+    (" Pairwise enrichment plots then showed why OVAL remained the clearest discriminator (Fig. 3D to F). In the Gallus-versus-Anas and Gallus-versus-Columba planes, OVAL fell on the glycan-skewed side of the comparison, indicating that its glycan shift outpaced or even opposed the corresponding protein-abundance shift rather than merely mirroring it. In the Anas-versus-Columba plane, OVAL again remained displaced from simple protein-glycan equivalence, preserving the same ordering beyond the chicken comparison. Intact-glycopeptide assignments therefore placed OVAL along a coherent cross-species progression from compact High-Mannose glycans in chicken to Neutral Complex/Hybrid glycans in duck and more extended Sialylated Complex/Hybrid glycans in pigeon. Together, Fig. 3A to F identified OVAL as the shared protein whose glycosylation changed in the most phenotype-relevant manner.", []),
 ])
 
 p_s2d = spara([
@@ -408,7 +408,7 @@ add_main_figure_legend(
     "Fig. 3.",
     "Ortholog filtering and abundance-glycan decoupling prioritize OVAL.",
     [
-        ("(A) Circos-style summary of the orthologous glycoprotein subset retained after stringent BlastP filtering, highlighting shared candidate proteins across chicken, duck, and pigeon. Species are color-coded, gray labels indicate chicken proteins without retained non-chicken orthologs under the final comparison criteria, and highlighted labels mark OVAL, OC116, TRFE, and OC17. (B to D) Proteotype coevolution plots comparing log2-transformed protein abundance and glycan abundance within chicken, duck, and pigeon, respectively; inset values show Spearman's ρ and two-sided p values. (E to G) Pairwise two-dimensional glycan-protein enrichment plots for Gallus versus Anas, Gallus versus Columba, and Anas versus Columba.", False, False),
+        ("(A to C) Proteotype coevolution plots comparing log2-transformed protein abundance and glycan abundance within chicken, duck, and pigeon, respectively; inset values show Spearman's ρ and two-sided p values, and highlighted labels mark OVAL, OC116, TRFE, and OC17 where retained. (D to F) Pairwise two-dimensional glycan-protein enrichment plots for Gallus versus Columba, Gallus versus Anas, and Anas versus Columba. The dashed diagonal marks equal protein and glycan change, and highlighted proteins identify matrix candidates whose glycan shifts depart from simple protein-abundance scaling.", False, False),
     ],
 )
 
@@ -416,21 +416,21 @@ head("OVAL glycan state reshapes surface accessibility")
 
 p_s3a = spara([
     ("OVAL was selected for structural analysis because it remained shared, chemically distinct, and directly comparable across species. Dominant glycosylated OVAL ensembles and matched apo references were rebuilt to test whether the three species differed mainly through glycan-dependent surface behavior rather than through backbone sequence alone.", [4, 11]),
-    (" In Fig. 4A, glycosylated ensembles departed from their matched apo references in the number of Ca²⁺-relevant acidic hotspots, and the same displacement reappeared in the physically exposed carboxylate surface measured in Fig. 4B and in the whole-surface electrostatic maps in Fig. 4C. Removing glycans collapsed much of that separation and brought the three backbones closer together. The initial structural difference therefore reflected a glycan-imposed shift in the exposed acidic surface presented at mineralization onset rather than a generic sequence effect (Fig. 4A to C; Fig. S10).", []),
+    (" Representative rebuilt glycan conformations and species-specific surface maps showed that the dominant glycans occupied different spatial envelopes on the same folded protein scaffold (Fig. 4A and B). Matched glycosylated-versus-apo comparisons then showed that glycan addition changed the number of Ca²⁺-relevant hotspot residues and the exposed carboxylate surface, indicating that the recovered structural difference reflected a glycan-imposed shift in the acidic surface presented at mineralization onset rather than a generic sequence effect (Fig. 4K and L; Fig. S10).", []),
 ])
 
 p_s3b = spara([
-    (" Pigeon first separated by occupying the largest overall glycan envelope, as shown by the higher radius of gyration in Fig. 4D and the longer end-to-end distances in Fig. 4E. That expansion, however, did not lift the glycans away from the protein.", []),
-    (" Instead, the same pigeon ensembles remained at similar or closer glycan-protein separations in Fig. 4F and reached smaller minimum backbone distances in Fig. 4G, consistent with extended glycans that also fold back toward the surface. Chicken defined the opposite endpoint: compact glycans in Fig. 4D and Fig. 4E, weaker surface contact in Fig. 4F and Fig. 4G, and therefore the least geometrically intrusive glycan layer. Duck again lay between those limits. Fig. 4D to G therefore convert glycan-class progression into a shielding geometry, from compact and weakly contacting chicken glycans to extended but surface-hugging pigeon glycans, with duck occupying the intermediate state.", []),
+    (" Pigeon first separated by occupying the largest overall glycan envelope, as shown by the higher radius of gyration in Fig. 4C and the longer end-to-end distances in Fig. 4E. That expansion occurred together with closer local approaches to the backbone in Fig. 4D and a broader glycan-protein distance distribution in Fig. 4F, consistent with extended glycans that sample a larger envelope while still folding back toward the OVAL surface.", []),
+    (" Chicken defined the opposite endpoint, with compact glycans and the weakest geometric intrusion into the acidic interface; duck again lay between those limits. Fig. 4C to F therefore convert glycan-class progression into a shielding geometry, from compact and weakly contacting chicken glycans to extended but surface-engaging pigeon glycans, with duck occupying the intermediate state.", []),
 ])
 
 p_s3c = spara([
-    (" Fig. 4H to K resolved the same acidic interface at progressively stricter levels. Fig. 4H measures gross shielding, Fig. 4I the hotspot surface area that remains solvent exposed, Fig. 4J the hotspot fraction among candidate acidic residues, and Fig. 4K the subset of hotspots that remains both electrostatically favorable and physically reachable to Ca²⁺.", []),
+    (" Fig. 4G to J resolved the same acidic interface at progressively stricter levels. Fig. 4G measures gross interface shielding, Fig. 4H asks what fraction of candidate acidic residues remained hotspots, Fig. 4I measures the surface area retained by hotspot residues, and Fig. 4J counts the subset of Ca²⁺ hotspots that remained both electrostatically favorable and physically reachable.", []),
     (" Interface shielding increased stepwise from chicken to duck to pigeon, and the same ordering was retained across hotspot surface area, hotspot fraction, and net accessible Ca²⁺ hotspots. Together, these panels show progressive masking of the shared acidic OVAL face during early mineralization.", []),
 ])
 
 p_s3d = spara([
-    (" Fig. 4L and Fig. 4M then collapse the same contrast to the whole-interface level by partitioning hotspot counts and hotspot-residue surface area into exposed and shielded fractions. Chicken retained the largest exposed share in both panels, pigeon shifted the largest share into the shielded compartment, and duck again remained intermediate.", []),
+    (" Fig. 4K to N then used matched glycosylated and apo references to collapse the same contrast to the whole-interface level. Hotspot counts, carboxylate surface accessibility, net hotspot accessibility, and hotspot-residue SASA all retained the same qualitative ordering: chicken preserved the most accessible Ca²⁺-relevant surface, pigeon shifted the largest share into a glycan-affected state, and duck remained intermediate or converged with pigeon depending on the metric.", []),
     (" Chicken therefore retained the strongest inferred Ca²⁺-capturing capacity and the state most compatible with earlier Ca²⁺-responsive opening of OVAL at mineralization onset; pigeon defined the weakest and latest-starting limit, and duck remained intermediate. The same ordering matched the phenotype sequence: chicken combined the densest mammillary field and the highest local hatching resistance, whereas duck and pigeon converged toward the lower-resistance side from different structural backgrounds. Fig. 4A to M thus links glycan-dependent separation, glycan geometry, interface masking, and Ca²⁺-relevant accessibility on a shared matrix protein.", []),
 ])
 
@@ -440,7 +440,7 @@ add_main_figure_legend(
     "Fig. 4.",
     "OVAL glycan state reorganizes interface exposure and Ca²⁺-relevant accessibility.",
     [
-        ("(A) Number of Ca²⁺ hotspot residues, defined as surface Asp/Glu positions with APBS potential below −5 kT/e, in glycosylated and matched apo OVAL ensembles. (B) Carboxylate surface accessibility. (C) Surface electrostatic potential distributions for glycosylated versus apo structures. (D to G) Ensemble geometric descriptors of the rebuilt glycans, including radius of gyration, end-to-end distance, glycan-protein distance, and minimum glycan-backbone distance. (H) Glycan-mediated interface shielding. (I) Mean solvent-accessible surface area (SASA) of hotspot residues. (J) Hotspot fraction among candidate acidic residues. (K) Net accessible Ca²⁺ hotspots. (L) Partition of hotspot accessibility into net accessible and glycan-shielded components. (M) Partition of hotspot-residue SASA into net accessible and glycan-shielded components. Species-specific ensemble sizes are indicated beneath the violins. Species comparisons in Fig. 4D to M used one-way ANOVA followed by Duncan's multiple range test; glycosylated-versus-apo contrasts in Fig. 4A to C were evaluated against matched apo references by one-sample t test, with significance annotations shown above the brackets.", False, False),
+        ("(A) Representative rebuilt OVAL-glycan conformations on the protein surface. (B) Species-specific surface maps showing glycan positions and Ca²⁺-relevant surface regions. (C to F) Ensemble geometric descriptors of the rebuilt glycans, including radius of gyration, minimum glycan-backbone distance, end-to-end distance, and glycan-protein distance. (G) Glycan-mediated interface shielding. (H) Hotspot fraction among candidate acidic residues. (I) Mean solvent-accessible surface area (SASA) of hotspot residues. (J) Net accessible Ca²⁺ hotspots. (K) Ca²⁺ hotspot residue counts in glycosylated and matched apo OVAL references. (L) Carboxylate surface accessibility in glycosylated and apo references. (M) Ca²⁺ hotspot accessibility. (N) Ca²⁺ hotspot-residue SASA. Species comparisons used one-way ANOVA followed by Duncan's multiple range test where applicable; glycosylated-versus-apo contrasts were evaluated against matched apo references by one-sample t test.", False, False),
     ],
     before=20,
     after=80,
@@ -774,7 +774,7 @@ mixed([
 head("Integrated protein-glycan abundance comparison")
 
 para(
-    "For Fig. 3B to D, protein-level and glycan-site quantification tables were "
+    "For Fig. 3A to C, protein-level and glycan-site quantification tables were "
     "loaded separately for each species from the Protein_quant and Site_quant sheets. "
     "When the Number Comparable field was present, protein entries with values < 2 "
     "and glycan-site entries with values < 1 were excluded. Mean protein intensity "
@@ -786,11 +786,11 @@ para(
     "a matched protein-abundance measurement. Protein and glycan intensities were "
     "log2-transformed, and within-species protein-glycan coupling was summarized by "
     "Spearman rank correlation with two-sided p values. OVAL, OC116, TRFE, and OC17 "
-    "were highlighted by the strict ortholog assignments used in Fig. 3A, and labels "
+    "were highlighted by the strict ortholog assignments summarized in Fig. 2E, and labels "
     "were annotated with the corresponding glycosylated Asn position.")
 
 para(
-    "For Fig. 3E to G, pairwise glycan-protein enrichment plots were built from "
+    "For Fig. 3D to F, pairwise glycan-protein enrichment plots were built from "
     "ortholog-mapped protein and glycan abundance differences between species. Protein "
     "abundance for each accession was defined as the mean of nonzero replicate "
     "intensities after excluding proteins with Number Comparable < 2 when available. "
