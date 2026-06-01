@@ -57,51 +57,58 @@ SPECIES_COLOR = {'Gallus': '#C46B83', 'Anas': '#93AACD', 'Columba': '#F3CE9D'}
 
 
 # ── 统计标注 ──────────────────────────────────────────────────────────────────
-def sig_label(p):
-    if p < 0.001: return '***'
-    if p < 0.01:  return '**'
-    if p < 0.05:  return '*'
-    return 'ns'
+def pairwise_mann_whitney_letters(groups_dict, alpha: float = 0.05):
+    cleaned = []
+    for species in SPECIES_ORDER:
+        arr = np.asarray(groups_dict[species], dtype=float)
+        cleaned.append(arr[np.isfinite(arr)])
 
-
-def add_significance_brackets(ax, x1, x2, y, h, label, fs=STAT_FS):
-    ax.plot([x1, x1, x2, x2], [y, y + h, y + h, y], lw=0.9, c='#333')
-    ax.text((x1 + x2) / 2, y + h * 1.05, label,
-            ha='center', va='bottom', fontsize=fs, color='#333')
-
-
-def pairwise_mann_whitney(groups_dict):
-    comparisons = []
-    for left in range(len(SPECIES_ORDER)):
-        for right in range(left + 1, len(SPECIES_ORDER)):
-            sp_left = SPECIES_ORDER[left]
-            sp_right = SPECIES_ORDER[right]
-            left_vals = np.asarray(groups_dict[sp_left], dtype=float)
-            right_vals = np.asarray(groups_dict[sp_right], dtype=float)
-            left_vals = left_vals[np.isfinite(left_vals)]
-            right_vals = right_vals[np.isfinite(right_vals)]
+    means = np.array([
+        np.mean(values) if len(values) else -np.inf
+        for values in cleaned
+    ])
+    order = np.argsort(means)[::-1]
+    sig = np.zeros((len(cleaned), len(cleaned)), dtype=bool)
+    for i in range(len(cleaned)):
+        for j in range(i + 1, len(cleaned)):
+            left_vals = cleaned[order[i]]
+            right_vals = cleaned[order[j]]
             if len(left_vals) == 0 or len(right_vals) == 0:
                 continue
             _, p_value = stats.mannwhitneyu(left_vals, right_vals, alternative='two-sided')
-            label = sig_label(p_value)
-            if label != 'ns':
-                comparisons.append((left, right, label, p_value))
-    return comparisons
+            sig[i, j] = sig[j, i] = (p_value < alpha)
+
+    letters_by_rank = {
+        (False, False, False): ('a', 'a', 'a'),
+        (False, False, True): ('ab', 'a', 'b'),
+        (False, True, False): ('a', 'ab', 'b'),
+        (False, True, True): ('a', 'a', 'b'),
+        (True, False, False): ('a', 'b', 'ab'),
+        (True, False, True): ('a', 'b', 'a'),
+        (True, True, False): ('a', 'b', 'b'),
+        (True, True, True): ('a', 'b', 'c'),
+    }[(bool(sig[0, 1]), bool(sig[0, 2]), bool(sig[1, 2]))]
+
+    letters = [''] * len(cleaned)
+    for ranked_index, original_index in enumerate(order):
+        letters[original_index] = letters_by_rank[ranked_index]
+    return letters
 
 
-def add_pairwise_mwu_annotations(ax, groups_dict, y_min, y_max, y_range):
-    comparisons = pairwise_mann_whitney(groups_dict)
-    if not comparisons:
-        return y_max
-    comparisons = sorted(comparisons, key=lambda item: (item[1] - item[0], item[0]))
-    step = max(y_range * 0.08, 1e-9)
-    tick_h = step * 0.35
-    base_y = y_max + y_range * 0.05
-    top_y = base_y
-    for level, (left, right, label, _) in enumerate(comparisons):
-        y = base_y + level * step
-        add_significance_brackets(ax, left, right, y, tick_h, label)
-        top_y = max(top_y, y + tick_h * 2.2)
+def add_group_letters(ax, groups_dict, y_max, y_range):
+    y_range = max(y_range, 1e-9)
+    data_lists = [groups_dict[species] for species in SPECIES_ORDER]
+    letters = pairwise_mann_whitney_letters(groups_dict)
+    top_y = y_max
+    for index, (values, letter) in enumerate(zip(data_lists, letters)):
+        arr = np.asarray(values, dtype=float)
+        arr = arr[np.isfinite(arr)]
+        if len(arr) == 0:
+            continue
+        y = arr.max() + y_range * 0.04
+        ax.text(index, y, letter, ha='center', va='bottom',
+                fontsize=STAT_FS, color='#333')
+        top_y = max(top_y, y + y_range * 0.08)
     return top_y
 
 
@@ -144,11 +151,11 @@ def draw_violin_panel(ax, groups_dict, ylabel, title, panel_label,
         ax.hlines(med, i - 0.22, i + 0.22,
                   color='#222', lw=1.6, zorder=4)
 
-    stat_top = add_pairwise_mwu_annotations(ax, groups_dict, y_min, y_max, y_range)
+    stat_top = add_group_letters(ax, groups_dict, y_max, y_range)
 
     ax.set_xticks(positions)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
-    style_panel_axes(ax, ylabel, f"{title}\nPairwise Mann–Whitney U")
+    style_panel_axes(ax, ylabel, title)
     ax.set_ylim(y_min - y_range * ypad_bot, stat_top + y_range * 0.12)
 
 
@@ -186,11 +193,11 @@ def draw_box_jitter_panel(ax, groups_dict, ylabel, title):
                    color=SPECIES_COLOR[species], alpha=0.72,
                    edgecolors='none', zorder=3)
 
-    stat_top = add_pairwise_mwu_annotations(ax, groups_dict, y_min, y_max, y_range)
+    stat_top = add_group_letters(ax, groups_dict, y_max, y_range)
 
     ax.set_xticks(positions)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
-    style_panel_axes(ax, ylabel, f"{title}\nPairwise Mann–Whitney U")
+    style_panel_axes(ax, ylabel, title)
     ax.set_ylim(y_min - y_range * 0.04, stat_top + y_range * 0.12)
 
 
@@ -213,11 +220,11 @@ def draw_dot_ci_panel(ax, groups_dict, ylabel, title):
                     ecolor='#333333', elinewidth=1.5, capsize=6, zorder=4)
 
     top_anchor = max(means + ci95)
-    stat_top = add_pairwise_mwu_annotations(ax, groups_dict, y_min, top_anchor, y_range)
+    stat_top = add_group_letters(ax, groups_dict, top_anchor, y_range)
 
     ax.set_xticks(positions)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
-    style_panel_axes(ax, ylabel, f"{title}\nPairwise Mann–Whitney U")
+    style_panel_axes(ax, ylabel, title)
     ax.set_xlim(-0.45, len(SPECIES_ORDER) - 0.55)
     ax.set_ylim(y_min - y_range * 0.08, stat_top + y_range * 0.12)
 
@@ -255,11 +262,11 @@ def draw_half_violin_box_panel(ax, groups_dict, ylabel, title):
         patch.set_edgecolor(SPECIES_COLOR[species])
         patch.set_linewidth(1.3)
 
-    stat_top = add_pairwise_mwu_annotations(ax, groups_dict, y_min, y_max, y_range)
+    stat_top = add_group_letters(ax, groups_dict, y_max, y_range)
 
     ax.set_xticks(positions)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
-    style_panel_axes(ax, ylabel, f"{title}\nPairwise Mann–Whitney U")
+    style_panel_axes(ax, ylabel, title)
     ax.set_xlim(-0.55, len(SPECIES_ORDER) - 0.45)
     ax.set_ylim(y_min - y_range * 0.04, stat_top + y_range * 0.12)
 
@@ -294,11 +301,11 @@ def draw_slim_bar_jitter_panel(ax, groups_dict, ylabel, title):
                    edgecolors='none', zorder=3)
 
     top_anchor = max(y_max, np.nanmax(means + ci95))
-    stat_top = add_pairwise_mwu_annotations(ax, groups_dict, y_min, top_anchor, y_range)
+    stat_top = add_group_letters(ax, groups_dict, top_anchor, y_range)
 
     ax.set_xticks(positions)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
-    style_panel_axes(ax, ylabel, f"{title}\nPairwise Mann–Whitney U")
+    style_panel_axes(ax, ylabel, title)
     ax.set_xlim(-0.55, len(SPECIES_ORDER) - 0.45)
     ax.set_ylim(min(0, y_min - y_range * 0.05), stat_top + y_range * 0.12)
 
@@ -328,12 +335,12 @@ def draw_line_panel(ax, groups_dict, ylabel, title):
                     markeredgecolor='#222222', markeredgewidth=0.9,
                     ecolor='#333333', elinewidth=1.3, capsize=5, zorder=4)
 
-    top_anchor = max(means + stds)
-    stat_top = add_pairwise_mwu_annotations(ax, groups_dict, y_min, top_anchor, y_range)
+    top_anchor = max(y_max, np.nanmax(means + stds))
+    stat_top = add_group_letters(ax, groups_dict, top_anchor, y_range)
 
     ax.set_xticks(positions)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
-    style_panel_axes(ax, ylabel, f"{title}\nPairwise Mann–Whitney U")
+    style_panel_axes(ax, ylabel, title)
     ax.set_xlim(-0.45, len(SPECIES_ORDER) - 0.55)
     ax.set_ylim(y_min - y_range * 0.08, stat_top + y_range * 0.12)
 
@@ -389,14 +396,14 @@ def draw_hotspot_lollipop(ax, df, show_legend=True):
     y_min = min(np.nanmin(net_values[sp]) for sp in SPECIES_ORDER)
     y_span = max(y_top - y_min, 1e-9)
     stat_groups = {sp: df[df.species == sp]['net_accessible'].values for sp in SPECIES_ORDER}
-    stat_top = add_pairwise_mwu_annotations(ax, stat_groups, y_min, y_top, y_span)
+    stat_top = add_group_letters(ax, stat_groups, y_top, y_span)
 
     ax.set_xticks(xs)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
     style_panel_axes(
         ax,
         'Hotspot Count',
-        'Ca$^{2+}$ Hotspot Accessibility\nPairwise Mann–Whitney U',
+        'Ca$^{2+}$ Hotspot Accessibility',
     )
     ax.set_ylim(max(0, y_min - y_span * 0.28), stat_top + y_span * 0.12)
     ax.set_xlim(-0.6, len(SPECIES_ORDER) - 0.4)
@@ -470,14 +477,14 @@ def draw_sasa_dumbbell(ax, df, show_legend=True):
     }
     y_min = min(np.nanmin(residual_values[sp]) for sp in SPECIES_ORDER)
     y_span = max(y_top - y_min, 1e-9)
-    stat_top = add_pairwise_mwu_annotations(ax, residual_groups, y_min, y_top, y_span)
+    stat_top = add_group_letters(ax, residual_groups, y_top, y_span)
 
     ax.set_xticks(xs)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
     style_panel_axes(
         ax,
         r'Hotspot Residue SASA (Å²)',
-        r'Ca$^{2+}$ Hotspot Residue SASA\nPairwise Mann–Whitney U',
+        r'Ca$^{2+}$ Hotspot Residue SASA',
     )
     ax.set_ylim(max(0, y_min - y_span * 0.28), stat_top + y_span * 0.12)
     ax.set_xlim(-0.6, len(SPECIES_ORDER) - 0.4)
