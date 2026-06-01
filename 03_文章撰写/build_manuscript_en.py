@@ -845,11 +845,9 @@ p_m_reglyco = mixed([
      "Re-Glyco Ensemble tool (glycoshape.org/ensemble), which restores missing "
      "glycans by aligning them to torsion angles from Privateer crystallographic "
      "standards and sampling conformations from the GlycoShape molecular-dynamics "
-     "ensemble library. "
-     "For each protein, a session was created via the GlycoShape API to identify "
-     "available N-glycosylation sequons in the structural model; each matched "
-    "glycan was then submitted as an independent modeling job and attached to "
-     "the target sequon \u2014 ", False, False),
+    "ensemble library. "
+    "For each OVAL ortholog, glycan modeling was constrained to the experimentally detected glycopeptide site identified in the present dataset; each matched "
+    "glycan was then submitted as an independent modeling job via the GlycoShape API and attached to the measured target sequon \u2014 ", False, False),
     ("G.\u00a0gallus", False, True),
     (" N293 and ", False, False),
     ("A.\u00a0platyrhynchos", False, True),
