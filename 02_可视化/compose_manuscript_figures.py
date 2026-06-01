@@ -226,11 +226,11 @@ def _stress_color(t: float) -> tuple[int, int, int]:
 def make_stress_legend_bottom(width: int, height: int) -> Image.Image:
     legend = Image.new("RGBA", (width, height), (255, 255, 255, 255))
     draw = ImageDraw.Draw(legend)
-    title_font = _load_font(max(34, height // 4))
-    tick_font = _load_font(max(28, height // 5))
+    title_font = _load_font(max(48, height // 3))
+    tick_font = _load_font(max(34, height // 4))
 
-    title = "Von Mises Stress (MPa)"
-    bar_w = int(width * 0.58)
+    title = "Stress (MPa)"
+    bar_w = int(width * 0.42)
     bar_h = max(28, height // 7)
     bar_x = (width - bar_w) // 2
     title_y = max(8, height // 16)
