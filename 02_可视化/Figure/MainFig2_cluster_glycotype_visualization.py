@@ -19,6 +19,7 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 import numpy as np
 import pandas as pd
+from matplotlib.offsetbox import AnnotationBbox, OffsetImage
 from scipy.spatial.distance import braycurtis, jensenshannon
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -79,6 +80,12 @@ MS_FILES = {
     "Gallus": MS_DIR / "Glycan_MS_Gallus.xlsx",
     "Anas": MS_DIR / "Glycan_MS_Anas.xlsx",
     "Columba": MS_DIR / "Glycan_MS_Columba.xlsx",
+}
+ICON_DIR = ROOT / "02_可视化" / "eggtooth"
+SPECIES_ICONS = {
+    "Gallus": ICON_DIR / "icon_Gallus.jpg",
+    "Anas": ICON_DIR / "icon_Anas.jpg",
+    "Columba": ICON_DIR / "icon_Columba.jpg",
 }
 
 
@@ -361,13 +368,27 @@ def draw_similarity_heatmap(
     ax.set_xticks(np.arange(len(SPECIES_ORDER)))
     ax.set_yticks(np.arange(len(SPECIES_ORDER)))
     ax.set_xticklabels(SPECIES_ORDER, fontsize=12.8)
-    ax.set_yticklabels(SPECIES_ORDER, fontsize=12.8)
+    ax.set_yticklabels([])
     for tick, species in zip(ax.get_xticklabels(), SPECIES_ORDER):
         tick.set_color(SPECIES_COLORS[species])
         tick.set_fontweight("bold")
-    for tick, species in zip(ax.get_yticklabels(), SPECIES_ORDER):
-        tick.set_color(SPECIES_COLORS[species])
-        tick.set_fontweight("bold")
+    for row_index, species in enumerate(SPECIES_ORDER):
+        icon_path = SPECIES_ICONS[species]
+        if not icon_path.exists():
+            continue
+        icon = plt.imread(icon_path)
+        image_box = OffsetImage(icon, zoom=0.12)
+        annotation = AnnotationBbox(
+            image_box,
+            (-0.13, row_index),
+            xycoords=ax.get_yaxis_transform(),
+            frameon=False,
+            box_alignment=(0.5, 0.5),
+            pad=0,
+            zorder=6,
+        )
+        annotation.set_clip_on(False)
+        ax.add_artist(annotation)
     for row_index in range(len(SPECIES_ORDER)):
         for col_index in range(len(SPECIES_ORDER)):
             value = values[row_index, col_index]
