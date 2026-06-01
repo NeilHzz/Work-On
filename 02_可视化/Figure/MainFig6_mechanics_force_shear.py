@@ -1,6 +1,6 @@
 """
 Science Advances 格式 — 力学结果图
-Fig_force_duncan.png     : Duncan DMRT bar chart (F_max & τ_max)
+Fig_force_duncan.png     : Tukey HSD bar chart (F_max & τ_max)
 Fig_force_timeseries.png : Mean ± 1σ force time-series (3 species)
 
 数据源: combined_rcforc_yforce.xlsx
@@ -69,7 +69,7 @@ def to_tau(F_N, T_mm):
     return 1000.0 * F_N / (np.pi * D_SHELL * T_mm)
 
 # ─────────────────────────────────────────────────────────────
-# Load 3Species_Comparison for DMRT data
+# Load 3Species_Comparison for Tukey data
 # ─────────────────────────────────────────────────────────────
 df3 = pd.read_excel(XLSX, sheet_name="3Species_Comparison", engine="openpyxl")
 cases_df = df3[df3["Case"].isin(CASES)].copy()
@@ -114,7 +114,7 @@ for sp in SPECIES:
         ts_data[sp] = (t_ref, mat)
 
 # ─────────────────────────────────────────────────────────────
-# Duncan MRT
+# Tukey HSD
 # ─────────────────────────────────────────────────────────────
 def _cld3(names, sig):
     s01, s02, s12 = bool(sig[0,1]), bool(sig[0,2]), bool(sig[1,2])
@@ -145,7 +145,7 @@ def _letters_highest_as_a(letters, ordered_names):
         for name in letters
     }
 
-def duncan_mrt(groups, names, alpha=0.05):
+def tukey_hsd(groups, names, alpha=0.05):
     k = len(groups)
     ns = [len(g) for g in groups]
     means = np.array([g.mean() for g in groups])
@@ -153,42 +153,38 @@ def duncan_mrt(groups, names, alpha=0.05):
     SS_e = sum(float(np.sum((g - g.mean())**2)) for g in groups)
     df_e = sum(ns) - k
     MSE  = SS_e / df_e
-    n_harm = k / sum(1.0 / n for n in ns)
-    SE = np.sqrt(MSE / n_harm)
     order = np.argsort(means)
     s_means  = means[order]
     s_names  = [names[i] for i in order]
     s_groups = [groups[i] for i in order]
     s_stds   = np.array([groups[i].std(ddof=1) for i in order])
     s_ns     = [ns[i] for i in order]
-    crit = []
-    for p in range(2, k+1):
-        q_p = stats.studentized_range.ppf(1.0 - alpha, k=p, df=df_e)
-        crit.append(q_p * SE)
     sig = np.zeros((k, k), dtype=bool)
-    diffs = np.zeros((k, k))
+    diffs = np.zeros((k, k), dtype=float)
+    q_crit = stats.studentized_range.ppf(1.0 - alpha, k=k, df=df_e)
     for i in range(k):
         for j in range(i+1, k):
-            p = j - i + 1
-            d = s_means[j] - s_means[i]
-            Rp = crit[p-2]
-            sig[i,j] = sig[j,i] = (d > Rp)
-            diffs[i,j] = d; diffs[j,i] = -d
+            diff = s_means[j] - s_means[i]
+            se = np.sqrt(MSE / 2.0 * (1.0 / s_ns[i] + 1.0 / s_ns[j]))
+            threshold = q_crit * se
+            sig[i, j] = sig[j, i] = bool(diff > threshold)
+            diffs[i, j] = diff
+            diffs[j, i] = -diff
     letters = _letters_highest_as_a(_cld3(s_names, sig), s_names)
-    return dict(f_stat=f_stat, p_anova=p_anova, MSE=MSE, df_e=df_e, SE=SE,
+    return dict(f_stat=f_stat, p_anova=p_anova,
                 order=order, s_names=s_names, s_means=s_means, s_stds=s_stds,
-                s_groups=s_groups, s_ns=s_ns, crit=crit, sig=sig, diffs=diffs,
+                s_groups=s_groups, s_ns=s_ns, sig=sig, diffs=diffs,
                 letters=letters)
 
-res_F   = duncan_mrt(F_DATA,   SPECIES)
-res_tau = duncan_mrt(TAU_DATA, SPECIES)
+res_F   = tukey_hsd(F_DATA,   SPECIES)
+res_tau = tukey_hsd(TAU_DATA, SPECIES)
 
 # ─────────────────────────────────────────────────────────────
-# Fig 1 — DMRT bar chart
+# Fig 1 — Tukey HSD bar chart
 # ─────────────────────────────────────────────────────────────
 fig1, axes = plt.subplots(1, 2, figsize=(12, 6.5))
 fig1.suptitle(
-    "Duncan's Multiple Range Test — Egg Shell Impact Simulation\n"
+    "Tukey's HSD — Egg Shell Impact Simulation\n"
     "(n = 9 per species, α = 0.05;  same letter = no significant difference)",
     fontsize=20, fontweight="bold"
 )
@@ -211,7 +207,7 @@ def plot_dmrt(ax, res, data_orig, metric_label, unit):
                    color=color, edgecolors="k",
                    linewidths=0.5, zorder=4, alpha=1.0)
 
-    # Duncan letter labels only
+    # Tukey letter labels only
     y_top = orig_means + orig_stds
     y_max = float(y_top.max())
     for i, sp in enumerate(SPECIES):
@@ -240,7 +236,7 @@ plt.tight_layout(rect=[0, 0, 1, 0.86])
 save_fig(plt.gcf(), "Fig6B", dpi=200)
 plt.close("all")
 
-# ── Individual DMRT panels ─────────────────────────────────────────────────
+# ── Individual Tukey panels ────────────────────────────────────────────────
 rng = np.random.default_rng(42)
 fig_fmax, ax_fmax = plt.subplots(1, 1, figsize=(6, 5.67))
 plot_dmrt(ax_fmax, res_F, F_DATA, "F_max", "N")

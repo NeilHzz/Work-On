@@ -1,10 +1,10 @@
 """
 乳突层形态结构可视化 (合并自 plot_microstructure.py + plot_mammilla_density_significance.py)
 ============================================================
-统计方法：三组比较采用 Duncan's Multiple Range Test (DMRT)
+统计方法：三组比较采用 Tukey's HSD
 输出：
-  Fig_mammilla_microstructure_panels.png  — 三指标 (密度/体积/比) 箱线图面板（含Duncan字母）
-  Fig_mammilla_density_significance.png   — 乳突密度显著性统计箱线图（含Duncan字母）
+    Fig_mammilla_microstructure_panels.png  — 三指标 (密度/体积/比) 箱线图面板（含Tukey字母）
+    Fig_mammilla_density_significance.png   — 乳突密度显著性统计箱线图（含Tukey字母）
 """
 
 import pandas as pd
@@ -44,11 +44,11 @@ ORDER  = ['Chicken', 'Duck', 'Pigeon']
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# Duncan's Multiple Range Test (3组)
+# Tukey's HSD (3组)
 # ══════════════════════════════════════════════════════════════════════════════
-def duncan_mrt(groups: list, names: list, alpha: float = 0.05) -> dict:
+def tukey_hsd(groups: list, names: list, alpha: float = 0.05) -> dict:
     """
-    Duncan's Multiple Range Test（单因素方差分析后多重比较）。
+    Tukey's HSD（单因素方差分析后多重比较）。
 
     参数
     ----
@@ -58,19 +58,13 @@ def duncan_mrt(groups: list, names: list, alpha: float = 0.05) -> dict:
 
     返回
     ----
-    dict 包含 ANOVA 结果、临界极差、CLD 字母等
+    dict 包含 ANOVA 结果、两两显著性矩阵、CLD 字母等
     """
     k     = len(groups)
     ns    = [len(g) for g in groups]
     means = np.array([g.mean() for g in groups])
 
     f_stat, p_anova = stats.f_oneway(*groups)
-
-    SS_e = sum(float(np.sum((g - g.mean()) ** 2)) for g in groups)
-    df_e = sum(ns) - k
-    MSE  = SS_e / df_e
-    n_harm = k / sum(1.0 / n for n in ns)
-    SE     = np.sqrt(MSE / n_harm)
 
     # 按均值升序排列
     order    = np.argsort(means)
@@ -80,23 +74,22 @@ def duncan_mrt(groups: list, names: list, alpha: float = 0.05) -> dict:
     s_stds   = np.array([groups[i].std(ddof=1) for i in order])
     s_ns     = [ns[i]     for i in order]
 
-    # Duncan 临界极差 R_p（p = 2, ..., k）
-    crit = []
-    for p in range(2, k + 1):
-        q_p = stats.studentized_range.ppf(1.0 - alpha, k=p, df=df_e)
-        crit.append(q_p * SE)
+    SS_e = sum(float(np.sum((g - g.mean()) ** 2)) for g in groups)
+    df_e = sum(ns) - k
+    MSE  = SS_e / df_e
 
     # 显著性矩阵（排序后编号）
     sig   = np.zeros((k, k), dtype=bool)
-    diffs = np.zeros((k, k))
+    diffs = np.zeros((k, k), dtype=float)
+    q_crit = stats.studentized_range.ppf(1.0 - alpha, k=k, df=df_e)
     for i in range(k):
         for j in range(i + 1, k):
-            p  = j - i + 1
-            d  = s_means[j] - s_means[i]
-            Rp = crit[p - 2]
-            sig[i, j] = sig[j, i] = (d > Rp)
-            diffs[i, j] = d
-            diffs[j, i] = -d
+            diff = s_means[j] - s_means[i]
+            se = np.sqrt(MSE / 2.0 * (1.0 / s_ns[i] + 1.0 / s_ns[j]))
+            threshold = q_crit * se
+            sig[i, j] = sig[j, i] = bool(diff > threshold)
+            diffs[i, j] = diff
+            diffs[j, i] = -diff
 
     # CLD 字母标注（3 组）
     letters = {}
@@ -119,19 +112,17 @@ def duncan_mrt(groups: list, names: list, alpha: float = 0.05) -> dict:
 
     return dict(
         f_stat=f_stat, p_anova=p_anova,
-        MSE=MSE, df_e=df_e, SE=SE,
         s_names=s_names, s_means=s_means, s_stds=s_stds,
         s_groups=s_groups, s_ns=s_ns,
-        crit=crit, sig=sig, diffs=diffs, letters=letters,
+        sig=sig, diffs=diffs, letters=letters,
     )
 
 
-def print_dmrt(label: str, res: dict):
+def print_tukey(label: str, res: dict):
     print(f"\n{'='*60}")
-    print(f"  Duncan's MRT — {label}")
+    print(f"  Tukey HSD — {label}")
     print(f"{'='*60}")
     print(f"  ANOVA: F = {res['f_stat']:.4f},  p = {res['p_anova']:.4e}")
-    print(f"  MSE = {res['MSE']:.6f}  df_error = {res['df_e']}  SE = {res['SE']:.6f}")
     print(f"\n  {'Species':<12}  {'n':>3}  {'Mean':>10}  {'SD':>9}  {'Letter':>6}")
     print(f"  {'-'*48}")
     for i, nm in enumerate(res['s_names']):
@@ -142,13 +133,11 @@ def print_dmrt(label: str, res: dict):
     print(f"\n  两两比较:")
     for i in range(k):
         for j in range(i + 1, k):
-            p    = j - i + 1
             d    = res['diffs'][i, j]
-            Rp   = res['crit'][p - 2]
             sig  = res['sig'][i, j]
             mark = "sig **" if sig else " ns"
             print(f"    {res['s_names'][i]} vs {res['s_names'][j]}: "
-                  f"diff={d:+.4f}  R{p}={Rp:.4f}  [{mark}]")
+                  f"diff={d:+.4f}  [{mark}]")
 
 # ══════════════════════════════════════════════════════════════════════════════
 # 共用数据加载函数
@@ -198,7 +187,7 @@ def load_metric_arrays():
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# Fig 1 — 三指标箱线图面板 (Density / Volume / Ratio)，含 Duncan 字母
+# Fig 1 — 三指标箱线图面板 (Density / Volume / Ratio)，含 Tukey 字母
 # ══════════════════════════════════════════════════════════════════════════════
 def plot_microstructure_panels(df_plot, metric_arrays: dict):
     """
@@ -217,10 +206,10 @@ def plot_microstructure_panels(df_plot, metric_arrays: dict):
     for i, (mk, col) in enumerate(zip(METRIC_KEYS, DF_COLS)):
         ax = axes[i]
 
-        # Duncan MRT
+        # Tukey HSD
         grp_data  = [metric_arrays[sp][mk] for sp in ORDER]
-        res = duncan_mrt(grp_data, ORDER)
-        print_dmrt(f"{titles[i]}", res)
+        res = tukey_hsd(grp_data, ORDER)
+        print_tukey(f"{titles[i]}", res)
 
         sns.boxplot(x='Species', y=col, hue='Species', order=ORDER, data=df_plot, ax=ax,
                 palette=COLORS, width=0.5, showfliers=False,
@@ -233,7 +222,7 @@ def plot_microstructure_panels(df_plot, metric_arrays: dict):
                   palette=COLORS, alpha=0.95, jitter=True, size=5,
                   edgecolor='#222222', linewidth=0.45, legend=False)
 
-        # 标注 Duncan 字母
+        # 标注 Tukey 字母
         y_range = df_plot[col].max() - df_plot[col].min()
         y_letter = df_plot[col].max() + y_range * 0.06
         for xi, sp in enumerate(ORDER):
@@ -257,14 +246,14 @@ def plot_microstructure_panels(df_plot, metric_arrays: dict):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# Fig 2 — 乳突密度显著性统计箱线图（Duncan's MRT）
+# Fig 2 — 乳突密度显著性统计箱线图（Tukey HSD）
 # ══════════════════════════════════════════════════════════════════════════════
 def plot_mammilla_density_significance(chicken_data, duck_data, pigeon_data):
-    # --- Duncan's MRT ---
+    # --- Tukey HSD ---
     groups = [chicken_data, duck_data, pigeon_data]
     names  = ['Chicken', 'Duck', 'Pigeon']
-    res = duncan_mrt(groups, names)
-    print_dmrt("Mammilla Density (per mm²)", res)
+    res = tukey_hsd(groups, names)
+    print_tukey("Mammilla Density (per mm²)", res)
 
     df_plot = pd.DataFrame(
         [{'Species': 'Chicken', 'Density': x} for x in chicken_data] +
@@ -288,7 +277,7 @@ def plot_mammilla_density_significance(chicken_data, duck_data, pigeon_data):
     ax.set_xlabel('')
     ax.tick_params(axis='both', which='major', labelsize=20)
 
-    # 标注显著性连线（有差异的组对）+ Duncan 字母
+    # 标注显著性连线（有差异的组对）+ Tukey 字母
     y_range  = df_plot['Density'].max() - df_plot['Density'].min()
     y_base   = df_plot['Density'].max()
     h        = y_range * 0.08
@@ -308,7 +297,7 @@ def plot_mammilla_density_significance(chicken_data, duck_data, pigeon_data):
                 ha='center', va='bottom', fontsize=20, color='black')
         bracket_top = by + h * 0.4
 
-    # Duncan 字母
+    # Tukey 字母
     y_letter = bracket_top + h * 0.8
     for xi, sp in enumerate(ORDER):
         ltr = res['letters'].get(sp, '')
@@ -318,7 +307,7 @@ def plot_mammilla_density_significance(chicken_data, duck_data, pigeon_data):
     ax.set_ylim(top=y_letter + y_range * 0.15)
     ax.set_title(
         f"Mammilla Density\n"
-        f"Duncan ANOVA: F={res['f_stat']:.2f}, p={res['p_anova']:.2e}",
+        f"Tukey ANOVA: F={res['f_stat']:.2f}, p={res['p_anova']:.2e}",
         fontsize=20, fontweight='bold')
 
     sns.despine()
@@ -337,11 +326,11 @@ if __name__ == '__main__':
     duck_arr    = m_arrays['Duck']['density']
     pigeon_arr  = m_arrays['Pigeon']['density']
 
-    print("=== Fig 1: 三指标形态结构面板 (Duncan's MRT) ===")
+    print("=== Fig 1: 三指标形态结构面板 (Tukey HSD) ===")
     plot_microstructure_panels(df_all, m_arrays)
 
     # Fig 2 (mammilla_density_significance) disabled — removed from output
-    # print("\n=== Fig 2: 乳突密度显著性 (Duncan's MRT) ===")
+    # print("\n=== Fig 2: 乳突密度显著性 (Tukey HSD) ===")
     # plot_mammilla_density_significance(chicken_arr, duck_arr, pigeon_arr)
 
     print("\n全部图表已生成完毕。")
