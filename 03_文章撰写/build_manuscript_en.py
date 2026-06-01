@@ -633,17 +633,15 @@ para("Materials and Methods", bold=True, size=14, before=320, after=160,
 head("Biological materials")
 
 p_m_bio = mixed([
-    ("Six freshly laid eggs from each of three avian species were collected within "
-     "24 h of oviposition. ", False, False),
+    ("Fertilized eggs were collected during the mid-laying period from three avian lines: seven eggs from Chahua pink-shelled laying hens, seven eggs from Shaoxing spotted green-shelled laying ducks, and 19 eggs from White King egg pigeons. ", False, False),
     ("Gallus gallus", False, True),
-    (" (domestic chicken) eggs were obtained from the Poultry Resources Conservation "
+    (" eggs were obtained from the Poultry Resources Conservation "
      "Farm, China Agricultural University (Beijing, China); ", False, False),
     ("Columba livia", False, True),
-    (" (rock pigeon) eggs were provided by Prof. Chang Yu, College of Veterinary "
+    (" eggs were provided by Prof. Chang Yu, College of Veterinary "
      "Medicine, China Agricultural University; and ", False, False),
     ("Anas platyrhynchos", False, True),
-    (" (Mallard duck) eggs were supplied by Jinxing Duck Industry (Beijing, China). "
-        "All eggs were stored at 4\u00b0C until processing. Fresh collection and matched cold storage were used to minimize post-oviposition variation before comparative analysis.", False, False),
+    (" eggs were supplied by Jinxing Duck Industry (Beijing, China). All eggs were stored at 16\u00b0C for 7 d under breeder-egg holding conditions before analysis.", False, False),
 ])
 
 head("Eggshell matrix protein extraction")
@@ -651,7 +649,7 @@ head("Eggshell matrix protein extraction")
 mixed([
     ("Eggshell matrix proteins were extracted from the eggshell mammillary layer "
      "(EML) by an established EDTA demineralization protocol. Eggs were rinsed with "
-    "deionized water and placed in sterile sealed bags. For ", False, False),
+    "deionized water and placed in sterile sealed bags. One egg from each species was reserved for micro-CT analysis; the remaining shells were used for matrix-protein extraction. Chicken and duck shells were extracted individually, whereas pigeon shells were processed as three-egg pools to maintain comparable starting mass across extraction units. For ", False, False),
     ("G.\u00a0gallus", False, True),
     (" and ", False, False),
     ("A.\u00a0platyrhynchos", False, True),
@@ -659,7 +657,9 @@ mixed([
      "extraction by treatment with 15 mL of 5% EDTA (0.13 mol/L, pH 7.6) supplemented "
      "with 2-mercaptoethanol (10 mmol/L) for 30 min at 20\u00b0C, with gentle manual "
     "kneading to separate the ECL; eggshells were subsequently rinsed with deionized "
-     "water. EML proteins from all three species were then solubilized under the same "
+     "water. No discrete cuticle layer was recognized in pigeon eggshells, so ", False, False),
+    ("C.\u00a0livia", False, True),
+    (" shells were rinsed with distilled water and entered the same extraction workflow directly. EML proteins from all three species were then solubilized under the same "
      "EDTA\u20132-mercaptoethanol conditions with the extraction duration extended to 12 h "
      "at 20\u00b0C. The resulting suspension was centrifuged at 1,000 \u00d7 g for 15 min; the "
      "pellet was resuspended and centrifuged a second time, and the pooled supernatant "
@@ -669,11 +669,10 @@ mixed([
 head("Micro-CT imaging and mammillary morphometry")
 
 p_m_ct = para(
-    "Two eggshell fragments (each approximately 4\u20135 mm\u00b2) were excised from the "
-    "equatorial region of each species and scanned using a Phoenix V|tome|x\u00a0M "
+    "One eggshell fragment (4 mm \u00d7 4 mm) from each species was excised from the equatorial region near the blunt-half midpoint and scanned using a Phoenix V|tome|x\u00a0M "
     "microfocus CT system (GE Sensing and Inspection Technologies GmbH, Wunstorf, "
     "Germany). The X-ray source was operated at 85 kV tube voltage and 160 \u03bcA current without a beam filter; scan settings were held "
-    "constant across all specimens, and a total of 1,800 projection images were collected for each eggshell. Reconstructed image volumes were exported as 16-bit unsigned isotropic datasets with a sampling distance of approximately 0.003836 mm along the x, y, and z axes (about 3.84 \u03bcm voxel size). Volumetric data were reconstructed in 3D Slicer, and the eggshell region was segmented with the Threshold module in the Segmentation workflow using per-sample manual adjustment guided by grayscale contrast. Acquisition noise was suppressed by a 5 \u00d7 5 \u00d7 5 "
+    "constant across all specimens, and a total of 1,800 projection images were collected for each eggshell. Reconstructed image volumes were exported as 16-bit unsigned isotropic datasets with a sampling distance of approximately 0.003836 mm along the x, y, and z axes (about 3.84 \u03bcm voxel size). After scanning, each fragment was subdivided evenly into nine subfragments for downstream regional quantification. Volumetric data were reconstructed in 3D Slicer, and the eggshell region was segmented with the Threshold module in the Segmentation workflow using operator-guided threshold correction after automatic selection. The same operator reviewed all three species side by side; grayscale thresholds were fine-tuned to retain all true shell voxels while preserving visible pore openings. Acquisition noise was suppressed by a 5 \u00d7 5 \u00d7 5 "
     "median filter, followed by largest-island isolation and 9 \u00d7 9 \u00d7 9 hole-filling. "
     "Within the same region of interest, three morphometric parameters were then calculated from the labelmap. "
     "The segmented shell model was first duplicated as a single-copy volume and solid-filled with the Fill Holes operation; "
@@ -681,23 +680,21 @@ p_m_ct = para(
     "Mammillary density was calculated as mammilla count divided by ROI area. "
     "Total eggshell volume in the same ROI was obtained directly from the labelmap, and mean column-unit volume was defined as total shell volume divided by mammilla count; "
     "column-unit volume fraction was then calculated as mean column-unit volume divided by the total eggshell volume of the corresponding ROI. "
-    "Because the columnar units initiated by mammillae are arranged as repetitive and approximately even planar units in normal avian eggshell microstructure, these parameters were treated as local average representatives of whole-shell organization (n\u202f=\u202f2 fragments per species). The same segmentation and post-processing workflow was applied to all scans so that species contrasts reflected morphology rather than reconstruction settings."
+    "Because the columnar units initiated by mammillae are arranged as repetitive and approximately even planar units in normal avian eggshell microstructure, these parameters were treated as local average representatives of whole-shell organization (n\u202f=\u202f9 subfragments per species from one scanned fragment). The same segmentation and post-processing workflow was applied to all scans so that species contrasts reflected morphology rather than reconstruction settings."
 )
 cite(p_m_ct, [1, 30])
 
 head("Shotgun proteomics of eggshell matrix proteins")
 
 para(
-    "For each species, two eggs were pooled per biological replicate and three "
-    "independent replicates were prepared (n\u202f=\u202f3 per species). Proteins were "
+    "For shotgun proteomics, eggshell-matrix extracts from the post-CT sample set were prepared as single-egg samples for chicken and duck and as three-egg pools for pigeon. Proteins were "
     "extracted by resuspension in lysis buffer (1% SDS, 1% protease inhibitor "
     "cocktail), sonication on ice, and clarification by centrifugation at "
     "12,000 \u00d7 g at 4\u00b0C for 10 min; protein concentration was determined with a "
     "BCA assay kit. Proteins were precipitated with pre-cooled acetone (5 volumes, "
     "\u221220\u00b0C, 2 h), washed twice with acetone, and redissolved in 200 mM TEAB. "
     "Disulfide bonds were reduced with 5 mM dithiothreitol (56\u00b0C, 30 min) and "
-    "alkylated with 11 mM iodoacetamide (room temperature, 15 min, dark). Proteins "
-    "were pooled at the two-egg level to reduce idiosyncratic egg-to-egg variation while preserving the dominant species-level signal. They "
+    "alkylated with 11 mM iodoacetamide (room temperature, 15 min, dark). They "
     "were digested overnight with sequencing-grade trypsin (enzyme:protein ratio "
     "1:50) and desalted with Strata X SPE columns. No offline HPLC fractionation was performed before LC-MS/MS analysis. For proteome acquisition, 20 \u03bcg peptide was injected per run."
 )
@@ -876,8 +873,7 @@ p_m_apbs = para(
     "model and a matched apo reference with glycans removed using APBS v3.4.1. Atomic "
     "partial charges and radii were assigned with PDB2PQR using the CHARMM36 force "
     "field and PROPKA protonation at pH 7.4; glycan heavy-atom partial charges were "
-    "assigned from the GLYCAM06 parameter set. "
-    "Chem. 29:622). Solvent-accessible surface areas were calculated by the "
+    "assigned from published GLYCAM06 values. APBS input grids were generated automatically from the PQR bounding box with 10 \u00c5 padding and a target grid spacing of 0.5 \u00c5; focusing grids were set to 70% of the coarse-grid lengths. The nonlinear Poisson\u2013Boltzmann equation was solved with single-ion boundary conditions, 0.15 mol/L monovalent salt (ion radii 2.0 and 1.8 \u00c5 for cation and anion, respectively), protein dielectric 2.0, solvent dielectric 78.54, solvent-accessible surface definition smol, charge discretization spl0, solvent probe radius 1.4 \u00c5, spline window 0.3 \u00c5, surface density 10.0, and temperature 298.15 K. Solvent-accessible surface areas were calculated by the "
     "Shrake\u2013Rupley algorithm; surface residues were defined by relative ASA "
     "\u2265 0.25. Ca\u00b2\u207a-binding electrostatic hotspots were defined as surface Asp or "
     "Glu residues with APBS potential < \u22125 kT/e. Ensemble-level metrics reported "
@@ -905,21 +901,16 @@ head("Statistical analysis")
 mixed([
     ("All values are expressed as mean \u00b1 s.d. All statistical tests were two-tailed, "
      "and p < 0.05 was considered statistically significant throughout. "
-     "Mammillary morphometric parameters were compared among species by one-way ANOVA "
+    "Normality was evaluated by the Shapiro\u2013Wilk test and homogeneity of variance by Levene's test before parametric between-species analyses. Mammillary morphometric parameters were compared among species by one-way ANOVA "
      "followed by Duncan's multiple range test (DMRT; \u03b1\u202f=\u202f0.05) "
-     "(n\u202f=\u202f2 fragments per species). Glycan ensemble geometric descriptors (Rg, "
-     "end-to-end distance, minimum glycan\u2013protein contact distance) and per-ensemble "
-     "hotspot SASA metrics were compared among species by one-way ANOVA followed by "
-     "Duncan's multiple range test (DMRT; \u03b1\u202f=\u202f0.05). "
+    "(n\u202f=\u202f9 subfragments per species). Assumption tests supported the same parametric workflow for finite-element outputs (F_max and \u03c4_max). In contrast, glycan ensemble geometric descriptors (Rg, end-to-end distance, minimum glycan\u2013protein contact distance) and hotspot-derived ensemble metrics did not satisfy normality and/or homoscedasticity across species, so pairwise species contrasts for these variables were evaluated with two-sided Mann\u2013Whitney U tests. "
      "Glycosylation-induced reduction in N_hot within ", False, False),
     ("C.\u00a0livia", False, True),
-    (" was assessed by one-sample t test versus the apo reference value (t\u2081\u2083); "
-     "total Asp/Glu SASA differences between glycosylated and apo structures were "
-     "evaluated by one-sample t test against the apo reference value; shifts in "
-     "median surface electrostatic potential were assessed by one-sample t test "
-    "against the apo reference value. Finite-element simulation outcomes "
+    (" was assessed by one-sample Wilcoxon signed-rank test versus the apo reference value; total Asp/Glu SASA at the whole-interface level was summarized descriptively because the structure-level values were invariant across ", False, False),
+    ("C.\u00a0livia", False, True),
+    (" glycoforms; shifts in median surface electrostatic potential were assessed by one-sample Wilcoxon signed-rank test against the apo reference value. Finite-element simulation outcomes "
      "(F_max, \u03c4_max) were compared among species by one-way ANOVA with Duncan's "
-     "multiple range test (DMRT; \u03b1\u202f=\u202f0.05). No formal tests of normality or homoscedasticity were performed, no multiple-testing correction was applied, and no outliers were removed. All statistical analyses were "
+    "multiple range test (DMRT; \u03b1\u202f=\u202f0.05). No multiple-testing correction was applied, and no outliers were removed. All statistical analyses were "
      "conducted in Python using scipy.stats and statsmodels.", False, False),
 ])
 
