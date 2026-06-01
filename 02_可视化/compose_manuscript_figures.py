@@ -660,6 +660,28 @@ def compose_fig4():
             y += row.height + gap
         return block
 
+    def draw_dashed_line(draw, start, end, *, dash=34, gap=22, width=5,
+                         fill=(175, 175, 175, 255)):
+        x1, y1 = start
+        x2, y2 = end
+        if x1 == x2:
+            step = dash + gap
+            y = min(y1, y2)
+            y_stop = max(y1, y2)
+            while y < y_stop:
+                draw.line((x1, y, x2, min(y + dash, y_stop)), fill=fill, width=width)
+                y += step
+            return
+        if y1 == y2:
+            step = dash + gap
+            x = min(x1, x2)
+            x_stop = max(x1, x2)
+            while x < x_stop:
+                draw.line((x, y1, min(x + dash, x_stop), y2), fill=fill, width=width)
+                x += step
+            return
+        raise ValueError("draw_dashed_line only supports horizontal or vertical lines")
+
     def make_shared_final_legend():
         legend_w = min(2600, inner_w // 2)
         legend_h = 120
@@ -740,6 +762,23 @@ def compose_fig4():
         y += row.height
         if idx < len(gaps):
             y += gaps[idx]
+
+    draw = ImageDraw.Draw(canvas)
+    group_row_w = group_a.width + group_b.width + GAP
+    group_row_left = MARGIN + max(0, (inner_w - group_row_w) // 2)
+    vertical_sep_x = group_row_left + group_a.width + GAP // 2
+    draw_dashed_line(
+        draw,
+        (vertical_sep_x, MARGIN + 20),
+        (vertical_sep_x, MARGIN + group_row.height - 20),
+    )
+
+    horizontal_sep_y = MARGIN + group_row.height + group_gap // 2
+    draw_dashed_line(
+        draw,
+        (MARGIN + 20, horizontal_sep_y),
+        (CANVAS_W - MARGIN - 20, horizontal_sep_y),
+    )
 
     save_fig(canvas, "Fig4_composed")
 
