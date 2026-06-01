@@ -909,12 +909,12 @@ def compose_supp_fig7():
     outer_gap = 80
 
     raw_glyco = load_img(PNG / "Fig4D_G.png")
-    raw_surface = load_img(PNG / "Fig5A.png")
+    raw_surface = load_img(PNG / "Fig5D.png")
 
     if raw_glyco is None:
         raw_glyco = make_placeholder(3563, 1774, "Fig4D_G not found")
     if raw_surface is None:
-        raw_surface = make_placeholder(5203, 3133, "Fig5A not found")
+        raw_surface = make_placeholder(2172, 1629, "Fig5D not found")
 
     target_w = max(raw_glyco.width, raw_surface.width)
     glyco = scale_to_w(raw_glyco, target_w)
@@ -922,7 +922,7 @@ def compose_supp_fig7():
 
     glyco = add_label(glyco, "A", font=FONT_PUB_LABEL)
     surface = add_label(surface, "B", font=FONT_PUB_LABEL,
-                        cover=True, cover_px=(120, 120))
+                        cover=True, cover_px=(180, 160))
 
     canvas_w = target_w + 2 * MARGIN
     canvas_h = glyco.height + surface.height + 2 * MARGIN + outer_gap
