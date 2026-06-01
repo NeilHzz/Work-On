@@ -413,13 +413,11 @@ def draw_hotspot_lollipop(ax, df, show_legend=True):
         ax.scatter(xs[i] + jitter, shown, s=10, color=color,
                alpha=0.26, edgecolors='none', zorder=2)
         ax.vlines(xs[i], net, total, color=color, linewidth=8, alpha=0.32, zorder=1)
-        ax.scatter(xs[i], total, s=120, facecolor='white', edgecolor=color,
-                   linewidth=2.0, zorder=4)
         ax.errorbar(xs[i], net, yerr=net_ci95[sp], fmt='o', markersize=10,
                     markerfacecolor=color, markeredgecolor='#222222',
                     markeredgewidth=0.9, ecolor='#333333', elinewidth=1.4,
                     capsize=5, zorder=5)
-        ax.text(xs[i] + 0.06, total, f'{total:.1f}', ha='left', va='center',
+        ax.text(xs[i] + 0.06, net, f'{net:.1f}', ha='left', va='center',
                 fontsize=VALUE_FS - 2, color='#555')
         ax.text(xs[i] + 0.06, (net + total) / 2, f'-{loss:.1f}', ha='left',
                 va='center', fontsize=VALUE_FS - 3, color='#555')
@@ -451,8 +449,8 @@ def draw_hotspot_lollipop(ax, df, show_legend=True):
         legend_handles = [
             Line2D([0], [0], marker='o', color='none', markerfacecolor='#777',
                    markeredgecolor='#222', markersize=8, label='Net Accessible'),
-            Line2D([0], [0], marker='o', color='none', markerfacecolor='white',
-                   markeredgecolor='#777', markersize=8, label='Total Candidate'),
+             Line2D([0], [0], color='#777', linewidth=4, alpha=0.5,
+                 label='Candidate Span'),
         ]
         ax.legend(handles=legend_handles, fontsize=LEGEND_FS - 2,
                   loc='upper left', bbox_to_anchor=(0.52, 0.98),
