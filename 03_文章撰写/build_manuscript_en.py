@@ -12,7 +12,7 @@ from pathlib import Path
 import re
 from shared_references import REFS
 
-OUT = str(Path(__file__).with_name("manuscript260601v2.docx"))
+OUT = str(Path(__file__).with_name("manuscript0602.docx"))
 FIG_BASE = Path(__file__).resolve().parent.parent / "02_可视化" / "260601" / "02_main_composed_figures"
 
 REF_TEXTS = {}
@@ -191,12 +191,12 @@ def add_main_figure_legend(label, title, caption_parts, before=0, after=160):
 
 # Title (≤135 characters)
 para(
-    "Eggshell matrix protein glycan states link mammillary organization to local hatching resistance in birds",
+    "OVAL glycan state links mammillary organization to local hatching resistance across avian eggshells",
     bold=True, size=14, before=0, after=160, align=WD_ALIGN_PARAGRAPH.LEFT
 )
 
 # Short title (≤50 characters)
-para("Matrix protein glycans and hatching resistance",
+para("OVAL glycans and hatching resistance",
      bold=False, size=11, after=60, align=WD_ALIGN_PARAGRAPH.LEFT)
 
 para(
@@ -209,19 +209,19 @@ para("Abstract", bold=True, size=11, before=80, after=40,
      align=WD_ALIGN_PARAGRAPH.LEFT)
 
 para(
-    "Birds hatch with a conserved egg-tooth, so unresolved mechanical differences should lie in the eggshell rather than in the shell-breaking tool. "
-    "We compared chicken, duck, and pigeon to test whether the first clear divergence appeared in the mammillary layer and whether glycan states on shared matrix proteins tracked that divergence. "
-    "We combined micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco modeling, electrostatic analysis, and finite-element simulation. "
-    "Mammillary organization diverged, whereas the matrix-protein toolkit remained broadly shared. "
-    "Among the shared proteins, ovalbumin (OVAL) showed an ordered shift from High Mannose-dominant glycans in chicken to Neutral Complex/Hybrid-dominant glycans in duck and Sialylated Complex/Hybrid-dominant glycans in pigeon. "
+    "Birds hatch with a conserved egg-tooth, so unresolved differences in local shell-breaking mechanics are likely to reside in the eggshell rather than in the shell-breaking tool. "
+    "We compared chicken, duck, and pigeon to test whether divergence first appears in the mammillary layer and whether glycan states on shared matrix proteins track that divergence. "
+    "We integrated micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco modeling, electrostatic analysis, and finite-element simulation. "
+    "Mammillary organization diverged while the matrix-protein toolkit remained broadly shared. "
+    "Among the shared proteins, ovalbumin (OVAL) showed an ordered glycan-state shift from High Mannose-dominant glycans in chicken to Neutral Complex/Hybrid-dominant glycans in duck and Sialylated Complex/Hybrid-dominant glycans in pigeon. "
     "This shift aligned with progressively lower Ca²⁺-relevant surface accessibility and with the same chicken-versus-duck/pigeon contrast in simulated local hatching resistance. "
-    "Together, these results identify OVAL glycan state as the most informative molecular layer linking a chicken-like eggshell state to mammillary organization and local hatching mechanics.",
+    "Together, the data identify OVAL glycan state as the clearest molecular layer linking a chicken-like eggshell state to mammillary organization and local hatching mechanics.",
     bold=False, size=10, before=0, after=80, align=WD_ALIGN_PARAGRAPH.JUSTIFY
 )
 
 # Teaser (≤125 characters, one sentence for non-specialist readers)
 para(
-    "Teaser: Compact OVAL glycans align with a chicken-like eggshell state and higher simulated local hatching resistance.",
+    "Teaser: Compact OVAL glycans mark the high-resistance chicken-like eggshell state.",
     bold=False, italic=True, size=10, before=80, after=160, align=WD_ALIGN_PARAGRAPH.LEFT
 )
 
