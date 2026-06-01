@@ -543,7 +543,7 @@ para("Discussion", bold=True, size=14, before=320, after=160,
     align=WD_ALIGN_PARAGRAPH.LEFT)
 
 p_disc_mam1 = smixed([
-        ([('Mammillary organisation diverged while the eggshell-matrix toolkit remained broadly shared across the three species. ', False, False),
+        ([('In the present comparison, mammillary organisation showed the clearest early structural contrast while the eggshell-matrix toolkit remained broadly shared across the three species. ', False, False),
             ('Within that shared background, OVAL glycan state provided the most consistent link between molecular variation, surface accessibility, and local hatching resistance in this dataset.', False, False)], [1, 16, 18]),
 ])
 
@@ -563,7 +563,7 @@ p_disc_axis = spara([
 ])
 
 p_disc_mam2 = spara([
-    (" Among the molecular layers examined here, OVAL N-glycan architecture most closely tracked the cross-species structural differences.", []),
+    (" Among the molecular layers examined here, OVAL N-glycan architecture most closely tracked the structural contrast recovered in this comparison.", []),
     (" Orthogroup turnover, gene-family change, and glycoprotein-network divergence still matter, but they mainly define comparative background rather than the nearest explanation. OVAL glycan state is especially informative because it is shared across species, chemically interpretable, and located on an abundant matrix protein already implicated in mineralization.", [4, 18, 27]),
     (" Earlier work had already kept OVAL in view as an abundant eggshell glycoprotein and mineralization candidate. Prior glycoproteomic studies also showed that eggshell-matrix proteins can occupy different N-glycosylation states. The advance here is not simply that additional glycopeptides were detected. Rather, the ortholog-resolved cross-species comparison identifies which glycan states align most consistently with phenotype and carries those assignments into structural and mechanical interpretation.", [4, 18]),
     (" Earlier chicken studies established a glycosite foundation for OVAL and identified glycosylated Asn in OC116. The present dataset resolved dominant glycan classes on the corresponding OVAL ortholog sequons carried into structural modelling (G. gallus N293; A. platyrhynchos and C. livia N97). Relative to earlier site-detection studies, the present comparison extends breadth across species and into glycan-class interpretation rather than merely lengthening a within-species site inventory.", [8, 18, 21]),
@@ -588,7 +588,7 @@ p_disc_oval = spara([
 p_disc_mech = spara([
     ("The mechanical comparison was designed around the inside-out loading event of hatching rather than conventional outside compression or whole-shell breaking tests.", [16, 37, 69]),
     (" That distinction matters because eggshell thickness strongly influences absolute failure load. By contrast, τ_max is less confounded by thickness and more directly reflects load transfer through the mammillary interface itself.", [16, 34, 69]),
-    (" The present analysis therefore complements recent finite-element and eggshell-strength studies. It asks whether the inner mammillary interface preserves the same cross-species contrast already inferred from matrix state and morphology.", [16, 34, 35, 69]),
+    (" The present analysis therefore complements recent finite-element and eggshell-strength studies. It asks whether the inner mammillary interface preserves the same contrast already inferred from matrix state and morphology in this comparison.", [16, 34, 35, 69]),
     (" Duck makes that separation especially clear because its thicker shell elevated F_max but did not recreate the high-τ_max state observed in chicken.", [16, 37, 69]),
 ])
 
@@ -600,7 +600,7 @@ p_disc_discriminate = spara([
     ("These considerations help separate thickness buffering and developmental background from the material pathway emphasized here.", []),
     (" Eggshell thickness, body size, and broad reproductive ecology all contribute background variation, and lineage history undoubtedly matters.", [3, 14]),
     (" But thickness-based explanations do not account for the τ_max differences. Diffuse lineage-divergence explanations also do not explain why the same contrast recurs in glycan class, electrostatic accessibility, mammillary-layer organisation, and hatching-relevant mechanics.", [16, 37]),
-    (" What recurs across the dataset is the alignment between glycan state, surface shielding, mammillary organisation, and τ_max under inside-out loading.", []),
+    (" What recurs across this dataset is the alignment between glycan state, surface shielding, mammillary organisation, and τ_max under inside-out loading.", []),
     (" Ecology and phylogeny establish the design space, whereas matrix-protein glycan state remains the nearest chemically readable layer recovered here.", [4, 18]),
 ])
 
