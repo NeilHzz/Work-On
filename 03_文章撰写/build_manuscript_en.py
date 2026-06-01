@@ -329,17 +329,17 @@ p_ss1 = smixed([
 head("Mammillary organisation provides the first clear eggshell difference")
 
 mixed([
-    ("Viewed through that shared hatching context, the first eggshell level to separate the three species was mammillary-layer morphology (Fig. 1C). In ", False, False),
+    ("Viewed through that shared hatching context, the first eggshell level to show a clear contrast in the present comparison was mammillary-layer morphology (Fig. 1C). In ", False, False),
     ("G. gallus", False, True),
     (", mammillae were smoother overall and formed rounded projections. In ", False, False),
     ("A. platyrhynchos", False, True),
     (", mammillae showed more ridges and angular turns across the inner surface. ", False, False),
     ("C. livia", False, True),
-    (" was dominated by discrete triangular-conical mammillae. Three-dimensional surface reconstructions agreed with the cross-sectional views, indicating that the three eggshells differ in mammillary geometry rather than representing minor variants of a shared inner-surface template.", False, False),
+    (" was dominated by discrete triangular-conical mammillae. Three-dimensional surface reconstructions agreed with the cross-sectional views, indicating that the sampled inner-shell regions differed in mammillary geometry rather than representing minor variants of a shared inner-surface template.", False, False),
 ])
 
 p_s0b = mixed([
-    ("Quantification then separated the three species in two related but not identical ways (Fig. 1D). Mammillary knob density was highest in ", False, False),
+    ("Quantification resolved the sampled regions in two related but not identical ways (Fig. 1D). Mammillary knob density was highest in ", False, False),
     ("G. gallus", False, True),
     (" (171.36 ± 5.63 per mm²), exceeding both ", False, False),
     ("A. platyrhynchos", False, True),
@@ -351,7 +351,7 @@ p_s0b = mixed([
     ("A. platyrhynchos", False, True),
     (" (0.44 ± 0.02), and lowest in ", False, False),
     ("G. gallus", False, True),
-    (" (0.40 ± 0.01). Quantitatively, chicken showed the densest early mineralization pattern. Pigeon devoted the largest share of shell volume to crystal units grown from individual mammillary knobs. Duck remained intermediate in crystal-unit proportion while resembling pigeon in density. The two metrics did not collapse into one monotonic axis, but both indicated that mammillary organisation had already diverged before later shell traits were considered. This layer is the earliest structural level governing eggshell mechanics and is controlled by matrix proteins. We therefore asked a narrower question: did the contrast reflect wholesale toolkit replacement or differential use of a largely shared system?", False, False),
+    (" (0.40 ± 0.01). Within this scanned-fragment comparison, chicken showed the highest local mammillary density, whereas pigeon devoted the largest share of shell volume to crystal units grown from individual mammillary knobs. Duck remained intermediate in crystal-unit proportion while resembling pigeon in density. The two metrics did not collapse into one monotonic axis, but together they indicated that a mammillary-level contrast was already detectable before later shell traits were considered. Because this layer is the earliest structural level linked to eggshell mechanics and matrix control, we then asked a narrower question: did the observed contrast reflect wholesale toolkit replacement or differential use of a largely shared system?", False, False),
 ])
 cite(p_s0b, [1, 4, 28])
 
