@@ -94,13 +94,33 @@ def significance_label(p: float) -> str:
     return 'ns'
 
 
+def mannwhitney_pairs(groups: list, alpha: float = 0.05) -> list:
+    pairs = []
+    for i in range(len(groups)):
+        for j in range(i + 1, len(groups)):
+            _, p = stats.mannwhitneyu(groups[i], groups[j], alternative='two-sided')
+            if p < alpha:
+                pairs.append((i, j, p))
+    return sorted(pairs, key=lambda item: (item[1] - item[0], item[0], item[1]))
+
+
+def add_pairwise_brackets(ax, pairs, y_base, step):
+    top = y_base
+    for level, (i, j, p) in enumerate(pairs):
+        y = y_base + level * step
+        ax.plot([i, i, j, j], [y, y + step * 0.35, y + step * 0.35, y],
+                lw=0.9, c='#333', clip_on=False)
+        ax.text((i + j) / 2, y + step * 0.45, significance_label(p),
+                ha='center', va='bottom', fontsize=10, fontweight='bold', color='#333')
+        top = y + step * 1.2
+    return top
+
+
 def violin_one(ax, metric, ylabel):
     data = [detail.loc[detail.species==sp, metric].dropna().values
             for sp in SPECIES_ORDER]
     colors = [SPECIES_COLORS[sp] for sp in SPECIES_ORDER]
-
-    # Duncan's MRT
-    res = duncan_mrt(data, SPECIES_ORDER)
+    sig_pairs = mannwhitney_pairs(data)
 
     parts = ax.violinplot(data, positions=range(len(SPECIES_ORDER)),
                           showmedians=True, showextrema=False, widths=0.6)
@@ -124,18 +144,14 @@ def violin_one(ax, metric, ylabel):
     ax.set_xticklabels([f'{sp}\n(n={len(d)})' for sp, d in zip(SPECIES_ORDER, data)],
                        fontsize=8)
     ax.set_ylabel(ylabel, fontsize=9)
-
-    # Duncan CLD 字母标注
     ymax = max(d.max() for d in data if len(d))
-    span = ymax - min(d.min() for d in data if len(d))
-    letter_y = ymax + span * 0.05
-    for xi, sp in enumerate(SPECIES_ORDER):
-        ltr = res['letters'].get(sp, '')
-        ax.text(xi, letter_y, ltr, ha='center', va='bottom',
-                fontsize=11, fontweight='bold', color='#333')
-    ax.set_ylim(top=letter_y + span * 0.15)
-    ax.set_title(f"ANOVA: F={res['f_stat']:.2f}, p={res['p_anova']:.2e}",
-                 fontsize=7.5, color='#555', pad=2)
+    ymin = min(d.min() for d in data if len(d))
+    span = ymax - ymin if ymax > ymin else max(abs(ymax) * 0.1, 1.0)
+    top = ymax
+    if sig_pairs:
+        top = add_pairwise_brackets(ax, sig_pairs, ymax + span * 0.05, span * 0.08)
+    ax.set_ylim(top=top + span * 0.18)
+    ax.set_title('Pairwise Mann–Whitney U', fontsize=7.5, color='#555', pad=2)
 
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)

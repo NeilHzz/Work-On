@@ -93,6 +93,16 @@ def add_significance_brackets(ax, x1, x2, y, h, label, fs=8):
             ha='center', va='bottom', fontsize=fs, color='#333')
 
 
+def mannwhitney_pairs(groups: list, alpha: float = 0.05) -> list:
+    pairs = []
+    for i in range(len(groups)):
+        for j in range(i + 1, len(groups)):
+            _, p = stats.mannwhitneyu(groups[i], groups[j], alternative='two-sided')
+            if p < alpha:
+                pairs.append((i, j, p))
+    return sorted(pairs, key=lambda item: (item[1] - item[0], item[0], item[1]))
+
+
 # ── 小提琴 + 散点（单面板）────────────────────────────────────────────────────
 def draw_violin_panel(ax, groups_dict, ylabel, title, panel_label,
                       ypad_top=0.12, ypad_bot=0.02):
@@ -120,23 +130,24 @@ def draw_violin_panel(ax, groups_dict, ylabel, title, panel_label,
         ax.hlines(med, i - 0.22, i + 0.22,
                   color='#222', lw=1.6, zorder=4)
 
-    # Duncan's MRT CLD 字母标注
     grp_data = [groups_dict[sp] for sp in SPECIES_ORDER]
-    res = duncan_mrt(grp_data, SPECIES_ORDER)
-    letter_y = y_max + y_range * 0.05
-    for xi, sp in enumerate(SPECIES_ORDER):
-        ltr = res['letters'].get(sp, '')
-        ax.text(xi, letter_y, ltr, ha='center', va='bottom',
-                fontsize=11, fontweight='bold', color='#333')
+    sig_pairs = mannwhitney_pairs(grp_data)
+    bracket_top = y_max
+    if sig_pairs:
+        base_y = y_max + y_range * 0.05
+        step = max(y_range * 0.08, 0.4)
+        for level, (i, j, p) in enumerate(sig_pairs):
+            y = base_y + level * step
+            add_significance_brackets(ax, i, j, y, step * 0.35, sig_label(p), fs=10)
+            bracket_top = y + step * 1.2
 
     n_labels = [f'\n(n={len(groups_dict[sp])})' for sp in SPECIES_ORDER]
     ax.set_xticks(positions)
     ax.set_xticklabels([sp + n for sp, n in zip(SPECIES_ORDER, n_labels)],
                        fontsize=8.5)
     ax.set_ylabel(ylabel, fontsize=9)
-    ax.set_title(f"{title}\nANOVA: F={res['f_stat']:.2f}, p={res['p_anova']:.2e}",
-                 fontsize=9, pad=6)
-    ax.set_ylim(y_min - y_range * ypad_bot, letter_y + y_range * 0.20)
+    ax.set_title(f"{title}\nPairwise Mann–Whitney U", fontsize=9, pad=6)
+    ax.set_ylim(y_min - y_range * ypad_bot, bracket_top + y_range * 0.20)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.text(-0.12, 1.04, panel_label, transform=ax.transAxes,
@@ -180,25 +191,26 @@ def draw_stacked_bar(ax, df):
         ax.text(xs[i], net + sh / 2, f'{sh:.1f}', ha='center', va='center',
                 fontsize=9, color='#555')
 
-    # Duncan's MRT CLD letters on net_accessible
     y_top = max(means[sp] + shielded_means[sp] for sp in SPECIES_ORDER)
-    res_bar = duncan_mrt(
-        [df[df.species == sp]['net_accessible'].values for sp in SPECIES_ORDER],
-        SPECIES_ORDER)
-    letter_y = y_top + (y_top * 0.08)
-    for xi, sp in enumerate(SPECIES_ORDER):
-        ltr = res_bar['letters'].get(sp, '')
-        ax.text(xi, letter_y, ltr, ha='center', va='bottom',
-                fontsize=12, fontweight='bold', color='#333')
+    grp_data = [df[df.species == sp]['net_accessible'].values for sp in SPECIES_ORDER]
+    sig_pairs = mannwhitney_pairs(grp_data)
+    bracket_top = y_top
+    if sig_pairs:
+        base_y = y_top + (y_top * 0.08)
+        step = max(y_top * 0.08, 0.4)
+        for level, (i, j, p) in enumerate(sig_pairs):
+            y = base_y + level * step
+            add_significance_brackets(ax, i, j, y, step * 0.30, sig_label(p), fs=10)
+            bracket_top = y + step * 1.1
 
     ax.set_xticks(xs)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=11)
     ax.set_ylabel('Hotspot Count (mean ± 95% CI)', fontsize=9.5)
     ax.set_title(
         f'Ca$^{{2+}}$ Hotspot Accessibility: Net Accessible vs. Glycan-Shielded'
-        f'\nANOVA: F={res_bar["f_stat"]:.2f}, p={res_bar["p_anova"]:.2e}',
+        f'\nPairwise Mann–Whitney U',
         fontsize=9.5, pad=8)
-    ax.set_ylim(0, letter_y + y_top * 0.22)
+    ax.set_ylim(0, bracket_top + y_top * 0.22)
     ax.set_xlim(-0.6, len(SPECIES_ORDER) - 0.4)
 
     legend_handles = [
@@ -252,24 +264,25 @@ def draw_sasa_bar(ax, df):
                     ha='center', va='bottom', fontsize=8.5, color='#555')
 
     y_top = max(means[sp] + shielded_means[sp] for sp in SPECIES_ORDER)
-    # Duncan's MRT CLD letters on iface_full_sasa
-    res_sasa = duncan_mrt(
-        [df[df.species == sp]['iface_full_sasa'].values for sp in SPECIES_ORDER],
-        SPECIES_ORDER)
-    letter_y = y_top + (y_top * 0.08)
-    for xi, sp in enumerate(SPECIES_ORDER):
-        ltr = res_sasa['letters'].get(sp, '')
-        ax.text(xi, letter_y, ltr, ha='center', va='bottom',
-                fontsize=12, fontweight='bold', color='#333')
+    grp_data = [df[df.species == sp]['iface_full_sasa'].values for sp in SPECIES_ORDER]
+    sig_pairs = mannwhitney_pairs(grp_data)
+    bracket_top = y_top
+    if sig_pairs:
+        base_y = y_top + (y_top * 0.08)
+        step = max(y_top * 0.08, 0.4)
+        for level, (i, j, p) in enumerate(sig_pairs):
+            y = base_y + level * step
+            add_significance_brackets(ax, i, j, y, step * 0.30, sig_label(p), fs=10)
+            bracket_top = y + step * 1.1
 
     ax.set_xticks(xs)
     ax.set_xticklabels(SPECIES_ORDER, fontsize=11)
     ax.set_ylabel(r'Hotspot Residue SASA (Å²)', fontsize=9.5)
     ax.set_title(
         r'Ca$^{2+}$ Hotspot Residue SASA: Net Accessible vs. Glycan-Shielded'
-        f'\nANOVA: F={res_sasa["f_stat"]:.2f}, p={res_sasa["p_anova"]:.2e}',
+        f'\nPairwise Mann–Whitney U',
         fontsize=9.5, pad=8)
-    ax.set_ylim(0, letter_y + y_top * 0.22)
+    ax.set_ylim(0, bracket_top + y_top * 0.22)
     ax.set_xlim(-0.6, len(SPECIES_ORDER) - 0.4)
     legend_handles = [
         mpatches.Patch(facecolor='#aaa', label='Net Accessible SASA (with glycan)'),

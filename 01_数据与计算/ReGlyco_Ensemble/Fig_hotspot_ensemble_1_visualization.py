@@ -92,6 +92,16 @@ def add_significance_brackets(ax, x1, x2, y, h, label, fs=8):
             ha='center', va='bottom', fontsize=fs, color='#333')
 
 
+def mannwhitney_pairs(groups: list, alpha: float = 0.05) -> list:
+    pairs = []
+    for i in range(len(groups)):
+        for j in range(i + 1, len(groups)):
+            _, p = stats.mannwhitneyu(groups[i], groups[j], alternative='two-sided')
+            if p < alpha:
+                pairs.append((i, j, p))
+    return sorted(pairs, key=lambda item: (item[1] - item[0], item[0], item[1]))
+
+
 # ── Panel A / B: 小提琴 + 散点 ────────────────────────────────────────────────
 def draw_violin_panel(ax, groups_dict, ylabel, title, panel_label):
     positions  = list(range(len(SPECIES_ORDER)))
@@ -117,22 +127,23 @@ def draw_violin_panel(ax, groups_dict, ylabel, title, panel_label):
         med = np.median(vals)
         ax.hlines(med, i - 0.22, i + 0.22, color='#222', lw=1.6, zorder=4)
 
-    # Duncan's MRT CLD 字母标注
     grp_data = [groups_dict[sp] for sp in SPECIES_ORDER]
-    res = duncan_mrt(grp_data, SPECIES_ORDER)
-    letter_y = y_max + y_range * 0.05
-    for xi, sp in enumerate(SPECIES_ORDER):
-        ltr = res['letters'].get(sp, '')
-        ax.text(xi, letter_y, ltr, ha='center', va='bottom',
-                fontsize=11, fontweight='bold', color='#333')
+    sig_pairs = mannwhitney_pairs(grp_data)
+    bracket_top = y_max
+    if sig_pairs:
+        base_y = y_max + y_range * 0.05
+        step = max(y_range * 0.08, 0.4)
+        for level, (i, j, p) in enumerate(sig_pairs):
+            y = base_y + level * step
+            add_significance_brackets(ax, i, j, y, step * 0.35, sig_label(p), fs=10)
+            bracket_top = y + step * 1.2
 
     n_labels = [f'\n(n={len(groups_dict[sp])})' for sp in SPECIES_ORDER]
     ax.set_xticks(positions)
     ax.set_xticklabels([sp + n for sp, n in zip(SPECIES_ORDER, n_labels)], fontsize=8.5)
     ax.set_ylabel(ylabel, fontsize=9)
-    ax.set_title(f"{title}\nANOVA: F={res['f_stat']:.2f}, p={res['p_anova']:.2e}",
-                 fontsize=9, pad=6)
-    ax.set_ylim(y_min - y_range * 0.03, letter_y + y_range * 0.20)
+    ax.set_title(f"{title}\nPairwise Mann–Whitney U", fontsize=9, pad=6)
+    ax.set_ylim(y_min - y_range * 0.03, bracket_top + y_range * 0.20)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.text(-0.12, 1.04, panel_label, transform=ax.transAxes,
