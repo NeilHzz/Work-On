@@ -1,0 +1,69 @@
+260601 final figure export manifest
+Generated: 2026-06-01
+Rule: main subfigure filenames follow the final composed manuscript figures, not legacy source panel names.
+Supplementary figures follow 03_文章撰写/supplementary_materials260520.docx / build_supplementary_en.py order.
+
+[01_main_subfigures_matched_to_composed]
+Count: 30 legacy matched panel PNGs; current Fig2_composed now includes additional generated Fig2 panels listed below.
+- Fig1A.png <= Fig1A.png
+- Fig1B.png <= eggtooth 2x3 grid
+- Fig1C.png <= eggtooth/Gallus.jpg + eggtooth/Anas.jpg + eggtooth/Columba.jpg
+- Fig1D.png <= Fig1D.png
+- Fig2A <= Figure/PNG/Fig2.png (glycoprotein orthogroup UpSet)
+- Fig2B <= Figure/PNG/Fig2_cluster_glycotype_consistency.png (coverage overview + shared-core Jensen-Shannon similarity)
+- Fig2C <= omitted from current composed layout
+- Fig2D <= Figure/PNG/Fig2_species_glycotype_proportion.png (species-level glycan-type composition)
+- Fig2E <= 260526/01_main_subfigures_matched_to_composed/Fig3A.png (BLAST ortholog chord diagram; within-species order = bitscore; arc width = sequence length; chord endpoints = HSP regions; target matrix proteins use full-name arrow labels; no no-ortholog sector)
+- Fig2 Circle.png <= archived previous circle version
+- Fig3B.png <= Fig4A.png
+- Fig3C.png <= Fig4B.png
+- Fig3D.png <= Fig4C.png
+- Fig3E.png <= Fig4H.png
+- Fig3F.png <= Fig4I.png
+- Fig3G.png <= Fig4J.png
+- Fig4A.png <= Fig5B.png
+- Fig4B.png <= Fig5C.png
+- Fig4C.png <= Fig5D.png
+- Fig4D.png <= Fig5E.png
+- Fig4E.png <= Fig5F.png
+- Fig4F.png <= Fig5G.png
+- Fig4G.png <= Fig5H.png
+- Fig4H.png <= Fig5I.png
+- Fig4I.png <= Fig5J.png
+- Fig4J.png <= Fig5K.png
+- Fig4K.png <= Fig5L.png
+- Fig4L.png <= Fig5M.png
+- Fig4M.png <= Fig5N.png
+- Fig5A.png <= 鸡（喙）.png + chicken_model_render.png
+- Fig5B.png <= 鸭（喙）.png + duck_model_render.png
+- Fig5C.png <= 鸽子（喙）.png + pigeon_model_render.png
+- Fig6A.png <= Fig6A_Force.png + Fig6B_Fmax.png
+- Fig6B.png <= Fig6A_Shear.png + Fig6B_Taumax.png
+
+[02_main_composed_figures]
+Count: 5 final selected composed figures
+- Fig1_composed.png
+- Fig2_composed.png
+- Fig3_composed.png
+- Fig4_composed.png
+- Fig5_Fig6_composed_horizontal.png (final merged Fig5/Fig6 horizontal layout)
+
+[03_supplementary_figures_from_docx]
+Count: 11 top-level FigS PNG files + 6 FigS11 component panels
+- FigS1.png <= Supplementary\Figures\SuppFig1_Species_Selection\Sensitivity_Analysis_Results.png
+- FigS2.png <= 02_可视化\Figure\PNG\Fig1B.png
+- FigS3.png <= Supplementary\Figures\SuppFig2_Venn_Orthogroups\Fig_venn_orthogroups.png
+- FigS4.png <= Supplementary\Figures\SuppFig3_Phylo_Tree\Fig_phylo_tree.png
+- FigS5.png <= Supplementary\Figures\SuppFig4_GO_Enrichment\图2.jpg
+- FigS6.png <= 02_可视化\Figure\PNG\Fig4D_G.png
+- FigS7.png <= combined from 02_可视化\Figure\PNG\Fig5D.png + 02_可视化\Figure\PNG\Fig5A.png
+- FigS8.png <= Supplementary\Figures\SuppFig5_CAFE5_Gene_Family_Turnover\Fig_cafe5_expansion_contraction.png
+- FigS9.png <= 02_可视化\Figure\PNG\Fig2H.png
+- FigS10.png <= Supplementary\Figures\SuppFig7_Glycosylation_Hotspot\Fig_hotspot_ensemble_1.png
+- FigS11.png <= combined 3x2 from Supplementary/Figures/SuppFig8_FEA_Force_Analysis
+- FigS11A.png <= Supplementary\Figures\SuppFig8_FEA_Force_Analysis\chicken_rcforc_3x3.png
+- FigS11D.png <= Supplementary\Figures\SuppFig8_FEA_Force_Analysis\chicken_rcforc_yforce.png
+- FigS11B.png <= Supplementary\Figures\SuppFig8_FEA_Force_Analysis\duck_rcforc_3x3.png
+- FigS11E.png <= Supplementary\Figures\SuppFig8_FEA_Force_Analysis\duck_rcforc_yforce.png
+- FigS11C.png <= Supplementary\Figures\SuppFig8_FEA_Force_Analysis\pigeon_rcforc_3x3.png
+- FigS11F.png <= Supplementary\Figures\SuppFig8_FEA_Force_Analysis\pigeon_rcforc_yforce.png
