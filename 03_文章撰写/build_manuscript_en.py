@@ -411,7 +411,7 @@ add_main_figure_legend(
 p_s2b = mixed([
     ("A stricter BlastP-based filter retained an orthologous glycoprotein subset suitable for structural comparison and summarized that shared candidate space in Fig. 2E. Using ", False, False),
     ("G. gallus", False, True),
-    (" as the reference, non-reference candidates were retained only when the mean E-value was below 1 × 10⁻⁵ and sequence identity met the final comparability thresholds. This filter restricted the downstream comparison to high-confidence orthologs. Under that stricter mapping, OC17 was glycosylated only in chicken, whereas OC116, TRFE, and OVAL all retained glycosylation signals across the three species and served as shared anchors. Among them, OVAL showed one of the clearest cross-species glycan differences and was therefore prioritised for subsequent structural analysis.", False, False),
+    (" as the reference, non-reference candidates were retained only when the mean E-value was below 1 × 10⁻⁵ and sequence identity met the final comparability thresholds. This filter restricted the downstream comparison to high-confidence orthologs. Under that stricter mapping, OC17 was glycosylated only in chicken, whereas OC116, TRFE, and OVAL all retained glycosylation signals across the three species and served as shared anchors. Among them, OVAL showed a clear cross-species glycan difference and was therefore prioritised for subsequent structural analysis.", False, False),
 ])
 p_s2c = spara([
     ("Integrated protein and glycan abundance profiles further identified OVAL as the shared protein most closely aligned with the cross-species eggshell differences (Fig. 3A to C). Across the full dataset, protein-glycan coupling was weak in chicken but consistently positive in duck and pigeon, indicating lineage differences in how glycosylation scaled with protein output.", []),
@@ -524,7 +524,7 @@ mixed([
     ("A. platyrhynchos", False, True),
     (" together with ", False, False),
     ("C. livia", False, True),
-    (" in the low group, matched the grouping recovered for mammillary density by Duncan's multiple range test (Fig. 1D). The mechanics therefore retained the contrast already recovered from mammillary organization and OVAL accessibility.", False, False),
+    (" in the low group, matched the grouping recovered for mammillary density by Duncan's multiple range test (Fig. 1D). The mechanics therefore retained the contrast already recovered from mammillary organisation and OVAL accessibility.", False, False),
 ])
 
 mixed([
@@ -589,14 +589,14 @@ p_disc_mech = spara([
 ])
 
 p_disc_evo = para(
-    "A second interpretive issue is that the mammillary layer can be partly resorbed during late incubation and hatching. That possibility does not erase the relevance of the present comparison because the quantified descriptors used here were mammillary density and crystal-unit organization. Those features remain embedded in the shell even when part of the innermost material has been absorbed. The same consideration guided the mechanical readout. We emphasized the second characteristic peak rather than the first. The earliest force excursion is dominated more strongly by initial morphology-dependent contact, whereas the later peak more faithfully reflects stress transmission through the shell wall as a whole."
+    "A second interpretive issue is that the mammillary layer can be partly resorbed during late incubation and hatching. That possibility does not erase the relevance of the present comparison because the quantified descriptors used here were mammillary density and crystal-unit organisation. Those features remain embedded in the shell even when part of the innermost material has been absorbed. The same consideration guided the mechanical readout. We emphasized the second characteristic peak rather than the first. The earliest force excursion is dominated more strongly by initial morphology-dependent contact, whereas the later peak more faithfully reflects stress transmission through the shell wall as a whole."
 )
 
 p_disc_discriminate = spara([
     ("These considerations help separate thickness buffering and developmental background from the material pathway emphasized here.", []),
     (" Eggshell thickness, body size, and broad reproductive ecology all contribute background variation, and lineage history undoubtedly matters.", [3, 14]),
-    (" But thickness-based explanations do not account for the τ_max differences. Diffuse lineage-divergence explanations also do not explain why the same contrast recurs in glycan class, electrostatic accessibility, mammillary-layer organization, and hatching-relevant mechanics.", [16, 37]),
-    (" What recurs across the dataset is the alignment between glycan state, surface shielding, mammillary organization, and τ_max under inside-out loading.", []),
+    (" But thickness-based explanations do not account for the τ_max differences. Diffuse lineage-divergence explanations also do not explain why the same contrast recurs in glycan class, electrostatic accessibility, mammillary-layer organisation, and hatching-relevant mechanics.", [16, 37]),
+    (" What recurs across the dataset is the alignment between glycan state, surface shielding, mammillary organisation, and τ_max under inside-out loading.", []),
     (" Ecology and phylogeny establish the design space, whereas matrix-protein glycan state remains the most proximate chemically readable layer recovered here.", [4, 18]),
 ])
 
