@@ -680,7 +680,7 @@ p_m_ct = para(
     "Mammillary density was calculated as mammilla count divided by analysis-unit area. "
     "Total eggshell volume in the same analysis unit was obtained directly from the labelmap, and mean column-unit volume was defined as total shell volume divided by mammilla count; "
     "column-unit volume fraction was then calculated as mean column-unit volume divided by the total eggshell volume of the corresponding analysis unit. "
-    "Because the columnar units initiated by mammillae are arranged as repetitive and approximately even planar units in normal avian eggshell microstructure, these parameters were treated as local average representatives of whole-shell organization (n\u202f=\u202f9 subfragments per species from one scanned fragment). The same segmentation and post-processing workflow was applied to all scans so that species contrasts reflected morphology rather than reconstruction settings."
+    "Because the columnar units initiated by mammillae are arranged as repetitive and approximately even planar units in normal avian eggshell microstructure, these parameters were treated as local average representatives of whole-shell organisation (n\u202f=\u202f9 subfragments per species from one scanned fragment). The same segmentation and post-processing workflow was applied to all scans so that species contrasts reflected morphology rather than reconstruction settings."
 )
 cite(p_m_ct, [1, 30])
 
@@ -841,7 +841,7 @@ p_m_reglyco = mixed([
      "standards and sampling conformations from the GlycoShape molecular-dynamics "
     "ensemble library. "
     "For each OVAL ortholog, glycan modelling was constrained to the experimentally detected glycopeptide site identified in the present dataset; each matched "
-    "glycan was then submitted as an independent modeling job via the GlycoShape API and attached to the measured target sequon \u2014 ", False, False),
+    "glycan was then submitted as an independent modelling job via the GlycoShape API and attached to the measured target sequon \u2014 ", False, False),
     ("G.\u00a0gallus", False, True),
     (" N293 and ", False, False),
     ("A.\u00a0platyrhynchos", False, True),
