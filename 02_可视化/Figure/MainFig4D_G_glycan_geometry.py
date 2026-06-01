@@ -115,6 +115,45 @@ def significance_label(p: float) -> str:
     return 'ns'
 
 
+def add_significance_brackets(ax, x1, x2, y, h, label, fs=STAT_FS):
+    ax.plot([x1, x1, x2, x2], [y, y + h, y + h, y], lw=0.9, c='#333')
+    ax.text((x1 + x2) / 2, y + h * 1.05, label,
+            ha='center', va='bottom', fontsize=fs, color='#333')
+
+
+def pairwise_mann_whitney(data):
+    comparisons = []
+    for left in range(len(SPECIES_ORDER)):
+        for right in range(left + 1, len(SPECIES_ORDER)):
+            left_vals = np.asarray(data[left], dtype=float)
+            right_vals = np.asarray(data[right], dtype=float)
+            left_vals = left_vals[np.isfinite(left_vals)]
+            right_vals = right_vals[np.isfinite(right_vals)]
+            if len(left_vals) == 0 or len(right_vals) == 0:
+                continue
+            _, p_value = stats.mannwhitneyu(left_vals, right_vals, alternative='two-sided')
+            label = significance_label(p_value)
+            if label != 'ns':
+                comparisons.append((left, right, label, p_value))
+    return comparisons
+
+
+def add_pairwise_mwu_annotations(ax, data, y_min, y_max, span):
+    comparisons = pairwise_mann_whitney(data)
+    if not comparisons:
+        return y_max
+    comparisons = sorted(comparisons, key=lambda item: (item[1] - item[0], item[0]))
+    step = max(span * 0.08, 1e-9)
+    tick_h = step * 0.35
+    base_y = y_max + span * 0.05
+    top_y = base_y
+    for level, (left, right, label, _) in enumerate(comparisons):
+        y = base_y + level * step
+        add_significance_brackets(ax, left, right, y, tick_h, label)
+        top_y = max(top_y, y + tick_h * 2.2)
+    return top_y
+
+
 def style_panel_axes(ax, ylabel: str, title: str) -> None:
     ax.set_ylabel(ylabel, fontsize=AXIS_LABEL_FS, labelpad=YLABEL_PAD)
     ax.yaxis.set_label_coords(YLABEL_X, 0.5)
@@ -129,9 +168,6 @@ def violin_one(ax, metric, ylabel, subtitle=''):
     data = [detail.loc[detail.species==sp, metric].dropna().values
             for sp in SPECIES_ORDER]
     colors = [SPECIES_COLORS[sp] for sp in SPECIES_ORDER]
-
-    # Duncan's MRT
-    res = duncan_mrt(data, SPECIES_ORDER)
 
     parts = ax.violinplot(data, positions=range(len(SPECIES_ORDER)),
                           showmedians=True, showextrema=False, widths=0.6)
@@ -154,19 +190,14 @@ def violin_one(ax, metric, ylabel, subtitle=''):
     ax.set_xticks(range(len(SPECIES_ORDER)))
     ax.set_xticklabels(SPECIES_ORDER, fontsize=TICK_FS)
 
-    # Duncan CLD 字母标注
     ymax = max(d.max() for d in data if len(d))
-    span = ymax - min(d.min() for d in data if len(d))
-    letter_y = ymax + span * 0.05
-    for xi, sp in enumerate(SPECIES_ORDER):
-        ltr = res['letters'].get(sp, '')
-        ax.text(xi, letter_y, ltr, ha='center', va='bottom',
-            fontsize=STAT_FS, fontweight='bold', color='#333')
-    ax.set_ylim(top=letter_y + span * 0.15)
-    p_text = format_p_value(res['p_anova'])
-    title_str = (f"{subtitle}\n{p_text}"
+    ymin = min(d.min() for d in data if len(d))
+    span = ymax - ymin
+    stat_top = add_pairwise_mwu_annotations(ax, data, ymin, ymax, span)
+    ax.set_ylim(top=stat_top + span * 0.12)
+    title_str = (f"{subtitle}\nPairwise Mann–Whitney U"
                 if subtitle else
-                p_text)
+                'Pairwise Mann–Whitney U')
     style_panel_axes(ax, ylabel, title_str)
 
 
@@ -174,8 +205,6 @@ def box_jitter_one(ax, metric, ylabel, subtitle=''):
     data = [detail.loc[detail.species == species, metric].dropna().values
             for species in SPECIES_ORDER]
     colors = [SPECIES_COLORS[species] for species in SPECIES_ORDER]
-    res = duncan_mrt(data, SPECIES_ORDER)
-
     box = ax.boxplot(
         data,
         positions=range(len(SPECIES_ORDER)),
@@ -208,15 +237,11 @@ def box_jitter_one(ax, metric, ylabel, subtitle=''):
     ymax = max(values.max() for values in data if len(values))
     ymin = min(values.min() for values in data if len(values))
     span = ymax - ymin
-    letter_y = ymax + span * 0.05
-    for index, species in enumerate(SPECIES_ORDER):
-        label = res['letters'].get(species, '')
-        ax.text(index, letter_y, label, ha='center', va='bottom',
-                fontsize=STAT_FS, fontweight='bold', color='#333')
-    ax.set_ylim(ymin - span * 0.04, letter_y + span * 0.18)
-    title_str = (f"{subtitle}\n{format_p_value(res['p_anova'])}"
+    stat_top = add_pairwise_mwu_annotations(ax, data, ymin, ymax, span)
+    ax.set_ylim(ymin - span * 0.04, stat_top + span * 0.12)
+    title_str = (f"{subtitle}\nPairwise Mann–Whitney U"
                  if subtitle else
-                 format_p_value(res['p_anova']))
+                 'Pairwise Mann–Whitney U')
     style_panel_axes(ax, ylabel, title_str)
 
 
@@ -224,7 +249,6 @@ def raincloud_one(ax, metric, ylabel, subtitle=''):
     data = [detail.loc[detail.species == species, metric].dropna().values
             for species in SPECIES_ORDER]
     colors = [SPECIES_COLORS[species] for species in SPECIES_ORDER]
-    res = duncan_mrt(data, SPECIES_ORDER)
     positions = np.arange(len(SPECIES_ORDER))
 
     parts = ax.violinplot(data, positions=positions,
@@ -266,16 +290,12 @@ def raincloud_one(ax, metric, ylabel, subtitle=''):
     ymax = max(values.max() for values in data if len(values))
     ymin = min(values.min() for values in data if len(values))
     span = ymax - ymin
-    letter_y = ymax + span * 0.05
-    for index, species in enumerate(SPECIES_ORDER):
-        label = res['letters'].get(species, '')
-        ax.text(index, letter_y, label, ha='center', va='bottom',
-                fontsize=STAT_FS, fontweight='bold', color='#333')
+    stat_top = add_pairwise_mwu_annotations(ax, data, ymin, ymax, span)
     ax.set_xlim(-0.55, len(SPECIES_ORDER) - 0.45)
-    ax.set_ylim(ymin - span * 0.04, letter_y + span * 0.18)
-    title_str = (f"{subtitle}\n{format_p_value(res['p_anova'])}"
+    ax.set_ylim(ymin - span * 0.04, stat_top + span * 0.12)
+    title_str = (f"{subtitle}\nPairwise Mann–Whitney U"
                  if subtitle else
-                 format_p_value(res['p_anova']))
+                 'Pairwise Mann–Whitney U')
     style_panel_axes(ax, ylabel, title_str)
 
 
@@ -283,7 +303,6 @@ def half_violin_box_one(ax, metric, ylabel, subtitle=''):
     data = [detail.loc[detail.species == species, metric].dropna().values
             for species in SPECIES_ORDER]
     colors = [SPECIES_COLORS[species] for species in SPECIES_ORDER]
-    res = duncan_mrt(data, SPECIES_ORDER)
     positions = np.arange(len(SPECIES_ORDER))
 
     parts = ax.violinplot(data, positions=positions,
@@ -317,16 +336,12 @@ def half_violin_box_one(ax, metric, ylabel, subtitle=''):
     ymax = max(values.max() for values in data if len(values))
     ymin = min(values.min() for values in data if len(values))
     span = ymax - ymin
-    letter_y = ymax + span * 0.05
-    for index, species in enumerate(SPECIES_ORDER):
-        label = res['letters'].get(species, '')
-        ax.text(index, letter_y, label, ha='center', va='bottom',
-                fontsize=STAT_FS, fontweight='bold', color='#333')
+    stat_top = add_pairwise_mwu_annotations(ax, data, ymin, ymax, span)
     ax.set_xlim(-0.55, len(SPECIES_ORDER) - 0.45)
-    ax.set_ylim(ymin - span * 0.04, letter_y + span * 0.18)
-    title_str = (f"{subtitle}\n{format_p_value(res['p_anova'])}"
+    ax.set_ylim(ymin - span * 0.04, stat_top + span * 0.12)
+    title_str = (f"{subtitle}\nPairwise Mann–Whitney U"
                  if subtitle else
-                 format_p_value(res['p_anova']))
+                 'Pairwise Mann–Whitney U')
     style_panel_axes(ax, ylabel, title_str)
 
 
