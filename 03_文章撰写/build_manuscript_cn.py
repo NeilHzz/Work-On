@@ -340,6 +340,25 @@ p_s0b_cn = mixed([
 ])
 cite(p_s0b_cn, [1, 4, 28])
 
+doc.add_page_break()
+add_centered_figure("Fig1_composed.png", width_cm=10.1, before=0, after=20)
+add_main_figure_legend(
+    "图1.",
+    "三种模型鸟类共享出壳界面并表现出乳突层差异。",
+    [
+        ("(A) 基于AVONET 10,993个物种记录构建的三维比较空间；坐标轴概括水域关联、生活方式-栖息地差异和发育模式。颜色表示鸟类目级类群，灰色框标出三种目标物种所在区域，空心圆表示 ", False, False),
+        ("Gallus gallus", False, True),
+        ("、", False, False),
+        ("Anas platyrhynchos", False, True),
+        (" 和 ", False, False),
+        ("Columba livia", False, True),
+        ("。(B) 三物种侧面头部视图和背侧喙部视图，显示带破壳齿的喙尖。(C) 乳突层代表性显微CT截面和三维内表面重建；鸡表现为更平滑的圆钝乳突，鸭表现出更多棱脊和角状结构，鸽则以离散三角锥状乳突为主。比例尺，100 μm。(D) 乳突密度和晶体单元体积比例的箱线图。散点表示单个测量值；p值来自单因素ANOVA，不同字母表示Duncan多重范围检验分组。", False, False),
+    ],
+    before=20,
+    after=80,
+)
+doc.add_page_break()
+
 head("共享基质蛋白把解释收束到糖基化")
 
 p_sprot_bg_cn = spara([
@@ -361,6 +380,15 @@ p_s2a_cn = mixed([
     ("这一网络层面的不对称性由此突出了一组状态差异显著的共享糖蛋白，并把后续直系同源和结构分析的候选范围进一步收窄。", False, False),
 ])
 
+add_centered_figure("Fig2_composed.png", width_cm=14.6)
+add_main_figure_legend(
+    "图2.",
+    "共享和谱系偏向蛋壳糖蛋白的网络视图。",
+    [
+        ("圆形网络连接鸡、鸭和鸽蛋壳糖蛋白的直系同源关系与优势糖链类别。最内层同心区域表示三物种保守糖蛋白核心；外周扇区表示两两共享和谱系限制性蛋白；最外层糖链类别节点概括全文统一的糖型分类，包括High-Mannose、Paucimannose/Truncated、Neutral Complex/Hybrid、Fucosylated Complex/Hybrid、Sialylated Complex/Hybrid和Other。曲线连接蛋白节点与糖链类别，外侧标注显示每类糖链对应的蛋白数量。", False, False),
+    ],
+)
+
 p_s2b_cn = mixed([
     ("更严格的BlastP过滤进一步保留了一组适合结构比较的直系同源糖蛋白，并在图3A中概括了这一共享候选空间。以", False, False),
     ("G. gallus", False, True),
@@ -378,6 +406,15 @@ p_s2d_cn = spara([
     ("由于这些OVAL糖链类别在大小和电荷分布上差异显著，更合理的比较变量是OVAL表面可及性，而不是单纯的OVAL丰度。", []),
     ("真正相关的特征，是被不同糖链装饰后其酸性界面还有多少保持化学可及。直系同源控制、丰度解耦和糖链类别推进三方面证据共同将OVAL保留为唯一同时保持可比、化学特异且可进行结构追踪的共享候选。", []),
 ])
+
+add_centered_figure("Fig3_composed.png", width_cm=15.5)
+add_main_figure_legend(
+    "图3.",
+    "直系同源过滤和丰度-糖链解耦优先指向OVAL。",
+    [
+        ("(A) 严格BlastP过滤后保留的直系同源糖蛋白候选集合的Circos式概览，突出鸡、鸭和鸽之间共享的候选蛋白。物种以颜色区分，灰色标签表示在最终比较标准下未保留非鸡直系同源物的鸡蛋白，高亮标签表示OVAL、OC116、TRFE和OC17。(B至D) 鸡、鸭和鸽物种内蛋白丰度与糖链丰度log2转换后的proteotype coevolution图；插图给出Spearman ρ和双侧p值。(E至G) Gallus对Anas、Gallus对Columba和Anas对Columba的两两二维糖链-蛋白富集图。", False, False),
+    ],
+)
 
 head("OVAL糖链状态重塑表面可及性")
 
@@ -400,6 +437,19 @@ p_s3d_cn = spara([
     ("图4L和图4M则把同一差异进一步压缩到整体界面层面，分别把热点数量和热点残基表面积拆分为暴露部分与被遮蔽部分。鸡在这两幅图中都保留了最大的暴露份额，鸽把最大的份额转入遮蔽区室，而鸭仍位于两者之间。", []),
     ("把这一结果压缩到整体界面层面后，鸡也就对应于最强的 Ca²⁺ 吸附潜力，并且最符合更早进入 Ca²⁺ 响应式构象打开、从而更早启动矿化的状态；鸽则对应最弱、最晚的另一端，鸭仍处于中间。这一排序与前文表型链条是对上的：鸡同时具有最高的乳突密度和最高的局部出壳抗性，而鸭和鸽则从不同结构背景收敛到较低抗性侧。因此，图4A至M构成的是一条连续的结构论证，而不是若干并列子图：它从糖链依赖的分离出发，经过糖链几何和界面遮蔽，最后收束到共享基质蛋白上的 Ca²⁺ 相关表面可及性。", []),
 ])
+
+doc.add_page_break()
+add_centered_figure("Fig4_composed.png", width_cm=15.2, before=0, after=20)
+add_main_figure_legend(
+    "图4.",
+    "OVAL糖链状态重组界面暴露和Ca²⁺相关可及性。",
+    [
+        ("(A) 糖基化和配对apo OVAL系综中Ca²⁺热点残基数量；热点定义为APBS势值低于−5 kT/e的表面Asp/Glu位点。(B) 羧酸基表面可及性。(C) 糖基化与apo结构的表面静电势分布。(D至G) 重建糖链的系综几何描述符，包括回转半径、端到端距离、糖链-蛋白距离和最小糖链-骨架距离。(H) 糖链介导的界面遮蔽。(I) 热点残基平均溶剂可及表面积（SASA）。(J) 候选酸性残基中的热点比例。(K) 净可及Ca²⁺热点。(L) 热点可及性在净可及和糖链遮蔽组分之间的分配。(M) 热点残基SASA在净可及和糖链遮蔽组分之间的分配。小提琴图下方标出物种特异性系综大小。图4D至M的物种比较采用单因素ANOVA结合Duncan多重范围检验；图4A至C中糖基化与apo对照之间的差异采用相对于配对apo参考的一样本t检验，显著性标注见图中括号。", False, False),
+    ],
+    before=20,
+    after=80,
+)
+doc.add_page_break()
 
 head("有限元分析把同一对比连接到局部出壳抗性")
 
