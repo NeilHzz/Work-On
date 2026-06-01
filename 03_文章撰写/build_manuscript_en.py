@@ -461,7 +461,7 @@ add_main_figure_legend(
     "Fig. 4.",
     "OVAL glycan state reorganizes interface exposure and Ca²⁺-relevant accessibility.",
     [
-        ("(A) Representative rebuilt OVAL-glycan conformations on the protein surface. (B) Species-specific surface maps show glycan positions and Ca²⁺-relevant surface regions. (C to F) Ensemble geometric descriptors of the rebuilt glycans include radius of gyration, minimum glycan-backbone distance, end-to-end distance, and glycan-protein distance. (G) Glycan-mediated interface shielding. (H) Hotspot fraction among candidate acidic residues. (I) Mean solvent-accessible surface area (SASA) of hotspot residues. (J) Net accessible Ca²⁺ hotspots. (K) Ca²⁺ hotspot residue counts in glycosylated and matched apo OVAL references. (L) Carboxylate surface accessibility in glycosylated and apo references. (M) Ca²⁺ hotspot accessibility. (N) Ca²⁺ hotspot-residue SASA. Species comparisons used one-way ANOVA followed by Duncan's multiple range test where applicable. Glycosylated-versus-apo contrasts were evaluated against matched apo references by one-sample t test.", False, False),
+        ("(A) Representative rebuilt OVAL-glycan conformations on the protein surface. (B) Species-specific surface maps show glycan positions and Ca²⁺-relevant surface regions. (C to F) Ensemble geometric descriptors of the rebuilt glycans include radius of gyration, minimum glycan-backbone distance, end-to-end distance, and glycan-protein distance. (G) Glycan-mediated interface shielding. (H) Hotspot fraction among candidate acidic residues. (I) Mean solvent-accessible surface area (SASA) of hotspot residues. (J) Net accessible Ca²⁺ hotspots. (K) Ca²⁺ hotspot residue counts in glycosylated and matched apo OVAL references. (L) Carboxylate surface accessibility in glycosylated and apo references. (M) Ca²⁺ hotspot accessibility. (N) Ca²⁺ hotspot-residue SASA. Species comparisons for ensemble-derived metrics used two-sided Mann–Whitney U tests. Glycosylated-versus-apo structure-level contrasts were evaluated against matched apo references with one-sample Wilcoxon signed-rank tests when structure-level variation was present.", False, False),
     ],
     before=20,
     after=80,
@@ -674,12 +674,12 @@ p_m_ct = para(
     "Germany). The X-ray source was operated at 85 kV tube voltage and 160 \u03bcA current without a beam filter; scan settings were held "
     "constant across all specimens, and a total of 1,800 projection images were collected for each eggshell. Reconstructed image volumes were exported as 16-bit unsigned isotropic datasets with a sampling distance of approximately 0.003836 mm along the x, y, and z axes (about 3.84 \u03bcm voxel size). After scanning, each fragment was subdivided evenly into nine subfragments for downstream regional quantification. Volumetric data were reconstructed in 3D Slicer, and the eggshell region was segmented with the Threshold module in the Segmentation workflow using operator-guided threshold correction after automatic selection. The same operator reviewed all three species side by side; grayscale thresholds were fine-tuned to retain all true shell voxels while preserving visible pore openings. Acquisition noise was suppressed by a 5 \u00d7 5 \u00d7 5 "
     "median filter, followed by largest-island isolation and 9 \u00d7 9 \u00d7 9 hole-filling. "
-    "Within the same region of interest, three morphometric parameters were then calculated from the labelmap. "
+    "Within each subfragment, three morphometric parameters were then calculated from the labelmap. "
     "The segmented shell model was first duplicated as a single-copy volume and solid-filled with the Fill Holes operation; "
     "subtraction of the original shell model from the filled solid yielded the mammillary interspace layer, and closed voids appearing in that interspace plane were defined as mammillary knobs. "
-    "Mammillary density was calculated as mammilla count divided by ROI area. "
-    "Total eggshell volume in the same ROI was obtained directly from the labelmap, and mean column-unit volume was defined as total shell volume divided by mammilla count; "
-    "column-unit volume fraction was then calculated as mean column-unit volume divided by the total eggshell volume of the corresponding ROI. "
+    "Mammillary density was calculated as mammilla count divided by analysis-unit area. "
+    "Total eggshell volume in the same analysis unit was obtained directly from the labelmap, and mean column-unit volume was defined as total shell volume divided by mammilla count; "
+    "column-unit volume fraction was then calculated as mean column-unit volume divided by the total eggshell volume of the corresponding analysis unit. "
     "Because the columnar units initiated by mammillae are arranged as repetitive and approximately even planar units in normal avian eggshell microstructure, these parameters were treated as local average representatives of whole-shell organization (n\u202f=\u202f9 subfragments per species from one scanned fragment). The same segmentation and post-processing workflow was applied to all scans so that species contrasts reflected morphology rather than reconstruction settings."
 )
 cite(p_m_ct, [1, 30])
@@ -901,16 +901,14 @@ head("Statistical analysis")
 mixed([
     ("All values are expressed as mean \u00b1 s.d. All statistical tests were two-tailed, "
      "and p < 0.05 was considered statistically significant throughout. "
-    "Normality was evaluated by the Shapiro\u2013Wilk test and homogeneity of variance by Levene's test before parametric between-species analyses. Mammillary morphometric parameters were compared among species by one-way ANOVA "
+     "Normality was evaluated by the Shapiro\u2013Wilk test and homogeneity of variance by Levene's test before parametric between-species analyses. Mammillary morphometric parameters were compared among species by one-way ANOVA "
      "followed by Duncan's multiple range test (DMRT; \u03b1\u202f=\u202f0.05) "
-    "(n\u202f=\u202f9 subfragments per species). Assumption tests supported the same parametric workflow for finite-element outputs (F_max and \u03c4_max). In contrast, glycan ensemble geometric descriptors (Rg, end-to-end distance, minimum glycan\u2013protein contact distance) and hotspot-derived ensemble metrics did not satisfy normality and/or homoscedasticity across species, so pairwise species contrasts for these variables were evaluated with two-sided Mann\u2013Whitney U tests. "
+     "(n\u202f=\u202f9 subfragments per species). The same assumption checks supported one-way ANOVA with Duncan's multiple range test for finite-element outcomes (F_max and \u03c4_max). In contrast, glycan ensemble geometric descriptors (Rg, end-to-end distance, minimum glycan\u2013protein contact distance) and hotspot-derived ensemble metrics did not satisfy normality and/or homoscedasticity across species, so pairwise species contrasts for these variables were evaluated with two-sided Mann\u2013Whitney U tests. "
      "Glycosylation-induced reduction in N_hot within ", False, False),
     ("C.\u00a0livia", False, True),
     (" was assessed by one-sample Wilcoxon signed-rank test versus the apo reference value; total Asp/Glu SASA at the whole-interface level was summarized descriptively because the structure-level values were invariant across ", False, False),
     ("C.\u00a0livia", False, True),
-    (" glycoforms; shifts in median surface electrostatic potential were assessed by one-sample Wilcoxon signed-rank test against the apo reference value. Finite-element simulation outcomes "
-     "(F_max, \u03c4_max) were compared among species by one-way ANOVA with Duncan's "
-    "multiple range test (DMRT; \u03b1\u202f=\u202f0.05). No multiple-testing correction was applied, and no outliers were removed. All statistical analyses were "
+    (" glycoforms; shifts in median surface electrostatic potential were assessed by one-sample Wilcoxon signed-rank test against the apo reference value. No multiple-testing correction was applied, and no outliers were removed. All statistical analyses were "
      "conducted in Python using scipy.stats and statsmodels.", False, False),
 ])
 
