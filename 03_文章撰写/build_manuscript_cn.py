@@ -295,6 +295,9 @@ p_intro4 = smixed([
             ([ ("在当前数据中，这条顺序比较路径最清楚地收束到OVAL，其糖链状态与乳突密度、Ca²⁺相关表面可及性和局部出壳抗性一致。", False, False)], [18]),
 ])
 
+para("结果", bold=True, size=14, before=320, after=160,
+     align=WD_ALIGN_PARAGRAPH.LEFT, heading=True)
+
 head("破壳齿功能保守，焦点转向蛋壳")
 
 p_ss1_cn = smixed([
