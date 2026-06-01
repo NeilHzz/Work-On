@@ -332,7 +332,7 @@ p_s0b = mixed([
     ("A. platyrhynchos", False, True),
     (" (0.4413 ± 0.0249), and lowest in ", False, False),
     ("G. gallus", False, True),
-    (" (0.3975 ± 0.0127). Quantitatively, chicken showed the densest early mineralization pattern, pigeon devoted the largest share of shell volume to crystal units grown from individual mammillary knobs, and duck remained intermediate in crystal-unit proportion while resembling pigeon in density. The two metrics did not collapse into one monotonic axis, but both showed that mammillary organization had already diverged before later shell traits were considered. Because this layer is the earliest structural level governing eggshell mechanics and is controlled by matrix proteins, we next asked a narrower question: did the contrast reflect wholesale toolkit replacement or differential use of a largely shared system?", False, False),
+    (" (0.3975 ± 0.0127). Quantitatively, chicken showed the densest early mineralization pattern. Pigeon devoted the largest share of shell volume to crystal units grown from individual mammillary knobs, and duck remained intermediate in crystal-unit proportion while resembling pigeon in density. The two metrics did not collapse into one monotonic axis, but both showed that mammillary organization had already diverged before later shell traits were considered. Because this layer is the earliest structural level governing eggshell mechanics and is controlled by matrix proteins, we asked a narrower question: did the contrast reflect wholesale toolkit replacement or differential use of a largely shared system?", False, False),
 ])
 cite(p_s0b, [1, 4, 28])
 
@@ -342,13 +342,13 @@ add_main_figure_legend(
     "Fig. 1.",
     "Shared hatching interface and mammillary divergence across the three model species.",
     [
-        ("(A) Three-dimensional AVONET comparison space built from 10,993 species records; axes summarize aquatic association, lifestyle-habitat discordance, and developmental mode. Colors denote avian orders, gray boxes mark the regions occupied by the three focal species, and open circles indicate ", False, False),
+        ("(A) Three-dimensional AVONET comparison space built from 10,993 species records. Axes summarize aquatic association, lifestyle-habitat discordance, and developmental mode. Colors denote avian orders, and gray boxes mark the regions occupied by the three focal species. Open circles indicate ", False, False),
         ("Gallus gallus", False, True),
         (", ", False, False),
         ("Anas platyrhynchos", False, True),
         (", and ", False, False),
         ("Columba livia", False, True),
-        (". (B) Species-specific lateral head views (top row) and dorsal beak views (bottom row) showing the egg-tooth-bearing beak tip in chicken, duck, and pigeon. (C) Representative micro-CT sections and three-dimensional inner-surface reconstructions of the mammillary layer; chicken shows smoother rounded mammillae, duck more ridged and angular mammillae, and pigeon discrete triangular-conical mammillae. Scale bars, 100 μm. (D) Box plots of mammillary density and unit volume ratio across species. Points denote individual measurements; p values from one-way ANOVA are shown above the plots, and different letters indicate Duncan's multiple range test groupings.", False, False),
+        (". (B) Species-specific lateral head views (top row) and dorsal beak views (bottom row) show the egg-tooth-bearing beak tip in chicken, duck, and pigeon. (C) Representative micro-CT sections and three-dimensional inner-surface reconstructions of the mammillary layer. Chicken shows smoother rounded mammillae, duck more ridged and angular mammillae, and pigeon discrete triangular-conical mammillae. Scale bars, 100 μm. (D) Box plots show mammillary density and unit volume ratio across species. Points denote individual measurements. P values from one-way ANOVA are shown above the plots, and different letters indicate Duncan's multiple range test groupings.", False, False),
     ],
     before=20,
     after=80,
@@ -405,7 +405,7 @@ add_main_figure_legend(
     "Fig. 3.",
     "Ortholog filtering and abundance-glycan decoupling prioritize OVAL.",
     [
-        ("(A to C) Proteotype coevolution plots comparing log2-transformed protein abundance and glycan abundance within chicken, duck, and pigeon, respectively; inset values show Spearman's ρ and two-sided p values, and highlighted labels mark OVAL, OC116, TRFE, and OC17 where retained. (D to F) Pairwise two-dimensional glycan-protein enrichment plots for Gallus versus Columba, Gallus versus Anas, and Anas versus Columba. The dashed diagonal marks equal protein and glycan change, and highlighted proteins identify matrix candidates whose glycan shifts depart from simple protein-abundance scaling.", False, False),
+        ("(A to C) Proteotype coevolution plots compare log2-transformed protein abundance and glycan abundance within chicken, duck, and pigeon, respectively. Insets show Spearman's ρ and two-sided p values. Highlighted labels mark OVAL, OC116, TRFE, and OC17 where retained. (D to F) Pairwise two-dimensional glycan-protein enrichment plots compare Gallus versus Columba, Gallus versus Anas, and Anas versus Columba. The dashed diagonal marks equal protein and glycan change. Highlighted proteins identify matrix candidates whose glycan shifts depart from simple protein-abundance scaling.", False, False),
     ],
 )
 
@@ -437,7 +437,7 @@ add_main_figure_legend(
     "Fig. 4.",
     "OVAL glycan state reorganizes interface exposure and Ca²⁺-relevant accessibility.",
     [
-        ("(A) Representative rebuilt OVAL-glycan conformations on the protein surface. (B) Species-specific surface maps showing glycan positions and Ca²⁺-relevant surface regions. (C to F) Ensemble geometric descriptors of the rebuilt glycans, including radius of gyration, minimum glycan-backbone distance, end-to-end distance, and glycan-protein distance. (G) Glycan-mediated interface shielding. (H) Hotspot fraction among candidate acidic residues. (I) Mean solvent-accessible surface area (SASA) of hotspot residues. (J) Net accessible Ca²⁺ hotspots. (K) Ca²⁺ hotspot residue counts in glycosylated and matched apo OVAL references. (L) Carboxylate surface accessibility in glycosylated and apo references. (M) Ca²⁺ hotspot accessibility. (N) Ca²⁺ hotspot-residue SASA. Species comparisons used one-way ANOVA followed by Duncan's multiple range test where applicable; glycosylated-versus-apo contrasts were evaluated against matched apo references by one-sample t test.", False, False),
+        ("(A) Representative rebuilt OVAL-glycan conformations on the protein surface. (B) Species-specific surface maps show glycan positions and Ca²⁺-relevant surface regions. (C to F) Ensemble geometric descriptors of the rebuilt glycans include radius of gyration, minimum glycan-backbone distance, end-to-end distance, and glycan-protein distance. (G) Glycan-mediated interface shielding. (H) Hotspot fraction among candidate acidic residues. (I) Mean solvent-accessible surface area (SASA) of hotspot residues. (J) Net accessible Ca²⁺ hotspots. (K) Ca²⁺ hotspot residue counts in glycosylated and matched apo OVAL references. (L) Carboxylate surface accessibility in glycosylated and apo references. (M) Ca²⁺ hotspot accessibility. (N) Ca²⁺ hotspot-residue SASA. Species comparisons used one-way ANOVA followed by Duncan's multiple range test where applicable. Glycosylated-versus-apo contrasts were evaluated against matched apo references by one-sample t test.", False, False),
     ],
     before=20,
     after=80,
@@ -447,7 +447,7 @@ doc.add_page_break()
 head("Finite-element modeling recovers the same contrast in local hatching resistance")
 
 p_s4a = mixed([
-    ("Finite-element testing translated the shared egg-tooth interface into an explicit inside-out loading design. Fig. 5A pairs species-specific dorsal beak views with the corresponding micro-CT-derived finite-element setups built from the beak-tip geometry summarized in Fig. 1B and reports the corresponding peak force and peak shear-stress summaries. Because the meshes preserved species-specific shell geometry, the analysis remained anchored to the same mammillary context identified morphologically. Impact loading was sampled on circular eggshell fragments (model diameter D = 2.0 mm) at nine parameterized lateral-offset positions on a 3 × 3 grid (0.5 mm spacing), yielding n = 9 independent contact shear-stress time courses per species. Both raw peak contact force (F_max) and peak contact shear stress (τ_max) were recorded to reduce the influence of model size, gross geometry, and especially eggshell thickness. Peak τ_max was used as the direct readout of local hatching resistance at the mammillary contact interface, and species means ± s.d. were calculated across the nine positions (Fig. S11A to F; eggshell thicknesses: ", False, False),
+    ("Finite-element testing translated the shared egg-tooth interface into an explicit inside-out loading design. Fig. 5A pairs species-specific dorsal beak views with micro-CT-derived finite-element setups and summary box plots of peak force and peak shear stress. The setups were built from the beak-tip geometry summarized in Fig. 1B. Because the meshes preserved species-specific shell geometry, the analysis remained anchored to the same mammillary context identified morphologically. Impact loading was sampled on circular eggshell fragments (model diameter D = 2.0 mm) at nine lateral-offset positions on a 3 × 3 grid (0.5 mm spacing). This design yielded n = 9 independent contact shear-stress time courses per species. Both raw peak contact force (F_max) and peak contact shear stress (τ_max) were recorded to reduce the influence of model size, gross geometry, and especially eggshell thickness. Peak τ_max was used as the direct readout of local hatching resistance at the mammillary contact interface. Species means ± s.d. were calculated across the nine positions (Fig. S11A to F; eggshell thicknesses: ", False, False),
     ("G. gallus", False, True),
     (" 0.29 mm, ", False, False),
     ("A. platyrhynchos", False, True),
@@ -468,7 +468,7 @@ add_main_figure_legend(
         ("Anas platyrhynchos", False, True),
         (", and ", False, False),
         ("Columba livia", False, True),
-        (". In each species set, the left image shows the dorsal beak view used to localize the egg-tooth, and the right image shows the eggshell-fragment mesh, conical impactor, and representative finite-element model output at contact. (B) Mean contact-force time courses across nine impact positions with shaded ±1σ envelopes. (C) Mean contact shear-stress time courses for the same nine positions with shaded ±1σ envelopes. Points in the box plots denote individual impact positions (n = 9 per species), p values from one-way ANOVA are shown above the box plots, and different letters indicate Duncan's multiple range test groupings. The simulations were built from reconstructed shell geometry rather than idealized shells.", False, False),
+        (". In each species set, the left image shows the dorsal beak view used to localize the egg-tooth. The right image shows the eggshell-fragment mesh, conical impactor, and representative finite-element model output at contact. (B) Mean contact-force time courses across nine impact positions with shaded ±1σ envelopes. (C) Mean contact shear-stress time courses for the same nine positions with shaded ±1σ envelopes. Points in the box plots denote individual impact positions (n = 9 per species). P values from one-way ANOVA are shown above the box plots. Different letters indicate Duncan's multiple range test groupings. The simulations were built from reconstructed shell geometry rather than idealized shells.", False, False),
     ],
     before=20,
     after=80,
@@ -482,17 +482,17 @@ mixed([
     ("A. platyrhynchos", False, True),
     (" reached 0.898 ± 0.090 N, and ", False, False),
     ("C. livia", False, True),
-    (" reached 0.485 ± 0.039 N, with all pairwise differences significant (Fig. 5A and B). By contrast, τ_max resolved a two-level pattern (p = 6.644 × 10⁻¹⁰). ", False, False),
+    (" reached 0.485 ± 0.039 N, and all pairwise differences were significant (Fig. 5A and B). By contrast, τ_max resolved a two-level pattern (p = 6.644 × 10⁻¹⁰). ", False, False),
     ("G. gallus", False, True),
     (" reached 551.6 ± 108.8 MPa and was significantly higher than ", False, False),
     ("A. platyrhynchos", False, True),
     (" at 404.0 ± 39.6 MPa and ", False, False),
     ("C. livia", False, True),
-    (" at 393.0 ± 35.2 MPa, whereas the latter two species did not differ significantly from each other (Fig. 5A and C).", False, False),
+    (" at 393.0 ± 35.2 MPa. The latter two species did not differ significantly from each other (Fig. 5A and C).", False, False),
 ])
 
 mixed([
-    ("The difference between F_max and τ_max showed that duck's higher raw contact force was driven mainly by its greater shell thickness (0.35 mm versus 0.19 mm in pigeon), rather than by superior unit-area material resistance. By contrast, ", False, False),
+    ("The difference between F_max and τ_max showed that duck's higher raw contact force was driven mainly by its greater shell thickness (0.35 mm versus 0.19 mm in pigeon). It did not indicate superior unit-area material resistance. By contrast, ", False, False),
     ("G. gallus", False, True),
     (" exhibited a 36-40% increase in τ_max relative to the two other species, indicating higher local hatching resistance independent of shell thickness. This high-versus-low grouping, with ", False, False),
     ("G. gallus", False, True),
@@ -504,7 +504,7 @@ mixed([
 ])
 
 mixed([
-    ("Whole-shell fracture force alone could make duck appear mechanically superior to chicken because of its greater shell thickness, despite the absence of the same high-density mammillary state. By focusing instead on local hatching resistance at the micro-CT-derived mammillary interface, τ_max removes that ambiguity and shows that the high-density chicken state remains distinct, whereas duck and pigeon converge at lower resistance. This functional readout preserved the same asymmetry already visible in earlier sections and linked glycosylation-associated differences to local shell-breaking mechanics across the three model species.", False, False),
+    ("Whole-shell fracture force alone could make duck appear mechanically superior to chicken because of its greater shell thickness, despite the absence of the same high-density mammillary state. By focusing instead on local hatching resistance at the micro-CT-derived mammillary interface, τ_max removes that ambiguity. It shows that the high-density chicken state remains distinct, whereas duck and pigeon converge at lower resistance. This functional readout preserved the same asymmetry already visible in earlier sections and linked glycosylation-associated differences to local shell-breaking mechanics across the three model species.", False, False),
 ])
 
 cite(p_s4a, [16, 37, 69])
@@ -538,7 +538,7 @@ p_disc_axis = spara([
 p_disc_mam2 = spara([
     ("Among the molecular layers examined here, OVAL N-glycan architecture most closely tracked the cross-species structural differences.", []),
     (" Orthogroup turnover, gene-family change, and glycoprotein-network divergence still matter, but they mainly define comparative background rather than the nearest explanation. OVAL glycan state is more informative because it is shared across species, chemically interpretable, and located on an abundant matrix protein already implicated in mineralization.", [4, 18, 27]),
-    (" Earlier work had already kept OVAL in view as an abundant eggshell glycoprotein and mineralization candidate, and prior glycoproteomic studies showed that eggshell-matrix proteins can occupy different N-glycosylation states. The advance here is not simply that additional glycopeptides were detected. Rather, an ortholog-resolved cross-species comparison identified which glycan states aligned most clearly with phenotype and carried those assignments into structural and mechanical interpretation.", [4, 18]),
+    (" Earlier work had already kept OVAL in view as an abundant eggshell glycoprotein and mineralization candidate, and prior glycoproteomic studies showed that eggshell-matrix proteins can occupy different N-glycosylation states. The advance here is not simply that additional glycopeptides were detected. Rather, the ortholog-resolved cross-species comparison identified which glycan states aligned most clearly with phenotype and carried those assignments into structural and mechanical interpretation.", [4, 18]),
     (" Earlier chicken studies established a glycosite foundation for OVAL and identified glycosylated Asn in OC116. The present dataset resolved dominant glycan classes on the corresponding OVAL ortholog sequons carried into structural modeling (G. gallus N293; A. platyrhynchos and C. livia N97). Relative to earlier site-detection studies, the present comparison extends breadth across species and into glycan-class interpretation rather than merely lengthening a within-species site inventory. OVAL is useful not because it is unique, but because it remains comparable across species while retaining interpretable chemical divergence at the level of specific glycan classes.", [8, 18, 21]),
 ])
 
