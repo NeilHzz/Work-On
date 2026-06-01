@@ -673,7 +673,7 @@ p_m_ct = para(
     "equatorial region of each species and scanned with a Phoenix V|tome|x\u00a0M "
     "microfocus CT system (GE Sensing and Inspection Technologies GmbH, Wunstorf, "
     "Germany) at 85 kV and 160 \u03bcA with no beam filter; scan settings were held "
-    "constant across all specimens. Three-dimensional reconstructions were generated "
+    "constant across all specimens. Reconstructed image volumes were exported as 16-bit unsigned isotropic datasets with a sampling distance of approximately 0.003836 mm along the x, y, and z axes (about 3.84 \u03bcm voxel size). Three-dimensional reconstructions were generated "
     "in 3D Slicer by threshold-based segmentation. Acquisition noise was suppressed by a 5 \u00d7 5 \u00d7 5 "
     "median filter, followed by largest-island isolation and 9 \u00d7 9 \u00d7 9 hole-filling. "
     "Within the same region of interest, three morphometric parameters were then calculated from the labelmap. "
