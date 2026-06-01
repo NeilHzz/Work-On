@@ -210,7 +210,7 @@ para("Abstract", bold=True, size=11, before=80, after=40,
 
 para(
     "Birds hatch with a conserved egg-tooth, so unresolved mechanical differences should lie in the eggshell rather than in the shell-breaking tool. "
-    "Here, we compared chicken, duck, and pigeon to test whether the first clear divergence appeared in the mammillary layer and whether glycan states on shared matrix proteins tracked that divergence. "
+    "We compared chicken, duck, and pigeon to test whether the first clear divergence appeared in the mammillary layer and whether glycan states on shared matrix proteins tracked that divergence. "
     "We combined micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco modeling, electrostatic analysis, and finite-element simulation. "
     "Mammillary organization diverged, whereas the matrix-protein toolkit remained broadly shared. "
     "Among the shared proteins, ovalbumin (OVAL) showed an ordered shift from High Mannose-dominant glycans in chicken to Neutral Complex/Hybrid-dominant glycans in duck and Sialylated Complex/Hybrid-dominant glycans in pigeon. "
@@ -273,8 +273,8 @@ p_intro4 = smixed([
       ('Anas platyrhynchos', False, True),
       (', and ', False, False),
       ('Columba livia', False, True),
-      (' as terrestrial precocial, aquatic-associated precocial, and terrestrial altricial models, respectively, thereby spanning crossed developmental and ecological contrasts within a common hatching framework.', False, False)], [3, 22, 23]),
-        ([(' This design prevented the comparison from collapsing into either a simple phylogenetic pairing or a single precocial-versus-altricial contrast.', False, False)], []),
+            (' as terrestrial precocial, aquatic-associated precocial, and terrestrial altricial models, respectively.', False, False)], [3, 22, 23]),
+        ([(' This design spanned crossed developmental and ecological contrasts within a common hatching framework and avoided a simple phylogenetic or precocial-versus-altricial comparison.', False, False)], []),
     ([(' We integrated micro-CT morphometry to define mammillary organization; comparative eggshell-matrix proteomics and intact glycopeptide mass spectrometry to resolve shared matrix proteins and their glycan states; Re-Glyco structural modeling and electrostatic analysis to infer protein-surface consequences; and finite-element simulation to test whether the same cross-species contrast remained detectable in local hatching resistance.', False, False)], []),
     ([(' Each level constrained the next, keeping molecular interpretation tied to shell structure rather than floating free of the material context.', False, False)], []),
     ([(' In the present dataset, that sequential comparison converged most clearly on OVAL, whose glycan states aligned with mammillary density, Ca²⁺-relevant surface accessibility, and local hatching resistance.', False, False)], [18]),
@@ -374,10 +374,6 @@ p_sprot_focus = spara([
 ])
 
 head("OVAL glycosylation provides the most interpretable cross-species contrast")
-
-            ('Columba livia', False, True),
-            (' as terrestrial precocial, aquatic-associated precocial, and terrestrial altricial models, respectively.', False, False)], [3, 22, 23]),
-                ([(' This design spanned crossed developmental and ecological contrasts within a common hatching framework and avoided a simple phylogenetic or precocial-versus-altricial comparison.', False, False)], []),
 
 add_centered_figure("Fig2_composed.png", width_cm=14.6)
 add_main_figure_legend(
