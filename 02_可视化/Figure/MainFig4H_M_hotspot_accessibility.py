@@ -508,9 +508,6 @@ def draw_sasa_dumbbell(ax, df, show_legend=True):
                     capsize=5, zorder=5)
         ax.text(xs[i] + 0.07, residual, f'{residual:.1f}', ha='left', va='center',
                 fontsize=VALUE_FS - 2, color='#555')
-        loss_label_y = residual - max(0.7, y_top * 0.018)
-        ax.text(xs[i] + 0.07, loss_label_y, f'-{shielded:.1f}',
-            ha='left', va='center', fontsize=VALUE_FS - 3, color='#555')
 
     # Duncan's MRT CLD letters on residual hotspot SASA
     res_sasa = duncan_mrt(
