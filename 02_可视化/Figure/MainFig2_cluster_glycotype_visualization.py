@@ -504,6 +504,27 @@ def plot_cluster_consistency(
         note=f"1 - Jensen-Shannon distance; n={shared_group_count}",
     )
 
+    ax_left.text(
+        -0.18,
+        1.08,
+        "B",
+        transform=ax_left.transAxes,
+        ha="left",
+        va="top",
+        fontsize=18,
+        fontweight="bold",
+    )
+    ax_right.text(
+        -0.12,
+        1.08,
+        "C",
+        transform=ax_right.transAxes,
+        ha="left",
+        va="top",
+        fontsize=18,
+        fontweight="bold",
+    )
+
     fig.subplots_adjust(top=0.88, bottom=0.18)
     save_fig(fig, "Fig2_cluster_glycotype_consistency")
     plt.close(fig)

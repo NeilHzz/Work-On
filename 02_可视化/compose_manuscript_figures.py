@@ -527,29 +527,38 @@ def compose_fig2():
             x += panel_img.width + GAP
         return row
 
-    # A: current glycoprotein orthogroup UpSet plot, full width for readability.
-    A = panel("Fig2.png", "A", inner_w, trim=False)
+    # Fig 2 layout: A on the upper left; B/C combined panel and D below; E on the right.
+    right_w = int((inner_w - GAP) * 0.36)
+    left_w = inner_w - right_w - GAP
 
-    # B-C: equal-height analytical panels to keep the middle row compact and balanced.
-    row2 = fit_row([
-        ("Fig2_cluster_glycotype_consistency.png", "B", True),
-        ("Fig2_species_glycotype_heatmap.png", "C", True),
-    ], inner_w)
+    A = panel("Fig2.png", "A", left_w, trim=False)
+    row1 = Image.new("RGBA", (left_w, A.height), (255, 255, 255, 0))
+    paste(row1, A, 0, 0)
 
-    # D-E: keep the narrative order but scale both panels to the same height so the final row reads as one unit.
-    row3 = fit_row([
-        ("Fig2_species_glycotype_proportion.png", "D", True),
-        (FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", True),
-    ], inner_w)
+    bd_w = (left_w - GAP) // 2
+    BC = panel("Fig2_cluster_glycotype_consistency.png", "", target_w=bd_w, trim=True)
+    D = panel("Fig2_species_glycotype_proportion.png", "D", target_w=left_w - bd_w - GAP, trim=True)
+    row2_h = max(BC.height, D.height)
+    row2 = Image.new("RGBA", (left_w, row2_h), (255, 255, 255, 0))
+    paste(row2, BC, 0, 0)
+    paste(row2, D, bd_w + GAP, 0)
 
-    rows = [A, row2, row3]
-    total_h = 2 * MARGIN + sum(row.height for row in rows) + GAP * (len(rows) - 1)
+    left_block_h = row1.height + GAP + row2.height
+    left_block = Image.new("RGBA", (left_w, left_block_h), (255, 255, 255, 0))
+    paste(left_block, row1, 0, 0)
+    paste(left_block, row2, 0, row1.height + GAP)
+
+    E = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", target_w=right_w, trim=True)
+
+    content_h = max(left_block.height, E.height)
+    content = Image.new("RGBA", (inner_w, content_h), (255, 255, 255, 0))
+    paste(content, left_block, 0, 0)
+    paste(content, E, left_w + GAP, max(0, (content_h - E.height) // 2))
+
+    total_h = 2 * MARGIN + content.height
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
 
-    y = MARGIN
-    for row in rows:
-        paste(canvas, row, MARGIN, y)
-        y += row.height + GAP
+    paste(canvas, content, MARGIN, MARGIN)
     save_fig(canvas, "Fig2_composed")
 
 
@@ -600,7 +609,7 @@ def compose_fig4():
     sub_gap = 36
 
     def make_panel(fname, label=None, *, ncols=None, target_w=None, cover_old=False,
-                   trim=False, max_h=None, label_offset=(14, 8),
+                   trim=False, max_h=None, zoom=1.0, label_offset=(14, 8),
                    cover_px=(90, 110)):
         if target_w is None and ncols is not None:
             target_w = (inner_w - (ncols - 1) * GAP) // ncols
@@ -611,6 +620,9 @@ def compose_fig4():
             raw = make_placeholder(placeholder_w, placeholder_h, fname)
         if trim:
             raw = trim_white(raw, pad=24, threshold=250)
+        slot_w = target_w
+        if target_w is not None and zoom != 1.0:
+            target_w = max(1, round(target_w * zoom))
         if target_w is not None and max_h is not None:
             img = scale_to_fit(raw, target_w, max_h)
         elif target_w is not None:
@@ -619,6 +631,9 @@ def compose_fig4():
             img = scale_to_h(raw, max_h)
         else:
             img = raw
+        if slot_w is not None and zoom != 1.0 and img.width > slot_w:
+            left = max(0, (img.width - slot_w) // 2)
+            img = img.crop((left, 0, left + slot_w, img.height))
         if label is not None:
             img = add_label(img, label, font=FONT_FIG4_LABEL,
                             offset=label_offset, cover=cover_old,
@@ -673,7 +688,7 @@ def compose_fig4():
 
     dg_context_row = compose_centered_row([
         make_panel("Fig4D-G_Gallus.png", target_w=group_panel_w, trim=True),
-        make_panel("Fig4D-G_Columba.png", target_w=group_panel_w, trim=True),
+        make_panel("Fig4D-G_Columba.png", target_w=group_panel_w, trim=True, zoom=1.12),
     ], gap=sub_gap, row_width=group_w)
     cf_plot_row = compose_centered_row([
         make_panel("Fig5E.png", "C", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),

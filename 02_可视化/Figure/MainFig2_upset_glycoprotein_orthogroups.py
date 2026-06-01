@@ -32,8 +32,8 @@ SPECIES_COLORS = {
     "GlyAnas": "#93AACD",
     "GlyColumba": "#F3CE9D",
 }
-NODE_SIZE_MIN = 210
-NODE_SIZE_MAX = 620
+NODE_SIZE_MIN = 300
+NODE_SIZE_MAX = 900
 DISPLAY_LABELS = {
     "GlyGallus": "Gallus",
     "GlyColumba": "Columba",
@@ -205,15 +205,8 @@ def draw_upset(memberships):
             if species in group:
                 ax_matrix.scatter(xi, y, s=node_size(group, species), color=SPECIES_COLORS[species],
                                   edgecolor="white", linewidth=0.8, zorder=3)
-                protein_count = protein_counts[group][species]
-                ax_matrix.text(
-                    xi, y, str(protein_count),
-                    ha="center", va="center", fontsize=10.2,
-                    fontweight="bold", color="white",
-                    zorder=4,
-                )
             else:
-                ax_matrix.scatter(xi, y, s=260, color="#D8D8D8",
+                ax_matrix.scatter(xi, y, s=300, color="#D8D8D8",
                                   edgecolor="white", linewidth=0.8, zorder=2)
     ax_matrix.set_xlim(-0.9, len(intersections) - 0.35)
     ax_matrix.spines["top"].set_visible(False)
