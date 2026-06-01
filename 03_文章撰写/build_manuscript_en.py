@@ -272,7 +272,8 @@ p_intro_sig = spara([
     (" In other systems, glycans can act as dynamic shields rather than passive bulk alone.", [42, 43, 44, 63]),
     (" Zeng and colleagues further showed that the same eggshell matrix protein can occupy different N-glycosylation states across the cuticle and mineralized layer. Glycan state can therefore redistribute biological role across eggshell compartments rather than simply decorate a fixed protein scaffold.", [18]),
     (" Prior mineralization-related work suggested that OVAL can enter a Ca²⁺-responsive conformational state during early shell formation.", [4, 11, 29]),
-    (" Work in other glycosylated systems further shows that glycan differences can reshape folded protein surfaces and accessible interfaces.", [42, 43, 61, 63, 81]),
+    (" Work in other glycosylated systems further shows that glycan differences can reshape folded protein surfaces.", [42, 43, 61]),
+    (" Related studies also show effects on accessible interfaces and shield-like surface behavior.", [63, 81]),
     (" We therefore asked whether cross-species glycan differences reshape the folded OVAL surface and alter the Ca²⁺-accessible interface presented at mineralization onset.", [4, 18]),
     (" If that structural difference is biologically relevant, it should remain detectable at the hatching-relevant mechanical end point. We therefore examined local resistance at the mammillary interface under egg-tooth-like loading.", [16, 37, 69]),
 ])
