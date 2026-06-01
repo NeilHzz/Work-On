@@ -116,6 +116,41 @@ def add_significance_brackets(ax, x1, x2, y, h, label, fs=STAT_FS):
             ha='center', va='bottom', fontsize=fs, color='#333')
 
 
+def pairwise_mann_whitney(groups_dict):
+    comparisons = []
+    for left in range(len(SPECIES_ORDER)):
+        for right in range(left + 1, len(SPECIES_ORDER)):
+            sp_left = SPECIES_ORDER[left]
+            sp_right = SPECIES_ORDER[right]
+            left_vals = np.asarray(groups_dict[sp_left], dtype=float)
+            right_vals = np.asarray(groups_dict[sp_right], dtype=float)
+            left_vals = left_vals[np.isfinite(left_vals)]
+            right_vals = right_vals[np.isfinite(right_vals)]
+            if len(left_vals) == 0 or len(right_vals) == 0:
+                continue
+            _, p_value = stats.mannwhitneyu(left_vals, right_vals, alternative='two-sided')
+            label = sig_label(p_value)
+            if label != 'ns':
+                comparisons.append((left, right, label, p_value))
+    return comparisons
+
+
+def add_pairwise_mwu_annotations(ax, groups_dict, y_min, y_max, y_range):
+    comparisons = pairwise_mann_whitney(groups_dict)
+    if not comparisons:
+        return y_max
+    comparisons = sorted(comparisons, key=lambda item: (item[1] - item[0], item[0]))
+    step = max(y_range * 0.08, 1e-9)
+    tick_h = step * 0.35
+    base_y = y_max + y_range * 0.05
+    top_y = base_y
+    for level, (left, right, label, _) in enumerate(comparisons):
+        y = base_y + level * step
+        add_significance_brackets(ax, left, right, y, tick_h, label)
+        top_y = max(top_y, y + tick_h * 2.2)
+    return top_y
+
+
 def style_panel_axes(ax, ylabel: str, title: str,
                      ylabel_x: float | None = None,
                      ylabel_fs: int | None = None) -> None:
