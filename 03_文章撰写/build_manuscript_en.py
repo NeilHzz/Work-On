@@ -649,7 +649,7 @@ head("Eggshell matrix protein extraction")
 mixed([
     ("Eggshell matrix proteins were extracted from the eggshell mammillary layer "
      "(EML) by an established EDTA demineralization protocol. Eggs were rinsed with "
-    "deionized water and placed in sterile sealed bags. One egg from each species was reserved for micro-CT analysis; the remaining shells were used for matrix-protein extraction. Chicken and duck shells were extracted individually, whereas pigeon shells were processed as three-egg pools to maintain comparable starting mass across extraction units. For ", False, False),
+    "deionized water and placed in sterile sealed bags. One egg from each species was reserved for micro-CT analysis; the remaining shells were used for matrix-protein extraction. The remaining six chicken eggs and six duck eggs were divided into three two-egg extraction units per species, whereas the remaining 18 pigeon eggs were divided into three six-egg extraction units. These pooled extraction units were used as the matched biological samples for both shotgun proteomics and intact glycopeptide analysis. For ", False, False),
     ("G.\u00a0gallus", False, True),
     (" and ", False, False),
     ("A.\u00a0platyrhynchos", False, True),
@@ -687,7 +687,7 @@ cite(p_m_ct, [1, 30])
 head("Shotgun proteomics of eggshell matrix proteins")
 
 para(
-    "For shotgun proteomics, eggshell-matrix extracts from the post-CT sample set were prepared as single-egg samples for chicken and duck and as three-egg pools for pigeon. Proteins were "
+    "For shotgun proteomics, eggshell-matrix extracts from the post-CT sample set were analyzed as three pooled biological samples per species, with each chicken and duck sample comprising two eggs and each pigeon sample comprising six eggs. Proteins were "
     "extracted by resuspension in lysis buffer (1% SDS, 1% protease inhibitor "
     "cocktail), sonication on ice, and clarification by centrifugation at "
     "12,000 \u00d7 g at 4\u00b0C for 10 min; protein concentration was determined with a "
@@ -725,7 +725,7 @@ mixed([
 head("Intact glycopeptide mass spectrometry")
 
 para(
-    "For intact glycopeptide analysis, 200 \u03bcg peptide digest was used as input for each enrichment. N-glycopeptides were enriched from tryptic digests by hydrophilic interaction "
+    "For intact glycopeptide analysis, the same three pooled biological samples per species were carried forward, and 200 \u03bcg peptide digest from each pooled sample was used as input for enrichment. N-glycopeptides were enriched from tryptic digests by hydrophilic interaction "
     "liquid chromatography (HILIC). Peptide digests were redissolved in loading "
     "buffer (80% ACN, 5% TFA), loaded onto a HILIC column, washed three times with "
     "loading buffer, and glycopeptides were eluted twice with 0.1% TFA, 50 mM "
