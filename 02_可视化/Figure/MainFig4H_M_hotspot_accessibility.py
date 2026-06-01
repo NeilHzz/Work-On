@@ -47,52 +47,6 @@ XTICK_PAD = 6
 PANEL_ADJUST = dict(left=0.20, right=0.98, bottom=0.21, top=0.83)
 
 
-def format_p_value(p_value: float) -> str:
-    if p_value <= 0 or not np.isfinite(p_value):
-        return 'p < 1e-300'
-    return f'p = {p_value:.2e}'
-
-
-# ═════ Duncan's Multiple Range Test ════════════════════════════════════════
-def duncan_mrt(groups: list, names: list, alpha: float = 0.05) -> dict:
-    k = len(groups)
-    ns = [len(g) for g in groups]
-    means = np.array([g.mean() for g in groups])
-    f_stat, p_anova = stats.f_oneway(*groups)
-    SS_e   = sum(float(np.sum((g - g.mean()) ** 2)) for g in groups)
-    df_e   = sum(ns) - k
-    MSE    = SS_e / df_e
-    n_harm = k / sum(1.0 / n for n in ns)
-    SE     = np.sqrt(MSE / n_harm)
-    order  = np.argsort(means)[::-1]
-    s_means = means[order]
-    s_names = [names[i] for i in order]
-    crit = [stats.studentized_range.ppf(1.0 - alpha, k=p, df=df_e) * SE
-            for p in range(2, k + 1)]
-    sig = np.zeros((k, k), dtype=bool)
-    for i in range(k):
-        for j in range(i + 1, k):
-            p_span = j - i + 1
-            sig[i, j] = sig[j, i] = (s_means[i] - s_means[j] > crit[p_span - 2])
-    if k == 3:
-        s01, s02, s12 = bool(sig[0,1]), bool(sig[0,2]), bool(sig[1,2])
-        table = {
-            (False,False,False): ('a','a','a'),
-            (False,False,True ): ('ab','a','b'),
-            (False,True, False): ('a','ab','b'),
-            (False,True, True ): ('a','a','b'),
-            (True, False,False): ('a','b','ab'),
-            (True, False,True ): ('a','b','a'),
-            (True, True, False): ('a','b','b'),
-            (True, True, True ): ('a','b','c'),
-        }
-        ltrs = table[(s01, s02, s12)]
-        letters = {s_names[i]: ltrs[i] for i in range(3)}
-    else:
-        letters = {}
-    return dict(f_stat=f_stat, p_anova=p_anova, letters=letters)
-
-
 FOLDER  = r"D:\system_folder\Desktop\Work On\01_数据与计算\ReGlyco_Ensemble"
 CSV_DIR = os.path.join(FOLDER, "csv")
 OUT_PNG = os.path.join(r"D:\system_folder\Desktop\Work On\02_可视化\Figure\png", "Fig5I_N.png")
