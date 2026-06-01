@@ -12,7 +12,7 @@ from pathlib import Path
 import re
 from shared_references import REFS
 
-OUT = str(Path(__file__).with_name("manuscript260601.docx"))
+OUT = str(Path(__file__).with_name("manuscript260601v2.docx"))
 FIG_BASE = Path(__file__).resolve().parent.parent / "02_可视化" / "260601" / "02_main_composed_figures"
 
 REF_TEXTS = {}
@@ -191,7 +191,7 @@ def add_main_figure_legend(label, title, caption_parts, before=0, after=160):
 
 # Title (≤135 characters)
 para(
-    "Glycan states of eggshell matrix proteins link mammillary organization to local hatching resistance across birds",
+    "Eggshell matrix protein glycan states link mammillary organization to local hatching resistance in birds",
     bold=True, size=14, before=0, after=160, align=WD_ALIGN_PARAGRAPH.LEFT
 )
 
@@ -209,12 +209,13 @@ para("Abstract", bold=True, size=11, before=80, after=40,
      align=WD_ALIGN_PARAGRAPH.LEFT)
 
 para(
-    "Birds hatch with a conserved egg-tooth, placing unresolved mechanical differences in the eggshell rather than the shell-breaking tool. "
-    "We compared chicken, duck, and pigeon to test whether the first clear divergence appeared in the mammillary layer and whether glycan states on shared matrix proteins tracked that divergence. "
-    "Micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco modeling, electrostatic analysis, and finite-element simulation showed that mammillary organization diverged while the matrix-protein toolkit remained largely shared. "
-    "Among shared proteins, ovalbumin (OVAL) showed an ordered glycan-state shift from High-Mannose-dominant chicken to Neutral Complex/Hybrid-dominant duck and Sialylated Complex/Hybrid-dominant pigeon. "
+    "Birds hatch with a conserved egg-tooth, so unresolved mechanical differences should lie in the eggshell rather than in the shell-breaking tool. "
+    "Here, we compared chicken, duck, and pigeon to test whether the first clear divergence appeared in the mammillary layer and whether glycan states on shared matrix proteins tracked that divergence. "
+    "We combined micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco modeling, electrostatic analysis, and finite-element simulation. "
+    "Mammillary organization diverged, whereas the matrix-protein toolkit remained broadly shared. "
+    "Among the shared proteins, ovalbumin (OVAL) showed an ordered shift from High Mannose-dominant glycans in chicken to Neutral Complex/Hybrid-dominant glycans in duck and Sialylated Complex/Hybrid-dominant glycans in pigeon. "
     "This shift aligned with progressively lower Ca²⁺-relevant surface accessibility and with the same chicken-versus-duck/pigeon contrast in simulated local hatching resistance. "
-    "These results identified OVAL glycan state as the most informative molecular layer linking a chicken-like eggshell state to mammillary organization and local hatching mechanics.",
+    "Together, these results identify OVAL glycan state as the most informative molecular layer linking a chicken-like eggshell state to mammillary organization and local hatching mechanics.",
     bold=False, size=10, before=0, after=80, align=WD_ALIGN_PARAGRAPH.JUSTIFY
 )
 
@@ -364,7 +365,7 @@ p_sprot_bg = spara([
 ])
 
 p_sprot_go = spara([
-    (" GO enrichment and gene-family turnover further pointed to lineage-specific immune and defense background (Figs. S5, S8, and S9), but those signals described comparative context more than the layer most directly tied to mammillary organization. Those lineage-biased signals remained relevant as evolutionary backdrop, but they did not by themselves identify the proximate layer connecting a shared matrix repertoire to mammillary-layer divergence and, later, hatching-relevant mechanics across species.", []),
+        (" We therefore anchored the comparison to the conserved egg-tooth interface and asked whether glycan-state differences on shared matrix proteins could explain why a common shell-building toolkit yields different Ca²⁺-accessible states at mineralization onset. In that framing, the missing step is not another protein list, but a bridge from glycan class to surface presentation on a shared matrix background.", []),
 ])
 
 p_sprot_focus = spara([
@@ -374,9 +375,9 @@ p_sprot_focus = spara([
 
 head("OVAL glycosylation provides the most interpretable cross-species contrast")
 
-p_s2a = mixed([
-    ("Intact glycopeptides gave a direct cross-species view of specific glycoforms on avian eggshell matrix proteins. Fig. 2A to C first showed that the three glycoproteomes were not sampled at equal breadth, yet they still retained a stable comparative core. At the cluster level, the three-species intersection contained 25 shared clusters, whereas the largest additional overlap was the Anas-Columba sector with 64 clusters; Gallus-specific clusters were essentially absent in this clustered view, indicating that the chicken dataset entered the comparison mainly through the shared matrix background rather than through a large private glycoprotein sector (Fig. 2A). The same asymmetry appeared in the quantitative inventory: Anas yielded the broadest coverage with 321 glycoproteins, 547 glycosites, and 197 glycan compositions, Columba remained intermediate with 192, 257, and 162, and Gallus was the most compact with 55, 88, and 105, respectively (Fig. 2B). Despite that unequal breadth, shared-core Jensen-Shannon similarity remained within a narrow range of 0.33 to 0.40, with the Anas-Columba pair highest, indicating that the three species still occupied a comparable shared glycoprotein framework rather than fully disconnected chemical spaces (Fig. 2C). The glycan-class composition profiles then showed that High Mannose and Complex-Fucosylated glycans formed a broad background across species, whereas Complex-Sialylated and other extended classes contributed more strongly to lineage differences (Fig. 2D). The ortholog-glycan chord view retained the same message at the protein level: a shared eggshell-matrix repertoire was present, but individual shared proteins carried different dominant glycan classes across species (Fig. 2E). This asymmetry highlighted shared glycoproteins with strongly divergent states and narrowed the candidate space for ortholog and structural analysis.", False, False),
-])
+            ('Columba livia', False, True),
+            (' as terrestrial precocial, aquatic-associated precocial, and terrestrial altricial models, respectively.', False, False)], [3, 22, 23]),
+                ([(' This design spanned crossed developmental and ecological contrasts within a common hatching framework and avoided a simple phylogenetic or precocial-versus-altricial comparison.', False, False)], []),
 
 add_centered_figure("Fig2_composed.png", width_cm=14.6)
 add_main_figure_legend(
@@ -520,7 +521,7 @@ para("Discussion", bold=True, size=14, before=320, after=160,
 
 p_disc_mam1 = smixed([
     ([('Mammillary organization diverged while the eggshell-matrix toolkit remained broadly shared across the three species. ', False, False),
-            ('Within that shared background, OVAL glycan state provided the clearest correspondence between molecular variation, surface accessibility, and local hatching resistance recovered in this dataset.', False, False)], [1, 16, 18]),
+            ('Within that shared background, OVAL glycan state gave the clearest link between molecular variation, surface accessibility, and local hatching resistance in this dataset.', False, False)], [1, 16, 18]),
 ])
 
 p_disc_regulator = spara([
@@ -580,25 +581,25 @@ p_disc_discriminate = spara([
 ])
 
 p_disc_function = para(
-    "The discussion therefore converges on the chicken eggshell state. Across the present comparison, chicken combined the densest mammillary field, the least shielded Ca²⁺-relevant OVAL surface, and the highest local hatching resistance under inside-out loading. This convergence identifies the chicken-like state as the structural-functional target in the dataset and supports the broader point that chemically specific states on reused matrix proteins can organize mineralized phenotypes more clearly than proteome turnover alone."
+    "Taken together, the comparison converged on a chicken-like eggshell state. Chicken combined the densest mammillary field, the least shielded Ca²⁺-relevant OVAL surface, and the highest local hatching resistance under inside-out loading. This pattern supports the broader inference that chemically specific states on reused matrix proteins can organize mineralized phenotypes more clearly than proteome turnover alone."
 )
 cite(p_disc_function, [67, 73, 74])
 
 p_disc_selection = para(
-    "Duck and pigeon remain essential because they define the bounds of the chicken state across both shell structure and ecological-developmental position. Duck shows that a more aquatic niche and broadly precocial developmental condition can coexist with greater shell thickness, intermediate OVAL accessibility, and low τ_max without recreating the same mammillary-interface resistance. Pigeon shows that a more terrestrial and more altricial position can still converge with duck at low τ_max, but from a thinner shell and a different mammillary background. Together, these contrasts make chicken the clearest reference state for linking glycan-dependent matrix behavior to eggshell performance across the ecological and developmental space sampled here. OVAL glycan state is the most explicit molecular layer through which that high-resistance state becomes mechanistically interpretable."
+    "Duck and pigeon remain essential because they define the bounds of that chicken-like state across both shell structure and ecological-developmental position. Duck combined greater shell thickness with intermediate OVAL accessibility and low τ_max, showing that thickness alone did not recreate the chicken state. Pigeon converged with duck at low τ_max, but did so from a thinner shell and a different mammillary background. Together, these contrasts make chicken the clearest reference state for linking glycan-dependent matrix behavior to eggshell performance across the sampled design space. OVAL glycan state is the most explicit molecular layer through which that state becomes mechanically interpretable."
 )
 
 p_disc_biomineral = para(
-    "That same analytical sequence should travel beyond avian eggshell. Many biomineralization systems depend on organic matrices that modulate ion access, surface exposure, and mineral nucleation through chemically specific interfacial states rather than through bulk composition alone. In that broader frame, the present workflow offers a way to move from glycoproteomic state to surface presentation and then to mesoscale function, which is also the scale-bridging problem faced in other mineralized tissues and biomimetic materials. The same logic may be relevant even in regenerative contexts, where eggshell-derived materials and eggshell membrane proteins have already been explored for tissue engineering and bone repair, including improved osteoproductivity of injectable grafts. The study therefore also provides a template for asking how chemically specific matrix states organize biomineral behavior across biological and biomedical settings."
+    "The same analytical sequence may extend beyond avian eggshells. Many biomineralization systems depend on organic matrices that regulate ion access, surface exposure, and mineral nucleation through chemically specific interfacial states rather than bulk composition alone. In that broader frame, the present workflow offers a way to move from glycoproteomic state to surface presentation and then to mesoscale function. Similar scale-bridging problems arise in other mineralized tissues and biomimetic materials. The same logic may also inform regenerative settings in which eggshell-derived materials or membrane proteins are being explored for tissue engineering and bone repair. The study therefore provides a template for testing how chemically specific matrix states organize biomineral behavior across biological and biomedical contexts."
 )
 cite(p_disc_biomineral, [64, 67, 68, 73])
 
 p_disc_future = para(
-    "The present scope remains bounded. We analyzed dominant glycoforms rather than the full in vivo range of glycan heterogeneity, treated each species as mechanically uniform at the scale of the mean eggshell, and relied on incompletely constrained uterine ionic conditions in the APBS framework. The next decisive tests are defined-glycoform mineralization assays, direct manipulation of OVAL glycosylation in chicken, and site-resolved validation of the same inside-out mechanical contrast. Those experiments should determine whether the OVAL glycan state identified here directly participates in shell mineralization or mainly marks the chicken-like high-resistance state with unusual fidelity."
+    "The present scope remains bounded. We analyzed dominant glycoforms rather than the full in vivo glycan ensemble, treated each species as mechanically uniform at the scale of the mean eggshell, and relied on incompletely constrained uterine ionic conditions in the APBS framework. The next decisive tests are defined-glycoform mineralization assays, direct manipulation of OVAL glycosylation in chicken, and site-resolved validation of the same inside-out mechanical contrast. These experiments should clarify whether the OVAL glycan state directly participates in shell mineralization or instead marks the chicken-like high-resistance state with unusual fidelity."
 )
 
 p_disc_close = para(
-    "In summary, the present study establishes a continuous comparison from mammillary organization to glycoprotein state, structure, and local hatching mechanics in three avian eggshells. Chicken emerged as the target state, combining dense mammillary organization, compact OVAL glycosylation, greater Ca²⁺-relevant surface exposure, and the highest local resistance at the mammillary interface during hatching. This strategy can be extended to other abundant eggshell matrix proteins as their modification states become resolvable with similar confidence. Together, the morphometric, glycoproteomic, structural, and mechanical analyses identify OVAL glycan state as the most informative molecular layer linking the chicken-like eggshell state to mammillary organization and local hatching mechanics."
+    "In summary, this study connected mammillary organization, glycoprotein state, surface accessibility, and local hatching mechanics across three avian eggshells. Chicken defined the high-resistance end of that axis, combining dense mammillary organization, compact OVAL glycans, greater Ca²⁺-relevant surface exposure, and the highest local resistance at the mammillary interface. As comparable glycoform assignments become available, the same strategy can be extended to other abundant eggshell matrix proteins. Together, the morphometric, glycoproteomic, structural, and mechanical evidence identifies OVAL glycan state as the most informative molecular layer linking the chicken-like eggshell state to mammillary organization and local hatching mechanics."
 )
 
 p_disc_limits = p_disc_close
