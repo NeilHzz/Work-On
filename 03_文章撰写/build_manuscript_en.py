@@ -367,7 +367,7 @@ add_main_figure_legend(
         ("Anas platyrhynchos", False, True),
         (", and ", False, False),
         ("Columba livia", False, True),
-        (". (B) Species-specific lateral head views (top row) and dorsal beak views (bottom row) show the egg-tooth-bearing beak tip in chicken, duck, and pigeon. (C) Representative micro-CT sections and three-dimensional inner-surface reconstructions of the mammillary layer. Chicken shows smoother rounded mammillae, duck more ridged and angular mammillae, and pigeon discrete triangular-conical mammillae. Scale bars, 100 μm. (D) Box plots show mammillary density and unit volume ratio across species. Points denote individual measurements. P values from one-way ANOVA are shown above the plots, and different letters indicate Tukey HSD groupings.", False, False),
+        (". (B) Species-specific lateral head views (top row) and dorsal beak views (bottom row) show the egg-tooth-bearing beak tip in chicken, duck, and pigeon. (C) Representative micro-CT sections and three-dimensional inner-surface reconstructions of the mammillary layer. Chicken shows smoother rounded mammillae, duck more ridged and angular mammillae, and pigeon discrete triangular-conical mammillae. Scale bars, 100 μm. (D) Box plots show mammillary density and unit volume ratio across species. Points denote nine non-overlapping subfragments from the scanned fragment of each species. P values from one-way ANOVA are shown above the plots, and different letters indicate Tukey HSD groupings.", False, False),
     ],
     before=20,
     after=80,
@@ -684,7 +684,7 @@ p_m_ct = para(
     "Mammillary density was calculated as mammilla count divided by analysis-unit area. "
     "Total eggshell volume in the same analysis unit was obtained directly from the labelmap, and mean column-unit volume was defined as total shell volume divided by mammilla count; "
     "column-unit volume fraction was then calculated as mean column-unit volume divided by the total eggshell volume of the corresponding analysis unit. "
-    "Because the columnar units initiated by mammillae are arranged as repetitive and approximately even planar units in normal avian eggshell microstructure, these parameters were treated as local average representatives of whole-shell organisation (n\u202f=\u202f9 subfragments per species from one scanned fragment). The same segmentation and post-processing workflow was applied to all scans so that species contrasts reflected morphology rather than reconstruction settings."
+    "Because the columnar units initiated by mammillae are arranged as repetitive and approximately even planar units in normal avian eggshell microstructure, these parameters were treated as local average representatives of whole-shell organisation. The nine observations per species were non-overlapping regional subsamples from one scanned fragment and were used to quantify within-fragment spatial variation around that local mean rather than to represent nine independent eggs. The same segmentation and post-processing workflow was applied to all scans so that species contrasts reflected morphology rather than reconstruction settings."
 )
 cite(p_m_ct, [1, 30])
 
@@ -905,8 +905,7 @@ mixed([
     ("All values are expressed as mean \u00b1 s.d. All statistical tests were two-tailed, "
      "and p < 0.05 was considered statistically significant throughout. "
     "Normality was evaluated by the Shapiro\u2013Wilk test and homogeneity of variance by Levene's test before parametric between-species analyses. Mammillary morphometric parameters were compared among species by one-way ANOVA "
-    "followed by Tukey's honestly significant difference test (Tukey HSD; \u03b1\u202f=\u202f0.05) "
-    "(n\u202f=\u202f9 subfragments per species). The same assumption checks supported one-way ANOVA with Tukey HSD for finite-element outcomes (F_max and \u03c4_max). In contrast, glycan ensemble geometric descriptors (Rg, end-to-end distance, minimum glycan\u2013protein contact distance) and hotspot-derived ensemble metrics did not satisfy normality and/or homoscedasticity across species, so pairwise species contrasts for these variables were evaluated with two-sided Mann\u2013Whitney U tests. "
+    "followed by Tukey's honestly significant difference test (Tukey HSD; \u03b1\u202f=\u202f0.05). These nine morphometric observations per species were non-overlapping subfragments from one scanned fragment and should therefore be interpreted as within-fragment regional replicates rather than as nine independent biological samples. The same assumption checks supported one-way ANOVA with Tukey HSD for finite-element outcomes (F_max and \u03c4_max). In contrast, glycan ensemble geometric descriptors (Rg, end-to-end distance, minimum glycan\u2013protein contact distance) and hotspot-derived ensemble metrics did not satisfy normality and/or homoscedasticity across species, so pairwise species contrasts for these variables were evaluated with two-sided Mann\u2013Whitney U tests. "
      "Glycosylation-induced reduction in N_hot within ", False, False),
     ("C.\u00a0livia", False, True),
     (" was assessed by one-sample Wilcoxon signed-rank test versus the apo reference value; total Asp/Glu SASA at the whole-interface level was summarized descriptively because the structure-level values were invariant across ", False, False),
