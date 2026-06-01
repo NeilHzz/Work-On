@@ -699,19 +699,17 @@ para(
     "alkylated with 11 mM iodoacetamide (room temperature, 15 min, dark). Proteins "
     "were pooled at the two-egg level to reduce idiosyncratic egg-to-egg variation while preserving the dominant species-level signal. They "
     "were digested overnight with sequencing-grade trypsin (enzyme:protein ratio "
-    "1:50) and desalted with Strata X SPE columns."
+    "1:50) and desalted with Strata X SPE columns. No offline HPLC fractionation was performed before LC-MS/MS analysis. For proteome acquisition, 20 \u03bcg peptide was injected per run."
 )
 
 mixed([
-    ("Desalted peptides were dissolved in 0.1% formic acid and separated on a "
+    ("Desalted peptides were dissolved in mobile phase A (0.1% formic acid in water) and separated on a "
      "home-made 15-cm \u00d7 100-\u03bcm i.d. reversed-phase C18 analytical column connected "
-     "to a Vanquish Neo UPLC system (Thermo Fisher Scientific) at 400 nl/min over "
-     "a 22.6-min gradient (4\u201399% solvent B; 0.1% formic acid in 80% acetonitrile). "
-    "Separated peptides were analyzed on an Orbitrap Astral mass spectrometer "
-    "(Thermo Fisher Scientific) with a nano-electrospray ionization source (1,900 V). "
+     "to a Vanquish Neo UPLC system (Thermo Fisher Scientific). Mobile phase B consisted of 0.1% formic acid in 80% acetonitrile, and the flow rate was maintained at 400 nl/min. The gradient program was 4% B for 0\u20130.5 min, 4\u20138% B for 0.5\u20130.6 min, 8\u201322.5% B for 0.6\u201313.6 min, 22.5\u201335% B for 13.6\u201320.5 min, 35\u201355% B for 20.5\u201320.9 min, 55\u201399% B for 20.9\u201321.4 min, and 99% B for 21.4\u201322.6 min. "
+    "After UPLC separation, peptides were introduced into a nano-electrospray ionization source operated at 1,900 V and analyzed on an Orbitrap Astral mass spectrometer (Thermo Fisher Scientific). "
      "Full-MS spectra were acquired in the Orbitrap at 240,000 resolution over "
     "380\u2013980 m/z; MS/MS fragments were acquired in the Astral analyzer at 80,000 "
-     "resolution using HCD fragmentation (NCE\u202f=\u202f25%), fixed first mass 150 m/z, "
+     "resolution using HCD fragmentation in DIA mode (NCE\u202f=\u202f25%), fixed first mass 150 m/z, "
      "AGC target 500%, and maximum injection time 3 ms. DIA data were processed with "
      "DIA-NN v1.8 against species-specific reference proteomes \u2014 ", False, False),
     ("G.\u00a0gallus", False, True),
@@ -730,7 +728,7 @@ mixed([
 head("Intact glycopeptide mass spectrometry")
 
 para(
-    "N-glycopeptides were enriched from tryptic digests by hydrophilic interaction "
+    "For intact glycopeptide analysis, 200 \u03bcg peptide digest was used as input for each enrichment. N-glycopeptides were enriched from tryptic digests by hydrophilic interaction "
     "liquid chromatography (HILIC). Peptide digests were redissolved in loading "
     "buffer (80% ACN, 5% TFA), loaded onto a HILIC column, washed three times with "
     "loading buffer, and glycopeptides were eluted twice with 0.1% TFA, 50 mM "
