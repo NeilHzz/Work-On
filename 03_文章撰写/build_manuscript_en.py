@@ -367,7 +367,7 @@ add_main_figure_legend(
         ("Anas platyrhynchos", False, True),
         (", and ", False, False),
         ("Columba livia", False, True),
-        (". (B) Species-specific lateral head views (top row) and dorsal beak views (bottom row) show the egg-tooth-bearing beak tip in chicken, duck, and pigeon. (C) Representative micro-CT sections and three-dimensional inner-surface reconstructions of the mammillary layer. Chicken shows smoother rounded mammillae, duck more ridged and angular mammillae, and pigeon discrete triangular-conical mammillae. Scale bars, 100 μm. (D) Box plots show mammillary density and unit volume ratio across species. Points denote individual measurements. P values from one-way ANOVA are shown above the plots, and different letters indicate Duncan's multiple range test groupings.", False, False),
+        (". (B) Species-specific lateral head views (top row) and dorsal beak views (bottom row) show the egg-tooth-bearing beak tip in chicken, duck, and pigeon. (C) Representative micro-CT sections and three-dimensional inner-surface reconstructions of the mammillary layer. Chicken shows smoother rounded mammillae, duck more ridged and angular mammillae, and pigeon discrete triangular-conical mammillae. Scale bars, 100 μm. (D) Box plots show mammillary density and unit volume ratio across species. Points denote individual measurements. P values from one-way ANOVA are shown above the plots, and different letters indicate Tukey HSD groupings.", False, False),
     ],
     before=20,
     after=80,
@@ -495,7 +495,7 @@ add_main_figure_legend(
         ("Anas platyrhynchos", False, True),
         (", and ", False, False),
         ("Columba livia", False, True),
-        (". In each species set, the left image shows the dorsal beak view used to localize the egg-tooth. The right image shows the eggshell-fragment mesh, conical impactor, and representative finite-element model output at contact. (B) Mean contact-force time courses across nine impact positions with shaded ±1σ envelopes. (C) Mean contact shear-stress time courses for the same nine positions with shaded ±1σ envelopes. Points in the box plots denote individual impact positions (n = 9 per species). P values from one-way ANOVA are shown above the box plots. Different letters indicate Duncan's multiple range test groupings. The simulations were built from reconstructed shell geometry rather than idealized shells.", False, False),
+        (". In each species set, the left image shows the dorsal beak view used to localize the egg-tooth. The right image shows the eggshell-fragment mesh, conical impactor, and representative finite-element model output at contact. (B) Mean contact-force time courses across nine impact positions with shaded ±1σ envelopes. (C) Mean contact shear-stress time courses for the same nine positions with shaded ±1σ envelopes. Points in the box plots denote individual impact positions (n = 9 per species). P values from one-way ANOVA are shown above the box plots. Different letters indicate Tukey HSD groupings. The simulations were built from reconstructed shell geometry rather than idealized shells.", False, False),
     ],
     before=20,
     after=80,
@@ -527,7 +527,7 @@ mixed([
     ("A. platyrhynchos", False, True),
     (" together with ", False, False),
     ("C. livia", False, True),
-    (" in the low group, matched the grouping recovered for mammillary density by Duncan's multiple range test (Fig. 1D). The mechanics therefore retained the contrast already recovered from mammillary organisation and OVAL accessibility.", False, False),
+    (" in the low group, matched the grouping recovered for mammillary density by Tukey HSD (Fig. 1D). The mechanics therefore retained the contrast already recovered from mammillary organisation and OVAL accessibility.", False, False),
 ])
 
 mixed([
