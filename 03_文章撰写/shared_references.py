@@ -87,4 +87,5 @@ REFS = [
     "86. G. A. Clark, Jr., Occurrence and timing of egg teeth in birds. Wilson Bulletin 73, 268-278 (1961).",
     "87. L. D'Alba, R. Maia, M. E. Hauber, M. D. Shawkey, The evolution of eggshell cuticle in relation to nesting ecology. Proceedings of the Royal Society B: Biological Sciences 283, 20160687 (2016).",
     "88. N. P. C. Horrocks, K. Hine, A. Hegemann, H. K. Ndithia, M. Shobrak, S. Ostrowski, J. B. Williams, K. D. Matson, B. I. Tieleman, Are antimicrobial defences in bird eggs related to climatic conditions associated with risk of trans-shell microbial infection? Frontiers in Zoology 11, 49 (2014).",
+    "89. P.-L. Chiang, Y.-C. Tseng, H.-J. Wu, S.-H. Tsao, S.-P. Wu, W.-C. Wang, H.-I. Hsieh, J.-Y. Juang, Elastic moduli of avian eggshell. Biology 10, 989 (2021).",
 ]
