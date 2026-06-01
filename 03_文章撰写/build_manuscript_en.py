@@ -233,33 +233,47 @@ para("Introduction", bold=True, size=14, before=0, after=160,
 
 # §1 — Background value
 p_s1a = spara([
-    (" Bird hatching presents a localized mechanical problem: force must be delivered to one small shell-breaking site. In birds, that site is defined by the egg-tooth, a transient structure that presses the inner eggshell surface during escape. Comparable hatching-assist structures also occur across other egg-laying amniotes.", [16, 82, 83, 84, 85, 86]),
-    (" Because egg-tooth function is broadly conserved, biologically meaningful hatching differences are more likely to lie in the eggshell than in the shell-breaking tool itself. Avian eggshells vary with nesting environment, gas exchange, microbial exposure, and developmental mode rather than following a single architectural solution.", [15, 26, 39, 40, 41]),
-    (" The mammillary layer is especially relevant because it is the first mechanically consequential shell layer and the site at which calcite growth begins under eggshell-matrix control. Later shell layers inherit that early mineralization context. Mammillary organization is therefore the first place where local matrix differences can scale into mature shell behavior.", [1, 4, 20, 28, 30, 34, 57]),
+    (" Bird hatching presents a localized mechanical problem: force must be delivered to one small shell-breaking site. In birds, that site is defined by the egg-tooth, a transient structure that presses the inner eggshell surface during escape.", [16, 86]),
+    (" Comparable hatching-assist structures also occur across other egg-laying amniotes.", [82, 83, 84, 85]),
+    (" Because egg-tooth function is broadly conserved, biologically meaningful hatching differences are more likely to lie in the eggshell than in the shell-breaking tool itself.", [16]),
+    (" Avian eggshells vary with nesting environment, gas exchange, microbial exposure, and developmental mode.", [15, 26, 39]),
+    (" Comparative analyses therefore do not recover a single architectural solution.", [40, 41]),
+    (" The mammillary layer is especially relevant because it is the first mechanically consequential shell layer and the site at which calcite growth begins under eggshell-matrix control.", [1, 4, 20, 28]),
+    (" Later shell layers inherit that early mineralization context.", [30, 34]),
+    (" Mammillary organization is therefore the first place where local matrix differences can scale into mature shell behavior.", [1, 57]),
 ])
 
 p_s1b = spara([
-    (" The central question is therefore mechanistic: once the shell-breaking interface is held constant, which molecular regulators of the mammillary layer account for the different eggshell states recovered across species?", [1, 2, 4, 16, 28]),
+    (" The central question is therefore mechanistic: once the shell-breaking interface is held constant, which molecular regulators of the mammillary layer account for the different eggshell states recovered across species?", [1, 4, 16]),
+    (" Earlier eggshell-matrix and mammillary-layer work already makes that level the most plausible control point.", [2, 28]),
 ])
 
 # §2 — Prior work and its limits
 p_intro2 = spara([
-    (" Eggshell matrix proteins regulate mammillary-layer mineralization, crystal growth, and mature eggshell architecture, with OC17, OC116, TRFE, and OVAL among the best-studied examples.", [1, 2, 4, 10, 19, 21, 29]),
-    (" Recent syntheses repeatedly recover an overlapping set of recurrent proteins, including OC17, OC116, ovotransferrin-related components, OVAL, ovomucoid, and ovocalyxin-family proteins. Their recurrence makes them a stable anchor for shell organization across studies.", [1, 2, 4, 19, 21, 29]),
+    (" Eggshell matrix proteins regulate mammillary-layer mineralization, crystal growth, and mature eggshell architecture.", [1, 2, 4]),
+    (" OC17, OC116, TRFE, and OVAL are among the best-studied examples.", [10, 19, 21, 29]),
+    (" Recent syntheses repeatedly recover an overlapping set of recurrent proteins, including OC17, OC116, ovotransferrin-related components, OVAL, ovomucoid, and ovocalyxin-family proteins.", [1, 2, 4]),
+    (" Their recurrence makes them a stable anchor for shell organization across studies.", [19, 21, 29]),
     (" These proteins therefore provide a natural comparative anchor for asking how a shared mineralization toolkit is reused in different shell contexts. The key remaining issue is not protein presence alone, but how the shared proteins are deployed.", [1, 2, 4]),
     (" Known posttranslational modifications on eggshell matrix proteins fall mainly into phosphorylation and glycosylation, and sites of both classes have already been studied extensively.", [17, 18, 21]),
     (" One major difference, however, is chemical diversity: phosphate side groups are comparatively similar, whereas glycan side chains vary widely in composition, size, and charge, with correspondingly different effects on protein biology.", [49, 50, 80]),
     (" Glycosylation studies therefore cannot stop at site occupancy alone; the specific glycan class carried at a site is itself a central variable.", [49, 50]),
-    (" Earlier glycoproteomic work showed that the same eggshell-matrix proteins can occupy distinct N-glycosylation states. Chicken-focused biochemical studies had already identified glycosylated Asn in proteins such as OC116 and defined the carbohydrate composition of OVAL-associated glycans. Parallel studies of egg white, chalaza, vitelline membrane, and incubation-stage transitions likewise indicate that glycosylation states can shift within avian egg systems.", [7, 8, 18, 21, 47, 48]),
+    (" Earlier glycoproteomic work showed that the same eggshell-matrix proteins can occupy distinct N-glycosylation states.", [18]),
+    (" Chicken-focused biochemical studies had already identified glycosylated Asn in proteins such as OC116 and defined the carbohydrate composition of OVAL-associated glycans.", [8, 21]),
+    (" Parallel studies of egg white, chalaza, vitelline membrane, and incubation-stage transitions likewise indicate that glycosylation states can shift within avian egg systems.", [7, 47, 48]),
     (" Those studies were essential, but they were usually organized within one species, one shell compartment, or one site inventory at a time. They therefore established that eggshell glycosylation exists and is chemically diverse, without yet showing how matched glycan states on shared matrix proteins align with cross-species eggshell structure.", [8, 18, 21]),
-    (" Many recurrent eggshell proteins and glycosites are already known. What remains unresolved is how those proteins are redeployed at the glycan-state level when mammillary organization and shell-breaking mechanics diverge across species.", [1, 2, 18, 29, 66]),
+    (" Many recurrent eggshell proteins and glycosites are already known.", [1, 2, 29, 66]),
+    (" What remains unresolved is how those proteins are redeployed at the glycan-state level when mammillary organization and shell-breaking mechanics diverge across species.", [18]),
     (" Avian eggshell studies have rarely resolved which specific N-glycan forms are carried by shared matrix proteins across species. The open question is whether that glycan layer explains why similar protein toolkits yield different eggshell structures.", [2, 4, 18]),
 ])
 
 p_intro_sig = spara([
-    (" Glycosylation alters protein stability, molecular recognition, surface exposure, and conformational state, and glycans in other systems can act as dynamic shields rather than passive bulk alone.", [42, 43, 61, 63, 72, 78]),
+    (" Glycosylation alters protein stability, molecular recognition, surface exposure, and conformational state.", [61, 72, 78]),
+    (" In other systems, glycans can act as dynamic shields rather than passive bulk alone.", [42, 43, 44, 63]),
     (" Zeng and colleagues further showed that the same eggshell matrix protein can occupy different N-glycosylation states across the cuticle and mineralized layer. Glycan state can therefore redistribute biological role across eggshell compartments rather than simply decorate a fixed protein scaffold.", [18]),
-    (" Prior mineralization-related work also suggested that OVAL can enter a Ca²⁺-responsive conformational state during early shell formation. We therefore asked whether cross-species glycan differences reshape the folded OVAL surface and alter the Ca²⁺-accessible interface presented at mineralization onset.", [4, 11, 29, 42, 43, 61, 63, 81]),
+    (" Prior mineralization-related work suggested that OVAL can enter a Ca²⁺-responsive conformational state during early shell formation.", [4, 11, 29]),
+    (" Work in other glycosylated systems further shows that glycan differences can reshape folded protein surfaces and accessible interfaces.", [42, 43, 61, 63, 81]),
+    (" We therefore asked whether cross-species glycan differences reshape the folded OVAL surface and alter the Ca²⁺-accessible interface presented at mineralization onset.", [4, 18]),
     (" If that structural difference is biologically relevant, it should remain detectable at the hatching-relevant mechanical end point. We therefore examined local resistance at the mammillary interface under egg-tooth-like loading.", [16, 37, 69]),
 ])
 
