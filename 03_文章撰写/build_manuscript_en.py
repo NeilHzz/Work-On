@@ -252,10 +252,10 @@ p_intro_sig = spara([
     (" Glycosylation can alter protein stability, molecular recognition, and surface accessibility, and in other systems glycans act as dynamic shields that reshape accessible interfaces.", [42, 43, 44, 61, 63, 72, 78, 81]),
     (" Layer-resolved eggshell work further showed that the same matrix protein can occupy different N-glycosylation states across shell compartments, implying that glycan state may redistribute function rather than merely decorate a fixed scaffold.", [18]),
     (" OVAL was therefore a tractable test case because it is abundant, mineralization-relevant, and linked to Ca²⁺-responsive conformational behaviour during early shell formation.", [4, 11, 18, 29]),
+    (" We anchored the comparison to the conserved egg-tooth interface and asked whether glycan-state differences on shared matrix proteins generate different Ca²⁺-accessible surfaces at mineralization onset.", [4, 16, 18]),
 ])
 
 p_intro_gap = spara([
-    (" We anchored the comparison to the conserved egg-tooth interface and asked whether glycan-state differences on shared matrix proteins generate different Ca²⁺-accessible surfaces at mineralization onset.", [4, 16, 18]),
     (" The missing step is a direct bridge from glycan class to surface presentation on a shared matrix background, and OVAL provided that bridge because its dominant glycan classes could be followed from glycoproteomics into structural modelling.", [4, 18, 29, 42]),
 ])
 
