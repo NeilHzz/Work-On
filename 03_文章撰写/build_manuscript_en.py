@@ -272,9 +272,9 @@ p_intro4 = smixed([
       (', and ', False, False),
       ('Columba livia', False, True),
             (' as terrestrial precocial, aquatic-associated precocial, and terrestrial altricial models, respectively.', False, False)], [3, 22, 23]),
-    ([(' This design crossed developmental and ecological contrasts within one conserved hatching framework instead of reducing the comparison to phylogeny alone.', False, False)], []),
-    ([(' We integrated micro-CT morphometry, comparative proteomics and intact glycopeptide mass spectrometry, Re-Glyco modelling with electrostatic analysis, and finite-element simulation to obtain a cross-scale readout from shell structure to molecular state to mechanical outcome.', False, False)], []),
-    ([(' Across this sequence, OVAL provided the strongest coherent signal: its glycan state aligned with mammillary density, Ca²⁺-relevant surface accessibility, and local hatching resistance.', False, False)], []),
+    ([(' We established an integrated approach that combines micro-CT morphometry, comparative proteomics, intact glycopeptide mass spectrometry, Re-Glyco modelling with electrostatic analysis, and finite-element simulation for large-scale, cross-scale analysis of eggshell structure, glycan state, and hatching mechanics.', False, False)], []),
+    ([(' Our analyses reveal that mammillary-layer organisation separates the species before the broader matrix-protein toolkit does, and that OVAL glycan state is the strongest coherent signal linking molecular state to surface accessibility and local hatching resistance.', False, False)], []),
+    ([(' Together, these findings establish a framework for connecting glycan-state variation to eggshell organisation and inside-out failure behaviour across birds.', False, False)], []),
 ])
 
 # ═══════════════════════════════════════════════════════════════════════════
