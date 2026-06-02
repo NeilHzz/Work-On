@@ -44,6 +44,13 @@ s._sectPr.append(_lnNum)
 SCI_F = "Times New Roman"
 BODY = "SimSun"
 
+# Latin taxon names should be italicized wherever they appear in running text.
+TAXON_PATTERN = re.compile(
+    r"(Gallus\s+gallus|Anas\s+platyrhynchos|Columba\s+livia|"
+    r"G\.\s*gallus|A\.\s*platyrhynchos|C\.\s*livia|"
+    r"Gallus|Anas|Columba)"
+)
+
 
 def _set_font(rPr, latin_name, east_asia_name=None):
     if east_asia_name is None:
@@ -67,6 +74,21 @@ def fmt(run, size=11, bold=False, italic=False, heading=False):
     _set_font(rPr, SCI_F, east_asia_name)
 
 
+def add_text_with_taxon_italics(p, text, size=11, bold=False, italic=False, heading=False):
+    if italic:
+        r = p.add_run(text)
+        fmt(r, size=size, bold=bold, italic=True, heading=heading)
+        return
+
+    parts = TAXON_PATTERN.split(text)
+    for part in parts:
+        if not part:
+            continue
+        run_italic = bool(TAXON_PATTERN.fullmatch(part))
+        r = p.add_run(part)
+        fmt(r, size=size, bold=bold, italic=run_italic, heading=heading)
+
+
 def spacing(p, before=0, after=120, line=24):
     pPr = p._p.get_or_add_pPr()
     e = OxmlElement("w:spacing")
@@ -82,8 +104,7 @@ def para(text, bold=False, italic=False, size=11,
     p = doc.add_paragraph()
     p.alignment = align
     spacing(p, before=before, after=after)
-    r = p.add_run(text)
-    fmt(r, size=size, bold=bold, italic=italic, heading=heading)
+    add_text_with_taxon_italics(p, text, size=size, bold=bold, italic=italic, heading=heading)
     return p
 
 
@@ -92,8 +113,7 @@ def mixed(parts, before=0, after=120, align=WD_ALIGN_PARAGRAPH.JUSTIFY):
     p.alignment = align
     spacing(p, before=before, after=after)
     for text, bold, italic in parts:
-        r = p.add_run(text)
-        fmt(r, bold=bold, italic=italic)
+        add_text_with_taxon_italics(p, text, bold=bold, italic=italic)
     return p
 
 
