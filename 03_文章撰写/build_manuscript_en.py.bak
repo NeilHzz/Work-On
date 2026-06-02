@@ -913,4 +913,3 @@ for source_number in CITATION_ORDER:
 doc.save(OUT)
 print(f"[OK]  {OUT}")
 
-
