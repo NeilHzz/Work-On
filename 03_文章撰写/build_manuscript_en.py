@@ -575,28 +575,22 @@ p_disc_mech = spara([
     (" That distinction matters because eggshell thickness strongly influences absolute failure load, whereas τ_max is less confounded by thickness and more directly reflects load transfer through the mammillary interface itself.", [16, 34, 69]),
     (" The present analysis therefore complements recent finite-element and eggshell-strength studies by asking whether the inner mammillary interface preserves the same contrast already inferred from matrix state and morphology.", [16, 34, 35, 69]),
     (" Duck makes that separation especially clear because its thicker shell elevated F_max but did not recreate the high-τ_max state observed in chicken.", []),
+    ("These considerations help separate thickness buffering and developmental background from the material pathway emphasized here.", []),
+    (" Eggshell thickness, body size, and broad reproductive ecology all contribute background variation, and lineage history undoubtedly matters.", [3, 14]),
+    (" But thickness-based explanations do not account for the τ_max differences. Diffuse lineage-divergence explanations also do not explain why the same contrast recurs in glycan class, electrostatic accessibility, mammillary-layer organisation, and hatching-relevant mechanics.", [16, 37]),
+    (" What recurs across this dataset is the alignment between glycan state, surface shielding, mammillary organisation, and τ_max under inside-out loading.", []),
+    (" Ecology and phylogeny establish the design space, whereas matrix-protein glycan state remains the nearest chemically readable layer recovered here.", [4, 18]),
+    (" Duck and pigeon remain essential because they define the bounds of that chicken-like state across both shell structure and ecological-developmental position. Duck combined greater shell thickness with intermediate OVAL accessibility and low τ_max, showing that thickness alone did not recreate the chicken state. Pigeon converged with duck at low τ_max, but did so from a thinner shell and a different mammillary background. Together, these contrasts make chicken a useful reference state within the sampled design space for linking glycan-dependent matrix behaviour to eggshell performance. In that framework, OVAL glycan state is the most directly readable molecular layer through which the state becomes mechanically interpretable.", []),
 ])
 
 p_disc_evo = para(
     "A second interpretive issue is that the mammillary layer can be partly resorbed during late incubation and hatching. That possibility does not erase the relevance of the present comparison because the quantified descriptors used here were mammillary density and crystal-unit organisation. Those features remain embedded in the shell even when part of the innermost material has been absorbed. The same consideration guided the mechanical readout. We emphasized the second characteristic peak rather than the first because the earliest force excursion is dominated more strongly by initial morphology-dependent contact, whereas the later peak more faithfully reflects stress transmission through the shell wall as a whole."
 )
 
-p_disc_discriminate = spara([
-    ("These considerations help separate thickness buffering and developmental background from the material pathway emphasized here.", []),
-    (" Eggshell thickness, body size, and broad reproductive ecology all contribute background variation, and lineage history undoubtedly matters.", [3, 14]),
-    (" But thickness-based explanations do not account for the τ_max differences. Diffuse lineage-divergence explanations also do not explain why the same contrast recurs in glycan class, electrostatic accessibility, mammillary-layer organisation, and hatching-relevant mechanics.", [16, 37]),
-    (" What recurs across this dataset is the alignment between glycan state, surface shielding, mammillary organisation, and τ_max under inside-out loading.", []),
-    (" Ecology and phylogeny establish the design space, whereas matrix-protein glycan state remains the nearest chemically readable layer recovered here.", [4, 18]),
-])
-
 p_disc_function = para(
     "Taken together, the comparison converged on a chicken-like eggshell state in this dataset. Chicken combined the densest mammillary field, the least shielded Ca²⁺-relevant OVAL surface, and the highest local hatching resistance under inside-out loading. This pattern supports the inference that chemically specific states on reused matrix proteins can organise mineralised phenotypes more directly than proteome turnover alone in this comparison."
 )
 cite(p_disc_function, [67, 73, 74])
-
-p_disc_selection = para(
-    "Duck and pigeon remain essential because they define the bounds of that chicken-like state across both shell structure and ecological-developmental position. Duck combined greater shell thickness with intermediate OVAL accessibility and low τ_max, showing that thickness alone did not recreate the chicken state. Pigeon converged with duck at low τ_max, but did so from a thinner shell and a different mammillary background. Together, these contrasts make chicken a useful reference state within the sampled design space for linking glycan-dependent matrix behaviour to eggshell performance. In that framework, OVAL glycan state is the most directly readable molecular layer through which the state becomes mechanically interpretable."
-)
 
 p_disc_biomineral = para(
     "The same analytical sequence may extend beyond avian eggshells. Many biomineralization systems depend on organic matrices that regulate ion access, surface exposure, and mineral nucleation through chemically specific interfacial states rather than bulk composition alone. In that broader frame, the present workflow offers a way to move from glycoproteomic state to surface presentation and then to mesoscale function. Similar scale-bridging problems arise in other mineralized tissues and biomimetic materials. The same logic may also inform regenerative settings in which eggshell-derived materials or membrane proteins are being explored for tissue engineering and bone repair. More broadly, the study offers a template for testing how chemically specific matrix states organize biomineral behavior across biological and biomedical contexts."
