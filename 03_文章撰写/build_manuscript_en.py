@@ -281,7 +281,7 @@ para("Results", bold=True, size=14, before=320, after=160,
 # ════════════════════════════════════════════════════════════════════════════
 # § Species selection — ecological and developmental niche analysis
 # ════════════════════════════════════════════════════════════════════════════
-head("A conserved breaker isolates the shell as the variable, revealing mammillary organisation as the first clear eggshell difference")
+head("The conserved hatching interface isolates shell variation")
 
 p_ss1 = smixed([
     ([(' We placed extant birds into a comparative space using 10,993 AVONET species records and selected three deliberately separated model species from that space (Fig. 1A).', False, False)], [16, 22, 41]),
@@ -358,7 +358,7 @@ p_sprot_focus = spara([
     (" Most recurrent eggshell matrix proteins emphasized in earlier studies were recovered in the broader proteomic and glycoproteomic background here, indicating substantial agreement with prior eggshell-matrix work. The present dataset also broadened that comparative background.", [1, 2, 4, 10, 19, 21, 29]),
 ])
 
-head("OVAL glycosylation provides the most interpretable cross-species contrast")
+head("OVAL glycosylation defines the clearest cross-species molecular contrast")
 
 p_s2a = spara([
     ("Intact-glycopeptide profiling first showed that the three species differed in sampling depth yet still shared a stable comparison core (Fig. 2A to D). The cluster view recovered 25 clusters shared by all three species, with the largest additional pairwise overlap between duck and pigeon at 64 clusters, whereas chicken contributed little species-private cluster space (Fig. 2A).", []),
@@ -437,7 +437,7 @@ add_main_figure_legend(
 )
 doc.add_page_break()
 
-head("Finite-element modelling recovers the same contrast in local hatching resistance")
+head("Inside-out loading recovers the same local resistance contrast")
 
 p_s4a = mixed([
     ("Finite-element testing translated the shared egg-tooth interface into an explicit inside-out loading design. Fig. 5A pairs species-specific dorsal beak views with micro-CT-derived finite-element setups and summary box plots of peak force and peak shear stress. The setups were built from the beak-tip geometry summarized in Fig. 1B. Because the meshes preserved species-specific shell geometry, the analysis remained anchored to the same mammillary context identified morphologically. Impact loading was sampled across multiple offset positions on the eggshell fragments, yielding independent contact shear-stress time courses for each species. We recorded both raw peak contact force (F_max) and peak contact shear stress (τ_max) so that thickness-driven effects could be separated from local interface resistance more explicitly. Peak τ_max was used as the direct readout of local hatching resistance at the mammillary contact interface. Species means ± s.d. were calculated across the sampled positions (Fig. S11A to F; eggshell thicknesses: ", False, False),
