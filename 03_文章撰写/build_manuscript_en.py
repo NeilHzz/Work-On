@@ -45,9 +45,8 @@ FONT = "Times New Roman"   # Science Advances: use universal fonts
 
 # Latin taxon names should be italicized consistently in running text.
 TAXON_PATTERN = re.compile(
-    r"(chicken\s+gallus|duck\s+platyrhynchos|pigeon\s+livia|"
-    r"G\.\s*[\u00A0\s]*gallus|A\.\s*[\u00A0\s]*platyrhynchos|C\.\s*[\u00A0\s]*livia|"
-    r"chicken|duck|pigeon)"
+    r"(Gallus\s+gallus|Anas\s+platyrhynchos|Columba\s+livia|"
+    r"G\.\s*[\u00A0\s]*gallus|A\.\s*[\u00A0\s]*platyrhynchos|C\.\s*[\u00A0\s]*livia)"
 )
 
 def _set_font(rPr, name):
