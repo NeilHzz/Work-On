@@ -55,6 +55,21 @@ def _translate_text(text: str, retries: int = 3) -> str:
     return text
 
 
+def _translate_batch(texts: list[str], batch_size: int = 40) -> list[str]:
+    out: list[str] = []
+    for i in range(0, len(texts), batch_size):
+        chunk = texts[i : i + batch_size]
+        try:
+            translated = translator.translate_batch(chunk)
+            if not translated or len(translated) != len(chunk):
+                raise RuntimeError("batch size mismatch")
+            out.extend(translated)
+        except Exception:
+            # Fallback per item for resilience.
+            out.extend(_translate_text(t) for t in chunk)
+    return out
+
+
 def _replace_paragraph_text_keep_format(p, new_text: str) -> None:
     if p.runs:
         p.runs[0].text = new_text
@@ -82,11 +97,18 @@ def _set_cn_fonts(doc: Document) -> None:
 
 def _translate_paragraphs(paragraphs) -> int:
     changed = 0
+    targets = []
     for p in paragraphs:
         src = "".join(r.text for r in p.runs) if p.runs else p.text
-        if not _should_translate(src):
-            continue
-        dst = _translate_text(src)
+        if _should_translate(src):
+            targets.append((p, src))
+
+    if not targets:
+        return 0
+
+    src_texts = [t[1] for t in targets]
+    dst_texts = _translate_batch(src_texts)
+    for (p, _), dst in zip(targets, dst_texts):
         _replace_paragraph_text_keep_format(p, dst)
         changed += 1
     return changed
