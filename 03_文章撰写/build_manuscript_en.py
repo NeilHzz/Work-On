@@ -250,7 +250,7 @@ para("Introduction", bold=True, size=14, before=0, after=160,
 
 # 搂1 鈥?Background value
 p_s1a = spara([
-    (" Bird hatching is a local failure event: the egg-tooth pushes on the inner shell surface rather than spreading force across the shell as a whole.", [16, 86]),
+    (" Bird hatching is a localized event: the egg-tooth presses on a small area of the inner shell rather than loading the whole shell at once.", [16, 86]),
     (" Comparable hatching-assist structures recur across egg-laying amniotes, so biologically meaningful variation in hatching performance is more likely to lie in the shell than in the tool itself.", [16, 82, 83, 84, 85]),
     (" Yet current knowledge remains limited on how species with similar hatching mechanics produce distinct shell states across ecology and development.", [15, 26, 39, 40, 41]),
     (" The mammillary layer is the key entry point because it is the first mechanically consequential shell layer and the site where matrix-guided calcite growth begins. The mechanistic question follows directly: once the shell-breaking interface is held constant, which molecular regulators at the mammillary layer account for the distinct eggshell states recovered across species?", [1, 2, 4, 16, 28, 57]),
