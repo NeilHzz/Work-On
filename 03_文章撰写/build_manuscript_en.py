@@ -232,7 +232,7 @@ para("Introduction", bold=True, size=14, before=0, after=160,
 
 # §1 — Background value
 p_s1a = spara([
-    (" Bird hatching is a localized failure process in which force is transmitted through the egg-tooth against the inner shell surface rather than distributed across the shell as a whole.", [16, 86]),
+    (" Bird hatching happens at one local contact point: the egg-tooth pushes the inner shell surface instead of force being spread across the whole shell.", [16, 86]),
     (" Comparable hatching-assist structures recur across egg-laying amniotes, so biologically meaningful variation in hatching performance is more likely to reside in the shell than in the tool itself.", [16, 82, 83, 84, 85]),
     (" Despite this clear framework, current knowledge remains limited on how species with shared hatching mechanics produce distinct shell states across ecology and development.", [15, 26, 39, 40, 41]),
     (" The mammillary layer is the most direct entry point because it is both the first mechanically consequential shell layer and the site where matrix-guided calcite growth begins, allowing local molecular differences to propagate into mature shell behaviour.", [1, 4, 20, 28, 30, 34, 57]),
@@ -274,7 +274,7 @@ p_intro4 = smixed([
             (' as terrestrial precocial, aquatic-associated precocial, and terrestrial altricial models, respectively.', False, False)], [3, 22, 23]),
     ([(' This design crossed developmental and ecological contrasts within one conserved hatching framework instead of reducing the comparison to phylogeny alone.', False, False)], []),
     ([(' We integrated micro-CT morphometry, comparative proteomics and intact glycopeptide mass spectrometry, Re-Glyco modelling with electrostatic analysis, and finite-element simulation to obtain a cross-scale readout from shell structure to molecular state to mechanical outcome.', False, False)], []),
-    ([(' Across this sequence, OVAL provided the strongest coherent signal: its glycan state aligned with mammillary density, Ca²⁺-relevant surface accessibility, and local hatching resistance.', False, False)], [18]),
+    ([(' Across this sequence, OVAL provided the strongest coherent signal: its glycan state aligned with mammillary density, Ca²⁺-relevant surface accessibility, and local hatching resistance.', False, False)], []),
 ])
 
 # ═══════════════════════════════════════════════════════════════════════════
