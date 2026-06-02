@@ -261,7 +261,6 @@ p_intro_sig = spara([
 p_intro_gap = spara([
     (" We therefore anchored the comparison to the conserved egg-tooth interface and asked whether glycan-state differences on shared matrix proteins generate different Ca²⁺-accessible surfaces at mineralization onset.", [4, 16, 18]),
     (" The missing step is a direct bridge from glycan class to surface presentation on a shared matrix background, and OVAL provided that bridge because its dominant glycan classes could be followed from glycoproteomics into structural modelling.", [4, 18, 29, 42]),
-    (" We used chicken, duck, and pigeon as a model set spanning terrestrial precocial, aquatic-associated precocial, and terrestrial altricial life histories.", [3, 22, 23]),
 ])
 
 # §4 — This study
@@ -273,8 +272,8 @@ p_intro4 = smixed([
       (', and ', False, False),
       ('Columba livia', False, True),
                         ('.', False, False)], []),
-    ([(' We established an integrated approach that combines micro-CT morphometry, comparative proteomics, intact glycopeptide mass spectrometry, Re-Glyco modelling with electrostatic analysis, and finite-element simulation for large-scale, cross-scale analysis of eggshell structure, glycan state, and hatching mechanics.', False, False)], []),
-    ([(' Our analyses reveal that mammillary-layer organisation separates the species before the broader matrix-protein toolkit does, and that OVAL glycan state is the strongest coherent signal linking molecular state to surface accessibility and local hatching resistance.', False, False)], []),
+    ([(' We established an integrated approach that combines micro-CT morphometry, comparative proteomics, intact glycopeptide mass spectrometry, Re-Glyco modelling with electrostatic analysis, and finite-element simulation for cross-scale analysis of eggshell structure, glycan state, and hatching mechanics.', False, False)], []),
+    ([(' Our analyses reveal that mammillary-layer organisation separates the species before the broader matrix-protein toolkit does, and that OVAL glycan state is the strongest signal linking molecular state to surface accessibility and local hatching resistance.', False, False)], []),
     ([(' Together, these findings establish a framework for connecting glycan-state variation to eggshell organisation and inside-out failure behaviour across birds.', False, False)], []),
 ])
 
