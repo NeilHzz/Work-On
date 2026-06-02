@@ -614,7 +614,7 @@ para("材料与方法", bold=True, size=14, before=320, after=160,
 head("生物材料")
 
 p_m_bio = mixed([
-    ("在产蛋中期采集三个禽类品系的受精蛋，包括茶花鸡粉壳蛋鸡7枚、绍兴麻鸭绿壳蛋鸭7枚和白羽王蛋鸽19枚。Anas蛋来源于山东某蛋鸭养殖场。", False, False),
+    ("在产蛋中期采集三个禽类品系的受精蛋，包括Gallus蛋7枚、Anas蛋7枚和Columba蛋19枚。Anas蛋来源于山东某蛋鸭养殖场。", False, False),
     ("Gallus gallus", False, True),
     (" 蛋来自中国农业大学家禽资源保护场（北京，中国）；", False, False),
     ("Columba livia", False, True),
@@ -630,7 +630,7 @@ mixed([
     ("G.\u00a0gallus", False, True),
     (" 和 ", False, False),
     ("A.\u00a0platyrhynchos", False, True),
-    ("，先以15 mL 5% EDTA（0.13 mol/L，pH 7.6，补加10 mmol/L 2-巯基乙醇）在20°C处理30 min，并轻柔揉捏以去除蛋壳外表皮层（ECL），随后以去离子水漂洗。鸽蛋壳未识别到离散cuticle层，因此 ", False, False),
+    ("，先以15 mL 5% EDTA（0.13 mol/L，pH 7.6，补加10 mmol/L 2-巯基乙醇）在20°C处理30 min，并轻柔揉捏以去除蛋壳外表皮层（ECL），随后以去离子水漂洗。Columba蛋壳未识别到离散cuticle层，因此 ", False, False),
     ("C.\u00a0livia", False, True),
     (" 仅以蒸馏水漂洗后直接进入同一提取流程。随后三物种都在相同EDTA-2-巯基乙醇条件下延长提取12 h（20°C）。所得悬液以1,000 × g离心15 min，沉淀重悬后再次离心，合并上清并于−80°C保存至分析。三物种在相同提取化学条件下并行处理，以尽量降低操作漂移造成的假性差异。", False, False),
 ])
