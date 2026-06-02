@@ -281,7 +281,7 @@ para("Results", bold=True, size=14, before=320, after=160,
 # ════════════════════════════════════════════════════════════════════════════
 # § Species selection — ecological and developmental niche analysis
 # ════════════════════════════════════════════════════════════════════════════
-head("A conserved breaker isolates the shell as the variable")
+head("A conserved breaker isolates the shell as the variable, revealing mammillary organisation as the first clear eggshell difference")
 
 p_ss1 = smixed([
     ([(' We placed extant birds into a comparative space using 10,993 AVONET species records and selected three deliberately separated model species from that space (Fig. 1A).', False, False)], [16, 22, 41]),
@@ -298,9 +298,6 @@ p_ss1 = smixed([
     ([(' The focal species differed in beak-tip geometry, but the egg-tooth remained a similarly localized dorsal breaker in all three species and therefore pointed to the same inside-out shell-breaking event during hatching (Fig. 1B).', False, False)], [16, 37, 82, 86]),
     ([(' Once that interface is held constant, the next question is which eggshell layer first separates the species.', False, False)], []),
 ])
-
-# ════════════════════════════════════════════════════════════════════════════
-head("Mammillary organisation provides the first clear eggshell difference")
 
 mixed([
     ("Viewed through that shared hatching context, the first eggshell level to show a clear contrast in the present comparison was mammillary-layer morphology (Fig. 1C). In ", False, False),
