@@ -70,6 +70,44 @@ def _translate_batch(texts: list[str], batch_size: int = 40) -> list[str]:
     return out
 
 
+def _split_for_translation(text: str) -> list[str]:
+    # Prefer sentence chunks; fallback to punctuation-based chunking for long blocks.
+    s = text.strip()
+    if len(s) <= 260:
+        return [s]
+
+    parts = re.split(r"(?<=[.!?])\s+", s)
+    chunks: list[str] = []
+    buf = ""
+    for p in parts:
+        p = p.strip()
+        if not p:
+            continue
+        if len(p) > 260:
+            sub_parts = re.split(r"(?<=[,;:])\s+", p)
+        else:
+            sub_parts = [p]
+        for sp in sub_parts:
+            sp = sp.strip()
+            if not sp:
+                continue
+            if len(buf) + len(sp) + 1 <= 260:
+                buf = (buf + " " + sp).strip()
+            else:
+                if buf:
+                    chunks.append(buf)
+                buf = sp
+    if buf:
+        chunks.append(buf)
+    return chunks if chunks else [s]
+
+
+def _translate_long_text(text: str) -> str:
+    chunks = _split_for_translation(text)
+    translated_chunks = _translate_batch(chunks, batch_size=20)
+    return " ".join(t.strip() for t in translated_chunks if t and t.strip())
+
+
 def _replace_paragraph_text_keep_format(p, new_text: str) -> None:
     if p.runs:
         p.runs[0].text = new_text
@@ -107,7 +145,7 @@ def _translate_paragraphs(paragraphs) -> int:
         return 0
 
     src_texts = [t[1] for t in targets]
-    dst_texts = _translate_batch(src_texts)
+    dst_texts = [_translate_long_text(t) for t in src_texts]
     for (p, _), dst in zip(targets, dst_texts):
         _replace_paragraph_text_keep_format(p, dst)
         changed += 1
