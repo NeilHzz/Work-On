@@ -571,16 +571,16 @@ p_disc_oval = spara([
 ])
 
 p_disc_mech = spara([
-    ("The mechanical comparison was designed around the inside-out loading event of hatching rather than conventional outside compression or whole-shell breaking tests.", []),
-    (" That distinction matters because eggshell thickness strongly influences absolute failure load, whereas τ_max is less confounded by thickness and more directly reflects load transfer through the mammillary interface itself.", [16, 34, 69]),
-    (" The present analysis therefore complements recent finite-element and eggshell-strength studies by asking whether the inner mammillary interface preserves the same contrast already inferred from matrix state and morphology.", [16, 34, 35, 69]),
-    (" Duck makes that separation especially clear because its thicker shell elevated F_max but did not recreate the high-τ_max state observed in chicken.", []),
-    ("These considerations help separate thickness buffering and developmental background from the material pathway emphasized here.", []),
-    (" Eggshell thickness, body size, and broad reproductive ecology all contribute background variation, and lineage history undoubtedly matters.", [3, 14]),
-    (" But thickness-based explanations do not account for the τ_max differences. Diffuse lineage-divergence explanations also do not explain why the same contrast recurs in glycan class, electrostatic accessibility, mammillary-layer organisation, and hatching-relevant mechanics.", [16, 37]),
-    (" What recurs across this dataset is the alignment between glycan state, surface shielding, mammillary organisation, and τ_max under inside-out loading.", []),
-    (" Ecology and phylogeny establish the design space, whereas matrix-protein glycan state remains the nearest chemically readable layer recovered here.", [4, 18]),
-    (" Duck and pigeon remain essential because they define the bounds of that chicken-like state across both shell structure and ecological-developmental position. Duck combined greater shell thickness with intermediate OVAL accessibility and low τ_max, showing that thickness alone did not recreate the chicken state. Pigeon converged with duck at low τ_max, but did so from a thinner shell and a different mammillary background. Together, these contrasts make chicken a useful reference state within the sampled design space for linking glycan-dependent matrix behaviour to eggshell performance. In that framework, OVAL glycan state is the most directly readable molecular layer through which the state becomes mechanically interpretable.", []),
+    ("The mechanical comparison targets inside-out loading during hatching rather than conventional outside compression or whole-shell fracture.", []),
+    (" That choice is critical: eggshell thickness inflates absolute failure load, whereas τ_max is less thickness-confounded and more directly reports stress transfer through the mammillary interface.", [16, 34, 69]),
+    (" The analysis therefore asks whether the inner mammillary interface retains the same contrast already inferred from matrix chemistry and morphology.", [16, 34, 35, 69]),
+    (" Duck makes this separation explicit: its thicker shell increased F_max but did not recreate the high-τ_max state observed in chicken.", []),
+    (" This distinction separates thickness buffering and developmental background from the material pathway emphasized here.", []),
+    (" Eggshell thickness, body size, broad reproductive ecology, and lineage history all contribute background structure.", [3, 14]),
+    (" Yet thickness-only explanations do not account for τ_max, and diffuse lineage-divergence explanations do not explain why the same ordering recurs across glycan class, electrostatic accessibility, mammillary organisation, and hatching-relevant mechanics.", [16, 37]),
+    (" What recurs is the same alignment: glycan state, surface shielding, mammillary organisation, and τ_max under inside-out loading.", []),
+    (" Ecology and phylogeny define the design space, whereas matrix-protein glycan state remains the nearest chemically interpretable layer recovered here.", [4, 18]),
+    (" Duck and pigeon remain essential because they bound that chicken-like state across shell structure and ecological-developmental position. Duck combines greater shell thickness with intermediate OVAL accessibility and low τ_max, showing that thickness alone does not recreate the chicken state. Pigeon converges with duck at low τ_max from a thinner shell and a different mammillary background. Together, these contrasts make chicken a useful reference state for linking glycan-dependent matrix behaviour to eggshell performance. In this framework, OVAL glycan state is the most directly readable molecular layer through which that state becomes mechanically interpretable.", []),
 ])
 
 p_disc_evo = para(
