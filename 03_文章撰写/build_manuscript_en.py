@@ -43,6 +43,13 @@ s._sectPr.append(_lnNum)
 # ── 辅助 ─────────────────────────────────────────────────────────────────
 FONT = "Times New Roman"   # Science Advances: use universal fonts
 
+# Latin taxon names should be italicized consistently in running text.
+TAXON_PATTERN = re.compile(
+    r"(Gallus\s+gallus|Anas\s+platyrhynchos|Columba\s+livia|"
+    r"G\.\s*[\u00A0\s]*gallus|A\.\s*[\u00A0\s]*platyrhynchos|C\.\s*[\u00A0\s]*livia|"
+    r"Gallus|Anas|Columba)"
+)
+
 def _set_font(rPr, name):
     rFonts = OxmlElement("w:rFonts")
     for attr in ("w:ascii", "w:hAnsi", "w:eastAsia", "w:cs"):
@@ -55,6 +62,20 @@ def fmt(run, size=11, bold=False, italic=False):
     run.font.italic = italic
     rPr = run._r.get_or_add_rPr()
     _set_font(rPr, FONT if not italic else "Times New Roman")
+
+def add_text_with_taxon_italics(p, text, size=11, bold=False, italic=False):
+    if italic:
+        r = p.add_run(text)
+        fmt(r, size=size, bold=bold, italic=True)
+        return
+
+    parts = TAXON_PATTERN.split(text)
+    for part in parts:
+        if not part:
+            continue
+        run_italic = bool(TAXON_PATTERN.fullmatch(part))
+        r = p.add_run(part)
+        fmt(r, size=size, bold=bold, italic=run_italic)
 
 def spacing(p, before=0, after=120, line=24):
     """line in pt; double-spaced for Science Advances initial submission"""
@@ -71,8 +92,7 @@ def para(text, bold=False, italic=False, size=11,
     p = doc.add_paragraph()
     p.alignment = align
     spacing(p, before=before, after=after)
-    r = p.add_run(text)
-    fmt(r, size=size, bold=bold, italic=italic)
+    add_text_with_taxon_italics(p, text, size=size, bold=bold, italic=italic)
     return p
 
 def mixed(parts, before=0, after=120, align=WD_ALIGN_PARAGRAPH.JUSTIFY):
@@ -81,8 +101,7 @@ def mixed(parts, before=0, after=120, align=WD_ALIGN_PARAGRAPH.JUSTIFY):
     p.alignment = align
     spacing(p, before=before, after=after)
     for text, bold, italic in parts:
-        r = p.add_run(text)
-        fmt(r, bold=bold, italic=italic)
+        add_text_with_taxon_italics(p, text, bold=bold, italic=italic)
     return p
 
 def head(text, size=11):
