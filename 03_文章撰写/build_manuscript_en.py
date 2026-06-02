@@ -348,11 +348,6 @@ add_main_figure_legend(
 )
 doc.add_page_break()
 
-# ════════════════════════════════════════════════════════════════════════════
-# S_prot  Eggshell matrix proteome orthogroup analysis
-# ════════════════════════════════════════════════════════════════════════════
-head("Shared matrix proteins focus the comparison on glycosylation")
-
 p_sprot_bg = spara([
     ("Orthogroup analysis resolved the three eggshell matrix proteomes into a large shared core with smaller pairwise-shared and lineage-restricted complements (Fig. S3). At the overall level, the proteome still followed broad ancestry (Fig. S4), arguing against wholesale replacement of the eggshell-matrix toolkit.", []),
 ])
