@@ -614,7 +614,7 @@ para("材料与方法", bold=True, size=14, before=320, after=160,
 head("生物材料")
 
 p_m_bio = mixed([
-    ("在产蛋中期采集三个禽类品系的受精蛋，包括茶花鸡粉壳蛋鸡7枚、绍兴麻鸭绿壳蛋鸭7枚和白羽王蛋鸽19枚。", False, False),
+    ("在产蛋中期采集三个禽类品系的受精蛋，包括茶花鸡粉壳蛋鸡7枚、绍兴麻鸭绿壳蛋鸭7枚和白羽王蛋鸽19枚。Anas 蛋来源于山东某蛋鸭养殖场。", False, False),
     ("Gallus gallus", False, True),
     (" 蛋来自中国农业大学家禽资源保护场（北京，中国）；", False, False),
     ("Columba livia", False, True),
