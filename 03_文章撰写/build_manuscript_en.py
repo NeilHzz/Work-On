@@ -13,7 +13,7 @@ import re
 from shared_references import REFS
 
 OUT = str(Path(__file__).with_name("manuscript260602v2.docx"))
-FIG_BASE = Path(__file__).resolve().parent.parent / "02_鍙鍖? / "260601" / "02_main_composed_figures"
+FIG_BASE = Path(__file__).resolve().parent.parent / "02_可视化" / "260601" / "02_main_composed_figures"
 
 REF_TEXTS = {}
 for ref_text in REFS:
