@@ -232,10 +232,10 @@ para("Introduction", bold=True, size=14, before=0, after=160,
 
 # §1 — Background value
 p_s1a = spara([
-    (" Bird hatching is a localized failure event in which force is delivered through the egg-tooth against the inner shell surface rather than across the shell as a whole.", [16, 86]),
-    (" Comparable hatching-assist structures recur across other egg-laying amniotes, implying that biologically relevant variation in hatching performance is more likely to reside in the shell than in the tool itself.", [16, 82, 83, 84, 85]),
-    (" Avian eggshells nevertheless diverge with ecology and development, indicating that birds achieve hatching with multiple shell solutions rather than one universal architecture.", [15, 26, 39, 40, 41]),
-    (" The mammillary layer is therefore the critical entry point because it is both the first mechanically consequential shell layer and the site where matrix-guided calcite growth begins, allowing local molecular differences to scale into mature shell behaviour.", [1, 4, 20, 28, 30, 34, 57]),
+    (" Bird hatching is a localized failure process in which force is transmitted through the egg-tooth against the inner shell surface rather than distributed across the shell as a whole.", [16, 86]),
+    (" Comparable hatching-assist structures recur across egg-laying amniotes, so biologically meaningful variation in hatching performance is more likely to reside in the shell than in the tool itself.", [16, 82, 83, 84, 85]),
+    (" Despite this clear framework, current knowledge remains limited on how species with shared hatching mechanics produce distinct shell states across ecology and development.", [15, 26, 39, 40, 41]),
+    (" The mammillary layer is the most direct entry point because it is both the first mechanically consequential shell layer and the site where matrix-guided calcite growth begins, allowing local molecular differences to propagate into mature shell behaviour.", [1, 4, 20, 28, 30, 34, 57]),
 ])
 
 p_s1b = spara([
@@ -245,15 +245,17 @@ p_s1b = spara([
 # §2 — Prior work and its limits
 p_intro2 = spara([
     (" Eggshell matrix proteins regulate mammillary-layer mineralization, crystal growth, and mature shell architecture, and recurrent factors such as OC17, OC116, TRFE, and OVAL define a broadly shared shell-building toolkit.", [1, 2, 4, 10, 19, 21, 29]),
-    (" The unresolved issue is not toolkit presence, but how that shared toolkit is differentially deployed across species.", [1, 2, 4]),
-    (" This gap is sharpest for glycosylation: posttranslational sites are catalogued, but unlike chemically constrained phosphate groups, glycans vary widely in composition, size, and charge and can therefore create distinct molecular states on the same protein scaffold, making glycan class rather than site occupancy alone a mechanistic variable.", [17, 18, 21, 49, 50, 80]),
-    (" Yet comparative eggshell studies have rarely resolved matched glycan states carried by shared matrix proteins across species, leaving unclear whether that glycan layer explains why similar toolkits yield distinct shell states.", [2, 4, 7, 18, 29, 47, 48, 66]),
+    (" The unresolved issue is therefore not toolkit presence, but how that shared toolkit is differentially deployed across species.", [1, 2, 4]),
+    (" This gap is especially acute for glycosylation. Posttranslational sites are catalogued, but unlike chemically constrained phosphate groups, glycans vary widely in composition, size, and charge and can therefore generate distinct molecular states on the same protein scaffold.", [17, 18, 21, 49, 50, 80]),
+    (" Glycan class is thus a mechanistic variable rather than a decorative feature of site occupancy alone.", [49, 50]),
+    (" Accumulating glycoproteomic studies established that eggshell matrix proteins carry distinct N-glycosylation states, including glycosylated Asn in OC116 and defined OVAL-associated glycan compositions, but most analyses were organized within one species, one shell compartment, or one site inventory at a time.", [7, 8, 18, 21, 47, 48]),
+    (" As a result, avian eggshell comparisons still rarely resolve matched glycan states on shared matrix proteins across species, leaving unresolved whether that glycan layer explains why similar toolkits yield distinct shell states.", [2, 4, 18, 29, 66]),
 ])
 
 p_intro_sig = spara([
-    (" Glycosylation can alter protein stability, molecular recognition, and folded surface accessibility, and in other systems glycans act as dynamic shields that reshape accessible interfaces.", [42, 43, 44, 61, 63, 72, 78, 81]),
-    (" Layer-resolved eggshell work likewise showed that the same matrix protein can occupy different N-glycosylation states across shell compartments, implying that glycan state may redistribute function rather than merely decorate a fixed scaffold.", [18]),
-    (" OVAL was therefore an especially tractable test case because it is abundant, mineralization-relevant, and linked to Ca²⁺-responsive conformational behaviour during early shell formation.", [4, 11, 18, 29]),
+    (" Glycosylation can alter protein stability, molecular recognition, and folded surface accessibility, and in other systems glycans function as dynamic shields that reshape accessible interfaces.", [42, 43, 44, 61, 63, 72, 78, 81]),
+    (" Layer-resolved eggshell work further showed that the same matrix protein can occupy different N-glycosylation states across shell compartments, implying that glycan state may redistribute function rather than merely decorate a fixed scaffold.", [18]),
+    (" OVAL was therefore a tractable test case because it is abundant, mineralization-relevant, and linked to Ca²⁺-responsive conformational behaviour during early shell formation.", [4, 11, 18, 29]),
 ])
 
 p_intro_gap = spara([
@@ -270,9 +272,9 @@ p_intro4 = smixed([
       (', and ', False, False),
       ('Columba livia', False, True),
             (' as terrestrial precocial, aquatic-associated precocial, and terrestrial altricial models, respectively.', False, False)], [3, 22, 23]),
-    ([(' This design crossed developmental and ecological contrasts within one conserved hatching framework rather than reducing the comparison to phylogeny alone.', False, False)], []),
-    ([(' We combined micro-CT morphometry, comparative proteomics and intact glycopeptide mass spectrometry, Re-Glyco modelling with electrostatic analysis, and finite-element simulation to trace shell structure to molecular state to mechanical outcome.', False, False)], []),
-    ([(' Across that chain, OVAL provided the most consistent cross-scale signal: its glycan state aligned with mammillary density, Ca²⁺-relevant surface accessibility, and local hatching resistance.', False, False)], [18]),
+    ([(' This design crossed developmental and ecological contrasts within one conserved hatching framework instead of reducing the comparison to phylogeny alone.', False, False)], []),
+    ([(' We integrated micro-CT morphometry, comparative proteomics and intact glycopeptide mass spectrometry, Re-Glyco modelling with electrostatic analysis, and finite-element simulation to obtain a cross-scale readout from shell structure to molecular state to mechanical outcome.', False, False)], []),
+    ([(' Across this sequence, OVAL provided the strongest coherent signal: its glycan state aligned with mammillary density, Ca²⁺-relevant surface accessibility, and local hatching resistance.', False, False)], [18]),
 ])
 
 # ═══════════════════════════════════════════════════════════════════════════
