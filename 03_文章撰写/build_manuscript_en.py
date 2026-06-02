@@ -232,43 +232,41 @@ para("Introduction", bold=True, size=14, before=0, after=160,
 
 # §1 — Background value
 p_s1a = spara([
-    (" Bird hatching is a localized failure event: load is delivered through one breaker-defined interface rather than across the shell as a whole. In birds, that breaker is the egg-tooth, a transient structure that presses the inner shell surface during escape.", [16, 86]),
-    (" Comparable hatching-assist structures recur across other egg-laying amniotes, implying that unresolved variation in hatching performance is more likely to reside in the shell than in the tool itself.", [16, 82, 83, 84, 85]),
-    (" Avian eggshells nevertheless vary with nesting environment, gas exchange demands, microbial exposure, and developmental mode.", [15, 26, 39]),
-    (" Comparative studies therefore recover multiple shell solutions rather than one universal architecture.", [40, 41]),
-    (" The mammillary layer is central because it is both the first mechanically consequential shell layer and the site where calcite growth begins under matrix control; later shell layers inherit that first mineralization context.", [1, 4, 20, 28, 30, 34]),
-    (" Mammillary organisation is thus the earliest level at which local matrix differences can be amplified into mature shell behaviour.", [1, 57]),
+    (" Bird hatching is a localized failure process in which force is transmitted through one breaker-defined interface rather than distributed across the shell as a whole. In birds, that breaker is the egg-tooth, a transient structure that presses the inner shell surface during escape.", [16, 86]),
+    (" Comparable hatching-assist structures recur across other egg-laying amniotes, indicating that biologically meaningful variation in hatching performance is more likely to reside in the shell than in the tool itself.", [16, 82, 83, 84, 85]),
+    (" Avian eggshells nevertheless vary with nesting environment, gas exchange demands, microbial exposure, and developmental mode, so comparative studies recover multiple shell solutions rather than one universal architecture.", [15, 26, 39, 40, 41]),
+    (" The mammillary layer is especially informative because it is both the first mechanically consequential shell layer and the site where calcite growth begins under matrix control; later shell layers inherit that first mineralization context.", [1, 4, 20, 28, 30, 34]),
+    (" Mammillary organisation is therefore the earliest level at which local matrix differences can be propagated into mature shell behaviour.", [1, 57]),
 ])
 
 p_s1b = spara([
-    (" The mechanistic question follows directly: once the shell-breaking interface is held constant, which molecular regulators of the mammillary layer account for the different eggshell states recovered across species?", [1, 4, 16]),
-    (" Earlier eggshell-matrix and mammillary-layer studies already place that level as the most plausible control point.", [2, 28]),
+    (" The mechanistic question follows directly: once the shell-breaking interface is held constant, which molecular regulators of the mammillary layer account for the distinct eggshell states recovered across species?", [1, 4, 16]),
+    (" Earlier eggshell-matrix and mammillary-layer studies already place that level at the most plausible control point.", [2, 28]),
 ])
 
 # §2 — Prior work and its limits
 p_intro2 = spara([
-    (" Eggshell matrix proteins regulate mammillary-layer mineralization, crystal growth, and mature shell architecture, and recurrent factors such as OC17, OC116, TRFE, and OVAL define a broadly shared toolkit.", [1, 2, 4, 10, 19, 21, 29]),
-    (" The unresolved issue is not toolkit presence, but differential deployment across species.", [1, 2, 4]),
-    (" This gap is acute for glycosylation. Posttranslational sites are well catalogued, but phosphate side groups are chemically constrained whereas glycans vary widely in composition, size, and charge.", [17, 18, 21, 49, 50, 80]),
+    (" Eggshell matrix proteins regulate mammillary-layer mineralization, crystal growth, and mature shell architecture, and recurrent factors such as OC17, OC116, TRFE, and OVAL define a broadly shared shell-building toolkit.", [1, 2, 4, 10, 19, 21, 29]),
+    (" The key unresolved issue is therefore not toolkit presence, but how that shared toolkit is differentially deployed across species.", [1, 2, 4]),
+    (" This gap is particularly acute for glycosylation. Posttranslational sites are well catalogued, but phosphate side groups are chemically constrained, whereas glycans vary widely in composition, size, and charge and can therefore generate distinct molecular states on the same protein scaffold.", [17, 18, 21, 49, 50, 80]),
     (" Glycosylation analyses therefore cannot stop at site occupancy; glycan class is itself a mechanistic variable.", [49, 50]),
     (" Earlier glycoproteomic and biochemical studies established that eggshell matrix proteins can occupy distinct N-glycosylation states, including glycosylated Asn in OC116 and defined carbohydrate compositions for OVAL-associated glycans.", [8, 18, 21]),
-    (" However, most studies were organized within one species, one shell compartment, or one site inventory at a time.", [7, 47, 48]),
+    (" However, most studies were organized within one species, one shell compartment, or one site inventory at a time, so information on matched glycan states carried by shared matrix proteins across species has remained sparse.", [7, 47, 48]),
     (" As a result, avian eggshell comparisons have rarely resolved which specific N-glycan forms are carried by shared matrix proteins across species, or whether that glycan layer explains why similar toolkits yield distinct shell states.", [2, 4, 18, 29, 66]),
 ])
 
 p_intro_sig = spara([
     (" Glycosylation alters protein stability, molecular recognition, surface exposure, and conformational state.", [61, 72, 78]),
-    (" In other systems, glycans can behave as dynamic shields rather than passive bulk alone.", [42, 43, 44, 63]),
+    (" In other systems, glycans behave as dynamic shields rather than passive bulk alone, and site-specific glycan states can reshape folded protein surfaces and alter accessible interfaces.", [42, 43, 44, 61, 63, 81]),
     (" Zeng and colleagues further showed that the same eggshell matrix protein can occupy different N-glycosylation states across the cuticle and mineralized layer. Glycan state can therefore redistribute biological role across shell compartments rather than merely decorate a fixed protein scaffold.", [18]),
-    (" Prior mineralization-related work suggested that OVAL can enter a Ca²⁺-responsive conformational state during early shell formation.", [4, 11, 29]),
-    (" Work in other glycosylated systems further shows that glycan differences can reshape folded protein surfaces and alter accessible interfaces.", [42, 43, 61, 63, 81]),
-    (" We therefore asked whether cross-species glycan differences reshape the folded OVAL surface and alter the Ca²⁺-accessible interface presented at mineralization onset.", [4, 18]),
-    (" If that structural difference matters biologically, it should remain detectable at the hatching-relevant mechanical end point. We therefore examined local resistance at the mammillary interface under egg-tooth-like loading.", [16, 37, 69]),
+    (" OVAL is especially relevant in that context because prior mineralization-related work suggested that it can enter a Ca²⁺-responsive conformational state during early shell formation.", [4, 11, 29]),
+    (" We therefore asked whether cross-species glycan differences reshape the folded OVAL surface, alter the Ca²⁺-accessible interface presented at mineralization onset, and remain detectable at the hatching-relevant mechanical end point.", [4, 16, 18, 37, 69]),
 ])
 
 p_intro_gap = spara([
-    (" We therefore anchored the comparison to the conserved egg-tooth interface and asked whether glycan-state differences on shared matrix proteins explain why a common shell-building toolkit yields different Ca²⁺-accessible states at mineralization onset. In that framing, the missing step is a bridge from glycan class to surface presentation on a shared matrix background.", []),
-    (" OVAL provided a tractable test case: its Ca²⁺-responsive surface behaviour was already biologically relevant in earlier mineralization work, it remained abundant across species, and its dominant glycan classes could be followed from glycoproteomics into structural modelling.", [4, 18, 29, 42]),
+    (" We therefore anchored the comparison to the conserved egg-tooth interface and asked whether glycan-state differences on shared matrix proteins explain why a common shell-building toolkit yields different Ca²⁺-accessible states at mineralization onset.", []),
+    (" In that framing, the missing step is a direct bridge from glycan class to surface presentation on a shared matrix background.", []),
+    (" OVAL provided a tractable test case because its Ca²⁺-responsive surface behaviour was already biologically relevant in earlier mineralization work, it remained abundant across species, and its dominant glycan classes could be followed from glycoproteomics into structural modelling.", [4, 18, 29, 42]),
 ])
 
 # §4 — This study
@@ -281,7 +279,7 @@ p_intro4 = smixed([
       ('Columba livia', False, True),
             (' as terrestrial precocial, aquatic-associated precocial, and terrestrial altricial models, respectively.', False, False)], [3, 22, 23]),
     ([(' This design sampled crossed developmental and ecological contrasts within one conserved hatching framework, avoiding reduction to phylogeny alone or a simple precocial-versus-altricial split.', False, False)], []),
-    ([(' We profiled mammillary organisation by micro-CT morphometry, resolved shared matrix proteins and glycan states by comparative proteomics and intact glycopeptide mass spectrometry, inferred surface consequences by Re-Glyco modelling and electrostatic analysis, and tested functional persistence of the same contrast by finite-element simulation.', False, False)], []),
+    ([(' We profiled mammillary organisation by micro-CT morphometry, resolved shared matrix proteins and glycan states by comparative proteomics and intact glycopeptide mass spectrometry, inferred surface consequences by Re-Glyco modelling and electrostatic analysis, and tested whether the same contrast persisted at the mechanical level by finite-element simulation.', False, False)], []),
     ([(' This stepwise design constrained interpretation across layers, from shell structure to molecular state to mechanical outcome.', False, False)], []),
     ([(' Across that sequence, OVAL provided the strongest cross-scale signal: its glycan states aligned with mammillary density, Ca²⁺-relevant surface accessibility, and local hatching resistance.', False, False)], [18]),
 ])
