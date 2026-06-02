@@ -209,7 +209,7 @@ para("Abstract", bold=True, size=11, before=80, after=40,
      align=WD_ALIGN_PARAGRAPH.LEFT)
 
 para(
-    "Comparative eggshell profiling has remained at protein inventory and glycosite levels. Using matched multi-layer analyses, we asked how glycan states on conserved matrix proteins map onto cross-species shell divergence. "
+    "Eggshell matrix proteins are key regulators of eggshell structural formation, but research has remained largely limited to protein inventories and posttranslational modification sites. Using matched multi-layer analyses, we asked how glycan states on conserved matrix proteins map onto cross-species shell divergence. "
     "We compared chicken, duck, and pigeon under a conserved egg-tooth interface by integrating micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco structural modelling, electrostatic analysis, and finite-element simulation. "
     "Cross-species separation emerged first in mammillary-layer organisation, while the matrix-protein toolkit remained largely shared. "
     "Within that shared background, ovalbumin (OVAL) shifted from High Mannose-dominant glycans in chicken to Neutral Complex/Hybrid-dominant glycans in duck and Sialylated Complex/Hybrid-dominant glycans in pigeon. "
@@ -232,21 +232,17 @@ para("Introduction", bold=True, size=14, before=0, after=160,
 
 # §1 — Background value
 p_s1a = spara([
-    (" Bird hatching is a local failure event: the egg-tooth loads the inner shell surface rather than distributing force across the shell as a whole.", [16, 86]),
+    (" Bird hatching is a local failure event: the egg-tooth pushes on the inner shell surface rather than spreading force across the shell as a whole.", [16, 86]),
     (" Comparable hatching-assist structures recur across egg-laying amniotes, so biologically meaningful variation in hatching performance is more likely to lie in the shell than in the tool itself.", [16, 82, 83, 84, 85]),
     (" Yet current knowledge remains limited on how species with similar hatching mechanics produce distinct shell states across ecology and development.", [15, 26, 39, 40, 41]),
-    (" The mammillary layer is the key entry point because it is the first mechanically consequential shell layer and the site where matrix-guided calcite growth begins.", [1, 4, 20, 28, 30, 34, 57]),
-])
-
-p_s1b = spara([
-    (" The mechanistic question follows directly: once the shell-breaking interface is held constant, which molecular regulators at the mammillary layer account for the distinct eggshell states recovered across species?", [1, 2, 4, 16, 28]),
+    (" The mammillary layer is the key entry point because it is the first mechanically consequential shell layer and the site where matrix-guided calcite growth begins. The mechanistic question follows directly: once the shell-breaking interface is held constant, which molecular regulators at the mammillary layer account for the distinct eggshell states recovered across species?", [1, 2, 4, 16, 28, 57]),
 ])
 
 # §2 — Prior work and its limits
 p_intro2 = spara([
     (" Eggshell matrix proteins regulate mammillary-layer mineralization, crystal growth, and mature shell architecture, and recurrent factors such as OC17, OC116, TRFE, and OVAL define a shared shell-building toolkit.", [1, 2, 4, 10, 19, 21, 29]),
     (" The unresolved issue is not toolkit presence, but how that toolkit is deployed across species.", [1, 2, 4]),
-    (" This gap is sharpest for glycosylation. Posttranslational sites are catalogued, but glycans vary widely in composition, size, and charge and can generate distinct molecular states on the same protein scaffold.", [17, 18, 21, 49, 50, 80]),
+    (" This gap is sharpest for posttranslational modification. Phosphorylation and glycosylation sites are both catalogued, but phosphate side groups are comparatively similar whereas glycans vary widely in composition, size, and charge and can generate distinct molecular states on the same protein scaffold.", [17, 18, 21, 49, 50, 80]),
     (" Glycan class is therefore a mechanistic variable, not just a feature of site occupancy.", [49, 50]),
     (" Glycoproteomic studies have shown that eggshell matrix proteins carry distinct N-glycosylation states, including glycosylated Asn in OC116 and defined OVAL-associated glycan compositions, but most analyses remained within one species, one compartment, or one site inventory at a time.", [7, 8, 18, 21, 47, 48]),
     (" As a result, avian eggshell comparisons still rarely resolve matched glycan states on shared matrix proteins across species, leaving open whether that glycan layer explains why similar toolkits yield distinct shell states.", [2, 4, 18, 29, 66]),
