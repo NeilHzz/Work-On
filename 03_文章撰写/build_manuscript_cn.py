@@ -6,6 +6,7 @@ Produces a sentence-aligned Chinese manuscript from the latest English manuscrip
 from pathlib import Path
 import re
 import time
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
 from docx import Document
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
@@ -40,11 +41,16 @@ def _translate_text(text: str, retries: int = 3) -> str:
     last_err = None
     for i in range(retries):
         try:
-            out = translator.translate(text)
+            with ThreadPoolExecutor(max_workers=1) as ex:
+                fut = ex.submit(translator.translate, text)
+                out = fut.result(timeout=25)
             if not out:
                 out = text
             _cache[text] = out
             return out
+        except FutureTimeoutError:
+            last_err = RuntimeError("translation timeout")
+            time.sleep(0.8 * (i + 1))
         except Exception as e:  # noqa: BLE001
             last_err = e
             time.sleep(0.8 * (i + 1))
@@ -55,18 +61,12 @@ def _translate_text(text: str, retries: int = 3) -> str:
     return text
 
 
-def _translate_batch(texts: list[str], batch_size: int = 40) -> list[str]:
+def _translate_batch(texts: list[str], batch_size: int = 12) -> list[str]:
+    # Use per-item translation with timeout protection to avoid batch-level hangs.
     out: list[str] = []
     for i in range(0, len(texts), batch_size):
         chunk = texts[i : i + batch_size]
-        try:
-            translated = translator.translate_batch(chunk)
-            if not translated or len(translated) != len(chunk):
-                raise RuntimeError("batch size mismatch")
-            out.extend(translated)
-        except Exception:
-            # Fallback per item for resilience.
-            out.extend(_translate_text(t) for t in chunk)
+        out.extend(_translate_text(t) for t in chunk)
     return out
 
 
@@ -104,7 +104,7 @@ def _split_for_translation(text: str) -> list[str]:
 
 def _translate_long_text(text: str) -> str:
     chunks = _split_for_translation(text)
-    translated_chunks = _translate_batch(chunks, batch_size=20)
+    translated_chunks = _translate_batch(chunks, batch_size=8)
     return " ".join(t.strip() for t in translated_chunks if t and t.strip())
 
 
@@ -133,7 +133,7 @@ def _set_cn_fonts(doc: Document) -> None:
             rFonts.set(qn("w:eastAsia"), "SimSun")
 
 
-def _translate_paragraphs(paragraphs) -> int:
+def _translate_paragraphs(paragraphs, label: str = "paragraphs") -> int:
     changed = 0
     targets = []
     for p in paragraphs:
@@ -144,11 +144,13 @@ def _translate_paragraphs(paragraphs) -> int:
     if not targets:
         return 0
 
-    src_texts = [t[1] for t in targets]
-    dst_texts = [_translate_long_text(t) for t in src_texts]
-    for (p, _), dst in zip(targets, dst_texts):
+    total = len(targets)
+    for idx, (p, src) in enumerate(targets, 1):
+        dst = _translate_long_text(src)
         _replace_paragraph_text_keep_format(p, dst)
         changed += 1
+        if idx % 10 == 0 or idx == total:
+            print(f"[PROGRESS] {label}: {idx}/{total}", flush=True)
     return changed
 
 
@@ -159,16 +161,16 @@ def main() -> None:
     doc = Document(str(EN_DOC))
     changed = 0
 
-    changed += _translate_paragraphs(doc.paragraphs)
+    changed += _translate_paragraphs(doc.paragraphs, label="body")
 
-    for table in doc.tables:
+    for t_idx, table in enumerate(doc.tables, 1):
         for row in table.rows:
             for cell in row.cells:
-                changed += _translate_paragraphs(cell.paragraphs)
+                changed += _translate_paragraphs(cell.paragraphs, label=f"table-{t_idx}")
 
-    for sec in doc.sections:
-        changed += _translate_paragraphs(sec.header.paragraphs)
-        changed += _translate_paragraphs(sec.footer.paragraphs)
+    for s_idx, sec in enumerate(doc.sections, 1):
+        changed += _translate_paragraphs(sec.header.paragraphs, label=f"header-{s_idx}")
+        changed += _translate_paragraphs(sec.footer.paragraphs, label=f"footer-{s_idx}")
 
     _set_cn_fonts(doc)
     doc.save(str(OUT_DOC))
