@@ -294,7 +294,7 @@ p_ss1 = smixed([
             ('Columba livia', False, True),
                 (' were therefore chosen near contrasting regions of those ecological-developmental gradients, reducing blurring by intermediate combinations.', False, False)], [3, 22, 23, 41]),
     ([(' This functional grouping only partly overlaps with phylogeny. Chicken and duck remain closely related precocial taxa but separate along the habitat axis, whereas pigeon anchors the altricial end of the comparison (Fig. S2).', False, False)], [3, 22, 23]),
-    ([(' The design keeps shared ancestry in view while still enforcing clear life-history separation within the same analytical frame.', False, False)], []),
+    ([(' The design preserves shared ancestry while separating life histories within the same frame.', False, False)], []),
     ([(' The focal species differed in beak-tip geometry, but the egg-tooth remained a similarly localized dorsal breaker in all three species and therefore pointed to the same inside-out shell-breaking event during hatching (Fig. 1B).', False, False)], [16, 37, 82, 86]),
     ([(' With that interface held constant, the next question is which eggshell layer first separates the species.', False, False)], []),
 ])
@@ -361,8 +361,8 @@ p_sprot_focus = spara([
 head("OVAL glycosylation gives the clearest cross-species molecular contrast")
 
 p_s2a = spara([
-    ("Intact-glycopeptide profiling first showed that the three species differed in sampling depth yet still shared a stable comparison core (Fig. 2A to D). The cluster view recovered 25 clusters shared by all three species, with the largest additional pairwise overlap between duck and pigeon at 64 clusters, whereas chicken contributed little species-private cluster space (Fig. 2A).", []),
-    ("The same asymmetry appeared in the catalog counts: duck yielded 321 glycoproteins, 547 glycosites, and 197 glycan compositions; pigeon yielded 192, 257, and 162; and chicken yielded 55, 88, and 105 (Fig. 2B). Shared-core Jensen-Shannon similarity nevertheless remained concentrated between 0.33 and 0.40, with the duck-pigeon pair highest (Fig. 2C). These values indicate divergence within a still comparable glycoproteomic background rather than three disconnected chemical spaces.", []),
+    ("Intact-glycopeptide profiling showed that the three species differed in sampling depth but still shared a stable comparison core (Fig. 2A to D). The cluster view recovered 25 clusters shared by all three species, with the largest additional pairwise overlap between duck and pigeon at 64 clusters, whereas chicken contributed little species-private cluster space (Fig. 2A).", []),
+    ("The same pattern held for the catalog counts: duck yielded 321 glycoproteins, 547 glycosites, and 197 glycan compositions; pigeon yielded 192, 257, and 162; and chicken yielded 55, 88, and 105 (Fig. 2B). Shared-core Jensen-Shannon similarity remained between 0.33 and 0.40, with the duck-pigeon pair highest (Fig. 2C). These values indicate divergence within a still comparable glycoproteomic background rather than three disconnected chemical spaces.", []),
     ("Glycan-class composition reinforced the same point at the chemical-deployment level. High-Mannose and Complex-Fucosylated glycans formed a broad cross-species background, whereas Complex-Sialylated and other more extended classes contributed more strongly to lineage separation (Fig. 2D).", []),
 ])
 
@@ -537,7 +537,7 @@ p_disc_mam2 = spara([
 ])
 
 p_disc_other = spara([
-    ("The non-OVAL signals still matter. OC116 and TRFE remained informative shared proteins, whereas OC17 appeared glycosylated only in chicken and may therefore represent a more lineage-restricted mineralization program.", []),
+    ("The non-OVAL signals still matter. OC116 and TRFE remained informative shared proteins, whereas OC17 appeared glycosylated only in chicken and may therefore represent a more lineage-restricted mineralization program.", [10, 19, 29]),
     (" Earlier eggshell studies had already assigned functional importance to OC17, OC116, and ovotransferrin-related matrix components, and the present dataset does not overturn that view. Instead, these proteins define the biological backdrop more consistently than they define the main cross-species discriminator recovered here.", [10, 19, 29]),
     (" For OC116 in particular, earlier biochemical work had already established glycosylated Asn in chicken eggshell matrix. More recent avian palaeoproteomic work showed that OC116 is among the more sequence-variable avian eggshell proteins. It shows substantial intraspecies variability rather than acting as a uniformly stable species marker. That broader context fits our comparison: retained glycosylation keeps OC116 biologically relevant, but it does not recover as stable a structure-linked contrast as OVAL.", [21, 66]),
     (" The same point also clarifies how the present study relates to earlier eggshell glycoproteomics. Those studies were essential for showing that eggshell matrix proteins can be glycosylated and that site-level inventories are experimentally accessible. Our contribution is the next comparative step: shared orthologs, dominant glycan classes, and the consequence of those classes for surface presentation across species.", [18, 21]),
