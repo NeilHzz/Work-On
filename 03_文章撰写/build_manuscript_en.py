@@ -372,9 +372,9 @@ p_s2a = spara([
 add_centered_figure("Fig2_composed.png", width_cm=14.6)
 add_main_figure_legend(
     "Fig. 2.",
-    "Shared-core glycoproteome structure and glycan-class deployment.",
+    "Shared-core glycoproteome structure and glycan deployment.",
     [
-        ("(A) Species-partitioned cluster counts in the glycoproteomic dataset. (B) Numbers of detected glycoproteins, glycosites, and glycan compositions in each species. (C) Shared-core Jensen-Shannon similarity among the three species. (D) Species-level distribution of glycan-class assignments, including High Mannose, Pauci-mannose, Hybrid, Complex-Plain, Complex-Fucosylated, Complex-Sialylated, and Other glycans. (E) Ortholog-glycan chord view linking eggshell glycoproteins to dominant glycan classes across chicken, duck, and pigeon, with highlighted matrix proteins retained for downstream comparison.", False, False),
+        ("(A) Species-partitioned cluster counts in the intact glycopeptide dataset. (B) Numbers of detected glycoproteins, glycosites, and glycan compositions in each species. (C) Shared-core Jensen-Shannon similarity among the three species. (D) Species-level distribution of glycan-class assignments. (E) Ortholog-glycan chord view linking eggshell glycoproteins to dominant glycan classes across chicken, duck, and pigeon; highlighted matrix proteins were retained for downstream comparison.", False, False),
     ],
 )
 
@@ -400,7 +400,7 @@ add_main_figure_legend(
     "Fig. 3.",
     "Ortholog filtering and abundance-glycan decoupling prioritize OVAL.",
     [
-        ("(A to C) Proteotype coevolution plots compare log2-transformed protein abundance and glycan abundance within chicken, duck, and pigeon, respectively. Insets show Spearman's ρ and two-sided p values. Highlighted labels mark OVAL, OC116, TRFE, and OC17 where retained. (D to F) Pairwise two-dimensional glycan-protein enrichment plots compare Gallus versus Columba, Gallus versus Anas, and Anas versus Columba. The dashed diagonal marks equal protein and glycan change. Highlighted proteins identify matrix candidates whose glycan shifts depart from simple protein-abundance scaling.", False, False),
+        ("(A to C) Proteotype coevolution plots compare log2-transformed protein abundance and glycan abundance within chicken, duck, and pigeon. Insets show Spearman's ρ and two-sided p values. Highlighted labels mark OVAL, OC116, TRFE, and OC17 where retained. (D to F) Pairwise two-dimensional glycan-protein enrichment plots compare Gallus versus Columba, Gallus versus Anas, and Anas versus Columba. The dashed diagonal marks equal protein and glycan change.", False, False),
     ],
 )
 
@@ -456,7 +456,7 @@ doc.add_page_break()
 add_centered_figure("Fig5_composed.png", width_cm=15.5, before=0, after=20)
 add_main_figure_legend(
     "Fig. 5.",
-    "Finite-element setup and local hatching resistance at the mammillary interface.",
+    "Finite-element loading at the mammillary interface recovers local hatching resistance.",
     [
         ("(A) Species-specific dorsal beak views with dashed boxes marking the egg-tooth position. The panel is paired with micro-CT-derived finite-element setups and summary box plots of peak contact force (F_max) and peak shear stress (τ_max). Species are ", False, False),
         ("Gallus gallus", False, True),
