@@ -17,6 +17,14 @@ OUT_DOC = Path(__file__).with_name("manuscript260602v2_cn.docx")
 translator = GoogleTranslator(source="en", target="zh-CN")
 _cache: dict[str, str] = {}
 
+# Locked terminology to keep manuscript wording consistent across reruns.
+TERM_LOCKS: list[tuple[str, str]] = [
+    ("OVAL", "卵黄血管区（OVAL）"),
+    ("mammillary layer", "乳突层"),
+    ("inside-out loading", "由内向外加载"),
+    ("hotspot", "热点"),
+]
+
 
 def _has_english_letters(text: str) -> bool:
     return bool(re.search(r"[A-Za-z]", text))
@@ -53,6 +61,35 @@ def _translate_text(text: str, retries: int = 3) -> str:
     print(f"[WARN] translation failed, keep original: {text[:80]} :: {last_err}")
     _cache[text] = text
     return text
+
+
+def _term_token(index: int) -> str:
+    return f"ZXQTERM{index:03d}"
+
+
+def _lock_terms_for_translation(text: str) -> tuple[str, dict[str, str]]:
+    protected = text
+    token_to_cn: dict[str, str] = {}
+    for index, (src_term, cn_term) in enumerate(TERM_LOCKS):
+        token = _term_token(index)
+        token_to_cn[token] = cn_term
+        # case-insensitive replacement to avoid translator drifting terminology.
+        protected = re.sub(re.escape(src_term), token, protected, flags=re.IGNORECASE)
+    return protected, token_to_cn
+
+
+def _restore_locked_terms(text: str, token_to_cn: dict[str, str]) -> str:
+    out = text
+    for token, cn_term in token_to_cn.items():
+        out = out.replace(token, cn_term)
+    return out
+
+
+def _normalize_locked_terms(text: str) -> str:
+    out = text
+    for src_term, cn_term in TERM_LOCKS:
+        out = re.sub(re.escape(src_term), cn_term, out, flags=re.IGNORECASE)
+    return out
 
 
 def _translate_batch(texts: list[str], batch_size: int = 40) -> list[str]:
@@ -103,9 +140,12 @@ def _split_for_translation(text: str) -> list[str]:
 
 
 def _translate_long_text(text: str) -> str:
-    chunks = _split_for_translation(text)
+    locked_text, token_to_cn = _lock_terms_for_translation(text)
+    chunks = _split_for_translation(locked_text)
     translated_chunks = _translate_batch(chunks, batch_size=20)
-    return " ".join(t.strip() for t in translated_chunks if t and t.strip())
+    joined = " ".join(t.strip() for t in translated_chunks if t and t.strip())
+    restored = _restore_locked_terms(joined, token_to_cn)
+    return _normalize_locked_terms(restored)
 
 
 def _replace_paragraph_text_keep_format(p, new_text: str) -> None:
