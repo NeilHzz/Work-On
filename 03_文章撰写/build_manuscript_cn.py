@@ -778,7 +778,7 @@ cite(p_m_apbs_cn, [12, 42, 43])
 head("有限元分析")
 
 p_m_fea_cn = mixed([
-    ("用于后续有限元分析的感兴趣区域在显微CT重建阶段定义为半径1 mm的圆柱体积。由显微CT获得的蛋壳表面模型先导出为STL文件，并在Geomagic Wrap中完成有限元前处理，包括顺序去噪（强度2）、三角面简化至约300,000个面片、0.01 mm网格重构、迭代缺陷修复至零残余缺陷，以及以最小公差进行有机参数曲面拟合。处理后的蛋壳表面模型随后导入Ansys Workbench 2023 R1，并使用显式LS-DYNA模块求解（单位制：mm/kg/N/s）。为隔离结构本身造成的机械差异，三物种均赋予相同的蛋壳材料参数；参数取自Biology 10, 989 (2021; DOI: 10.3390/biology10100989) 报道的鸟类蛋壳弹性研究，而不是对每个物种单独重新估算。在求解器keyword deck中，蛋壳采用 *MAT_PLASTIC_KINEMATIC 和 *SECTION_SOLID，参数为密度2770 kg/m^3、Young's modulus 3.0 × 10^10 Pa、Poisson's ratio 0.33、yield strength 1.5 × 10^7 Pa、tangent modulus 0，以及failure前最大等效塑性应变0.05。该显式冲击设置遵循crash-deformation simulation的一般逻辑，但缩放到了本研究关注的局部蛋壳加载几何。模拟破壳齿的冲击体为圆台（底半径0.1 mm、顶半径0.5 mm、高0.5 mm），赋予库内IRON-ARMCO显式材料并独立划分实体网格。冲击体与蛋壳之间采用 *CONTACT_AUTOMATIC_SURFACE_TO_SURFACE，摩擦系数0.2。蛋壳网格尺寸分别为0.05 mm（", False, False),
+    ("用于后续有限元分析的感兴趣区域在显微CT重建阶段定义为半径1 mm的圆柱体积。由显微CT获得的蛋壳表面模型先导出为STL文件，并在Geomagic Wrap中完成有限元前处理，包括顺序去噪（强度2）、三角面简化至约300,000个面片、0.01 mm网格重构、迭代缺陷修复至零残余缺陷，以及以最小公差进行有机参数曲面拟合。处理后的蛋壳表面模型随后导入Ansys Workbench 2023 R1，并使用显式LS-DYNA模块求解（单位制：mm/kg/N/s）。为隔离结构本身造成的机械差异，三物种均赋予相同的蛋壳材料参数；参数取自Biology 10, 989 (2021; DOI: 10.3390/biology10100989) 报道的鸟类蛋壳弹性研究，而不是对每个物种单独重新估算。在求解器keyword deck中，蛋壳采用 *MAT_PLASTIC_KINEMATIC 和 *SECTION_SOLID，参数为密度2770 kg/m^3、Young's modulus 3.0 × 10^10 Pa、Poisson's ratio 0.33、yield strength 1.5 × 10^7 Pa、tangent modulus 0，以及failure前最大等效塑性应变0.05。该显式冲击设置遵循碰撞-变形模拟的一般逻辑，但缩放到了本研究关注的局部蛋壳加载几何。模拟破壳齿的冲击体为圆台（底半径0.1 mm、顶半径0.5 mm、高0.5 mm），赋予库内IRON-ARMCO显式材料并独立划分实体网格。冲击体与蛋壳之间采用 *CONTACT_AUTOMATIC_SURFACE_TO_SURFACE，摩擦系数0.2。蛋壳网格尺寸分别为0.05 mm（", False, False),
     ("G. gallus", False, True),
     ("）、0.05 mm（", False, False),
     ("A. platyrhynchos", False, True),
