@@ -342,15 +342,15 @@ doc.add_page_break()
 add_centered_figure("Fig1_composed.png", width_cm=10.1, before=0, after=20)
 add_main_figure_legend(
     "图1.",
-    "三种模型鸟类共享出壳界面并表现出乳突层差异。",
+    "三种模型鸟类的比较空间、出壳界面与乳突层形态差异。",
     [
-        ("(A) 基于AVONET 10,993个物种记录构建的三维比较空间；坐标轴概括水域关联、生活方式-栖息地差异和发育模式。颜色表示鸟类目级类群，灰色框标出三种目标物种所在区域，空心圆表示 ", False, False),
+        ("(A) 基于AVONET 10,993个物种记录构建的三维比较空间；坐标轴概括水域关联、生活方式-栖息地差异和发育模式。颜色表示鸟类目级类群，灰色框标示三种目标物种的采样区域，空心圆表示 ", False, False),
         ("Gallus gallus", False, True),
         ("、", False, False),
         ("Anas platyrhynchos", False, True),
         (" 和 ", False, False),
         ("Columba livia", False, True),
-        ("。(B) 三物种侧面头部视图和背侧喙部视图，显示带破壳齿的喙尖。(C) 乳突层代表性显微CT截面和三维内表面重建；鸡表现为更平滑的圆钝乳突，鸭表现出更多棱脊和角状结构，鸽则以离散三角锥状乳突为主。比例尺，100 μm。(D) 乳突密度和晶体单元体积比例的箱线图。散点表示各物种扫描碎片上的9个非重叠子区域；p值来自单因素ANOVA，不同字母表示Tukey HSD分组。", False, False),
+        ("。(B) 三物种侧面头部视图（上）和背侧喙部视图（下），显示带破壳齿的喙尖。(C) 乳突层代表性显微CT截面和三维内表面重建。比例尺，100 μm。(D) 物种间乳突密度和晶体单元体积比例箱线图。散点表示每个物种一个扫描碎片中的9个非重叠子区域；p值采用单因素ANOVA计算，不同字母表示Tukey HSD分组。", False, False),
     ],
     before=20,
     after=80,
@@ -381,9 +381,9 @@ p_s2a_cn = spara([
 add_centered_figure("Fig2_composed.png", width_cm=14.6)
 add_main_figure_legend(
     "图2.",
-    "共享核心糖蛋白组结构与糖链类别部署。",
+    "跨物种共享核心糖蛋白组架构与糖链类别部署。",
     [
-        ("(A) 糖蛋白组数据中的物种分区cluster数量。(B) 各物种检测到的糖蛋白、糖基化位点和糖链组成数量。(C) 三物种共享核心的Jensen-Shannon相似性。(D) 物种水平糖链类别分布，包括High Mannose、Pauci-mannose、Hybrid、Complex-Plain、Complex-Fucosylated、Complex-Sialylated和Other。(E) 直系同源-糖链弦图，连接鸡、鸭和鸽蛋壳糖蛋白与优势糖链类别，并高亮后续比较保留的基质蛋白候选。", False, False),
+        ("(A) 糖蛋白组数据中的物种分区cluster数量。(B) 各物种检测到的糖蛋白、糖基化位点和糖链组成数量。(C) 物种间共享核心的Jensen-Shannon相似性。(D) 物种水平糖链类别分布（High Mannose、Pauci-mannose、Hybrid、Complex-Plain、Complex-Fucosylated、Complex-Sialylated和Other）。(E) 直系同源-糖链弦图，连接鸡、鸭和鸽蛋壳糖蛋白与优势糖链类别，并高亮后续分析保留的基质蛋白。", False, False),
     ],
 )
 
@@ -408,9 +408,9 @@ p_s2d_cn = spara([
 add_centered_figure("Fig3_composed.png", width_cm=15.5)
 add_main_figure_legend(
     "图3.",
-    "直系同源过滤和丰度-糖链解耦优先指向OVAL。",
+    "直系同源约束下的丰度-糖链分析确定OVAL为最清晰共享区分子。",
     [
-        ("(A至C) 鸡、鸭和鸽物种内蛋白丰度与糖链丰度log2转换后的proteotype coevolution图；插图给出Spearman ρ和双侧p值，并在保留的情况下高亮OVAL、OC116、TRFE和OC17。(D至F) Gallus对Columba、Gallus对Anas和Anas对Columba的两两二维糖链-蛋白富集图。虚线对角线表示蛋白和糖链变化幅度相同，高亮蛋白表示糖链变化偏离简单蛋白丰度缩放的基质蛋白候选。", False, False),
+        ("(A至C) 鸡、鸭和鸽物种内蛋白丰度与糖链丰度log2转换后的proteotype coevolution图；插图给出Spearman ρ和双侧p值，高亮标注保留的基质蛋白（OVAL、OC116、TRFE和OC17）。(D至F) Gallus对Columba、Gallus对Anas和Anas对Columba的两两二维糖链-蛋白富集图。虚线对角线表示蛋白和糖链变化幅度相等；向糖链富集侧偏移表示糖链变化超过蛋白丰度变化。", False, False),
     ],
 )
 
@@ -439,9 +439,9 @@ doc.add_page_break()
 add_centered_figure("Fig4_composed.png", width_cm=15.2, before=0, after=20)
 add_main_figure_legend(
     "图4.",
-    "OVAL糖链状态重组界面暴露和Ca²⁺相关可及性。",
+    "OVAL糖链类别重塑表面几何与Ca²⁺相关界面可及性。",
     [
-        ("(A) OVAL表面上代表性重建糖链构象。(B) 物种特异性表面图，显示糖链位置和Ca²⁺相关表面区域。(C至F) 重建糖链的系综几何描述符，包括回转半径、最小糖链-骨架距离、端到端距离和糖链-蛋白距离。(G) 糖链介导的界面遮蔽。(H) 候选酸性残基中的热点比例。(I) 热点残基平均溶剂可及表面积（SASA）。(J) 净可及Ca²⁺热点。(K) 糖基化和配对apo OVAL参考中的Ca²⁺热点残基数量。(L) 糖基化和apo参考中的羧酸基表面可及性。(M) Ca²⁺热点可及性。(N) Ca²⁺热点残基SASA。系综层面的物种比较采用双侧Mann-Whitney U检验；在存在结构层面变异时，糖基化与apo的配对对照采用相对于apo参考的一样本Wilcoxon符号秩检验。", False, False),
+        ("(A) OVAL表面上代表性重建糖链构象。(B) 物种特异性表面图，显示糖链位置和Ca²⁺相关区域。(C至F) 重建糖链的系综几何描述符：回转半径、最小糖链-骨架距离、端到端距离和糖链-蛋白距离。(G) 糖链介导的界面遮蔽。(H) 候选酸性残基中的热点比例。(I) 热点残基平均溶剂可及表面积（SASA）。(J) 净可及Ca²⁺热点。(K) 糖基化和配对apo OVAL参考中的Ca²⁺热点残基数量。(L) 糖基化和apo参考中的羧酸基表面可及性。(M) Ca²⁺热点可及性。(N) Ca²⁺热点残基SASA。系综层面的物种比较采用双侧Mann-Whitney U检验；在存在结构层面变异时，糖基化与apo的结构层面对照采用一样本Wilcoxon符号秩检验。", False, False),
     ],
     before=20,
     after=80,
@@ -466,15 +466,15 @@ doc.add_page_break()
 add_centered_figure("Fig5_composed.png", width_cm=15.5, before=0, after=20)
 add_main_figure_legend(
     "图5.",
-    "乳突界面出壳相关加载的有限元建模与局部抗性。",
+    "内向外有限元加载解析乳突界面的局部出壳抗性。",
     [
-        ("(A) 物种特异性喙部俯视图及其对应的micro-CT有限元模型，并展示峰值接触力（F_max）和峰值剪切应力（τ_max）的汇总箱线图，包括 ", False, False),
+        ("(A) 物种特异性喙部俯视图（虚线框标示破壳齿位置）及其对应的micro-CT有限元模型，并展示峰值接触力（F_max）和峰值剪切应力（τ_max）的汇总箱线图，包括 ", False, False),
         ("Gallus gallus", False, True),
         ("、", False, False),
         ("Anas platyrhynchos", False, True),
         (" 和 ", False, False),
         ("Columba livia", False, True),
-        ("。每个物种组中，左侧为喙部俯视图，虚线框标示破壳齿位置；右侧为蛋壳碎片网格、相应锥形压头以及接触时的代表性有限元模型输出。(B) 9个冲击位置的平均接触力时间曲线，阴影表示±1σ。(C) 同一9个位置的平均接触剪切应力时间曲线，阴影表示±1σ。箱线图中的点表示单个冲击位置（每物种n = 9），p值来自单因素ANOVA，不同字母表示Tukey HSD分组。模拟直接建立在实测重建壳体几何而非理想化壳体之上。", False, False),
+        ("。每个物种组中，左侧为喙部俯视图，右侧为蛋壳碎片网格、锥形压头及接触时的代表性有限元输出。(B) 9个冲击位置的平均接触力时间曲线，阴影表示±1σ。(C) 同一9个位置的平均接触剪切应力时间曲线，阴影表示±1σ。箱线图中的点表示单个冲击位置（每物种n = 9）；p值采用单因素ANOVA计算，不同字母表示Tukey HSD分组。模拟基于实测重建壳体几何而非理想化壳体。", False, False),
     ],
     before=20,
     after=80,
