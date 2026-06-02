@@ -209,13 +209,12 @@ para("Abstract", bold=True, size=11, before=80, after=40,
      align=WD_ALIGN_PARAGRAPH.LEFT)
 
 para(
-    "Comparative eggshell profiling has largely been resolved at the level of protein inventories and glycosylation sites, leaving unclear how shared matrix proteins are redeployed at the glycan-state level when shell structure and hatching mechanics diverge. "
-    "Here, we compared chicken, duck, and pigeon as deliberately separated ecological-developmental states under a conserved egg-tooth interface. "
-    "We integrated micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco structural modelling, electrostatic analysis, and finite-element simulation. "
-    "The first strong cross-species separation appeared in mammillary-layer organisation rather than in the broad matrix-protein toolkit, which remained largely shared. "
-    "Within that shared background, ovalbumin (OVAL) showed an ordered shift from High Mannose-dominant glycans in chicken to Neutral Complex/Hybrid-dominant glycans in duck and Sialylated Complex/Hybrid-dominant glycans in pigeon. "
-    "Those glycan states predicted progressively stronger shielding of the Ca²⁺-relevant OVAL surface and were mirrored by a chicken-high versus duck/pigeon-low contrast in local hatching resistance. "
-    "Across morphometric, glycoproteomic, structural, and mechanical layers, OVAL glycan state emerged as the most chemically readable feature linking a chicken-like eggshell state to mammillary organisation and inside-out failure behaviour.",
+    "Comparative eggshell studies have mostly resolved shared matrix proteins at the inventory or glycosite level, leaving unclear how matched glycan states on conserved proteins scale into shell structure and hatching mechanics. "
+    "Here, we compared chicken, duck, and pigeon under a conserved egg-tooth interface and integrated micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco structural modelling, electrostatic analysis, and finite-element simulation. "
+    "Cross-species separation appeared first in mammillary-layer organisation, whereas the matrix-protein toolkit remained largely shared. "
+    "Within that shared background, ovalbumin (OVAL) shifted from High Mannose-dominant glycans in chicken to Neutral Complex/Hybrid-dominant glycans in duck and Sialylated Complex/Hybrid-dominant glycans in pigeon. "
+    "These states predicted stronger shielding of the Ca²⁺-relevant OVAL surface and were mirrored by a chicken-high versus duck/pigeon-low contrast in local hatching resistance. "
+    "Together, the data place OVAL glycan state as a molecular layer linking a chicken-like eggshell state to mammillary organisation and inside-out failure behaviour.",
     bold=False, size=10, before=0, after=80, align=WD_ALIGN_PARAGRAPH.JUSTIFY
 )
 
