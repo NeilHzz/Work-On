@@ -144,8 +144,8 @@ def _translate_long_text(text: str) -> str:
     chunks = _split_for_translation(locked_text)
     translated_chunks = _translate_batch(chunks, batch_size=20)
     joined = " ".join(t.strip() for t in translated_chunks if t and t.strip())
-    restored = _restore_locked_terms(joined, token_to_cn)
-    return _normalize_locked_terms(restored)
+    normalized = _normalize_locked_terms(joined)
+    return _restore_locked_terms(normalized, token_to_cn)
 
 
 def _replace_paragraph_text_keep_format(p, new_text: str) -> None:
