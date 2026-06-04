@@ -15,7 +15,7 @@ from docx.shared import Cm, Pt
 FIG_BASE = Path(r"D:\system_folder\Desktop\Work On\Supplementary\Figures")
 MAIN_FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
 PANEL_FIG_BASE = Path(__file__).resolve().parent.parent / "02_可视化" / "Figure" / "PNG"
-OUT = str(Path(__file__).with_name("supplementary_materials0602.docx"))
+OUT = str(Path(__file__).with_name("supplementary_materials260605.docx"))
 
 doc = Document()
 
@@ -132,20 +132,23 @@ def fig_caption(parts, before=0, after=240):
 para("Supplementary Materials for", size=11, before=0, after=40,
      align=WD_ALIGN_PARAGRAPH.CENTER)
 para(
-    "OVAL glycan state tracks mammillary organisation and local hatching resistance across avian eggshells",
+    "Cross-species OVAL glycan states connect mammillary-layer organisation to hatching-favourable eggshell mechanics",
     bold=True, size=12, before=0, after=160, align=WD_ALIGN_PARAGRAPH.CENTER,
 )
-para("",
+para("[Author list and affiliations to match the main manuscript]",
     size=10, before=0, after=300, align=WD_ALIGN_PARAGRAPH.CENTER)
 
-para("This PDF file includes:", bold=True, size=11, before=0, after=60,
+para("This PDF file includes:", size=11, before=0, after=60,
      align=WD_ALIGN_PARAGRAPH.LEFT)
 for line in [
     "Supplementary Text 1 to 2",
     "Figs. S1 to S11",
-    "Table S1 to S7 (uploaded separately as Excel files)",
+    "Legends for tables S1 to S7",
+    "",
+    "Other Supplementary Material for this manuscript includes the following:",
+    "Tables S1 to S7",
 ]:
-    bullet = doc.add_paragraph(style="List Bullet")
+    bullet = doc.add_paragraph()
     bullet.alignment = WD_ALIGN_PARAGRAPH.LEFT
     sp(bullet, before=0, after=20)
     run = bullet.add_run(line)
@@ -153,7 +156,7 @@ for line in [
 
 doc.add_page_break()
 
-section_head("Supplementary Text")
+section_head("SUPPLEMENTARY TEXT")
 
 st_head("Supplementary Text 1. Species selection and sensitivity analysis.")
 mpara([
@@ -201,7 +204,7 @@ mpara([
 ], before=80)
 
 doc.add_page_break()
-section_head("Figures")
+section_head("SUPPLEMENTARY FIGURES")
 
 add_image(FIG_BASE / "SuppFig1_Species_Selection" / "Sensitivity_Analysis_Results.png", width_cm=15.5)
 fig_title("Fig. S1.", "Sensitivity analysis of the macroecological species-selection framework.")
