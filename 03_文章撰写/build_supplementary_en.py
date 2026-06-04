@@ -209,75 +209,75 @@ section_head("SUPPLEMENTARY FIGURES")
 add_image(FIG_BASE / "SuppFig1_Species_Selection" / "Sensitivity_Analysis_Results.png", width_cm=15.5)
 fig_title("Fig. S1.", "Sensitivity analysis of the macroecological species-selection framework.")
 fig_caption([
-    ("Distribution of variance explained (R^2) and cluster silhouette coefficients from 500 randomized perturbation iterations applied to the AVONET-based principal-component space used to select ", False, False),
+    ("Distribution of variance explained (R^2) and cluster silhouette coefficients from 500 randomized perturbation iterations applied to the AVONET-based principal-component space used for species selection. The focal species are ", False, False),
     ("Gallus gallus", False, True),
     (", ", False, False),
     ("Anas platyrhynchos", False, True),
     (", and ", False, False),
     ("Columba livia", False, True),
-    (" as focal species. Categorical ecological variables were numerically encoded, and each iteration introduced independent random shifts to all encoding weights within +/-30% of the original values. The tight concentration of both metrics around the baseline indicates that species-group assignments are robust to the categorical encoding scheme.", False, False),
+    (". Categorical ecological variables were numerically encoded, and each iteration introduced independent random shifts to all encoding weights within +/-30% of the original values. The tight concentration of both metrics around the baseline supports stable species assignment under alternative encoding schemes.", False, False),
 ])
 
 doc.add_page_break()
 add_image(PANEL_FIG_BASE / "Fig1B.png", width_cm=15.5)
 fig_title("Fig. S2.", "Order-level avian phylogenetic context and comparative-axis heatmaps for the focal species.")
 fig_caption([
-    ("Phylogenetic relationship of representative avian taxa together with heatmap tracks for aquatic association (X), developmental mode (Z), and lifestyle-habitat discordance (Y). Colored order labels locate the broader comparative frame used for species selection. The positions of the focal lineages show that the chicken, duck, and pigeon comparison spans functional axes that only partly overlap with phylogeny.", False, False),
+    ("Phylogenetic relationship of representative avian taxa with heatmap tracks for aquatic association (X), developmental mode (Z), and lifestyle-habitat discordance (Y). Colored order labels indicate the broader comparative frame used for species selection. The focal lineages span functional axes that only partly overlap with phylogeny.", False, False),
 ])
 
 doc.add_page_break()
 add_image(FIG_BASE / "SuppFig2_Venn_Orthogroups" / "Fig_venn_orthogroups.png", width_cm=12.0)
 fig_title("Fig. S3.", "Three-species Venn diagram of shared and lineage-restricted eggshell matrix orthogroups.")
 fig_caption([
-    ("OrthoFinder-based orthogroup analysis resolves the three eggshell matrix proteomes into a large three-species shared core, three pairwise-shared subsets, and three lineage-restricted subsets. Numbers indicate orthogroup counts for each subset. The large shared core indicates that cross-species comparison is built on a common protein repertoire rather than on wholesale protein replacement.", False, False),
+    ("OrthoFinder-based orthogroup analysis of the three eggshell matrix proteomes. Numbers indicate orthogroup counts in the three-species shared core, pairwise-shared subsets, and lineage-restricted subsets. The large shared core supports comparison on a common protein repertoire.", False, False),
 ])
 
 doc.add_page_break()
 add_image(FIG_BASE / "SuppFig3_Phylo_Tree" / "Fig_phylo_tree.png", width_cm=14.0)
 fig_title("Fig. S4.", "Maximum-likelihood phylogenetic tree of the three focal species reconstructed from single-copy orthologs.")
 fig_caption([
-    ("Phylogenetic tree inferred by IQ-TREE from a concatenated alignment of single-copy orthologous protein sequences. Branch lengths reflect substitutions per site. Ultrafast bootstrap support values (1000 replicates) are shown at internal nodes. The topology places Galliformes and Anseriformes as sister clades within Galloanseres and Columbiformes as the more distant outgroup, consistent with published avian phylogenies.", False, False),
+    ("Phylogenetic tree inferred by IQ-TREE from a concatenated alignment of single-copy orthologous protein sequences. Branch lengths indicate substitutions per site. Ultrafast bootstrap support values from 1000 replicates are shown at internal nodes.", False, False),
 ])
 
 doc.add_page_break()
 add_image(FIG_BASE / "SuppFig4_GO_Enrichment" / "图2.jpg", width_cm=16.0)
 fig_title("Fig. S5.", "GO enrichment across species-specific and pairwise eggshell matrix protein sets.")
 fig_caption([
-    ("Top, GO terms enriched in the three pairwise-shared ortholog sets (GnA, Gallus-Anas; GnC, Gallus-Columba; AnC, Anas-Columba). Bottom, GO terms enriched in the three species-specific ortholog sets (Gallus, Anas, Columba). Colors denote GO category: biological process (BP), cellular component (CC), and molecular function (MF). The combined view highlights both ecological signal in the pairwise-shared sets and lineage-restricted signal in the species-specific sets; notably, the ", False, False),
+    ("Top, GO terms enriched in the three pairwise-shared ortholog sets (GnA, Gallus-Anas; GnC, Gallus-Columba; AnC, Anas-Columba). Bottom, GO terms enriched in the three species-specific ortholog sets (Gallus, Anas, Columba). Colors denote GO category: biological process (BP), cellular component (CC), and molecular function (MF). The ", False, False),
     ("G. gallus", False, True),
-    ("-specific set retained protein N-linked glycosylation among its enriched biological-process terms.", False, False),
+    ("-specific set includes protein N-linked glycosylation among its enriched biological-process terms.", False, False),
 ])
 
 doc.add_page_break()
 add_image(PANEL_FIG_BASE / "Fig4D_G.png", width_cm=15.5)
 fig_title("Fig. S6.", "Protein-specific glycosylation profiles of recurrent eggshell matrix proteins.")
 fig_caption([
-    ("Stacked glycan-class profiles for recurrent eggshell matrix proteins across chicken, duck, and pigeon, including OVAL, OC116, TRFE, and OC17. Bars summarize the relative contribution of detected glycan classes for each protein-species combination, providing the protein-level glycosylation background that motivated the focused OVAL structural analysis in the main figures.", False, False),
+    ("Stacked glycan-class profiles for recurrent eggshell matrix proteins across chicken, duck, and pigeon, including OVAL, OC116, TRFE, and OC17. Bars show the relative contribution of detected glycan classes for each protein-species combination.", False, False),
 ])
 
 doc.add_page_break()
 add_image(PANEL_FIG_BASE / "FigS7.png", width_cm=15.8)
 fig_title("Fig. S7.", "Protein-specific glycosylation profiles and surface electrostatic context for OVAL structural ensembles.")
 fig_caption([
-    ("Panel A shows the species-level surface potential distribution comparing glycosylated and apo OVAL structural ensembles, summarizing the APBS potential landscape that complements the hotspot and accessibility analyses in the main Re-Glyco figure. Panel B shows the per-structure surface electrostatic map across glycosylated OVAL models and matched apo references, providing the ensemble-level context behind the summarized APBS-potential comparison.", False, False),
+    ("(A) Species-level surface potential distributions comparing glycosylated and apo OVAL structural ensembles. (B) Per-structure surface electrostatic maps for glycosylated OVAL models and matched apo references. Surface potentials were calculated with APBS.", False, False),
 ])
 
 doc.add_page_break()
 add_image(FIG_BASE / "SuppFig5_CAFE5_Gene_Family_Turnover" / "Fig_cafe5_expansion_contraction.png", width_cm=14.0)
 fig_title("Fig. S8.", "CAFE5 gene-family expansion and contraction across the three species.")
 fig_caption([
-    ("Phylogenetic tree annotated with lineage-specific gene-family expansion (red) and contraction (blue) events inferred by CAFE5 using the species divergence time tree. Numbers at nodes indicate the estimated ancestral gene-family size; numbers on branches indicate the net change. Only gene families with a per-family ", False, False),
+    ("Phylogenetic tree annotated with lineage-specific gene-family expansion (red) and contraction (blue) events inferred by CAFE5 using the species divergence time tree. Numbers at nodes indicate estimated ancestral gene-family size; numbers on branches indicate net change. Only gene families with a per-family ", False, False),
     ("p", False, True),
     (" < 0.05 (Viterbi ", False, False),
     ("p", False, True),
-    (" value) are shown. Lineages differed in the turnover of immune- and defense-related gene families, whereas core eggshell matrix families remained broadly conserved.", False, False),
+    (" value) are shown.", False, False),
 ])
 
 doc.add_page_break()
 add_image(PANEL_FIG_BASE / "Fig2H.png", width_cm=16.0)
 fig_title("Fig. S9.", "Functional enrichment links gene-family turnover to lineage-biased biological processes.")
 fig_caption([
-    ("Alluvial summary connecting species, gene-family turnover direction, and enriched Gene Ontology terms inferred from expanded and contracted families. Flow colors distinguish expansion and contraction signals, and terminal blocks summarize the enriched biological-process, cellular-component, and molecular-function terms associated with each lineage. The plot complements the CAFE5 turnover tree by showing which functional categories account for the lineage-biased expansion and contraction patterns.", False, False),
+    ("Alluvial summary connecting species, gene-family turnover direction, and enriched Gene Ontology terms inferred from expanded and contracted families. Flow colors distinguish expansion and contraction signals. Terminal blocks summarize enriched biological-process, cellular-component, and molecular-function terms associated with each lineage.", False, False),
 ])
 
 doc.add_page_break()
@@ -300,7 +300,7 @@ fig_caption([
     ("G. gallus", False, True),
     (" showed the smallest conformational space and the weakest shielding; ", False, False),
     ("A. platyrhynchos", False, True),
-    (" was intermediate. The apo comparison provides an internal control: once N-glycans were removed, cross-species separation in hotspot count largely collapsed. Panel C contrasts were evaluated against the apo reference by one-sample Wilcoxon signed-rank test when structure-level variation was present.", False, False),
+    (" was intermediate. Apo structures provide the reference condition after N-glycan removal. Panel C contrasts were evaluated against the apo reference by one-sample Wilcoxon signed-rank test when structure-level variation was present.", False, False),
 ])
 
 doc.add_page_break()
@@ -337,7 +337,7 @@ fig_caption([
     ("_max", False, False),
     (" and peak shear stress (τ", False, False),
     ("_max", False, False),
-    (") computed from these nine replicates per species are reported in the main text and Fig. 5. Simulations were run in LS-DYNA (Ansys) using explicit dynamic finite-element analysis, with eggshell thickness set to the species-specific value measured from micro-CT.", False, False),
+    (") computed from these nine replicates per species are reported in the main text and Fig. 5. Simulations were run in LS-DYNA (Ansys) using explicit dynamic finite-element analysis. Eggshell thickness was set to the species-specific value measured from micro-CT.", False, False),
 ])
 
 doc.save(OUT)

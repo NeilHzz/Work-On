@@ -15,7 +15,7 @@ from docx.shared import Cm, Pt
 FIG_BASE = Path(r"D:\system_folder\Desktop\Work On\Supplementary\Figures")
 MAIN_FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
 PANEL_FIG_BASE = Path(__file__).resolve().parent.parent / "02_可视化" / "Figure" / "PNG"
-OUT = str(Path(__file__).with_name("supplementary_materials0602_cn.docx"))
+OUT = str(Path(__file__).with_name("supplementary_materials260605_cn.docx"))
 
 doc = Document()
 
@@ -117,29 +117,24 @@ para("补充材料", bold=True, size=14,
      before=0, after=240, align=WD_ALIGN_PARAGRAPH.CENTER)
 
 para(
-    "OVAL糖链状态追踪鸟类蛋壳乳突层组织与局部出壳抗性",
+    "跨物种 OVAL 糖链状态将乳突层组织与有利于破壳的蛋壳力学联系起来",
     italic=False, size=11, before=0, after=360,
     align=WD_ALIGN_PARAGRAPH.CENTER,
 )
 
-para("目录", bold=True, size=11, before=0, after=60,
+para("[作者、单位和通讯作者信息与正文一致]",
+     size=10, before=0, after=240, align=WD_ALIGN_PARAGRAPH.CENTER)
+
+para("本 PDF 文件包括：", size=11, before=0, after=60,
      align=WD_ALIGN_PARAGRAPH.LEFT)
 
 for line in [
-    "补充文本 1. 物种选择与敏感性分析",
-    "补充文本 2. 蛋壳基质蛋白组正交组分析",
+    "补充文本 1 至 2",
+    "图 S1 至 S11",
+    "表 S1 至 S7 图注",
     "",
-    "图S1. 验证宏观生态物种选择框架的敏感性分析",
-    "图S2. 目标物种在更广鸟类比较框架中的系统位置与比较轴热图",
-    "图S3. 三物种共享与谱系限制性蛋壳基质正交组的 Venn 图",
-    "图S4. 基于单拷贝直系同源物重建的三个目标物种的最大似然系统发育树",
-    "图S5. 物种特异与成对共享蛋壳基质蛋白集合的 GO 富集",
-    "图S6. 反复出现的蛋壳基质蛋白的蛋白特异性糖基化谱",
-    "图S7. 反复出现的蛋壳基质蛋白糖型谱及 OVAL 结构系综表面电势背景",
-    "图S8. 三个物种的 CAFE5 基因家族扩张与收缩",
-    "图S9. 基因家族周转对应的谱系偏向功能富集",
-    "图S10. OVAL 糖链几何及 apo/糖基化对照的 Re-Glyco 系综分析",
-    "图S11. 各物种九个偏移位置的有限元反力时间历程",
+    "本文其他补充材料包括：",
+    "表 S1 至 S7",
 ]:
     para(line, size=11, before=0, after=40, align=WD_ALIGN_PARAGRAPH.LEFT)
 
