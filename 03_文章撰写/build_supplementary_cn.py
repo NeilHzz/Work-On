@@ -131,7 +131,6 @@ para("本 PDF 文件包括：", size=11, before=0, after=60,
 for line in [
     "补充文本 1 至 2",
     "图 S1 至 S11",
-    "表 S1 至 S7 图注",
     "",
     "本文其他补充材料包括：",
     "表 S1 至 S7",
@@ -173,12 +172,14 @@ fig_caption(
 
 doc.add_page_break()
 
+para("补充图", bold=True, size=12,
+     before=0, after=240, align=WD_ALIGN_PARAGRAPH.LEFT)
 
 # 图S1
 fig_title("图S1.", "验证宏观生态物种选择框架的敏感性分析。")
 add_image(FIG_BASE / "SuppFig1_Species_Selection" / "Sensitivity_Analysis_Results.png", width_cm=15.5)
 fig_caption(
-    "在基于 AVONET 的主成分空间中，为选择 Gallus gallus、Anas platyrhynchos 和 Columba livia 作为目标物种而进行的 500 次随机扰动迭代，其方差解释度（R²）和聚类 silhouette 系数分布如图所示。主要生活方式、栖息地和营养生态位等分类生态变量均采用数值编码；每次迭代都在原始值 ±30% 范围内对全部编码权重进行独立随机扰动。两项指标均高度集中于基线值附近，说明物种分组对分类变量编码方式保持稳健。"
+    "在基于 AVONET 的主成分空间中进行 500 次随机扰动迭代后，方差解释度（R²）和聚类 silhouette 系数的分布。目标物种为 Gallus gallus、Anas platyrhynchos 和 Columba livia。分类生态变量采用数值编码；每次迭代均在原始值 ±30% 范围内对全部编码权重进行独立随机扰动。两项指标集中于基线值附近，支持物种分组在不同编码方案下保持稳定。"
 )
 
 
@@ -187,7 +188,7 @@ doc.add_page_break()
 fig_title("图S2.", "目标物种在更广鸟类比较框架中的系统位置与比较轴热图。")
 add_image(PANEL_FIG_BASE / "Fig1B.png", width_cm=15.5)
 fig_caption(
-    "代表性鸟类类群的系统发育关系及水生关联（X）、发育方式（Z）和生态不一致性（Y）三条比较轴的热图。彩色目级标签给出了目标物种所处的更广比较框架。鸡、鸭和鸽的位置显示，这组三物种比较覆盖的功能轴线只与系统关系部分重合。"
+    "代表性鸟类类群的系统发育关系及水生关联（X）、发育方式（Z）和生态不一致性（Y）三条比较轴的热图。彩色目级标签表示物种选择所使用的更广比较框架。目标谱系覆盖的功能轴线只与系统发育关系部分重合。"
 )
 
 
@@ -196,7 +197,7 @@ doc.add_page_break()
 fig_title("图S3.", "三物种共享与谱系限制性蛋壳基质正交组的 Venn 图。")
 add_image(FIG_BASE / "SuppFig2_Venn_Orthogroups" / "Fig_venn_orthogroups.png", width_cm=12.0)
 fig_caption(
-    "三种蛋壳基质蛋白组的 OrthoFinder 正交组聚类结果。该图将检测到的正交组划分为一个大的三物种共享核心、三个两两共享区域以及三个谱系限制性区域。数字表示各区域中的正交组数量。大的共享核心说明跨物种比较建立在共同蛋白背景之上。"
+    "三种蛋壳基质蛋白组的 OrthoFinder 正交组分析。数字表示三物种共享核心、两两共享集合和谱系限制性集合中的正交组数量。大的共享核心支持在共同蛋白背景上进行跨物种比较。"
 )
 
 
@@ -205,7 +206,7 @@ doc.add_page_break()
 fig_title("图S4.", "基于单拷贝直系同源物重建的三个目标物种的最大似然系统发育树。")
 add_image(FIG_BASE / "SuppFig3_Phylo_Tree" / "Fig_phylo_tree.png", width_cm=14.0)
 fig_caption(
-    "该最大似然物种树基于单拷贝直系同源集合重建。分支长度表示每个位点的替换数；内部节点给出了支持度数值（1000 次重复）。树拓扑显示鸡形目和雁形目在鸡雁类中互为姐妹群，而鸽形目为更远的外群，与已发表的鸟类系统发育关系一致。"
+    "基于单拷贝直系同源蛋白序列串联比对并由 IQ-TREE 推断的系统发育树。分支长度表示每个位点替换数。内部节点显示 1000 次重复得到的 ultrafast bootstrap 支持度。"
 )
 
 
@@ -214,7 +215,7 @@ doc.add_page_break()
 fig_title("图S5.", "物种特异与成对共享蛋壳基质蛋白集合的 GO 富集。")
 add_image(FIG_BASE / "SuppFig4_GO_Enrichment" / "图2.jpg", width_cm=16.0)
 fig_caption(
-    "上半部分显示三个两两共享正交组区域（GnA，即 Gallus–Anas；GnC，即 Gallus–Columba；AnC，即 Anas–Columba）的 GO 富集条目；下半部分显示三个物种特异正交组集合（Gallus、Anas、Columba）的 GO 富集条目。颜色区分 GO 类别，包括生物过程（BP）、细胞组分（CC）和分子功能（MF）。其中，G. gallus 特异集合保留了蛋白 N-连接糖基化这一富集生物过程。"
+    "上半部分显示三个两两共享正交组区域（GnA，Gallus–Anas；GnC，Gallus–Columba；AnC，Anas–Columba）的 GO 富集条目；下半部分显示三个物种特异正交组集合（Gallus、Anas、Columba）的 GO 富集条目。颜色区分 GO 类别：生物过程（BP）、细胞组分（CC）和分子功能（MF）。G. gallus 特异集合包括蛋白 N-连接糖基化这一富集生物过程。"
 )
 
 
@@ -223,7 +224,7 @@ doc.add_page_break()
 fig_title("图S6.", "反复出现的蛋壳基质蛋白的蛋白特异性糖基化谱。")
 add_image(PANEL_FIG_BASE / "Fig4D_G.png", width_cm=15.5)
 fig_caption(
-    "OVAL、OC116、TRFE 和 OC17 等反复出现的蛋壳基质蛋白在鸡、鸭和鸽中的糖链类别组成。堆叠柱表示每个蛋白-物种组合中检测到的不同糖型类别的相对贡献。该图提供了蛋白层面的糖基化背景，并解释正文为何进一步聚焦于 OVAL 的结构可及性分析。"
+    "OVAL、OC116、TRFE 和 OC17 等反复出现的蛋壳基质蛋白在鸡、鸭和鸽中的糖链类别组成。堆叠柱表示每个蛋白-物种组合中检测到的不同糖链类别的相对贡献。"
 )
 
 
@@ -232,7 +233,7 @@ doc.add_page_break()
 fig_title("图S7.", "反复出现的蛋壳基质蛋白糖型谱及 OVAL 结构系综表面电势背景。")
 add_image(PANEL_FIG_BASE / "FigS7.png", width_cm=15.8)
 fig_caption(
-    "A 面板展示糖基化与 apo OVAL 结构系综在三个物种中的表面电势分布小提琴图，概括了与主图 Re-Glyco 分析中的热点数量、羧酸基可及性和 APBS 电势比较相配套的整体电势背景。B 面板展示糖基化 OVAL 模型及配对 apo 参考结构的逐结构表面电势图，给出该 APBS 比较背后的完整结构系综背景。"
+    "(A) 糖基化与 apo OVAL 结构系综在三个物种中的表面电势分布。(B) 糖基化 OVAL 模型及配对 apo 参考结构的逐结构表面电势图。表面电势由 APBS 计算得到。"
 )
 
 
@@ -241,7 +242,7 @@ doc.add_page_break()
 fig_title("图S8.", "三个物种的 CAFE5 基因家族扩张与收缩。")
 add_image(FIG_BASE / "SuppFig5_CAFE5_Gene_Family_Turnover" / "Fig_cafe5_expansion_contraction.png", width_cm=14.0)
 fig_caption(
-    "系统发育树上标注了利用物种分化时间树并由 CAFE5 推断的谱系特异性基因家族扩张（红色）与收缩（蓝色）事件。节点上的数字表示估计的祖先基因家族大小，分支上的数字表示净变化。仅展示每个家族 p < 0.05（Viterbi p 值）的基因家族。各谱系在免疫和防御相关基因家族的周转上存在差异，而核心蛋壳基质基因家族总体保持保守。"
+    "系统发育树上标注了利用物种分化时间树并由 CAFE5 推断的谱系特异性基因家族扩张（红色）与收缩（蓝色）事件。节点上的数字表示估计的祖先基因家族大小，分支上的数字表示净变化。仅展示每个家族 p < 0.05（Viterbi p 值）的基因家族。"
 )
 
 
@@ -250,14 +251,14 @@ doc.add_page_break()
 fig_title("图S9.", "基因家族周转对应的谱系偏向功能富集。")
 add_image(PANEL_FIG_BASE / "Fig2H.png", width_cm=16.0)
 fig_caption(
-    "基于扩张和收缩基因家族得到的谱系、周转方向与 GO 富集条目之间的 alluvial 汇总图。流线颜色区分扩张与收缩信号，右侧端点概括各谱系相关的生物过程、细胞组分和分子功能条目。该图从功能富集层面补充 CAFE5 周转树，显示各谱系扩张或收缩家族主要对应的功能类别。"
+    "基于扩张和收缩基因家族得到的谱系、周转方向与 GO 富集条目之间的 alluvial 汇总图。流线颜色区分扩张与收缩信号，右侧端点概括各谱系相关的生物过程、细胞组分和分子功能条目。"
 )
 # 图S10
 doc.add_page_break()
 fig_title("图S10.", "OVAL 糖链几何及 apo/糖基化对照的 Re-Glyco 系综分析。")
 add_image(FIG_BASE / "SuppFig7_Glycosylation_Hotspot" / "Fig_hotspot_ensemble_1.png", width_cm=15.5)
 fig_caption(
-    "(A) 三种物种特异性 OVAL–糖链复合物在构象系综重复中的糖链回旋半径（Rg）分布，按物种着色（G. gallus 为橙色，A. platyrhynchos 为蓝色，C. livia 为绿色）。(B) 相同三种复合物的糖链端到端距离分布。(C) 各物种糖基化与 apo OVAL 结构逐构象的 Ca²⁺ 热点计数（Nhot）比较。C. livia 具有最大的构象空间和最强的糖链遮蔽；G. gallus 具有最小的构象空间和最弱的遮蔽；A. platyrhynchos 居中。移除 N-糖链后，跨物种在热点计数上的分离明显收敛。图中 panel C 在存在结构层面变异时，采用相对于 apo 参考的一样本 Wilcoxon 符号秩检验评估。"
+    "(A) 三种物种特异性 OVAL–糖链复合物在构象系综重复中的糖链回转半径（Rg）分布，按物种着色（G. gallus 为橙色，A. platyrhynchos 为蓝色，C. livia 为绿色）。(B) 相同三种复合物的糖链端到端距离分布。(C) 各物种糖基化与 apo OVAL 结构逐构象的 Ca²⁺ 热点计数（Nhot）比较。Apo 结构为移除 N-糖链后的参考状态。Panel C 在存在结构层面变异时，采用相对于 apo 参考的一样本 Wilcoxon 符号秩检验评估。"
 )
 
 
@@ -277,7 +278,7 @@ add_images_row([
     FIG_BASE / "SuppFig8_FEA_Force_Analysis" / "pigeon_rcforc_yforce.png",
 ], width_cm=7.5)
 fig_caption(
-    "(A–C) G. gallus（A）、A. platyrhynchos（B）和 C. livia（C）在九个参数化冲击位置（3 × 3 横向偏移网格）上的接触力（F）时间历程曲线。每条曲线代表一次模拟，显示从接触开始到峰值接触力的全过程。内嵌图给出了各物种九个位置的峰值接触力（F_max）分布。(D–F) 对应的 Y 方向反力（FY）时间历程。由这九次重复计算得到的物种峰值接触力（F_max）和峰值接触剪切应力（τ_max）的均值 ± s.d. 已在正文和图5中报告。模拟采用 LS-DYNA（Ansys）显式动力有限元分析完成，蛋壳厚度设置为基于 micro-CT 测得的物种特异性数值。"
+    "(A–C) G. gallus（A）、A. platyrhynchos（B）和 C. livia（C）在九个参数化冲击位置（3 × 3 横向偏移网格）上的接触力（F）时间历程曲线。每条曲线代表一次模拟，显示从接触开始到峰值接触力的过程。内嵌图给出了各物种九个位置的峰值接触力（F_max）分布。(D–F) 对应的 Y 方向反力（FY）时间历程。由九次重复计算得到的物种峰值接触力（F_max）和峰值接触剪切应力（τ_max）的均值 ± s.d. 已在正文和图5中报告。模拟采用 LS-DYNA（Ansys）显式动力有限元分析完成。蛋壳厚度设置为基于 micro-CT 测得的物种特异性数值。"
 )
 
 

@@ -143,7 +143,6 @@ para("This PDF file includes:", size=11, before=0, after=60,
 for line in [
     "Supplementary Text 1 to 2",
     "Figs. S1 to S11",
-    "Legends for tables S1 to S7",
     "",
     "Other Supplementary Material for this manuscript includes the following:",
     "Tables S1 to S7",
