@@ -4,6 +4,7 @@ Produces a sentence-aligned Chinese manuscript from the latest English manuscrip
 """
 
 from pathlib import Path
+import json
 import re
 import time
 from docx import Document
@@ -13,17 +14,106 @@ from deep_translator import GoogleTranslator
 
 EN_DOC = Path(__file__).with_name("manuscript260602v2.docx")
 OUT_DOC = Path(__file__).with_name("manuscript260602v2_cn.docx")
+CACHE_FILE = Path(__file__).with_name(".translation_cache_cn.json")
 
 translator = GoogleTranslator(source="en", target="zh-CN")
-_cache: dict[str, str] = {}
+try:
+    _cache: dict[str, str] = json.loads(CACHE_FILE.read_text(encoding="utf-8"))
+except (FileNotFoundError, json.JSONDecodeError):
+    _cache = {}
 
-# Locked terminology to keep manuscript wording consistent across reruns.
+# Locked terminology keeps sentence-level translation stable across reruns.
 TERM_LOCKS: list[tuple[str, str]] = [
-    ("OVAL", "卵黄血管区（OVAL）"),
+    ("Cross-species OVAL glycan states connect mammillary-layer organisation to hatching-favourable eggshell mechanics", "跨物种OVAL糖链状态将乳突层组织与有利于破壳的蛋壳力学联系起来"),
+    ("Ca²⁺accessibility-mammillary-mechanics axis", "Ca²⁺可及性-乳突层-力学轴"),
+    ("Ca²⁺accessible matrix-protein surfaces", "Ca²⁺可及的基质蛋白表面"),
+    ("ovalbumin (OVAL)", "卵清蛋白（OVAL）"),
+    ("ovalbumin", "卵清蛋白"),
+    ("OVAL", "卵清蛋白（OVAL）"),
+    ("OVAL glycan states", "OVAL糖链状态"),
+    ("OVAL glycan state", "OVAL糖链状态"),
+    ("OC116", "OC116"),
+    ("TRFE", "TRFE"),
+    ("OC17", "OC17"),
+    ("Re-Glyco", "Re-Glyco"),
+    ("GlycoShape", "GlycoShape"),
+    ("GlyTouCan", "GlyTouCan"),
+    ("AlphaFold2", "AlphaFold2"),
+    ("APBS", "APBS"),
+    ("PDB2PQR", "PDB2PQR"),
+    ("MSFragger", "MSFragger"),
+    ("DIA-NN", "DIA-NN"),
+    ("OrthoFinder", "OrthoFinder"),
+    ("OrthoVenn3", "OrthoVenn3"),
+    ("CAFE5", "CAFE5"),
+    ("Gallus gallus", "Gallus gallus"),
+    ("Anas platyrhynchos", "Anas platyrhynchos"),
+    ("Columba livia", "Columba livia"),
+    ("G. gallus", "G. gallus"),
+    ("A. platyrhynchos", "A. platyrhynchos"),
+    ("C. livia", "C. livia"),
+    ("chicken", "鸡"),
+    ("duck", "鸭"),
+    ("pigeon", "鸽"),
+    ("mammillary-layer", "乳突层"),
     ("mammillary layer", "乳突层"),
+    ("mammillary", "乳突层"),
+    ("matrix-protein", "基质蛋白"),
+    ("matrix protein", "基质蛋白"),
+    ("glycoprotein", "糖蛋白"),
+    ("glycopeptides", "糖肽"),
+    ("glycopeptide", "糖肽"),
+    ("glycan-state", "糖链状态"),
+    ("glycan states", "糖链状态"),
+    ("glycan state", "糖链状态"),
+    ("N-glycan", "N-糖链"),
+    ("glycans", "糖链"),
+    ("glycan", "糖链"),
+    ("glycosylation", "糖基化"),
     ("inside-out loading", "由内向外加载"),
+    ("inside-out", "由内向外"),
+    ("egg-tooth", "卵齿"),
+    ("Local finite-element loading connects egg-tooth contact geometry to species-specific shell resistance", "局部有限元加载将卵齿接触几何与物种特异性蛋壳阻力联系起来"),
+    ("finite-element", "有限元"),
+    ("micro-CT", "显微CT"),
+    ("shell resistance", "蛋壳阻力"),
+    ("interface resistance", "界面阻力"),
+    ("local resistance", "局部阻力"),
+    ("egg shell", "蛋壳"),
+    ("eggshell", "蛋壳"),
+    ("radius of gyration", "回转半径"),
+    ("hatching resistance", "孵化阻力"),
+    ("hatching-favourable", "有利于破壳"),
+    ("hatching-relevant", "破壳相关"),
+    ("hatching-favourable eggshell mechanics", "有利于破壳的蛋壳力学"),
+    ("hatching-relevant shell mechanics", "破壳相关蛋壳力学"),
+    ("local hatching mechanics", "局部破壳力学"),
+    ("shell mechanics", "蛋壳力学"),
+    ("local stress response", "局部应力响应"),
+    ("mammillary-interface mechanism", "乳突层界面机制"),
+    ("hotspots", "热点"),
     ("hotspot", "热点"),
+    ("Ca²⁺relevant", "Ca²⁺相关"),
+    ("Ca²⁺responsive", "Ca²⁺响应性"),
+    ("Ca²⁺", "Ca²⁺"),
+    ("Ca2+", "Ca²⁺"),
 ]
+
+ABBREVIATIONS: tuple[str, ...] = (
+    "Fig.",
+    "Figs.",
+    "Table.",
+    "Eq.",
+    "Dr.",
+    "Prof.",
+    "G.",
+    "A.",
+    "C.",
+    "s.d.",
+    "e.g.",
+    "i.e.",
+    "vs.",
+ )
 
 
 def _has_english_letters(text: str) -> bool:
@@ -52,6 +142,7 @@ def _translate_text(text: str, retries: int = 3) -> str:
             if not out:
                 out = text
             _cache[text] = out
+            _save_cache()
             return out
         except Exception as e:  # noqa: BLE001
             last_err = e
@@ -60,20 +151,28 @@ def _translate_text(text: str, retries: int = 3) -> str:
     # Fallback: keep original if remote translation fails.
     print(f"[WARN] translation failed, keep original: {text[:80]} :: {last_err}")
     _cache[text] = text
+    _save_cache()
     return text
 
 
+def _save_cache() -> None:
+    CACHE_FILE.write_text(
+        json.dumps(_cache, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+
 def _term_token(index: int) -> str:
-    return f"ZXQTERM{index:03d}"
+    return f"ZXQTERM{index:03d}X"
 
 
 def _lock_terms_for_translation(text: str) -> tuple[str, dict[str, str]]:
     protected = text
     token_to_cn: dict[str, str] = {}
-    for index, (src_term, cn_term) in enumerate(TERM_LOCKS):
+    ordered_terms = sorted(TERM_LOCKS, key=lambda item: len(item[0]), reverse=True)
+    for index, (src_term, cn_term) in enumerate(ordered_terms):
         token = _term_token(index)
         token_to_cn[token] = cn_term
-        # case-insensitive replacement to avoid translator drifting terminology.
         protected = re.sub(re.escape(src_term), token, protected, flags=re.IGNORECASE)
     return protected, token_to_cn
 
@@ -81,7 +180,7 @@ def _lock_terms_for_translation(text: str) -> tuple[str, dict[str, str]]:
 def _restore_locked_terms(text: str, token_to_cn: dict[str, str]) -> str:
     out = text
     for token, cn_term in token_to_cn.items():
-        out = out.replace(token, cn_term)
+        out = re.sub(re.escape(token), cn_term, out, flags=re.IGNORECASE)
     return out
 
 
@@ -92,58 +191,117 @@ def _normalize_locked_terms(text: str) -> str:
     return out
 
 
-def _translate_batch(texts: list[str], batch_size: int = 40) -> list[str]:
+def _group_translation_texts(texts: list[str], max_count: int, max_chars: int = 4500) -> list[list[str]]:
+    groups: list[list[str]] = []
+    current: list[str] = []
+    current_chars = 0
+    for text in texts:
+        next_chars = current_chars + len(text) + 20
+        if current and (len(current) >= max_count or next_chars > max_chars):
+            groups.append(current)
+            current = []
+            current_chars = 0
+        current.append(text)
+        current_chars += len(text) + 20
+    if current:
+        groups.append(current)
+    return groups
+
+
+def _translate_joined_sentences(texts: list[str]) -> list[str]:
+    delimiter = "ZXQSENTSEP000X"
+    joined = f"\n{delimiter}\n".join(texts)
+    translated = translator.translate(joined)
+    if not translated:
+        raise RuntimeError("empty translation")
+    parts = [part.strip() for part in translated.split(delimiter)]
+    if len(parts) != len(texts):
+        raise RuntimeError("joined sentence split mismatch")
+    return parts
+
+
+def _translate_batch(texts: list[str], batch_size: int = 8) -> list[str]:
     out: list[str] = []
     for i in range(0, len(texts), batch_size):
         chunk = texts[i : i + batch_size]
-        try:
-            translated = translator.translate_batch(chunk)
-            if not translated or len(translated) != len(chunk):
-                raise RuntimeError("batch size mismatch")
-            out.extend(translated)
-        except Exception:
-            # Fallback per item for resilience.
-            out.extend(_translate_text(t) for t in chunk)
+        cached = [_cache.get(text) for text in chunk]
+        if all(item is not None for item in cached):
+            out.extend(item or source for item, source in zip(cached, chunk))
+            print(f"[cn] translated/cached sentences: {min(i + batch_size, len(texts))}/{len(texts)}", flush=True)
+            continue
+
+        missing_positions = [index for index, item in enumerate(cached) if item is None]
+        missing_texts = [chunk[index] for index in missing_positions]
+        for group in _group_translation_texts(missing_texts, max_count=batch_size):
+            try:
+                translated = _translate_joined_sentences(group)
+                for source, target in zip(group, translated):
+                    _cache[source] = target or source
+            except Exception:
+                for source in group:
+                    _translate_text(source)
+
+        _save_cache()
+        out.extend(_cache.get(text, text) for text in chunk)
+        print(f"[cn] translated/cached sentences: {min(i + batch_size, len(texts))}/{len(texts)}", flush=True)
     return out
 
 
-def _split_for_translation(text: str) -> list[str]:
-    # Prefer sentence chunks; fallback to punctuation-based chunking for long blocks.
-    s = text.strip()
-    if len(s) <= 260:
-        return [s]
+def _protect_abbreviations(text: str) -> tuple[str, dict[str, str]]:
+    protected = text
+    token_to_abbr: dict[str, str] = {}
+    for index, abbr in enumerate(ABBREVIATIONS):
+        token = f"ZXQABBR{index:03d}X"
+        token_to_abbr[token] = abbr
+        protected = protected.replace(abbr, token)
+    return protected, token_to_abbr
 
-    parts = re.split(r"(?<=[.!?])\s+", s)
-    chunks: list[str] = []
-    buf = ""
-    for p in parts:
-        p = p.strip()
-        if not p:
-            continue
-        if len(p) > 260:
-            sub_parts = re.split(r"(?<=[,;:])\s+", p)
-        else:
-            sub_parts = [p]
-        for sp in sub_parts:
-            sp = sp.strip()
-            if not sp:
-                continue
-            if len(buf) + len(sp) + 1 <= 260:
-                buf = (buf + " " + sp).strip()
-            else:
-                if buf:
-                    chunks.append(buf)
-                buf = sp
-    if buf:
-        chunks.append(buf)
-    return chunks if chunks else [s]
+
+def _restore_abbreviations(text: str, token_to_abbr: dict[str, str]) -> str:
+    restored = text
+    for token, abbr in token_to_abbr.items():
+        restored = restored.replace(token, abbr)
+    return restored
+
+
+def _split_sentences(text: str) -> list[str]:
+    s = text.strip()
+    if not s:
+        return []
+
+    protected, token_to_abbr = _protect_abbreviations(s)
+    raw_sentences = re.split(r"(?<=[.!?])\s+", protected)
+    sentences = []
+    for sentence in raw_sentences:
+        restored = _restore_abbreviations(sentence.strip(), token_to_abbr)
+        if restored:
+            sentences.append(restored)
+    return sentences or [s]
 
 
 def _translate_long_text(text: str) -> str:
     locked_text, token_to_cn = _lock_terms_for_translation(text)
-    chunks = _split_for_translation(locked_text)
-    translated_chunks = _translate_batch(chunks, batch_size=20)
-    joined = " ".join(t.strip() for t in translated_chunks if t and t.strip())
+    sentences = _split_sentences(locked_text)
+    translated_chunks = _translate_batch(sentences, batch_size=20)
+    aligned_sentences = []
+    for source, translated in zip(sentences, translated_chunks):
+        out = translated.strip() if translated and translated.strip() else source
+        aligned_sentences.append(out)
+    joined = " ".join(aligned_sentences)
+    normalized = _normalize_locked_terms(joined)
+    return _restore_locked_terms(normalized, token_to_cn)
+
+
+def _restore_translated_sentences(
+    source_sentences: list[str],
+    translated_sentences: list[str],
+    token_to_cn: dict[str, str],
+) -> str:
+    aligned_sentences = []
+    for source, translated in zip(source_sentences, translated_sentences):
+        out = translated.strip() if translated and translated.strip() else source
+        aligned_sentences.append(out)
+    joined = " ".join(aligned_sentences)
     normalized = _normalize_locked_terms(joined)
     return _restore_locked_terms(normalized, token_to_cn)
 
@@ -184,9 +342,20 @@ def _translate_paragraphs(paragraphs) -> int:
     if not targets:
         return 0
 
-    src_texts = [t[1] for t in targets]
-    dst_texts = [_translate_long_text(t) for t in src_texts]
-    for (p, _), dst in zip(targets, dst_texts):
+    prepared = []
+    all_sentences = []
+    for p, src in targets:
+        locked_text, token_to_cn = _lock_terms_for_translation(src)
+        sentences = _split_sentences(locked_text)
+        start = len(all_sentences)
+        all_sentences.extend(sentences)
+        prepared.append((p, sentences, token_to_cn, start, len(sentences)))
+
+    translated_sentences = _translate_batch(all_sentences, batch_size=8)
+
+    for p, sentences, token_to_cn, start, count in prepared:
+        chunk = translated_sentences[start : start + count]
+        dst = _restore_translated_sentences(sentences, chunk, token_to_cn)
         _replace_paragraph_text_keep_format(p, dst)
         changed += 1
     return changed

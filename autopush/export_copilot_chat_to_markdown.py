@@ -5,17 +5,56 @@ import datetime as dt
 import json
 import re
 from pathlib import Path
+from urllib.parse import unquote, urlparse
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Export VS Code Copilot Chat transcripts to daily Markdown files."
     )
-    parser.add_argument("--transcripts-dir", required=True, help="Directory containing transcript JSONL files.")
-    parser.add_argument("--output-dir", required=True, help="Directory for generated Markdown files.")
-    parser.add_argument("--workspace-name", required=True, help="Workspace key used in the export metadata.")
+    parser.add_argument("--transcripts-dir", help="Directory containing transcript JSONL files.")
+    parser.add_argument("--output-dir", help="Directory for generated Markdown files.")
+    parser.add_argument("--workspace-name", help="Workspace key used in the export metadata.")
     parser.add_argument("--machine", default="", help="Machine name used in the export metadata.")
     return parser.parse_args()
+
+
+def file_uri_to_path(value: str) -> Path | None:
+    parsed = urlparse(value)
+    if parsed.scheme != "file":
+        return None
+    return Path(unquote(parsed.path).lstrip("/"))
+
+
+def infer_transcripts_dir(workspace_dir: Path) -> Path | None:
+    storage_root = Path.home() / "AppData" / "Roaming" / "Code" / "User" / "workspaceStorage"
+    if not storage_root.exists():
+        return None
+
+    resolved_workspace = workspace_dir.resolve()
+    for storage_dir in storage_root.iterdir():
+        workspace_json = storage_dir / "workspace.json"
+        if not workspace_json.exists():
+            continue
+
+        try:
+            workspace_data = json.loads(workspace_json.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            continue
+
+        folder = workspace_data.get("folder")
+        if not isinstance(folder, str):
+            continue
+
+        folder_path = file_uri_to_path(folder)
+        if folder_path is None or folder_path.resolve() != resolved_workspace:
+            continue
+
+        transcripts_dir = storage_dir / "GitHub.copilot-chat" / "transcripts"
+        if transcripts_dir.exists():
+            return transcripts_dir
+
+    return None
 
 
 def read_jsonl(path: Path) -> list[dict]:
@@ -163,10 +202,13 @@ def render_daily_index(date_label: str, sessions: list[dict]) -> str:
 
 def main() -> int:
     args = parse_args()
-    transcripts_dir = Path(args.transcripts_dir)
-    output_dir = Path(args.output_dir)
+    workspace_dir = Path.cwd()
+    inferred_transcripts_dir = infer_transcripts_dir(workspace_dir)
+    transcripts_dir = Path(args.transcripts_dir) if args.transcripts_dir else inferred_transcripts_dir
+    output_dir = Path(args.output_dir) if args.output_dir else workspace_dir / "chat_logs"
+    workspace_name = args.workspace_name or workspace_dir.name
 
-    if not transcripts_dir.exists():
+    if transcripts_dir is None or not transcripts_dir.exists():
         print(f"[chat-md] transcript directory not found: {transcripts_dir}")
         return 0
 
@@ -198,7 +240,7 @@ def main() -> int:
         session_markdown = render_session_markdown(
             session_id=session_id,
             session_title=session_title,
-            workspace_name=args.workspace_name,
+            workspace_name=workspace_name,
             machine_name=args.machine,
             transcript_name=transcript_path.name,
             started_at=started_at,
