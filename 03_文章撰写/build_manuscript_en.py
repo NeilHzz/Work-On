@@ -499,7 +499,7 @@ mixed([
     ("duck", False, True),
     (" at 404.00 ± 39.60 MPa and ", False, False),
     ("pigeon", False, True),
-    (" at 393.00 ± 35.20 MPa. The latter two species did not differ significantly from each other (Fig. 5C).", False, False),
+    (" at 393.00 ± 35.20 MPa. The latter two species did not differ significantly from each other (p = 0.728; Fig. 5C).", False, False),
 ])
 
 mixed([
