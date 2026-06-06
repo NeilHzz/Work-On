@@ -231,7 +231,7 @@ para(
     "We compared chicken, duck, and pigeon under a conserved egg-tooth interface by integrating micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco structural modelling, electrostatic analysis, and finite-element simulation. "
     "Cross-species separation emerged first in mammillary-layer organisation, while the matrix-protein toolkit remained largely shared. "
     "Within that shared background, ovalbumin (OVAL) shifted from High Mannose-dominant glycans in chicken to Neutral Complex/Hybrid-dominant glycans in duck and Sialylated Complex/Hybrid-dominant glycans in pigeon. "
-    "These glycan states predicted a stepwise change in Ca²⁺relevant OVAL surface accessibility, which aligned with mammillary density, shell thickness, and the local stress response to inside-out egg-tooth loading. "
+    "These glycan states predicted a Ca²⁺surface-accessibility gradient on OVAL that tracked mammillary density and, after separating shell-thickness effects, resolved into a chicken-high versus duck/pigeon-low contrast in local shell-breaking structural strength. "
     "Together, the data refine current understanding of avian eggshell formation by connecting Ca²⁺accessible matrix-protein surfaces to mammillary-layer organisation and to shell mechanics that can favour localized hatching.",
     bold=False, size=10, before=0, after=80, align=WD_ALIGN_PARAGRAPH.JUSTIFY
 )
