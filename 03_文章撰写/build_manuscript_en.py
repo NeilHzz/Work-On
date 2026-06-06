@@ -564,7 +564,7 @@ p_disc_other = spara([
 
 p_disc_oval = spara([
     ("Re-Glyco and APBS analyses provide the structural bridge in the argument.", []),
-    (" Compact chicken glycans left the critical acidic OVAL surface relatively exposed. Longer, more electronegative pigeon glycans reduced Ca²⁺approach both sterically and electrostatically, with duck again occupying an intermediate state.", []),
+    (" Across species, this produced a glycan-state gradient: compact chicken glycans preserved the most accessible acidic surface, neutral complex/hybrid duck glycans imposed an intermediate constraint, and extended sialylated pigeon glycans generated the strongest steric and electrostatic shielding.", []),
     (" Earlier in vitro and structural work had already suggested that OVAL conformation and electrostatics matter during mineralization, but matched glycoform-resolved surface ensembles had not been compared across bird species.", [4, 11]),
     (" Glycan-state variation is therefore resolved here as a physically interpretable surface difference. Although this result does not establish direct causality, it supports a restrained inference: different glycan states on the same matrix protein can alter the chemical surface presented to the mineralizing environment and may thereby contribute to the structural divergence observed here.", []),
 ])
