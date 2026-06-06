@@ -25,6 +25,7 @@ except (FileNotFoundError, json.JSONDecodeError):
 # Locked terminology keeps sentence-level translation stable across reruns.
 TERM_LOCKS: list[tuple[str, str]] = [
     ("Cross-species OVAL glycan states reveal a matrix mechanism for avian shell-breaking mechanics", "跨物种OVAL糖链状态揭示鸟类破壳力学的基质机制"),
+    ("Eggshell matrix proteins are key regulators of eggshell structural formation, and existing studies have generated rich posttranslational-modification site maps, leaving the side-chain properties of glycosylation modifications as an important layer for further investigation.", "蛋壳基质蛋白是蛋壳结构形成的关键调控因子，已有研究已经建立了丰富的翻译后修饰位点图谱，而糖基化修饰侧链性质仍是有待进一步解析的重要层面。"),
     ("Ca²⁺accessibility-mammillary-mechanics axis", "Ca²⁺可及性-乳突层-力学轴"),
     ("Ca²⁺accessible matrix-protein surfaces", "Ca²⁺可及的基质蛋白表面"),
     ("ovalbumin (OVAL)", "卵清蛋白（OVAL）"),
