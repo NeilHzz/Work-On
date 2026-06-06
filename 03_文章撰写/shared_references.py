@@ -88,4 +88,5 @@ REFS = [
     "87. L. D'Alba, R. Maia, M. E. Hauber, M. D. Shawkey, The evolution of eggshell cuticle in relation to nesting ecology. Proceedings of the Royal Society B: Biological Sciences 283, 20160687 (2016).",
     "88. N. P. C. Horrocks, K. Hine, A. Hegemann, H. K. Ndithia, M. Shobrak, S. Ostrowski, J. B. Williams, K. D. Matson, B. I. Tieleman, Are antimicrobial defences in bird eggs related to climatic conditions associated with risk of trans-shell microbial infection? Frontiers in Zoology 11, 49 (2014).",
     "89. P.-L. Chiang, Y.-C. Tseng, H.-J. Wu, S.-H. Tsao, S.-P. Wu, W.-C. Wang, H.-I. Hsieh, J.-Y. Juang, Elastic moduli of avian eggshell. Biology 10, 989 (2021).",
+    "90. C. J. Sun, S. R. Chen, G. Y. Xu, X. M. Liu, N. Yang, Global variation and uniformity of eggshell thickness for chicken eggs. Poultry Science 91, 2718-2721 (2012).",
 ]

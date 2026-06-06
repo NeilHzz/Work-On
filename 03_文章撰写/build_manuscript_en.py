@@ -572,6 +572,7 @@ p_disc_oval = spara([
 p_disc_mech = spara([
     ("The mechanical comparison targets inside-out loading during hatching rather than conventional outside compression or whole-shell fracture.", []),
     (" That choice is critical: eggshell thickness inflates absolute failure load, whereas τ_max is less thickness-confounded and more directly reports stress transfer through the mammillary interface.", [16, 34, 69]),
+    (" Sun et al. likewise showed from longitudinal and latitudinal measurements that eggshell thickness varies across the whole egg, with the circumferential zone around the blunt end being locally thinnest, reinforcing the need to separate global shell-thickness buffering from local hatching-interface mechanics.", [90]),
     (" The analysis therefore asks whether the inner mammillary interface retains the same contrast already inferred from matrix chemistry and morphology.", [16, 34, 35, 69]),
     (" Duck makes this separation explicit: its thicker shell increased F_max but did not recreate the high-τ_max state observed in chicken.", []),
     (" This distinction separates thickness buffering and developmental background from the material pathway emphasized here.", []),
