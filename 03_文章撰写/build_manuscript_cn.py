@@ -24,7 +24,7 @@ except (FileNotFoundError, json.JSONDecodeError):
 
 # Locked terminology keeps sentence-level translation stable across reruns.
 TERM_LOCKS: list[tuple[str, str]] = [
-    ("Cross-species OVAL glycan states connect mammillary-layer organisation to hatching-favourable eggshell mechanics", "跨物种OVAL糖链状态将乳突层组织与有利于破壳的蛋壳力学联系起来"),
+    ("Cross-species OVAL glycan states reveal a matrix mechanism for avian shell-breaking mechanics", "跨物种OVAL糖链状态揭示鸟类破壳力学的基质机制"),
     ("Ca²⁺accessibility-mammillary-mechanics axis", "Ca²⁺可及性-乳突层-力学轴"),
     ("Ca²⁺accessible matrix-protein surfaces", "Ca²⁺可及的基质蛋白表面"),
     ("ovalbumin (OVAL)", "卵清蛋白（OVAL）"),
@@ -87,6 +87,7 @@ TERM_LOCKS: list[tuple[str, str]] = [
     ("hatching-relevant", "破壳相关"),
     ("hatching-favourable eggshell mechanics", "有利于破壳的蛋壳力学"),
     ("hatching-relevant shell mechanics", "破壳相关蛋壳力学"),
+    ("shell-breaking mechanics", "破壳力学"),
     ("local hatching mechanics", "局部破壳力学"),
     ("shell mechanics", "蛋壳力学"),
     ("local stress response", "局部应力响应"),

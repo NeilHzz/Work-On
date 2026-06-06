@@ -209,7 +209,7 @@ def add_main_figure_legend(label, title, caption_parts, before=0, after=160):
 
 # Title (鈮?35 characters)
 para(
-    "Cross-species OVAL glycan states connect mammillary-layer organisation to hatching-favourable eggshell mechanics",
+    "Cross-species OVAL glycan states reveal a matrix mechanism for avian shell-breaking mechanics",
     bold=True, size=14, before=0, after=160, align=WD_ALIGN_PARAGRAPH.LEFT
 )
 
