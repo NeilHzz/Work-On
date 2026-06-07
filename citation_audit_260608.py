@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+import sys
 from collections import Counter
 from datetime import datetime
 from pathlib import Path
@@ -11,9 +12,12 @@ from docx import Document
 
 BASE = Path.cwd()
 WORK_DIR = next(BASE.glob("03_*"))
-DOCX = WORK_DIR / "manuscript260608.docx"
-REPORT = WORK_DIR / "manuscript260608_citation_check.md"
-JSON_OUT = WORK_DIR / "manuscript260608_citation_check.json"
+DOCX = Path(sys.argv[1]) if len(sys.argv) > 1 else WORK_DIR / "manuscript260608.docx"
+if not DOCX.is_absolute():
+    candidates = list(WORK_DIR.glob(DOCX.name))
+    DOCX = candidates[0] if candidates else DOCX
+REPORT = WORK_DIR / f"{DOCX.stem}_citation_check.md"
+JSON_OUT = WORK_DIR / f"{DOCX.stem}_citation_check.json"
 
 
 REFERENCE_HEADING = "References"
@@ -95,14 +99,12 @@ def reference_format_issues(references: dict[int, dict]) -> list[dict]:
         text = ref["text"]
         if " et al" in text or "et al." in text:
             issues.append({"ref": number, "issue": "uses et al.; Science style requires complete author lists"})
-        if re.search(r"\bdoi:|https?://doi\.org/", text, re.I):
-            has_doi = True
-        else:
-            has_doi = False
-        if not has_doi:
-            issues.append({"ref": number, "issue": "DOI missing; Science Advances asks for DOI when available"})
-        if not re.search(r"\(\d{4}\)\.?$", text):
-            issues.append({"ref": number, "issue": "does not end with publication year in parentheses"})
+        has_doi = bool(re.search(r"\bdoi:\s*10\.|https?://doi\.org/", text, re.I))
+        has_url = bool(re.search(r"https?://", text, re.I))
+        if not has_doi and not has_url:
+            issues.append({"ref": number, "issue": "DOI or stable URL missing; Science Advances asks for DOI when available"})
+        if not re.search(r"\(\d{4}\)", text):
+            issues.append({"ref": number, "issue": "publication year in parentheses not detected"})
         if re.search(r"\b\d{4};", text):
             issues.append({"ref": number, "issue": "appears to use semicolon-year style rather than Science citation style"})
         if re.search(r"^\[[0-9]+\]", text):
@@ -166,7 +168,7 @@ def main() -> None:
 
     first_order_note = "PASS" if not first_order_violations else "FAIL"
     crossref_note = "PASS" if not missing_reference_numbers and not uncited_reference_numbers and not numbering_gaps else "FAIL"
-    doi_missing = sum(1 for item in format_issues if "DOI missing" in item["issue"])
+    doi_missing = sum(1 for item in format_issues if "DOI or stable URL missing" in item["issue"])
     report = [
         "# manuscript260608 Citation Check",
         "",
@@ -182,7 +184,7 @@ def main() -> None:
         f"- Reference entries: {len(ref_set)}",
         f"- Citation/reference cross-match: **{crossref_note}**",
         f"- First-citation numbering order: **{first_order_note}**",
-        f"- Reference entries missing DOI field: {doi_missing}",
+        f"- Reference entries missing DOI/stable URL field: {doi_missing}",
         "",
         "## Science Advances Checks Applied",
         "",
@@ -216,13 +218,13 @@ def main() -> None:
             "",
             "## Format Issues",
             "",
-            f"- DOI missing in {doi_missing} of {len(ref_set)} reference entries. This is the main Science Advances compliance gap.",
+            f"- DOI/stable URL missing in {doi_missing} of {len(ref_set)} reference entries.",
             f"- In-text citation style detected: {style['in_text_parentheses_count']} parenthetical numeric groups, {style['in_text_square_bracket_count']} square-bracket numeric groups.",
             "- Current reference list uses `1. Author...` numbering. Keep this only if you are following Science-family parenthetical-number style; convert consistently if the submission system/template requires square brackets.",
         ]
     )
 
-    non_doi_issues = [item for item in format_issues if "DOI missing" not in item["issue"]]
+    non_doi_issues = [item for item in format_issues if "DOI or stable URL missing" not in item["issue"]]
     if non_doi_issues:
         report.append("")
         report.append("### Non-DOI Format Flags")
