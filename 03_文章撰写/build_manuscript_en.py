@@ -382,8 +382,8 @@ head("OVAL glycosylation gives the clearest cross-species molecular contrast")
 
 p_s2a = spara([
     ("Intact-glycopeptide profiling showed that the three species differed in sampling depth but still shared a stable comparison core (Fig. 2A to D; Tables S1 and S2). The cluster view recovered 25 clusters shared by all three species, with the largest additional pairwise overlap between duck and pigeon at 64 clusters, whereas chicken contributed little species-private cluster space (Fig. 2A).", []),
-    ("The same pattern held for the catalog counts: duck yielded 321 glycoproteins, 547 glycosites, and 197 glycan compositions; pigeon yielded 192, 257, and 162; and chicken yielded 55, 88, and 105 (Fig. 2B). Shared-core Jensen-Shannon similarity remained between 0.33 and 0.40, with the duck-pigeon pair highest (Fig. 2C). These values indicate divergence within a still comparable glycoproteomic background rather than three disconnected chemical spaces.", []),
-    ("Glycan-class composition reinforced the same point at the chemical-deployment level. High-Mannose and Complex-Fucosylated glycans formed a broad cross-species background, whereas Complex-Sialylated and other more extended classes contributed more strongly to lineage separation (Fig. 2D).", []),
+    (" The same pattern held for the catalog counts: duck yielded 321 glycoproteins, 547 glycosites, and 197 glycan compositions; pigeon yielded 192, 257, and 162; and chicken yielded 55, 88, and 105 (Fig. 2B). Shared-core Jensen-Shannon similarity remained between 0.33 and 0.40, with the duck-pigeon pair highest (Fig. 2C). These values indicate divergence within a still comparable glycoproteomic background rather than three disconnected chemical spaces.", []),
+    (" Glycan-class composition reinforced the same point at the chemical-deployment level. High-Mannose and Complex-Fucosylated glycans formed a broad cross-species background, whereas Complex-Sialylated and other more extended classes contributed more strongly to lineage separation (Fig. 2D).", []),
 ])
 
 add_centered_figure("Fig2_composed.png", width_cm=14.6)
@@ -498,7 +498,7 @@ mixed([
     (" reached 0.90 ± 0.09 N, and ", False, False),
     ("pigeon", False, True),
     (" reached 0.49 ± 0.04 N, and all pairwise differences were significant by Tukey HSD (Fig. 5B). By contrast, τ_max resolved a two-level pattern (p = 6.64 × 10^-10). ", False, False),
-    ("chicken", False, True),
+    ("Chicken", False, True),
     (" reached 0.613 ± 0.061 MPa and was significantly higher than ", False, False),
     ("duck", False, True),
     (" at 0.413 ± 0.041 MPa and ", False, False),
@@ -508,7 +508,7 @@ mixed([
 
 mixed([
     ("The difference between F_max and τ_max clarified the duck result. Its higher raw contact force was driven mainly by greater shell thickness (0.35 mm versus 0.19 mm in pigeon). It did not indicate superior unit-area material resistance. By contrast, ", False, False),
-    ("chicken", False, True),
+    ("Chicken", False, True),
     (" exhibited a 36-40% increase in τ_max relative to the two other species, indicating a stronger hatching-relevant local stress response independent of shell thickness. This high-versus-low grouping, with ", False, False),
     ("chicken", False, True),
     (" alone in the high group and ", False, False),
