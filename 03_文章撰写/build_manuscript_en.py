@@ -767,11 +767,11 @@ mixed([
     ("G.\u00a0gallus", False, True),
     (" sequence against the non-reference-species proteomes (E-value "
      "threshold 1 \u00d7 10\u207b\u2075; maximum 500 target sequences; 250 reported alignments). "
-     "Candidate hits were retained at average maximum sequence identity \u2265 0.80; "
+     "Candidate hits were retained at average maximum sequence identity \u2265 0.40; "
      "where query and subject non-overlapping HSP counts were unequal, a relaxed "
-     "threshold of \u2265 0.50 was applied. Final UniProt ortholog identifiers used for "
+     "maximum-identity threshold of \u2265 0.40 was applied. Final UniProt ortholog identifiers used for "
      "downstream structural and quantitative analyses are listed in Supplementary "
-     "Table\u00a01.", False, False),
+     "Table\u00a03.", False, False),
 ])
 
 head("Integrated protein-glycan abundance comparison")
@@ -788,7 +788,7 @@ para(
     "a matched protein-abundance measurement. Protein and glycan intensities were "
     "log2-transformed, and within-species protein-glycan coupling was summarized by "
     "Spearman rank correlation with two-sided p values. OVAL, OC116, TRFE, and OC17 "
-    "were highlighted by the strict ortholog assignments summarized in Fig. 2E, and labels "
+    "were highlighted by the strict ortholog assignments summarized in Fig. 2E and Table S3, and labels "
     "were annotated with the corresponding glycosylated Asn position.")
 
 para(
@@ -849,7 +849,7 @@ p_m_reglyco = mixed([
      "atoms, the end-to-end distance of the glycan chain, and the minimum distance "
      "between any glycan heavy atom and protein C\u03b1 atoms (minimum C\u03b1 contact "
      "distance). Per-structure summary statistics (mean\u00a0\u00b1\u00a0s.d.) and pairwise species "
-     "comparisons (Mann\u2013Whitney\u00a0U test, two-tailed) were performed for each descriptor.", False, False),
+     "comparisons (Mann\u2013Whitney\u00a0U test, two-tailed) were performed for each descriptor and are reported in Tables S5 and S6.", False, False),
 ])
 cite(p_m_reglyco, [11, 56, 65])
 
@@ -879,7 +879,7 @@ p_m_fea = mixed([
     ("A. platyrhynchos", False, True),
     ("), and 0.03 mm (", False, False),
     ("C. livia", False, True),
-    ("), ensuring at least six element layers across the eggshell cross-section; the impactor was meshed at 0.1 mm. The impactor was driven by an imposed initial velocity of 50,000 mm/s along the loading axis, whereas one boundary set on the fragment perimeter was fully fixed in all translational and rotational degrees of freedom. Analyses ran for 1.0 \u00d7 10\u207b\u2074 s with a time-step safety factor of 0.7, erosion enabled, a minimum time step of 1 \u00d7 10\u207b\u2078 s, and automatic mass scaling; solver outputs included GLSTAT, SPCFORC, RCFORC, NCFORC, BNDOUT, NODOUT, MATSUM, ELOUT, JNTFORC, and DEFORC at 1.0 \u00d7 10\u207b\u2077 s intervals, with D3PLOT and INTFOR written every 1.0 \u00d7 10\u207b\u2076 s. For the positional loading analysis, the impactor was sampled at nine lateral offsets arranged on a 3 \u00d7 3 grid with 0.5 mm spacing. Across these nine cases, only the impactor coordinates were translated; material definitions, contact settings, boundary conditions, fragment size, and all other solver controls were held constant. Peak contact force (F_max) and peak contact shear stress (\u03c4_max) were extracted for each position. Sampling nine offsets allowed local positional heterogeneity to be measured without changing fragment size or loading geometry between species.", False, False),
+    ("), ensuring at least six element layers across the eggshell cross-section; the impactor was meshed at 0.1 mm. The impactor was driven by an imposed initial velocity of 50,000 mm/s along the loading axis, whereas one boundary set on the fragment perimeter was fully fixed in all translational and rotational degrees of freedom. Analyses ran for 1.0 \u00d7 10\u207b\u2074 s with a time-step safety factor of 0.7, erosion enabled, a minimum time step of 1 \u00d7 10\u207b\u2078 s, and automatic mass scaling; solver outputs included GLSTAT, SPCFORC, RCFORC, NCFORC, BNDOUT, NODOUT, MATSUM, ELOUT, JNTFORC, and DEFORC at 1.0 \u00d7 10\u207b\u2077 s intervals, with D3PLOT and INTFOR written every 1.0 \u00d7 10\u207b\u2076 s. For the positional loading analysis, the impactor was sampled at nine lateral offsets arranged on a 3 \u00d7 3 grid with 0.5 mm spacing. Across these nine cases, only the impactor coordinates were translated; material definitions, contact settings, boundary conditions, fragment size, and all other solver controls were held constant. Peak contact force (F_max) and peak contact shear stress (\u03c4_max) were extracted for each position and are reported in Table S7. Sampling nine offsets allowed local positional heterogeneity to be measured without changing fragment size or loading geometry between species.", False, False),
 ])
 cite(p_m_fea, [16, 37, 89])
 
@@ -889,7 +889,7 @@ mixed([
     ("All values are expressed as mean \u00b1 s.d. All statistical tests were two-tailed, "
      "and p < 0.05 was considered statistically significant throughout. "
     "Normality was evaluated by the Shapiro\u2013Wilk test and homogeneity of variance by Levene's test before parametric between-species analyses. Mammillary morphometric parameters were compared among species by one-way ANOVA "
-    "followed by Tukey's honestly significant difference test (Tukey HSD; \u03b1\u202f=\u202f0.05). These nine morphometric observations per species were non-overlapping subfragments from one scanned fragment and should therefore be interpreted as within-fragment regional replicates rather than as nine independent biological samples. The same assumption checks supported one-way ANOVA with Tukey HSD for finite-element outcomes (F_max and \u03c4_max). In contrast, glycan ensemble geometric descriptors (Rg, end-to-end distance, minimum glycan\u2013protein contact distance) and hotspot-derived ensemble metrics did not satisfy normality and/or homoscedasticity across species, so pairwise species contrasts for these variables were evaluated with two-sided Mann\u2013Whitney U tests. "
+    "followed by Tukey's honestly significant difference test (Tukey HSD; \u03b1\u202f=\u202f0.05). These nine morphometric observations per species were non-overlapping subfragments from one scanned fragment and should therefore be interpreted as within-fragment regional replicates rather than as nine independent biological samples. The same assumption checks supported one-way ANOVA with Tukey HSD for finite-element outcomes (F_max and \u03c4_max), with the underlying values reported in Table S7. In contrast, glycan ensemble geometric descriptors (Rg, end-to-end distance, minimum glycan\u2013protein contact distance) and hotspot-derived ensemble metrics did not satisfy normality and/or homoscedasticity across species, so pairwise species contrasts for these variables were evaluated with two-sided Mann\u2013Whitney U tests. "
      "Glycosylation-induced reduction in N_hot within ", False, False),
     ("C.\u00a0livia", False, True),
     (" was assessed by one-sample Wilcoxon signed-rank test versus the apo reference value; total Asp/Glu SASA at the whole-interface level was summarized descriptively because the structure-level values were invariant across ", False, False),
