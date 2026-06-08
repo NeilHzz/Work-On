@@ -59,27 +59,27 @@ para(
 
 para(
     doc,
-    "Avian eggshells are built rapidly by matrix-guided mineralization, yet they must also permit controlled local fracture during hatching. A central unresolved question is how conserved matrix proteins are chemically tuned to produce species-specific mammillary architectures and hatching-relevant mechanics within a shared shell-building program.",
+    "Avian eggshells offer a concise biological test of a broader materials question: how a conserved organic matrix can produce mineralized structures that are both protective and locally breakable. In eggshell formation, this problem is concentrated at the mammillary layer, where matrix-guided nucleation first organizes the shell architecture later encountered during hatching.",
 )
 
 para(
     doc,
-    "Here, we compare chicken, duck, and pigeon using micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco structural modeling, electrostatic analysis, and finite-element simulation. Species divergence emerged first in the mammillary layer, whereas the matrix-protein toolkit remained largely shared. Within this shared background, OVAL glycan states shifted from High-Mannose-dominant glycans in chicken to Neutral Complex/Hybrid-dominant glycans in duck and Sialylated Complex/Hybrid-dominant glycans in pigeon.",
+    "The manuscript builds a cross-scale spine for this problem. We first show that species divergence emerges at the mammillary layer before broad turnover of the eggshell-matrix protein toolkit. We then identify OVAL glycan state as the clearest chemically interpretable contrast within that shared matrix background.",
 )
 
 para(
     doc,
-    "This glycan-state progression supports a model in which compact OVAL glycans preserve greater calcium-accessible surface, promote earlier or more efficient nucleation-site exposure, and contribute to a denser mammillary field. Together, these analyses connect a matrix-level chemical axis to mammillary organization and local hatching-relevant response.",
+    "Using intact glycopeptide mass spectrometry, Re-Glyco structural modeling, and electrostatic analysis, we connect OVAL glycan-state variation to calcium-accessible surface presentation. This supports a model in which glycan-dependent surface accessibility can influence OVAL opening, nucleation-site exposure, and mammillary-layer organization.",
 )
 
 para(
     doc,
-    "The inside-out mechanical analysis further separates local stress transfer at the mammillary interface from whole-shell force and thickness effects. This distinction supports the central interpretation that OVAL glycan state is a chemically interpretable axis linking surface accessibility, mammillary organization, and localized shell-breaking mechanics.",
+    "The inside-out finite-element analysis completes the spine by moving the endpoint from whole-shell strength to local stress transfer at the mammillary interface. The resulting argument links shared matrix chemistry, glycan-state variation, mineral organization, and localized shell-breaking mechanics in one comparative framework.",
 )
 
 para(
     doc,
-    "We believe the study is well suited to Science Advances because it addresses a general problem in biomineralization: how posttranslational states of conserved matrix proteins organize material phenotypes across molecular, mesoscale, and mechanical levels. Rather than describing species differences in eggshell structure, the manuscript provides a testable cross-scale framework linking matrix glycosylation to mineral nucleation, mammillary architecture, and localized fracture behavior.",
+    "We believe the study is well suited to Science Advances because it addresses a broad biomineralization question with a mechanistic, cross-scale design. Rather than presenting a descriptive comparison of avian eggshells, the manuscript provides a testable framework for how posttranslational matrix states organize material phenotypes across molecular, mesoscale, and mechanical levels.",
 )
 
 para(
