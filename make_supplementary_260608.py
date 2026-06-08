@@ -21,7 +21,7 @@ MAIN_DOC_CN = WRITING / "0_Manuscript_CN" / "manuscript260608v2.docx"
 FIGURE_CAPTIONS = {
     "Fig. S1.": (
         "Fig. S1. Sensitivity analysis of the macroecological species-selection framework.",
-        "Distributions of variance explained (R2) and cluster silhouette coefficients from 500 randomized perturbation iterations applied to the AVONET-based principal-component space used for species selection. The focal species were Gallus gallus, Anas platyrhynchos, and Columba livia. Categorical ecological variables were numerically encoded, and each iteration shifted all encoding weights independently within +/-30% of the original values. The narrow distributions around the baseline values indicate that focal-species separation was stable under alternative encoding schemes.",
+        "Distributions of variance explained (R²) and cluster silhouette coefficients from 500 randomized perturbation iterations applied to the AVONET-based principal-component space used for species selection. The focal species were Gallus gallus, Anas platyrhynchos, and Columba livia. Categorical ecological variables were numerically encoded, and each iteration shifted all encoding weights independently within ±30% of the original values. The narrow distributions around the baseline values indicate that focal-species separation was stable under alternative encoding schemes.",
     ),
     "Fig. S2.": (
         "Fig. S2. Avian phylogenetic context and comparative-axis coding for the focal species.",
@@ -45,7 +45,7 @@ FIGURE_CAPTIONS = {
     ),
     "Fig. S7.": (
         "Fig. S7. OVAL surface-potential distributions and residue-level APBS potential maps.",
-        "Panel A shows species-level distributions of surface APBS potential for OVAL structural ensembles. Brackets indicate statistical comparisons among species. Panel B maps residue-level APBS potentials along the OVAL sequence for glycosylated and apo models. Rows are grouped by species and model state, and colors encode electrostatic potential values. The maps provide the residue-resolved electrostatic context used to interpret Ca2+-accessible surface differences.",
+        "Panel A shows species-level distributions of surface APBS potential for OVAL structural ensembles. Brackets indicate statistical comparisons among species. Panel B maps residue-level APBS potentials along the OVAL sequence for glycosylated and apo models. Rows are grouped by species and model state, and colors encode electrostatic potential values. The maps provide the residue-resolved electrostatic context used to interpret Ca²⁺-accessible surface differences.",
     ),
     "Fig. S8.": (
         "Fig. S8. CAFE5 gene-family expansion and contraction across the three focal species.",
@@ -56,12 +56,12 @@ FIGURE_CAPTIONS = {
         "Alluvial plots connect species, gene-family turnover direction, and enriched Gene Ontology terms inferred from expanded and contracted gene families. Flow colors distinguish expansion and contraction signals. Terminal blocks summarize enriched biological-process, cellular-component, and molecular-function terms for each lineage-specific turnover class.",
     ),
     "Fig. S10.": (
-        "Fig. S10. Re-Glyco ensemble analysis of OVAL Ca2+ hotspot exposure and glycan shielding.",
-        "Panel A shows total exposed Ca2+ hotspot counts across species-specific OVAL structural ensembles using the exposed-SASA threshold shown above the plot. Panel B shows glycan-shielded hotspot counts, defined by the glycan-induced SASA change threshold shown above the plot. Letters denote post hoc group differences after ANOVA. Panel C shows hotspot-count trajectories across 50 conformation models for each species-level ensemble. Together, these panels show that chicken retained the highest exposed Ca2+ hotspot state, whereas pigeon carried stronger glycan shielding and duck occupied an intermediate range.",
+        "Fig. S10. Re-Glyco ensemble analysis of OVAL Ca²⁺ hotspot exposure and glycan shielding.",
+        "Panel A shows total exposed Ca²⁺ hotspot counts across species-specific OVAL structural ensembles using the exposed-SASA threshold shown above the plot. Panel B shows glycan-shielded hotspot counts, defined by the glycan-induced SASA change threshold shown above the plot. Letters denote post hoc group differences after ANOVA. Panel C shows hotspot-count trajectories across 50 conformation models for each species-level ensemble. Together, these panels show that chicken retained the highest exposed Ca²⁺ hotspot state, whereas pigeon carried stronger glycan shielding and duck occupied an intermediate range.",
     ),
     "Fig. S11.": (
         "Fig. S11. Finite-element Y-force and contact-stress time courses across offset loading positions.",
-        "Panels A and B show chicken simulations, panels C and D show duck simulations, and panels E and F show pigeon simulations. For each species, the 3 x 3 panels show contact Y-force time courses across nine lateral target-plate offsets, with peak force and contact-stress markers annotated on each curve. The paired summary panel overlays the nine Y-force trajectories for the same species. Solid and dashed curves show the paired force and contact-stress readouts used to derive peak Fmax and tau_max values reported in the main text and Fig. 5.",
+        "Panels A and B show chicken simulations, panels C and D show duck simulations, and panels E and F show pigeon simulations. For each species, the 3 × 3 panels show contact Y-force time courses across nine lateral target-plate offsets, with peak force and contact-stress markers annotated on each curve. The paired summary panel overlays the nine Y-force trajectories for the same species. Solid and dashed curves show the paired force and contact-stress readouts used to derive peak F_max and τ_max values reported in the main text and Fig. 5.",
     ),
 }
 
