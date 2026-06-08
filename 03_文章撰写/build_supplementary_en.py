@@ -283,23 +283,19 @@ doc.add_page_break()
 add_image(FIG_BASE / "SuppFig7_Glycosylation_Hotspot" / "Fig_hotspot_ensemble_1.png", width_cm=15.5)
 fig_title("Fig. S10.", "Re-Glyco ensemble analysis of OVAL Ca2+-hotspot accessibility and glycan shielding.")
 fig_caption([
-    ("(A) Distribution of glycan radius of gyration (R", False, False),
-    ("g", False, False),
-    (") across conformational ensemble replicates for the three species-specific OVAL-glycan complexes, colored by species (", False, False),
+    ("(A) Total Ca2+-relevant hotspot counts across species-specific OVAL conformational ensembles and matched apo references. (B) Glycan-shielded hotspot counts showing the subset of Ca2+-relevant sites masked after glycan restoration. (C) Per-conformation hotspot-count trajectories across 50 Re-Glyco conformations for each species-specific OVAL-glycan complex and apo reference. Colors indicate ", False, False),
     ("G. gallus", False, True),
     (" orange, ", False, False),
     ("A. platyrhynchos", False, True),
     (" blue, ", False, False),
     ("C. livia", False, True),
-    (" green). (B) Glycan end-to-end distance distributions across conformations for the same three complexes. (C) Per-conformation Ca²⁺ hotspot count (N", False, False),
-    ("hot", False, False),
-    (") comparing the glycosylated and apo OVAL structures for each species. ", False, False),
+    (" green. ", False, False),
     ("C. livia", False, True),
-    (" showed the largest conformational space and the strongest glycan shielding; ", False, False),
+    (" showed the strongest glycan-associated reduction in accessible hotspot count; ", False, False),
     ("G. gallus", False, True),
-    (" showed the smallest conformational space and the weakest shielding; ", False, False),
+    (" showed the weakest hotspot shielding; ", False, False),
     ("A. platyrhynchos", False, True),
-    (" was intermediate. Apo structures provide the reference condition after N-glycan removal. Panel C contrasts were evaluated against the apo reference by one-sample Wilcoxon signed-rank test when structure-level variation was present.", False, False),
+    (" was intermediate. Apo structures provide the reference condition after N-glycan removal. Glycosylated-versus-apo contrasts were evaluated against the apo reference by one-sample Wilcoxon signed-rank test when structure-level variation was present.", False, False),
 ])
 
 doc.add_page_break()
@@ -315,28 +311,27 @@ add_images_row([
     FIG_BASE / "SuppFig8_FEA_Force_Analysis" / "pigeon_rcforc_3x3.png",
     FIG_BASE / "SuppFig8_FEA_Force_Analysis" / "pigeon_rcforc_yforce.png",
 ], width_cm=7.5)
-fig_title("Fig. S11.", "Per-species finite-element reaction-force time courses across all nine offset positions.")
+fig_title("Fig. S11.", "Per-species finite-element force and shear-stress time courses across all nine offset positions.")
 fig_caption([
-    ("(A-C) Contact force (", False, False),
-    ("F", False, True),
-    (") time-course curves for all nine parametric impact positions (3 × 3 lateral offset grid) for ", False, False),
+    ("For each species, the left image shows the 3 x 3 offset-position time courses and the right image shows the corresponding summary time courses. Rows show ", False, False),
     ("G. gallus", False, True),
-    (" (A), ", False, False),
+    (", ", False, False),
     ("A. platyrhynchos", False, True),
-    (" (B), and ", False, False),
+    (", and ", False, False),
     ("C. livia", False, True),
-    (" (C). Each curve represents one simulation; curves are shown from the onset of contact to peak force. Insets show the peak contact force (", False, False),
+    (", respectively. Contact force (", False, False),
+    ("F", False, True),
+    (") and shear stress (τ) are plotted from the onset of contact to peak response for all nine parametric impact positions. Each curve represents one simulation; the offset grid used 0.5-mm lateral spacing. The peak contact force (", False, False),
     ("F", False, True),
     ("_max", False, False),
-    (") distribution across the nine positions for each species. (D-F) Corresponding Y-direction reaction-force (", False, False),
-    ("F", False, True),
-    ("Y", False, False),
-    (") time courses. Species means ± s.d. of ", False, False),
+    (") and peak shear stress (τ", False, False),
+    ("_max", False, False),
+    (") values computed from these nine simulations per species are reported in Table S7 and summarized in Fig. 5. Species means ± s.d. of ", False, False),
     ("F", False, True),
     ("_max", False, False),
-    (" and peak shear stress (τ", False, False),
+    (" and τ", False, False),
     ("_max", False, False),
-    (") computed from these nine replicates per species are reported in the main text and Fig. 5. Simulations were run in LS-DYNA (Ansys) using explicit dynamic finite-element analysis. Eggshell thickness was set to the species-specific value measured from micro-CT.", False, False),
+    (") were calculated from the same nine positions. Simulations were run in LS-DYNA (Ansys) using explicit dynamic finite-element analysis. Eggshell thickness was set to the species-specific value measured from micro-CT.", False, False),
 ])
 
 doc.save(OUT)
