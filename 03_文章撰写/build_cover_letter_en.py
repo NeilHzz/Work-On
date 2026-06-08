@@ -10,7 +10,7 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt
 
-OUT = Path(__file__).with_name("cover_letter260606.docx")
+OUT = Path(__file__).with_name("0_Cover letter") / "cover_letter260606.docx"
 FONT = "Times New Roman"
 
 
@@ -54,22 +54,32 @@ para(doc, "Dear Editors,")
 
 para(
     doc,
-    'We are pleased to submit our manuscript entitled "Cross-species OVAL glycan states reveal a matrix mechanism for avian shell-breaking mechanics" for consideration as a Research Article in Science Advances.',
+    'We are pleased to submit our manuscript entitled "OVAL glycan states link eggshell matrix chemistry to avian shell-breaking mechanics" for consideration as a Research Article in Science Advances.',
 )
 
 para(
     doc,
-    "Avian eggshell formation is a rapid mineralization process in which matrix proteins must coordinate calcium access, nucleation, crystal growth, and shell architecture within a compressed uterine time window. The mammillary layer is the first structural layer established during this process and a key determinant of later shell organization, yet it remains unclear how conserved matrix proteins generate distinct mammillary states and local hatching mechanics across species.",
+    "Avian eggshells are built rapidly by matrix-guided mineralization, yet they must also permit controlled local fracture during hatching. A central unresolved question is how conserved matrix proteins are chemically tuned to produce species-specific mammillary architectures and hatching-relevant mechanics within a shared shell-building program.",
 )
 
 para(
     doc,
-    "Here, we address this gap by integrating micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco structural modeling, electrostatic analysis, and finite-element simulation across chicken, duck, and pigeon. Our results identify OVAL glycan state as a chemically interpretable axis that links Ca2+-relevant surface accessibility, glycan-modulated OVAL unfolding and nucleation-site exposure, mammillary-layer organization, and local shell-breaking mechanics under an inside-out hatching interface.",
+    "Here, we compare chicken, duck, and pigeon using micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco structural modeling, electrostatic analysis, and finite-element simulation. Species divergence emerged first in the mammillary layer, whereas the matrix-protein toolkit remained largely shared. Within this shared background, OVAL glycan states shifted from High-Mannose-dominant glycans in chicken to Neutral Complex/Hybrid-dominant glycans in duck and Sialylated Complex/Hybrid-dominant glycans in pigeon.",
 )
 
 para(
     doc,
-    "The study is well suited to Science Advances because it connects molecular glycoform variation to a mesoscale biomineral structure and to a biologically relevant mechanical endpoint. Rather than treating eggshell differences as descriptive species traits, the manuscript provides a cross-scale framework for testing how posttranslational states on shared matrix proteins can organize mineralized phenotypes.",
+    "This glycan-state progression supports a model in which compact chicken OVAL glycans preserve greater Ca2+-accessible surface, promote earlier or more efficient nucleation-site exposure, and contribute to a denser mammillary field. Consistent with this model, chicken showed the highest mammillary density (171.36 +/- 5.63 per mm2), compared with duck (155.22 +/- 8.63 per mm2) and pigeon (158.27 +/- 11.39 per mm2).",
+)
+
+para(
+    doc,
+    "The inside-out finite-element analysis further separated shell thickness from local hatching-relevant response. Duck had a thicker shell than pigeon (0.35 versus 0.19 mm) and a higher peak contact force (0.90 +/- 0.09 versus 0.49 +/- 0.04 N), but its peak contact shear stress grouped with pigeon rather than chicken. Chicken reached the highest local stress response (551.60 +/- 108.80 MPa), whereas duck and pigeon reached 404.00 +/- 39.60 MPa and 393.00 +/- 35.20 MPa, respectively.",
+)
+
+para(
+    doc,
+    "We believe the study is well suited to Science Advances because it addresses a general problem in biomineralization: how posttranslational states of conserved matrix proteins organize material phenotypes across molecular, mesoscale, and mechanical levels. Rather than describing species differences in eggshell structure, the manuscript provides a testable cross-scale framework linking matrix glycosylation to mineral nucleation, mammillary architecture, and localized fracture behavior.",
 )
 
 para(
