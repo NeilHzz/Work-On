@@ -331,7 +331,7 @@ fig_caption([
     ("_max", False, False),
     (" and τ", False, False),
     ("_max", False, False),
-    (") were calculated from the same nine positions. Simulations were run in LS-DYNA (Ansys) using explicit dynamic finite-element analysis. Eggshell thickness was set to the species-specific value measured from micro-CT.", False, False),
+    (" were calculated from the same nine positions. Simulations were run in LS-DYNA (Ansys) using explicit dynamic finite-element analysis. Eggshell thickness was set to the species-specific value measured from micro-CT.", False, False),
 ])
 
 doc.save(OUT)
