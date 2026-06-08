@@ -492,7 +492,7 @@ doc.add_page_break()
 
 mixed([
     ("Peak F_max differed significantly among species (p = 1.64 × 10^-13). ", False, False),
-    ("chicken", False, True),
+    ("Chicken", False, True),
     (" reached 1.12 ± 0.11 N, ", False, False),
     ("duck", False, True),
     (" reached 0.90 ± 0.09 N, and ", False, False),
