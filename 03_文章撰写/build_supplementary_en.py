@@ -132,7 +132,7 @@ def fig_caption(parts, before=0, after=240):
 para("Supplementary Materials for", size=11, before=0, after=40,
      align=WD_ALIGN_PARAGRAPH.CENTER)
 para(
-    "Cross-species OVAL glycan states connect mammillary-layer organisation to hatching-favourable eggshell mechanics",
+    "Cross-species OVAL glycan states reveal a matrix mechanism for avian shell-breaking mechanics",
     bold=True, size=12, before=0, after=160, align=WD_ALIGN_PARAGRAPH.CENTER,
 )
 para("[Author list and affiliations to match the main manuscript]",
@@ -281,7 +281,7 @@ fig_caption([
 
 doc.add_page_break()
 add_image(FIG_BASE / "SuppFig7_Glycosylation_Hotspot" / "Fig_hotspot_ensemble_1.png", width_cm=15.5)
-fig_title("Fig. S10.", "Re-Glyco ensemble analysis of OVAL glycan geometry and apo-versus-glycosylated states.")
+fig_title("Fig. S10.", "Re-Glyco ensemble analysis of OVAL Ca2+-hotspot accessibility and glycan shielding.")
 fig_caption([
     ("(A) Distribution of glycan radius of gyration (R", False, False),
     ("g", False, False),
