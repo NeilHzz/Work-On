@@ -1,13 +1,13 @@
 # manuscript260608 Citation Check
 
-Generated: 2026-06-08T12:14:19
+Generated: 2026-06-08T12:27:00
 Document: `manuscript260608v2.docx`
 Target: Science Advances
 
 ## Summary
 
 - Overall status: **PASS**
-- In-text citation groups: 61
+- In-text citation groups: 60
 - Unique cited references: 67
 - Reference entries: 67
 - Citation/reference cross-match: **PASS**
@@ -29,7 +29,7 @@ Target: Science Advances
 ## Format Issues
 
 - DOI/stable URL missing in 0 of 67 reference entries.
-- In-text citation style detected: 61 parenthetical numeric groups, 0 square-bracket numeric groups.
+- In-text citation style detected: 60 parenthetical numeric groups, 0 square-bracket numeric groups.
 - Current reference list uses `1. Author...` numbering. Keep this only if you are following Science-family parenthetical-number style; convert consistently if the submission system/template requires square brackets.
 
 ## Recommended Fixes
