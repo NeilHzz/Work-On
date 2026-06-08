@@ -9,6 +9,7 @@ Fig_force_timeseries.png : Mean ± 1σ force time-series (3 species)
 import os
 import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _save import save_fig
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib
@@ -27,8 +28,12 @@ SINGLE_PANEL_ADJUST = dict(left=0.13, right=0.97, bottom=0.13, top=0.86)
 # Paths
 # ─────────────────────────────────────────────────────────────
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-XLSX       = r"D:\system_folder\Desktop\Work On\01_数据与计算\力学分析\combined_rcforc_yforce.xlsx"
-OUT_DIR    = r"D:\system_folder\Desktop\Work On\02_可视化\Figure\png"
+WORK_ROOT = Path(SCRIPT_DIR).resolve().parents[1]
+XLSX_CANDIDATES = sorted(WORK_ROOT.glob("01_*/**/combined_rcforc_yforce.xlsx"))
+if not XLSX_CANDIDATES:
+    raise FileNotFoundError("combined_rcforc_yforce.xlsx not found under 01_*")
+XLSX       = str(XLSX_CANDIDATES[-1])
+OUT_DIR    = os.path.join(SCRIPT_DIR, "PNG")
 os.makedirs(OUT_DIR, exist_ok=True)
 OUT_TUKEY  = os.path.join(OUT_DIR, "Fig_force_tukey.png")
 OUT_TS     = os.path.join(OUT_DIR, "Fig_force_timeseries.png")
@@ -66,7 +71,7 @@ CASES = [
 SP_PREFIX = {"Gallus": "C", "Columba": "P", "Anas": "D"}
 
 def to_tau(F_N, T_mm):
-    return 1000.0 * F_N / (np.pi * D_SHELL * T_mm)
+    return F_N / (np.pi * D_SHELL * T_mm)
 
 # ─────────────────────────────────────────────────────────────
 # Load 3Species_Comparison for Tukey data
