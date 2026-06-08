@@ -69,12 +69,12 @@ para(
 
 para(
     doc,
-    "This glycan-state progression supports a model in which compact chicken OVAL glycans preserve greater Ca2+-accessible surface, promote earlier or more efficient nucleation-site exposure, and contribute to a denser mammillary field. Consistent with this model, chicken showed the highest mammillary density (171.36 +/- 5.63 per mm2), compared with duck (155.22 +/- 8.63 per mm2) and pigeon (158.27 +/- 11.39 per mm2).",
+    "This glycan-state progression supports a model in which compact OVAL glycans preserve greater calcium-accessible surface, promote earlier or more efficient nucleation-site exposure, and contribute to a denser mammillary field. The inside-out mechanical analysis then connects this matrix-level axis to a local hatching-relevant response rather than to whole-shell force alone.",
 )
 
 para(
     doc,
-    "The inside-out finite-element analysis further separated shell thickness from local hatching-relevant response. Duck had a thicker shell than pigeon (0.35 versus 0.19 mm) and a higher peak contact force (0.90 +/- 0.09 versus 0.49 +/- 0.04 N), but its peak contact shear stress grouped with pigeon rather than chicken. Chicken reached the highest local stress response (551.60 +/- 108.80 MPa), whereas duck and pigeon reached 404.00 +/- 39.60 MPa and 393.00 +/- 35.20 MPa, respectively.",
+    "The duck comparison is particularly important because it separates shell-thickness buffering from local stress transfer at the mammillary interface. This distinction strengthens the central interpretation that OVAL glycan state is a chemically interpretable axis linking surface accessibility, mammillary organization, and localized shell-breaking mechanics.",
 )
 
 para(
