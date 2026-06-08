@@ -381,7 +381,7 @@ p_sprot_focus = spara([
 head("OVAL glycosylation gives the clearest cross-species molecular contrast")
 
 p_s2a = spara([
-    ("Intact-glycopeptide profiling showed that the three species differed in sampling depth but still shared a stable comparison core (Fig. 2A to D). The cluster view recovered 25 clusters shared by all three species, with the largest additional pairwise overlap between duck and pigeon at 64 clusters, whereas chicken contributed little species-private cluster space (Fig. 2A).", []),
+    ("Intact-glycopeptide profiling showed that the three species differed in sampling depth but still shared a stable comparison core (Fig. 2A to D; Tables S1 and S2). The cluster view recovered 25 clusters shared by all three species, with the largest additional pairwise overlap between duck and pigeon at 64 clusters, whereas chicken contributed little species-private cluster space (Fig. 2A).", []),
     ("The same pattern held for the catalog counts: duck yielded 321 glycoproteins, 547 glycosites, and 197 glycan compositions; pigeon yielded 192, 257, and 162; and chicken yielded 55, 88, and 105 (Fig. 2B). Shared-core Jensen-Shannon similarity remained between 0.33 and 0.40, with the duck-pigeon pair highest (Fig. 2C). These values indicate divergence within a still comparable glycoproteomic background rather than three disconnected chemical spaces.", []),
     ("Glycan-class composition reinforced the same point at the chemical-deployment level. High-Mannose and Complex-Fucosylated glycans formed a broad cross-species background, whereas Complex-Sialylated and other more extended classes contributed more strongly to lineage separation (Fig. 2D).", []),
 ])
@@ -396,7 +396,7 @@ add_main_figure_legend(
 )
 
 p_s2b = mixed([
-    ("A stricter BlastP-based filter retained an orthologous glycoprotein subset suitable for structural comparison and summarized that shared candidate space in Fig. 2E. Using ", False, False),
+    ("A stricter BlastP-based filter retained an orthologous glycoprotein subset suitable for structural comparison and summarized that shared candidate space in Fig. 2E and Table S3. Using ", False, False),
     ("chicken", False, True),
     (" as the reference, non-reference candidates were retained only when the mean E-value was below 1 × 10-5 and sequence identity met the final comparability thresholds. This restricted the downstream comparison to high-confidence orthologs. Under that stricter mapping, OC17 was glycosylated only in chicken, whereas OC116, TRFE, and OVAL all retained glycosylation signals across the three species and served as shared anchors. Among them, OVAL showed a clear cross-species glycan shift and was prioritised for structural analysis.", False, False),
 ])
@@ -404,11 +404,12 @@ p_s2c = spara([
     ("Integrated protein and glycan abundance profiles further identified OVAL as the shared protein most closely aligned with the cross-species eggshell differences. In chicken, the protein-abundance and glycan-abundance space showed weak overall coupling, and OVAL occupied a comparatively modest glycan-burden position among the highlighted matrix proteins (Fig. 3A). In duck, the same analysis showed stronger positive protein-glycan coupling, with OVAL retaining high protein abundance while shifting toward higher glycan output (Fig. 3B). In pigeon, protein-glycan coupling was again positive, and OVAL carried the strongest glycan burden among the three species while remaining within the shared matrix-protein background (Fig. 3C).", []),
     (" Pairwise enrichment plots then showed why OVAL remained the most interpretable discriminator. In the chicken-versus-pigeon plane, OVAL shifted toward the glycan-rich side of the comparison, indicating that its glycan change exceeded the corresponding protein-abundance change (Fig. 3D). In the chicken-versus-duck plane, OVAL again deviated from the equal-change diagonal, separating chicken from duck through glycan enrichment rather than simple protein abundance (Fig. 3E). In the duck-versus-pigeon plane, OVAL remained displaced from protein-glycan equivalence, preserving a glycan-state ordering beyond the chicken-centered comparisons (Fig. 3F).", []),
     (" Among the highlighted eggshell-matrix proteins, OVAL therefore remained abundant in all three species but differed sharply in glycan burden: relatively modest in chicken, stronger in duck, and strongest in pigeon. OC116 and TRFE remained informative shared proteins, but neither separated bulk protein abundance from glycan output as consistently as OVAL.", []),
-    (" Intact-glycopeptide assignments placed OVAL along a coherent cross-species progression. Chicken carried compact High-Mannose glycans, duck was enriched for Neutral Complex/Hybrid glycans, and pigeon carried more extended Sialylated Complex/Hybrid glycans. Taken together, the six Fig. 3 panels place OVAL among the shared proteins whose glycosylation aligns most closely with the phenotype ordering recovered here.", []),
+    (" Intact-glycopeptide assignments placed OVAL along a coherent cross-species progression. Chicken carried compact High-Mannose glycans, duck was enriched for Neutral Complex/Hybrid glycans, and pigeon carried more extended Sialylated Complex/Hybrid glycans. Protein-glycan joint-analysis tables are provided in Table S4, and the recurrent matrix-protein glycosylation profiles are summarized in Fig. S6. Taken together, the six Fig. 3 panels place OVAL among the shared proteins whose glycosylation aligns most closely with the phenotype ordering recovered here.", []),
 ])
 
 p_s2d = spara([
-    ("Because those OVAL glycan classes differ strongly in size and charge distribution, the more informative comparative variable was OVAL surface accessibility rather than OVAL abundance alone.", []),
+    ("Because those OVAL glycan classes differ strongly in size and charge distribution, the more informative comparative variable was OVAL surface accessibility rather than OVAL abundance alone. OVAL ensemble geometry and APBS-derived surface-potential context are summarized in Fig. S7 and Tables S5 and S6.", []),
+    (" Broader gene-family expansion, contraction, and turnover-enrichment analyses are provided in Figs. S8 and S9, separating lineage-scale background from the OVAL-focused structural comparison.", []),
     (" The relevant feature was how much of the acidic OVAL interface remained chemically reachable once decorated by different glycans. Ortholog control, abundance decoupling, and glycan-class progression together left OVAL as the shared candidate that was most directly comparable, chemically specific, and structurally actionable.", []),
 ])
 
@@ -461,7 +462,7 @@ doc.add_page_break()
 head("Inside-out loading resolves hatching-relevant local mechanics")
 
 p_s4a = mixed([
-    ("Finite-element testing translated the shared egg-tooth interface into an explicit inside-out loading design. Fig. 5A shows the species-specific dorsal beak views and the matched micro-CT-derived finite-element shell fragments used for loading. Because the meshes preserved species-specific shell geometry, the analysis remained anchored to the same mammillary context identified morphologically. Impact loading was sampled across multiple offset positions on the eggshell fragments, yielding independent contact-force and contact-shear-stress time courses for each species (Fig. 5B and C). We recorded both raw peak contact force (F_max) and peak contact shear stress (τ_max) so that thickness-driven force effects could be separated from the local stress response at the mammillary contact interface. Peak τ_max was used as the direct readout of hatching-relevant local shell response. Species means ± s.d. were calculated across the sampled positions (Fig. S11A to F; eggshell thicknesses: ", False, False),
+    ("Finite-element testing translated the shared egg-tooth interface into an explicit inside-out loading design. Fig. 5A shows the species-specific dorsal beak views and the matched micro-CT-derived finite-element shell fragments used for loading. Because the meshes preserved species-specific shell geometry, the analysis remained anchored to the same mammillary context identified morphologically. Impact loading was sampled across multiple offset positions on the eggshell fragments, yielding independent contact-force and contact-shear-stress time courses for each species (Fig. 5B and C). We recorded both raw peak contact force (F_max) and peak contact shear stress (τ_max) so that thickness-driven force effects could be separated from the local stress response at the mammillary contact interface. Peak τ_max was used as the direct readout of hatching-relevant local shell response. Species means ± s.d. were calculated across the sampled positions (Fig. S11; Table S7; eggshell thicknesses: ", False, False),
     ("chicken", False, True),
     (" 0.29 mm, ", False, False),
     ("duck", False, True),
@@ -482,7 +483,7 @@ add_main_figure_legend(
         ("pigeon", False, True),
         (", and ", False, False),
         ("duck", False, True),
-        (" from top to bottom. Each model shows the conical egg-tooth impactor and a representative local stress field on the reconstructed shell geometry. (B) Mean contact-force time courses across nine impact positions, with shaded ±1σ envelopes, and the corresponding peak contact force (F_max) distribution. Star markers indicate the mean peak value on each time-course trace. (C) Mean contact shear-stress time courses across the same nine positions, with shaded ±1σ envelopes, and the corresponding peak shear stress (τ_max) distribution. Star markers indicate the mean peak value on each trace. Box-plot points denote individual impact positions (n = 9 per species), bars show mean ± s.d., p values above the plots are one-way ANOVA omnibus p values, and different letters indicate Tukey HSD groupings at p < 0.05. Simulations used identical loading and material settings so that the comparisons isolate geometry-dependent local response.", False, False),
+        (" from top to bottom. Each model shows the conical egg-tooth impactor and a representative local stress field on the reconstructed shell geometry. (B) Mean contact-force time courses across nine impact positions, with shaded ±1σ envelopes, and the corresponding peak contact force (F_max) distribution. Star markers indicate the mean peak value on each time-course trace. (C) Mean contact shear-stress time courses across the same nine positions, with shaded ±1σ envelopes, and the corresponding peak shear stress (τ_max) distribution. Star markers indicate the mean peak value on each trace. Box-plot points denote individual impact positions (n = 9 per species), bars show mean ± s.d., p values above the plots are one-way ANOVA omnibus p values, and different letters indicate Tukey HSD groupings at p < 0.05. Underlying finite-element values are reported in Table S7. Simulations used identical loading and material settings so that the comparisons isolate geometry-dependent local response.", False, False),
     ],
     before=20,
     after=80,
@@ -498,11 +499,11 @@ mixed([
     ("pigeon", False, True),
     (" reached 0.49 ± 0.04 N, and all pairwise differences were significant by Tukey HSD (Fig. 5B). By contrast, τ_max resolved a two-level pattern (p = 6.64 × 10^-10). ", False, False),
     ("chicken", False, True),
-    (" reached 551.60 ± 108.80 MPa and was significantly higher than ", False, False),
+    (" reached 0.613 ± 0.061 MPa and was significantly higher than ", False, False),
     ("duck", False, True),
-    (" at 404.00 ± 39.60 MPa and ", False, False),
+    (" at 0.413 ± 0.041 MPa and ", False, False),
     ("pigeon", False, True),
-    (" at 393.00 ± 35.20 MPa. The latter two species did not differ significantly from each other (p = 0.728; Fig. 5C).", False, False),
+    (" at 0.406 ± 0.033 MPa. The latter two species did not differ significantly from each other (Tukey HSD, p = 0.957; Fig. 5C).", False, False),
 ])
 
 mixed([
