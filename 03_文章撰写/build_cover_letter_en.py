@@ -69,12 +69,12 @@ para(
 
 para(
     doc,
-    "This glycan-state progression supports a model in which compact OVAL glycans preserve greater calcium-accessible surface, promote earlier or more efficient nucleation-site exposure, and contribute to a denser mammillary field. The inside-out mechanical analysis then connects this matrix-level axis to a local hatching-relevant response rather than to whole-shell force alone.",
+    "This glycan-state progression supports a model in which compact OVAL glycans preserve greater calcium-accessible surface, promote earlier or more efficient nucleation-site exposure, and contribute to a denser mammillary field. Together, these analyses connect a matrix-level chemical axis to mammillary organization and local hatching-relevant response.",
 )
 
 para(
     doc,
-    "The duck comparison is particularly important because it separates shell-thickness buffering from local stress transfer at the mammillary interface. This distinction strengthens the central interpretation that OVAL glycan state is a chemically interpretable axis linking surface accessibility, mammillary organization, and localized shell-breaking mechanics.",
+    "The inside-out mechanical analysis further separates local stress transfer at the mammillary interface from whole-shell force and thickness effects. This distinction supports the central interpretation that OVAL glycan state is a chemically interpretable axis linking surface accessibility, mammillary organization, and localized shell-breaking mechanics.",
 )
 
 para(
