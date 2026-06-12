@@ -12,8 +12,8 @@ from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 from deep_translator import GoogleTranslator
 
-EN_DOC = Path(__file__).with_name("manuscript260602v2.docx")
-OUT_DOC = Path(__file__).with_name("manuscript260602v2_cn.docx")
+EN_DOC = Path(__file__).with_name("0_Manuscript") / "manuscript260608v4.docx"
+OUT_DOC = Path(__file__).with_name("0_Manuscript_CN") / "manuscript260608v4_cn.docx"
 CACHE_FILE = Path(__file__).with_name(".translation_cache_cn.json")
 
 translator = GoogleTranslator(source="en", target="zh-CN")

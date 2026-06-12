@@ -9,20 +9,20 @@ from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
-from docx.shared import Cm, Pt
+from docx.shared import Cm, Pt, Inches
 
 
 FIG_BASE = Path(r"D:\system_folder\Desktop\Work On\Supplementary\Figures")
 MAIN_FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
 PANEL_FIG_BASE = Path(__file__).resolve().parent.parent / "02_可视化" / "Figure" / "PNG"
-OUT = str(Path(__file__).with_name("supplementary_materials260605.docx"))
+OUT = str(Path(__file__).with_name("0_A_Submit260608") / "supplementary_materials260608.docx")
 
 doc = Document()
 
 section = doc.sections[0]
-section.left_margin = section.right_margin = section.top_margin = section.bottom_margin = Cm(2.54)
-section.page_width = Cm(21.0)
-section.page_height = Cm(29.7)
+section.left_margin = section.right_margin = section.top_margin = section.bottom_margin = Inches(1)
+section.page_width = Inches(8.5)
+section.page_height = Inches(11)
 
 FONT = "Times New Roman"
 
@@ -34,7 +34,7 @@ def _set_font(run_props, name=FONT):
     run_props.insert(0, r_fonts)
 
 
-def fmt(run, size=11, bold=False, italic=False):
+def fmt(run, size=12, bold=False, italic=False):
     run.font.size = Pt(size)
     run.font.bold = bold
     run.font.italic = italic
@@ -51,7 +51,7 @@ def sp(paragraph, before=0, after=80, line=12):
     props.append(spacing)
 
 
-def para(text, bold=False, italic=False, size=11, before=0, after=80,
+def para(text, bold=False, italic=False, size=12, before=0, after=80,
          align=WD_ALIGN_PARAGRAPH.JUSTIFY):
     paragraph = doc.add_paragraph()
     paragraph.alignment = align
@@ -85,7 +85,7 @@ def st_head(text):
     paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
     sp(paragraph, before=240, after=80)
     run = paragraph.add_run(text)
-    fmt(run, size=11, bold=True)
+    fmt(run, size=12, bold=True)
     return paragraph
 
 
@@ -129,29 +129,31 @@ def fig_caption(parts, before=0, after=240):
     return paragraph
 
 
-para("Supplementary Materials for", size=11, before=0, after=40,
+para("Supplementary Materials for", size=18, before=0, after=40,
      align=WD_ALIGN_PARAGRAPH.CENTER)
 para(
-    "Cross-species OVAL glycan states reveal a matrix mechanism for avian shell-breaking mechanics",
-    bold=True, size=12, before=0, after=160, align=WD_ALIGN_PARAGRAPH.CENTER,
+    "OVAL glycan states link eggshell matrix chemistry to avian shell-breaking mechanics",
+    bold=True, size=14, before=0, after=160, align=WD_ALIGN_PARAGRAPH.CENTER,
 )
-para("[Author list and affiliations to match the main manuscript]",
-    size=10, before=0, after=300, align=WD_ALIGN_PARAGRAPH.CENTER)
+para("[First author] et al.", size=12, before=0, after=80,
+     align=WD_ALIGN_PARAGRAPH.CENTER)
+para("*Corresponding author. Email: [corresponding author email]",
+     size=12, before=0, after=300, align=WD_ALIGN_PARAGRAPH.CENTER)
 
-para("This PDF file includes:", size=11, before=0, after=60,
+para("This PDF file includes:", size=12, before=0, after=60,
      align=WD_ALIGN_PARAGRAPH.LEFT)
 for line in [
     "Supplementary Text 1 to 2",
     "Figs. S1 to S11",
     "",
-    "Other Supplementary Material for this manuscript includes the following:",
+    "Other Supplementary Materials for this manuscript include the following:",
     "Tables S1 to S7",
 ]:
     bullet = doc.add_paragraph()
     bullet.alignment = WD_ALIGN_PARAGRAPH.LEFT
     sp(bullet, before=0, after=20)
     run = bullet.add_run(line)
-    fmt(run, size=11)
+    fmt(run, size=12)
 
 doc.add_page_break()
 
