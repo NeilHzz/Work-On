@@ -10,7 +10,7 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt
 
-OUT = Path(__file__).with_name("0_Cover letter") / "cover_letter260606.docx"
+OUT = Path(__file__).with_name("0_Cover letter") / "cover_letter260615.docx"
 FONT = "Times New Roman"
 
 
@@ -48,33 +48,33 @@ doc = Document()
 section = doc.sections[0]
 section.left_margin = section.right_margin = section.top_margin = section.bottom_margin = Cm(2.54)
 
-para(doc, "[Date]")
+para(doc, "June 15, 2026")
 para(doc, "Science Advances Editorial Office")
 para(doc, "Dear Editors,")
 
 para(
     doc,
-    'We are pleased to submit our manuscript entitled "OVAL glycan states link eggshell matrix chemistry to avian shell-breaking mechanics" for consideration as a Research Article in Science Advances.',
+    'We are pleased to submit our manuscript entitled "OVAL glycan states link eggshell matrix chemistry to shell architecture and avian shell-breaking mechanics" for consideration as a Research Article in Science Advances.',
 )
 
 para(
     doc,
-    "Avian eggshells offer a concise biological test of a broader materials question: how a conserved organic matrix can produce mineralized structures that are both protective and locally breakable. In eggshell formation, this problem is concentrated at the mammillary layer, where matrix-guided nucleation first organizes the shell architecture later encountered during hatching.",
+    "Avian eggshells offer a concise biological test of a broader materials question: how a conserved organic matrix can produce mineralized structures that are both protective and locally breakable. In eggshell formation, this problem is concentrated at the mammillary layer, where matrix-guided nucleation first organizes the physical eggshell architecture later encountered during shell breaking.",
 )
 
 para(
     doc,
-    "The manuscript builds a cross-scale spine for this problem. We first show that species divergence emerges at the mammillary layer before broad turnover of the eggshell-matrix protein toolkit. We then identify OVAL glycan state as the clearest chemically interpretable contrast within that shared matrix background.",
+    "The manuscript builds a cross-scale argument for this problem. We first show that species divergence emerges at the mammillary layer before broad turnover of the eggshell-matrix protein toolkit. We then identify OVAL glycan state as the clearest chemically interpretable contrast within that shared matrix background.",
 )
 
 para(
     doc,
-    "Using intact glycopeptide mass spectrometry, Re-Glyco structural modeling, and electrostatic analysis, we connect OVAL glycan-state variation to calcium-accessible surface presentation. This supports a model in which glycan-dependent surface accessibility can influence OVAL opening, nucleation-site exposure, and mammillary-layer organization.",
+    "Using intact glycopeptide mass spectrometry, Re-Glyco structural modelling, and electrostatic analysis, we connect OVAL glycan-state variation to calcium-accessible surface presentation. This supports a model in which glycan-dependent surface accessibility can influence OVAL opening, nucleation-site exposure, and mammillary-layer organization.",
 )
 
 para(
     doc,
-    "The inside-out finite-element analysis completes the spine by moving the endpoint from whole-shell strength to local stress transfer at the mammillary interface. The resulting argument links shared matrix chemistry, glycan-state variation, mineral organization, and localized shell-breaking mechanics in one comparative framework.",
+    "The inside-out finite-element analysis completes the argument by moving the endpoint from whole-shell strength to local stress transfer at the mammillary interface. The resulting framework links shared matrix chemistry, glycan-state variation, physical eggshell architecture, and localized shell-breaking mechanics.",
 )
 
 para(
@@ -88,9 +88,9 @@ para(
 )
 
 para(doc, "Sincerely,")
-para(doc, "[Corresponding author name]")
-para(doc, "[Affiliation]")
-para(doc, "[Email]")
+para(doc, "Jiangxia Zheng")
+para(doc, "National Engineering Laboratory for Animal Breeding and MOA Key Laboratory of Animal Genetics and Breeding, College of Animal Science and Technology, China Agricultural University")
+para(doc, "jxzheng@cau.edu.cn")
 
 doc.save(OUT)
 print(f"[OK] {OUT}")

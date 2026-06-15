@@ -1,0 +1,2281 @@
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+1 of 25
+NEUROSCIENCE
+Human brain glycoform coregulation network and 
+glycan modification alterations in Alzheimer’s disease
+Qi Zhang1, Cheng Ma2, Lih- Shen Chin1, Sheng Pan2, Lian Li1*
+Despite the importance of protein glycosylation to brain health, current knowledge of glycosylated proteoforms 
+or glycoforms in human brain and their alterations in Alzheimer’s disease (AD) is limited. Here, we report a 
+proteome- wide glycoform profiling study of human AD and control brains using intact glycopeptide- based quan-
+titative glycoproteomics coupled with systems biology. Our study identified more than 10,000 human brain N- 
+glycoforms from nearly 1200 glycoproteins and uncovered disease signatures of altered glycoforms and glycan 
+modifications, including reduced sialylation and N-  glycan branching and elongation as well as elevated manno -
+sylation and N- glycan truncation in AD. Network analyses revealed a higher- order organization of brain glycopro-
+teome into networks of coregulated glycoforms and glycans and discovered glycoform and glycan modules 
+associated with AD clinical phenotype, amyloid- β accumulation, and tau pathology. Our findings provide valuable 
+insights into disease pathogenesis and a rich resource of glycoform and glycan changes in AD and pave the way 
+forward for developing glycosylation- based therapies and biomarkers for AD.
+INTRODUCTION
+Alzheimer’s disease (AD) is the most common form of dementia, 
+characterized pathologically by accumulation of amyloid- β (Aβ ) 
+plaques and tau neurofibrillary tangles in the brain (1, 2). Genome- 
+wide association studies (GW AS) have identified over 40 genetic risk 
+loci for AD (3 , 4), and transcriptomic and proteomic analyses re-
+vealed RNA and protein expression changes that are much broader 
+than Aβ and tau accumulation in AD brain (3 , 5). However, DNA 
+variations and RNA or protein level changes alone are insufficient to 
+account for all aspects of AD pathobiology, as proteins are known to 
+undergo posttranslational modifications that control their function 
+(6, 7) and proteoforms generated from protein modifications add 
+enormous diversity and complexity to the proteome (7 ). The most 
+prevalent and complex form of protein modification is glycosylation, 
+which produces vastly diverse arrays of glycosylated proteoforms or 
+glycoforms (a glycoform is an isoform of a protein that differs only 
+with respect to the number or type of attached glycan) to greatly ex-
+pand the proteome and its functionalities (8, 9).
+As a major type of glycosylation, N- linked glycosylation controls 
+many biological processes through covalent attachment of glycans to 
+asparagine residues of proteins (9, 10). Protein N- glycosylation in-
+volves a multi- step process that begins by oligosaccharyltransferase 
+(OST)–catalyzed “en bloc” addition of a 14- sugar precursor Glc3Man9 
+GlcNAc2 to asparagine residues within the sequon N- X- S|T (X  ≠ P) 
+of newly synthesized proteins in the lumen of endoplasmic reticulum 
+(ER). The N- glycans are then processed and remodeled by coordi-
+nated actions of glycosyltransferases and glycosidases in the ER 
+and Golgi compartments, producing a wide variety of glycoforms 
+with distinct glycan compositions and structures, such as oligoman-
+nose, hybrid, and complex- type N- glycans (9, 11). The site- specific N- 
+glycans on glycoproteins not only regulate protein folding, activity, 
+trafficking, and subcellular localization but also serve as the sugar 
+code to mediate bio- recognition and signal distinct cellular outcomes 
+(8, 12).
+N- glycan modifications of proteins are vital for the development, 
+maintenance, and function of the nervous system (13, 14). The im-
+portance of protein N- glycosylation to brain health is underscored 
+by the findings that genetic mutations in glycosylation enzymes for 
+N- glycan attachment or processing cause human congenital disor -
+ders with prominent neurological abnormalities (15). N- glycans on 
+glycoproteins are increasingly recognized as functional effectors 
+of genetic and epigenetic disease risk (16). Accumulating evidence 
+points to a link between aberrant protein N- glycosylation and AD 
+pathogenesis (17–19). Glycomic analyses of N- glycans detached from 
+glycoproteins have revealed changes in global levels of N- glycans 
+in AD brains (20–22), but the information of glycoproteins and gly-
+cosites bearing the N- glycans was lost. We recently performed an 
+integrated proteomic and glycoproteomic study using 18O- tagging to 
+label in vivo N- glycosylation sites and identified disease- associated 
+N- glycoproteins and glycosites with altered N- glycosylation site oc-
+cupancy in AD brains (23). While 1132 unique N- glycoproteins were 
+analyzed, the study was limited by the use of a deglycosylation step in 
+the workflow, resulting in the loss of information on glycans at each 
+glycosite. A more recent intact glycopeptide- based glycoproteomic 
+study reported qualitative analysis of site- specific N- glycan and gly-
+coforms from 268 unique N- glycoproteins (defined by unique gene 
+ID) in AD and control brains (24), but suffered from the low cover-
+age of brain N- glycoproteome and the lack of quantitative informa-
+tion regarding the levels of site- specific N- glycans and glycoforms in 
+human brain and their alterations in AD. Because of the inherent 
+complexity of N- glycan modifications and technical challenges in 
+intact glycoproteomics and associated data analysis, our current 
+knowledge of system- wide changes in human brain glycoforms and 
+site- specific N- glycan modifications in AD is very limited.
+Here, we established an integrated approach that combines intact 
+glycopeptide- based quantitative glycoproteomics and systems biolo-
+gy for large- scale, in- depth analysis of glycoforms and site- specific N- 
+glycan modifications in human brain and their changes in AD. Using 
+this approach, we identified more than 10,000 N- glycoforms from 
+1184 unique N- glycoproteins and obtained a system- level view of 
+1department of Pharmacology and chemical Biology, c enter for neurodegenera-
+tive disease, emory University School of Medicine, Atlanta, GA 30322, USA. 2t he 
+Brown Foundation institute of Molecular Medicine, University of texas health Sci-
+ence c enter at houston, houston, t X 77030, USA.
+*c orresponding author. email: lli5@ emory. edu
+c opyright © 2024 t he 
+Authors, some rights 
+reserved; exclusive 
+licensee American 
+Association for the 
+Advancement of 
+Science. no claim to 
+original U.S. 
+Government Works. 
+distributed under a 
+c reative commons 
+Attribution 
+nonc ommercial 
+license 4.0 ( cc BY- nc ). 
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+2 of 25
+human brain glycoforms and their attached N- glycans. Our analyses 
+reveal previously unknown changes in glycoforms and site- specific 
+glycans in AD and uncover glycoform and glycan coregulation net-
+works in human brain and their alterations in AD. Our findings pro-
+vide mechanistic insights into the roles of N- glycan modifications in 
+brain dysfunction in AD and establish a framework of glycosylation- 
+based networks and pathways for understanding and treating AD.
+RESUL TS
+Glycoproteomic landscape of AD and control brains revealed 
+by intact glycoproteomics
+To characterize human brain glycoproteome and its changes in AD, 
+we established and optimized a mass spectrometry–based intact 
+glycoproteomics platform for large- scale simultaneous profiling of 
+glycoproteins, glycoforms, glycosites, and site- specific glycan compo-
+sitions in brain samples. Our glycoproteomics workflow consisted of 
+SDS- mediated protein extraction (25), filter- aided sample prepara-
+tion (FASP) (26), glycopeptide enrichment by strong anion exchange 
+and electrostatic repulsion–hydrophilic interaction chromatography 
+(SAX- ERLIC) (27), liquid chromatography–tandem mass spectrom-
+etry (LC- MS/MS) with higher- energy collisional dissociation (HCD) 
+using a stepped collision energy (SCE) setting (28), and MS data 
+analysis using Byonic software (29) for the identification of intact 
+N- glycopeptides and their attached glycan compositions. Because 
+correct assignment of glycopeptides carrying glycan compositions 
+with similar masses [e.g., one sialic acid (NeuAc) versus two fucoses, 
+Δm  =  1.0204 Da] is a challenge in glycoproteomics, we used the 
+Byonic 182 human N- glycan library, which does not contain glycan 
+compositions with more than one fucose, to minimize the false as-
+signment of NeuAc- containing glycan compositions to fucosylated 
+glycan compositions containing two or more fucoses. Byonic weights 
+diagnostic peaks at mass/charge ratio (m/z) 292.103 for NeuAc and 
+274.092 for NeuAc with water loss very heavily for the assignment of 
+NeuAc- containing glycopeptides (29, 30). The glycopeptide assign-
+ment was verified by manual validation with the evidence of diagnos-
+tic oxonium ions and the monoisotopic precursor ion profile (fig. S1). 
+Furthermore, analysis of technical replicates from control brain sam-
+ples confirmed that the coverage and reproducibility of our glycopro-
+teomics analyses are acceptable for glycoproteome- profiling studies 
+(fig. S2). We used the optimized glycoproteomics workflow to analyze 
+human dorsolateral prefrontal cortex tissue samples from the same 
+cohort of 16 neuropathologically confirmed AD and control cases 
+(table S1) as in our proteomics and glycosite- profiling studies (23, 31). 
+In total, we identified 12,176 unique N- glycopeptides with attached 
+N- glycans at the N- X- S|T (X  ≠ P) sequon, corresponding to 10,731 
+unique N- glycoforms with 164 distinct N- glycan compositions at 
+2544 unique N- glycosites in 1184 unique N- glycoproteins (Fig. 1, A to 
+D, and table S2). This dataset represents the largest glycoproteome da-
+taset of human AD and control brains to date with site- specific N- 
+glycan and glycoform information.
+Comparison of the glycoproteome dataset with our proteome 
+profiling data from the same cohort (31) showed that 348 glycopro-
+teins (~29%) of the 1184 glycoproteins were exclusively identified by 
+intact glycoproteomics (Fig. 1E), demonstrating that our glycopro-
+teomics workflow enables analysis of a subset of proteins that may 
+otherwise remain undetected by global proteome profiling. As ex-
+pected, the glycoproteome dataset was enriched for plasma mem-
+brane and extracellular proteins, lysosomal and ER lumenal proteins, 
+neuronal and synaptic membrane proteins as well as receptors, ion 
+channels, and cell adhesion molecules (fig.  S3 and table  S3). Our 
+analyses (Fig. 1, E and F) showed that ~51% of the N- glycoproteins 
+and 41% of the N- glycosites identified in this study overlapped with 
+those detected in our previous study (23) using a deglycosylation- 
+based glycoproteomic approach (deglycoproteomics). The differ -
+ences in the identifications of glycoproteins and glycosites between 
+this work and our prior study are likely due to the differences in 
+glycopeptide enrichment and MS fragmentation methods used 
+in intact glycoproteomics versus deglycoproteomics analyses. 
+Matching our intact glycoproteomic dataset to the UniProt database 
+showed that 65% of the identified 2544 N- glycosites were annotated 
+or predicted in the database (Fig. 1G). The current study provided 
+experimental evidence for more than 950 UniProt- predicted N- 
+glycosites and identified more than 880 N- glycosites that have not 
+been previously reported in UniProt (Fig. 1G). Comparison of our 
+glycoproteomic data with the results of Suttapitugsakul et  al. (24) 
+and Tena et al. (32) showed substantial overlaps in the identified N- 
+glycoproteins, N- glycosites, N- glycans, and N- glycoforms (fig. S4). 
+Notably, our glycoproteomics workflow achieved a greater coverage 
+of brain glycoproteome, enabling analysis of additional 9597 N-  
+glycoforms, 892 N- glycoproteins, 2007 N- glycosites, and 45 N-  
+glycan compositions in this work (fig. S4).
+Our glycoproteomic analysis identified 7772 N- glycoforms in con-
+trol and 8196 N- glycoforms in AD, with 5237 N- glycoforms overlap-
+ping between control and AD brains (Fig.  1D and table  S2). We 
+identified 164 N- glycan compositions in both control and AD brains 
+(table S2) and categorized them into seven glycan types: oligoman-
+nose, paucimannose, chitobiose core, undecorated complex/hybrid 
+(neither fucosylated nor sialylated), fucosylated- only, sialylated- only, 
+and sialofucosylated (sialylated and fucosylated) glycans. In control 
+brains, ~36% of the total N- glycoforms carried oligomannose- type 
+glycans and ~41% carried fucose- containing glycans (including both 
+fucosylated- only glycans and sialofucosylated glycans) (Fig. 1H and 
+fig. S5A), consistent with the findings from previous glycoproteomic 
+and glycomic studies (20, 24, 33). In addition, ~26% of control brain 
+glycoforms carried sialic acid–containing glycans (including both 
+sialylated- only glycans and sialofucosylated glycans), ~8% carried un-
+decorated complex/hybrid (neither fucosylated nor sialylated) gly-
+cans, ~4% carried paucimannose- type glycans, and ~ 2% carried 
+chitobiose core–type glycans (Fig. 1H and fig. S5A). We found that 
+the percentages of sialylated- only glycoforms, sialofucosylated glyco-
+forms, and total sialylated glycoforms were significantly decreased in 
+AD brains, whereas the percentages of fucosylated- only glycoforms 
+and undecorated complex/hybrid glycoforms were significantly in-
+creased in AD (Fig. 1H). To gain insight into N- glycan branching, we 
+classified the N- glycans into different branching categories based on 
+the number of antennary HexNAc residues (i.e., total number of 
+HexNAc residues − 2) in glycan compositions (Fig. 1H). We note that 
+these branching categories are putative structural assignments be-
+cause a single glycan composition may represent multiple glycan 
+structures and branching types (34). Our analysis revealed that the 
+percentages of glycoforms carrying glycans with a total of six HexNAc 
+residues (assigned tetra- antennary glycans) or >6 HexNAc residues 
+(highly branched or elongated glycans) were significantly decreased 
+in AD brains (Fig. 1H).
+We identified 1952 N- glycosites in control and 2114 N- glycosites 
+in AD brains, with 1522 N- glycosites shared by control and AD 
+brains (Fig.  1C, and table  S2). Approximately 57% of the total 
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+3 of 25
+Fig. 1. Intact glycopeptide- based glycoproteomics analysis of human AD and control brains. (A) t he total number of unique n-  glycopeptides, n-  glycoforms, n- 
+glycoproteins, n- glycosites, and n- glycan compositions identified in this study. (B to D) comparisons of identified n- glycoproteins (B), n- glycosites (c ), and n- glycoforms 
+(d) in Ad versus control ( ct ) brains. (E) c omparison of identified n-  glycoproteins by intact glycoproteomics with proteins detected by proteomics and deglycopro -
+teomics. (F) Overlap of identified n-  glycosites with those detected by deglycoproteomics. (G) Match of the identified n-  glycosites to UniProt database of annotated n- 
+glycosites. (H and I) distribution of identified n-  glycoforms (h) and n-  glycosites (i) containing the indicated glycan type in Ad and control brains. data represent means 
+± Sd (n  = 8 cases per group). *P  < 0.05; **P  < 0.01; ***P  < 0.001; ****P  < 0.0001, unpaired two- tailed Student’s t test. (J) Pie charts showing the proportions of glycopro-
+teins with the indicated number of in vivo n-  glycosites per protein (macroheterogeneity) and glycosites with the indicated number of n- glycans per site (microheteroge-
+neity) in Ad and control brains.
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+4 of 25
+N- glycosites in control brains were observed with oligomannose gly-
+cans, ~60% with fucose- containing glycans, 43% with sialic acid–
+containing glycans, ~13% with undecorated complex/hybrid glycans, 
+~9% with paucimannose glycans, and ~5% with chitobiose core–type 
+glycans (Fig. 1I and fig. S5B). We note that in Fig. 1I, each N- glycosite 
+was not categorized exclusively to a single glycan type, so one N-  
+glycosite can count toward multiple glycan types if several different 
+glycans were attached to that glycosite. We found that the percent-
+ages of sialofucosylated glycosites and total sialylated glycosites 
+were significantly decreased in AD, whereas the percentage of 
+fucosylated-  only glycosites was significantly increased in AD 
+(Fig. 1I). Our finding of disease- associated decreases in total sialylated 
+glycosites (Fig. 1I) and sialylated glycoforms (Fig. 1H) indicates a 
+reduction in overall sialylation in AD. In addition, we found that the 
+percentage of glycosites carrying glycans with a total of five HexNAc 
+residues (tri- antennary or bisecting GlcNAc glycans) was significantly 
+increased in AD (Fig. 1I), consistent with reported elevation in 
+bisecting GlcNAc modification in AD (35). In contrast, the percent-
+age of glycosites carrying glycans with >6 HexNAc residues was sig-
+nificantly decreased in AD (Fig.  1I), indicating reduced N- glycan 
+branching and/or elongation in AD.
+For the 1522 shared N- glycosites (Fig. 1C), we analyzed the 
+differences in the number of glycoforms at each glycosite be-
+tween AD and controls for each of the major glycan types and 
+performed unsupervised hierarchical clustering analysis to char -
+acterize site- specific N- glycosylation alterations in AD (fig. S6). 
+The heatmap illustrated AD- associated changes in glycosylation 
+patterns in ~ 69% of the shared N- glycosites, whereas the remain-
+ing ~31% of the glycosites showed no change in their glycosyl-
+ation profiles in AD (fig. S6). For each glycan type, we observed 
+increased glycosylation at some glycosites and decreased glyco-
+sylation at some other glycosites (fig. S6). Quantification of the net 
+change in the number of glycoforms for each glycan type across 
+the 1522 glycosites showed an overall decrease in sialylation in AD 
+and an overall increase in modifications by oligomannose gly-
+cans, fucosylated- only glycans, and undecorated complex/hybrid 
+glycans in AD (fig. S6).
+Our analysis showed that more than half of the N- glycoproteins 
+in control (~58%) and AD (~ 56%) brains were N- glycosylated at a 
+single glycosite, while about 10% were multiply glycosylated with five 
+or more in vivo N- glycosylation sites (Fig. 1J). The average number 
+of in vivo N- glycosites per glycoprotein was 2.1 in both control and 
+AD brains, consistent with the result from our glycosite- profiling 
+study (23). Our glycoproteomic analysis revealed extensive heteroge-
+neity in the number of different N- glycans that modified each gly-
+cosite (Fig. 1J). Approximately 45% of the total glycosites were found 
+with one glycan, whereas about 18% had more than five glycans and 
+about 1% of the glycosites had more than 30 glycans in both control 
+and AD brains (Fig. 1J). The identified glycosite with the highest de-
+gree of glycan heterogeneity was cell surface receptor CD47 N111 
+glycosite, which carried 78 glycans in control and 73 glycans in AD 
+brains (table S2). The identified glycoprotein with the highest degree 
+of glycoform diversity was neural cell adhesion protein contactin–1 
+(CNTN1), which had 199 glycoforms with 83 glycans across eight 
+glycosites in control brains and 194 glycoforms with 72 glycans 
+across eight glycosites in AD brains (table S2). On average, each gly-
+cosite had 4.0 glycans in control and 3.9 glycans in AD brains, and 
+each glycoprotein had 8.5 glycoforms in control and 8.3 glycoforms 
+in AD brains.
+Site- specific glycosylation profiles of AD- related proteins 
+and risk factors
+Our glycoproteomic analysis mapped site- specific N- glycans and 
+N- glycoforms of a number of GW AS- identified AD risk factors (e.g., 
+ABCA7, ACE, ADAM10, CLU, CNTNAP2, EPHA1, PLD3, SORL1, 
+and TM2D3) and other AD- related proteins (e.g., tau, nicastrin, and 
+LRP1) in human AD and control brains (Fig. 2, fig. S7, and table S2). 
+While our previous deglycoproteomics study (23) has shown that 
+APP is an N- glycosylated protein, APP was not detected here, which 
+could be due to the low abundance of APP glycoforms or the different 
+methods of glycopeptide enrichment and MS fragmentation used in 
+intact glycoproteomics versus deglycoproteomics analyses. The glyco-
+sylation profiles of the detected AD- relevant proteins demonstrated a 
+broad range of glycan and glycoform diversity, with some proteins 
+(e.g., ABCA7 and EPHA1) having only one glycoform carrying a sin-
+gle glycan at a single glycosite, and other proteins (e.g., CLU and 
+LRP1) having more than 80 glycoforms carrying 30 or more glycans 
+across multiple glycosites (Fig.  2 and fig.  S7). CLU (clusterin, also 
+known as apolipoprotein J) is the third most significant risk factor for 
+AD with an extracellular chaperone function (36). We identified a to-
+tal of 88 CLU glycoforms carrying 60 different glycans across four 
+glycosites in control brains and 104 CLU glycoforms carrying 67 gly-
+cans across four glycosites in AD brains, with most glycoforms carry-
+ing fucosylated and/or sialylated glycans (Fig.  2 and table  S2). Our 
+analysis uncovered 26 AD- specific CLU glycoforms and 10 control- 
+specific CLU glycoforms (Fig. 2 and table S2), revealing an involve-
+ment of CLU N- glycosylation aberrations in AD.
+SORL1 (sortilin- related receptor 1, also known as SORLA) is a 
+cargo sorting receptor that has emerged as a major risk factor for 
+both early- onset and late- onset AD (1, 37). Our analysis revealed 37 
+SORL1 glycoforms carrying 15 glycans across 12 glycosites in control 
+brains and 38 SORL1 glycoforms carrying 19 glycans across 15 gly-
+cosites in AD brains, including 13 AD- specific glycoforms and 12 
+control- specific glycoforms, with most glycoforms carrying oligo-
+mannose glycans (Fig. 2 and table S2). We identified five SORL1 gly-
+cosites (N616, N1068, N1246, N2069, and N2076) with a gain of 
+N- glycosylation in AD and two SORL1 glycosites (N99 and N674) 
+with a complete loss of N- glycosylation in AD (Fig. 2 and table S2). 
+These findings, together with recent identification of SORL1 N674S 
+mutation for a familial form of AD (37, 38), point to a pathogenic 
+role of SORL1 N- glycosylation alterations in AD.
+LRP1 (low- density lipoprotein receptor- related protein 1), a key 
+regulator of Aβ and tau trafficking and AD neuropathology (39, 40), 
+is the most heavily N- glycosylated protein that we identified in hu-
+man brain (table S2). In total, 94 LRP1 glycoforms carrying 30 glycans 
+across 31 glycosites were found in control brains and 119 LRP1 glyco-
+forms carrying 35 glycans across 32 glycosites were found in AD 
+brains, with most glycoforms carrying oligomannose or fucosylated- 
+only type glycans (fig. S7 and table S2). We identified 47 LRP1 glyco-
+forms and four LRP1 glycosites exclusively in AD brains and 22 LRP1 
+glycoforms and three LRP1 glycosites only in controls (fig. S7 and ta-
+ble S2), highlighting an association of LRP1 N- glycosylation aberra-
+tions with AD.
+We and others previously reported aberrant tau N- glycosylation in 
+AD (17–19, 23), but the site- specific N- glycans and N- glycoforms of 
+tau in AD remain unknown. Our analysis revealed that tau was mod-
+ified at the N410 residue of tau441 isoform (corresponding to N727 of 
+tau758 isoform) by a high- mannose- type glycan exclusively in AD 
+but not controls (Fig. 2 and table S2), consistent with our prior finding 
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+5 of 25
+Fig. 2. Site- specific glycan and glycoform mapping of AD- related proteins and risk factors. (A) Bar graphs showing the number of identified n-  glycosites, n- glycan 
+compositions, and n- glycoforms mapped to each of the Ad- related proteins and risk factors in Ad and control (ct ) brains. (B) Site- specific glycosylation patterns of cl U, 
+tau, tM2d3, and SORl1 in Ad compared to control brains. n-  glycosites are indicated by the amino acid positions of glycosylated asparagine residues, with cyan-  and pink- 
+colored n- glycosites denoting the glycosites detected exclusively in control and Ad brains, respectively.
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+6 of 25
+of tau N410 as the N- glycosite in AD (23). We also detected a tau 
+glycoform carrying a sialylated- only glycan at the N359 glycosite in 
+control brains (Fig. 2 and table S2), which could be due to glycosyl-
+ation of a tau species with altered conformation in aging brains. In 
+addition to CLU, SORL1, LRP1, and tau, our analysis revealed disease- 
+associated changes in site- specific N- glycosylation patterns of several 
+other AD- relevant proteins, including ACE, ADAM10, CNTNAP2, 
+PLD3, TM2D3, and nicastrin (Fig. 2, fig. S7, and table S2). Together, 
+these results provide strong support for the involvement of altered N- 
+glycan modifications of the AD- related proteins and risk factors in 
+AD pathophysiology.
+Reduced sialylation and N- glycan branching or elongation 
+and elevated mannosylation and N- glycan truncation in AD
+To further characterize protein N- glycan modifications and their al-
+terations in AD, we performed quantitative analyses of the intensities 
+of glycopeptides with different glycan types to determine the relative 
+abundance of glycan modification for each glycan category in indi-
+vidual brain samples from AD and control cases (Fig. 3, A to C, and 
+table S4). We found that protein modification by oligomannose gly-
+cans is highly abundant in human brain, occurring at ~49% relative 
+abundance (Fig. 3A and table S4A). Five of the top seven most abun-
+dant N- glycans on brain proteins had compositions H5N2 to H9N2 
+corresponding to oligomannose glycan structures containing two core 
+GlcNAc and five to nine mannose residues (Man5 to Man9 glycans), 
+with H5N2 being the most abundant N- glycan at ~21% relative abun-
+dance in healthy human brains (Fig. 3C and table S4B). The other two 
+of the top seven most abundant glycans had compositions H3N5F1 
+and H3N4F1 corresponding to bisecting GlcNAc- containing, core- 
+fucosylated glycan structures (Fig. 3C and table S4B), consistent with 
+the prior findings from glycomic analyses of N- glycans released from 
+brain glycoproteins (20, 33, 41). Our results revealed that the abun-
+dances of H5N2, H3N5F1, and H3N4F1 modifications were signifi-
+cantly increased in AD, whereas the abundance of H9N2 modification 
+was significantly decreased in AD (Fig. 3C and table S4B).
+Our quantitative analysis showed that in control brains, fucosyl-
+ation (including modification by fucosylated- only and sialofucosyl-
+ated glycans) and sialylation (including modification by sialylated- only 
+and sialofucosylated glycans) occur at ~39% and ~19% relative abun-
+dance, respectively (Fig. 3A, fig. S5C, and table S4A). The sialylation 
+in AD brains was reduced to ~13% relative abundance, whereas the 
+fucosylation abundance was not significantly changed in AD (Fig. 3A 
+and table S4A). We also observed a significant increase in the abun-
+dance of modification by complex/hybrid (neither fucosylated nor 
+sialylated) glycans in AD (Fig. 3A and table S4A). Furthermore, our 
+quantitative analysis revealed significant decreases in the abundances 
+of modifications by glycans with 6 HexNAc residues (tetra- antennary 
+glycans) or >6 HexNAc residues (highly branched or elongated gly-
+cans) in AD brains (Fig.  3B and table  S4A), indicating reduced N-  
+glycan branching and/or elongation in AD. In contrast, the abundance 
+of modification by glycans with 5 HexNAc residues (tri- antennary or 
+bisecting GlcNAc glycans) was significantly increased in AD (Fig. 3B 
+and table S4A), in agreement with prior finding of increased bisecting 
+GlcNAc modification in AD (35).
+We next performed differential abundance analysis of modifica-
+tions by 164 individual glycan compositions and identified 46 glycan 
+modifications that were significantly altered in AD compared to con-
+trols, including 30 glycan modifications with decreased abundance 
+and 16 glycan modifications with increased abundance in AD (Fig. 3D 
+and table S4, B and C). Unsupervised hierarchical clustering analysis 
+based on glycan modification abundance profiles demonstrated that 
+the identified 46 glycan modifications provide an N- glycan disease 
+signature for distinguishing AD cases from the controls (Fig.  3E). 
+The glycan clustering dendrogram showed a segregation of glycan 
+modifications into down- regulated and up- regulated clusters in AD 
+(Fig. 3E). We found that ~83% of the identified down- regulated gly-
+can modifications in AD were sialylation with a predominance of 
+highly branched and/or elongated sialylated glycans (e.g., H8N6S1, 
+H7N6F1S4, and H8N7F1S3), whereas none of the up- regulated gly-
+can modifications was sialylation (Fig. 3E and table S4C), providing 
+additional evidence supporting an association of decreased sialylation 
+and N- glycan branching/elongation with AD. The identified up-  
+regulated glycan modifications in AD (Fig. 3E and table S4C) include 
+mannosylation by H4N2 and H5N2 glycans, modification by undeco-
+rated complex/hybrid glycans with relatively simple, neutral struc-
+tures (e.g., H3N3, H5N3, H4N4, and H5N4), and modification by 
+bisecting GlcNAc- containing core- fucosylated glycans (e.g., H3N4F1, 
+H3N5F1, and H3N6F1). We also observed increased modifications 
+by chitobiose core–type glycans N1 and N2 and by paucimannose gly-
+cans H1N2, H2N2, and H3N2 (Fig. 3E and table S4C), indicating el-
+evated N- glycan truncation in AD.
+AD- associated protein glycoforms with altered site- specific 
+N- glycan modifications
+Next, we assessed disease- associated abundance changes of individual 
+glycoforms by performing differential glycoform abundance analysis 
+(Fig. 4A and table S5A) and identified 556 glycoforms with signifi-
+cantly altered levels (>1.3- fold change, P  < 0.05) in AD compared to 
+control brains, including 421 glycoforms from 149 glycoproteins with 
+increased glycoform abundance and 135 glycoforms from 58 glyco-
+proteins with decreased glycoform abundance in AD (Fig. 4, A and B, 
+and table  S5B). Comparison of glycoform abundance changes with 
+the corresponding protein abundance changes measured in brain 
+samples from the same cohort (31) showed that most of the observed 
+changes in glycoform abundance in AD were caused by changes in 
+site- specific N- glycan modification levels but not by altered protein 
+expression levels (Fig. 4C, fig. S8, and table S5B). We found that 449 
+glycoforms had >1.3- fold changes in site- specific N- glycan modifica-
+tion levels in AD versus controls, including 337 glycoforms from 111 
+glycoproteins with increased N- glycan modification levels and 112 
+glycoforms from 52 glycoproteins with decreased N- glycan modifica-
+tion levels in AD (Fig. 4C and table S5B). Unsupervised hierarchical 
+clustering analysis showed that the identified 449 glycoforms segre-
+gated into down- regulated and up- regulated clusters and they provide 
+a glycoform signature for distinguishing AD cases from the controls 
+(Fig. 4D). We observed an enrichment of sialylated- only and sialofu-
+cosylated glycans in the down- regulated cluster and an enrichment of 
+fucosylated- only, paucimannose- type, and oligomannose- type gly-
+cans in the up- regulated cluster (Fig. 4D and table S5B). The identified 
+N- glycans attached to disease- associated glycoforms (Fig. 4D and ta-
+ble S5B) provide a site- specific glycan signature for AD.
+Beside the glycoforms with altered glycan modification levels, 
+our analyses also identified 179 glycoforms from 105 glycoproteins 
+with a gain of a site- specific N- glycan modification in AD and 49 
+glycoforms from 32 glycoproteins with a loss of a site- specific N-  
+glycan modification in AD (Fig. 5, A to C, and table S5C), provid-
+ing additional site- specific glycoform and glycan signatures for 
+AD. In total, we identified 516 hyperglycosylated glycoforms from 
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+7 of 25
+Fig. 3. Disease- associated changes in overall levels of N- glycan modifications in AD. (A to C) comparison of relative abundances of glycan modifications for the indi-
+cated glycan types (A), glycan branching categories (B), and top seven most abundant glycan compositions ( c ) in Ad versus control brains. c orresponding glycan struc-
+tures are shown for glycan compositions in (c ). data represent means ± Sd (n  = 8 cases per group). *P  < 0.05; **P  < 0.01; ****P  < 0.0001, unpaired two- tailed Student’s t 
+test. (D) volcano plot of fold changes in Ad versus control (log2 Fc ) for 164 individual glycan compositions and corresponding–log10 P values showing identification of 46 
+significantly (P  < 0.05) altered glycan modifications in Ad with top 23 glycan modifications labeled. (E) Unsupervised hierarchical clustering based on glycan modification 
+abundance profiles showing clear segregation of clinical cases into Ad (top) and control (ct ; bottom) groups and glycan modifications into up- regulated (left) and down- 
+regulated (right) clusters in Ad. Glycan composition key: h, hexose; n, N- acetylhexosamine; F, fucose; S, sialic acid.
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+8 of 25
+178 hyperglycosylated proteins with increased or a gain of site-  
+specific N- glycan modification in AD and 161 hypoglycosylated 
+glycoforms from 71 hypoglycosylated proteins with decreased or a 
+loss of site- specific N- glycan modification in AD (Fig. 5, A to C, 
+and table S6, A and B). We found that both hyperglycosylation and 
+hypoglycosylation datasets contain glycoforms and glycoproteins 
+with altered paucimannosylation, oligomannosylation, fucosyl -
+ation, and/or sialylation (Fig. 5, A to C; fig. S9; and table S6).
+We then performed gene ontology (GO) enrichment analyses of 
+the hyperglycosylation and hypoglycosylation datasets to gain insights 
+into the cellular functions and processes that were affected by dysregu-
+lated N- glycan modifications in AD (Fig. 5, D to F , and table S7, A and 
+B). We found that both hypoglycosylation and hyperglycosylation 
+datasets were significantly enriched for plasma membrane and 
+extracellular proteins involved in cell adhesion, cell surface receptor 
+signaling, nervous system process, and extracellular matrix (ECM) 
+function. However, only AD- associated hyperglycosylation, but not 
+hypoglycosylation, was significantly linked to GO terms of neurotrans-
+mitter receptor activity and semaphorin receptor activity (Fig. 5E and 
+table S7, A and B), whereas hypoglycosylation in AD, but not hyper-
+glycosylation, was enriched for GO categories of endopeptidase regu-
+lator activity and regulation of potassium ion transport (Fig. 5, E and 
+F). Our analyses revealed multiple cellular functions that were differ-
+entially affected by different types of altered glycan modifications in 
+AD (Fig. 5, D to F , and table S7, C to J). For example, hyperoligoman-
+nosylation, hypofucosylation, and hyposialylation in AD, but not 
+other types of glycan modification changes, were significantly associ-
+ated with ER and lysosome, whereas hyperpaucimannosylation was 
+Fig. 4. Identification of AD- associated protein glycoforms with altered site- specific N- glycan modifications. (A) volcano plot of individual glycoform abundance 
+fold changes in Ad versus control (log2 Fc ) and corresponding −log10 P values showing identification of 556 significantly altered (>1.3- fold change, P < 0.05) glycoforms 
+in Ad with top 12 glycoforms labeled. (B) examples of identified glycoforms with decreased or increased abundance in Ad . data are shown as means ± Sd (n  = 8 cases 
+per group). **P  < 0.01; ****P  < 0.0001, limma moderated t test. (C) Scatterplot showing at least ±1.3- fold changes in site- specific glycan modifications for most of the 
+identified Ad - associated glycoforms with top 10 glycoforms labeled. (D) Unsupervised hierarchical clustering of individual clinical cases based on the identified 449 gly-
+coforms with altered site- specific glycan modifications. Glycoforms are displayed as rows with corresponding glycan types shown in the left heatmap.
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+9 of 25
+selectively associated with Golgi apparatus (Fig. 5D). Hyperoligoman-
+nosylation and hyperfucosylation in AD were found to specifically as-
+sociate with Aβ binding (Fig. 5E), and hyperoligomannosylation and 
+hyposialylation in AD were preferentially linked to regulation of bio-
+logical quality (Fig. 5F).
+Glycan modification coregulation network analysis uncovers 
+glycan modules linked to AD pathology
+To gain systems- level insights into glycan modifications in human 
+brain and their changes in AD, we performed glycan modification 
+coregulation network analysis by using the weighted correlation net-
+work analysis (WGCNA) algorithm (42) to construct a glycan net-
+work with nodes representing glycan modifications connected with 
+edges defined by the connectivity based on pairwise correlation pat-
+terns of glycan modification abundance profiles of 164 glycan com-
+positions (Fig.  6A). By applying the scale- free topology criterion 
+(42), we generated a human brain glycan network consisting of eight 
+modules of strongly coregulated glycan modifications (Fig. 6, A and 
+B, and table S8). These glycan modules (GNMs), color- coded using 
+the WGCNA convention (42, 43), were labeled according to module 
+Fig. 5. Analysis and annotation of glycoforms and glycoproteins with altered site- specific N- glycan modifications in AD. (A to C) hyperglycosylation includes gly-
+coforms (A) and glycoproteins (c ) with increased site- specific n- glycan modification and/or a gain of site- specific n- glycan modification in Ad, whereas hypoglycosylation 
+includes glycoforms (B) and glycoproteins ( c ) with decreased site- specific n-  glycan modification and/or a complete loss of site- specific n-  glycan modification in 
+Ad. numbers indicate the total number or the number of hyperglycosylated or hypoglycosylated glycoforms or glycoproteins carrying the following glycan types: P , 
+paucimannose; O, oligomannose; F, fucose-  containing glycan; and S, sialic acid–containing glycan. (D to F) GO cellular component, molecular function, and biological 
+process categories enriched in Ad hyperglycosylation or hypoglycosylation dataset are shown with Benjamini–hochberg FdR-  corrected P values. c ount indicates the 
+number of glycoproteins per GO term.
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+10 of 25
+Fig. 6. Glycan modification coregulation network analysis and identification of AD- related glycan modules. (A) Glycan WGcnA cluster dendrogram with dynamic 
+tree cut revealing eight modules (color- coded) of coregulated n- glycan modifications. (B) inter- modular connectivity of the identified eight glycan modules. correlations 
+of each glycan module with Ad status, Aβ pathology ( ceRAd score), or neurofibrillary tangle pathology (Braak stage) are shown by Biweight midcorrelation coefficients 
+(bicor r values) in the heatmap, with significant positive (red) or negative (green) correlations marked by asterisks. *P  < 0.05; ****P  < 0.0001. (C) Box plots of module ei-
+genglycan (Megn) values in Ad and control cases for each Ad - related module, with differences in Me gn values between Ad and control shown by Kruskal-  Wallis test P 
+values. (D) Glycan coregulation network plots of Ad- associated modules GnM2, GnM1, and GnM4, with node representing individual glycan composition, node color for 
+glycan modification type, and node size in proportion to node connectivity. Glycan composition key: h, hexose; n, N- acetylhexosamine; F, fucose; S, sialic acid.
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+11 of 25
+size from GNM1 (the largest module with 52 glycans) to GNM8 (the 
+smallest module with 5 glycans) (Fig. 6B and table S8). We computed 
+an eigenglycan for each module as the module representative and 
+performed module- trait association analyses to assess the correlation 
+relationships between each module eigenglycan and AD- relevant 
+phenotypic traits and other characteristics of brain samples (fig. S10). 
+We identified one positively correlated glycan module (GNM2) and 
+two negatively correlated glycan modules (GNM1 and GNM4) with 
+significant association to AD status, Aβ pathology [Consortium to 
+Establish a Registry for Alzheimer’s disease (CERAD) score], and/or 
+neurofibrillary tangle pathology (Braak stage), but no association to 
+age, sex, ApoE genotype, or postmortem interval (Fig.  6B and 
+fig. S10). We found that the AD- positively correlated module GNM2 
+had significantly increased module glycan modification levels in AD, 
+whereas AD- negatively correlated modules GNM1 and GNM4 had 
+significantly decreased module glycan modification levels in AD 
+(Fig. 6C).
+Our analyses showed that the GNM2 module, which has a strong 
+positive correlation to AD neuropathology (CERAD r  = 0.91, P  = 1 × 
+10−6; Braak r  = 0.85, P  = 4 × 10−5), contained 25 glycan modifications 
+(Fig. 6D), including modifications by oligomannose glycans (H4N2, 
+H5N2, H6N2, and H7N2), undecorated complex/hybrid glycans with 
+relatively simple, neutral structures (e.g., H3N3, H3N4, and H5N4), 
+bisecting GlcNAc- containing core- fucosylated glycans (e.g., H3N4F1, 
+H3N5F1, and H3N6F1), paucimannose glycans (H1N2, H2N2, and 
+H3N2), and chitobiose core glycans (N1 and N2). In contrast, the 
+GNM1 module with a strong negative correlation to AD neuropathol-
+ogy (CERAD r  =  −0.87, P  = 1 × 10−5; Braak r  =  −0.9, P  = 2 × 10−6) 
+contained 52 glycan modifications (Fig.  6D), which primarily con-
+sisted of modifications by sialofucosylated glycans (e.g., H5N6F1S2, 
+H7N7F1S3, and H8N7F1S3), sialylated- only glycans (e.g., H6N5S3, 
+H7N6S3, and H7N6S4), and highly branched and/or elongated gly-
+cans (e.g., H4N9, H10N10F1, and H11N11S1). We found cosegrega-
+tion of core- fucosylated glycans N1F1, N2F1, H1N2F1, H4N2F1, and 
+H5N2F1 in the AD- negatively correlated GNM1 module, whereas 
+their non- fucosylated counterparts (N1, N2, H1N2, H4N2, and 
+H5N2) were cosegregated in the AD- positively correlated GNM2 
+module (Fig. 6D), indicating an association of reduced core fucosyl-
+ation of these glycans with AD. Our analyses also showed that the 
+GNM4 module with negative correlation to Aβ pathology but no cor-
+relation to tau tangle pathology (Fig.  6D) contained seven glycan 
+modifications, including modifications by sialofucosylated glycans 
+H6N3F1S1 and H9N6F1S2, sialylated- only glycans H5N3S1 and 
+H8N6S1, and the highly branched or elongated glycan H9N9F1, sug-
+gesting an Aβ- specific negative effect on these glycan modifications. 
+The predominant presence of sialylated glycans (including sialylated- 
+only and sialofucosylated glycans) and highly branched or elongated 
+N- glycans in AD- negatively correlated GNM1 and GNM4 modules 
+further supports the involvement of decreased sialylation and N-  
+glycan branching or elongation in AD pathophysiology.
+Protein glycoform coregulation network analysis reveals 
+AD- associated glycoform modules
+To elucidate the relationships among protein glycoforms with differ-
+ent site- specific glycan modifications in AD, we performed glyco-
+form coregulation network analysis using WGCNA to construct a 
+glycoform network with nodes representing glycoforms connected 
+with edges defined by the connectivity based on pairwise correlation 
+patterns of glycoform abundance profiles (Fig.  7A). Our network 
+analysis revealed an organization of human brain glycoproteome 
+into a network of 21 modules of coregulated glycoforms (Fig. 7, A 
+and B, and table S9). These glycoform modules (GFMs) were labeled 
+from GFM1 (the largest module with 440 glycoforms from 159 gly-
+coproteins) to GFM21 (the smallest module with 36 glycoforms from 
+16 glycoproteins) (Fig. 7B and table S9). In the glycoform network, 
+different glycoforms from a single protein were often found in differ-
+ent modules, such as the differential distribution of GABA- B recep-
+tor subunit GABBR1 glycoforms to GFM2 (GABBR1_N440_H5N2 
+and GABBR1_N440_H3N5F1 glycoforms), GFM4 (GABBR1_
+N482_H5N2 glycoform), GFM8 (GABBR1_N440_H4N4F1 glyco-
+form), GFM14 (GABBR1_N502_H4N5S1 glycoform), and GFM21 
+(GABBR1_N440_H5N4F1 glycoform) modules (table S9). The colo-
+calization of some glycoforms in the same module (e.g., the presence 
+of two GABBR1 glycoforms in the GFM2 module) suggests coordi-
+nated regulation of these glycoforms and their site- specific glycan 
+modifications, whereas the partition of glycoforms into separate 
+modules (e.g., the distribution of GABBR1 glycoforms in the GFM2, 
+GFM4, GFM8, GFM14, and GFM21 modules) may reflect differen-
+tial regulation of site- specific glycan modifications or different cel-
+lular or subcellular distributions of distinct glycoforms.
+We performed module- trait association analyses using module 
+eigenglycoforms as the module representatives and identified seven 
+glycoform modules with significant correlations to AD status, Aβ 
+CERAD score, and/or tau Braak stage, including five positively cor-
+related modules (GFM1, GFM2, GFM4, GFM11, and GFM19) and 
+two negatively correlated modules (GFM3 and GFM14) (Fig. 7B and 
+fig. S11). None of the seven glycoform modules showed significant 
+correlation to age, sex, or postmortem interval (fig. S11), indicating 
+that the identified AD association of these modules was not due to 
+the potential confounding factors. We found that GFM1 and GFM11 
+modules also showed positive correlations with the ApoE4 allele dos-
+age (Fig. 7B and fig. S11), in line with the dosage- dependent role of 
+ApoE4 allele for increasing AD risk (44). In addition, we identified 
+an ApoE4- positively correlated module (GFM6) with no association 
+to AD phenotypes (fig. S11), indicating that some ApoE4- induced 
+changes in site- specific glycan modifications are unrelated to AD pa-
+thology. Our analysis showed that the module glycoform abundance 
+profiles for all five AD- positively correlated modules were signifi-
+cantly increased in AD (Fig.  7C), whereas those for the two AD-  
+negatively correlated modules were significantly decreased in AD 
+(Fig. 7D).
+We then assessed the enrichment of cell- type markers for different 
+brain cells in glycoform modules and found that six of the seven 
+AD- associated glycoform modules (GFM1, GFM2, GFM3, GFM4, 
+GFM11, and GFM19) were highly enriched with neuronal cell mark-
+ers, although some of these modules were also enriched with astro-
+cyte and/or oligodendrocyte markers (Fig.  7B). By contrast, the 
+AD- associated GFM14 module was preferentially enriched with oli-
+godendrocyte markers (Fig. 7B). Analysis of inter- modular relation-
+ships using pairwise correlations between module eigenglycoforms 
+revealed a higher- order organization of closely interconnected glyco-
+form modules into superclusters (Fig. 7B). The colocalization of AD- 
+negatively correlated GFM3 and GFM14 modules in a supercluster 
+(Fig. 7B) suggests close relationships among the glyco- pathways and/
+or biological processes associated with these two negatively correlated 
+glycoform modules. We found that four of the five AD- positively 
+correlated modules (GFM1, GFM4, GFM11, and GFM19) were 
+colocalized in another supercluster (Fig. 7B), indicating that the 
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+12 of 25
+Fig. 7. Protein glycoform coregulation network analysis and identification of AD- associated glycoform modules. (A) Glycoform WGcnA analysis identifies 21 mod-
+ules of coregulated protein glycoforms. (B) inter- modular connectivity of 21 glycoform coregulation modules. heatmap at the top shows the correlations (bicor r values) 
+of each glycoform module with the indicated Ad - relevant traits, with significant positive (orange) or negative (green) correlations marked by asterisks. heatmap at the 
+bottom shows the enrichment for markers of astrocyte, microglia, oligodendrocyte, or neuron in each module with FdR- adjusted P values. *P  <  0.05; **P  <  0.01; 
+***P  < 0.001; ****P  < 0.0001. (C and D) Box plots of module eigenglycoform (Me gf ) values in Ad and control cases for Ad - positively correlated modules ( c ) and Ad - 
+negatively correlated modules (d), with differences in Megf values between Ad and control shown by Kruskal- Wallis test P values.
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+13 of 25
+corresponding glyco- pathways and/or biological processes for these 
+positively correlated modules may also be functionally related and/or 
+coordinately regulated in AD.
+Topological structures and membership information of the seven 
+AD- associated glycoform modules are provided in Fig. 8A and ta-
+ble S9. Given the central role of hub nodes in determining a network 
+module’s architecture and function (45, 46), we identified hub glyco-
+forms for each module using the intramodular connectivity and de-
+picted the top 10 most- connected hub glycoforms in the center of 
+each network plot (Fig. 8A). We assessed the glycan characteristics of 
+each AD- related module by analyzing the distributions of site-  
+specific glycan types and glycan compositions attached to glycoforms 
+in each module (Fig.  8, B and C) and found that each AD- related 
+module had a distinctive site- specific glycan modification pattern, 
+which reflects module- specific coregulation among glycoforms and 
+their site- specific glycan modifications in the module. For example, 
+the GFM1 module was enriched for glycoforms carrying chitobiose 
+core, paucimannose, oligomannose, or fucosylated- only glycans and 
+underrepresented for glycoforms with sialylated- only or sialofu-
+cosylated glycans, whereas the GFM3 module was enriched for sialo-
+fucosylated and sialylated- only glycoforms but underrepresented for 
+glycoforms bearing other glycan types (Fig.  8B). Our analyses re-
+vealed that enrichment of oligomannosylated glycoforms and deple-
+tion of sialofucosylated glycoforms is a common feature shared by all 
+five AD- positively correlated modules, and the opposite was true for 
+AD- negatively correlated modules, which were enriched for sialofu-
+cosylated glycoforms and depleted for oligomannosylated glyco-
+forms (Fig. 8B).
+Glycoform module analyses uncover multiple CNS processes 
+altered by dysregulated glycan modifications in AD
+We performed GO enrichment analyses and found that the identified 
+AD- related glycoform modules had overlapping yet distinct biochemi-
+cal and functional characteristics (Fig.  8, D to F , and table  S10). All 
+seven disease- related modules were prominently associated with cell 
+adhesion process with an overrepresentation of glycoforms from cell 
+adhesion proteins, including neural cell adhesion molecules (e.g., 
+NCAM1, NCAM2, NRCAM, L1CAM, and CHL1/L1CAM2), synap-
+tic cell adhesion molecules (CADM1/SynCAM and CADM2/Syn-
+CAM2), IgLON family of cell adhesion molecules (OPCML, LSAMP , 
+and NEGR1), adhesion G protein–coupled receptors (ADGRB1/BAI1, 
+ADGRB3/BAI3, and ADGRL1/latrophilin- 1), neurexin- 1 (NRXN1), 
+teneurin- 4 (TENM4), neuronal pentraxin- 1 (NPTX1), neuronal pen-
+traxin receptor (NPTXR), contactins (CNTN1, CNTN2, CNTN3, and 
+CNTN4), contactin- associated proteins (CNTNAP1/Caspr1, CNT-
+NAP2/Caspr2, CNTNAP4/Caspr4, and CNTNAP5/Caspr5), cadher-
+ins (CDH2, CDH10, and CDH13), protocadherins (PCDH1, PCDH9, 
+and PCDH17), neurofascin (NFASC), neogenin (NEO1), neuroplastin 
+(NPTN), ADAM22, LGI1, CD47, CD200, SIRPA, JAM3, and/or THY1 
+(Fig.  8, E and F , and table  S9). The identification of site- specific 
+glycoforms from cell adhesion proteins as top hub glycoforms of 
+AD- positively correlated modules (e.g., L1CAM_N671_H3N4F1, 
+NRCAM_223_H4N2, CNTN1_N338_H5N2, and OPCML_N70_
+H6N2) and AD- negatively correlated modules (CD200_N90_
+H6N6F1S2 and THY1_N42_H5N4F1 glycoforms) (Fig.  8A and 
+table  S9) supports a central role of cell adhesion glycoforms as key 
+drivers of disease- associated glycoform network changes in AD. Our 
+results (Figs. 7 and 8), together with increasing evidence for many of 
+these cell adhesion proteins in controlling synapse organization and 
+remodeling, synaptic function, trans- synaptic signaling, and/or 
+neuron- glia communication (47, 48), indicate that dysregulated glycan 
+modifications (e.g., up- regulated oligomannosylation and down-  
+regulated sialylation) of cell adhesion proteins could be a previously 
+unidentified pathogenic mechanism leading to synapse loss, synaptic 
+dysfunction, and cognitive decline in AD.
+Another prominent feature shared by all seven AD- related mod-
+ules was their association with ECM organization and matrisome 
+function with an enrichment of glycoforms from matrisome pro-
+teins, including ECM structural constituents [e.g., laminins (LAMA2, 
+LAMA5, and LAMC1), collagens (COL6A2 and COL6A3), heparan 
+sulfate proteoglycan HSPG2/perlecan, fibromodulin (FMOD), nido-
+gen- 2 (NID2), biglycan (BGN), TINAGL1, and vitronectin (VTN)], 
+perineuronal net components [e.g., tenascins (TNC and TNR), neu-
+rocan (NCAN), aggrecan (ACAN), brevican (BCAN), hyaluronan 
+and proteoglycan link protein 1 (HAPLN1), and versican (VCAN)], 
+ECM receptors [e.g., integrins (ITGA1, ITGA2, ITGA6, ITGA7, 
+ITGAM, ITGAV , ITGB1, and ITGB8), agrin (AGRN), BCAM, and 
+tetraspanins (TSPAN3 and TSPAN8)], ECM- associated proteins 
+[e.g., SPARCL1/hevin, clusterin (CLU), semaphorins (SEMA4D and 
+SEMA7A), GPNMB/osteoactivin, and hemopexin (HPX)], and 
+ECM regulators [ADAM10, lysyl hydroxylase- 1 (PLOD1), A2M, 
+alpha- 1- antitrypsin (SERPINA1), and neuroserpin (SERPINI1)] 
+(Fig. 8, D to F , and table S9). The importance of ECM glycoforms 
+in driving AD- associated glycoform network changes is highlighted 
+by their identification as top hub glycoforms of AD- positively 
+correlated modules (e.g., LAMA2_N2028_H3N4F1, LAMA2_
+N1901_H5N2, NCAN_N122_H6N2, HAPLN1_N56_H3N5F1, and 
+LAMA5_N2501_H5N4F1S1) and AD- negatively correlated mod-
+ules (LAMC1_N1107_H5N4F1, LAMC1_N1223_H6N5F1S1, and 
+TNR_N1261_H5N5F1S1) (Fig.  8A and table  S9). Our findings 
+(Fig. 8 and table S10) reveal a previously unrecognized connection of 
+aberrant mannosylation, fucosylation, and sialylation of matrisome 
+proteins with altered ECM dynamics, matrisome dysfunction, and 
+impaired ECM- cell communication in AD. A number of the identi-
+fied matrisome proteins (e.g., HSPG2, TNC, BGN, VCAN, ITGAV , 
+ITGB1, ITGAM, CLU, SEMA7A, A2M, and SERPINA1) play critical 
+roles in the control of inflammatory response (49, 50). Furthermore, 
+AD- associated modules also contained glycoforms from other 
+inflammation- related proteins [e.g., complement C3, complement 
+factor H (CFH), HP , tissue factor F3, CD47, and JAM3]. Together, 
+these results highlight a link between altered glycan modifications of 
+these glycoproteins and neuroinflammation in AD.
+Our analyses showed that AD- positively correlated GFM1, GFM2, 
+and GFM4 modules were highly enriched with mannosylated and fu-
+cosylated glycoforms from neuronal and synaptic membrane proteins 
+involved in neurotransmission and synaptic plasticity, including neu-
+rotransmitter receptors [glutamate receptors (GRM3/mGluR3, GRM5/
+mGluR5, GRIN1/NR1, GRIN2A/NR2A, GRIN2B/NR2B, GRIA1/GluR1, 
+GRIA2/GluR2, GRIA3/GluR3, GRIK2/GluR6, and GRIK3/GluR7), 
+GABA receptors (GABBR1, GABBR2, GABRA3, GABRB2, and 
+GABRG2), and glycine receptor GPR158/mGlyR)], synaptic vesicle 
+proteins SYNPR and SYPL1, voltage- gated Ca 2+ channel subunit 
+CACNA2D1, neuronal K +/Cl− cotransporter SLC12A5/KCC2, K + 
+channel modulatory subunit DPP6, glutamate receptor trafficking reg-
+ulator OLFM1/noelin, and hippocampal excitatory synapse organizer 
+IGSF8 with GRM3_N414_H3N4F1, GRIK2_N378_H8N2, GRIN1_
+N276_H5N2, GABBR1_N482_H5N2, GRM5_N382_H3N5F1, and 
+SYNPR_N33_ H3N5F1 as top hub glycoforms (Fig. 8, A, E, and F , and 
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+14 of 25
+Fig. 8. Biochemical and functional characteristics of AD- associated glycoform module networks. (A) Glycoform coregulation network plots of Ad- associated mod-
+ules, with node representing individual glycoform, node color for site- specific glycan modification type, and node size in proportion to kMe- based intramodular connec-
+tivity. A maximum of 50 glycoforms are shown for each module, with top 10 hub glycoforms in the center of each network plot. t he glycoform id and full name 
+(protein_n- glycosite_glycan composition) for top 10 hub glycoforms are indicated next to the module network plot, with glycoforms color- coded for site- specific glycan 
+types. t he full list of glycoforms in each module and their kMe values are provided in table S9. (B) heatmap shows the percentages of glycoforms with the indicated glycan 
+types in each Ad - associated module (% Glycoform scale bar) and the net change in the percentage of glycoforms carrying each glycan type in each module versus the 
+percentage of glycoforms carrying the same glycan type in the control brain (% change scale bar). (C) heatmap shows the percentages of glycoforms carrying each of top 
+10 most frequent glycan compositions in each Ad- associated module. (D to F) GO cellular component, molecular function, and biological process categories enriched in 
+each Ad - associated module are shown with Benjamini- hochberg FdR- corrected P values. count indicates the number of glycoproteins per GO term.
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+15 of 25
+table S9), indicating an association of up- regulated mannosylation and 
+fucosylation of the neurotransmitter receptors and synaptic proteins 
+with synaptic dysfunction and cognitive decline in AD. By contrast, 
+AD- negatively correlated GFM3 module was associated with the neu-
+rotransmission process with an enrichment of sialylated glycoforms 
+from neuronal and synaptic proteins involved in ion transport, includ-
+ing Na+/K+ transporting adenosine triphosphatase (ATPase) subunits 
+ATP1B1 and ATP1B2, voltage- gated Na+ channel subunit SCN2A/
+Nav1.2, glutamate ionotropic receptor subunit GRIA2/GluR2, synaptic 
+vesicle proteins SV2A and SYPL1, K+ channel modulatory subunits 
+DPP6 and DPP10, and choline transporter- like protein SLC44A2 with 
+ATP1B1_N193_H7N6S3, ATP1B1_N193_H7N6F1S3, and SYPL1_
+N71_H6N4F1S1 as top hub glycoforms (Fig.  8, A, E, and F , and ta-
+ble  S9), revealing an involvement of decreased sialylation of these 
+proteins in altered brain cell ion homeostasis and neurotransmis-
+sion in AD.
+Another key finding from our analyses is a strong association of 
+AD- positively correlated GFM1, GFM2, and GFM4 modules and the 
+AD- negatively correlated GFM3 module with signal transduction pro-
+cesses in the brain, as demonstrated by an enrichment of glycoforms 
+from a variety of signaling receptors [e.g., insulin receptor (INSR), 
+neurotrophic tyrosine kinase receptor NTRK2/TrkB, GDNF receptor 
+GFRA2, EGF family receptors (EGFR and ERBB3), protein tyrosine 
+phosphatase receptor PTPRZ1, purinergic receptor P2RX7, inositol 
+1,4,5- trisphosphate receptor ITPR1/IP3R1, neuronal pentraxin 
+NPTX1, neuronal pentraxin receptor NPTXR, interleukin- 6 receptor 
+subunit IL6ST, V- set immunoregulatory receptor VSIR, adhesion G 
+protein–coupled receptors (ADGRB1/BAI1, ADGRB3/BAI3, and 
+ADGRL1/latrophilin- 1), integrins (ITGA1, ITGA2, ITGA6, ITGA7, 
+ITGAM, ITGAV , ITGB1, and ITGB8), and plexin family of semaphorin 
+receptors (PLXNA1, PLXNA2, PLXNA4, PLXNB1, PLXNB2, and 
+PLXNC1)], signaling receptor ligands (e.g., semaphorins SEMA4D and 
+SEMA7A), and other signaling regulators (e.g., ADAM10, ADAM22, 
+Nicastrin, ACE1, DKK3, MEGF8, NEGR1, LINGO1, and CD38) 
+(Fig. 8E and table S9). These results, together with the identification of 
+site- specific glycoforms from a number of signaling receptors and regu-
+lators as top hub glycoforms of AD- positively correlated modules (e.g., 
+ADGRB3_N779_H5N2, NPTX1_N154_H3N5F1, ADAM22_N634_
+H3N5F1, NTRK2_N95_H6N2, and PLXNB2_N127_ H3N5F1) and 
+AD- negatively correlated modules (e.g., LINGO1_N505_H3N6F1S2 
+and NEGR1_N294_H8N7F1), indicate that elevated mannosylation 
+and fucosylation and reduced sialylation and N- glycan branching or 
+elongation of the signaling receptors and regulators could be previously 
+unknown pathogenic events leading to neuronal signaling dysregula-
+tion in AD.
+We found that six of the seven AD- related glycoform modules 
+(GFM1, GFM4, GFM11, GFM19, GFM3, and GFM14) were closely 
+linked to lysosomal function with an enrichment of glycoforms 
+from lysosomal proteins, including lysosomal lumenal hydrolases 
+[e.g., cathepsins (CTSD and CTSL), tripeptidyl- peptidase 1 (TPP1), 
+palmitoyl- protein thioesterase 1 (PPT1), lysosomal alpha- glucosidase 
+(GAA), lysosomal acid glucosylceramidase (GBA1), acid ceramidase 
+1 (ASAH1), prenylcysteine oxidase 1 (PCYOX1), beta- glucuronidase 
+(GUSB), iduronate 2- sulfatase (IDS), steroid sulfatase (STS), hexosa-
+minidase subunit A (HEXA), sialic acid acetylesterase (SIAE), and 
+lysosomal carboxypeptidase C (PRCP)], lysosomal membrane- bound 
+hydrolases (e.g., phospholipase PLD3 and lysosomal acid phospha-
+tase ACP2), lysosomal transporters (e.g., vacuolar H +- transporting 
+ATPase subunits ATP6AP1 and ATP6V0E2, and ATP- binding 
+cassette transporter ABCA2), and other lysosomal membrane gly-
+coproteins (e.g., LAMP1, LAMP2, and TMEM25) (Fig.  8D and ta-
+ble S9). Furthermore, site- specific glycoforms from several lysosomal 
+glycoproteins (e.g., PLD3_N387_N1F1, PLD3_N387_H3N5F1, PCY-
+OX1_N323_H5N2, TPP1_N313_H5N2, ABCA2_N14_H3N5F1, 
+ABCA2_N1775_H9N2, and CTSL_N221_H6N2) were identified as 
+top hub glycoforms of AD- related modules (Fig.  8A and table  S9). 
+These results, together with ample evidence for the critical roles of the 
+identified lysosomal hydrolases, transporters, and other lysosomal 
+glycoproteins in controlling intracellular degradation and brain ho-
+meostasis (51, 52) and the finding of PLD3 as a risk factor for AD 
+(53), indicate that altered glycan modifications (e.g., increased pauci-
+mannosylation or oligomannosylation) of the lysosomal hydrolases 
+and lysosomal membrane glycoproteins could be a previously un-
+identified pathogenic mechanism leading to lysosomal dysfunction, 
+defective lysosomal acidification, impaired degradation, and neuro-
+degeneration in AD.
+Our analyses revealed that AD- positively correlated GFM1, GFM2, 
+and GFM4 modules were also associated with the process of receptor- 
+mediated endocytosis with an enrichment of mannosylated or fucosyl-
+ated glycoforms from endocytic cargo receptors, including low- density 
+lipoprotein (LDL) receptor family members LRP1 and LRP1B, sortilin 
+SORT1, sortilin- related receptor SORL1, and lysosomal sorting 
+receptor M6PR/CD- MPR with LRP1_N1575_H5N2, LRP1_N2620_
+H5N2, LRP1_N1511_H4N4F1, M6PR_N57_H7N2, and SORL1_
+N1894_H5N2 as top hub glycoforms (Fig. 8, E and F , and table S9). 
+While fucosylated SORT1 glycoforms (SORT1_N98_H3N4F1, 
+SORT1_N98_H4N5F1, and SORT1_N162_H3N5F1) were localized 
+in AD- positively correlated GFM1 module, sialylated SORT1 glyco-
+forms (SORT1_N98_H4N5F1S1 and SORT1_N98_H4N6S1) were 
+found in the AD- negatively correlated GFM3 module linked to the 
+process of receptor- mediated endocytosis (Fig.  8, E and F , and ta-
+ble  S9). Furthermore, sialylated glycoforms from lysosomal sorting 
+receptor SCARB2/LIMP2 (SCARB2_N224_H5N6F1S2 and SCARB2_
+N224_H6N6F1S2) were also localized in the GFM3 module (table S9). 
+Our findings, together with the reported functions of these cargo re-
+ceptors in controlling endocytic trafficking of APP , tau, and/or other 
+cargos (40, 54) and GW AS identification of SORL1 and SORT1 as risk 
+factors for AD (55), indicate that elevated mannosylation and fucosyl-
+ation and reduced sialylation of the endocytic cargo receptors could be 
+previously unrecognized pathogenic events contributing to endocytic 
+trafficking dysregulation and AD neuropathology.
+Alterations in N- glycan modification enzymes and 
+regulators in AD
+Protein N- glycosylation is a highly regulated process that includes se-
+quential steps of initiation, trimming or processing, branching and 
+elongation, and capping, which are controlled by the ordered actions 
+of a variety of glycosyltransferases, glycosidases, and other regulators 
+in the ER and Golgi compartments (8, 9). To determine whether al-
+terations in N- glycosylation enzymes and regulators are involved in 
+driving the N- glycan modification changes observed in AD brain, we 
+examined the mRNA expression profiles of the N- glycosylation–related 
+genes in the transcriptome datasets from the Religious Orders Study 
+and the Memory and Aging Project (ROSMAP), Mount Sinai School 
+of Medicine (MSSM), and Mayo studies covering seven brain regions 
+(Fig. 9), using a published resource of AD brain transcriptome meta- 
+analysis (56). In addition, we assessed the protein expression patterns 
+of N- glycosylation enzymes and regulators (Fig. 9) in our proteome 
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+16 of 25
+dataset from the same cohort (31) and five other AD brain proteome 
+datasets (57–61). We found that the expression levels of several sub-
+units (e.g., STT3A, STT3B, RPN2, TUSC3 and MAGT1) of OST en-
+zyme complexes, which catalyze the initiation step of N- glycosylation 
+by cotranslationally or posttranslationally transferring a preformed 
+oligosaccharide Glc3Man9GlcNAc2 to asparagine residues of proteins 
+in the ER (8, 62), were altered in AD brain (Fig. 9), consistent with our 
+previous identification of OST dysregulation as a cause of protein N- 
+glycosylation site occupancy changes in AD (23).
+Our multiomics interrogations revealed that glucosidase I (MOGS) 
+and GANAB and PRKCSH subunits of glucosidase II, the enzymes 
+that sequentially trim the three terminal glucose residues from the Gl-
+c3Man9GlcNAc2 glycan on glycoproteins (63), had altered protein lev-
+els in AD brain (Fig. 9). Furthermore, we found that malectin (MLEC), 
+an ER lectin that binds the di- glucosylated glycan generated by gluco-
+sidase I to retain immature or misfolded proteins in the ER (63), cal-
+nexin (CANX) and calreticulin (CALR), the ER lectin chaperones that 
+bind the mono- glucosylated glycan generated by glucosidase II to fa-
+cilitate protein folding (9), and UDP- glucose:glycoprotein glucosyl-
+transferase UGGT1 and UGGT2, the protein folding sensors that 
+re- glucosylate the incompletely folded proteins to allow re- association 
+with the CANX- CALR chaperone system for further folding (9, 64), 
+were also altered in AD brain (Fig. 9). In addition, LMAN2/VIP36, a 
+lectin cargo receptor that binds Man 8GlcNAc2 glycan on correctly 
+folded proteins to mediate ER- to- Golgi trafficking (63), and ERLEC1/
+XTP3B, an ER lectin that binds oligomannose glycans (Man7GlcNAc2, 
+Man6GlcNAc2, and Man5GlcNAc2) on misfolded proteins to promote 
+ER- associated degradation (ERAD) (9, 63), were down- regulated in 
+AD brain (Fig. 9). Moreover, single- nucleotide polymorphisms (SNPs) 
+in CANX and EDEM2 (an ER degradation- enhancing α- mannosidase- 
+like protein for mannose trimming of misfolded proteins) were 
+associated with increased AD risk by GW AS meta- analyses (65, 66). 
+Together, these data provide evidence supporting the involvement of 
+altered ER glycan- processing enzymes and ER lectins in causing the 
+protein N- glycan modification changes in AD brain uncovered by 
+this study.
+Our analyses showed that N - acetylglucosaminyltransferase 
+MGAT1, a Golgi enzyme that catalyzes the first step in N- glycan 
+branching by adding a GlcNAc residue to Man5GlcNAc2 on glycopro-
+teins to form GlcNAcMan5GlcNAc2 glycan (8), and α- mannosidase II 
+enzymes MAN2A1 and MAN2A2, which remove the terminal two 
+mannose residues to generate GlcNAcMan3GlcNAc2 glycan (8), were 
+up- regulated in AD brain (Fig. 9). The up- regulation of these enzymes 
+provides a mechanism for driving the increased overall levels of 
+protein modifications by H5N3 and H3N3 glycans observed in AD 
+brain (Fig. 3D and table S4C). In addition, we found that MGAT4C, 
+Fig. 9. Multiomics interrogations revealing alterations in N-  glycosylation machinery in AD. integrated analyses of Ad transcriptome, proteome, and GWAS meta- 
+analysis datasets reveal disease- associated changes in n- glycan modification enzymes and regulators in human Ad cases. dataset 1 includes transcriptome data from the 
+Religious Orders Study and the Memory and Aging Project (ROSMAP), Mount Sinai School of Medicine (MSSM), and Mayo studies. dataset 7 includes M29 Glycosylation/
+eR module membership and correlation data to cognitive function (MMSe30 score), Aβ pathology (ceRAd score), or nFt pathology (Braak stage). t he transcriptome and 
+proteome datasets were obtained from the following brain regions: dlPFc, dorsolateral prefrontal cortex; FP , frontal pole; iFG, inferior frontal gyrus; PhG, parahippocam-
+pal gyrus; St G, superior temporal gyrus; tcX, temporal cortex; cBe , cerebellum; Fc, frontal cortex; ec, entorhinal cortex; hiP , hippocampus; and c G, cingulate gyrus. t he 
+reference number for each dataset is indicated in parentheses.
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+17 of 25
+an N- acetylglucosaminyltransferase that promotes the formation of 
+tri-  and tetra- antennary branching glycan structures in the Golgi (8), 
+were down- regulated in AD brain (Fig.  9). Furthermore, GW AS 
+meta- analyses have identified SNPs in MGAT4B and MGAT5 as can-
+didate risk alleles for AD (65, 66). These findings suggest that reduced 
+MGAT4C expression and altered MGAT4B and MGAT5 enzymes 
+may cause decreased N- glycan branching in AD as implicated by our 
+results (Figs. 1, H and I, and 3B).
+Examination of N- glycan elongation enzymes in the multiomics 
+datasets showed that B3GALT2, a galactosyltransferase that attaches 
+galactose to the terminal GlcNAc residue of glycans to form type 1 
+LacNAc- based chain (8), was down- regulated in AD (Fig. 9), whereas 
+B4GALT1 and B4GALT4, the galactosyltransferases that produce a 
+type 2 LacNAc- based glycan chain (8 ), were up- regulated in AD 
+(Fig. 9), indicating dysregulated galactosylation and elongation in AD 
+brain. Analysis of N- glycan capping enzymes revealed that while fu-
+cosyltransferases were mostly unaltered in AD, several sialyltransfer-
+ases such as ST3GAL3 and ST6GAL2, which attach sialic acid to the 
+galactose residue via α 2,3-  and α2,6- linkage, respectively (8 ), and 
+ST8SIA2, ST8SIA3, and ST8SIA4, which add sialic acid to the termi-
+nal sialic acid residue via α2,8- linkage to generate di- , oligo-  or poly- 
+sialylated glycoproteins (8), were down- regulated in AD brain (Fig. 9). 
+Furthermore, GW AS meta- analysis has associated an SNP in ST8SIA3 
+with increased AD risk (66). The identified down- regulation of sialyl-
+transferases (Fig.  9) provides a mechanism for driving the reduced 
+overall sialylation in AD brain uncovered by this work (Figs. 1, H and 
+I, and 3A, and table S4A). Additionally, we found that sialyltransferase 
+ST6GAL1 was up- regulated in AD (Fig. 9), which could contribute to 
+the formation of hypersialylated glycoforms detected in AD brain 
+(Fig. 5, A and C, and table S6I). Our multiomics interrogations also 
+revealed that N- acetyl- β- hexosaminidase HEXB and α- mannosidase 
+MAN2B1, two enzymes that are involved in N- glycan truncation 
+to generate paucimannose glycans on proteins (67, 68), were up-  
+regulated in AD brain (Fig. 9), providing a mechanism for driving the 
+increased paucimannosylation by H3N2, H2N2, and H1N2 glycans 
+in AD brain (Fig. 3E and table S4C).
+Compared to transcriptomics, proteomics studies have relatively 
+less coverage of the proteome. Johnson et  al. (60) is the largest AD 
+brain proteome dataset to date, but it still lacks expression data for 
+many N- glycosylation- related genes, particularly for enzymes in-
+volved in the N- glycan branching, elongation, fucosylation, and si-
+alylation (Fig. 9). Despite the limitation, interrogation of proteomics 
+datasets has revealed disease- associated changes in N- glycosylation 
+enzymes not observed at the RNA level (Fig. 9). Consistent with this 
+result, Johnson et al. (60) have identified a protein coexpression net-
+work module, named M29 Glycosylation/ER, which was not pre-
+served in the RNA network. The M29 Glycosylation/ER module had 
+strong correlation to AD neuropathology and cognition phenotypes 
+(60) and contained OST subunits (STT3B, RPN2, and DDOST), ER 
+glycan- processing enzymes (GANAB, PRKCSH, and UGGT1), and 
+ER lectins (MLEC, CANX, and LMAN2) (Fig. 9). By further inter -
+rogation of the Johnson et al. dataset (60), we uncovered additional 
+N- glycosylation- related proteins (STT3A, DAD1, TUSC3, UGGT2, 
+MAN2A2, LMAN2L, OS9, ERLEC1, FUT9, HEXB, and MANBA) 
+with significant correlation to cognitive function (MMSE30 score), 
+Aβ pathology (CERAD score), and/or NFT pathology (Braak stage) 
+(Fig. 9). In addition, interrogation of Aβ plaque and NFT proteomics 
+datasets (69–71) revealed that some of the N- glycan modification en-
+zymes (RPN1, DDOST, GANAB, PRKCSH, UGGT1, and HEXB) and 
+ER lectin chaperones (CALR and CANX) were colocalized with Aβ 
+plaques and NFTs in AD brain (Fig. 9). Collectively, the convergent 
+evidence from multiomics analyses (Fig. 9) provides strong support 
+for the involvement of dysregulated N- glycosylation machinery in 
+driving glycoproteome remodeling and AD pathogenesis.
+DISCUSSION
+The present study is the first to use intact glycopeptide- based quanti-
+tative glycoproteomics coupled with network biology to provide a 
+systems- level view of protein glycoforms and site- specific glycan 
+modifications in human brain and their changes in AD. We report the 
+largest human brain glycoproteome to date with 10,731 N- glycoforms 
+from 1184 glycoproteins carrying 164 distinct glycan compositions 
+across 2544 glycosylation sites. The acquisition of such extensive gly-
+coproteomic information is mainly attributed to the strength of our 
+optimized intact glycoproteomics pipeline, including full extraction 
+of proteins with strong detergent SDS (25), preparation of high- purity 
+peptides by FASP (26), enrichment of intact glycopeptides using SAX- 
+ERLIC, a more effective approach than lectin affinity enrichment 
+methods for reducing the bias toward certain glycan moieties on gly-
+copeptides (27), and SCE- HCD–based LC- MS/MS analysis (28). Our 
+analyses reveal that oligomannosylation and fucosylation are two pre-
+dominant types of glycan modification in human brain (Figs. 1, H and 
+I, and 3A, and table S4A), consistent with previous glycoproteomic 
+and glycomic results (20, 24, 33). Our study also shows that sialylation 
+(including modifications by sialylated- only glycans and sialofucosyl-
+ated glycans) is a common type of glycan modification in the brain, 
+occurring at ~ 26% of total glycoforms (detection frequency) and 
+~19% relative abundance (Figs. 1H and 3A and table S4A). By con-
+trast, a recent glycoproteomic study using multi- lectin and HILIC 
+enrichment reported a low occurrence of sialylation at <9% detection 
+frequency in the brain (24), whereas the study by Tena et al. (32) using 
+membrane fractions reported a predominance of sialylation (mostly 
+sialofucosylation) at >70% relative abundance in the brain. The deep 
+coverage of human brain glycoproteome achieved by our study pro-
+vides fundamental information for understanding the roles of N-  
+glycan modifications in brain health and disease.
+Our deep glycoproteomic analysis extends our previous finding 
+of altered N- glycosylation site occupancy in AD brain (23) and gen-
+erates site- specific glyco- maps of N- glycans and glycoforms for hu-
+man brain glycoproteins, including disease- relevant proteins such as 
+GW AS- identified AD risk factors (e.g., CLU, SORL1, ABCA7, ACE, 
+ADAM10, CNTNAP2, EPHA1, PLD3, and TM2D3) and other AD- 
+related proteins (e.g., tau, nicastrin, and LRP1) in healthy and AD 
+brains (Fig.  2, fig.  S7, and table  S2). The identified AD- associated 
+changes in site- specific glycan modification patterns of these pro-
+teins provides compelling evidence supporting the proposed role of 
+aberrant N- glycosylation in AD pathogenesis (17, 18). The site-  
+specific glyco- maps of AD- relevant proteins obtained from this work 
+provide an important resource for future studies to determine func-
+tional impacts of glycan modifications of these proteins in AD 
+pathogenesis.
+Consistent with our deglycoproteomics results (23), this study has 
+identified many loss and gain of N- glycosylation sites in AD (Figs. 1C 
+and 5, A and B, and tables S2 and S5C). The gain of N- glycosites could 
+represent N- glycosylation of cryptic N- glycosites (i.e., normally un-
+used N- glycosylation sequon) that become exposed due to protein 
+folding changes induced by ER stress or other environmental and 
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+18 of 25
+genetic factors associated with AD (62), whereas the loss of N-  
+glycosylation at the identified N- glycosites could result from altered 
+folding of substrate proteins in AD, making these normally exposed 
+N- glycosites inaccessible to modification by N- glycosylation enzymes 
+in AD. Furthermore, the altered expression and activity of OST STT3A 
+and STT3B complexes in AD revealed by multiomics interrogations 
+(Fig. 9) and our previous study (23) provide another mechanism for 
+driving AD- associated gain and loss of N- glycosites. In addition, 
+alterations in dolichol- oligosaccharide synthesis enzymes identified 
+in AD brain (23) could also contribute to the observed loss and gain 
+of N- glycosites in AD. The finding of close correlations between 
+protein levels of OST subunits (STT3A, STT3B, RPN2, DAD1, and 
+TUSC3) and AD neuropathology and/or cognition phenotypes 
+(Fig. 9), together with the identification of mutations in OST subunits 
+(e.g., STT3A, STT3B, DAD1, and TUSC3) as the cause of congenital 
+disorders of glycosylation with brain function abnormalities (15, 62), 
+provides strong support for the critical role of OST dysfunction and 
+N- glycosylation dysregulation in AD pathogenesis.
+Our study reveals that reduced sialylation is a prominent feature of 
+AD brain glycoproteome (Figs. 1, H and I, and 3A and table S4A). The 
+observed reduction in overall sialylation in AD could be caused by 
+down- regulated expression of sialyltransferases (e.g., ST3GAL3 and 
+ST6GAL2) (Fig.  9) and decreased sialyltransferase activity in AD 
+brain (72). GW AS identification of sialic acid–binding receptor CD33 
+(also called Siglec- 3) as a risk factor for AD (73) underscores the im-
+portance of studying protein sialylation in brain dysfunction in 
+AD. Our analysis shows that reduced overall sialylation in AD (Fig. 3A 
+and table  S4A) results mainly from disease- associated decreases in 
+modification by 25 sialylated glycan compositions (Fig. 3, D and E). 
+Moreover, we have identified 86 hyposialylated glycoforms from 39 
+hyposialylated proteins and 60 hypersialylated glycoforms from 44 
+hypersialylated proteins in AD (Fig. 5, A to C, and table S6, I and J). 
+The observed protein-  and glycoform- specific hypersialylation (Fig. 5, 
+A and C, and table S6I) could be caused by the identified up- regulation 
+of sialyltransferase ST6GAL1 in AD (Fig.  9). Furthermore, β - site 
+APP- cleaving enzyme- 1 (BACE1) has been shown to cleave ST6GAL1 
+to generate a secreted form of enzymatically active sialyltransferase 
+(74), which could also contribute to protein-  and glycoform- specific 
+hypersialylation in AD. Our analyses have uncovered multiple bio-
+logical processes affected by altered sialylation in AD, including cell 
+adhesion, synaptic transmission, ECM function, cell surface receptor 
+signaling, and lysosome function (Fig. 5, D to F , and table S7, I and J), 
+providing mechanistic insights into the functional involvement of 
+dysregulated protein sialylation in AD pathophysiology.
+Our analyses have uncovered significant decreases in the overall 
+levels of protein modifications by N- glycan with six or more HexNAc 
+residues (Figs. 1, H and I, and 3B) and identified 21 glycan composi-
+tions containing ≥ 6 HexNAc residues as down- regulated glycan 
+modifications in AD (Fig.  3, D and E, and table  S4), indicating re-
+duced N- glycan branching and/or elongation in AD brain. The in-
+volvement of reduced N- glycan branching in AD is further supported 
+by the identified down- regulation of N- glycan branching enzyme 
+MGAT4C (Fig. 9) and association of SNPs in MGAT4B and MGAT5 
+with AD risk (65, 66), and the involvement of reduced N- glycan 
+elongation in AD is supported by the down- regulation of N- glycan 
+elongation enzyme B3GALT2 (Fig. 9). Our study reveals a list of gly-
+coproteins and glycoforms with reduced N- glycan branching and/or 
+elongation in AD (Fig. 4, fig. S9, and table S5). These results, together 
+with the reported roles of N- glycan branching and elongation in 
+controlling cell surface protein function, endocytosis, inflammation, 
+and neurodegeneration (75, 76), indicate that decreased N- glycan 
+branching and elongation could be previously unknown pathogenic 
+mechanisms contributing to endocytic trafficking dysregulation, neu-
+roinflammation, and neurodegeneration in AD. Future studies are 
+warranted to further investigate N- glycan branching and elongation 
+aberrations and their roles in AD pathogenesis.
+The observed predominance of protein oligomannosylation in hu-
+man brain (Figs. 1, H and I, and 3A) is consistent with prior studies 
+showing that unlike most tissues, brain contains high abundance of 
+oligomannose glycans, which are concentrated at the synapse (33, 77). 
+Our study reveals that, while the overall levels of oligomannosylation 
+are unaltered in AD (Figs. 1, H and I, and 3A), H5N2 (Man5 glycan) 
+modification is increased and H9N2 (Man9 glycan) modification is 
+decreased in AD (Fig. 3, C to E). Furthermore, we have identified 187 
+glycoforms and 107 glycoproteins with hyperoligomannosylation 
+and 36 glycoforms and 29 glycoproteins with hypo- oligomannosylation 
+in AD (Fig. 5, A to C, and table S6, C and D). Glucose- trimming 
+and oligomannose glycan processing in the ER are intimately linked 
+to protein folding, trafficking, and quality control, with different 
+oligomannose- containing glycans serving as distinct sorting signals 
+for protein folding, ER- to- Golgi trafficking, or ERAD (9, 63). The al-
+terations in ER glycan- processing enzymes (e.g., MOGS, GANAB, 
+PRKCSH, UGGT1, and UGGT2) and ER lectins for binding various 
+oligomannose- containing glycan sorting signals (e.g., MLEC, CANX, 
+CALR, LMAN2/VIP36, and ERLEC1/XTP3B) and their association 
+with AD phenotypes uncovered by multiomics interrogations (Fig. 9), 
+together with GW AS- identified association of SNPs in CANX and 
+EDEM2 with AD risk (65, 66), provide molecular mechanisms for 
+driving the protein-  and glycan- specific changes in oligomannosyl-
+ation observed in AD brain. Our results indicate that disease-  
+associated hyperoligomannosylation and hypo- oligomannosylation 
+both affect plasma membrane and extracellular proteins involved in 
+cell adhesion, transmembrane signaling, and inflammation in AD 
+(Fig. 5, D to F , and table S7, C and D). However, only hyperoligoman-
+nosylation, but not hypo- oligomannosylation, is significantly associ-
+ated with proteins localized to the synapse, ER, and lysosome to affect 
+synaptic transmission, ER function, and lysosomal processes (Fig. 5, 
+D to F). Collectively, our findings provide mechanistic insights into 
+the functional involvement of dysregulated protein oligomannosyl-
+ation in AD pathophysiology.
+This study shows that protein paucimannosylation is a signifi-
+cant feature of human brain glycoproteome, occurring at ~4% of 
+total glycoforms, ~ 9% of total glycosites, and ~ 2.5% relative abun-
+dance (Figs. 1, H and I, and 3A). Paucimannosylation was initially 
+thought to be an invertebrate-  and plant- specific type of glycosyl-
+ation (78), but accumulating evidence indicates that paucimanno-
+sylation also occurs in vertebrates, particularly in the mammalian 
+brain (41, 67). Recent studies have shown that protein pauciman-
+nosylation is mediated by an N- acetyl- β- hexosaminidase–dependent 
+truncation pathway (68) and paucimannose glycans on glycopro-
+teins can be further truncated to form chitobiose core–type glycans 
+(67). Our finding of increased modifications by paucimannose gly-
+cans (H1N2, H2N2, and H3N2) and chitobiose core–type glycans 
+(N1 and N2) in AD brain (Fig. 3E and table S4C) indicates an in-
+volvement of elevated N- glycan truncation in AD. Corroborating 
+with our finding, a glycomic study reported an association of AD 
+neuropathology with a shift to smaller N- glycans with lower m /z 
+values (79). Our multiomics interrogations reveal that the observed 
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+19 of 25
+increases in paucimannosylation (Fig. 3E) could be caused by the 
+up- regulated expression of N - acetyl- β- hexosaminidase HEXB and 
+α- mannosidase MAN2B1 in AD (Fig. 9). Furthermore, our work 
+has identified a list of glycoproteins and glycoforms with altered 
+paucimannosylation in AD brain (Fig. 5, A to C, and table S6, E and 
+F) and uncovered hyperpaucimannosylation- affected processes in 
+AD, including neuroinflammation, synaptic dysfunction, cell adhe-
+sion alteration, Golgi dysfunction, and cell signaling dysregulation 
+(Fig. 5, D to F , and table S7E), highlighting a previously overlooked 
+connection between dysregulation of protein paucimannosylation 
+and AD pathogenesis.
+This work demonstrates that protein fucosylation is a predomi-
+nant type of glycan modification in the human brain, occurring at 
+~41% of total glycoforms, ~60% of total glycosites, and 39% relative 
+abundance (Figs. 1, H and I, and 3A). These numbers may represent 
+an underestimation of total fucosylation in the brain because glycans 
+with two or more fucoses were omitted from our analysis to reduce 
+glycopeptide misassignments due to Fuc(2) versus NeuAc(1) ambi-
+guities. Previous glycomics analyses have found glycan structures 
+with two or multiple fucoses in the brain, although they represent a 
+minor contribution compared to glycans with a single fucose (20, 33). 
+Despite this limitation, our finding of a predominance of protein fu-
+cosylation in human brain (Figs. 1, H and I, and 3A) is in line with the 
+reported high abundance of fucosylated N- glycans in the brain with 
+crucial roles in regulation of synaptic plasticity and cognitive process-
+es ( 33, 80). Our analyses reveal an increase in modification by 
+fucosylated- only glycans and a decrease in modification by sialofu-
+cosylated glycans, resulting in no significant change in overall fucosyl-
+ation in AD brain (Fig. 1, H and I; fig. S6; Fig. 3A; and table S4A). 
+Furthermore, we have identified 188 glycoforms and 83 glycoproteins 
+with hyperfucosylation and 83 glycoforms and 44 glycoproteins with 
+hypofucosylation in AD (Fig. 5, A to C, and table S6, G and H). The 
+elucidation of multiple biological processes and pathways affected by 
+disease- associated hyperfucosylation and hypofucosylation (Fig. 5, D 
+to F , and table S7, G and H) provides evidence linking altered fucosyl-
+ation to AD pathophysiology.
+This work establishes glycan modification coregulation network 
+analysis as an approach to analyze complex datasets of intact glyco-
+proteomics. Unlike differential analysis that determines abundance 
+changes of individual glycan modifications independently, coregula-
+tion network analysis relates glycan modifications to one another using 
+pairwise correlation relationships between glycan modification pro-
+files to illuminate higher- order organization and define modules of 
+coregulated glycan modifications that are functionally related and/or 
+coordinately regulated. Using this network analysis, we have uncov-
+ered an organization of human brain glycome (164 glycan composi-
+tions) into eight modules of coregulated glycan modifications (Fig. 6, 
+A and B, and table  S8). We have identified three disease- associated 
+glycan modules that are significantly correlated with AD clinico-
+pathological phenotypes, including two negatively correlated modules 
+(GNM1 and GNM4) enriched with sialylated glycans and highly 
+branched or elongated glycans as well as one positively correlated 
+module (GNM2) enriched with oligomannose, paucimannose, chito-
+biose core glycans, bisecting GlcNAc- containing glycans, and undeco-
+rated complex/hybrid glycans with relatively simple, neutral structures 
+(Fig. 6 and table S8). Our glycan network analysis reveals previously 
+unknown coregulation relationships among different glycan modifica-
+tions in human brain (Fig. 6D and table S8) and highlights an involve-
+ment of glycan- specific elevations in oligomannosylation, undecorated 
+complex/hybrid modification, bisection, paucimannosylation, and 
+chitobiose core modification and reductions in sialylation and N-  
+glycan branching and/or elongation in AD pathophysiology. These 
+results illustrate the value of glycan coregulation network analysis for 
+generating systems- level insights into glycan modifications in health 
+and disease.
+Another useful approach established by this work is the intact gly-
+coproteomics data- driven glycoform coregulation network analysis, 
+which reveals an organization of human brain glycoproteome into 21 
+modules of coregulated protein glycoforms (Fig. 7 and table S9). The 
+human brain glycoform network shows little overlap with our previ-
+ously reported proteomic (31) and deglycoproteomic (23) networks, 
+indicating that glycoform coregulation, protein coexpression, and N- 
+glycosylation site occupancy are controlled by distinct mechanisms. 
+Our study has identified seven disease- associated, glycoform mod-
+ules with significant correlations to AD phenotypes, including five 
+positively correlated modules (GFM1, GFM2, GFM4, GFM11, and 
+GFM19) and two negatively correlated modules (GFM3 and GFM14) 
+(Fig. 7 and fig. S8). Our analyses have generated a molecular blue-
+print of human brain glycoforms and site- specific glycan modifica-
+tion networks in AD brain and uncovered a number of dysregulated 
+glycan modification- affected processes and pathways, including al-
+terations in cell adhesion and synapse organization, matrisome dys-
+function, neuroinflammation, synaptic dysfunction, impaired brain 
+cell ion homeostasis, cell signaling dysregulation, ER and Golgi dys-
+function, endocytic trafficking dysregulation, and lysosomal dys-
+function (Figs.  7 and 8 and tables  S9 and S10). The identified 
+disease- associated networks, pathways, and hub glycoforms provide 
+attractive targets for AD biomarker and therapeutic development.
+While sex is known to affect N- glycosylation profiles in the plas-
+ma (81), recent studies have reported that sex has a minimal impact 
+on N- glycosylation profiles in the brain compared to the plasma (24, 
+33). Consistent with these reports, our analyses have shown that sex 
+has no significant effect on N- glycosylation profiles in human brain 
+(fig. S5) or N- glycan modification changes in AD brain (Figs. 3E and 
+4D). Furthermore, module- trait correlation analyses have demon-
+strated that none of the glycan modules (fig. S10) or AD- associated 
+glycoform modules (fig. S11) has any significant correlation to sex. 
+Together, these data provide strong evidence supporting that the 
+disease- associated N- glycan modification changes and glycoform 
+network alterations in AD brain uncovered by this study is not due to 
+sex as a confounding factor.
+We note that current glycoproteomics methods can only provide 
+glycan compositions but not glycan structures as the site- specific gly-
+can information, which limits insight into glycan structural diversity 
+as a single glycan composition may represent multiple glycan struc-
+tures (34). Another limitation of glycoproteomics is the challenge in 
+correct assignment of glycopeptides bearing glycan compositions 
+with similar masses, such as NeuAc(1) versus Fuc(2). To reduce the 
+misassignments, we did not consider glycans with two or more fu-
+coses in our analysis. In addition, quantitative glycoproteomics is lim-
+ited by the occurrence of missing data, such as missing glycopeptide 
+identifications or abundance values (82). Although our quantitative 
+analyses have identified 677 altered glycoforms in AD (Fig. 5, A and 
+B, and table S6, A and B), some important glycoform changes may 
+have been missed as a result of excluding intact glycopeptides with 
+missing values in >50% of the samples in our analyses. Furthermore, 
+the relatively small sample size used in this study only allowed detec-
+tion of disease- associated glycosylation changes with a large effect 
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+20 of 25
+size, and more subtle changes may have been missed (83). Despite 
+these limitations, we anticipate that the methodologies and findings 
+presented here will facilitate further studies of disease- associated gly-
+coforms and site- specific glycan changes in AD.
+In summary, our work has established the integration of intact 
+glycopeptide- based quantitative glycoproteomics with network biol-
+ogy as a paradigm for analyzing proteome- wide changes in site-  
+specific glycan modifications in AD. This approach can be broadly 
+applied to study glycan modification alterations in other human dis-
+eases or in different stress conditions. Our comprehensive and quan-
+titative glycoproteomics data of healthy human brains and AD 
+patients have revealed previously unknown disease signatures of al-
+tered glycoforms and site- specific glycan modifications in AD and 
+will serve as a valuable resource to facilitate future investigations into 
+the roles of glycan modifications in normal brain physiology and AD 
+pathophysiology. The identified glycan modification aberrations and 
+brain glycoform and glycan network alterations provide mechanistic 
+insights into AD pathogenesis and pave the way forward for develop-
+ing glycosylation- based therapies and biomarkers to combat this 
+devastating disease.
+MATERIALS AND METHODS
+Human brain sample preparation
+Postmortem brain tissues were acquired with informed consent from 
+the donors or their family and provided by the Emory Center for 
+Neurodegenerative Disease Brain Bank. All experiments were con-
+ducted in accordance with the U.S. National Institutes of Health 
+(NIH) guidelines for research involving human tissues and with the 
+ethical standards and principles of the Declaration of Helsinki. For 
+intact glycoproteomics analysis, we used the same sets of dorsolateral 
+prefrontal cortex samples from AD and age- matched control cases as 
+described in our previous proteomics and deglycoproteomics studies 
+(23, 31). The case information and neuropathological data, including 
+age, sex, disease status, disease duration, Aβ  pathology CERAD 
+score, neurofibrillary tangle Braak stage, ApoE genotype, and post-
+mortem interval (PMI), can be found in table  S1. Power analysis 
+showed that the sample size used in this study (n  = 16 AD and con-
+trol cases) has >80% power at a two- sided type I error rate of 5% to 
+detect an effect size of at least 1.6. The samples used in this study were 
+a neighboring piece of tissue from the same brain region used in our 
+previous publications (23, 31). For glycoproteomics sample prepara-
+tion, human brain tissue (25 mg per AD or control case) was homog-
+enized in 150 μl of lysis buffer containing 4% SDS, 100 mM DTT, and 
+100 mM tris- HCl (pH 7.6) at 95°C, and proteins were extracted as we 
+described previously (25, 31). Protein extracts were processed by fol-
+lowing the FASP protocol with the Microcon 30- kDa centrifugal fil-
+ter device (MRCF0R030, Merck) for detergent removal, cysteine 
+alkylation by iodoacetamide, trypsin digestion, and peptide purifica-
+tion (25, 26). Peptide concentrations were determined by UV spec-
+trometry as previously described (31), and purified peptides were 
+dried under vacuum.
+Enrichment of intact glycopeptides by SAX- ERLIC
+Purified peptides from each brain sample (200 μ g of peptides per 
+sample) were reconstituted in 60 μl of 50% acetonitrile (ACN) and 
+0.1% trifluoroacetic acid (TFA) in H 2O. Intact glycopeptides were 
+enriched by using ERLIC with SAX solid- phase extraction (SAX-  
+ERLIC) as previously described (27) with minor modification. Briefly, 
+SOLA- AX Solid Phase Extraction (SPE) cartridges (10 mg sorbent 
+per cartridge, Thermo Fisher Scientific) were equilibrated three times 
+with 1 ml of ACN, three times with 100 mM triethylammonium ace-
+tate (pH 7.0), and three times with loading buffer (95% ACN and 1% 
+TFA in H2O). Peptides were diluted in 1 ml of loading buffer and 
+loaded onto the SPE cartridge, and the flow- through was collected 
+and loaded again onto the cartridge. After washing the cartridge with 
+1 ml of loading buffer three times, the bound glycopeptides were elut-
+ed in two 600- μl aliquots of elution buffer (50% ACN and 0.1% TFA). 
+The eluted glycopeptides were dried under vacuum and stored at 
+−20°C for further analysis.
+Intact glycopeptide- based mass spectrometric analysis
+LC- MS/MS glycoproteomic analysis of intact glycopeptides was 
+performed using a Q- Exactive HF- X Orbitrap mass spectrometer 
+equipped with a nano- spray source and a nano- LC UltiMate 3000 
+high- performance liquid chromatography system (Thermo Fisher 
+Scientific). Intact glycopeptides were separated by online reversed-  
+phase- HPLC fractionation on an in- house packed column (30 cm × 
+100 μm; packed with 3 μ m Reprosil- Pur C18- AQ beads from Dr. 
+Maisch, Ammerbuch- Entringen, Germany), using a linear gradient 
+from 3% to 40% solvent B over 120 min at a flow rate of 350 nl/min 
+(mobile phase A, 2% ACN, 98% H2O, 0.1% FA; mobile phase B, 80% 
+ACN, 20% H2O, 0.1% FA). The mass spectrometer was operated in 
+the data- dependent acquisition mode. Full MS scans were acquired 
+from m/z 800 to 2000 at a resolution of 60,000 at m/z 200 with an au-
+tomatic gain control target of 1 × 10 6 ions and maximum ion accumu-
+lation time of 50 ms. The 15 most abundant ions were selected from 
+each full MS scan and fragmented with HCD using an SCE setting of 
+18%/28%/38%. SCE- HCD- MS/MS spectra were acquired at a resolu-
+tion of 15,000 at m /z 200 with an automatic gain control target of 
+20,000 ions and maximum ion accumulation time of 60 ms.
+Database search and intact glycopeptide identification
+MS raw data were processed by searching against the UniProt human 
+protein database (2016_02 Release, 20,198 reviewed entries) and a 
+Byonic built- in glycan database of 182 human N- glycans using Byon-
+ic software version 3.11.3 (Protein Metrics) (29, 30). The Byonic 
+182 human N- glycan database, which does not contain glycan com-
+positions with two or more fucoses, has been widely used in glyco-
+proteomics studies of human cells and patient specimens (84– 86). 
+Searches were conducted with the fragmentation type set to HCD and 
+mass tolerance setting of 20 ppm for both precursor and fragment 
+ions. Trypsin was selected as the proteolytic enzyme with a maximum 
+of two missed cleavages allowed. Carbamidomethylation of cysteine 
+(+57.021464 Da) was set as a fixed modification, and the variable 
+modifications included the following: N- glycosylation of asparagine 
+residue localized within the sequon N- X- S|T (X  ≠  P), oxidation of 
+methionine (+15.994915 Da), and deamidation of asparagine and 
+glutamine (+0.984016 Da). N- glycosylation and deamidation were 
+set as “common” modification, and oxidation was set as “rare” modi-
+fication. A total of two common modifications and one rare modifica-
+tion were allowed per identified peptide. The search output was 
+filtered to <1% false discovery rate (FDR) using the FDR 2D score, a 
+Byonic- computed FDR value based on a two- dimensional target- 
+decoy strategy that estimates and controls peptide- spectrum match 
+(PSM)–and protein- level FDRs simultaneously (29, 87). The filtered 
+data were further assessed using the posterior error probability (PEP) 
+2D score, a comprehensive measure of error probability by taking into 
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+21 of 25
+account 10 different Byonic parameters, including the Byonic score, 
+delta, precursor mass error, and digestion specificity (29, 30). Only the 
+N- glycopeptides with FDR 2D score < 0.01 and PEP 2D score  < 0.05 
+were included in data analysis.
+Quantitative analysis of glycopeptides and 
+N- glycan modifications
+Quantification of intact N- glycopeptides was performed by using Byo-
+logic software version 3.11.3 (Protein Metrics), which uses inputs from 
+both MS1 raw data and Byonic search results to determine glycopep-
+tide intensities (30). The Byologic quantification results were filtered to 
+FDR 2D score < 0.01 and PEP 2D score < 0.05. For quantitative analy-
+sis of N- glycan modifications, glycopeptides were grouped by their 
+glycan composition or glycan type, and the relative abundance of gly-
+can modification for each glycan category was determined by the 
+summed intensities of glycopeptides for the glycan category normal-
+ized by total intensities of glycopeptides for all N- glycan modifications 
+in each sample. Significance of difference in relative abundances of 
+glycan modification for each glycan category between AD and control 
+brains was assessed using unpaired two- tailed Student’s t test with 
+P  < 0.05 as the confidence threshold. Unsupervised hierarchical clus-
+tering based on the relative abundances of glycan modifications in 
+each sample was performed as we described previously (31).
+Differential glycoform abundance analysis and identification 
+of glycoforms with altered N- glycosylation in AD
+The abundance of a site- specific glycoform was determined by sum-
+ming the intensities of intact glycopeptides with the same glycan 
+composition at the same glycosylation site within the same protein. 
+Glycoform abundance values were converted to log2 scale and nor-
+malized by applying median- centered normalization. Differential 
+abundance analysis was performed using the normalized abundanc-
+es of glycoforms with valid abundance values in ≥50% of biological 
+replicates per group by using an empirical Bayes approach with the 
+limma R package (88, 89). Glycoforms with altered abundance in AD 
+were identified by using limma moderated t test with thresholds of 
+±1.3- fold change over the control (i.e., AD/control ratio  >1.3 or 
+<0.77) and P  < 0.05. The q value was used to correct for multiple 
+hypothesis testing and estimate the FDRs as previously described 
+(90). Unsupervised hierarchical clustering based on the normalized 
+glycoform abundances in each sample was performed as previously 
+described (31), and the clustered cases and glycoforms were visual-
+ized along with the corresponding N- glycan types using the Heat-
+mapper software (91). In addition to the quantitative analysis for 
+identification of glycoforms with altered N- glycan modification lev-
+els, glycoforms with a gain of a site- specific N- glycan modification in 
+AD were identified as the glycoforms detected in ≥50% of AD cases 
+but not in any of the control cases, and glycoforms with a complete 
+loss of a site- specific N- glycan modification in AD were identified as 
+the glycoforms detected in ≥ 50% of control cases but not in any of 
+the AD cases. Hyperglycosylated glycoforms were defined as the gly-
+coforms with increased or a gain of site- specific N- glycan modifica-
+tion in AD, whereas hypoglycosylated glycoforms were those with 
+decreased or a loss of site- specific N- glycan modification in AD.
+Multiomics interrogation for altered N- glycosylation 
+enzymes and regulators in AD
+Changes in RNA expression profiles of N- glycan modification en-
+zymes and regulators in AD brain were assessed in the transcriptome 
+datasets from ROSMAP , MSSM, and Mayo studies by using a public 
+resource of AD transcriptome differential expression meta- analysis 
+(56). Changes in protein expression profiles of N- glycosylation- 
+related genes in AD brain were investigated in our published pro-
+teome dataset from the same cohort (31) and five other AD brain 
+proteome datasets (57–61) by using the lists of differentially expressed 
+proteins in AD versus control obtained from these studies. N- glycan 
+modification enzymes or regulators with significant (P  < 0.05) corre-
+lation to AD neuropathological or cognitive trait were identified using 
+individual protein- trait correlation data from Johnson et  al. ( 60). 
+GW AS associations of N- glycosylation enzymes and regulators with 
+AD were assessed in AD GW AS meta- analysis datasets using the SNP 
+summary statistics (65, 66). Associations of N- glycosylation enzymes 
+and regulators with AD neuropathological hallmarks amyloid plaques 
+and neurofibrillary tangles were evaluated by the overlap with pro-
+teins that colocalize with amyloid plaques or neurofibrillary tangles in 
+localized proteomics analyses (69–71).
+Glycan modification coregulation network analysis
+Data- driven glycan modification coregulation network analysis was 
+performed by using WGCNA algorithm (42) to construct a human 
+brain glycan network from the glycan modification abundance pro-
+files of 164 glycan compositions. We used WGCNA package in R (42) 
+to calculate a correlation matrix for all pairwise correlations of glycan 
+modification abundances across all AD and control samples and then 
+transformed it into a weighted adjacency matrix with a soft threshold 
+power of 6 according to the scale- free topology criterion (42). The 
+weighted adjacency matrix was used to generate a topological overlap 
+(TO) matrix, and hierarchical clustering of glycans was performed us-
+ing 1  − TO as the distance measure. Modules of coregulated glycan 
+modifications were identified using dynamic tree- cutting with the fol-
+lowing parameters: minimal module size  = 5, deepSplit  = 4, merge 
+cut height  = 0.07, and a reassignment threshold of P  < 0.05. Glycan 
+coregulation module networks were graphically depicted by using the 
+Cytoscape v.3.5.0 software (92).
+Glycoform coregulation network analysis
+The intact glycoproteomics dataset was filtered for N- glycoforms 
+with valid abundance values in ≥50% of AD or control samples, and 
+the missing abundance values were imputed using the k- nearest 
+neighbors imputation function in the DAPAR software (93). Glyco-
+form coregulation network analysis was performed using the WGCNA 
+package in R (42) to generate a correlation matrix for all pairwise 
+correlations of glycoform abundances across all samples followed by 
+transformation into a weighted adjacency matrix using a soft thresh-
+old power of 10. Glycoforms were hierarchically clustered using the 
+TO- based dissimilarity, and modules of coregulated glycoforms 
+were identified by dynamic tree- cutting with parameters set as min-
+imal module size  = 30, deepSplit  = 4, merge cut height  = 0.07, and 
+a reassignment threshold of P < 0.05. Glycoform coregulation mod-
+ule networks were graphically depicted by using the igraph software 
+package (94).
+Analysis of inter- modular relationships and 
+module- trait associations
+For each module in the glycan or glycoform coregulation network, we 
+computed a module eigenglycan or eigenglycoform as the first princi-
+pal component of the coregulated glycans or glycoforms in the mod-
+ule according to the definition of eigennode (42). Pearson correlation 
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+22 of 25
+between each glycan or glycoform and the module eigenglycan or ei-
+genglycoform was used to determine module membership kME, a 
+measure of intramodular connectivity (45, 95). Hub glycans or glyco-
+forms for each module were identified as the glycans or glycoforms 
+with kME  > 0.8. Inter- modular relationships between glycan or glyco-
+form coregulation network modules were determined on the basis of 
+pairwise correlations between module eigenglycans or eigenglyco-
+forms as previously described (95, 96). Module- trait association anal-
+ysis was performed as previously described (31) using biweight 
+midcorrelations between each module eigenglycan or eigenglycoform 
+and each clinical or neuropathological trait and the correspond-
+ing P values.
+GO and cell- type marker enrichment analyses
+GO enrichment analysis of the generated datasets of differentially N- 
+glycosylated proteins and glycoform network modules was performed 
+using MetaCore bioinformatics software (version 6.37, build 69,500) 
+as previously described (31), with the total list of all proteins (includ-
+ing glycoproteins) identified in our human brain samples as the back-
+ground and FDR- corrected P  <  0.05 as the significance threshold. 
+Enrichment analysis for markers of major brain cell types (astrocyte, 
+microglia, neuron, and oligodendrocyte) in glycoform network mod-
+ules was performed as previously described (23). Significance was de-
+termined using one- sided Fisher’s exact test followed by correction for 
+multiple comparisons using the Benjamini- Hochberg FDR adjust-
+ment method (97).
+Statistical analyses
+The sample size used in this study was determined based on power 
+analysis and our prior studies (23, 31). Significance of difference in 
+group means between AD and control cases was assessed by unpaired 
+two- tailed Student’s t test, limma moderated t test, or Kruskal- Wallis 
+test as indicated. For data visualization, heatmaps with Z score values 
+of normalized abundances were generated using the Heatmapper tool 
+(91). Glycan or glycoform coregulation network analysis was per -
+formed using the WGCNA algorithm (42) to define network modules 
+of coregulated glycans or glycoforms. Module- trait association was 
+assessed by biweight midcorrelation between each module eigengly-
+can or eigenglycoform and each trait with P  < 0.05 as the confidence 
+threshold. Enrichment analyses were performed with one- sided Fish-
+er’s exact test to calculate P values. Correction for multiple compari-
+sons was performed using the q  value (90) or Benjamini- Hochberg 
+FDR adjustment method (97) as indicated.
+Supplementary Materials
+This PDF file includes:
+Figs. S1 to S11
+table S1
+l egends for tables S2 to S10
+Other Supplementary Material for this manuscript includes the following:
+tables S2 to S10
+REFERENCES AND NOTES
+ 1. P . Scheltens, B. de Strooper, M. Kivipelto, h. holstege, G. chetelat, c. e . teunissen,  
+J. c ummings, W. M. van der Flier, Alzheimer's disease. Lancet 397, 1577–1590 (2021).
+ 2. G. M. McKhann, d. S. Knopman, h. chertkow, B. t. h yman, c. R. Jack Jr., c. h. Kawas,  
+W. e. Klunk, W. J. Koroshetz, J. J. Manly, R. Mayeux, R. c. Mohs, J. c. Morris, M. n. Rossor,  
+P . Scheltens, M. c. carrillo, B. t hies, S. Weintraub, c. h. Phelps, t he diagnosis of dementia 
+due to Alzheimer's disease: Recommendations from the national institute on 
+Aging- Alzheimer's Association workgroups on diagnostic guidelines for Alzheimer's 
+disease. Alzheimers Dement. 7, 263–269 (2011).
+ 3. J. verheijen, K. Sleegers, Understanding alzheimer disease at the interface between 
+genetics and transcriptomics. Trends Genet. 34, 434–447 (2018).
+ 4. S. J. Andrews, B. Fulton- howard, A. Goate, interpretation of risk loci from genome- wide 
+association studies of Alzheimer's disease. Lancet Neurol. 19, 326–335 (2020).
+ 5. G. M. Sancesario, S. Bernardini, Alzheimer's disease in the omics era. Clin. Biochem. 59, 
+9–16 (2018).
+ 6. M. M. Muller, Post- translational modifications of protein backbones: Unique functions, 
+mechanisms, and challenges. Biochemistry 57, 177–185 (2018).
+ 7. l. M. Smith, n. l. Kelleher, c onsortium for top d own Proteomics, Proteoform: A single 
+term describing protein complexity. Nat. Methods 10, 186–187 (2013).
+ 8. K. t . Schjoldager, Y. narimatsu, h. J. Joshi, h. clausen, Global view of human protein 
+glycosylation pathways and functions. Nat. Rev. Mol. Cell Biol. 21, 729–749 (2020).
+ 9. K. W. Moremen, M. t iemeyer, A. v. nairn, vertebrate protein glycosylation: diversity, 
+synthesis and function. Nat. Rev. Mol. Cell Biol. 13, 448–462 (2012).
+ 10. F. Schwarz, M. Aebi, Mechanisms and principles of n- linked protein glycosylation. Curr. 
+Opin. Struct. Biol. 21, 576–582 (2011).
+ 11. P . Stanley, K. W. Moremen, n. e. l ewis, n. taniguchi, M. Aebi, chapter 9 n-  glycans, in 
+Essentials of Glycobiology, A. varki, R. d. c ummings, J. d. esko, P . Stanley, G. W. hart, M. 
+Aebi, d. Mohnen, t . Kinoshita, n. h. Packer, J. h. Prestegard, R. l. Schnaar, P . h. Seeberger, 
+eds. (c old Spring harbor laboratory Press, 2022), pp. 103–116.
+ 12. h. Kaltner, J. Abad- Rodriguez, A. P . corfield, J. Kopitz, h. J. Gabius, t he sugar code: l etters 
+and vocabulary, writers, editors and readers and biosignificance of functional 
+glycan- lectin pairing. Biochem. J. 476, 2623–2655 (2019).
+ 13. h. Scott, v. M. Panin, t he role of protein n- glycosylation in neural transmission. 
+Glycobiology 24, 407–417 (2014).
+ 14. v . Sytnyk, i. l eshchyns'ka, M. Schachner, neural glycomics: t he sweet side of nervous 
+system functions. Cell. Mol. Life Sci. 78, 93–116 (2021).
+ 15. h. h. Freeze, e . A. eklund, B. G. ng, M. c. Patterson, neurological aspects of human 
+glycosylation disorders. Annu. Rev. Neurosci. 38, 105–125 (2015).
+ 16. t . Stambuk, M. Klasic, v. Zoldos, G. lauc, n-  glycans as functional effectors of genetic and 
+epigenetic disease risk. Mol. Aspects Med. 79, 100891 (2021).
+ 17. S. Schedin- Weiss, B. Winblad, l. O. tjernberg, t he role of protein glycosylation in 
+Alzheimer disease. FEBS J. 281, 46–62 (2014).
+ 18. Y. Kizuka, S. Kitazume, n. taniguchi, n-  glycan and Alzheimer's disease. Biochim. Biophys. 
+Acta. Gen. Subj. 1861, 2447–2454 (2017).
+ 19. h. haukedal, K. K. Freude, i mplications of glycosylation in Alzheimer's disease. Front. 
+Neurosci. 14, 625348 (2020).
+ 20. S. Gaunitz, l. O. tjernberg, S. Schedin-  Weiss, t he n-  glycan profile in cortex and 
+hippocampus is altered in Alzheimer disease. J. Neurochem. 159, 292–304 (2021).
+ 21. M. Frenkel- Pinter, M. d. Shmueli, c. Raz, M. Yanku, S. Zilberzwige, e. Gazit, d. Segal, 
+interplay between protein glycosylation pathways in Alzheimer's disease. Sci. Adv. 3, 
+e1601576 (2017).
+ 22. S. t . Gizaw, t . Ohashi, M. tanaka, h. h inou, S. nishimura, Glycoblotting method allows for 
+rapid and efficient glycome profiling of human Alzheimer's disease brain, serum and 
+cerebrospinal fluid towards potential biomarker discovery. Biochim. Biophys. Acta 1860, 
+1716–1727 (2016).
+ 23. Q. Zhang, c. Ma, l. S. chin, l. li, i ntegrative glycoproteomics reveals protein n- 
+glycosylation aberrations and glycoproteomic network alterations in Alzheimer's disease. 
+Sci. Adv. 6, eabc5802 (2020).
+ 24. S. Suttapitugsakul, K. Stavenhagen, S. donskaya, d. A. Bennett, R. G. Mealer, n. t . Seyfried, 
+R. d. c ummings, Glycoproteomics landscape of asymptomatic and symptomatic human 
+Alzheimer's disease brain. Mol. Cell. Proteomics 21, 100433 (2022).
+ 25. Q. Zhang, c. Ma, l. li, l. S. chin, differential analysis of n-  glycopeptide abundance and 
+n-  glycosylation site occupancy for studying protein n- glycosylation dysregulation in 
+human disease. Bio. Protoc. 11, e4059 (2021).
+ 26. J. R. Wisniewski, Filter- aided sample preparation: t he versatile and efficient method for 
+proteomic analysis. Methods Enzymol. 585, 15–27 (2017).
+ 27. S. M. totten, c. l. Feasley, A. Bermudez, S. J. Pitteri, Parallel comparison of n- linked 
+glycopeptide enrichment techniques reveals extensive glycoproteomic analysis of 
+plasma enabled by SAX- eRlic. J. Proteome Res. 16, 1249–1260 (2017).
+ 28. Y. Wang, Z. t ian, new energy setup strategy for intact n- glycopeptides characterization 
+using higher- energy collisional dissociation. J. Am. Soc. Mass Spectrom. 31, 651–657 (2020).
+ 29. M. Bern, Y. J. Kil, c. Becker, Byonic: Advanced peptide and protein identification software. 
+Curr. Protoc. Bioinformatics 40, 13.20.1–13.20.14 (2012).
+ 30. A. Roushan, G. M. Wilson, d. Kletter, K. i. Sen, W. tang, Y. J. Kil, e. c arlson, M. Bern, Peak 
+filtering, peak annotation, and wildcard search for glycoproteomics. Mol. Cell. Proteomics 
+20, 100011 (2020).
+ 31. Q. Zhang, c. Ma, M. Gearing, P . G. Wang, l. S. chin, l. li, i ntegrated proteomics and 
+network analysis identifies protein hubs and network alterations in Alzheimer's disease. 
+Acta Neuropathol. Commun. 6, 19 (2018).
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+23 of 25
+ 32. J. tena, i. Maezawa, M. Barboza, M. Wong, c. Zhu, M. R. Alvarez, l. W. Jin, A. M. Zivkovic,  
+c. B. l ebrilla, Regio- specific n- glycome and n- glycoproteome map of the elderly human 
+brain with and without Alzheimer's disease. Acta Neuropathol. Commun. 21, 100427 
+(2022).
+ 33. S. e. Williams, M. noel, S. l ehoux, M. c etinbas, R. J. Xavier, R. i. Sadreyev, e. M. Scolnick,  
+J. W. Smoller, R. d. c ummings, R. G. Mealer, Mammalian brain glycoproteins exhibit 
+diminished glycan complexity compared to other tissues. Nat. Commun. 13, 275 (2022).
+ 34. S. Suttapitugsakul, F. Sun, R. Wu, Recent advances in glycoproteomic analysis by mass 
+spectrometry. Anal. Chem. 92, 267–291 (2020).
+ 35. Y. Kizuka, n. taniguchi, neural functions of bisecting GlcnAc. Glycoconj. J. 35, 345–351 
+(2018).
+ 36. e . M. Foster, A. dangla- valls, S. l ovestone, e. M. Ribe, n. J. Buckley, clusterin in Alzheimer's 
+disease: Mechanisms, genetics, and lessons from other pathologies. Front. Neurosci. 13, 
+164 (2019).
+ 37. d . c ampion, c. charbonnier, G. n icolas, SORl1 genetic variants and Alzheimer disease 
+risk: A literature review and meta- analysis of sequencing data. Acta Neuropathol. 138, 
+173–186 (2019).
+ 38. e . l ouwersheimer, P . e. c ohn- hokke, Y. A. Pijnenburg, M. M. Weiss, e. A. Sistermans,  
+A. J. Rozemuller, M. hulsman, J. c. van Swieten, c. M. van d uijn, F. Barkhof, t. Koene,  
+P . Scheltens, W. M. van der Flier, h. holstege, Rare genetic variant in SORl1 may increase 
+penetrance of Alzheimer’s disease in a family with several generations of APOe- ɛ4 
+homozygosity. J. Alzheimers Dis. 56, 63–74 (2017).
+ 39. M. Shinohara, M. tachibana, t. Kanekiyo, G. Bu, Role of lRP1 in the pathogenesis of 
+Alzheimer's disease: evidence from clinical and preclinical studies. J. Lipid Res. 58, 
+1267–1281 (2017).
+ 40. J. n. Rauch, G. l una, e. Guzman, M. Audouard, c. challis, Y. e. Sibih, c. l eshuk,  
+i. hernandez, S. Wegmann, B. t. h yman, v. Gradinaru, M. Kampmann, K. S. Kosik, lRP1 is a 
+master regulator of tau uptake and spread. Nature 580, 381–385 (2020).
+ 41. t . S. Klaric, M. Salopek, v. Micek, O. Gornik Kljaic, G. lauc, Post- natal developmental 
+changes in the composition of the rat neocortical n-  glycome. Glycobiology 31, 636–648 
+(2021).
+ 42. P . langfelder, S. horvath, WGcnA: An R package for weighted correlation network 
+analysis. BMC Bioinformatics 9, 559 (2008).
+ 43. B. Zhang, S. horvath, A general framework for weighted gene co- expression network 
+analysis. Stat. Appl. Genet. Mol. Biol. 4, 17 (2005).
+ 44. c. c. liu, c. c. liu, t . Kanekiyo, h. Xu, G. Bu, Apolipoprotein e and Alzheimer disease: Risk, 
+mechanisms and therapy. Nat. Rev. Neurol. 9, 106–118 (2013).
+ 45. P . langfelder, P . S. Mischel, S. horvath, When is hub gene selection better than standard 
+meta- analysis? PLOS ONE 8, e61505 (2013).
+ 46. A. l. Barabasi, Z. n. Oltvai, network biology: Understanding the cell's functional 
+organization. Nat. Rev. Genet. 5, 101–113 (2004).
+ 47. J. R. Sanes, S. l. Zipursky, Synaptic specificity, recognition molecules, and assembly of 
+neural circuits. Cell 181, 1434–1435 (2020).
+ 48. t . c. Sudhof, t he cell biology of synapse formation. J. Cell Biol. 220, e202103052 (2021).
+ 49. S. Wiemann, J. Reinhard, A. Faissner, immunomodulatory role of the extracellular matrix 
+protein tenascin- c in neuroinflammation. Biochem. Soc. Trans. 47, 1651–1660 (2019).
+ 50. S. Ghorbani, v. W. Yong, t he extracellular matrix as modifier of neuroinflammation and 
+remyelination in multiple sclerosis. Brain 144, 1958–1973 (2021).
+ 51. A. Ballabio, J. S. Bonifacino, l ysosomes as dynamic regulators of cell and organismal 
+homeostasis. Nat. Rev. Mol. Cell Biol. 21, 101–118 (2020).
+ 52. R. A. n ixon, t he aging lysosome: An essential catalyst for late- onset neurodegenerative 
+diseases. Biochim. Biophys. Acta. Proteins Proteom. 1868, 140443 (2020).
+ 53. e . c uyvers, K. Sleegers, Genetic variations underlying Alzheimer's disease: evidence from 
+genome- wide association studies and beyond. Lancet Neurol. 15, 857–868 (2016).
+ 54. S. eggert, c. t homas, S. Kins, G. hermey, t rafficking in Alzheimer's disease: Modulation of 
+APP transport and processing by the transmembrane proteins lRP1, SorlA, SorcS1c, 
+Sortilin, and c alsyntenin. Mol. Neurobiol. 55, 5809–5829 (2018).
+ 55. c. Bellenguez, F. Küçükali, i. e . Jansen, l. Kleineidam, S. Moreno-  Grau, n. Amin, A. c. naj,  
+R. c ampos- Martin, B. Grenier- Boley, v. Andrade, P . A. holmans, A. Boland, v. damotte,  
+S. J. van der l ee, M. R. c osta, t. Kuulasmaa, Q. Yang, i. de Rojas, J. c. Bis, A. Yaqub, i. Prokic, 
+J. chapuis, S. Ahmad, v. Giedraitis, d. Aarsland, P . Garcia- Gonzalez, c. Abdelnour,  
+e. Alarcón- Martín, d. Alcolea, M. Alegret, i. Alvarez, v. Álvarez, n. J. Armstrong, A. t solaki, 
+c. Antúnez, i. Appollonio, M. Arcaro, S. Archetti, A. A. Pastor, B. Arosio, l. Athanasiu,  
+h. Bailly, n. Banaj, M. Baquero, S. Barral, A. Beiser, A. B. Pastor, J. e. Below, P . Benchek,  
+l. Benussi, c. Berr, c. Besse, v. Bessi, G. Binetti, A. Bizarro, R. Blesa, M. Boada, e. Boerwinkle, 
+B. Borroni, S. Boschi, P . Bossù, G. Bråthen, J. Bressler, c. Bresner, h. Brodaty, K. J. Brookes,  
+l. i. Brusco, d . Buiza- Rueda, K. Bûrger, v. Burholt, W. S. Bush, M. calero, l. B. c antwell,  
+G. chene, J. chung, M. l. c uccaro, Á. carracedo, R. cecchetti, l. c ervera- carles,  
+c. charbonnier, h.- h. chen, c. chillotti, S. c iccone, J. A. h. R. claassen, c. clark, e . c onti,  
+A. c orma- Gómez, e. c ostantini, c. c ustodero, d. daian, M. c. dalmasso, A. daniele,  
+e. dardiotis, J.- F. dartigues, P . P . de deyn, K. de Paiva l opes, l. d . de Witte, S. debette,  
+J. deckert, t . del Ser, n. d enning, A. de Stefano, M. dichgans, J. diehl- Schmid,  
+M. diez- Fairen, P . d. Rossi, S. d jurovic, e. duron, e. düzel, c. d ufouil, G. eiriksdottir,  
+S. engelborghs, v. escott- Price, A. espinosa, M. ewers, K. M. Faber, t . Fabrizio, S. F. nielsen, 
+d. W. Fardo, l. Farotti, c. Fenoglio, M. Fernández- Fuertes, R. Ferrari, c. B. Ferreira, e. Ferri,  
+B. Fin, P . Fischer, t . Fladby, K. Fließbach, B. Fongang, M. Fornage, J. Fortea, t . M. Foroud,  
+S. Fostinelli, n. c. Fox, e . Franco- Macías, M. J. Bullido, A. Frank- García, l. Froelich,  
+B. Fulton- howard, d. Galimberti, J. M. García- Alberca, P . García- González,  
+S. Garcia- Madrona, G. Garcia- Ribas, R. Ghidoni, i. Giegling, G. Giorgio, A. M. Goate,  
+O. Goldhardt, d. Gomez- Fonseca, A. González- Pérez, c. Graff, G. Grande, e. Green,  
+t . Grimmer, e. Grünblatt, M. Grunin, v. Gudnason, t . Guetta- Baranes, A. haapasalo,  
+G. hadjigeorgiou, J. l. haines, K. l. hamilton- nelson, h. hampel, O. hanon, J. hardy,  
+A. M. hartmann, l. hausner, J. harwood, S. heilmann- heimbach, S. helisalmi,  
+M. t . heneka, i. hernández, M. J. herrmann, P . hoffmann, c. holmes, h. holstege,  
+R. h. vilas, M. hulsman, J. humphrey, G. J. Biessels, X. Jian, c. Johansson, G. R. Jun,  
+Y. Kastumata, J. Kauwe, P . G. Kehoe, l. Kilander, A. K. Ståhlbom, M. Kivipelto, A. Koivisto,  
+J. Kornhuber, M. h. Kosmidis, W. A. Kukull, P . P . Kuksa, B. W. Kunkle, A. B. Kuzma, c. lage,  
+e. J. laukka, l. launer, A. lauria, c.-  Y. l ee, J. l ehtisalo, O. l erch, A. lleó, W. l. Jr, O. l opez,  
+A. l. de Munain, S. l ove, M. l öwemark, l. l uckcuck, K. l. l unetta, Y. Ma, J. Macías,  
+c. A. Mac l eod, W. Maier, F. Mangialasche, M. Spallazzi, M. Marquié, R. Marshall,  
+e. R. Martin, A. M. Montes, c. M. Rodríguez, c. Masullo, R. Mayeux, S. Mead, P . Mecocci,  
+M. Medina, A. Meggy, S. Mehrabian, S. Mendoza, M. Menéndez- González, P . Mir,  
+S. Moebus, M. Mol, l. Molina- Porcel, l. Montrreal, l. Morelli, F. Moreno, K. Morgan,  
+t . Mosley, M. M. nöthen, c. Muchnik, S. Mukherjee, B. nacmias, t . ngandu, G. n icolas,  
+B. G. nordestgaard, R. Olaso, A. Orellana, M. Orsini, G. Ortega, A. Padovani, c. Paolo,  
+G. Papenberg, l. Parnetti, F. Pasquier, P . Pastor, G. Peloso, A. Pérez- cordón, J. Pérez- tur,  
+P . Pericard, O. Peters, Y. A. l. Pijnenburg, J. A. Pineda, G. Piñol- Ripoll, c. Pisanu, t . Polak,  
+J. Popp, d. Posthuma, J. Priller, R. Puerta, O. Quenez, i. Quintela, J. Q. t homassen,  
+A. Rábano, i. Rainero, F. Rajabli, i. Ramakers, l. M. Real, M. J. t . Reinders, c. Reitz,  
+d. Reyes- dumeyer, P . Ridge, S. Riedel- heller, P . Riederer, n. Roberto,  
+e. Rodriguez- Rodriguez, A. Rongve, i. R. Allende, M. Rosende- Roca, J. l. Royo, e . Rubino,  
+d. Rujescu, M. e. Sáez, P . Sakka, i. Saltvedt, Á. Sanabria, M. B. Sánchez- Arjona,  
+F. Sanchez- Garcia, P . S. Juan, R. Sánchez- valle, S. B. Sando, c. Sarnowski, c. l. Satizabal,  
+M. Scamosci, n. Scarmeas, e. Scarpini, P . Scheltens, n. Scherbaum, M. Scherer, M. Schmid, 
+A. Schneider, J. M. Schott, G. Selbæk, d. Seripa, M. Serrano, J. Sha, A. A. Shadrin,  
+O. Skrobot, S. Slifer, G. J. l. Snijders, h. Soininen, v. Solfrizzi, A. Solomon, Y. Song, S. Sorbi, 
+O. Sotolongo- Grau, G. Spalletta, A. Spottke, A. Squassina, e. Stordal, J. P . tartan, l. tárraga, 
+n. t esí, A. t halamuthu, t. t homas, G. tosto, l. t raykov, l. t remolizzo, A. tybjærg- hansen,  
+A. Uitterlinden, A. Ullgren, i. Ulstein, S. valero, O. valladares, c. van Broeckhoven, J. vance, 
+B. n. vardarajan, A. van der l ugt, J. van d ongen, J. van Rooij, J. van Swieten,  
+R. vandenberghe, F. verhey, J.- S. vidal, J. vogelgsang, M. vyhnalek, M. Wagner, d. Wallon, 
+l.- S. Wang, R. Wang, l. Weinhold, J. Wiltfang, G. Windle, B. Woods, M. Yannakoulia, h. Zare, 
+Y. Zhao, X. Zhang, c. Zhu, M. Zulaica, eAdB, GR@Ace , deGeSc O, eAdi, GeRAd , demgene, 
+FinnGen, AdGc, chARGe , l. A. Farrer, B. M. Psaty, M. Ghanbari, t . Raj, P . Sachdev,  
+K. Mather, F. Jessen, M. A. ikram, A. de Mendonça, J. hort, M. t solaki, M. A. Pericak- vance, 
+P . Amouyel, J. Williams, R. Frikke- Schmidt, J. clarimon, J.- F. deleuze, G. Rossi, S. Seshadri, 
+O. A. Andreassen, M. ingelsson, M. h iltunen, K. Sleegers, G. d. Schellenberg,  
+c. M. van d uijn, R. Sims, W. M. van der Flier, A. Ruiz, A. Ramirez, J.- c. lambert, new 
+insights into the genetic etiology of Alzheimer's disease and related dementias. Nat. 
+Genet. 54, 412–436 (2022).
+ 56. Y.- W. Wan, R. Al- Ouran, c. G. Mangleburg, t . M. Perumal, t . v. l ee, K. Allison, v. Swarup,  
+c. c. Funk, c. Gaiteri, M. Allen, M. Wang, S. M. neuner, c. c. Kaczorowski, v. M. Philip,  
+G. R. howell, h. Martini- Stoica, h. Zheng, h. Mei, X. Zhong, J. W. Kim, v. l. dawson,  
+t . M. dawson, P . c. Pao, l. h. t sai, J. v. haure- Mirande, M. e. ehrlich, P . chakrabarty,  
+Y. l evites, X. Wang, e. B. dammer, G. Srivastava, S. Mukherjee, S. K. Sieberts, l. Omberg,  
+K. d. dang, J. A. eddy, P . Snyder, Y. chae, S. Amberkar, W. Wei, W. hide, c. Preuss, A. ergun, 
+P . J. ebert, d. c. Airey, S. Mostafavi, l. Yu, h.- U. Klein, Accelerating Medicines Partnership- 
+Alzheimer's disease, G. W. c arter, d. A. c ollier, t . e. Golde, A. i. l evey, d. A. Bennett,  
+K. estrada, t . M. townsend, B. Zhang, e. Schadt, P . l. de Jager, n. d . Price, n. ertekin- taner, 
+Z. liu, J. M. Shulman, l. M. Mangravite, B. A. l ogsdon, Meta- analysis of the Alzheimer's 
+disease human brain transcriptome and functional dissection in mouse models. Cell Rep. 
+32, 107908 (2020).
+ 57. J. Xu, S. Patassini, n. Rustogi, i. Riba- Garcia, B. d. hale, A. M. Phillips, h. Waldvogel,  
+R. haines, P . Bradbury, A. Stevens, R. l. M. Faull, A. W. dowsey, G. J. S. cooper, R. d. Unwin, 
+Regional protein expression in human Alzheimer's brain correlates with disease severity. 
+Commun. Biol. 2, 43 (2019).
+ 58. c. F. Mendonca, M. Kuras, F. c. S. nogueira, i. Pla, t . hortobagyi, l. csiba, M. Palkovits,  
+e. Renner, P . dome, G. Marko- varga, G. B. domont, M. Rezeli, Proteomic signatures of 
+brain regions affected by tau pathology in early and late stages of Alzheimer's disease. 
+Neurobiol. Dis. 130, 104509 (2019).
+ 59. e . c. B. Johnson, e. B. dammer, d. M. duong, l. Ping, M. Zhou, l. Yin, l. A. h igginbotham, 
+A. Guajardo, B. White, J. c. t roncoso, M. t hambisetty, t . J. Montine, e. B. l ee,  
+J. Q. t rojanowski, t . G. Beach, e. M. Reiman, v. haroutunian, M. Wang, e. Schadt, B. Zhang, 
+d. W. dickson, n. ertekin- taner, t . e. Golde, v. A. Petyuk, P . l. de Jager, d. A. Bennett,  
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+24 of 25
+t. S. Wingo, S. Rangaraju, i. hajjar, J. M. Shulman, J. J. lah, A. i. l evey, n. t. Seyfried, 
+large- scale proteomic analysis of Alzheimer's disease brain and cerebrospinal fluid 
+reveals early changes in energy metabolism associated with microglia and astrocyte 
+activation. Nat. Med. 26, 769–780 (2020).
+ 60. e . c. B. Johnson, e. K. c arter, e. B. dammer, d. M. duong, e. S. Gerasimov, Y. liu, J. liu,  
+R. Betarbet, l. Ping, l. Yin, G. e . Serrano, t. G. Beach, J. Peng, P . l. de Jager, v. haroutunian, 
+B. Zhang, c. Gaiteri, d . A. Bennett, M. Gearing, t. S. Wingo, A. P . Wingo, J. J. lah, A. i. levey, 
+n. t. Seyfried, large- scale deep multi- layer analysis of Alzheimer's disease brain reveals 
+strong proteomic disease- related changes not observed at the RnA level. Nat. Neurosci. 
+25, 213–225 (2022).
+ 61. v . Astillero- l opez, M. Gonzalez- Rodriguez, S. villar-  conde, A. Flores-  cuadrado,  
+A. Martinez- Marcos, i. Ubeda- Banon, d . Saiz- Sanchez, neurodegeneration and 
+astrogliosis in the entorhinal cortex in Alzheimer's disease: Stereological layer-  
+specific assessment and proteomic analysis. Alzheimers Dement. 18, 2468–2480 
+(2022).
+ 62. n. cherepanova, S. Shrimal, R. Gilmore, n- linked glycosylation and homeostasis of the 
+endoplasmic reticulum. Curr. Opin. Cell Biol. 41, 57–65 (2016).
+ 63. A. tannous, G. B. Pisoni, d. n. hebert, M. Molinari, n- linked sugar- regulated protein 
+folding and quality control in the eR. Semin. Cell Dev. Biol. 41, 79–89 (2015).
+ 64. B. M. Adams, n. P . canniff, K. P . Guay, i. S. B. larsen, d. n. hebert, Quantitative 
+glycoproteomics reveals cellular substrate selectivity of the eR protein quality control 
+sensors UGGt1 and UGGt2. eLife 9, e63997 (2020).
+ 65. J. c. lambert, c. A. i brahim- verbaas, d. harold, A. c. naj, R. Sims, c. Bellenguez,  
+A. l. d eStafano, J. c. Bis, G. W. Beecham, B. Grenier- Boley, G. Russo, t. A. t horton- Wells,  
+n. Jones, A. v. Smith, v. chouraki, c. t homas, M. A. ikram, d. Zelenika, B. n. vardarajan,  
+Y. Kamatani, c. F. lin, A. Gerrish, h. Schmidt, B. Kunkle, M. l. d unstan, A. Ruiz,  
+M. t. Bihoreau, S. h. choi, c. Reitz, F. Pasquier, c. c ruchaga, d. c raig, n. Amin, c. Berr,  
+O. l. l opez, P . l. de Jager, v. d eramecourt, J. A. Johnston, d. evans, S. l ovestone,  
+l. l etenneur, F. J. Moron, d. c. Rubinsztein, G. eiriksdottir, K. Sleegers, A. M. Goate,  
+n. Fievet, M. W. huentelman, M. Gill, K. Brown, M. i. Kamboh, l. Keller,  
+P . Barberger- Gateau, B. McGuiness, e. B. larson, R. Green, A. J. Myers, c. d ufouil, S. todd,  
+d. Wallon, S. l ove, e. Rogaeva, J. Gallacher, P . S. George- hyslop, J. clarimon, A. lleo,  
+A. Bayer, d. W. t suang, l. Yu, M. t solaki, P . Bossu, G. Spalletta, P . Proitsi, J. collinge, S. Sorbi, 
+F. Sanchez- Garcia, n. c. Fox, J. hardy, M. c. d . naranjo, P . Bosco, R. clarke, c. Brayne,  
+d. Galimberti, M. Mancuso, F. Matthews, european Alzheimer's disease (eAdi), Genetic 
+and environmental Risk in Alzheimer's (GeRARd), Alzheimer's disease Genetic 
+c onsortium (AdGc ), c ohorts for heart and Aging Research in Genomic epidemiology 
+(chARGe), S. Moebus, P . Mecocci, M. del Zompo, W. Maier, h. hampel, A. Pilotto,  
+M. Bullido, F. Panza, P . caffarra, B. nacmias, J. R. Gilbert, M. Mayhaus, l. lannefelt,  
+h. hakonarson, S. Pichler, M. M. c arrasquillo, M. ingelsson, d. Beekly, v. Alvarez, F. Zou,  
+O. valladares, S. G. Younkin, e. c oto, K. l. hamilton- nelson, W. Gu, c. Razquin, P . Pastor,  
+i. Mateo, M. J. Owen, K. M. Faber, P . v. Jonsson, O. combarros, M. c. O'd onovan,  
+l. B. c antwell, h. Soininen, d . Blacker, S. Mead, t. h. Mosley Jr., d . A. Bennett, t . B. harris,  
+l. Fratiglioni, c. holmes, R. F. de Bruijn, P . Passmore, t. J. Montine, K. Bettens, J. i. Rotter,  
+A. Brice, K. Morgan, t . M. Foroud, W. A. Kukull, d. hannequin, J. F. Powell, M. A. nalls,  
+K. Ritchie, K. l. l unetta, J. S. Kauwe, e. Boerwinkle, M. Riemenschneider, M. Boada,  
+M. h iltuenen, e. R. Martin, R. Schmidt, d. Rujescu, l. S. Wang, J. F. dartigues, R. Mayeux,  
+c. t zourio, A. hofman, M. M. nothen, c. Graff, B. M. Psaty, l. Jones, J. l. haines,  
+P . A. holmans, M. lathrop, M. A. Pericak- vance, l. J. launer, l. A. Farrer, c. M. van d uijn,  
+c. van Broeckhoven, v. Moskvina, S. Seshadri, J. Williams, G. d. Schellenberg, P . Amouyel, 
+Meta- analysis of 74,046 individuals identifies 11 new susceptibility loci for Alzheimer's 
+disease. Nat. Genet. 45, 1452–1458 (2013).
+ 66. B. W. Kunkle, B. Grenier- Boley, R. Sims, J. c. Bis, v. damotte, A. c. naj, A. Boland,  
+M. vronskaya, S. J. van der l ee, A. Amlie- Wolf, c. Bellenguez, A. Frizatti, v. chouraki,  
+e. R. Martin, K. Sleegers, n. Badarinarayan, J. Jakobsdottir, K. l. hamilton- nelson,  
+S. Moreno- Grau, R. Olaso, R. Raybould, Y. chen, A. B. Kuzma, M. hiltunen, t. Morgan,  
+S. Ahmad, B. n. vardarajan, J. epelbaum, P . hoffmann, M. Boada, G. W. Beecham,  
+J. G. Garnier, d. harold, A. l. Fitzpatrick, O. valladares, M. l. Moutet, A. Gerrish, A. v. Smith, 
+l. Qu, d . Bacq, n. d enning, X. Jian, Y. Zhao, M. del Zompo, n. c. Fox, S. h. choi, i. Mateo,  
+J. t. hughes, h. h. Adams, J. Malamon, F. Sanchez-  Garcia, Y. Patel, J. A. Brody,  
+B. A. dombroski, M. c. d . naranjo, M. daniilidou, G. eiriksdottir, S. Mukherjee, d . Wallon,  
+J. Uphill, t . Aspelund, l. B. c antwell, F. Garzia, d. Galimberti, e. hofer, M. Butkiewicz, B. Fin, 
+e. Scarpini, c. Sarnowski, W. S. Bush, S. Meslage, J. Kornhuber, c. c. White, Y. Song,  
+R. c. Barber, S. engelborghs, S. Sordon, d . voijnovic, P . M. Adams, R. vandenberghe,  
+M. Mayhaus, l. A. c upples, M. S. Albert, P . P . de deyn, W. Gu, J. J. himali, d. Beekly,  
+A. Squassina, A. M. hartmann, A. Orellana, d . Blacker, e. Rodriguez- Rodriguez,  
+S. l ovestone, M. e. Garcia, R. S. doody, c. Munoz- Fernadez, R. Sussams, h. lin,  
+t. J. Fairchild, Y. A. Benito, c. holmes, h. Karamujic- comic, M. P . Frosch, h. t honberg,  
+W. Maier, G. Roshchupkin, B. Ghetti, v. Giedraitis, A. Kawalia, S. li, R. M. huebinger,  
+l. Kilander, S. Moebus, i. hernandez, M. i. Kamboh, R. Brundin, J. t urton, Q. Yang,  
+M. J. Katz, l. c oncari, J. l ord, A. S. Beiser, c. d . Keene, S. helisalmi, i. Kloszewska,  
+W. A. Kukull, A. M. Koivisto, A. l ynch, l. tarraga, e. B. larson, A. haapasalo, B. lawlor,  
+t . h. Mosley, R. B. lipton, v. Solfrizzi, M. Gill, W. t . l ongstreth Jr., t . J. Montine, v. Frisardi,  
+M. diez- Fairen, F. Rivadeneira, R. c. Petersen, v. d eramecourt, i. Alvarez, F. Salani,  
+A. c iaramella, e. Boerwinkle, e. M. Reiman, n. Fievet, J. i. Rotter, J. S. Reisch, O. hanon,  
+c. c upidi, A. G. A. Uitterlinden, d. R. Royall, c. d ufouil, R. G. Maletta, i. de Rojas, M. Sano,  
+A. Brice, R. c ecchetti, P . S. George- hyslop, K. Ritchie, M. t solaki, d. W. t suang, B. dubois,  
+d. c raig, c. K. Wu, h. Soininen, d . Avramidou, R. l. Albin, l. Fratiglioni, A. Germanou,  
+l. G. Apostolova, l. Keller, M. Koutroumani, S. e . Arnold, F. Panza, O. Gkatzima, S. Asthana, 
+d. hannequin, P . Whitehead, c. S. Atwood, P . caffarra, h. hampel, i. Quintela, A. c arracedo, 
+l. lannfelt, d . c. Rubinsztein, l. l. Barnes, F. Pasquier, l. Frolich, S. Barral, B. McGuinness,  
+t . G. Beach, J. A. Johnston, J. t . Becker, P . Passmore, e. h. Bigio, J. M. Schott, t . d. Bird,  
+J. d. Warren, B. F. Boeve, M. K. lupton, J. d. Bowen, P . Proitsi, A. Boxer, J. F. Powell,  
+J. R. Burke, J. S. K. Kauwe, J. M. Burns, M. Mancuso, J. d. Buxbaum, U. Bonuccelli,  
+n. J. c airns, A. McQuillin, c. c ao, G. livingston, c. S. c arlson, n. J. Bass, c. M. c arlsson,  
+J. hardy, R. M. c arney, J. Bras, M. M. carrasquillo, R. Guerreiro, M. Allen, h. c. chui, e . Fisher, 
+c. Masullo, e. A. c rocco, c. d ec arli, G. Bisceglio, M. dick, l. Ma, R. d uara,  
+n. R. Graff- Radford, d. A. evans, A. hodges, K. M. Faber, M. Scherer, K. B. Fallon,  
+M. Riemenschneider, d. W. Fardo, R. heun, M. R. Farlow, h. Kolsch, S. Ferris, M. l eber,  
+t . M. Foroud, i. heuser, d. R. Galasko, i. Giegling, M. Gearing, M. hull, d . h. Geschwind,  
+J. R. Gilbert, J. Morris, R. c. Green, K. Mayo, J. h. Growdon, t . Feulner, R. l. hamilton,  
+l. e . harrell, d . drichel, l. S. honig, t . d. c ushion, M. J. huentelman, P . hollingworth,  
+c. M. hulette, B. t . hyman, R. Marshall, G. P . Jarvik, A. Meggy, e. Abner, G. e. Menzies,  
+l. W. Jin, G. l eonenko, l. M. Real, G. R. Jun, c. t . Baldwin, d. Grozeva, A. Karydas, G. Russo, 
+J. A. Kaye, R. Kim, F. Jessen, n. W. Kowall, B. vellas, J. h. Kramer, e. vardy, F. M. laFerla,  
+K. h. Jockel, J. J. lah, M. dichgans, J. B. l everenz, d. Mann, A. i. l evey, S. Pickering- Brown, 
+A. P . lieberman, n. Klopp, K. l. l unetta, h. e. Wichmann, c. G. l yketsos, K. Morgan,  
+d. c. Marson, K. Brown, F. Martiniuk, c. Medway, d . c. Mash, M. M. nothen, e . Masliah,  
+n. M. hooper, W. c. Mcc ormick, A. daniele, S. M. Mcc urry, A. Bayer, A. n. Mcdavid,  
+J. Gallacher, A. c. McKee, h. van den Bussche, M. Mesulam, c. Brayne, B. l. Miller,  
+S. Riedel- heller, c. A. Miller, J. W. Miller, A. Al- chalabi, J. c. Morris, c. e . Shaw, A. J. Myers,  
+J. Wiltfang, S. O'Bryant, J. M. Olichney, v. Alvarez, J. e. Parisi, A. B. Singleton, h. l. Paulson,  
+J. c ollinge, W. R. Perry, S. Mead, e. Peskind, d. h. c ribbs, M. Rossor, A. Pierce, n. S. Ryan,  
+W. W. Poon, B. nacmias, h. Potter, S. Sorbi, J. F. Quinn, e. Sacchinelli, A. Raj, G. Spalletta,  
+M. Raskind, c. c altagirone, P . Bossu, M. d. Orfei, B. Reisberg, R. clarke, c. Reitz, A. d . Smith, 
+J. M. Ringman, d. Warden, e. d. Roberson, G. Wilcock, e. Rogaeva, A. c. Bruni, h. J. Rosen, 
+M. Gallo, R. n. Rosenberg, Y. Ben- Shlomo, M. A. Sager, P . Mecocci, A. J. Saykin, P . Pastor,  
+M. l. c uccaro, J. M. vance, J. A. Schneider, l. S. Schneider, S. Slifer, W. W. Seeley,  
+A. G. Smith, J. A. Sonnen, S. Spina, R. A. Stern, R. h. Swerdlow, M. tang, R. e. tanzi,  
+J. Q. t rojanowski, J. c. t roncoso, v. M. van d eerlin, l. J. van eldik, h. v. vinters,  
+J. P . vonsattel, S. Weintraub, K. A. Welsh- Bohmer, K. c. Wilhelmsen, J. Williamson,  
+t . S. Wingo, R. l. Woltjer, c. B. Wright, c. e . Yu, l. Yu, Y. Saba, A. Pilotto, M. J. Bullido,  
+O. Peters, P . K. crane, d. Bennett, P . Bosco, e. c oto, v. Boccardi, P . l. de Jager, A. lleo,  
+n. Warner, O. l. l opez, M. ingelsson, P . deloukas, c. c ruchaga, c. Graff, R. Gwilliam,  
+M. Fornage, A. M. Goate, P . Sanchez- Juan, P . G. Kehoe, n. Amin, n. ertekin- taner, c. Berr,  
+S. d ebette, S. l ove, l. J. launer, S. G. Younkin, J. F. dartigues, c. c orcoran, M. A. ikram,  
+d. W. dickson, G. n icolas, d. c ampion, J. t schanz, h. Schmidt, h. hakonarson, J. clarimon, 
+R. Munger, R. Schmidt, l. A. Farrer, c. van Broeckhoven, M. c. O’donovan, A. l. d e Stefano, 
+l. Jones, J. l. haines, J. F. d eleuze, M. J. Owen, v. Gudnason, R. Mayeux, v. escott- Price,  
+B. M. Psaty, A. Ramirez, l. S. Wang, A. Ruiz, c. M. van d uijn, P . A. holmans, S. Seshadri,  
+J. Williams, P . Amouyel, G. d. Schellenberg, J. c. lambert, M. A. Pericak-  vance, Alzheimer 
+disease Genetics c onsortium (AdGc ), european Alzheimer’s disease initiative (eAdi), 
+c ohorts for heart and Aging Research in Genomic epidemiology c onsortium (chARGe), 
+Genetic and environmental Risk in Ad/d efining Genetic, Polygenic and environmental 
+Risk for Alzheimer’s disease consortium (GeRAd/PeRAdeS), Genetic meta- analysis of 
+diagnosed Alzheimer's disease identifies new risk loci and implicates Abeta, tau, 
+immunity and lipid processing. Nat. Genet. 51, 414–430 (2019).
+ 67. h. c. tjondro, i. l oke, S. chatterjee, M. t haysen- Andersen, human protein 
+paucimannosylation: c ues from the eukaryotic kingdoms. Biol. Rev. Camb. Philos. Soc. 94, 
+2068–2100 (2019).
+ 68. J. Ugonotti, R. Kawahara, i. l oke, Y. Zhu, S. chatterjee, h. c. tjondro, Z. Sumer- Bayraktar,  
+S. neelamegham, M. t haysen- Andersen, n- acetyl- β- d- hexosaminidases mediate the 
+generation of paucimannosidic proteins via a putative noncanonical truncation pathway 
+in human neutrophils. Glycobiology 32, 218–229 (2022).
+ 69. e . drummond, S. nayak, A. Faustin, G. Pires, R. A. h ickman, M. Askenazi, M. c ohen,  
+t . haldiman, c. Kim, X. han, Y. Shao, J. G. Safar, B. Ueberheide, t . Wisniewski, Proteomic 
+differences in amyloid plaques in rapidly progressive and sporadic Alzheimer's disease. 
+Acta Neuropathol. 133, 933–954 (2017).
+ 70. e . drummond, G. Pires, c. MacMurray, M. Askenazi, S. nayak, M. Bourdon, J. Safar,  
+B. Ueberheide, t . Wisniewski, Phosphorylated tau interactome in the human Alzheimer's 
+disease brain. Brain 143, 2803–2817 (2020).
+ 71. e . drummond, t . Kavanagh, G. Pires, M. Marta- Ariza, e. Kanshin, S. nayak, A. Faustin,  
+v. Berdah, B. Ueberheide, t . Wisniewski, t he amyloid plaque proteome in early onset 
+Alzheimer's disease and down syndrome. Acta Neuropathol. Commun. 10, 53 (2022).
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Zhang et al., Sci. Adv. 10, eadk6911 (2024)     5 April 2024
+Science Adv AnceS  |  ReSeAR ch AR ticle
+25 of 25
+ 72. t . M. Maguire, K. c. Breen, A decrease in neural sialyltransferase activity in Alzheimer's 
+disease. Dementia 6, 185–190 (1995).
+ 73. A. c. naj, G. Jun, G. W. Beecham, l. S. Wang, B. n. vardarajan, J. Buros, P . J. Gallins,  
+J. d. Buxbaum, G. P . Jarvik, P . K. crane, e. B. larson, t. d. Bird, B. F. Boeve,  
+n. R. Graff- Radford, P . l. de Jager, d. evans, J. A. Schneider, M. M. carrasquillo,  
+n. ertekin- taner, S. G. Younkin, c. cruchaga, J. S. Kauwe, P . nowotny, P . Kramer, J. hardy,  
+M. J. huentelman, A. J. Myers, M. M. Barmada, F. Y. demirci, c. t. Baldwin, R. c. Green,  
+e. Rogaeva, P . S. George- hyslop, S. e. Arnold, R. Barber, t. Beach, e. h. Bigio, J. d . Bowen,  
+A. Boxer, J. R. Burke, n. J. c airns, c. S. c arlson, R. M. c arney, S. l. c arroll, h. c. chui,  
+d. G. clark, J. c orneveaux, c. W. c otman, J. l. c ummings, c. d ec arli, S. t. deKosky,  
+R. diaz- Arrastia, M. dick, d . W. dickson, W. G. ellis, K. M. Faber, K. B. Fallon, M. R. Farlow,  
+S. Ferris, M. P . Frosch, d. R. Galasko, M. Ganguli, M. Gearing, d. h. Geschwind, B. Ghetti,  
+J. R. Gilbert, S. Gilman, B. Giordani, J. d. Glass, J. h. Growdon, R. l. hamilton, l. e . harrell,  
+e. head, l. S. honig, c. M. hulette, B. t. h yman, G. A. Jicha, l. W. Jin, n. Johnson,  
+J. Karlawish, A. Karydas, J. A. Kaye, R. Kim, e. h. Koo, n. W. Kowall, J. J. lah, A. i. l evey,  
+A. P . lieberman, O. l. l opez, W. J. Mack, d. c. Marson, F. Martiniuk, d . c. Mash, e . Masliah, 
+W. c. Mcc ormick, S. M. Mcc urry, A. n. Mcdavid, A. c. McKee, M. Mesulam, B. l. Miller,  
+c. A. Miller, J. W. Miller, J. e. Parisi, d. P . Perl, e. Peskind, R. c. Petersen, W. W. Poon,  
+J. F. Quinn, R. A. Rajbhandary, M. Raskind, B. Reisberg, J. M. Ringman, e. d. Roberson,  
+R. n. Rosenberg, M. Sano, l. S. Schneider, W. Seeley, M. l. Shelanski, M. A. Slifer,  
+c. d . Smith, J. A. Sonnen, S. Spina, R. A. Stern, R. e. tanzi, J. Q. t rojanowski, J. c. t roncoso,  
+v. M. van d eerlin, h. v. vinters, J. P . vonsattel, S. Weintraub, K. A. Welsh- Bohmer,  
+J. Williamson, R. l. Woltjer, l. B. c antwell, B. A. dombroski, d. Beekly, K. l. l unetta,  
+e. R. Martin, M. i. Kamboh, A. J. Saykin, e. M. Reiman, d. A. Bennett, J. c. Morris,  
+t. J. Montine, A. M. Goate, d. Blacker, d. W. t suang, h. hakonarson, W. A. Kukull,  
+t. M. Foroud, J. l. haines, R. Mayeux, M. A. Pericak-  vance, l. A. Farrer, G. d . Schellenberg, 
+c ommon variants at MS4A4/MS4A6e, cd2AP , cd33 and ePhA1 are associated with 
+late- onset Alzheimer's disease. Nat. Genet. 43, 436–441 (2011).
+ 74. i. Sugimoto, S. Futakawa, R. Oka, K. Ogawa, J. d . Marth, e. Miyoshi, n. taniguchi,  
+Y. hashimoto, S. Kitazume, Beta- galactoside alpha2,6- sialyltransferase i cleavage by 
+BAce1 enhances the sialylation of soluble glycoproteins. A novel regulatory mechanism 
+for alpha2,6- sialylation. J. Biol. Chem. 282, 34896–34903 (2007).
+ 75. J. W. dennis, K. S. lau, M. d emetriou, i. R. nabi, Adaptive regulation at the cell surface by 
+n-  glycosylation. Traffic 10, 1569–1578 (2009).
+ 76. S. U. l ee, A. Grigorian, J. Pawling, i. J. chen, G. Gao, t. Mozaffar, c. McKerlie, M. d emetriou, 
+n-  glycan processing deficiency promotes spontaneous inflammatory demyelination and 
+neurodegeneration. J. Biol. Chem. 282, 33725–33734 (2007).
+ 77. R. Kleene, M. Schachner, Glycans and neural cell interactions. Nat. Rev. Neurosci. 5, 
+195–208 (2004).
+ 78. h. Schachter, Paucimannose n-  glycans in Caenorhabditis elegans and Drosophila 
+melanogaster. Carbohydr. Res. 344, 1391–1396 (2009).
+ 79. l. Yu, Z. huo, J. Yang, h. Palma-  Gudiel, P . A. Boyle, J. A. Schneider, d. A. Bennett, J. Zhao, 
+human brain and blood n-  glycome profiling in Alzheimer's disease and Alzheimer's 
+disease- related dementias. Front. Aging Neurosci. 13, 765259 (2021).
+ 80. M. Schneider, e. Al- Shareffi, R. S. haltiwanger, Biological functions of fucose in mammals. 
+Glycobiology 27, 601–618 (2017).
+ 81. n. ding, h. n ie, X. Sun, W. Sun, Y. Qu, X. liu, Y. Yao, X. liang, c. c. chen, Y. li, human serum 
+n-  glycan profiles are age and sex dependent. Age Ageing 40, 568–575 (2011).
+ 82. Y. v. Karpievitch, A. R. dabney, R. d . Smith, normalization and missing value imputation 
+for label- free lc- MS analysis. BMC Bioinformatics 13, S5 (2012).
+ 83. M. Askenazi, t . Kavanagh, G. Pires, B. Ueberheide, t. Wisniewski, e. drummond, 
+c ompilation of reported protein changes in the brain in Alzheimer's disease. Nat. 
+Commun. 14, 4466 (2023).
+ 84. K. K. l eung, G. M. Wilson, l. l. Kirkemo, n. M. Riley, J. J. c oon, J. A. Wells, Broad and 
+thematic remodeling of the surfaceome and glycoproteome on isogenic cells 
+transformed with driving proliferative oncogenes. Proc. Natl. Acad. Sci. U.S.A. 117, 
+7764–7775 (2020).
+ 85. Z. chen, Q. Yu, Q. Yu, J. Johnson, R. Shipman, X. Zhong, J. huang, S. Asthana, c. c arlsson, 
+O. Okonkwo, l. li, i n- depth site- specific analysis of n-  glycoproteome in human 
+cerebrospinal fluid and glycosylation landscape changes in alzheimer's disease. Mol. Cell. 
+Proteomics 20, 100081 (2021).
+ 86. J. Zhu, Y. h. lin, K. A. dingess, M. Mank, B. Stahl, A. J. R. heck, Quantitative longitudinal 
+inventory of the n-  glycoproteome of human milk from a single donor reveals the highly 
+variable repertoire and dynamic site- specific changes. J. Proteome Res. 19, 1941–1952 
+(2020).
+ 87. M. W. Bern, Y. J. Kil, t wo- dimensional target decoy strategy for shotgun proteomics. J. 
+Proteome Res. 10, 5296–5301 (2011).
+ 88. M. e. Ritchie, B. Phipson, d. Wu, Y. hu, c. W. law, W. Shi, G. K. Smyth, limma powers 
+differential expression analyses for RnA- sequencing and microarray studies. Nucleic Acids 
+Res. 43, e47 (2015).
+ 89. K. Kammers, R. n. c ole, c. t iengwe, i. Ruczinski, detecting significant changes in protein 
+abundance. EuPA Open Proteom. 7, 11–19 (2015).
+ 90. J. d. Storey, Qvalue: Q- value estimation for false discovery rate control. (2015).
+ 91. S. Babicki, d. Arndt, A. Marcu, Y. liang, J. R. Grant, A. Maciejewski, d . S. Wishart, 
+heatmapper: Web- enabled heat mapping for all. Nucleic Acids Res. 44, W147–W153 
+(2016).
+ 92. P . Shannon, A. Markiel, O. Ozier, n. S. Baliga, J. t . Wang, d. Ramage, n. Amin,  
+B. Schwikowski, t . ideker, cytoscape: A software environment for integrated models of 
+biomolecular interaction networks. Genome Res. 13, 2498–2504 (2003).
+ 93. S. Wieczorek, F. combes, c. lazar, Q. Giai Gianetto, l. Gatto, A. d orffer, A. M. hesse,  
+Y. coute, M. Ferro, c. Bruley, t . Burger, dAPAR & ProStaR: Software to perform statistical 
+analyses in quantitative discovery proteomics. Bioinformatics 33, 135–136 (2017).
+ 94. G. csárdi, t . nepusz, t he igraph software package for complex network research. InterJ. 
+Complex Syst. 1695, 1–9 (2006).
+ 95. S. horvath, J. d ong, Geometric interpretation of gene coexpression network analysis. 
+PLOS Comput. Biol. 4, e1000117 (2008).
+ 96. P . langfelder, S. horvath, eigengene networks for studying the relationships between 
+co- expression modules. BMC Syst. Biol. 1, 54 (2007).
+ 97. Y. Benjamini, Y. hochberg, controlling the false discovery rate: A practical and powerful 
+approach to multiple testing. J. R. Stat. Soc. Series B Methodol. 57, 289–300 (1995).
+ 98. Y. Perez- Riverol, J. Bai, c. Bandla, d . Garcia- Seisdedos, S. hewapathirana,  
+S. Kamatchinathan, d . J. Kundu, A. Prakash, A. Frericks- Zipper, M. eisenacher, M. Walzer,  
+S. Wang, A. Brazma, J. A. vizcaino, t he PRide database resources in 2022: A hub for 
+mass spectrometry- based proteomics evidences. Nucleic Acids Res. 50, d543–d552 
+(2022).
+Acknowledgments: We thank M. Gearing for providing postmortem brain tissue samples with 
+demographic and neuropathological information. We are grateful to the emory center for 
+neurodegenerative disease Brain Bank donors and their families for their invaluable 
+contribution to this study. S.P . is grateful for the endowment of the Rochelle and Max levit 
+chair in the neurosciences. Funding: t his work was supported in part by nih/national 
+institute on Aging grants RF1AG057965 (to l.l.), R21AG082333 (to l.l.), RF1AG065282 (to 
+l.- S.c.), and R01AG079836 (to l.l.). t he emory c enter for neurodegenerative disease Brain 
+Bank was supported in part by nih grants P50 AG025688 and P30 nS055077. Author 
+contributions: conceptualization: l.l. and Q.Z. Methodology: Q.Z., c.M., and l.l. i nvestigation: 
+Q.Z., c.M., and l.l. Formal analysis: Q.Z. and l.l. visualization: Q.Z. and l.l. Resources: l.l., 
+l.- S.c., and S.P . Supervision: l.l., l.- S.c., and S.P . Funding acquisition: l.l., l.- S.c., and S.P . 
+Writing—original draft: l.l., Q.Z., and l.- S.c. Writing—review and editing: l.l., Q.Z., l.- S.c., S.P ., 
+and c.M. Competing interests: t he authors declare that they have no competing interests. 
+Data and materials availability: t he mass spectrometry glycoproteomics data have been 
+deposited to the ProteomeXchange consortium via the PRide (98) partner repository with the 
+dataset identifier PXd045001. All data needed to evaluate the conclusions in the paper are 
+present in the paper and/or the Supplementary Materials.
+Submitted 5 September 2023 
+Accepted 5 March 2024 
+Published 5 April 2024 
+10.1126/sciadv.adk6911
+Downloaded from https://www.science.org on April 07, 2026
+
+
+===== PAGE BREAK =====
+
+Human brain glycoform coregulation network and glycan modification alterations
+in Alzheimer’s disease
+Qi Zhang, Cheng Ma, Lih-Shen Chin, Sheng Pan, and Lian Li
+Sci. Adv. 10 (14), eadk6911.  DOI: 10.1126/sciadv.adk6911
+View the article online
+https://www.science.org/doi/10.1126/sciadv.adk6911
+Permissions
+https://www.science.org/help/reprints-and-permissions
+Use of this article is subject to the Terms of service
+Science Advances (ISSN 2375-2548) is published by the American Association for the Advancement of Science. 1200 New York Avenue
+NW, Washington, DC 20005. The title Science Advances is a registered trademark of AAAS. 
+Copyright © 2024 The Authors, some rights reserved; exclusive licensee American Association for the Advancement of Science. No claim
+to original U.S. Government Works. Distributed under a Creative Commons Attribution NonCommercial License 4.0 (CC BY-NC).
+Downloaded from https://www.science.org on April 07, 2026

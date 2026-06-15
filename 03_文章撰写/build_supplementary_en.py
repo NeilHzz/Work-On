@@ -1,6 +1,6 @@
-"""
+﻿"""
 Science Advances supplementary materials generator (English).
-Output: supplementary_materials_en.docx
+Output: supplementary_materials260615.docx
 """
 
 from pathlib import Path
@@ -12,10 +12,12 @@ from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, Inches
 
 
-FIG_BASE = Path(r"D:\system_folder\Desktop\Work On\Supplementary\Figures")
+FIG_BASE = Path(__file__).with_name("0_Supplementary_materials") / "Supplementary" / "Figures"
 MAIN_FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
-PANEL_FIG_BASE = Path(__file__).resolve().parent.parent / "02_可视化" / "Figure" / "PNG"
-OUT = str(Path(__file__).with_name("0_A_Submit260608") / "supplementary_materials260608.docx")
+PANEL_FIG_BASE = Path(__file__).resolve().parent.parent / "02_可视化" / "Figure" / "png"
+OUT_DIR = Path(__file__).with_name("0_Supplementary_materials")
+OUT = str(OUT_DIR / "supplementary_materials260615.docx")
+OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 doc = Document()
 
@@ -132,12 +134,12 @@ def fig_caption(parts, before=0, after=240):
 para("Supplementary Materials for", size=18, before=0, after=40,
      align=WD_ALIGN_PARAGRAPH.CENTER)
 para(
-    "OVAL glycan states link eggshell matrix chemistry to avian shell-breaking mechanics",
+    "OVAL glycan states link eggshell matrix chemistry to shell architecture and avian shell-breaking mechanics",
     bold=True, size=14, before=0, after=160, align=WD_ALIGN_PARAGRAPH.CENTER,
 )
-para("[First author] et al.", size=12, before=0, after=80,
+para("Lin Xuan1, Yaqi Li1, Jiajie Yang1, Yu Liu1, Chengyu Zhang1, Qiulian Wang1, Lingsen Zeng1, Tongyao Li1, Wenbin Zhou1, Xuefeng Shi1, Guiyun Xu1, and Jiangxia Zheng1*", size=12, before=0, after=80,
      align=WD_ALIGN_PARAGRAPH.CENTER)
-para("*Corresponding author. Email: [corresponding author email]",
+para("*Corresponding author. Email: jxzheng@cau.edu.cn",
      size=12, before=0, after=300, align=WD_ALIGN_PARAGRAPH.CENTER)
 
 para("This PDF file includes:", size=12, before=0, after=60,
@@ -167,10 +169,10 @@ mpara([
     ("Anas platyrhynchos", False, True),
     (", and ", False, False),
     ("Columba livia", False, True),
-    (" in three distinct, non-overlapping regions of avian ecological space (Fig. S1), corresponding to terrestrial ground-nesting precocial, semi-aquatic precocial, and elevated-nesting altricial life-history strategies, respectively. The three-species set was selected to sample both developmental and ecological contrasts within a common hatching framework rather than to maximize any single phylogenetic or morphological separation.", False, False),
+    (" in three distinct, non-overlapping regions of avian ecological space (Fig. S1), corresponding to terrestrial ground-nesting precocial, semi-aquatic precocial, and elevated-nesting altricial life-history strategies, respectively. The three-species set was selected to sample both developmental and ecological contrasts within a common shell-breaking framework rather than to maximize any single phylogenetic or morphological separation.", False, False),
 ])
 mpara([
-    ("To test whether this separation depended on the numerical encoding of categorical variables, we performed 500 randomized perturbation iterations in which all encoding weights were independently shifted within +/-30% of their original values. Across all iterations, the variance explained by the first two principal components and the cluster silhouette coefficient remained tightly centred on the unperturbed baseline (Fig. S1). The species assignments therefore remained stable under reasonable alternative encodings.", False, False),
+    ("To test whether this separation depended on the numerical encoding of categorical variables, we performed 500 randomized perturbation iterations in which all encoding weights were independently shifted within ±30% of their original values. Across all iterations, the variance explained by the first two principal components and the cluster silhouette coefficient remained tightly centred on the unperturbed baseline (Fig. S1). The species assignments therefore remained stable under reasonable alternative encodings.", False, False),
 ], before=80)
 
 st_head("Supplementary Text 2. Eggshell matrix proteome orthogroup analysis.")
@@ -210,13 +212,13 @@ section_head("SUPPLEMENTARY FIGURES")
 add_image(FIG_BASE / "SuppFig1_Species_Selection" / "Sensitivity_Analysis_Results.png", width_cm=15.5)
 fig_title("Fig. S1.", "Sensitivity analysis of the macroecological species-selection framework.")
 fig_caption([
-    ("Distribution of variance explained (R^2) and cluster silhouette coefficients from 500 randomized perturbation iterations applied to the AVONET-based principal-component space used for species selection. The focal species are ", False, False),
+    ("Distribution of variance explained (R²) and cluster silhouette coefficients from 500 randomized perturbation iterations applied to the AVONET-based principal-component space used for species selection. The focal species are ", False, False),
     ("Gallus gallus", False, True),
     (", ", False, False),
     ("Anas platyrhynchos", False, True),
     (", and ", False, False),
     ("Columba livia", False, True),
-    (". Categorical ecological variables were numerically encoded, and each iteration introduced independent random shifts to all encoding weights within +/-30% of the original values. The tight concentration of both metrics around the baseline supports stable species assignment under alternative encoding schemes.", False, False),
+    (". Categorical ecological variables were numerically encoded, and each iteration introduced independent random shifts to all encoding weights within ±30% of the original values. The tight concentration of both metrics around the baseline supports stable species assignment under alternative encoding schemes.", False, False),
 ])
 
 doc.add_page_break()
@@ -283,9 +285,9 @@ fig_caption([
 
 doc.add_page_break()
 add_image(FIG_BASE / "SuppFig7_Glycosylation_Hotspot" / "Fig_hotspot_ensemble_1.png", width_cm=15.5)
-fig_title("Fig. S10.", "Re-Glyco ensemble analysis of OVAL Ca2+-hotspot accessibility and glycan shielding.")
+fig_title("Fig. S10.", "Re-Glyco ensemble analysis of OVAL Ca²⁺-hotspot accessibility and glycan shielding.")
 fig_caption([
-    ("(A) Total Ca2+-relevant hotspot counts across species-specific OVAL conformational ensembles and matched apo references. (B) Glycan-shielded hotspot counts showing the subset of Ca2+-relevant sites masked after glycan restoration. (C) Per-conformation hotspot-count trajectories across 50 Re-Glyco conformations for each species-specific OVAL-glycan complex and apo reference. Colors indicate ", False, False),
+    ("(A) Total Ca²⁺-relevant hotspot counts across species-specific OVAL conformational ensembles and matched apo references. (B) Glycan-shielded hotspot counts showing the subset of Ca²⁺-relevant sites masked after glycan restoration. (C) Per-conformation hotspot-count trajectories across 50 Re-Glyco conformations for each species-specific OVAL-glycan complex and apo reference. Colors indicate ", False, False),
     ("G. gallus", False, True),
     (" orange, ", False, False),
     ("A. platyrhynchos", False, True),
@@ -315,7 +317,7 @@ add_images_row([
 ], width_cm=7.5)
 fig_title("Fig. S11.", "Per-species finite-element force and shear-stress time courses across all nine offset positions.")
 fig_caption([
-    ("For each species, the left image shows the 3 x 3 offset-position time courses and the right image shows the corresponding summary time courses. Rows show ", False, False),
+    ("For each species, the left image shows the 3 × 3 offset-position time courses and the right image shows the corresponding summary time courses. Rows show ", False, False),
     ("G. gallus", False, True),
     (", ", False, False),
     ("A. platyrhynchos", False, True),
@@ -336,5 +338,9 @@ fig_caption([
     (" were calculated from the same nine positions. Simulations were run in LS-DYNA (Ansys) using explicit dynamic finite-element analysis. Eggshell thickness was set to the species-specific value measured from micro-CT.", False, False),
 ])
 
+for paragraph in doc.paragraphs:
+    paragraph.style = doc.styles["Normal"]
+
 doc.save(OUT)
 print(f"Saved -> {OUT}")
+

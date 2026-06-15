@@ -47,6 +47,7 @@ Panel mapping (source image → manuscript figure / panel):
 
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
+import shutil
 import sys
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -60,6 +61,8 @@ EGGTOOTH = Path(__file__).resolve().parent / "eggtooth"
 OUT    = Path(__file__).resolve().parent / "Composed"
 OUT.mkdir(exist_ok=True)
 FINAL_MAIN_SUBFIGS = Path(__file__).resolve().parent / "260526" / "01_main_subfigures_matched_to_composed"
+if not FINAL_MAIN_SUBFIGS.exists():
+    FINAL_MAIN_SUBFIGS = Path(__file__).resolve().parent / "99_其他图片" / "260526" / "01_main_subfigures_matched_to_composed"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Layout constants
@@ -79,6 +82,12 @@ _FONT_CANDIDATES = [
     "/usr/share/fonts/truetype/msttcorefonts/Times_New_Roman_Bold.ttf",
     "/Library/Fonts/Times New Roman Bold.ttf",
 ]
+_FONT_ITALIC_CANDIDATES = [
+    "C:/Windows/Fonts/timesi.ttf",
+    "C:/Windows/Fonts/Times New Roman Italic.ttf",
+    "/usr/share/fonts/truetype/msttcorefonts/Times_New_Roman_Italic.ttf",
+    "/Library/Fonts/Times New Roman Italic.ttf",
+]
 
 
 def _load_font(size: int) -> ImageFont.FreeTypeFont:
@@ -88,9 +97,17 @@ def _load_font(size: int) -> ImageFont.FreeTypeFont:
     return ImageFont.load_default()
 
 
+def _load_italic_font(size: int) -> ImageFont.FreeTypeFont:
+    for fp in _FONT_ITALIC_CANDIDATES:
+        if Path(fp).exists():
+            return ImageFont.truetype(fp, size)
+    return _load_font(size)
+
+
 FONT_XL  = _load_font(120)   # full-width panels
 FONT_LG  = _load_font(100)   # half-width panels
 FONT_MD  = _load_font(80)    # third-width panels
+FONT_MD_ITALIC = _load_italic_font(80)
 FONT_SM  = _load_font(64)    # quarter-width panels
 FONT_FIG4_LABEL = _load_font(120)
 FONT_PUB_LABEL = _load_font(120)
@@ -100,6 +117,29 @@ SPECIES_COLORS = {
     "Anas": "#93AACD",
     "Columba": "#F3CE9D",
 }
+
+VIS_ROOT = Path(__file__).resolve().parent
+BASE = VIS_ROOT.parent
+PNG = VIS_ROOT / "Figure" / "PNG"
+DATA_ROOT = next((p for p in BASE.glob("01_*") if p.is_dir()), BASE / "01_数据与计算")
+FEM = next((p for p in DATA_ROOT.glob("LS-DYNA_*") if p.is_dir()), DATA_ROOT / "LS-DYNA_原始模型")
+ILLUS = next((p for p in DATA_ROOT.glob("*形态结构*") if p.is_dir()), DATA_ROOT)
+EGGTOOTH = VIS_ROOT / "eggtooth"
+OUT = VIS_ROOT / "Composed"
+OUT.mkdir(exist_ok=True)
+OTHER_IMAGES = next((p for p in VIS_ROOT.glob("99_*") if p.is_dir()), VIS_ROOT / "99_其他图片")
+FINAL_MAIN_COMPOSED = next(
+    (p / "main_composed" for p in VIS_ROOT.glob("00_*") if (p / "main_composed").exists()),
+    VIS_ROOT / "00_正文与补充材料图片" / "main_composed",
+)
+COMPOSED_SYNC_DIRS = [
+    FINAL_MAIN_COMPOSED,
+    OTHER_IMAGES / "260526" / "02_main_composed_figures",
+    OTHER_IMAGES / "Sci_Adv_Figure" / "Composed",
+]
+FINAL_MAIN_SUBFIGS = VIS_ROOT / "260526" / "01_main_subfigures_matched_to_composed"
+if not FINAL_MAIN_SUBFIGS.exists():
+    FINAL_MAIN_SUBFIGS = OTHER_IMAGES / "260526" / "01_main_subfigures_matched_to_composed"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Image utilities
@@ -308,12 +348,20 @@ def paste(canvas: Image.Image, img: Image.Image, x: int, y: int):
     canvas.paste(img, (x, y), img)
 
 
-def save_fig(img: Image.Image, name: str, dpi: int = PUBLICATION_DPI):
+def sync_composed_figure(path: Path):
+    for directory in COMPOSED_SYNC_DIRS:
+        directory.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(path, directory / path.name)
+
+
+def save_fig(img: Image.Image, name: str, dpi: int = PUBLICATION_DPI, sync: bool = False):
     """Flatten to RGB (white background) and save as PNG."""
     bg = Image.new("RGB", img.size, (255, 255, 255))
     bg.paste(img, mask=img.split()[3])
     out = OUT / f"{name}.png"
     bg.save(out, dpi=(dpi, dpi))
+    if sync:
+        sync_composed_figure(out)
     print(f"  Saved → {out}")
 
 
@@ -330,7 +378,7 @@ def make_fig1c_triptych(target_w: int) -> Image.Image:
             img = scale_to_w(raw, col_w)
         draw = ImageDraw.Draw(img)
         draw.text((col_w // 2, 18), species,
-                  fill=SPECIES_COLORS[species], font=FONT_MD, anchor="mt")
+                  fill=SPECIES_COLORS[species], font=FONT_MD_ITALIC, anchor="mt")
         panels.append(img)
 
     panel_h = max(img.height for img in panels)
@@ -788,7 +836,7 @@ def compose_fig4():
 #         Row A = Gallus (chicken), B = Anas (duck), C = Columba (pigeon)
 # ─────────────────────────────────────────────────────────────────────────────
 
-def compose_fig5():
+def _compose_fig5_legacy_beak_fem_only():
     print("\n=== Composing Fig 5 ===")
     inner_w   = CANVAS_W - 2 * MARGIN
     left_frac = 0.35                        # ~35 % matches reference (983/2776)
@@ -844,6 +892,93 @@ def compose_fig5():
     save_fig(canvas, "Fig5_composed")
 
 
+def compose_fig5():
+    print("\n=== Composing Fig 5 ===")
+    canvas_w, canvas_h = 11466, 4534
+    canvas = Image.new("RGBA", (canvas_w, canvas_h), (255, 255, 255, 255))
+
+    left_x, left_top = 30, 20
+    left_w = 4240
+    beak_w = 1230
+    fem_w = left_w - beak_w
+    row_gap = 0
+    row_h = (canvas_h - 2 * left_top - 2 * row_gap) // 3
+
+    species_data = [
+        ("A", EGGTOOTH / "鸡（喙）.png", FEM / "chicken_model_render.png", "Gallus (chicken)"),
+        ("B", EGGTOOTH / "鸭（喙）.png", FEM / "duck_model_render.png", "Anas (duck)"),
+        ("C", EGGTOOTH / "鸽子（喙）.png", FEM / "pigeon_model_render.png", "Columba (pigeon)"),
+    ]
+
+    species_data = [
+        ("A", next(EGGTOOTH.glob("*鸡*喙*.png"), EGGTOOTH / "鸡（喙）.png"),
+         FEM / "chicken_model_render.png", "Gallus (chicken)"),
+        ("", next(EGGTOOTH.glob("*鸭*喙*.png"), EGGTOOTH / "鸭（喙）.png"),
+         FEM / "duck_model_render.png", "Anas (duck)"),
+        ("", next(EGGTOOTH.glob("*鸽*喙*.png"), EGGTOOTH / "鸽子（喙）.png"),
+         FEM / "pigeon_model_render.png", "Columba (pigeon)"),
+    ]
+
+    for idx, (lbl, illus_path, fem_path, sp_name) in enumerate(species_data):
+        illus_raw = load_img(illus_path)
+        if illus_raw is None:
+            illus_img = make_placeholder(beak_w, row_h, f"{sp_name}\nillustration not found")
+        else:
+            illus_img = scale_to_fit(illus_raw, beak_w, row_h)
+
+        fem_raw = load_img(fem_path)
+        if fem_raw is None:
+            fem_img = make_placeholder(fem_w, row_h, f"{sp_name} FEM render\n(file not found)")
+        else:
+            fem_img = make_fem_panel_with_bottom_legend(
+                fem_raw, fem_w, row_h, show_legend=(idx == len(species_data) - 1)
+            )
+
+        row = Image.new("RGBA", (left_w, row_h), (255, 255, 255, 255))
+        paste(row, illus_img, (beak_w - illus_img.width) // 2, (row_h - illus_img.height) // 2)
+        paste(row, fem_img, beak_w, 0)
+        if lbl:
+            row = add_label(row, lbl, font=FONT_LG, offset=(0, 0))
+        paste(canvas, row, left_x, left_top + idx * (row_h + row_gap))
+
+    raw_force = load_img(PNG / "Fig6A_Force.png")
+    raw_shear = load_img(PNG / "Fig6A_Shear.png")
+    raw_fmax = load_img(PNG / "Fig6B_Fmax.png")
+    raw_taumax = load_img(PNG / "Fig6B_Taumax.png")
+
+    if raw_force is None:
+        raw_force = make_placeholder(2400, 1134, "Fig6A_Force not found")
+    if raw_shear is None:
+        raw_shear = make_placeholder(2400, 1134, "Fig6A_Shear not found")
+    if raw_fmax is None:
+        raw_fmax = make_placeholder(1200, 1134, "Fig6B_Fmax not found")
+    if raw_taumax is None:
+        raw_taumax = make_placeholder(1200, 1134, "Fig6B_Taumax not found")
+
+    mech_x = 4160
+    mech_top = 40
+    mech_row_h = 2060
+    mech_row_gap = 260
+    time_w = 4300
+    bar_w = 2180
+    plot_gap = 150
+
+    for idx, (label, time_raw, bar_raw) in enumerate([
+        ("B", raw_force, raw_fmax),
+        ("C", raw_shear, raw_taumax),
+    ]):
+        time_img = scale_to_fit(time_raw, time_w, mech_row_h)
+        bar_img = scale_to_fit(bar_raw, bar_w, mech_row_h)
+        row = Image.new("RGBA", (time_w + plot_gap + bar_w, mech_row_h), (255, 255, 255, 255))
+        paste(row, time_img, 0, (mech_row_h - time_img.height) // 2)
+        paste(row, bar_img, time_w + plot_gap + (bar_w - bar_img.width) // 2,
+              (mech_row_h - bar_img.height) // 2)
+        row = add_label(row, label, font=FONT_LG, offset=(0, 0))
+        paste(canvas, row, mech_x, mech_top + idx * (mech_row_h + mech_row_gap))
+
+    save_fig(canvas, "Fig5_composed", sync=True)
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Fig 6  (2-row × 2-column grid — uses individually saved panels)
 #   Row A: Force timeseries  (Fig6A_Force.png, left ~65 %) | F_max bars  (Fig6B_Fmax.png)
@@ -851,7 +986,7 @@ def compose_fig5():
 #   Generate source panels first: run  02_可视化/Figure/MainFig6_mechanics_force_shear.py
 # ─────────────────────────────────────────────────────────────────────────────
 
-def compose_fig6():
+def _compose_fig6_legacy():
     print("\n=== Composing Fig 6 ===")
     inner_w   = CANVAS_W - 2 * MARGIN
     left_frac = 0.65               # timeseries column ~65 % (figsize 12/18)
@@ -941,13 +1076,141 @@ def compose_supp_fig7():
 # Entry point
 # ─────────────────────────────────────────────────────────────────────────────
 
+MAIN_PANELS = FINAL_MAIN_COMPOSED.parent / "main_panels"
+FIG5_PANEL_NAMES = [
+    "Fig5A.png",
+    "Fig5B_left.png",
+    "Fig5B_right.png",
+    "Fig5C_left.png",
+    "Fig5C_right.png",
+    "Fig6A.png",
+    "Fig6B.png",
+]
+
+
+def load_main_panel(name: str) -> Image.Image:
+    panel = load_img(MAIN_PANELS / name)
+    if panel is None:
+        return make_placeholder(1200, 800, f"{name} not found")
+    return panel
+
+
+def compose_fig5_left_panel(name: str, target_w: int, target_h: int,
+                            crop_right: float = 0.88) -> Image.Image:
+    panel = load_main_panel(name)
+    panel = panel.crop((0, 0, int(panel.width * crop_right), panel.height))
+    panel = trim_white(panel, pad=18, threshold=250)
+    return scale_to_fit(panel, target_w, target_h)
+
+
+def compose_fig5_left_pair(left_name: str, right_name: str,
+                           target_w: int, target_h: int) -> Image.Image:
+    left = load_main_panel(left_name)
+    right = load_main_panel(right_name)
+    pair = Image.new("RGBA", (left.width + right.width, max(left.height, right.height)),
+                     (255, 255, 255, 255))
+    paste(pair, left, 0, 0)
+    paste(pair, right, left.width, 0)
+    pair = pair.crop((0, 0, int(pair.width * 0.88), pair.height))
+    pair = trim_white(pair, pad=18, threshold=250)
+    return scale_to_fit(pair, target_w, target_h)
+
+
+def compose_fig5_mechanics_panel(name: str, label: str,
+                                 target_w: int, target_h: int) -> Image.Image:
+    panel = load_main_panel(name)
+    panel = add_label(panel, label, font=FONT_LG, offset=(0, 0),
+                      cover=True, cover_px=(150, 150))
+    return scale_to_fit(panel, target_w, target_h)
+
+
+def crop_panel_content(img: Image.Image, box: tuple[int, int, int, int] | None = None,
+                       cover_label: bool = False) -> Image.Image:
+    if box is not None:
+        img = img.crop(box)
+    if cover_label:
+        img = img.copy()
+        ImageDraw.Draw(img).rectangle((0, 0, 220, 220), fill=(255, 255, 255, 255))
+    return trim_white(img, pad=18, threshold=250)
+
+
+def compose_fig5_beak_fem_row(label: str, beak_name: str, fem_name: str,
+                              target_w: int, target_h: int,
+                              beak_box: tuple[int, int, int, int] | None = None,
+                              fem_box: tuple[int, int, int, int] | None = None,
+                              show_legend: bool = False) -> Image.Image:
+    beak_w = 1180
+    fem_w = target_w - beak_w
+    row = Image.new("RGBA", (target_w, target_h), (255, 255, 255, 255))
+
+    beak = crop_panel_content(load_main_panel(beak_name), beak_box, cover_label=True)
+    fem = crop_panel_content(load_main_panel(fem_name), fem_box, cover_label=False)
+
+    legend_h = min(240, max(190, int(target_h * 0.13))) if show_legend else 0
+    fem_area_h = target_h - legend_h
+    beak = scale_to_fit(beak, beak_w, target_h)
+    fem = scale_to_fit(fem, int(fem_w * 0.96), int(fem_area_h * 0.96))
+
+    paste(row, beak, (beak_w - beak.width) // 2, (target_h - beak.height) // 2)
+    paste(row, fem, beak_w + (fem_w - fem.width) // 2, (fem_area_h - fem.height) // 2)
+    if show_legend:
+        legend = make_stress_legend_bottom(fem_w, legend_h)
+        paste(row, legend, beak_w, target_h - legend_h)
+
+    if label:
+        row = add_label(row, label, font=FONT_LG, offset=(0, 0))
+    return row
+
+
+def _compose_fig5_legacy_main_panels():
+    print("\n=== Composing Fig 5 ===")
+    canvas_w, canvas_h = 11466, 4534
+    canvas = Image.new("RGBA", (canvas_w, canvas_h), (255, 255, 255, 255))
+
+    left_x, left_top = 70, 40
+    left_w = 4080
+    row_gap = 12
+    row_h = (canvas_h - 2 * left_top - 2 * row_gap) // 3
+
+    left_rows = [
+        compose_fig5_beak_fem_row(
+            "A", "Fig5A.png", "Fig5A.png", left_w, row_h,
+            beak_box=(0, 0, 2500, 2464),
+            fem_box=(2500, 0, 6200, 2464),
+        ),
+        compose_fig5_beak_fem_row(
+            "", "Fig5B_left.png", "Fig5B_right.png", left_w, row_h,
+            fem_box=(0, 0, 2500, 2464),
+        ),
+        compose_fig5_beak_fem_row(
+            "", "Fig5C_left.png", "Fig5C_right.png", left_w, row_h,
+            fem_box=(0, 0, 2500, 2464),
+            show_legend=True,
+        ),
+    ]
+    for idx, row in enumerate(left_rows):
+        paste(canvas, row, left_x + (left_w - row.width) // 2,
+              left_top + idx * (row_h + row_gap) + (row_h - row.height) // 2)
+
+    mech_x = 4350
+    mech_top = 120
+    mech_w = canvas_w - mech_x - 80
+    mech_row_h = 1850
+    mech_row_gap = 500
+    for idx, (name, label) in enumerate([("Fig6A.png", "B"), ("Fig6B.png", "C")]):
+        panel = compose_fig5_mechanics_panel(name, label, mech_w, mech_row_h)
+        paste(canvas, panel, mech_x + (mech_w - panel.width) // 2,
+              mech_top + idx * (mech_row_h + mech_row_gap) + (mech_row_h - panel.height) // 2)
+
+    save_fig(canvas, "Fig5_composed", sync=True)
+
+
 if __name__ == "__main__":
     compose_fig1()
     compose_fig2()
     compose_fig3()
     compose_fig4()
     compose_fig5()
-    compose_fig6()
     compose_supp_fig7()
     print("\nAll manuscript figures composed successfully.")
     print(f"Output directory: {OUT}")
