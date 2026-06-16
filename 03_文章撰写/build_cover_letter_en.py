@@ -10,7 +10,7 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt
 
-OUT = Path(__file__).with_name("0_Cover letter") / "cover_letter260615.docx"
+OUT = Path(__file__).with_name("0_Cover letter") / "cover_letter_submitted.docx"
 FONT = "Times New Roman"
 
 
@@ -48,7 +48,7 @@ doc = Document()
 section = doc.sections[0]
 section.left_margin = section.right_margin = section.top_margin = section.bottom_margin = Cm(2.54)
 
-para(doc, "June 15, 2026")
+para(doc, "June 16, 2026")
 para(doc, "Science Advances Editorial Office")
 para(doc, "Dear Editors,")
 
@@ -59,7 +59,7 @@ para(
 
 para(
     doc,
-    "Avian eggshells offer a concise biological test of a broader materials question: how a conserved organic matrix can produce mineralized structures that are both protective and locally breakable. In eggshell formation, this problem is concentrated at the mammillary layer, where matrix-guided nucleation first organizes the physical eggshell architecture later encountered during shell breaking.",
+    "Avian eggshells test how a conserved organic matrix builds mineralized structures that are protective yet locally breakable. This problem is concentrated at the mammillary layer, where matrix-guided nucleation first organizes the physical eggshell architecture later used in shell breaking.",
 )
 
 para(
@@ -79,17 +79,22 @@ para(
 
 para(
     doc,
-    "We believe the study is well suited to Science Advances because it addresses a broad biomineralization question with a mechanistic, cross-scale design. Rather than presenting a descriptive comparison of avian eggshells, the manuscript provides a testable framework for how posttranslational matrix states organize material phenotypes across molecular, mesoscale, and mechanical levels.",
+    "We believe the study is well suited to Science Advances because it addresses a broad biomineralization question with a mechanistic, cross-scale design. Rather than a descriptive comparison of avian eggshells, the manuscript provides a testable framework for how posttranslational matrix states organize material phenotypes across molecular, mesoscale, and mechanical levels.",
 )
 
 para(
     doc,
-    "All authors have approved the manuscript and its submission. The work is original and is not under consideration elsewhere. Conflicts of interest, funding information, and data and code availability statements are provided in the manuscript.",
+    "For review, we have uploaded the Supplementary Materials file and Tables S1 to S7 as supporting files.",
+)
+
+para(
+    doc,
+    "All authors have approved the submission. None of the material has been published or is under consideration elsewhere, and there are no related manuscripts under review. The authors declare no competing interests. The study did not involve human participants or live animal experiments. Data, code, and material availability are described in the manuscript; no material transfer agreement applies.",
 )
 
 para(doc, "Sincerely,")
 para(doc, "Jiangxia Zheng")
-para(doc, "National Engineering Laboratory for Animal Breeding and MOA Key Laboratory of Animal Genetics and Breeding, College of Animal Science and Technology, China Agricultural University")
+para(doc, "China Agricultural University, Beijing 100193, China")
 para(doc, "jxzheng@cau.edu.cn")
 
 doc.save(OUT)

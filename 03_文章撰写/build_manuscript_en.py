@@ -12,7 +12,7 @@ from pathlib import Path
 import re
 from shared_references import REFS
 
-OUT = str(Path(__file__).with_name("0_Manuscript") / "manuscript260615.docx")
+OUT = str(Path(__file__).with_name("0_Manuscript") / "manuscript_submitted.docx")
 FIG_BASE = Path(__file__).resolve().parent.parent / "02_可视化" / "00_正文与补充材料图片" / "main_composed"
 
 REF_TEXTS = {}
@@ -252,13 +252,21 @@ runpara([
     ("Lin Xuan", False), ("1", True), (", Yaqi Li", False), ("1", True),
     (", Jiajie Yang", False), ("1", True), (", Yu Liu", False), ("1", True),
     (", Chengyu Zhang", False), ("1", True), (", Qiulian Wang", False), ("1", True),
-    (", Lingsen Zeng", False), ("1", True), (", Tongyao Li", False), ("1", True),
-    (", Wenbin Zhou", False), ("1", True), (", Xuefeng Shi", False), ("1", True),
-    (", Guiyun Xu", False), ("1", True), (", and Jiangxia Zheng", False), ("1*", True),
+    (", Lingsen Zeng", False), ("2,3", True), (", Tongyao Li", False), ("1", True),
+    (", Wenbin Zhou", False), ("1", True), (", Guiyun Xu", False), ("1", True),
+    (", and Jiangxia Zheng", False), ("1*", True),
 ], size=11, before=80, after=40, align=WD_ALIGN_PARAGRAPH.LEFT)
 runpara([
     ("1", True),
     (" National Engineering Laboratory for Animal Breeding and MOA Key Laboratory of Animal Genetics and Breeding, College of Animal Science and Technology, China Agricultural University, No. 2 Yuanmingyuan West Road, Haidian District, Beijing 100193, China.", False),
+], size=11, before=0, after=40, align=WD_ALIGN_PARAGRAPH.LEFT)
+runpara([
+    ("2", True),
+    (" Animal Breeding and Genomics, Wageningen University & Research, 6708 PB, Wageningen, The Netherlands.", False),
+], size=11, before=0, after=40, align=WD_ALIGN_PARAGRAPH.LEFT)
+runpara([
+    ("3", True),
+    (" State Key Laboratory of Genome and Multi-omics Technologies, Shenzhen Branch, Guangdong Laboratory of Lingnan Modern Agriculture, Key Laboratory of Livestock and Poultry Multi-omics of MARA, Agricultural Genomics Institute at Shenzhen, Chinese Academy of Agricultural Sciences, Shenzhen, 518124, China.", False),
 ], size=11, before=0, after=40, align=WD_ALIGN_PARAGRAPH.LEFT)
 runpara([
     ("*", True),
@@ -269,10 +277,10 @@ para("Abstract", bold=True, size=11, before=80, after=40,
      align=WD_ALIGN_PARAGRAPH.LEFT)
 
 para(
-    "Eggshell matrix proteins are key regulators of eggshell structural formation, and existing studies have generated rich posttranslational-modification site maps, leaving the side-chain properties of glycosylation modifications as an important layer for further investigation. Using matched multi-layer analyses, we asked how glycan states on conserved matrix proteins map onto cross-species shell divergence. "
-    "We compared chicken, duck, and pigeon under a conserved egg-tooth interface by integrating micro-CT morphometry, eggshell-matrix proteomics, intact glycopeptide mass spectrometry, Re-Glyco structural modelling, electrostatic analysis, and finite-element simulation. "
-    "Cross-species separation emerged first in mammillary-layer organisation, while the matrix-protein toolkit remained largely shared. "
-    "Within that shared background, ovalbumin (OVAL) shifted from High Mannose-dominant glycans in chicken to Neutral Complex/Hybrid-dominant glycans in duck and Sialylated Complex/Hybrid-dominant glycans in pigeon. "
+    "Eggshell matrix proteins are key regulators of eggshell structural formation, and existing studies have mapped posttranslational sites, leaving glycan side-chain properties less resolved. Using matched multi-layer analyses, we asked how glycan states on conserved matrix proteins map onto cross-species shell divergence. "
+    "We compared chicken, duck, and pigeon under a conserved egg-tooth interface by integrating morphometric, glycoproteomic, structural, electrostatic, and finite-element analyses. "
+    "Cross-species separation emerged first in mammillary-layer organisation within a largely shared matrix-protein toolkit. "
+    "OVAL shifted from High Mannose-dominant glycans in chicken through Neutral Complex/Hybrid glycans in duck to Sialylated Complex/Hybrid glycans in pigeon. "
     "These glycan states predicted a Ca²⁺surface-accessibility gradient on OVAL that provides a plausible route from glycan-modulated OVAL unfolding and matrix-bound nucleation-site exposure to mammillary-layer formation, mature mammillary density, and, after separating shell-thickness effects, local shell-breaking structural strength. "
     "Together, the data refine current understanding of avian eggshell formation by connecting Ca²⁺accessible matrix-protein surfaces to mammillary-layer organisation and to local shell-breaking mechanics.",
     bold=False, size=10, before=0, after=80, align=WD_ALIGN_PARAGRAPH.JUSTIFY

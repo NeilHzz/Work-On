@@ -1,6 +1,6 @@
 ﻿"""
 Science Advances supplementary materials generator (English).
-Output: supplementary_materials260615.docx
+Output: supplementary_materials_submitted.docx
 """
 
 from pathlib import Path
@@ -16,7 +16,7 @@ FIG_BASE = Path(__file__).with_name("0_Supplementary_materials") / "Supplementar
 MAIN_FIG_BASE = Path(__file__).resolve().parent.parent / "Figure260421"
 PANEL_FIG_BASE = Path(__file__).resolve().parent.parent / "02_可视化" / "Figure" / "png"
 OUT_DIR = Path(__file__).with_name("0_Supplementary_materials")
-OUT = str(OUT_DIR / "supplementary_materials260615.docx")
+OUT = str(OUT_DIR / "supplementary_materials_submitted.docx")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 doc = Document()
@@ -137,8 +137,14 @@ para(
     "OVAL glycan states link eggshell matrix chemistry to shell architecture and avian shell-breaking mechanics",
     bold=True, size=14, before=0, after=160, align=WD_ALIGN_PARAGRAPH.CENTER,
 )
-para("Lin Xuan1, Yaqi Li1, Jiajie Yang1, Yu Liu1, Chengyu Zhang1, Qiulian Wang1, Lingsen Zeng1, Tongyao Li1, Wenbin Zhou1, Xuefeng Shi1, Guiyun Xu1, and Jiangxia Zheng1*", size=12, before=0, after=80,
+para("Lin Xuan1, Yaqi Li1, Jiajie Yang1, Yu Liu1, Chengyu Zhang1, Qiulian Wang1, Lingsen Zeng2,3, Tongyao Li1, Wenbin Zhou1, Guiyun Xu1, and Jiangxia Zheng1*", size=12, before=0, after=80,
      align=WD_ALIGN_PARAGRAPH.CENTER)
+para("1 National Engineering Laboratory for Animal Breeding and MOA Key Laboratory of Animal Genetics and Breeding, College of Animal Science and Technology, China Agricultural University, No. 2 Yuanmingyuan West Road, Haidian District, Beijing 100193, China.",
+     size=12, before=0, after=40, align=WD_ALIGN_PARAGRAPH.CENTER)
+para("2 Animal Breeding and Genomics, Wageningen University & Research, 6708 PB, Wageningen, The Netherlands.",
+     size=12, before=0, after=40, align=WD_ALIGN_PARAGRAPH.CENTER)
+para("3 State Key Laboratory of Genome and Multi-omics Technologies, Shenzhen Branch, Guangdong Laboratory of Lingnan Modern Agriculture, Key Laboratory of Livestock and Poultry Multi-omics of MARA, Agricultural Genomics Institute at Shenzhen, Chinese Academy of Agricultural Sciences, Shenzhen, 518124, China.",
+     size=12, before=0, after=80, align=WD_ALIGN_PARAGRAPH.CENTER)
 para("*Corresponding author. Email: jxzheng@cau.edu.cn",
      size=12, before=0, after=300, align=WD_ALIGN_PARAGRAPH.CENTER)
 
@@ -183,7 +189,19 @@ mpara([
     ("A. platyrhynchos", False, True),
     (", and ", False, False),
     ("C. livia", False, True),
-    (", respectively (Fig. S3). The workflow resolved these proteins into a conserved three-species core of 1,997 orthogroups, pairwise-shared subsets of 180 (Gallus-Anas), 434 (Gallus-Columba), and 716 (Anas-Columba), and lineage-restricted sets of 9, 28, and 72 orthogroups for chicken, duck, and pigeon, respectively. The orthogroup structure therefore supports comparison on a shared matrix background rather than wholesale replacement of the eggshell toolkit.", False, False),
+    (", respectively (Fig. S3). The workflow resolved these proteins into a conserved three-species core of 1,997 orthogroups, pairwise-shared subsets of 180 (", False, False),
+    ("Gallus", False, True),
+    ("-", False, False),
+    ("Anas", False, True),
+    ("), 434 (", False, False),
+    ("Gallus", False, True),
+    ("-", False, False),
+    ("Columba", False, True),
+    ("), and 716 (", False, False),
+    ("Anas", False, True),
+    ("-", False, False),
+    ("Columba", False, True),
+    ("), and lineage-restricted sets of 9, 28, and 72 orthogroups for chicken, duck, and pigeon, respectively. The orthogroup structure therefore supports comparison on a shared matrix background rather than wholesale replacement of the eggshell toolkit.", False, False),
 ])
 mpara([
     ("GO enrichment of pairwise-shared sets highlighted ecological rather than purely phylogenetic stratification (Fig. S5). The ", False, False),
@@ -246,7 +264,25 @@ doc.add_page_break()
 add_image(FIG_BASE / "SuppFig4_GO_Enrichment" / "图2.jpg", width_cm=16.0)
 fig_title("Fig. S5.", "GO enrichment across species-specific and pairwise eggshell matrix protein sets.")
 fig_caption([
-    ("Top, GO terms enriched in the three pairwise-shared ortholog sets (GnA, Gallus-Anas; GnC, Gallus-Columba; AnC, Anas-Columba). Bottom, GO terms enriched in the three species-specific ortholog sets (Gallus, Anas, Columba). Colors denote GO category: biological process (BP), cellular component (CC), and molecular function (MF). The ", False, False),
+    ("Top, GO terms enriched in the three pairwise-shared ortholog sets (GnA, ", False, False),
+    ("Gallus", False, True),
+    ("-", False, False),
+    ("Anas", False, True),
+    ("; GnC, ", False, False),
+    ("Gallus", False, True),
+    ("-", False, False),
+    ("Columba", False, True),
+    ("; AnC, ", False, False),
+    ("Anas", False, True),
+    ("-", False, False),
+    ("Columba", False, True),
+    ("). Bottom, GO terms enriched in the three species-specific ortholog sets (", False, False),
+    ("Gallus", False, True),
+    (", ", False, False),
+    ("Anas", False, True),
+    (", ", False, False),
+    ("Columba", False, True),
+    ("). Colors denote GO category: biological process (BP), cellular component (CC), and molecular function (MF). The ", False, False),
     ("G. gallus", False, True),
     ("-specific set includes protein N-linked glycosylation among its enriched biological-process terms.", False, False),
 ])

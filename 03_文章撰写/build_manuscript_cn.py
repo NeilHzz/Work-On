@@ -12,8 +12,8 @@ from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 from deep_translator import GoogleTranslator
 
-EN_DOC = Path(__file__).with_name("0_Manuscript") / "manuscript260615.docx"
-OUT_DOC = Path(__file__).with_name("0_Manuscript_CN") / "manuscript260615_cn.docx"
+EN_DOC = Path(__file__).with_name("0_Manuscript") / "manuscript_submitted.docx"
+OUT_DOC = Path(__file__).with_name("0_Manuscript_CN") / "manuscript_submitted_cn.docx"
 CACHE_FILE = Path(__file__).with_name(".translation_cache_cn.json")
 INCLUDE_IMAGES = False
 INCLUDE_REFERENCES = False
@@ -184,7 +184,7 @@ POST_TRANSLATION_REPLACEMENTS: tuple[tuple[str, str], ...] = (
 FIXED_CN_PARAGRAPHS: dict[int, str] = {
     0: "OVAL糖链状态将蛋壳基质化学与壳结构和鸟类破壳力学联系起来",
     1: "OVAL糖链连接壳结构与力学",
-    2: "Lin Xuan1, Yaqi Li1, Jiajie Yang1, Yu Liu1, Chengyu Zhang1, Qiulian Wang1, Lingsen Zeng1, Tongyao Li1, Wenbin Zhou1, Xuefeng Shi1, Guiyun Xu1, and Jiangxia Zheng1*",
+    2: "Lin Xuan1, Yaqi Li1, Jiajie Yang1, Yu Liu1, Chengyu Zhang1, Qiulian Wang1, Lingsen Zeng2,3, Tongyao Li1, Wenbin Zhou1, Guiyun Xu1, and Jiangxia Zheng1*",
     3: "1 National Engineering Laboratory for Animal Breeding and MOA Key Laboratory of Animal Genetics and Breeding, College of Animal Science and Technology, China Agricultural University, No. 2 Yuanmingyuan West Road, Haidian District, Beijing 100193, China.",
     4: "*通信作者。邮箱：jxzheng@cau.edu.cn",
     5: "摘要",
@@ -234,6 +234,15 @@ FIXED_CN_PARAGRAPHS: dict[int, str] = {
     93: "利益冲突：作者声明无利益冲突。",
     94: "数据、代码和材料可用性：评估和复现本文结果所需的所有数据和代码均包含在正文和/或补充材料中。本研究生成的材料可向 J.Z. 合理索取（jxzheng@cau.edu.cn）。",
 }
+
+FIXED_CN_PARAGRAPHS = {
+    (index if index < 4 else index + 2): text
+    for index, text in FIXED_CN_PARAGRAPHS.items()
+}
+FIXED_CN_PARAGRAPHS.update({
+    4: "2 Animal Breeding and Genomics, Wageningen University & Research, 6708 PB, Wageningen, The Netherlands.",
+    5: "3 State Key Laboratory of Genome and Multi-omics Technologies, Shenzhen Branch, Guangdong Laboratory of Lingnan Modern Agriculture, Key Laboratory of Livestock and Poultry Multi-omics of MARA, Agricultural Genomics Institute at Shenzhen, Chinese Academy of Agricultural Sciences, Shenzhen, 518124, China.",
+})
 
 ABBREVIATIONS: tuple[str, ...] = (
     "Fig.",
@@ -581,6 +590,10 @@ def _postprocess_translated_doc(doc: Document) -> None:
             "y 坐标计算为 log2(G_ref) - log2(G_comp)，其中 I 和 G 分别表示蛋白丰度和糖链丰度。"
             "因此，y = x 对角线表示匹配的蛋白-糖链变化，而向糖链富集一侧的偏移则识别糖链变化超过整体蛋白丰度变化的蛋白。"
         ),
+    }
+    calibrated_paragraphs = {
+        (index if index < 4 else index + 2): text
+        for index, text in calibrated_paragraphs.items()
     }
     for index, text in calibrated_paragraphs.items():
         if index < len(doc.paragraphs):
