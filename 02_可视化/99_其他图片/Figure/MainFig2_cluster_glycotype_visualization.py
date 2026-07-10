@@ -25,8 +25,8 @@ from scipy.spatial.distance import braycurtis, jensenshannon
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _save import save_fig
 
-matplotlib.rcParams["font.family"] = "Times New Roman"
-matplotlib.rcParams["font.sans-serif"] = ["Times New Roman", "DejaVu Sans"]
+matplotlib.rcParams["font.family"] = "Minion Pro"
+matplotlib.rcParams["font.sans-serif"] = ["Minion Pro", "DejaVu Sans"]
 matplotlib.rcParams["mathtext.fontset"] = "stix"
 matplotlib.rcParams["axes.linewidth"] = 0.8
 matplotlib.rcParams["svg.fonttype"] = "none"
@@ -512,7 +512,7 @@ def plot_coverage_overview(overview_df: pd.DataFrame) -> None:
     fig, ax = plt.subplots(figsize=(4.5, 3.95))
     draw_coverage_overview(ax, overview_df)
     fig.subplots_adjust(top=0.90, bottom=0.18, left=0.28, right=0.99)
-    save_fig(fig, "Fig2_coverage_overview")
+    save_fig(fig, "glycotype_coverage_overview")
     plt.close(fig)
 
 
@@ -525,7 +525,7 @@ def plot_shared_core_similarity(similarity_df: pd.DataFrame, shared_group_count:
         note=f"1 - Jensen-Shannon distance; n={shared_group_count}",
     )
     fig.subplots_adjust(top=0.89, bottom=0.22, left=0.18, right=0.99)
-    save_fig(fig, "Fig2_shared_core_js")
+    save_fig(fig, "glycotype_shared_core_js")
     plt.close(fig)
 
 
@@ -570,7 +570,7 @@ def plot_cluster_consistency(
     )
 
     fig.subplots_adjust(top=0.88, bottom=0.18)
-    save_fig(fig, "Fig2_cluster_glycotype_consistency")
+    save_fig(fig, "Fig2BC_glycotype_consistency")
     plt.close(fig)
 
 
@@ -599,7 +599,7 @@ def plot_similarity_metric_comparison(
         vmin=shared_vmin,
     )
     fig.subplots_adjust(top=0.88, bottom=0.22)
-    save_fig(fig, "Fig2_shared_core_metric_comparison")
+    save_fig(fig, "glycotype_shared_core_metric_comparison")
     plt.close(fig)
 
 
@@ -673,7 +673,7 @@ def plot_species_proportions(type_count_df: pd.DataFrame) -> None:
     for handle in legend.legend_handles:
         handle.set_linewidth(0)
 
-    save_fig(fig, "Fig2_species_glycotype_proportion")
+    save_fig(fig, "Fig2D_glycotype_proportion")
     plt.close(fig)
 
 
@@ -729,7 +729,7 @@ def plot_species_type_heatmap(type_count_df: pd.DataFrame) -> None:
     cbar.set_label("Within-species percentage", fontsize=9.5)
     cbar.ax.tick_params(labelsize=8.5, length=2)
 
-    save_fig(fig, "Fig2_species_glycotype_heatmap")
+    save_fig(fig, "glycotype_species_heatmap")
     plt.close(fig)
 
 

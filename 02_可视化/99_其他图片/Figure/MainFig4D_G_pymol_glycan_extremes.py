@@ -20,7 +20,7 @@ import pandas as pd
 from PIL import Image, ImageDraw, ImageFont
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 REGLYCO = ROOT / "01_数据与计算" / "ReGlyco_Ensemble"
 PDB_DIR = REGLYCO / "PDB"
 CSV_DIR = REGLYCO / "csv"
@@ -79,11 +79,16 @@ def hex_to_rgb01(hex_color: str) -> list[float]:
     return [int(text[i:i + 2], 16) / 255.0 for i in (0, 2, 4)]
 
 
-def read_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
-    candidates = [
-        "C:/Windows/Fonts/timesbd.ttf" if bold else "C:/Windows/Fonts/times.ttf",
-        "C:/Windows/Fonts/arialbd.ttf" if bold else "C:/Windows/Fonts/arial.ttf",
-    ]
+def read_font(size: int, bold: bool = False, italic: bool = False) -> ImageFont.FreeTypeFont:
+    if italic:
+        candidates = [
+            "C:/Windows/Fonts/MinionPro-BoldIt.otf" if bold else "C:/Windows/Fonts/MinionPro-It.otf",
+        ]
+    else:
+        candidates = [
+            "C:/Windows/Fonts/MinionPro-Bold.otf" if bold else "C:/Windows/Fonts/MinionPro-Regular.otf",
+            "C:/Windows/Fonts/MinionPro-Semibold.otf" if bold else "C:/Windows/Fonts/MinionPro-It.otf",
+        ]
     for candidate in candidates:
         if Path(candidate).exists():
             return ImageFont.truetype(candidate, size)
@@ -834,7 +839,7 @@ def panel_with_title(job: dict) -> Image.Image:
     panel = Image.new("RGB", (target_w, target_h), "white")
     draw = ImageDraw.Draw(panel)
     title_font = read_font(48, bold=True)
-    sub_font = read_font(30, bold=False)
+    sub_font = read_font(30, bold=False, italic=True)
     title = job["role"]
     subtitle = f"{job['species']} | {job['structure']} model {job['model']}"
     tw, _ = text_size(draw, title, title_font)
@@ -867,9 +872,11 @@ def combine_outputs(jobs: list[dict]) -> None:
 
 def save_species_focus_output(job: dict) -> None:
     panel = panel_with_title(job)
-    path = OUT_DIR / f"Fig4D-G_{job['species']}.png"
+    path = OUT_DIR / f"Fig4A_context_{job['species']}.png"
     panel.save(path, dpi=(300, 300))
     print(f"Saved {path}")
+    legacy = OUT_DIR / f"Fig4D-G_{job['species']}.png"
+    shutil.copy2(path, legacy)
 
 
 def main() -> None:

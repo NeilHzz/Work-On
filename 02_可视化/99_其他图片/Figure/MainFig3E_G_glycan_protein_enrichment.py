@@ -30,8 +30,9 @@ from collections import defaultdict
 from adjustText import adjust_text
 
 # ─── 绘图风格 ──────────────────────────────────────────────────────────────
-mpl.rcParams['font.family'] = 'Times New Roman'
-mpl.rcParams['font.sans-serif']      = ['Times New Roman', 'DejaVu Sans']
+from _save import FONT_FAMILY, apply_research_font_settings
+
+apply_research_font_settings()
 mpl.rcParams['mathtext.fontset']     = 'stix'
 mpl.rcParams['axes.spines.top']      = False
 mpl.rcParams['axes.spines.right']    = False
@@ -50,9 +51,9 @@ OUT_DIR  = r"D:\system_folder\Desktop\Work On\02_可视化\Figure\png"
 os.makedirs(OUT_DIR, exist_ok=True)
 NOLEG = os.environ.get('NOLEG', '0') == '1'
 _PAIR_PANEL = {
-    ('Gallus', 'Columba'): 'Fig4H',
-    ('Gallus', 'Anas'):    'Fig4I',
-    ('Anas',   'Columba'): 'Fig4J',
+    ('Gallus', 'Columba'): 'Fig3E_enrichment_Gallus_vs_Columba',
+    ('Gallus', 'Anas'):    'Fig3F_enrichment_Gallus_vs_Anas',
+    ('Anas',   'Columba'): 'Fig3G_enrichment_Anas_vs_Columba',
 }
 
 # ─── 物种配置 ─────────────────────────────────────────────────────────────
@@ -599,9 +600,9 @@ def plot_2d_enrichment(sp_ref, sp_comp):
         if sub.empty: continue
         row = sub.iloc[0]
         if pname == 'OVAL':
-            ax.text(row['prot_log2FC'], row['glyc_log2FC'], '⭐',
+            ax.text(row['prot_log2FC'], row['glyc_log2FC'], '*',
                     color=color, ha='center', va='center', fontsize=24,
-                    zorder=7, fontfamily='Segoe UI Emoji')
+                    zorder=7, fontfamily=FONT_FAMILY)
         else:
             ax.scatter(row['prot_log2FC'], row['glyc_log2FC'],
                        c=color, s=170, zorder=6, linewidths=0, edgecolors='none', alpha=0.92)
@@ -664,7 +665,7 @@ def make_legend():
     handle_bg = plt.scatter([], [], color=BACKGROUND_PROTEIN_COLOR, s=80, edgecolor='none',
                             linewidth=0.5, label='Other Proteins')
     handles = [handle_bg]
-    handles.append(mpl.lines.Line2D([], [], marker='$⭐$', linestyle='None',
+    handles.append(mpl.lines.Line2D([], [], marker='*', linestyle='None',
                                     color=TARGET_COLORS['OVAL'], markersize=16,
                                     label='OVAL'))
     for pname in ['OC116', 'TRFE']:
@@ -683,7 +684,7 @@ def make_legend():
     leg.get_frame().set_linewidth(1.0)
 
     plt.tight_layout(pad=0.3)
-    save_fig(fig, 'Fig4H-J_Legend')
+    save_fig(fig, 'protein_enrichment_legend')
     plt.close()
 
 

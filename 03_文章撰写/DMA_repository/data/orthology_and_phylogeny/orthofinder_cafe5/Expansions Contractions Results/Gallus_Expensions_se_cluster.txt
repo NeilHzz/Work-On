@@ -1,0 +1,7 @@
+# cluster_name	protein_number	swiss_prot_id	go_annotation	protein_list
+cluster23	10	P15979	GO:0006955; P:immune response; IBA:GO_Central	Anas|A0A1L5SLQ3;Anas|A0A1L5SMD1;Anas|A0A7T6C3B3;Anas|Q2VQY7;Columba|A0A2I0LGH3;Gallus|A0A089FKX6;Gallus|A0A8V0X8D5;Gallus|A0A8V0X8Q3;Gallus|A0A8V0XD73;Gallus|P15979
+cluster63	8	Q90773	GO:0007155; P:cell adhesion; IEA:UniProtKB-KW	Anas|A0A493T4P7;Anas|A0A493T8B9;Columba|A0A2I0MS62;Gallus|A0A8V0XSN0;Gallus|A0A8V0XSP0;Gallus|A0A8V0YIV5;Gallus|A0A8V0Z888;Gallus|Q90773
+cluster181	6	Q9Y297	GO:0016055; P:Wnt signaling pathway; TAS:Reactome	Anas|A0A8B9R075;Columba|A0A2I0MV96;Gallus|A0A8V0XAE5;Gallus|A0A8V0XP52;Gallus|A0A8V0XUB8;Gallus|A0A8V0Z687
+cluster801	4	Q9H0S4	GO:0006364; P:rRNA processing; IMP:UniProtKB	Columba|A0A2I0LV72;Gallus|A0A8V0XEA8;Gallus|A0A8V0YZ41;Gallus|Q5ZLB0
+cluster803	4	Q8NFQ6	GO:0005543; F:phospholipid binding; NAS:UniProtKB	Columba|A0A2I0MK78;Gallus|A0A1D5PT25;Gallus|A0A8V0YSA6;Gallus|A0A8V0YZ17
+cluster807	4	Q9Y694	GO:0015711; P:organic anion transport; TAS:ProtInc	Columba|A0A2I0LGG5;Gallus|A0A8V0X6N8;Gallus|A0A8V0YIG1;Gallus|A0A8V0Z249

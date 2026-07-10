@@ -12,8 +12,8 @@ import numpy as np
 import pandas as pd
 import matplotlib
 matplotlib.use("Agg")
-matplotlib.rcParams["font.family"] = "Times New Roman"
-matplotlib.rcParams["font.sans-serif"] = ["Times New Roman", "DejaVu Sans"]
+matplotlib.rcParams["font.family"] = "Minion Pro"
+matplotlib.rcParams["font.sans-serif"] = ["Minion Pro", "DejaVu Sans"]
 matplotlib.rcParams["mathtext.fontset"] = "stix"
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
@@ -36,7 +36,7 @@ RADIUS      = 1.16
 GAP_DEG     = 6             # 物种间隔（度）
 PROTEIN_GAP_DEG = 0.8       # 蛋白间隔（度）
 LABEL_PAD   = 0.105         # 标签离外环距离
-FONT_FAMILY = "Times New Roman"
+FONT_FAMILY = "Minion Pro"
 
 # ── 1. 蛋白名称映射 ──────────────────────────────────────────────────────────────
 import json, re, os
@@ -397,8 +397,8 @@ def acc_species(acc):
     return None
 
 # ── 4. 绘图 ────────────────────────────────────────────────────────────────────
-matplotlib.rcParams["font.family"] = "Times New Roman"
-matplotlib.rcParams["font.serif"]  = ["Times New Roman"]
+matplotlib.rcParams["font.family"] = "Minion Pro"
+matplotlib.rcParams["font.serif"]  = ["Minion Pro"]
 
 # 双栏宽度，给名称留足够边距
 fig, ax = plt.subplots(figsize=(8.8, 8.8), facecolor="white")
@@ -626,9 +626,9 @@ ax.legend(handles=legend_patches,
           fontsize=11.6,
           title="Species",
           title_fontsize=11.6,
-          prop={"family": "Times New Roman", "size": 11.6},
+          prop={"family": "Minion Pro", "size": 11.6},
           bbox_to_anchor=(0.98, 0.02))
 
 plt.subplots_adjust(left=0.02, right=0.98, bottom=0.02, top=0.98)
-save_fig(plt.gcf(), "Fig3B")
+save_fig(plt.gcf(), "Fig3A_ortholog_circos")
 plt.close()

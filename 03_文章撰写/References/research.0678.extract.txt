@@ -1,0 +1,269 @@
+Guo et al. 2025 | https://doi.org/10.34133/research.0678
+1
+RESEARCH ARTICLE
+Toti-N-glycan Recognition Enables Universal 
+Multiplexed Single-Nucleus RNA Sequencing
+Yiran  Guo1†, Liang  Zhang2†, Xing  Zhao3†, Chang  Xu4†, Yiyang  Li4, 
+Zhaolong  Gao1, Gaozhi  Ou5, Peng  Chen1, Wenshan  Zheng4, Hao  Pei4*,  
+Xin  Liu1*, Bi-Feng  Liu1*, and Yiwei  Li1*
+1Key Laboratory of Molecular Biophysics of MOE and Hubei Bioinformatics & Molecular Imaging Key 
+Laboratory, Department of Biomedical Engineering, College of Life Science and Technology - The 
+Key Laboratory for Biomedical Photonics of MOE at Wuhan National Laboratory for Optoelectronics, 
+Huazhong University of Science and Technology, Wuhan 430074, China. 2College of Sports Medicine, 
+Wuhan Sports University, Wuhan 430079, China. 3John A. Paulson School of Engineering and Applied 
+Sciences, Harvard University, Cambridge 021238, MA, USA. 4MobiDrop (Zhejiang), Tongxiang, Zhejiang 
+314500, China. 5School of Sports, China University of Geosciences, Wuhan 430074, China.
+*Address correspondence to: yiweili@hust.edu.cn (Y.L.); bfliu@mail.hust.edu.cn (B.-F.L.); xliu@mail.hust.
+edu.cn (X.L.); haopei@mobidrop.com (H.P.)
+†These authors contributed equally to this paper.
+Sample barcoding-based multiplex single-cell and single-nucleus sequencing (sc/sn-seq) offers substantial 
+advantages by reducing costs, minimizing batch effects, and identifying artifacts, thereby advancing 
+biological and biomedical research. Despite these benefits, universal sample barcoding has been hindered 
+by challenges such as inhomogeneous expression of tagged biomolecules, limited tagging affinity, and 
+insufficient genetic insertion. To overcome these limitations, we developed Toti-N-Seq, a universal sample 
+multiplex method, by tagging Toti-N-glycan on cell surfaces or nuclear membranes via our engineered 
+streptavidin–Fbs1 GYR variant fusion protein, which could be used not only for sc-seq but also for sn-seq. 
+Instead of targeting lipids or proteins, we focused on targeting the ubiquitous N-glycans found on any 
+species with accessible membranes, which minimizes the exchange between barcoded samples and avoids 
+biased barcoding. Our technology can be broadly applied to multiple species and nearly all eukaryotic cell 
+types, with an overall classification accuracy of 0.969 for sc-seq and of 0.987 for sn-seq. As a demonstration 
+with clinical human peripheral blood mononuclear cells, our Toti-N-Seq achieved rapid one-step sample 
+preparation (<3 min) for easily scaling up while keeping high fidelity of sample ratios, removing artifacts, 
+and detecting rare cell populations (~0.5%). Consequently, we offer a versatile platform suitable for various 
+cell types and applications.
+Introduction
+ The dream of biologists to map the gene expression of every 
+individual cell in a living organism has been partially realized 
+through recent advances in single-cell technology [ 1 – 3 ]. The 
+throughput of single-cell analysis has evolved from examining 
+a single cell to hundreds of cells and now reaches a range of 103﻿ 
+to 105﻿ cells or nuclei, thanks to technologies based on microw-
+ells, combinatorial indexing, and droplet microfluidics [ 4 – 9 ]. 
+However, with approximately 36 trillion cells in a male body 
+and 28 trillion in a female body, even descriptive analysis of 
+living systems demands further scaling and substantially higher 
+throughput [ 10 ].
+ The increasing demands from the pharmaceutical industry, 
+clinical research, and developmental biology [ 11 – 14 ] have 
+required single-cell and single-nucleus sequencing (sc/sn-seq) 
+to be integrated with spatiotemporal information [ 15 – 19 ], 
+combinational perturbations [ 20 – 22 ], patient identities [ 23 , 24 ], 
+and experimental replicates [ 25 , 26 ] to minimize intersample 
+variability and uncover correlations. The scaling of sc/sn-seq 
+can be elegantly achieved by multiplexing samples prior to pro-
+cessing, utilizing barcoding through natural genetic variation, 
+chemical labeling, oligonucleotide (oligo)-labeled antibodies, 
+oligo-labeled lipid anchors, or genetic cell labeling [ 27 – 29 ]. 
+Sample multiplexing involves labeling cells with sample-specific 
+barcodes before pooling, allowing the sequencer to identify 
+the origins of transcripts [ 30 ]. These methods have achieved 
+increased throughput, eliminated batch effect, removed arti-
+facts, and reduced costs [ 25 , 26 ]. Among these methods, genetic 
+cell labeling suffers from varied efficiency between cell types 
+and long-term preprocessing [ 27 – 29 ], which may also intro-
+duce “side-effect” perturbations similar to chemical labeling 
+[ 25 , 27 – 29 ]. Antibody-based and lipid-based approaches are 
+simple and generally applicable to a wide range of single-cell 
+Citation: Guo Y, Zhang L, Zhao X, Xu C, 
+Li Y, Gao Z, Ou G, Chen P, Zheng W, 
+Pei H, et al. Toti-N-glycan Recognition 
+Enables Universal Multiplexed Single-
+Nucleus RNA Sequencing. Research 
+2025;8:Article 0678. https://doi.
+org/10.34133/research.0678
+Submitted 24 January 2025  
+Revised 19 March 2025  
+Accepted 27 March 2025  
+Published 22 April 2025
+Copyright © 2025 Yiran Guo et al.  
+Exclusive licensee Science and 
+Technology Review Publishing House. 
+No claim to original U.S. Government 
+Works. Distributed under a Creative 
+Commons Attribution License  
+(CC BY 4.0).
+Downloaded from https://spj.science.org on June 21, 2026
+
+Guo et al. 2025 | https://doi.org/10.34133/research.0678
+2
+applications and platforms. However, the success of using anti-
+bodies for sample multiplexing depends on the ubiquitous 
+expression of the target protein across cell types, which is chal-
+lenging to be found to fit all nuclei and cell types, thus limiting 
+the sample-agnostic universal application of multiplex sc/sn-
+seq [ 25 , 31 – 33 ]. In comparison, lipid-anchor-based methods 
+can be widely applied across species and cell types, but they 
+suffer weak and dynamic affinity between barcodes and lipids 
+on cell/nucleus surfaces, which eventually lead to potential off-
+target effects and cross-contamination during preparation 
+[ 26 , 33 ]. Overall, these methods tend to have a preference for 
+either sc-seq or sn-seq [ 33 ].
+ To address these issues, we focus on tagging another biomole-
+cule, N-glycan, which is universally presented on the surfaces of 
+eukaryotic cells across various types and species [ 34 – 36 ]. N-glycans 
+are a category of oligosaccharides that are covalently attached to 
+proteins at asparagine (Asn) residues via an N-glycosidic bond [ 35 ]. 
+They play a crucial role as information carriers on eukaryotic cell 
+surfaces. There are many types of N-glycans [ 37 ]. Although the 
+combination ratios of the types of N-glycans vary, the total amount 
+of N-glycans remains roughly consistent [ 38 ]. Here, we engineered 
+a Toti-N-glycan-recognizing protein with oligonucleotides that tags 
+all types of N-glycans nonselectively, enabling universal sc-RNA 
+sequencing (sc-RNA-seq) (Fig.  1 A). Remarkably, our Toti-N-glycan 
+barcodes are also capable of tagging nuclei; the sequencing assays 
+confirm tight labeling on nuclei with an overall classification accu-
+racy (OCA) of 0.987. Our Toti-N-glycan barcode further enables 
+efficient removing of cell doublets, resulting in a doublet ratio below 
+0.04% for sc-seq and below 0.02% for sn-seq. With enhanced tag-
+ging efficiency and minimized crosstalk, our technology can pre-
+serve rare/minor subpopulations (~0.5% in population) within the 
+multiplexed samples, allowing for high-throughput analysis with-
+out losing detailed cellular information in practical applications. 
+Results
+Toti-N-Seq overview
+ Toti-N-Seq labeled cells or nuclei with DNA barcodes by recog-
+nizing the Toti-N-glycan on the membrane (Fig.  1 A). N-Glycan 
+associates with the membrane through covalently attaching to 
+membrane proteins (Fig.  1 B). These N-glycans, present on both 
+nuclear and cell membranes, serve as anchors for DNA barcodes 
+(Table  S1 ), facilitating multiplex sequencing (multiplex-seq). To 
+enable selective and universal tagging of N-glycan, we adapted 
+a technology developed for N-glycan enrichment [ 39 , 40 ]. Our 
+method takes advantage of the natural protein Fbs1, which func-
+tions within the ubiquitin-mediated degradation system to rec-
+ognize the common core pentasaccharide motif (Man3GlcNAc2) 
+of N-glycans [ 41 ]. Compared to wild-type Fbs1, the Fbs1 GYR 
+variant (Fg) exhibits higher and unbiased recovery of all types 
+Fig. 1. The concept of Toti-N-Seq for sample-multiplexed single-cell and single-nucleus sequencing (sc/sn-seq). (A) Schematic illustration of the workflow of Toti-N-Seq for sample-
+multiplexed sc/sn-seq. Created in BioRender. Zhao, X. (2025) https://BioRender.com/4n6oqs1. (B) Schematic illustration of engineered streptavidin–Fbs1 GYR variant (Stv–Fg) 
+fusion protein for sample tagging. (C) Mass spectrometry showed the capability of engineered Stv–Fg for unbiased enrichment of N-glycan in cells. (D) Fluorescent imaging 
+assays demonstrated the capability of engineered Stv–Fg fusion protein for unbiased and fluorescent cell tagging. (E) Fluorescent imaging assays demonstrated the capability of 
+engineered Stv–Fg fusion protein for unbiased and fluorescent nucleus tagging. PCR, polymerase chain reaction; RT, reverse transcription; cDNA, complementary DNA; NGS, next-
+generation sequencing; mRNA, messenger RNA; BSA, bovine serum albumin; GFP, green fluorescent protein; Dil, 1,1′-dioctadecyl-3,3,3′,3′-tetramethylindocarbocyanine perchlorate.
+Downloaded from https://spj.science.org on June 21, 2026
+
+Guo et al. 2025 | https://doi.org/10.34133/research.0678
+3
+of N-glycans [ 39 , 40 ]. To explore the Fg’s capability in cell/
+nucleus tagging, we engineered a streptavidin–Fg fusion protein 
+(Stv–Fg), gaining more flexibility to link to biotin-modified 
+groups, such as biotin–green fluorescent protein and biotin–
+oligonucleotide barcodes (Fig.  1 B and Fig.  S1 ). This allows us to 
+link fluorescent barcodes or DNA barcodes to Fg via streptavi-
+din, which then recognizes and labels all types of N-glycans on 
+cell or nuclear membranes.
+ A Toti-N-Seq sample barcode includes an oligonucleotide 
+sequence with a 3′ polyA capture sequence, a 6-bp sample 
+index, and a 5′ polymerase chain reaction handle necessary for 
+hybridization and library construction. After following the 
+conventional steps of droplet-based sc/sn-seq, transcripts and 
+Toti-N-Seq sample barcodes are linked to a common cell- or 
+nucleus-specific barcode during reverse transcription, which 
+enables sample demultiplexing. Toti-N-Seq sample barcodes 
+and complementary DNA libraries are separated by size selec-
+tion before library construction, enabling pooled sequencing 
+at user-defined proportions (Fig.  1 A). 
+Biochemical evaluation of the tagging performance 
+of Toti-N-glycan barcodes
+ We evaluated whether the Stv–Fg fusion protein labels intact 
+N-glycans unbiasedly with minimal exchange between samples 
+during sample preparation. First, N-glycans from standard gly-
+coprotein (RNase B) were enriched using our engineering Stv–
+Fg fusion protein and analyzed via mass spectrometry. With 
+our engineered Stv–Fg fusion protein, all 5 N-glycans from 
+RNase B were accurately detected amid a complex background 
+of biomacromolecules (Fig.  1 C). The results demonstrated that 
+our engineered Stv–Fg fusion protein could selectively and 
+unbiasedly recognize N-glycans in a complex solution, which 
+paves the way for labeling cells and nuclei for multiplex sample 
+sequencing.
+ To further explore the labeling capability of our engineered 
+Stv–Fg fusion protein in living cells and nuclei, we linked the 
+engineered Stv–Fg fusion protein with biotin–green fluorescent 
+protein to form a Toti-N-glycan fluorescent barcode and then 
+incubated it with freshly isolated cells and nuclei (Fig.  1 D and 
+E). For cell membrane tagging, we compared the staining effi-
+ciency of our Toti-N-glycan fluorescent barcode with DiI 
+(1,1′-dioctadecyl-3,3,3′,3′-tetramethylindocarbocyanine per-
+chlorate, a dye that labels cell membranes by tagging lipids in 
+red). The Toti-N-glycan fluorescent barcode clearly stained the 
+cell membrane and colocalized with DiI at cell boundaries. 
+Remarkably, the Toti-N-glycan fluorescent barcode was more 
+efficient in labeling cell membranes than DiI in 2 aspects: the 
+Toti-N-glycan fluorescent barcode uniformly labeled every 
+single cell, while DiI did not accurately label the membranes 
+of some cells (Fig.  1 D); when we overlapped Toti-N-glycan 
+fluorescent barcode labeling with DiI, DiI exhibited more label-
+ing on intracellular lipid structures (Fig.  1 D). For nucleus tag-
+ging, we co-stained isolated nuclei with both our Toti-N-glycan 
+fluorescent barcode and Hoechst. The imaging results showed 
+clear nuclear boundary structures and the encapsulation of 
+Hoechst-labeled DNA inside the Toti-N-glycan fluorescent 
+barcode-labeled nuclear membrane (Fig.  1 E). Together, these 
+results demonstrate the capability of our engineered Stv–Fg 
+fusion protein to tag both cell membranes and nuclear mem-
+branes, allowing its application in imaging and beyond.
+ Next, we used flow cytometry to evaluate whether our Toti-
+N-glycan fluorescent barcode could tag multiple cell types from 
+different species. For 4 types of cells and nuclei from humans 
+and mice—NIH 3T3 (mouse embryonic fibroblasts), HEK293T 
+(human embryonic kidney cells), MDA-MB-231 (human breast 
+adenocarcinoma cells), and H1975 (human non-small-cell lung 
+cancer cells)—our Toti-N-glycan fluorescent barcode (Stv–Fg–
+Cy5 [cyanine 5] and Stv–Fg–PE [phycoerythrin]) successfully 
+tagged all cell types (Fig.  2 A and B). Additionally, we conducted 
+a titration assay to determine the concentration required for 
+efficient tagging of either cell membranes or nuclei (Fig.  S2 ). 
+By labeling cells and nuclei with varying concentrations of the 
+Toti-N-glycan fluorescent barcode, we found that efficient 
+labeling could be achieved at concentrations as low as 37.5 pM 
+for cell membranes and 75.0 pM for nuclei (Fig.  S2 ). Sample 
+barcode exchange is one of the issues in multiplex sc/sn-seq. 
+To test whether there is crosstalk after mixing 2 labeled popula-
+tions of cells with dyes, we firstly incubated the mixed samples 
+for different times and analyzed their signal afterward (Fig.  2 C). 
+The results showed that there was no obvious contamination 
+between samples after mixing for up to 90 min (Fig.  2 C). To 
+further test whether our strategy minimizes exchange between 
+samples, we mixed 2 labeled samples and use cell flow-cyto-
+metric analysis to separate them. The results showed that 2 
+populations of differentially labeled cells (Fig.  2 D) or nuclei 
+(Fig.  2 E) could be easily separated by flow cytometry. We also 
+compared the 2 populations with different incubation times 
+(~0, 45, and 90 min) after mixing. For cell membrane tagging, 
+within 45 min of incubation, only ~1% of cells were either nega-
+tively labeled or dual labeled (Fig.  2 D). For nucleus tagging, 
+even after 90 min of mixing, both the negatively labeled and 
+dual-labeled populations remained below 2% (Fig.  2 E). Since 
+the cells’ encapsulation with compartments typically takes less 
+than 15 min for various platforms [ 1 , 2 ], our Toti-N-glycan 
+barcode provides sufficient high fidelity for tagging different 
+samples during the library construction period. 
+Toti-N-glycan barcodes for the sc/sn-seq of  
+pooled samples
+ We validated the sample multiplexing capacity of Toti-N-Seq 
+through proof-of-concept experiments using either whole cells 
+or nuclei of HEK293T cells and NIH 3T3 cells (Fig.  3 and Fig. 
+ S3 ). Toti-N-glycan DNA sample barcodes were formed by link-
+ing biotinylated single-stranded DNA (biotin–ssDNA) to our 
+Stv–Fg fusion protein. All samples were trypsinized, tagged 
+with Toti-N-glycan DNA barcodes, and pooled before droplet 
+encapsulation in a commercial droplet-based microfluidic 
+device (MobiNova). 
+ After sequencing, we analyzed a final sc/sn-RNA-seq dataset 
+containing 80,000 nuclei (Fig.  3 ) and 100,000 cells (Fig.  S3 ). 
+We identified clusters in gene expression space according to 
+different genes for HEK293T cells as well as for NIH 3T3 cells 
+(Fig.  3 B). Projection of Toti-N-glycan DNA sample barcode 
+classifications onto gene expression space for the 2 sampled cell 
+types revealed that the Toti-N-glycan DNA sample barcode 
+successfully demultiplexed each sample (Fig.  3 A and B). Indeed, 
+when comparing the signature differentially expressed genes 
+(DEGs) of NIH 3T3 cells and HEK293T cells, we found that 
+the Tag 1 demultiplexed cells expressed only DEGs associated 
+with HEK293T cells, while Tag 2 demultiplexed cells expressed 
+only DEGs associated with NIH 3T3 cells (Fig.  3 C). Clustering 
+the cells by their signature DEGs efficiently grouped them into 
+2 clusters of HEK293T cells and 2 clusters of NIH 3T3 cells 
+(Fig.  3 D).
+Downloaded from https://spj.science.org on June 21, 2026

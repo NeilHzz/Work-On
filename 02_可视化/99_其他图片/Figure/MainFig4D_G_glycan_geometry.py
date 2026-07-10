@@ -17,8 +17,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-matplotlib.rcParams["font.family"] = "Times New Roman"
-matplotlib.rcParams["font.sans-serif"] = ["Times New Roman", "DejaVu Sans"]
+matplotlib.rcParams["font.family"] = "Minion Pro"
+matplotlib.rcParams["font.sans-serif"] = ["Minion Pro", "DejaVu Sans"]
 matplotlib.rcParams["mathtext.fontset"] = "stix"
 from matplotlib.lines import Line2D
 from pathlib import Path
@@ -313,6 +313,12 @@ SUBTITLES = {
 metric_keys   = list(METRICS.keys())
 metric_labels = list(METRICS.values())
 panel_labels  = list('ABCD')
+PANEL_NAMES = {
+    'glycan_rg': 'Fig4C_glycan_radius_of_gyration',
+    'glycan_min_dist_to_ca': 'Fig4D_glycan_backbone_proximity',
+    'glycan_end2end': 'Fig4E_glycan_end_to_end_distance',
+    'glycan_dist': 'Fig4F_glycan_protein_distance',
+}
 
 for mk, ml, lbl in zip(metric_keys, metric_labels, panel_labels):
     fig, ax = plt.subplots(figsize=PANEL_FIGSIZE)
@@ -326,5 +332,5 @@ for mk, ml, lbl in zip(metric_keys, metric_labels, panel_labels):
     else:
         half_violin_box_one(ax, mk, ml, subtitle=SUBTITLES.get(mk, ''))
     fig.subplots_adjust(**PANEL_ADJUST)
-    save_panel(fig, f'Fig5{chr(ord("E") + ord(lbl) - ord("A"))}')
+    save_panel(fig, PANEL_NAMES[mk])
     plt.close(fig)

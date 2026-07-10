@@ -11,8 +11,8 @@ Data sources:
 """
 import pandas as pd, numpy as np, matplotlib
 matplotlib.use('Agg')
-matplotlib.rcParams["font.family"] = "Times New Roman"
-matplotlib.rcParams["font.sans-serif"] = ["Times New Roman", "DejaVu Sans"]
+matplotlib.rcParams["font.family"] = "Minion Pro"
+matplotlib.rcParams["font.sans-serif"] = ["Minion Pro", "DejaVu Sans"]
 matplotlib.rcParams["mathtext.fontset"] = "stix"
 matplotlib.rcParams["font.size"] = 16
 import os
@@ -249,11 +249,11 @@ for sp, (short, col, mrkr, sz) in focal_cfg.items():
 
 # Legend
 legend_groups = [
-    ('\u2500\u2500 Focal species \u2500\u2500\u2500\u2500\u2500\u2500', '#FFFFFF'),
+    ('-- Focal species ------', '#FFFFFF'),
     (r'Anseriformes  ($\it{Anas}$)',    '#93AACD'),
     (r'Galliformes  ($\it{Gallus}$)',   '#C46B83'),
     (r'Columbiformes  ($\it{Columba}$)','#F3CE9D'),
-    ('\u2500\u2500 Aquatic \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500', '#FFFFFF'),
+    ('-- Aquatic ------------', '#FFFFFF'),
     ('Charadriiformes',   '#6BAED6'),
     ('Procellariiformes', '#4A7BB5'),
     ('Pelecaniformes',    '#4C9BAA'),
@@ -262,12 +262,12 @@ legend_groups = [
     ('Sphenisciformes',   '#3D7A7A'),
     ('Gaviiformes',       '#3D6E99'),
     ('Phoenicopterif.',   '#D47A9A'),
-    ('\u2500\u2500 Precocial \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500', '#FFFFFF'),
+    ('-- Precocial ----------', '#FFFFFF'),
     ('Gruiformes',        '#D48A40'),
     ('Tinamiformes',      '#D47A5A'),
     ('Otidiformes',       '#C8A830'),
     ('Struthionif.',      '#A04455'),
-    ('\u2500\u2500 Altricial \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500', '#FFFFFF'),
+    ('-- Altricial ----------', '#FFFFFF'),
     ('Passeriformes',     '#8855AA'),
     ('Psittaciformes',    '#44AA77'),
     ('Apodiformes',       '#CC8833'),
@@ -286,7 +286,7 @@ legend_groups = [
 ]
 legend_handles = []
 for lbl, col in legend_groups:
-    if lbl.startswith('\u2500\u2500'):
+    if lbl.startswith('-- '):
         legend_handles.append(mpatches.Patch(fc='none', ec='none', label=lbl))
     else:
         legend_handles.append(mpatches.Patch(fc=col, ec='none', label=lbl, linewidth=0))

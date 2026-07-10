@@ -1,4 +1,4 @@
-﻿"""
+"""
 三物种糖蛋白 OrthoFinder 聚类 + 糖型分类网络可视化
 ======================================================
 布局说明
@@ -28,8 +28,8 @@ import matplotlib.patheffects as pe
 from matplotlib.patches import Wedge
 
 warnings.filterwarnings("ignore")
-matplotlib.rcParams['font.family'] = 'Times New Roman'
-matplotlib.rcParams['font.sans-serif'] = ['Times New Roman', 'DejaVu Sans']
+matplotlib.rcParams['font.family'] = 'Minion Pro'
+matplotlib.rcParams['font.sans-serif'] = ['Minion Pro', 'DejaVu Sans']
 matplotlib.rcParams['mathtext.fontset'] = 'stix'
 
 # ── 工作目录 ────────────────────────────────────────────────────
@@ -637,14 +637,14 @@ plt.tight_layout()
 # Vector formats skipped for Fig3A — 567-node network is too complex
 from _save import PNG_DIR
 import os as _os
-plt.gcf().savefig(_os.path.join(PNG_DIR, "Fig3A.png"), dpi=300, bbox_inches='tight', facecolor='white')
-print("  Saved: Fig3A [PNG]")
+plt.gcf().savefig(_os.path.join(PNG_DIR, "glycotype_network.png"), dpi=300, bbox_inches='tight', facecolor='white')
+print("  Saved: glycotype_network [PNG]")
 # Generate PDF from PNG using Pillow
 from PIL import Image as _PILImage
-_png_path = _os.path.join(PNG_DIR, "Fig3A.png")
+_png_path = _os.path.join(PNG_DIR, "glycotype_network.png")
 from _save import PDF_DIR
-_pdf_path = _os.path.join(PDF_DIR, "Fig3A.pdf")
+_pdf_path = _os.path.join(PDF_DIR, "glycotype_network.pdf")
 _im = _PILImage.open(_png_path).convert('RGB')
 _im.save(_pdf_path, 'PDF', resolution=300)
-print("  Saved: Fig3A [PDF from raster]")
+print("  Saved: glycotype_network [PDF from raster]")
 plt.close('all')

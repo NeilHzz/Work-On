@@ -17,6 +17,7 @@ from pathlib import Path
 import json
 import math
 import subprocess
+import shutil
 import textwrap
 
 import numpy as np
@@ -24,7 +25,7 @@ import pandas as pd
 from PIL import Image, ImageDraw, ImageFont
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 REGLYCO = ROOT / "01_数据与计算" / "ReGlyco_Ensemble"
 PDB_DIR = REGLYCO / "PDB"
 CSV_DIR = REGLYCO / "csv"
@@ -73,11 +74,16 @@ def hex_to_rgb01(hex_color: str) -> list[float]:
     return [int(text[i:i + 2], 16) / 255.0 for i in (0, 2, 4)]
 
 
-def read_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
-    candidates = [
-        "C:/Windows/Fonts/timesbd.ttf" if bold else "C:/Windows/Fonts/times.ttf",
-        "C:/Windows/Fonts/arialbd.ttf" if bold else "C:/Windows/Fonts/arial.ttf",
-    ]
+def read_font(size: int, bold: bool = False, italic: bool = False) -> ImageFont.FreeTypeFont:
+    if italic:
+        candidates = [
+            "C:/Windows/Fonts/MinionPro-BoldIt.otf" if bold else "C:/Windows/Fonts/MinionPro-It.otf",
+        ]
+    else:
+        candidates = [
+            "C:/Windows/Fonts/MinionPro-Bold.otf" if bold else "C:/Windows/Fonts/MinionPro-Regular.otf",
+            "C:/Windows/Fonts/MinionPro-Semibold.otf" if bold else "C:/Windows/Fonts/MinionPro-It.otf",
+        ]
     for candidate in candidates:
         if Path(candidate).exists():
             return ImageFont.truetype(candidate, size)
@@ -428,7 +434,7 @@ def fit_panel(path: str | Path, species: str, width: int = 1180, height: int = 9
     resized = body.resize((int(body.width * scale), int(body.height * scale)), Image.LANCZOS)
     panel.paste(resized, ((width - resized.width) // 2, 108 + (height - 150 - resized.height) // 2))
     draw = ImageDraw.Draw(panel)
-    font = read_font(50, bold=True)
+    font = read_font(50, bold=True, italic=True)
     tw, _ = text_size(draw, species, font)
     draw.text(((width - tw) // 2, 30), species, fill=SPECIES_COLORS[species], font=font)
     return panel
@@ -472,9 +478,11 @@ def combine_outputs(jobs: list[dict]) -> None:
     canvas.save(combined, dpi=(300, 300))
     print(f"Saved {combined}")
     for job, panel in zip(jobs, panels):
-        out = OUT_DIR / f"Fig4H_K_3D_sasa_{job['species']}.png"
+        out = OUT_DIR / f"Fig4B_context_{job['species']}.png"
         panel.save(out, dpi=(300, 300))
         print(f"Saved {out}")
+        legacy = OUT_DIR / f"Fig4H_K_3D_sasa_{job['species']}.png"
+        shutil.copy2(out, legacy)
 
 
 def main() -> None:

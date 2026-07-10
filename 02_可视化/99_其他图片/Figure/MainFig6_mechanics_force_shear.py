@@ -4,22 +4,23 @@ Fig_force_tukey.png      : Tukey HSD bar chart (F_max & τ_max)
 Fig_force_timeseries.png : Mean ± 1σ force time-series (3 species)
 
 数据源: combined_rcforc_yforce.xlsx
-字体: Times New Roman (SA requirement)
+字体: Minion Pro (Research requirement)
 """
 import os
 import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from _save import save_fig
+from _save import FONT_FAMILY, apply_research_font_settings, save_fig
 from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib
 matplotlib.use("Agg")
-matplotlib.rcParams["font.family"] = "Times New Roman"
+apply_research_font_settings()
+matplotlib.rcParams["font.family"] = "Minion Pro"
 matplotlib.rcParams["font.size"] = 18
 matplotlib.rcParams["axes.linewidth"] = 1.3
 matplotlib.rcParams["mathtext.fontset"] = "custom"
-matplotlib.rcParams["mathtext.rm"] = "Times New Roman"
-matplotlib.rcParams["mathtext.it"] = "Times New Roman:italic"
+matplotlib.rcParams["mathtext.rm"] = "Minion Pro"
+matplotlib.rcParams["mathtext.it"] = "Minion Pro:italic"
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from scipy.interpolate import PchipInterpolator
@@ -55,10 +56,35 @@ FIXED_SVG_DIR = os.path.join(SCRIPT_DIR, "SVG")
 for _fixed_dir in (FIXED_PNG_DIR, FIXED_PDF_DIR, FIXED_SVG_DIR):
     os.makedirs(_fixed_dir, exist_ok=True)
 
+COMPAT_PANEL_ALIASES = {
+    "Fig5B_force_timeseries": ["Fig6A_Force"],
+    "Fig5C_shear_timeseries": ["Fig6A_Shear"],
+    "Fig5B_fmax": ["Fig6B_Fmax"],
+    "Fig5C_taumax": ["Fig6B_Taumax"],
+}
+
+
+def copy_compat_aliases(name):
+    import shutil
+    for alias in COMPAT_PANEL_ALIASES.get(name, []):
+        for directory, suffix in ((FIXED_PNG_DIR, ".png"), (FIXED_PDF_DIR, ".pdf"), (FIXED_SVG_DIR, ".svg")):
+            src = os.path.join(directory, f"{name}{suffix}")
+            dst = os.path.join(directory, f"{alias}{suffix}")
+            if os.path.exists(src):
+                shutil.copy2(src, dst)
+
+
 def save_fig_fixed(fig, name, dpi=200):
+    apply_research_font_settings()
+    try:
+        from _save import _italicize_species_names
+        _italicize_species_names(fig)
+    except Exception:
+        pass
     fig.savefig(os.path.join(FIXED_PNG_DIR, f"{name}.png"), dpi=dpi, facecolor="white")
     fig.savefig(os.path.join(FIXED_PDF_DIR, f"{name}.pdf"), facecolor="white")
     fig.savefig(os.path.join(FIXED_SVG_DIR, f"{name}.svg"), facecolor="white")
+    copy_compat_aliases(name)
     print(f"  Saved: {name} [PNG/PDF/SVG]")
 
 # ─────────────────────────────────────────────────────────────
@@ -77,7 +103,7 @@ COLORS   = [STANDARD_SPECIES_COLORS[sp] for sp in SPECIES]
 def style_species_text(texts):
     for text in texts:
         if text.get_text() in SPECIES:
-            text.set_fontfamily("Times New Roman")
+            text.set_fontfamily("Minion Pro")
             text.set_fontstyle("italic")
 
 CASES = [
@@ -256,7 +282,7 @@ def plot_tukey(ax, res, data_orig, metric_label, unit):
 plot_tukey(axes[0], res_F,   F_DATA,   "F_max",  "N")
 plot_tukey(axes[1], res_tau, TAU_DATA, "τ_max",  "MPa")
 plt.tight_layout(rect=[0, 0, 1, 0.86])
-save_fig(plt.gcf(), "Fig6B", dpi=200)
+save_fig(plt.gcf(), "mechanics_peak_bars_combined", dpi=200)
 plt.close("all")
 
 # ── Individual Tukey panels ────────────────────────────────────────────────
@@ -264,14 +290,14 @@ rng = np.random.default_rng(42)
 fig_fmax, ax_fmax = plt.subplots(1, 1, figsize=(6, 5.67))
 plot_tukey(ax_fmax, res_F, F_DATA, "F_max", "N")
 fig_fmax.subplots_adjust(**SINGLE_PANEL_ADJUST)
-save_fig_fixed(plt.gcf(), "Fig6B_Fmax", dpi=200)
+save_fig_fixed(plt.gcf(), "Fig5B_fmax", dpi=200)
 plt.close("all")
 
 rng = np.random.default_rng(42)
 fig_taumax, ax_taumax = plt.subplots(1, 1, figsize=(6, 5.67))
 plot_tukey(ax_taumax, res_tau, TAU_DATA, "τ_max", "MPa")
 fig_taumax.subplots_adjust(**SINGLE_PANEL_ADJUST)
-save_fig_fixed(plt.gcf(), "Fig6B_Taumax", dpi=200)
+save_fig_fixed(plt.gcf(), "Fig5C_taumax", dpi=200)
 plt.close("all")
 
 # ─────────────────────────────────────────────────────────────
@@ -307,12 +333,12 @@ if ts_data:
         ax_f.fill_between(ts_s, lo_f, hi_f, color=color, alpha=0.15)
         ax_f.plot(ts_s, ms_f, color=color, lw=2.2,
                   label=sp)
-        # Peak marker: ⭐ if significantly different from any other species, else •
+        # Peak marker: significant if different from any other species.
         pk_f = np.argmax(ms_f)
-        marker_f = '⭐' if _is_sig(sp, res_F) else '•'
+        marker_f = '*' if _is_sig(sp, res_F) else '.'
         ax_f.text(ts_s[pk_f], ms_f[pk_f], marker_f,
                   color=color, ha='center', va='bottom', fontsize=20, zorder=10,
-                  fontfamily='Segoe UI Emoji')
+                  fontfamily=FONT_FAMILY)
 
         # Tau
         ts_s2, ms_tau = smooth(t_ref, to_tau(mean_f, T_mm))
@@ -326,11 +352,10 @@ if ts_data:
             # Collect peaks for merged single dot
             tau_merge_peaks[sp] = (ts_s2[pk_tau], ms_tau[pk_tau])
         else:
-            # Peak marker: ⭐ if significantly different from any other species, else •
-            marker_tau = '⭐' if _is_sig(sp, res_tau) else '•'
+            marker_tau = '*' if _is_sig(sp, res_tau) else '.'
             ax_tau.text(ts_s2[pk_tau], ms_tau[pk_tau], marker_tau,
                         color=color, ha='center', va='bottom', fontsize=20, zorder=10,
-                        fontfamily='Segoe UI Emoji')
+                        fontfamily=FONT_FAMILY)
 
     # Draw a single merged dot for Columba + Anas in τ
     if tau_merge_peaks:
@@ -353,7 +378,7 @@ if ts_data:
 
     ax_tau.set_xlabel("Time (μs)", fontsize=20)
     plt.tight_layout()
-    save_fig(plt.gcf(), "Fig6A", dpi=200)
+    save_fig(plt.gcf(), "mechanics_timeseries_combined", dpi=200)
     plt.close("all")
     print("[OK] Time-series: Fig6A")
 
@@ -373,10 +398,10 @@ if ts_data:
         ax_f_only.plot(ts_s, ms_f, color=color, lw=2.2,
                        label=sp)
         pk_f = np.argmax(ms_f)
-        marker_f = '⭐' if _is_sig(sp, res_F) else '•'
+        marker_f = '*' if _is_sig(sp, res_F) else '.'
         ax_f_only.text(ts_s[pk_f], ms_f[pk_f], marker_f,
                        color=color, ha='center', va='bottom', fontsize=20, zorder=10,
-                       fontfamily='Segoe UI Emoji')
+                       fontfamily=FONT_FAMILY)
     ax_f_only.set_ylabel("Contact force F (N)", fontsize=20)
     ax_f_only.set_xlabel("Time (μs)", fontsize=20)
     legend = ax_f_only.legend(fontsize=18, framealpha=0.9)
@@ -386,7 +411,7 @@ if ts_data:
     ax_f_only.spines['top'].set_visible(False)
     ax_f_only.spines['right'].set_visible(False)
     fig_force.subplots_adjust(**SINGLE_PANEL_ADJUST)
-    save_fig_fixed(plt.gcf(), "Fig6A_Force", dpi=200)
+    save_fig_fixed(plt.gcf(), "Fig5B_force_timeseries", dpi=200)
     plt.close("all")
 
     # Shear only
@@ -408,10 +433,10 @@ if ts_data:
         if sp in ('Columba', 'Anas'):
             _tau_merge_peaks[sp] = (ts_s2[pk_tau], ms_tau[pk_tau])
         else:
-            marker_tau = '⭐' if _is_sig(sp, res_tau) else '•'
+            marker_tau = '*' if _is_sig(sp, res_tau) else '.'
             ax_tau_only.text(ts_s2[pk_tau], ms_tau[pk_tau], marker_tau,
                              color=color, ha='center', va='bottom', fontsize=20, zorder=10,
-                             fontfamily='Segoe UI Emoji')
+                             fontfamily=FONT_FAMILY)
     if _tau_merge_peaks:
         merged_x = np.mean([v[0] for v in _tau_merge_peaks.values()])
         merged_y = np.mean([v[1] for v in _tau_merge_peaks.values()])
@@ -425,7 +450,7 @@ if ts_data:
     ax_tau_only.spines['top'].set_visible(False)
     ax_tau_only.spines['right'].set_visible(False)
     fig_shear.subplots_adjust(**SINGLE_PANEL_ADJUST)
-    save_fig_fixed(plt.gcf(), "Fig6A_Shear", dpi=200)
+    save_fig_fixed(plt.gcf(), "Fig5C_shear_timeseries", dpi=200)
     plt.close("all")
     print("[OK] Individual panels: Fig6A_Force, Fig6A_Shear, Fig6B_Fmax, Fig6B_Taumax")
 else:

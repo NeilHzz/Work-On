@@ -1,0 +1,31 @@
+# cluster_name	protein_number	swiss_prot_id	go_annotation	protein_list
+cluster14	12	P13538	GO:0003774; F:motor activity; IEA:InterPro	Anas|A0A493TLQ2;Anas|A0A8B9TI10;Columba|A0A2I0LLJ2;Columba|A0A2I0LLJ6;Columba|A0A2I0LN06;Columba|A0A2I0LN15;Columba|A0A2I0LN17;Columba|A0A2I0LN31;Columba|A0A2I0LPD2;Columba|A0A2I0M275;Columba|A0A2I0MW65;Gallus|P13538
+cluster25	10	Q9JIQ8	GO:0006508; P:proteolysis; IDA:UniProtKB	Anas|A0A493STU7;Columba|A0A2I0LHH9;Columba|A0A2I0LLM2;Columba|A0A2I0LMH4;Columba|A0A2I0LUL7;Columba|A0A2I0M0C0;Columba|A0A2I0M384;Columba|A0A2I0MN31;Columba|A0A2I0MSP7;Gallus|A0A8V0YFK4
+cluster31	9	Q07014	GO:0007169; P:transmembrane receptor protein tyrosine kinase signaling pathway; IBA:GO_Central	Anas|A0A8B9TGL4;Columba|A0A2I0LUN9;Columba|A0A2I0M673;Columba|A0A2I0MD49;Columba|A0A2I0MJ01;Columba|A0A2I0MKF5;Columba|A0A2I0MVY8;Columba|A0A2I0MVY9;Gallus|A0A8V0XDS4
+cluster33	9	Q92841	GO:0006364; P:rRNA processing; IEA:UniProtKB-KW	Anas|A0A493TAJ8;Columba|A0A2I0LN65;Columba|A0A2I0MAB0;Columba|A0A2I0MFA6;Columba|A0A2I0MJT5;Columba|R7VWE6;Gallus|A0A3S5ZPN3;Gallus|A0A8V0YJ67;Gallus|A0A8V0YJ71
+cluster43	9	P09238	GO:0001666; P:response to hypoxia; IBA:GO_Central	Columba|A0A2I0M2X6;Columba|A0A2I0MCR2;Columba|A0A2I0MCS6;Columba|A0A2I0MCT1;Columba|A0A2I0MCT2;Columba|A0A2I0MCT3;Gallus|A0A8V0XNA3;Gallus|A0A8V0XP02;Gallus|E1C9E0
+cluster49	8	Q8IU85	GO:0071622; P:regulation of granulocyte chemotaxis; IMP:UniProtKB	Anas|A0A493T843;Columba|A0A2I0LHX8;Columba|A0A2I0LJQ2;Columba|A0A2I0LN05;Columba|A0A2I0MFR8;Columba|A0A2I0MH53;Columba|R7VPW6;Gallus|A0A8V0XKR3
+cluster54	8	P51166	GO:0048511; P:rhythmic process; IEA:UniProtKB-KW	Anas|A0A8B9QLG0;Columba|A0A2I0LHG2;Columba|A0A2I0LHM7;Columba|A0A2I0LZS6;Columba|A0A2I0M2Y0;Columba|A0A2I0MFM8;Columba|A0A2I0MRA7;Gallus|A0A8V1A7M2
+cluster60	8	Q64303	GO:0031098; P:stress-activated protein kinase signaling cascade; IBA:GO_Central	Anas|A0A8B9V456;Columba|A0A2I0LMW2;Columba|A0A2I0LS69;Columba|A0A2I0LUS9;Columba|A0A2I0M2P1;Columba|A0A2I0M6D5;Columba|A0A2I0MJ95;Gallus|E1BS97
+cluster65	8	Q99729	GO:0045893; P:positive regulation of transcription, DNA-templated; ISS:HGNC	Anas|A0A493TR50;Columba|A0A2I0LJY3;Columba|A0A2I0LNX0;Columba|A0A2I0M3D1;Columba|A0A2I0MA06;Columba|A0A2I0MH00;Columba|A0A2I0MNL8;Gallus|A0A8V0YRG0
+cluster77	7	Q99959	GO:0055010; P:ventricular cardiac muscle tissue morphogenesis; IMP:BHF-UCL	Anas|A0A8B9QYP8;Columba|A0A2I0LGI3;Columba|A0A2I0LII3;Columba|A0A2I0M064;Columba|A0A2I0M827;Columba|A0A2I0MKS7;Gallus|A0A8V0Y9L5
+cluster87	7	Q9NT26	GO:0007519; P:skeletal muscle tissue development; IEA:Ensembl	Anas|A0A493STJ4;Columba|A0A2I0LH19;Columba|A0A2I0LH40;Columba|A0A2I0LH98;Columba|A0A2I0LHP2;Columba|A0A2I0LUA5;Gallus|A0A1D5NYG3
+cluster94	7	Q9ULV4	GO:0007165; P:signal transduction; TAS:ProtInc	Anas|A0A8B9T4F6;Columba|A0A2I0LIR6;Columba|A0A2I0LNB4;Columba|A0A2I0M502;Columba|A0A2I0M5E5;Columba|A0A2I0M8B5;Gallus|A0A1L1RWS8
+cluster100	7	O95290	GO:0055085; P:transmembrane transport; IBA:GO_Central	Anas|A0A8B9V184;Columba|A0A2I0LJ47;Columba|A0A2I0M429;Columba|A0A2I0M7A8;Columba|A0A2I0MDT0;Columba|A0A2I0MSD9;Gallus|F1NM51
+cluster108	7	Q9NSL6	GO:0006511; P:ubiquitin-dependent protein catabolic process; IBA:GO_Central	Columba|A0A2I0LH75;Columba|A0A2I0LL16;Columba|A0A2I0MBL2;Columba|A0A2I0ML35;Columba|A0A2I0MPI7;Columba|A0A2I0MRN9;Gallus|A0A8V0X7N6
+cluster110	7	Q6IFV4	GO:0043587; P:tongue morphogenesis; IEP:RGD	Columba|A0A2I0LLZ1;Columba|A0A2I0LLZ8;Columba|A0A2I0LM08;Columba|A0A2I0LM09;Columba|A0A2I0LM12;Columba|R7VNU7;Gallus|A0A8V1A8U0
+cluster181	6	Q9Y297	GO:0016055; P:Wnt signaling pathway; TAS:Reactome	Anas|A0A8B9R075;Columba|A0A2I0MV96;Gallus|A0A8V0XAE5;Gallus|A0A8V0XP52;Gallus|A0A8V0XUB8;Gallus|A0A8V0Z687
+cluster186	6	Q6ZXD2	GO:0006665; P:sphingolipid metabolic process; IEA:UniProtKB-UniPathway	Columba|A0A2I0LJ60;Columba|A0A2I0M0L6;Columba|A0A2I0M8T1;Columba|A0A2I0MDG6;Gallus|A0A1D5PIR8;Gallus|A0A8V0YR94
+cluster363	5	Q95267	GO:0045944; P:positive regulation of transcription by RNA polymerase II; ISS:UniProtKB	Columba|A0A2I0LTB5;Columba|A0A2I0LU83;Columba|A0A2I0LZE0;Columba|A0A2I0MCJ9;Gallus|A0A1D5PRD7
+cluster365	5	Q9H540	GO:0042060; P:wound healing; ISS:UniProtKB	Columba|A0A2I0LI91;Columba|A0A2I0LJY8;Columba|A0A2I0MUA4;Gallus|A0A8V0YWN7;Gallus|A0A8V0YWS4
+cluster368	5	Q32P44	GO:0000226; P:microtubule cytoskeleton organization; IBA:GO_Central	Columba|A0A2I0MAP4;Columba|A0A2I0MP23;Columba|A0A2I0MP27;Gallus|A0A1D5NU87;Gallus|A0A8V0X2X8
+cluster800	4	Q0V7M0	GO:0006607; P:NLS-bearing protein import into nucleus; IBA:GO_Central	Columba|A0A2I0LNF2;Columba|A0A2I0ML81;Columba|A0A2I0MVK9;Gallus|A0A8V0YV14
+cluster801	4	Q9H0S4	GO:0006364; P:rRNA processing; IMP:UniProtKB	Columba|A0A2I0LV72;Gallus|A0A8V0XEA8;Gallus|A0A8V0YZ41;Gallus|Q5ZLB0
+cluster802	4	Q9UEB7	GO:0070914; P:UV-damage excision repair; IDA:UniProtKB	Columba|A0A2I0MB90;Columba|A0A2I0MBP3;Columba|A0A2I0MS12;Gallus|A0A8V0YLW8
+cluster803	4	Q8NFQ6	GO:0005543; F:phospholipid binding; NAS:UniProtKB	Columba|A0A2I0MK78;Gallus|A0A1D5PT25;Gallus|A0A8V0YSA6;Gallus|A0A8V0YZ17
+cluster804	4	Q91ZA3	GO:0004658; F:propionyl-CoA carboxylase activity; IMP:MGI	Columba|A0A2I0MBI7;Columba|A0A2I0MSE3;Columba|A0A2I0MSE5;Gallus|A0A8V0XHY2
+cluster805	4	Q86YB7	GO:0006635; P:fatty acid beta-oxidation; IBA:GO_Central	Columba|A0A2I0M6E4;Columba|A0A2I0MBY6;Columba|A0A2I0MUG3;Gallus|A0A8V0ZW56
+cluster807	4	Q9Y694	GO:0015711; P:organic anion transport; TAS:ProtInc	Columba|A0A2I0LGG5;Gallus|A0A8V0X6N8;Gallus|A0A8V0YIG1;Gallus|A0A8V0Z249
+cluster808	4	Q8TEF5	GO:0035023; P:regulation of Rho protein signal transduction; IEA:InterPro	Columba|A0A2I0LIG2;Columba|A0A2I0MS05;Columba|A0A2I0MU45;Gallus|A0A8V0ZJF4
+cluster809	4	Q13972	GO:0007264; P:small GTPase mediated signal transduction; IEA:InterPro	Columba|A0A2I0LT24;Columba|A0A2I0M3R2;Columba|A0A2I0M3S8;Gallus|A0A8V0YW34
+cluster810	4	Q98ST5	GO:0005615; C:extracellular space; IBA:GO_Central	Columba|A0A2I0M0A2;Columba|A0A2I0MVT4;Columba|A0A2I0MVT7;Gallus|A0A8V0XGV7

@@ -15,7 +15,7 @@ from _save import save_fig
 
 import matplotlib
 matplotlib.use("Agg")
-matplotlib.rcParams["font.family"] = "Times New Roman"
+matplotlib.rcParams["font.family"] = "Minion Pro"
 matplotlib.rcParams["font.size"] = 12.5
 matplotlib.rcParams["axes.linewidth"] = 1.0
 import matplotlib.pyplot as plt
@@ -228,7 +228,7 @@ def draw_upset(memberships):
         ax_matrix.text(
             label_x, y, DISPLAY_LABELS[species],
             ha="left", va="center", fontsize=11.2,
-            color=SPECIES_COLORS[species], fontfamily="Times New Roman",
+            color=SPECIES_COLORS[species], fontfamily="Minion Pro",
             fontstyle="italic",
         )
     for xi, (group, _) in zip(x, intersections):
@@ -278,7 +278,7 @@ def draw_upset(memberships):
 def main():
     memberships = load_memberships(DATA)
     fig, intersections, set_counts = draw_upset(memberships)
-    save_fig(fig, "Fig2", dpi=300)
+    save_fig(fig, "Fig2A", dpi=300)
     plt.close(fig)
     print("Set counts:", set_counts)
     print("Intersections:", [(tuple(sorted(group)), count) for group, count in intersections])

@@ -26,7 +26,7 @@ from mpl_toolkits.mplot3d.art3d import Line3DCollection
 from PIL import Image, ImageDraw, ImageFont
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 REGLYCO = ROOT / "01_数据与计算" / "ReGlyco_Ensemble"
 PDB_DIR = REGLYCO / "PDB"
 CSV_DIR = REGLYCO / "csv"
@@ -76,11 +76,16 @@ def hex_to_rgb01(hex_color: str) -> list[float]:
     return [int(text[i:i + 2], 16) / 255.0 for i in (0, 2, 4)]
 
 
-def read_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
-    candidates = [
-        "C:/Windows/Fonts/timesbd.ttf" if bold else "C:/Windows/Fonts/times.ttf",
-        "C:/Windows/Fonts/arialbd.ttf" if bold else "C:/Windows/Fonts/arial.ttf",
-    ]
+def read_font(size: int, bold: bool = False, italic: bool = False) -> ImageFont.FreeTypeFont:
+    if italic:
+        candidates = [
+            "C:/Windows/Fonts/MinionPro-BoldIt.otf" if bold else "C:/Windows/Fonts/MinionPro-It.otf",
+        ]
+    else:
+        candidates = [
+            "C:/Windows/Fonts/MinionPro-Bold.otf" if bold else "C:/Windows/Fonts/MinionPro-Regular.otf",
+            "C:/Windows/Fonts/MinionPro-Semibold.otf" if bold else "C:/Windows/Fonts/MinionPro-It.otf",
+        ]
     for candidate in candidates:
         if Path(candidate).exists():
             return ImageFont.truetype(candidate, size)
@@ -518,7 +523,7 @@ def render_clean_dg(structures: list[Structure]) -> None:
         ("G", "Min. glycan-C-alpha", "nearest glycan atom to backbone C-alpha", glycan_near_ca, ca_near_glycan, "#CC79A7"),
     ]
 
-    plt.rcParams["font.family"] = "Times New Roman"
+    plt.rcParams["font.family"] = "Minion Pro"
     fig = plt.figure(figsize=(19.2, 4.6), dpi=300)
     fig.patch.set_facecolor("white")
     for index, (panel, title, subtitle, point_a, point_b, color) in enumerate(specs, start=1):
@@ -538,7 +543,7 @@ def render_clean_dg(structures: list[Structure]) -> None:
 
 
 def render_clean_hk(structures: list[Structure]) -> None:
-    plt.rcParams["font.family"] = "Times New Roman"
+    plt.rcParams["font.family"] = "Minion Pro"
     fig = plt.figure(figsize=(16.5, 5.2), dpi=300)
     fig.patch.set_facecolor("white")
     fig.text(0.018, 0.965, "H-K  glycan shielding and hotspot accessibility examples",
@@ -699,8 +704,9 @@ def render_projected_dg(structures: list[Structure]) -> None:
         sub.alpha_composite(body, (0, title_h))
         canvas.alpha_composite(sub, (x0, 0))
 
-    out = OUT_DIR / "Fig4_model_D_G.png"
+    out = OUT_DIR / "structure_model_glycan_geometry.png"
     canvas.convert("RGB").save(out, dpi=(300, 300))
+    shutil.copy2(out, OUT_DIR / "Fig4_model_D_G.png")
     print(f"Saved {out}")
 
 
@@ -712,7 +718,7 @@ def render_projected_hk(structures: list[Structure]) -> None:
     draw = ImageDraw.Draw(canvas, "RGBA")
     title_font = read_font(72, bold=True)
     legend_font = read_font(42, bold=False)
-    species_font = read_font(62, bold=True)
+    species_font = read_font(62, bold=True, italic=True)
     draw.text((34, 22), "H-K  Glycan shielding and hotspot accessibility", fill=(0, 0, 0, 255), font=title_font)
     draw.ellipse((44, 118, 86, 160), fill=(209, 31, 26, 230))
     draw.text((104, 112), "accessible Ca2+ hotspot", fill=(35, 35, 35, 255), font=legend_font)
@@ -746,8 +752,9 @@ def render_projected_hk(structures: list[Structure]) -> None:
         panel_draw.text(((panel_w - lw) / 2, 8), label, fill=rgba(SPECIES_COLORS[structure.species], 255), font=species_font)
         canvas.alpha_composite(panel, (x0, top_h))
 
-    out = OUT_DIR / "Fig4_model_H_K.png"
+    out = OUT_DIR / "structure_model_hotspot_accessibility.png"
     canvas.convert("RGB").save(out, dpi=(300, 300))
+    shutil.copy2(out, OUT_DIR / "Fig4_model_H_K.png")
     print(f"Saved {out}")
 
 

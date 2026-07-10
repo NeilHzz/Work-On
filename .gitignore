@@ -2,6 +2,12 @@
 __pycache__/
 *.pyc
 .venv/
+markitdown_env/
+log.txt
+DMA_repository_zenodo_21053253_260630.zip
+
+# Local LaTeX workflow outputs
+latex_workflow/
 
 # LS-DYNA 仿真原始数据 (~162GB, 不适合 git 管理)
 01_数据与计算/LS-DYNA_原始模型/

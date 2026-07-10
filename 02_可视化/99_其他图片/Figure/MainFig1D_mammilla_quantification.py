@@ -19,10 +19,10 @@ import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _save import save_fig
 
 # ─── 全局绘图风格 ──────────────────────────────────────────────────────────
-plt.rcParams["font.family"] = "Times New Roman"
-plt.rcParams['font.sans-serif'] = ['Times New Roman', 'DejaVu Sans']
+plt.rcParams["font.family"] = "Minion Pro"
+plt.rcParams['font.sans-serif'] = ['Minion Pro', 'DejaVu Sans']
 plt.rcParams['axes.unicode_minus'] = False
-sns.set_theme(style="ticks", font="Times New Roman")
+sns.set_theme(style="ticks", font="Minion Pro")
 
 # ─── 数据路径 ──────────────────────────────────────────────────────────────
 FILE_PATH = r'D:\system_folder\Desktop\Work On\01_数据与计算\乳突层形态结构\specie.xlsx'
@@ -240,7 +240,7 @@ def plot_microstructure_panels(df_plot, metric_arrays: dict):
         ax.set_xticks(range(len(ORDER)))
         ax.set_xticklabels(SPECIES_TICK_LABELS)
         for tick in ax.get_xticklabels():
-            tick.set_fontfamily('Times New Roman')
+            tick.set_fontfamily('Minion Pro')
             tick.set_fontstyle('italic')
         ax.tick_params(axis='both', which='major', labelsize=20)
         ax.set_ylim(top=y_letter + y_range * 0.12)

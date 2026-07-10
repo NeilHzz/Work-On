@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this processed source-data and analysis-code repository, please cite the Zenodo record and the associated manuscript."
+title: "Processed source data and analysis code for OVAL glycan-state analyses of avian eggshell matrix chemistry and shell-breaking mechanics"
+version: "1.0.0"
+date-released: "2026-06-16"
+authors:
+  - name: "Authors of the associated manuscript"
+abstract: "Processed protein MS, glycan MS, orthology, Re-Glyco/APBS/SASA, and finite-element source data with analysis code for reproducing manuscript-level numerical summaries and source-data tables from the processed-data level."
+keywords:
+  - eggshell
+  - glycoproteomics
+  - OVAL
+  - Re-Glyco
+  - finite-element analysis
+  - processed source data

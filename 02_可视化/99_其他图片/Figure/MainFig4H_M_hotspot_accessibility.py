@@ -23,8 +23,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from matplotlib.lines import Line2D
-matplotlib.rcParams["font.family"] = "Times New Roman"
-matplotlib.rcParams["font.sans-serif"] = ["Times New Roman", "DejaVu Sans"]
+matplotlib.rcParams["font.family"] = "Minion Pro"
+matplotlib.rcParams["font.sans-serif"] = ["Minion Pro", "DejaVu Sans"]
 matplotlib.rcParams["mathtext.fontset"] = "stix"
 from matplotlib.gridspec import GridSpec
 from scipy import stats
@@ -555,7 +555,14 @@ def main():
         'D': draw_line_panel,
     }
 
-    # Panels A-D: semantic plot styles, with unchanged panel size and filenames
+    panel_names = {
+        'A': 'Fig4G_interface_shielding',
+        'B': 'Fig4I_hotspot_residue_sasa',
+        'C': 'Fig4H_hotspot_fraction',
+        'D': 'Fig4J_net_accessible_hotspots',
+    }
+
+    # Panels A-D: semantic plot styles, with unchanged panel size.
     for lbl, gd, ylabel, title in panels_violin:
         fig, ax = plt.subplots(figsize=PANEL_FIGSIZE)
         fig.patch.set_facecolor('white')
@@ -565,7 +572,7 @@ def main():
         else:
             drawer(ax, gd, ylabel, title)
         fig.subplots_adjust(**PANEL_ADJUST)
-        save_panel(fig, f'Fig5{chr(ord("I") + ord(lbl) - ord("A"))}')
+        save_panel(fig, panel_names[lbl])
         plt.close(fig)
 
     # Panel E: total-to-net lollipop
@@ -573,7 +580,7 @@ def main():
     fig.patch.set_facecolor('white')
     draw_hotspot_lollipop(ax, df, show_legend=False)
     fig.subplots_adjust(**PANEL_ADJUST)
-    save_panel(fig, 'Fig5M')
+    save_panel(fig, 'Fig4M_hotspot_accessibility')
     plt.close(fig)
 
     # Panel F: full-to-residual SASA dumbbell
@@ -581,7 +588,7 @@ def main():
     fig.patch.set_facecolor('white')
     draw_sasa_dumbbell(ax, df, show_legend=False)
     fig.subplots_adjust(**PANEL_ADJUST)
-    save_panel(fig, 'Fig5N')
+    save_panel(fig, 'Fig4N_hotspot_residue_sasa')
     plt.close(fig)
 
 

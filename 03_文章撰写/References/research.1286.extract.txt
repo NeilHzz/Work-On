@@ -1,0 +1,381 @@
+Yao et al. 2026 | https://doi.org/10.34133/research.1286
+1
+RESEARCH ARTICLE
+Single-Molecule Discrimination of 
+Multisialylated Ganglioside Oligosaccharides 
+Using an Engineered Nanopore
+Guangda  Yao1†, Boyang  Ren1,2†, Daigui  Zhu3,4†, Jianling  Tan1,5†,  
+Jingjing  Hou1,6, Yuan  Ma4, Zhengyu  Hang1, Zhuojia  Xu4, Zhaobing  Gao1,5*, 
+Tiehai  Li3,4*, and Bingqing  Xia1,5*
+1State Key Laboratory of Drug Research, Shanghai Institute of Materia Medica, Chinese Academy of 
+Sciences, Shanghai 201203, China. 2Tianjin University of Traditional Chinese Medicine, Tianjin 301617, 
+China. 3School of Chinese Materia Medica, Nanjing University of Chinese Medicine, Nanjing 210023, China. 
+4State Key Laboratory of Chemical Biology, Shanghai Institute of Materia Medica, Chinese Academy of 
+Sciences, Shanghai 201203, China. 5University of Chinese Academy of Sciences, Beijing 100049, China. 
+6School of Pharmacy, Fudan University, Shanghai 201203, China.
+*Address correspondence to: xiabingqing@simm.ac.cn (B.X.); tiehaili@simm.ac.cn (T.L.); zbgao@simm.
+ac.cn (Z.G.)
+†These authors contributed equally to this work.
+The function of ganglioside oligosaccharides critically depends on the number, linkage, and spatial 
+arrangement of sialic acid residues, yet direct discrimination of highly sialylated ganglioside oligosaccharides, 
+particularly at the isomeric level, remains challenging due to their high charge density and subtle structural 
+differences. Here, we present a nanopore-based strategy for single-molecule identification of ganglioside 
+oligosaccharides. By engineering the sensing region of an α-hemolysin nanopore with synergistic cationic 
+and aromatic mutations, we markedly enhance the capture of multisialylated glycans and prolong their 
+residence within the pore. This interaction-mediated slowdown converts otherwise transient blockade 
+events into extended trajectories containing rich molecular dynamics information. Beyond conventional 
+blockade amplitude and dwell time descriptors, we introduce time- and spectral-domain features to 
+characterize intraevent current fluctuations, thereby overcoming the key limitations of traditional nanopore 
+analyses. Using this approach, we reliably discriminate 4 linkage isomers of trisialylated ganglioside 
+glycans and accurately identify ganglioside oligosaccharides containing 3 to 5 sialic acid residues in 
+heterogeneous mixtures. When combined with a machine-learning framework, the extracted time- and 
+spectral-domain features enable single-level isomer identification and mixture deconvolution and remain 
+effective even in complex biological matrices such as neural cell line and brain tissue lysates. Together, 
+these results demonstrate that controlling analyte–pore interactions to unlock higher-order dynamical 
+signatures enables nanopore analysis of highly sialylated ganglioside oligosaccharides, providing a general 
+strategy for single-molecule glycan sequence elucidation in biologically relevant environments.
+Introduction
+ Gangliosides constitute one of the most structurally complex 
+classes of glycoconjugates in the nervous system [ 1 ], with their 
+biological functions predominantly encoded by the glycan moi-
+ety (named ganglioside oligosaccharides) [ 2 ]. Sialic acid residues 
+play a central role in this encoding by imparting a high negative 
+charge density, conformational flexibility, and diverse molecular 
+recognition capabilities to ganglioside oligosaccharides [ 3 – 5 ]. 
+A growing body of evidence indicates that subtle variations in 
+sialylation patterns critically shape ganglioside interactions with 
+lectins, Siglec receptors, pathogens, and immune regulators, 
+thereby influencing neural development, synaptic plasticity, and 
+neuroimmune homeostasis [ 6 – 9 ]. Highly sialylated gangliosides 
+are dynamically regulated during neurodevelopment and are 
+extensively remodeled in a range of neurological disorders [ 9 ]. 
+Accordingly, elucidating ganglioside oligosaccharide structures 
+at a level sufficient to capture these sialylation-dependent differ-
+ences is essential for understanding their biological functions 
+[ 10 ], yet achieving such structural resolution, particularly at the 
+isomeric level, remains a major analytical challenge.
+ At present, structural analysis of ganglioside oligosaccharides 
+relies primarily on liquid chromatography–mass spectrometry-
+based approaches [ 11 , 12 ]. While these methods provide valuable 
+compositional and subclass-level information, they face intrinsic 
+limitations in resolving highly sialylated glycans, particularly 
+Citation: Yao G, Ren B, Zhu D, 
+Tan J, Hou J, Ma Y, Hang Z, Xu Z, 
+Gao Z, Li T, et al. Single-Molecule 
+Discrimination of Multisialylated 
+Ganglioside Oligosaccharides Using 
+an Engineered Nanopore. Research 
+2026;9:Article 1286. https://doi.
+org/10.34133/research.1286
+Submitted 15 February 2026  
+Revised 20 April 2026  
+Accepted 23 April 2026  
+Published 19 May 2026
+Copyright © 2026 Guangda Yao et al.  
+Exclusive licensee Science and 
+Technology Review Publishing House. 
+No claim to original U.S. Government 
+Works. Distributed under a Creative 
+Commons Attribution License  
+(CC BY 4.0).
+Downloaded from https://spj.science.org on June 21, 2026
+
+Yao et al. 2026 | https://doi.org/10.34133/research.1286
+2
+those containing 3 or more sialic acids [ 13 , 14 ]. Sialic acid resi-
+dues are prone to in-source fragmentation and neutral loss, and 
+distinctions among positional and linkage isomers are often 
+inferred indirectly rather than determined experimentally. These 
+limitations become especially pronounced in complex or mixed 
+systems, where extensive signal overlap obscures low-abundance 
+yet functionally relevant structures. As a result, direct determina-
+tion of sialylation-dependent structural features in intact gan-
+glioside oligosaccharides remains beyond the reach of existing 
+analytical techniques [ 15 ].
+ Nanopore sensing has emerged as a powerful single-molecule 
+analytical technology [ 16 – 19 ], offering label-free detection with 
+a high temporal resolution and sensitivity to molecular size [ 20 ], 
+charge distribution [ 21 ], and conformation [ 22 ]. Previous studies 
+have demonstrated the feasibility of nanopore-based analysis of 
+monosaccharides [ 23 , 24 ], oligosaccharides [ 25 – 27 ], and glyco-
+sylated biomolecules [ 28 , 29 ], showing that carbohydrate trans-
+location dynamics can encode structural information. These 
+advances point to the potential of nanopores for glycan analysis 
+at the single-molecule level [ 18 ]. Ganglioside oligosaccharides, 
+however, pose a substantially greater challenge. Their structural 
+diversity is dominated by subtle differences in sialylation, which 
+introduce only minor changes to the overall molecular size and 
+charge. Consequently, distinct ganglioside oligosaccharide struc-
+tures are expected to generate highly similar translocation sig-
+natures, leading to extensive signal overlap. How such fine 
+structural variations can be resolved into distinguishable and 
+reproducible electrical signals therefore remains an open and 
+fundamental question for nanopore-based glycan analysis.
+ In this work, we investigate engineered nanopores for char-
+acterizing the translocation behavior of highly sialylated gan-
+glioside oligosaccharides at the single-molecule level. By tuning 
+analyte–pore interactions within the sensing region, we seek 
+to modulate glycan capture and residence in a manner that 
+increases the informational content of individual blockade 
+events while preserving glycan integrity. This approach allows 
+systematic examination of how sialic acid-dependent structural 
+features are reflected in nanopore electrical signals and provides 
+a foundation for extending nanopore sensing to structurally 
+complex glycan systems. 
+Results and Discussion
+Cationic engineering enhances the nanopore 
+capture of multisialylated glycans
+ To establish a nanopore-based identification platform for mul-
+tisialylated ganglioside oligosaccharides, GT1c, GQ1c, and 
+GP1c were selected as representative model analytes. As shown 
+in Fig.  1 A, these 3 oligosaccharides share a similar neutral gly-
+can core but differ in the number of N-acetylneuraminic acid 
+(Neu5Ac) and their modification sites on the core, thereby 
+representing a class of ganglioside oligosaccharides that are 
+structurally highly similar yet biologically distinct (Fig.  1 A). 
+To enable label-free nanopore measurements of multisialylated 
+oligosaccharides, we constructed a planar lipid bilayer nano-
+pore recording setup (Fig.  1 B). In this platform, a single nano-
+pore was reconstituted into a planar lipid bilayer separating the 
+﻿cis and trans chambers, permitting ionic conduction between 
+electrolyte solutions (such as 3 M KCl, 10 mM citric acid [CA], 
+pH = 5.0) (Fig.  1 B). We employed an α-hemolysin (α-HL) 
+nanopore (Fig.  S1 ), which has been reported in multiple studies 
+to support oligosaccharide identification [ 23 , 27 , 30 ]. Under an 
+applied potential of +100 mV (trans-positive), the wild-type 
+α-HL (WT) produced only a low event frequency for GT1c 
+(6.86 s−1), with a dispersed distribution of normalized blockade 
+amplitudes (ΔI 1/I 0) and a short dwell time (single-exponential 
+fit: 0.03 ms), indicating that the WT did not efficiently capture 
+the multisialylated glycans (Fig.  S2 A and B). The poor capture 
+rate of α-HL (WT) for highly negatively charged glycans could 
+be explained by the entry barrier at the pore mouth or/and the 
+interaction network within the lumen. 
+ Guided by the “multianionic terminal carboxylate groups 
+(–COO−)” characteristic of ganglioside oligosaccharides, a site-
+directed mutation strategy was implemented to introduce argi-
+nine (Arg, R) at the nanopore sensing region to create a localized 
+cationic environment near the constriction areas (Fig.  1 C). This 
+design was expected to lower the entry barrier and promote pore 
+localization of the analyte through electrostatic attraction. To 
+examine whether capture enhancement depends on the axial 
+position, we constructed single-point mutants of M113R, T145R, 
+T115R, and G143R individually (Fig.  1 C and Fig.  S1 ) and com-
+pared their event frequencies and dwell time under identical 
+conditions (Fig.  1 D and E). These mutants produced clearly dis-
+tinct current traces upon GT1c measurements (Fig.  S2 A and B). 
+Among them, M113R yielded the highest event frequency 
+(45.04 s−1), exceeding those of T145R, T115R, and G143R and 
+representing an over 5-fold increase relative to that of the WT 
+(Fig.  1 D). In addition, GT1c showed the longest dwell time 
+(single-exponential fit: 0.40 ms) in the M113R mutant, corre-
+sponding to an over 12-fold increase compared to that in the WT 
+(Fig.  1 E and Table  S1 ). Collectively, these results indicated 
+that the M113R substitution substantially improved nanopore 
+capture ability for multisialylated oligosaccharides and increases 
+the temporal information content of recorded events. The nano-
+pore ion selectivity was determined from reversal potentials 
+under asymmetric electrolyte conditions using the Goldman–
+Hodgkin–Katz equation [ 31 ]. The permeability ratios (P K 
++/P CI 
+−) 
+of the WT and M113R were 0.58 ± 0.03 and 0.32 ± 0.04, respec-
+tively (Fig.  1 F and Fig.  S3 ), indicating enhanced anion selectivity 
+in M113R, which may contribute to its increased capture rate via 
+stronger electroosmotic flow [ 32 , 33 ]. Therefore, M113R muta-
+tion was considered necessary for α-HL to sense multisialylated 
+glycans. To provide a molecular-level rationale for this enhance-
+ment after cationic engineering, we performed molecular dynam-
+ics (MD) simulations of the M113R–GT1c system. Umbrella 
+sampling MD simulations along the pore axis indicated that as 
+GT1c traverses the constriction region of α-HL, the carboxylate 
+groups of Neu5Ac form a stable salt bridge with R113, accom-
+panied by hydrogen-bonding and van der Waals interactions 
+(Fig.  1 G and Fig.  S4 A and B). The residue R113 also stabilizes 
+galactose (Gal) and Neu5Ac residues through stable hydrophobic 
+interactions and van der Waals contacts (Fig.  1 G and Fig.  S4 C). 
+These results offered a mechanistic basis for the experimentally 
+observed increase in capture efficiency and dwell time. 
+Double mutations reshape event kinetics and 
+prolong residence time
+ While the single mutation M113R substantially improved cap-
+ture, further analysis revealed that multisialylated glycans fre-
+quently produced near-complete blockades (Fig.  1 F and Fig. 
+ S2 ), such that ΔI 1/I 0 approached saturation (Table  S1 ). Under 
+these circumstances, amplitude-based discrimination becomes 
+intrinsically constrained. Consequently, subtle structural dif-
+ferences may no longer translate into resolvable amplitude 
+Downloaded from https://spj.science.org on June 21, 2026
+
+Yao et al. 2026 | https://doi.org/10.34133/research.1286
+3
+differences. In prior studies, near-complete blockade events 
+have been less frequently reported in nanopore-based glycan 
+sensing systems [ 26 , 30 , 34 , 35 ], but this is an issue that will even-
+tually be faced in the nanopore detection of complex glycans, 
+especially for nonlinear glycans. Motivated by this limitation, 
+we advanced our engineering objective from increasing capture 
+probability to prolonging dwell time, thereby providing an 
+extended observation window for each single-molecule event. 
+This strategy offers a practical and effective solution to mitigat-
+ing the constraints imposed by amplitude saturation. We first 
+reduced the KCl concentration in the electrolyte from 3 to 2 M 
+and recorded current traces for the M113R sensing of GT1c 
+(Fig.  2 A and Fig.  S5 ). The dwell time of GT1c (τ = 0.46 ± 0.10 ms) 
+under 2 M KCl was longer than that under 3 M KCl (Fig.  2 B), 
+which could be caused by decreased electroosmotic flow in 
+2 M KCl. Building on this result, we sought to introduce an 
+additional interaction site within the sensing region. We there-
+fore incorporated a tyrosine residue at the position adjacent to 
+M113R, generating the M113R/K147Y double mutant (Fig. 
+ 2 C). The aromatic ring of tyrosine was expected to support 
+additional CH–π and/or hydrophobic contacts with the glycan, 
+potentially stabilizing transient binding configurations [ 36 ]. 
+Under the same electrolyte conditions (2 M KCl, pH 5.0), GT1c 
+events recorded with M113R/K147Y (Fig.  2 C) exhibited a 
+markedly prolonged residence time, with τ slow = 3.19 ± 0.18 ms 
+and τ fast = 0.08 ± 0.02 ms (Fig.  2 D and Fig.  S6 ). These data 
+B
+A
+C
+D
+E
+F
+G
+H
+α3
+α3
+α8
+α8
+β4
+β3
+β4
+α3
+α8
+α3
+α8
+α8
+β4
+β3
+β4
+α3
+α8
+α8
+β4
+β3
+β4
+Neu5Ac
+Highest
+GT1c
+3× Neu5Ac
+4× Neu5Ac
+5× Neu5Ac
+Ganglioside oligosaccharide with poly-Neu5Ac
+GQ1c
+GP1c
+Gal
+GlcNAc
+GalNAc
+Glc
+Negatively charged
+α-HL
+nanopore
+Cis
++
+−
+Trans
+pid bilayer
+d 
+d b l
+bi y r
+ely charged
+e
+Lip
+Lipip
+-
+-
+-
+50 pA
+30 ms
+M113R, 3 M KCI, +100 mV, 10 µM GT1c
+I0
+E111
+K147
+R113
+Interaction sites
+Time (ns)
+0
+25
+50
+75
+100
+125
+150
+175
+200
+T115
+T117
+WT
+M113R T145R T115R G143R
+0
+20
+10
+30
+50
+40
+60
+α-HL mutants
+α-HL nanopore
+Longest
+WT
+M113R T145R T115R G143R
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+Dwell time (ms)
+α-HL mutants
+Salt bridge
+H bond
+Hydrophobic
+VdW contacts
+EOF
+EPF
+PK +
+PCl −
+0.58 (WT)
+0.32 (M113R)
+Current (pA)
+Voltage (mV)
+M113R
+WT
+−120
+−80
+−40
+0
+40
+80
+120
+−100
+−50
+0
+50
+100
+M113
+T145
+T115
+G143
+Fig. 1. High-efficiency capture of multisialylated oligosaccharides by the α-hemolysin M113R mutant. (A) Structures of 3 representative multisialylated ganglioside 
+oligosaccharides, GT1c, GQ1c, and GP1c, illustrated using the Symbol Nomenclature for Glycans (SNFG), in which N-acetylneuraminic acid (Neu5Ac), glucose (Glc), galactose 
+(Gal), and N-acetylgalactosamine (GalNAc) are denoted by standard symbols. (B) Schematic illustration of the biological nanopore sensing platform, where an α-hemolysin 
+nanopore is inserted into a lipid bilayer separating cis and trans chambers filled with symmetric electrolyte (3 M KCl, 10 mM citric acid [CA], pH 5.0) under an applied potential of 
++100 mV at the trans side, with the cis side grounded. (C) The positions of the sensing regions of α-hemoglobin, including M113, T145, T115R, and G143, are marked with 
+different colors. (D) Bar chart showing the event frequency of GT1c (10 μM) events detected by wild-type α-hemolysin (WT) and its mutants carrying single arginine substitutions 
+at different pore positions. (E) Bar chart showing the dwell time (τ, obtained from single-exponential fitting) of GT1c (10 μM) blockage events for the wild-type α-hemolysin 
+(WT) and its mutants. (F) Reversal potential measurements under asymmetric electrolyte conditions (1 M KCl in the trans reservoir and 0.1 M KCl in the cis reservoir), with 
+both solutions buffered in 10 mM CA acid at pH = 5.0, and ion selectivity calculation using the Goldman–Hodgkin–Katz equation. (G) Representative ionic current trace of 
+GT1c sensed by the M113R nanopore. (H) Dominant interaction types occurring with frequencies greater than 0.5% during GT1c passage through residue R113. The error bars 
+in (D) to (F) represent the standard deviation (SD) calculated from 3 independent replicates (n = 3).
+Downloaded from https://spj.science.org on June 21, 2026

@@ -1,48 +1,12 @@
 #!/usr/bin/env python
 """
-compose_manuscript_figures.py
-==============================
-Assembles individual panel PNGs into 6 manuscript composite figures
-matching the layout from Figure260421/ reference images.
+Assemble manuscript composite figures from canonical panel PNGs.
 
-Panel sources   : 02_可视化/Figure/PNG/
-FEM renders     : 01_数据与计算/LS-DYNA_原始模型/
-Bird illustrations (eggtooth): 02_可视化/eggtooth/
-Output          : 02_可视化/Composed/
-
-Panel mapping (source image → manuscript figure / panel):
-  Fig1A.png          → Fig1  A  (CVA 3D scatter)
-  eggtooth/鸡.png + 鸭.png + 鸽子.png (top row)
-  + 鸡（喙）.png + 鸭（喙）.png + 鸽子（喙）.png (bottom row)
-                     → Fig1  B  (2×3 bird illustration grid)
-    eggtooth/Gallus.jpg + Anas.jpg + Columba.jpg
-                                         → Fig1  C  (SEM + egg shell + mammilla structure)
-  Fig1D.png          → Fig1  D  (Mammilla density + volume boxplots)
-    Fig2.png           → Fig2     (Glycoprotein orthogroup UpSet plot, no letter)
-  Fig3B.png          → Fig3  A  (Chord diagram)
-  Fig4A.png          → Fig3  B  (Gallus Proteotype Coevolution scatter)
-  Fig4B.png          → Fig3  C  (Anas Proteotype Coevolution scatter)
-  Fig4C.png          → Fig3  D  (Columba Proteotype Coevolution scatter)
-  Fig4H.png          → Fig3  E  (2D Enrichment scatter)
-  Fig4I.png          → Fig3  F  (2D Enrichment scatter)
-  Fig4J.png          → Fig3  G  (2D Enrichment scatter)
-  Fig5B.png          → Fig4  A  (Ca²⁺ hotspot residues bar)
-  Fig5C.png          → Fig4  B  (Carboxylate surface accessibility bar)
-    Fig5E.png          → Fig4  C  (Glycan radius of gyration)
-    Fig5H.png          → Fig4  D  (Glycan–backbone proximity)
-    Fig5F.png          → Fig4  E  (Glycan end-to-end distance)
-    Fig5G.png          → Fig4  F  (Glycan–protein distance)
-    Fig5I.png          → Fig4  G  (Interface shielding)
-    Fig5K.png          → Fig4  H  (Hotspot fraction)
-    Fig5J.png          → Fig4  I  (Hotspot residue SASA)
-    Fig5L.png          → Fig4  J  (Net accessible Ca²⁺)
-    Fig5M.png          → Fig4  K  (Stacked bar – species comparison)
-    Fig5N.png          → Fig4  L  (Stacked bar – glycosite comparison)
-  eggtooth/鸡（喙）.png + chicken_model_render.png → Fig5  A  (Gallus)
-  eggtooth/鸭（喙）.png + duck_model_render.png    → Fig5  B  (Anas)
-  eggtooth/鸽子（喙）.png + pigeon_model_render.png→ Fig5  C  (Columba)
-    Fig6A_Force.png + Fig6B_Fmax.png   → Fig6 A
-    Fig6A_Shear.png + Fig6B_Taumax.png → Fig6 B
+The compose step reads only panel files named by their current manuscript
+figure/panel role, for example Fig2A.png, Fig3B_proteotype_Gallus.png,
+Fig4C_glycan_radius_of_gyration.png, and Fig5B_force_timeseries.png.
+Legacy numbered source names are written only as compatibility copies by the
+individual plotting scripts and are not used for composition.
 """
 
 from pathlib import Path
@@ -77,16 +41,13 @@ PUBLICATION_DPI = 1000  # 7200 px wide -> ~18.3 cm at native size
 # Font helpers
 # ─────────────────────────────────────────────────────────────────────────────
 _FONT_CANDIDATES = [
-    "C:/Windows/Fonts/timesbd.ttf",                            # Windows Times New Roman Bold
-    "C:/Windows/Fonts/Times New Roman Bold.ttf",
-    "/usr/share/fonts/truetype/msttcorefonts/Times_New_Roman_Bold.ttf",
-    "/Library/Fonts/Times New Roman Bold.ttf",
+    "C:/Windows/Fonts/MinionPro-Bold.otf",
+    "C:/Windows/Fonts/MinionPro-Semibold.otf",
+    "C:/Windows/Fonts/MinionPro-Regular.otf",
 ]
 _FONT_ITALIC_CANDIDATES = [
-    "C:/Windows/Fonts/timesi.ttf",
-    "C:/Windows/Fonts/Times New Roman Italic.ttf",
-    "/usr/share/fonts/truetype/msttcorefonts/Times_New_Roman_Italic.ttf",
-    "/Library/Fonts/Times New Roman Italic.ttf",
+    "C:/Windows/Fonts/MinionPro-It.otf",
+    "C:/Windows/Fonts/MinionPro-BoldIt.otf",
 ]
 
 
@@ -146,7 +107,15 @@ if not FINAL_MAIN_SUBFIGS.exists():
 # ─────────────────────────────────────────────────────────────────────────────
 
 def load_img(path) -> Image.Image | None:
-    """Load an image as RGBA.  Returns None with a warning if the file is missing."""
+    """
+Assemble manuscript composite figures from canonical panel PNGs.
+
+The compose step reads only panel files named by their current manuscript
+figure/panel role, for example Fig2A.png, Fig3B_proteotype_Gallus.png,
+Fig4C_glycan_radius_of_gyration.png, and Fig5B_force_timeseries.png.
+Legacy numbered source names are written only as compatibility copies by the
+individual plotting scripts and are not used for composition.
+"""
     p = Path(path)
     if not p.exists():
         print(f"  [WARN] File not found: {p}", file=sys.stderr)
@@ -157,7 +126,15 @@ def load_img(path) -> Image.Image | None:
 
 
 def make_placeholder(w: int, h: int, text: str = "") -> Image.Image:
-    """Light-grey placeholder rectangle with centred text."""
+    """
+Assemble manuscript composite figures from canonical panel PNGs.
+
+The compose step reads only panel files named by their current manuscript
+figure/panel role, for example Fig2A.png, Fig3B_proteotype_Gallus.png,
+Fig4C_glycan_radius_of_gyration.png, and Fig5B_force_timeseries.png.
+Legacy numbered source names are written only as compatibility copies by the
+individual plotting scripts and are not used for composition.
+"""
     img = Image.new("RGBA", (w, h), (220, 220, 220, 255))
     if text:
         draw = ImageDraw.Draw(img)
@@ -168,7 +145,15 @@ def make_placeholder(w: int, h: int, text: str = "") -> Image.Image:
 
 
 def scale_to_w(img: Image.Image, target_w: int) -> Image.Image:
-    """Proportionally resize *img* so its width equals *target_w*."""
+    """
+Assemble manuscript composite figures from canonical panel PNGs.
+
+The compose step reads only panel files named by their current manuscript
+figure/panel role, for example Fig2A.png, Fig3B_proteotype_Gallus.png,
+Fig4C_glycan_radius_of_gyration.png, and Fig5B_force_timeseries.png.
+Legacy numbered source names are written only as compatibility copies by the
+individual plotting scripts and are not used for composition.
+"""
     if img is None:
         return None
     nh = max(1, round(img.height * target_w / img.width))
@@ -176,7 +161,15 @@ def scale_to_w(img: Image.Image, target_w: int) -> Image.Image:
 
 
 def scale_to_h(img: Image.Image, target_h: int) -> Image.Image:
-    """Proportionally resize *img* so its height equals *target_h*."""
+    """
+Assemble manuscript composite figures from canonical panel PNGs.
+
+The compose step reads only panel files named by their current manuscript
+figure/panel role, for example Fig2A.png, Fig3B_proteotype_Gallus.png,
+Fig4C_glycan_radius_of_gyration.png, and Fig5B_force_timeseries.png.
+Legacy numbered source names are written only as compatibility copies by the
+individual plotting scripts and are not used for composition.
+"""
     if img is None:
         return None
     nw = max(1, round(img.width * target_h / img.height))
@@ -184,7 +177,15 @@ def scale_to_h(img: Image.Image, target_h: int) -> Image.Image:
 
 
 def scale_to_fit(img: Image.Image, max_w: int, max_h: int) -> Image.Image:
-    """Proportionally resize *img* to fit inside max_w × max_h."""
+    """
+Assemble manuscript composite figures from canonical panel PNGs.
+
+The compose step reads only panel files named by their current manuscript
+figure/panel role, for example Fig2A.png, Fig3B_proteotype_Gallus.png,
+Fig4C_glycan_radius_of_gyration.png, and Fig5B_force_timeseries.png.
+Legacy numbered source names are written only as compatibility copies by the
+individual plotting scripts and are not used for composition.
+"""
     if img is None:
         return None
     scale = min(max_w / img.width, max_h / img.height)
@@ -194,7 +195,15 @@ def scale_to_fit(img: Image.Image, max_w: int, max_h: int) -> Image.Image:
 
 
 def trim_white(img: Image.Image, pad: int = 24, threshold: int = 248) -> Image.Image:
-    """Trim near-white margins while preserving a small publication-safe pad."""
+    """
+Assemble manuscript composite figures from canonical panel PNGs.
+
+The compose step reads only panel files named by their current manuscript
+figure/panel role, for example Fig2A.png, Fig3B_proteotype_Gallus.png,
+Fig4C_glycan_radius_of_gyration.png, and Fig5B_force_timeseries.png.
+Legacy numbered source names are written only as compatibility copies by the
+individual plotting scripts and are not used for composition.
+"""
     rgba = img.convert("RGBA")
     rgb = rgba.convert("RGB")
     pixels = rgb.load()
@@ -216,7 +225,15 @@ def trim_white(img: Image.Image, pad: int = 24, threshold: int = 248) -> Image.I
 
 
 def smooth_fem_render(img: Image.Image) -> Image.Image:
-    """Soften FEM mesh speckle while preserving the colorbar and labels."""
+    """
+Assemble manuscript composite figures from canonical panel PNGs.
+
+The compose step reads only panel files named by their current manuscript
+figure/panel role, for example Fig2A.png, Fig3B_proteotype_Gallus.png,
+Fig4C_glycan_radius_of_gyration.png, and Fig5B_force_timeseries.png.
+Legacy numbered source names are written only as compatibility copies by the
+individual plotting scripts and are not used for composition.
+"""
     rgba = img.convert("RGBA")
     rgb = rgba.convert("RGB")
     width, height = rgba.size
@@ -320,29 +337,39 @@ def add_label(img: Image.Image, label: str,
               font: ImageFont.FreeTypeFont | None = None,
               offset: tuple[int, int] = (14, 8),
               cover: bool = False,
-              cover_px: tuple[int, int] = (90, 110)) -> Image.Image:
+              cover_px: tuple[int, int] = (90, 110),
+              cover_box: tuple[int, int, int, int] | None = None) -> Image.Image:
     """
-    Draw a bold panel letter at the top-left corner of *img*.
+Assemble manuscript composite figures from canonical panel PNGs.
 
-    Parameters
-    ----------
-    cover : bool
-        If True, first paint a white rectangle over *cover_px* to hide any
-        existing label that was embedded by the source script.
-    cover_px : (width, height)
-        Size of the white rectangle used when *cover=True*.
-    """
+The compose step reads only panel files named by their current manuscript
+figure/panel role, for example Fig2A.png, Fig3B_proteotype_Gallus.png,
+Fig4C_glycan_radius_of_gyration.png, and Fig5B_force_timeseries.png.
+Legacy numbered source names are written only as compatibility copies by the
+individual plotting scripts and are not used for composition.
+"""
     img = img.copy()
     draw = ImageDraw.Draw(img)
     if cover:
-        draw.rectangle([(0, 0), cover_px], fill=(255, 255, 255, 255))
+        if cover_box is None:
+            draw.rectangle([(0, 0), cover_px], fill=(255, 255, 255, 255))
+        else:
+            draw.rectangle(cover_box, fill=(255, 255, 255, 255))
     fnt = font or FONT_MD
     draw.text(offset, label, fill=(0, 0, 0, 255), font=fnt)
     return img
 
 
 def paste(canvas: Image.Image, img: Image.Image, x: int, y: int):
-    """Paste an RGBA *img* onto *canvas* at *(x, y)* using alpha compositing."""
+    """
+Assemble manuscript composite figures from canonical panel PNGs.
+
+The compose step reads only panel files named by their current manuscript
+figure/panel role, for example Fig2A.png, Fig3B_proteotype_Gallus.png,
+Fig4C_glycan_radius_of_gyration.png, and Fig5B_force_timeseries.png.
+Legacy numbered source names are written only as compatibility copies by the
+individual plotting scripts and are not used for composition.
+"""
     if img is None:
         return
     canvas.paste(img, (x, y), img)
@@ -354,8 +381,64 @@ def sync_composed_figure(path: Path):
         shutil.copy2(path, directory / path.name)
 
 
-def save_fig(img: Image.Image, name: str, dpi: int = PUBLICATION_DPI, sync: bool = False):
-    """Flatten to RGB (white background) and save as PNG."""
+def prepare_static_panels():
+    static_sources = {
+        "Fig2E_ortholog_circos.png": FINAL_MAIN_SUBFIGS / "Fig3A.png",
+    }
+    for panel_name, source in static_sources.items():
+        target = PNG / panel_name
+        if not source.exists():
+            raise FileNotFoundError(f"Required static panel source not found: {source}")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, target)
+
+
+REQUIRED_MAIN_PANELS = [
+    "Fig1A.png",
+    "Fig1D.png",
+    "Fig2A.png",
+    "Fig2BC_glycotype_consistency.png",
+    "Fig2D_glycotype_proportion.png",
+    "Fig2E_ortholog_circos.png",
+    "Fig3B_proteotype_Gallus.png",
+    "Fig3C_proteotype_Anas.png",
+    "Fig3D_proteotype_Columba.png",
+    "Fig3E_enrichment_Gallus_vs_Columba.png",
+    "Fig3F_enrichment_Gallus_vs_Anas.png",
+    "Fig3G_enrichment_Anas_vs_Columba.png",
+    "Fig4A_context_Gallus.png",
+    "Fig4A_context_Columba.png",
+    "Fig4B_context_Gallus.png",
+    "Fig4B_context_Anas.png",
+    "Fig4B_context_Columba.png",
+    "Fig4C_glycan_radius_of_gyration.png",
+    "Fig4D_glycan_backbone_proximity.png",
+    "Fig4E_glycan_end_to_end_distance.png",
+    "Fig4F_glycan_protein_distance.png",
+    "Fig4G_interface_shielding.png",
+    "Fig4H_hotspot_fraction.png",
+    "Fig4I_hotspot_residue_sasa.png",
+    "Fig4J_net_accessible_hotspots.png",
+    "Fig4K_hotspot_residues.png",
+    "Fig4L_carboxylate_surface_accessibility.png",
+    "Fig4M_hotspot_accessibility.png",
+    "Fig4N_hotspot_residue_sasa.png",
+    "Fig5B_force_timeseries.png",
+    "Fig5B_fmax.png",
+    "Fig5C_shear_timeseries.png",
+    "Fig5C_taumax.png",
+]
+
+
+def validate_required_panels():
+    missing = [name for name in REQUIRED_MAIN_PANELS if not (PNG / name).exists()]
+    if missing:
+        detail = "\n".join(f"  - {name}" for name in missing)
+        raise FileNotFoundError(f"Required composed panel(s) missing:\n{detail}")
+
+
+def save_fig(img: Image.Image, name: str, dpi: int = PUBLICATION_DPI, sync: bool = True):
+    """Flatten to RGB and save a composed PNG."""
     bg = Image.new("RGB", img.size, (255, 255, 255))
     bg.paste(img, mask=img.split()[3])
     out = OUT / f"{name}.png"
@@ -366,18 +449,21 @@ def save_fig(img: Image.Image, name: str, dpi: int = PUBLICATION_DPI, sync: bool
 
 
 def make_fig1c_triptych(target_w: int) -> Image.Image:
-    """Build Fig. 1C from the three species-specific mammillary structure panels."""
+    """Build Fig. 1C from species-specific mammillary structure panels."""
     inner_gap = 32
     col_w = (target_w - 2 * inner_gap) // 3
     panels = []
     for species in ["Gallus", "Anas", "Columba"]:
         raw = load_img(EGGTOOTH / f"{species}.jpg")
         if raw is None:
-            img = make_placeholder(col_w, int(col_w * 1.15), species)
+            body = make_placeholder(col_w, int(col_w * 1.15), species)
         else:
-            img = scale_to_w(raw, col_w)
+            body = trim_white(scale_to_w(raw, col_w), pad=10, threshold=252)
+        body = scale_to_w(body, col_w)
+        img = Image.new("RGBA", (col_w, body.height), (255, 255, 255, 0))
+        img.paste(body, (0, 0), body)
         draw = ImageDraw.Draw(img)
-        draw.text((col_w // 2, 18), species,
+        draw.text((col_w // 2, 145), species,
                   fill=SPECIES_COLORS[species], font=FONT_MD_ITALIC, anchor="mt")
         panels.append(img)
 
@@ -395,24 +481,14 @@ def row_images(files_labels: list[tuple[str, str]], ncols: int,
                cover_old_label: bool = False
                ) -> tuple[list[Image.Image], int]:
     """
-    Build a list of panel images for one row.
+Assemble manuscript composite figures from canonical panel PNGs.
 
-    Parameters
-    ----------
-    files_labels : list of (filename, manuscript_label)
-        *filename* is relative to PNG directory.
-    ncols : int
-        Number of columns in this row (determines panel width).
-    inner_w : int
-        Total inner canvas width (excluding outer margins).
-    cover_old_label : bool
-        Whether to white-out the existing embedded label before drawing the
-        new manuscript label (needed for panels from MainFig4A_C_SuppFigS8_reglyco_apbs.py).
-
-    Returns
-    -------
-    (panels, col_w) where *col_w* is the width of each column in px.
-    """
+The compose step reads only panel files named by their current manuscript
+figure/panel role, for example Fig2A.png, Fig3B_proteotype_Gallus.png,
+Fig4C_glycan_radius_of_gyration.png, and Fig5B_force_timeseries.png.
+Legacy numbered source names are written only as compatibility copies by the
+individual plotting scripts and are not used for composition.
+"""
     col_w = (inner_w - (ncols - 1) * GAP) // ncols
     font  = label_font or FONT_MD
     panels = []
@@ -433,10 +509,14 @@ def paste_row(canvas: Image.Image,
               y: int,
               x_start: int | None = None) -> int:
     """
-    Paste a row of equally-wide panels onto *canvas*.
+Assemble manuscript composite figures from canonical panel PNGs.
 
-    Returns the y coordinate directly below the pasted row (y + row_height + GAP).
-    """
+The compose step reads only panel files named by their current manuscript
+figure/panel role, for example Fig2A.png, Fig3B_proteotype_Gallus.png,
+Fig4C_glycan_radius_of_gyration.png, and Fig5B_force_timeseries.png.
+Legacy numbered source names are written only as compatibility copies by the
+individual plotting scripts and are not used for composition.
+"""
     x = x_start if x_start is not None else MARGIN
     row_h = max(p.height for p in panels if p is not None)
     for p in panels:
@@ -459,7 +539,9 @@ def compose_fig1():
         if raw is None:
             raw = make_placeholder(target_w, int(target_w * 0.7), f"Panel {label}")
         img = scale_to_w(raw, target_w)
-        return add_label(img, label, font=font)
+        if label:
+            return add_label(img, label, font=font)
+        return img
 
     top_left_w = int(inner_w * 0.58)
     top_right_w = inner_w - top_left_w - GAP
@@ -575,33 +657,59 @@ def compose_fig2():
             x += panel_img.width + GAP
         return row
 
-    # Fig 2 layout: A on the upper left; B/C combined panel and D below; E on the right.
+    # Fig 2 layout: A on the upper left; B/C/D on one lower row; E on the right.
     right_w = int((inner_w - GAP) * 0.36)
     left_w = inner_w - right_w - GAP
 
-    A = panel("Fig2.png", "A", left_w, trim=False)
+    A = panel("Fig2A.png", "", left_w, trim=False)
     row1 = Image.new("RGBA", (left_w, A.height), (255, 255, 255, 0))
     paste(row1, A, 0, 0)
 
-    bd_w = (left_w - GAP) // 2
-    BC = panel("Fig2_cluster_glycotype_consistency.png", "", target_w=bd_w, trim=True)
-    D = panel("Fig2_species_glycotype_proportion.png", "D", target_w=left_w - bd_w - GAP, trim=True)
-    row2_h = max(BC.height, D.height)
+    raw_bc = trim_white(load_img(PNG / "Fig2BC_glycotype_consistency.png"))
+    split_x = int(raw_bc.width * 0.54)
+    raw_b = trim_white(raw_bc.crop((0, 0, split_x, raw_bc.height)), pad=8)
+    raw_c = trim_white(raw_bc.crop((split_x, 0, raw_bc.width, raw_bc.height)), pad=8)
+
+    b_w = int(left_w * 0.27)
+    c_w = int(left_w * 0.27)
+    d_w = left_w - b_w - c_w - 2 * GAP
+    b_scaled = scale_to_w(raw_b, b_w)
+    c_scaled = scale_to_w(raw_c, c_w)
+    bc_h = min(b_scaled.height, c_scaled.height)
+    B = scale_to_h(raw_b, bc_h)
+    C = scale_to_h(raw_c, bc_h)
+    D = panel("Fig2D_glycotype_proportion.png", "", target_w=d_w, trim=True)
+    row2_h = max(B.height, C.height, D.height)
     row2 = Image.new("RGBA", (left_w, row2_h), (255, 255, 255, 0))
-    paste(row2, BC, 0, 0)
-    paste(row2, D, bd_w + GAP, 0)
+    paste(row2, B, 0, (row2_h - B.height) // 2)
+    paste(row2, C, b_w + GAP, (row2_h - C.height) // 2)
+    paste(row2, D, b_w + GAP + c_w + GAP, (row2_h - D.height) // 2)
 
     left_block_h = row1.height + GAP + row2.height
     left_block = Image.new("RGBA", (left_w, left_block_h), (255, 255, 255, 0))
     paste(left_block, row1, 0, 0)
     paste(left_block, row2, 0, row1.height + GAP)
 
-    E = panel(FINAL_MAIN_SUBFIGS / "Fig3A.png", "E", target_w=right_w, trim=True)
+    E = panel("Fig2E_ortholog_circos.png", "", target_w=right_w, trim=True)
 
     content_h = max(left_block.height, E.height)
     content = Image.new("RGBA", (inner_w, content_h), (255, 255, 255, 0))
     paste(content, left_block, 0, 0)
-    paste(content, E, left_w + GAP, max(0, (content_h - E.height) // 2))
+    e_y = max(0, (content_h - E.height) // 2)
+    paste(content, E, left_w + GAP, e_y)
+    draw = ImageDraw.Draw(content)
+    row2_y = row1.height + GAP
+    b_y = row2_y + (row2_h - B.height) // 2
+    c_y = row2_y + (row2_h - C.height) // 2
+    draw.rectangle((90, row2_y, 650, row2_y + 180), fill=(255, 255, 255, 255))
+    draw.rectangle((45, b_y, 620, b_y + 170), fill=(255, 255, 255, 255))
+    draw.rectangle((b_w + GAP + 52, c_y, b_w + GAP + 142, c_y + 110),
+                   fill=(255, 255, 255, 255))
+    draw.text((14, 8), "A", fill=(0, 0, 0, 255), font=FONT_PUB_LABEL)
+    draw.text((14, row2_y + 8), "B", fill=(0, 0, 0, 255), font=FONT_PUB_LABEL)
+    draw.text((b_w + GAP + 14, row2_y + 8), "C", fill=(0, 0, 0, 255), font=FONT_PUB_LABEL)
+    draw.text((b_w + GAP + c_w + GAP + 14, row2_y + 8), "D", fill=(0, 0, 0, 255), font=FONT_PUB_LABEL)
+    draw.text((left_w + GAP + 14, e_y + 8), "E", fill=(0, 0, 0, 255), font=FONT_PUB_LABEL)
 
     total_h = 2 * MARGIN + content.height
     canvas = Image.new("RGBA", (CANVAS_W, total_h), (255, 255, 255, 255))
@@ -627,8 +735,8 @@ def compose_fig3():
         return add_label(img, label, font=FONT_PUB_LABEL)
 
     rows = [
-        [panel("Fig4A.png", "B"), panel("Fig4B.png", "C"), panel("Fig4C.png", "D")],
-        [panel("Fig4H.png", "E"), panel("Fig4I.png", "F"), panel("Fig4J.png", "G")],
+        [panel("Fig3B_proteotype_Gallus.png", "A"), panel("Fig3C_proteotype_Anas.png", "B"), panel("Fig3D_proteotype_Columba.png", "C")],
+        [panel("Fig3E_enrichment_Gallus_vs_Columba.png", "D"), panel("Fig3F_enrichment_Gallus_vs_Anas.png", "E"), panel("Fig3G_enrichment_Anas_vs_Columba.png", "F")],
     ]
     row_heights = [max(img.height for img in row) for row in rows]
     total_h = 2 * MARGIN + sum(row_heights) + GAP * (len(rows) - 1)
@@ -757,46 +865,46 @@ def compose_fig4():
     bottom_panel_w = (inner_w - 3 * GAP) // 4
 
     dg_context_row = compose_centered_row([
-        make_panel("Fig4D-G_Gallus.png", target_w=group_panel_w, trim=True),
-        make_panel("Fig4D-G_Columba.png", target_w=group_panel_w, trim=True, zoom=0.9),
+        make_panel("Fig4A_context_Gallus.png", target_w=group_panel_w, trim=True),
+        make_panel("Fig4A_context_Columba.png", target_w=group_panel_w, trim=True, zoom=0.9),
     ], gap=sub_gap, row_width=group_w)
     dg_context_row = add_label(dg_context_row, "A", font=FONT_FIG4_LABEL)
     cf_plot_row = compose_centered_row([
-        make_panel("Fig5E.png", "C", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5H.png", "D", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig4C_glycan_radius_of_gyration.png", "C", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig4D_glycan_backbone_proximity.png", "D", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
     ], gap=sub_gap, row_width=group_w)
 
     de_plot_row = compose_centered_row([
-        make_panel("Fig5F.png", "E", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5G.png", "F", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig4E_glycan_end_to_end_distance.png", "E", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig4F_glycan_protein_distance.png", "F", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
     ], gap=sub_gap, row_width=group_w)
 
     group_a = compose_vertical_block([dg_context_row, cf_plot_row, de_plot_row], group_w)
 
     gi_plot_row = compose_centered_row([
-        make_panel("Fig5I.png", "G", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5K.png", "H", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig4G_interface_shielding.png", "G", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig4H_hotspot_fraction.png", "H", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
     ], gap=sub_gap, row_width=group_w)
 
     hj_plot_row = compose_centered_row([
-        make_panel("Fig5J.png", "I", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5L.png", "J", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig4I_hotspot_residue_sasa.png", "I", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig4J_net_accessible_hotspots.png", "J", target_w=group_panel_w, cover_old=True, cover_px=(120, 130)),
     ], gap=sub_gap, row_width=group_w)
 
     hk_context_row = compose_centered_row([
-        make_panel("Fig4H_K_3D_sasa_Gallus.png", target_w=group_three_panel_w, trim=True),
-        make_panel("Fig4H_K_3D_sasa_Anas.png", target_w=group_three_panel_w, trim=True),
-        make_panel("Fig4H_K_3D_sasa_Columba.png", target_w=group_three_panel_w, trim=True),
+        make_panel("Fig4B_context_Gallus.png", target_w=group_three_panel_w, trim=True),
+        make_panel("Fig4B_context_Anas.png", target_w=group_three_panel_w, trim=True),
+        make_panel("Fig4B_context_Columba.png", target_w=group_three_panel_w, trim=True),
     ], gap=sub_gap, row_width=group_w)
     hk_context_row = add_label(hk_context_row, "B", font=FONT_FIG4_LABEL)
     group_b = compose_vertical_block([hk_context_row, gi_plot_row, hj_plot_row], group_w)
 
     group_row = compose_centered_row([group_a, group_b], gap=GAP, row_width=inner_w)
     bottom_row = compose_centered_row([
-        make_panel("Fig5B.png", "K", target_w=bottom_panel_w, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5C.png", "L", target_w=bottom_panel_w, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5M.png", "M", target_w=bottom_panel_w, cover_old=True, cover_px=(120, 130)),
-        make_panel("Fig5N.png", "N", target_w=bottom_panel_w, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig4K_hotspot_residues.png", "K", target_w=bottom_panel_w, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig4L_carboxylate_surface_accessibility.png", "L", target_w=bottom_panel_w, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig4M_hotspot_accessibility.png", "M", target_w=bottom_panel_w, cover_old=True, cover_px=(120, 130)),
+        make_panel("Fig4N_hotspot_residue_sasa.png", "N", target_w=bottom_panel_w, cover_old=True, cover_px=(120, 130)),
     ], row_width=inner_w)
 
     rows = [group_row, bottom_row]
@@ -894,14 +1002,14 @@ def _compose_fig5_legacy_beak_fem_only():
 
 def compose_fig5():
     print("\n=== Composing Fig 5 ===")
-    canvas_w, canvas_h = 11466, 4534
+    canvas_w, canvas_h = 10100, 4100
     canvas = Image.new("RGBA", (canvas_w, canvas_h), (255, 255, 255, 255))
 
-    left_x, left_top = 30, 20
+    left_x, left_top = 20, 10
     left_w = 4240
     beak_w = 1230
     fem_w = left_w - beak_w
-    row_gap = 0
+    row_gap = -120
     row_h = (canvas_h - 2 * left_top - 2 * row_gap) // 3
 
     species_data = [
@@ -941,27 +1049,27 @@ def compose_fig5():
             row = add_label(row, lbl, font=FONT_LG, offset=(0, 0))
         paste(canvas, row, left_x, left_top + idx * (row_h + row_gap))
 
-    raw_force = load_img(PNG / "Fig6A_Force.png")
-    raw_shear = load_img(PNG / "Fig6A_Shear.png")
-    raw_fmax = load_img(PNG / "Fig6B_Fmax.png")
-    raw_taumax = load_img(PNG / "Fig6B_Taumax.png")
+    raw_force = load_img(PNG / "Fig5B_force_timeseries.png")
+    raw_shear = load_img(PNG / "Fig5C_shear_timeseries.png")
+    raw_fmax = load_img(PNG / "Fig5B_fmax.png")
+    raw_taumax = load_img(PNG / "Fig5C_taumax.png")
 
     if raw_force is None:
-        raw_force = make_placeholder(2400, 1134, "Fig6A_Force not found")
+        raw_force = make_placeholder(2400, 1134, "Fig5B_force_timeseries not found")
     if raw_shear is None:
-        raw_shear = make_placeholder(2400, 1134, "Fig6A_Shear not found")
+        raw_shear = make_placeholder(2400, 1134, "Fig5C_shear_timeseries not found")
     if raw_fmax is None:
-        raw_fmax = make_placeholder(1200, 1134, "Fig6B_Fmax not found")
+        raw_fmax = make_placeholder(1200, 1134, "Fig5B_fmax not found")
     if raw_taumax is None:
-        raw_taumax = make_placeholder(1200, 1134, "Fig6B_Taumax not found")
+        raw_taumax = make_placeholder(1200, 1134, "Fig5C_taumax not found")
 
-    mech_x = 4160
-    mech_top = 40
-    mech_row_h = 2060
-    mech_row_gap = 260
-    time_w = 4300
-    bar_w = 2180
-    plot_gap = 150
+    mech_x = 4000
+    mech_top = 70
+    mech_row_h = 1900
+    mech_row_gap = 90
+    time_w = 3950
+    bar_w = 1950
+    plot_gap = 60
 
     for idx, (label, time_raw, bar_raw) in enumerate([
         ("B", raw_force, raw_fmax),
@@ -981,8 +1089,8 @@ def compose_fig5():
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Fig 6  (2-row × 2-column grid — uses individually saved panels)
-#   Row A: Force timeseries  (Fig6A_Force.png, left ~65 %) | F_max bars  (Fig6B_Fmax.png)
-#   Row B: Shear timeseries  (Fig6A_Shear.png, left ~65 %) | τ_max bars  (Fig6B_Taumax.png)
+#   Row A: Force timeseries  (Fig5B_force_timeseries.png, left ~65 %) | F_max bars  (Fig5B_fmax.png)
+#   Row B: Shear timeseries  (Fig5C_shear_timeseries.png, left ~65 %) | tau_max bars  (Fig5C_taumax.png)
 #   Generate source panels first: run  02_可视化/Figure/MainFig6_mechanics_force_shear.py
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -994,15 +1102,15 @@ def _compose_fig6_legacy():
     right_w   = inner_w - left_w - GAP
 
     # ── load individually generated panels ──────────────────────────────────
-    raw_force  = load_img(PNG / "Fig6A_Force.png")
-    raw_shear  = load_img(PNG / "Fig6A_Shear.png")
-    raw_fmax   = load_img(PNG / "Fig6B_Fmax.png")
-    raw_taumax = load_img(PNG / "Fig6B_Taumax.png")
+    raw_force  = load_img(PNG / "Fig5B_force_timeseries.png")
+    raw_shear  = load_img(PNG / "Fig5C_shear_timeseries.png")
+    raw_fmax   = load_img(PNG / "Fig5B_fmax.png")
+    raw_taumax = load_img(PNG / "Fig5C_taumax.png")
 
-    if raw_force  is None: raw_force  = make_placeholder(2400, 1134, "Fig6A_Force not found\nrun MainFig6_mechanics_force_shear.py first")
-    if raw_shear  is None: raw_shear  = make_placeholder(2400, 1134, "Fig6A_Shear not found\nrun MainFig6_mechanics_force_shear.py first")
-    if raw_fmax   is None: raw_fmax   = make_placeholder(1200, 1300, "Fig6B_Fmax not found\nrun MainFig6_mechanics_force_shear.py first")
-    if raw_taumax is None: raw_taumax = make_placeholder(1200, 1300, "Fig6B_Taumax not found\nrun MainFig6_mechanics_force_shear.py first")
+    if raw_force  is None: raw_force  = make_placeholder(2400, 1134, "Fig5B_force_timeseries not found\nrun MainFig6_mechanics_force_shear.py first")
+    if raw_shear  is None: raw_shear  = make_placeholder(2400, 1134, "Fig5C_shear_timeseries not found\nrun MainFig6_mechanics_force_shear.py first")
+    if raw_fmax   is None: raw_fmax   = make_placeholder(1200, 1300, "Fig5B_fmax not found\nrun MainFig6_mechanics_force_shear.py first")
+    if raw_taumax is None: raw_taumax = make_placeholder(1200, 1300, "Fig5C_taumax not found\nrun MainFig6_mechanics_force_shear.py first")
 
     # ── scale left (timeseries) panels to left_w → row heights ──────────────
     force_s = scale_to_w(raw_force, left_w)
@@ -1069,7 +1177,7 @@ def compose_supp_fig7():
     y += surface_summary.height + outer_gap
     paste(canvas, surface_map, (canvas_w - surface_map.width) // 2, y)
 
-    save_fig(canvas, "FigS7")
+    save_fig(canvas, "FigS7", sync=False)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -1206,6 +1314,8 @@ def _compose_fig5_legacy_main_panels():
 
 
 if __name__ == "__main__":
+    prepare_static_panels()
+    validate_required_panels()
     compose_fig1()
     compose_fig2()
     compose_fig3()

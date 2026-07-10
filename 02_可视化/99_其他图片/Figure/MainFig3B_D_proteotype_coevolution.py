@@ -11,8 +11,9 @@ import matplotlib as mpl
 # ==========================================
 # 设置全局绘图风格 (参考 Science Advances 等高水平期刊)
 # ==========================================
-mpl.rcParams['font.family'] = 'Times New Roman'
-mpl.rcParams['font.sans-serif'] = ['Times New Roman', 'DejaVu Sans']
+from _save import FONT_FAMILY, apply_research_font_settings
+
+apply_research_font_settings()
 mpl.rcParams['mathtext.fontset'] = 'stix'
 mpl.rcParams['axes.spines.top'] = False    # 隐藏顶部边框
 mpl.rcParams['axes.spines.right'] = False  # 隐藏右侧边框
@@ -24,7 +25,11 @@ mpl.rcParams['ytick.labelsize'] = 22
 
 data_dir = r"D:\system_folder\Desktop\Work On\01_数据与计算\Raw_Data\MS_DATA"
 out_dir = r"D:\system_folder\Desktop\Work On\02_可视化\Figure\png"
-_SP_PANEL = {"Gallus": "Fig4A", "Anas": "Fig4B", "Columba": "Fig4C"}
+_SP_PANEL = {
+    "Gallus": "Fig3B_proteotype_Gallus",
+    "Anas": "Fig3C_proteotype_Anas",
+    "Columba": "Fig3D_proteotype_Columba",
+}
 
 # ==========================================
 # 目标蛋白映射表 (基于 Blastp 严格筛选结果)
@@ -159,8 +164,8 @@ for species in species_list:
                     ax.text(
                         oval_row['Log2_Protein_Intensity'],
                         oval_row['Log2_Glycan_Intensity'],
-                        '⭐', color=highlight_color, ha='center', va='center',
-                        fontsize=24, zorder=7, fontfamily='Segoe UI Emoji'
+                        '*', color=highlight_color, ha='center', va='center',
+                        fontsize=24, zorder=7, fontfamily=FONT_FAMILY
                     )
             else:
                 plt.scatter(

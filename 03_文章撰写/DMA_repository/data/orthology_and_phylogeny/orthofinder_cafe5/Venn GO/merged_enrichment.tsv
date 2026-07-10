@@ -1,0 +1,251 @@
+pathway	count_files	files
+signal transduction	5	"A&C_enrichment.txt,Anas_enrichment.txt,Columba_enrichment.txt,G&A_enrichment.txt,G&C_enrichment.txt"
+proteolysis	4	"A&C_enrichment.txt,Columba_enrichment.txt,G&A_enrichment.txt,G&C_enrichment.txt"
+spermatogenesis	4	"A&C_enrichment.txt,Columba_enrichment.txt,G&A_enrichment.txt,G&C_enrichment.txt"
+Wnt signaling pathway	3	"A&C_enrichment.txt,G&A_enrichment.txt,G&C_enrichment.txt"
+integral component of membrane	3	"A&C_enrichment.txt,G&A_enrichment.txt,G&C_enrichment.txt"
+mitotic cell cycle	3	"A&C_enrichment.txt,Anas_enrichment.txt,Gallus_enrichment.txt"
+protein glycosylation	3	"A&C_enrichment.txt,G&A_enrichment.txt,G&C_enrichment.txt"
+protein transport	3	"A&C_enrichment.txt,G&A_enrichment.txt,G&C_enrichment.txt"
+"regulation of transcription, DNA-templated"	3	"A&C_enrichment.txt,G&A_enrichment.txt,G&C_enrichment.txt"
+ubiquitin-dependent protein catabolic process	3	"A&C_enrichment.txt,Columba_enrichment.txt,G&C_enrichment.txt"
+viral process	3	"A&C_enrichment.txt,G&A_enrichment.txt,G&C_enrichment.txt"
+wound healing	3	"A&C_enrichment.txt,G&A_enrichment.txt,G&C_enrichment.txt"
+ER-associated ubiquitin-dependent protein catabolic process	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+G-protein coupled receptor signaling pathway	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+SMAD protein signal transduction	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+T cell receptor signaling pathway	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+calcium ion binding	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+calmodulin binding	2	"A&C_enrichment.txt,Anas_enrichment.txt"
+cell adhesion	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+cell differentiation	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+cytoplasm	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+cytoplasmic translation	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+intracellular protein transport	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+lipid binding	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+metal ion binding	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+microtubule-based process	2	"A&C_enrichment.txt,Gallus_enrichment.txt"
+multicellular organismal development	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+neutrophil degranulation	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+nucleus	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+positive regulation of B cell activation	2	"Anas_enrichment.txt,Gallus_enrichment.txt"
+positive regulation of transcription from RNA polymerase II promoter	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+post-translational protein modification	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+protein N-linked glycosylation	2	"A&C_enrichment.txt,Gallus_enrichment.txt"
+protein N-linked glycosylation via asparagine	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+protein folding	2	"G&A_enrichment.txt,G&C_enrichment.txt"
+protein homooligomerization	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+proteolysis involved in cellular protein catabolic process	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+regulation of Rho protein signal transduction	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+regulation of cell growth	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+regulation of cilium assembly	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+regulation of immune response	2	"Anas_enrichment.txt,Gallus_enrichment.txt"
+regulation of transcription from RNA polymerase II promoter	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+response to endoplasmic reticulum stress	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+response to oxidative stress	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+"retrograde transport, endosome to Golgi"	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+"retrograde vesicle-mediated transport, Golgi to ER"	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+skeletal system development	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+small GTPase mediated signal transduction	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+sodium ion transport	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+stress-activated protein kinase signaling cascade	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+toxin transport	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+"transcription, DNA-templated"	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+transforming growth factor beta receptor signaling pathway	2	"A&C_enrichment.txt,G&A_enrichment.txt"
+translation	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+translational initiation	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+transmembrane transport	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+tricarboxylic acid cycle	2	"A&C_enrichment.txt,G&A_enrichment.txt"
+vascular endothelial growth factor receptor signaling pathway	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+vesicle-mediated transport	2	"A&C_enrichment.txt,G&C_enrichment.txt"
+ATP hydrolysis coupled proton transport	1	A&C_enrichment.txt
+ATP synthesis coupled proton transport	1	A&C_enrichment.txt
+GTP binding	1	A&C_enrichment.txt
+N-glycan processing	1	G&A_enrichment.txt
+NAD biosynthetic process	1	A&C_enrichment.txt
+RNA binding	1	A&C_enrichment.txt
+RNA splicing	1	A&C_enrichment.txt
+Rab protein signal transduction	1	A&C_enrichment.txt
+Rho protein signal transduction	1	A&C_enrichment.txt
+SH3 domain binding	1	A&C_enrichment.txt
+UDP phosphorylation	1	A&C_enrichment.txt
+UDP-N-acetylglucosamine biosynthetic process	1	A&C_enrichment.txt
+UDP-N-acetylglucosamine metabolic process	1	A&C_enrichment.txt
+"Wnt signaling pathway, calcium modulating pathway"	1	A&C_enrichment.txt
+"Wnt signaling pathway, planar cell polarity pathway"	1	A&C_enrichment.txt
+adaptive immune response	1	G&A_enrichment.txt
+apoptotic process	1	A&C_enrichment.txt
+barbed-end actin filament capping	1	A&C_enrichment.txt
+carbohydrate binding	1	A&C_enrichment.txt
+carbohydrate metabolic process	1	G&C_enrichment.txt
+catalytic activity	1	G&C_enrichment.txt
+cell redox homeostasis	1	A&C_enrichment.txt
+cellular response to calcium ion	1	A&C_enrichment.txt
+cellular response to increased oxygen levels	1	A&C_enrichment.txt
+centriole	1	Anas_enrichment.txt
+chaperone mediated protein folding requiring cofactor	1	A&C_enrichment.txt
+cilium movement	1	A&C_enrichment.txt
+cysteine-type peptidase activity	1	A&C_enrichment.txt
+defense response to bacterium	1	A&C_enrichment.txt
+endocytosis	1	A&C_enrichment.txt
+epithelial cell differentiation	1	A&C_enrichment.txt
+exocytosis	1	A&C_enrichment.txt
+extracellular exosome	1	A&C_enrichment.txt
+extracellular matrix organization	1	A&C_enrichment.txt
+fatty acid metabolic process	1	A&C_enrichment.txt
+glutathione metabolic process	1	A&C_enrichment.txt
+glycolytic process	1	A&C_enrichment.txt
+glycosaminoglycan biosynthetic process	1	A&C_enrichment.txt
+growth plate cartilage chondrocyte morphogenesis	1	G&C_enrichment.txt
+heparin binding	1	A&C_enrichment.txt
+hydrolase activity	1	A&C_enrichment.txt
+identical protein binding	1	A&C_enrichment.txt
+immune response	1	A&C_enrichment.txt
+innate immune response	1	A&C_enrichment.txt
+iron-sulfur cluster assembly	1	A&C_enrichment.txt
+lipid catabolic process	1	A&C_enrichment.txt
+lipid metabolic process	1	A&C_enrichment.txt
+membrane	1	A&C_enrichment.txt
+membrane organization	1	A&C_enrichment.txt
+microtubule binding	1	A&C_enrichment.txt
+microtubule cytoskeleton organization	1	A&C_enrichment.txt
+microtubule-based movement	1	A&C_enrichment.txt
+misfolded or incompletely synthesized glycoprotein catabolic process	1	A&C_enrichment.txt
+"mitochondrial electron transport, ubiquinol to cytochrome c"	1	A&C_enrichment.txt
+mitochondrion	1	A&C_enrichment.txt
+motile cilium	1	A&C_enrichment.txt
+motor activity	1	A&C_enrichment.txt
+negative regulation of cell proliferation	1	A&C_enrichment.txt
+negative regulation of endopeptidase activity	1	A&C_enrichment.txt
+negative regulation of microtubule depolymerization	1	A&C_enrichment.txt
+negative regulation of phosphatase activity	1	A&C_enrichment.txt
+negative regulation of protein localization to cell surface	1	Anas_enrichment.txt
+negative regulation of transforming growth factor beta receptor signaling pathway	1	A&C_enrichment.txt
+nervous system development	1	Columba_enrichment.txt
+neuron migration	1	A&C_enrichment.txt
+neuron projection development	1	A&C_enrichment.txt
+non-canonical Wnt signaling pathway	1	A&C_enrichment.txt
+outer dynein arm assembly	1	A&C_enrichment.txt
+oxidation-reduction process	1	A&C_enrichment.txt
+oxidoreductase activity	1	A&C_enrichment.txt
+"oxidoreductase activity, acting on paired donors, with incorporation or reduction of molecular oxygen"	1	A&C_enrichment.txt
+pentose-phosphate shunt	1	A&C_enrichment.txt
+"pentose-phosphate shunt, non-oxidative branch"	1	A&C_enrichment.txt
+peptide cross-linking	1	A&C_enrichment.txt
+phagocytosis	1	A&C_enrichment.txt
+phosphatase binding	1	Anas_enrichment.txt
+phosphatidylinositol biosynthetic process	1	A&C_enrichment.txt
+phosphatidylinositol dephosphorylation	1	A&C_enrichment.txt
+phosphatidylinositol phosphorylation	1	A&C_enrichment.txt
+phospholipid metabolic process	1	G&C_enrichment.txt
+phospholipid translocation	1	A&C_enrichment.txt
+plasma membrane	1	A&C_enrichment.txt
+positive regulation of ERK1 and ERK2 cascade	1	A&C_enrichment.txt
+positive regulation of I-kappaB kinase/NF-kappaB signaling	1	A&C_enrichment.txt
+positive regulation of NF-kappaB transcription factor activity	1	A&C_enrichment.txt
+positive regulation of cell proliferation	1	A&C_enrichment.txt
+positive regulation of cell-substrate adhesion	1	G&C_enrichment.txt
+positive regulation of protein polymerization	1	A&C_enrichment.txt
+"positive regulation of transcription, DNA-templated"	1	A&C_enrichment.txt
+proteasome-mediated ubiquitin-dependent protein catabolic process	1	A&C_enrichment.txt
+protein O-linked glycosylation via threonine	1	A&C_enrichment.txt
+protein O-linked mannosylation	1	A&C_enrichment.txt
+protein dephosphorylation	1	A&C_enrichment.txt
+protein import into nucleus	1	A&C_enrichment.txt
+protein localization	1	A&C_enrichment.txt
+protein phosphorylation	1	A&C_enrichment.txt
+protein polyubiquitination	1	A&C_enrichment.txt
+protein processing	1	A&C_enrichment.txt
+protein secretion	1	A&C_enrichment.txt
+protein sumoylation	1	A&C_enrichment.txt
+protein targeting to membrane	1	A&C_enrichment.txt
+protein ufmylation	1	A&C_enrichment.txt
+protein-L-isoaspartate (D-aspartate) O-methyltransferase activity	1	A&C_enrichment.txt
+protoporphyrinogen IX biosynthetic process	1	A&C_enrichment.txt
+purine nucleotide biosynthetic process	1	A&C_enrichment.txt
+purine ribonucleoside salvage	1	A&C_enrichment.txt
+pyrimidine nucleotide biosynthetic process	1	A&C_enrichment.txt
+rRNA processing	1	A&C_enrichment.txt
+regulation of GTPase activity	1	A&C_enrichment.txt
+regulation of autophagy	1	A&C_enrichment.txt
+regulation of cell proliferation	1	A&C_enrichment.txt
+regulation of complement activation	1	A&C_enrichment.txt
+regulation of embryonic development	1	A&C_enrichment.txt
+regulation of endocytosis	1	A&C_enrichment.txt
+regulation of endopeptidase activity	1	A&C_enrichment.txt
+regulation of lipid metabolic process	1	A&C_enrichment.txt
+regulation of mitochondrial membrane potential	1	A&C_enrichment.txt
+regulation of nuclear cell cycle DNA replication	1	Gallus_enrichment.txt
+regulation of phosphatidylinositol dephosphorylation	1	A&C_enrichment.txt
+regulation of protein catabolic process	1	A&C_enrichment.txt
+regulation of protein localization	1	A&C_enrichment.txt
+regulation of protein stability	1	A&C_enrichment.txt
+regulation of synaptic plasticity	1	A&C_enrichment.txt
+regulation of systemic arterial blood pressure by renin-angiotensin	1	A&C_enrichment.txt
+regulation of translation	1	A&C_enrichment.txt
+regulation of translational initiation	1	A&C_enrichment.txt
+release of cytochrome c from mitochondria	1	A&C_enrichment.txt
+response to bacterium	1	A&C_enrichment.txt
+response to estrogen	1	A&C_enrichment.txt
+response to insulin	1	A&C_enrichment.txt
+response to iron ion	1	Anas_enrichment.txt
+response to peptide hormone	1	A&C_enrichment.txt
+response to unfolded protein	1	A&C_enrichment.txt
+response to wounding	1	A&C_enrichment.txt
+ribosomal large subunit assembly	1	A&C_enrichment.txt
+ruffle organization	1	A&C_enrichment.txt
+semaphorin-plexin signaling pathway	1	A&C_enrichment.txt
+semaphorin-plexin signaling pathway involved in axon guidance	1	A&C_enrichment.txt
+sensory perception of sound	1	A&C_enrichment.txt
+serine-type endopeptidase activity	1	G&C_enrichment.txt
+serine-type endopeptidase inhibitor activity	1	A&C_enrichment.txt
+serine-type peptidase activity	1	A&C_enrichment.txt
+short-term memory	1	A&C_enrichment.txt
+signal peptide processing	1	A&C_enrichment.txt
+signaling	1	A&C_enrichment.txt
+single fertilization	1	A&C_enrichment.txt
+skeletal muscle fiber development	1	A&C_enrichment.txt
+skeletal system morphogenesis	1	A&C_enrichment.txt
+smoothened signaling pathway	1	A&C_enrichment.txt
+smoothened signaling pathway involved in dorsal/ventral neural tube patterning	1	A&C_enrichment.txt
+social behavior	1	A&C_enrichment.txt
+sodium ion export from cell	1	A&C_enrichment.txt
+somitogenesis	1	A&C_enrichment.txt
+sperm axoneme assembly	1	A&C_enrichment.txt
+spermatid development	1	A&C_enrichment.txt
+spinal cord development	1	A&C_enrichment.txt
+spinal cord motor neuron differentiation	1	A&C_enrichment.txt
+spliceosomal snRNP assembly	1	A&C_enrichment.txt
+structural molecule activity	1	G&C_enrichment.txt
+substrate adhesion-dependent cell spreading	1	A&C_enrichment.txt
+sulfur compound metabolic process	1	A&C_enrichment.txt
+synapse assembly	1	A&C_enrichment.txt
+synapse organization	1	Anas_enrichment.txt
+synaptic vesicle endocytosis	1	A&C_enrichment.txt
+tRNA aminoacylation for protein translation	1	A&C_enrichment.txt
+tetrahydrobiopterin biosynthetic process	1	A&C_enrichment.txt
+toll-like receptor signaling pathway	1	A&C_enrichment.txt
+transcription initiation from RNA polymerase II promoter	1	A&C_enrichment.txt
+transcription-coupled nucleotide-excision repair	1	A&C_enrichment.txt
+transepithelial L-ascorbic acid transport	1	Anas_enrichment.txt
+translational elongation	1	A&C_enrichment.txt
+transmembrane receptor protein tyrosine kinase signaling pathway	1	A&C_enrichment.txt
+transsulfuration	1	A&C_enrichment.txt
+tumor necrosis factor-mediated signaling pathway	1	G&C_enrichment.txt
+type I interferon signaling pathway	1	A&C_enrichment.txt
+ubiquitin-dependent protein catabolic process via the multivesicular body sorting pathway	1	A&C_enrichment.txt
+ureteric bud development	1	G&C_enrichment.txt
+vascular endothelial growth factor signaling pathway	1	A&C_enrichment.txt
+vasculature development	1	A&C_enrichment.txt
+vasculogenesis	1	A&C_enrichment.txt
+ventral spinal cord development	1	A&C_enrichment.txt
+ventricular septum morphogenesis	1	G&C_enrichment.txt
+ventricular system development	1	A&C_enrichment.txt
+vesicle docking involved in exocytosis	1	G&C_enrichment.txt
+vesicle organization	1	A&C_enrichment.txt
+vesicle transport along microtubule	1	A&C_enrichment.txt
+viral entry into host cell	1	A&C_enrichment.txt
+visual perception	1	A&C_enrichment.txt
+"wound healing, spreading of cells"	1	A&C_enrichment.txt
+xenobiotic metabolic process	1	A&C_enrichment.txt
+zinc ion binding	1	A&C_enrichment.txt

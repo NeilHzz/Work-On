@@ -1,0 +1,19 @@
+Software and environment notes
+==============================
+
+The included Python scripts were prepared for Python 3.10 or later.
+
+Python packages:
+- pandas
+- numpy
+- scipy
+- openpyxl
+- biopython
+
+External tools and services used in the original analyses:
+- GlycoShape / Re-Glyco online workflow for glycoprotein ensemble generation.
+- APBS and PDB2PQR for electrostatic analysis. A full local rerun requires APBS/PDB2PQR installation and, if needed, an `APBS_BINARY` environment variable pointing to the APBS executable.
+- ANSYS Workbench / LS-DYNA for finite-element simulations.
+- OrthoFinder and CAFE5 for orthogroup and gene-family analyses.
+
+The archive includes the processed outputs used in the manuscript and Supplementary Materials. Exact local software build numbers for proprietary finite-element software, original mass-spectrometry search software, APBS/PDB2PQR, OrthoFinder, and CAFE5 were not fully preserved in this minimal processed-data archive. This limitation should be cited when describing the archive as a processed-data-level reproducibility package rather than a complete raw-data rerun environment.

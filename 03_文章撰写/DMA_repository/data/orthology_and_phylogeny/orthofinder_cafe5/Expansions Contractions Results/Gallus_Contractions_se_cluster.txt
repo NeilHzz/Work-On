@@ -1,0 +1,65 @@
+# cluster_name	protein_number	swiss_prot_id	go_annotation	protein_list
+cluster1	48	P04210	GO:0002377; P:immunoglobulin production; IBA:GO_Central	Anas|A0A493SXZ2;Anas|A0A493T0Y3;Anas|A0A493T120;Anas|A0A493T3C4;Anas|A0A493T488;Anas|A0A493T6P3;Anas|A0A493T7P7;Anas|A0A493T7W2;Anas|A0A493T835;Anas|A0A493TDR6;Anas|A0A493TL97;Anas|A0A493TNK9;Anas|A0A493TVM7;Anas|A0A493TXM9;Anas|A0A493TXZ2;Anas|A0A493TZB9;Anas|A0A493U2L3;Anas|A0A8B9R3Y6;Anas|A0A8B9R648;Anas|A0A8B9SK35;Anas|A0A8B9UDY2;Anas|A0A8B9UFU2;Anas|A0A8B9UG51;Anas|A0A8B9UGD6;Anas|A0A8B9UGV5;Anas|A0A8B9UH06;Anas|A0A8B9UH20;Anas|A0A8B9UHZ6;Anas|A0A8B9UM59;Anas|A0A8B9V211;Anas|A0A8B9VHH9;Anas|A0A8B9VMA2;Anas|A0A8B9VV09;Anas|A0A8B9W086;Anas|A0A8B9W528;Anas|R0KL71;Anas|R0L107;Anas|U3J1Z3;Columba|A0A2I0LZC1;Gallus|A0A8V0ZQJ4;Gallus|A0A8V0ZVP0;Gallus|A0A8V0ZXT4;Gallus|A0A8V0ZZD4;Gallus|A0A8V0ZZH6;Gallus|A0A8V0ZZJ1;Gallus|A0A8V0ZZT5;Gallus|A0A8V1A3B5;Gallus|A0A8V1A3D7
+cluster12	12	P08070	GO:0000278; P:mitotic cell cycle; IBA:GO_Central	Anas|A0A493SVD9;Anas|A0A493SYU1;Anas|A0A8B9SLJ4;Anas|A0A8B9STQ1;Anas|A0A8B9TJB7;Anas|A0A8B9USX6;Columba|A0A2I0LHP7;Columba|A0A2I0LKI5;Columba|A0A2I0LNR9;Columba|A0A2I0LX98;Columba|A0A2I0M1I4;Columba|A0A2I0MKV7
+cluster14	12	P13538	GO:0003774; F:motor activity; IEA:InterPro	Anas|A0A493TLQ2;Anas|A0A8B9TI10;Columba|A0A2I0LLJ2;Columba|A0A2I0LLJ6;Columba|A0A2I0LN06;Columba|A0A2I0LN15;Columba|A0A2I0LN17;Columba|A0A2I0LN31;Columba|A0A2I0LPD2;Columba|A0A2I0M275;Columba|A0A2I0MW65;Gallus|P13538
+cluster20	11	Q8TE73	GO:0036158; P:outer dynein arm assembly; IMP:SYSCILIA_CCNET	Anas|A0A493T2A8;Anas|A0A8B9QX41;Anas|A0A8B9SUZ0;Anas|A0A8B9SWZ3;Anas|A0A8B9SXA0;Anas|A0A8B9V2Z3;Anas|A0A8C0A014;Columba|A0A2I0MW76;Columba|A0A2I0MX22;Gallus|A0A8V0X370;Gallus|A0A8V0XSB0
+cluster25	10	Q9JIQ8	GO:0006508; P:proteolysis; IDA:UniProtKB	Anas|A0A493STU7;Columba|A0A2I0LHH9;Columba|A0A2I0LLM2;Columba|A0A2I0LMH4;Columba|A0A2I0LUL7;Columba|A0A2I0M0C0;Columba|A0A2I0M384;Columba|A0A2I0MN31;Columba|A0A2I0MSP7;Gallus|A0A8V0YFK4
+cluster26	9	Q9Y243	GO:0007165; P:signal transduction; IMP:UniProtKB	Anas|A0A493TGV3;Anas|U3ILM2;Columba|A0A2I0LIQ7;Columba|A0A2I0LRD3;Columba|A0A2I0LYH4;Columba|A0A2I0M344;Columba|A0A2I0MBA3;Columba|A0A2I0MH42;Columba|A0A2I0MTK2
+cluster31	9	Q07014	GO:0007169; P:transmembrane receptor protein tyrosine kinase signaling pathway; IBA:GO_Central	Anas|A0A8B9TGL4;Columba|A0A2I0LUN9;Columba|A0A2I0M673;Columba|A0A2I0MD49;Columba|A0A2I0MJ01;Columba|A0A2I0MKF5;Columba|A0A2I0MVY8;Columba|A0A2I0MVY9;Gallus|A0A8V0XDS4
+cluster49	8	Q8IU85	GO:0071622; P:regulation of granulocyte chemotaxis; IMP:UniProtKB	Anas|A0A493T843;Columba|A0A2I0LHX8;Columba|A0A2I0LJQ2;Columba|A0A2I0LN05;Columba|A0A2I0MFR8;Columba|A0A2I0MH53;Columba|R7VPW6;Gallus|A0A8V0XKR3
+cluster53	8	Q29XZ0	GO:0001501; P:skeletal system development; TAS:ProtInc	Anas|A0A493TYC5;Anas|A0A8B9QVE1;Anas|A0A8B9U145;Anas|A0A8B9U2K3;Anas|R0LNU6;Columba|A0A2I0MS15;Columba|A0A2I0MS20;Columba|A0A2I0MS31
+cluster54	8	P51166	GO:0048511; P:rhythmic process; IEA:UniProtKB-KW	Anas|A0A8B9QLG0;Columba|A0A2I0LHG2;Columba|A0A2I0LHM7;Columba|A0A2I0LZS6;Columba|A0A2I0M2Y0;Columba|A0A2I0MFM8;Columba|A0A2I0MRA7;Gallus|A0A8V1A7M2
+cluster55	8	P29350	GO:0031295; P:T cell costimulation; TAS:Reactome	Anas|A0A8B9QPI1;Anas|A0A8B9T1Y9;Columba|A0A2I0LY32;Columba|A0A2I0M5R6;Columba|A0A2I0M8A8;Columba|A0A2I0ML97;Columba|A0A2I0MVW7;Gallus|A0A3Q2UCN1
+cluster59	8	Q76PA0	GO:0050852; P:T cell receptor signaling pathway; IBA:GO_Central	Anas|A0A8B9SNR9;Anas|A0A8B9UI30;Anas|A0A8B9UQG2;Anas|A0A8B9V6U2;Anas|A0A8B9VR76;Columba|A0A2I0LID4;Columba|A0A2I0LP69;Gallus|A0A8V0XH88
+cluster60	8	Q64303	GO:0031098; P:stress-activated protein kinase signaling cascade; IBA:GO_Central	Anas|A0A8B9V456;Columba|A0A2I0LMW2;Columba|A0A2I0LS69;Columba|A0A2I0LUS9;Columba|A0A2I0M2P1;Columba|A0A2I0M6D5;Columba|A0A2I0MJ95;Gallus|E1BS97
+cluster65	8	Q99729	GO:0045893; P:positive regulation of transcription, DNA-templated; ISS:HGNC	Anas|A0A493TR50;Columba|A0A2I0LJY3;Columba|A0A2I0LNX0;Columba|A0A2I0M3D1;Columba|A0A2I0MA06;Columba|A0A2I0MH00;Columba|A0A2I0MNL8;Gallus|A0A8V0YRG0
+cluster70	7	P35813	GO:0006470; P:protein dephosphorylation; IMP:UniProtKB	Anas|A0A493SSN8;Anas|A0A493T925;Columba|A0A2I0LKZ2;Columba|A0A2I0LYP0;Columba|A0A2I0MAG7;Columba|A0A2I0MBK6;Columba|A0A2I0MNT3
+cluster77	7	Q99959	GO:0055010; P:ventricular cardiac muscle tissue morphogenesis; IMP:BHF-UCL	Anas|A0A8B9QYP8;Columba|A0A2I0LGI3;Columba|A0A2I0LII3;Columba|A0A2I0M064;Columba|A0A2I0M827;Columba|A0A2I0MKS7;Gallus|A0A8V0Y9L5
+cluster85	7	Q8NBR7	GO:0016567; P:protein ubiquitination; TAS:Reactome	Anas|A0A493SSX6;Columba|A0A2I0LIZ9;Columba|A0A2I0LXG2;Columba|A0A2I0MG00;Columba|A0A2I0MH19;Columba|A0A2I0MLN9;Columba|A0A2I0MV99
+cluster87	7	Q9NT26	GO:0007519; P:skeletal muscle tissue development; IEA:Ensembl	Anas|A0A493STJ4;Columba|A0A2I0LH19;Columba|A0A2I0LH40;Columba|A0A2I0LH98;Columba|A0A2I0LHP2;Columba|A0A2I0LUA5;Gallus|A0A1D5NYG3
+cluster90	7	Q9UHD2	GO:0016032; P:viral process; IEA:UniProtKB-KW	Anas|A0A493TYM2;Columba|A0A2I0LHM0;Columba|A0A2I0LJE2;Columba|A0A2I0LJJ4;Columba|A0A2I0LX57;Columba|A0A2I0MEG1;Columba|A0A2I0MJ78
+cluster94	7	Q9ULV4	GO:0007165; P:signal transduction; TAS:ProtInc	Anas|A0A8B9T4F6;Columba|A0A2I0LIR6;Columba|A0A2I0LNB4;Columba|A0A2I0M502;Columba|A0A2I0M5E5;Columba|A0A2I0M8B5;Gallus|A0A1L1RWS8
+cluster100	7	O95290	GO:0055085; P:transmembrane transport; IBA:GO_Central	Anas|A0A8B9V184;Columba|A0A2I0LJ47;Columba|A0A2I0M429;Columba|A0A2I0M7A8;Columba|A0A2I0MDT0;Columba|A0A2I0MSD9;Gallus|F1NM51
+cluster120	6	Q86VH2	GO:0021591; P:ventricular system development; IEA:Ensembl	Anas|A0A493STG0;Columba|A0A2I0LLF5;Columba|A0A2I0LV23;Columba|A0A2I0M2W0;Columba|A0A2I0MAF5;Columba|A0A2I0MFT4
+cluster139	6	Q7SIB3	GO:0005201; F:extracellular matrix structural constituent; IEA:InterPro	Anas|A0A493STX5;Anas|A0A8B9T9Z4;Columba|A0A2I0MAW5;Columba|A0A2I0MBC4;Columba|A0A2I0MS88;Columba|A0A2I0MT61
+cluster145	6	O46631	GO:0050870; P:positive regulation of T cell activation; IBA:GO_Central	Anas|A0A493T069;Anas|A0A493T5P2;Anas|A0A8B9TBK4;Anas|A0A8B9ZHN4;Anas|R0L1T2;Columba|A0A2I0M5V4
+cluster160	6	Q925F3	GO:0006511; P:ubiquitin-dependent protein catabolic process; IBA:GO_Central	Anas|A0A8B9SKK5;Columba|A0A2I0LTB0;Columba|A0A2I0M6T4;Columba|A0A2I0M9V4;Columba|A0A2I0MQB9;Columba|A0A2I0MVC6
+cluster171	6	Q7Z739	GO:0045948; P:positive regulation of translational initiation; IDA:UniProtKB	Anas|A0A8B9UD74;Anas|R0JVS6;Columba|A0A2I0M1J8;Columba|A0A2I0M566;Columba|A0A2I0M8V0;Columba|A0A2I0MVV1
+cluster180	6	Q32KP2	GO:0005829; C:cytosol; IBA:GO_Central	Anas|A0A493TCD4;Anas|A0A493TK35;Anas|A0A8B9QTY2;Anas|A0A8B9UQ68;Columba|A0A2I0MLQ5;Gallus|A0A8V0ZSZ9
+cluster183	6	Q8BQB6	GO:0034453; P:microtubule anchoring; IBA:GO_Central	Anas|A0A8B9TU94;Anas|A0A8B9UQF2;Anas|A0A8B9VF32;Anas|R0JG75;Columba|A0A2I0MDP7;Gallus|F1NE52
+cluster196	5	Q13131	GO:0016055; P:Wnt signaling pathway; IEA:UniProtKB-KW	Anas|A0A493TQZ9;Anas|A0A493TWR6;Anas|A0A8B9SYK4;Anas|R0JT95;Columba|A0A2I0LTY0
+cluster208	5	Q7L8C5	GO:0016192; P:vesicle-mediated transport; IBA:GO_Central	Anas|A0A493U2D3;Columba|A0A2I0LM21;Columba|A0A2I0LZU1;Columba|A0A2I0MHW3;Columba|A0A2I0MQ11
+cluster236	5	Q8WWZ7	GO:0055085; P:transmembrane transport; TAS:Reactome	Anas|A0A493T0T8;Anas|A0A493TEE3;Columba|A0A2I0LH99;Columba|A0A2I0LWQ5;Columba|A0A2I0M7E8
+cluster243	5	P30413	GO:0016021; C:integral component of membrane; IEA:UniProtKB-KW	Anas|A0A493T7I4;Anas|A0A8B9QNX5;Columba|A0A2I0LZK2;Columba|A0A2I0MPM7;Columba|A0A2I0MS67
+cluster249	5	Q99JL1	GO:0007026; P:negative regulation of microtubule depolymerization; IDA:UniProtKB	Anas|A0A493TGR2;Anas|A0A8B9SLX0;Anas|A0A8B9SZ99;Anas|A0A8B9VW23;Columba|A0A2I0LHX3
+cluster257	5	Q60431	GO:0097199; F:cysteine-type endopeptidase activity involved in apoptotic signaling pathway; ISS:UniProtKB	Anas|A0A493TVT4;Columba|A0A2I0LQ88;Columba|A0A2I0LQ91;Columba|A0A2I0MEW3;Columba|A0A2I0MMP4
+cluster265	5	Q2IAL6	GO:0010629; P:negative regulation of gene expression; IMP:AgBase	Anas|A0A493U1S6;Anas|A0A8B9QXA6;Anas|A0A8B9UE61;Columba|A0A0H3YPL2;Columba|A0A2I0LKX0
+cluster279	5	Q2HJE4	GO:0006511; P:ubiquitin-dependent protein catabolic process; IEA:InterPro	Anas|A0A8B9SZ75;Columba|A0A2I0LW91;Columba|A0A2I0M9R8;Columba|A0A2I0MD11;Columba|A0A2I0MJ58
+cluster283	5	A2AAJ9	GO:0035023; P:regulation of Rho protein signal transduction; IEA:InterPro	Anas|A0A8B9T4Q4;Columba|A0A2I0LRA9;Columba|A0A2I0LZK0;Columba|A0A2I0LZX9;Columba|A0A2I0MQK0
+cluster288	5	F1NTD6	GO:0032508; P:DNA duplex unwinding; ISS:UniProtKB	Anas|A0A8B9T9U5;Columba|A0A2I0LJC1;Columba|A0A2I0M560;Columba|A0A2I0MTK9;Columba|A0A2I0MTL0
+cluster294	5	A6NHC0	GO:0006508; P:proteolysis; IBA:GO_Central	Anas|A0A493T2A2;Anas|A0A8B9TTB2;Anas|A0A8B9VLD3;Columba|A0A2I0M4Z7;Columba|A0A2I0M520
+cluster302	5	Q9BYK8	GO:0019216; P:regulation of lipid metabolic process; TAS:Reactome	Anas|A0A8B9UKK7;Anas|R0JAX9;Columba|A0A2I0LMA8;Columba|A0A2I0LPW2;Columba|A0A2I0M5U2
+cluster306	5	B2KI30	GO:0004867; F:serine-type endopeptidase inhibitor activity; IEA:UniProtKB-KW	Anas|A0A8B9QKY5;Anas|A0A8B9V6M0;Columba|A0A2I0MW30;Columba|A0A2I0MX89;Columba|A0A2I0MX91
+cluster324	5	Q9BZ26	GO:0007264; P:small GTPase mediated signal transduction; IEA:InterPro	Anas|A0A493SWL9;Anas|A0A493T3L3;Columba|A0A2I0MBU2;Columba|A0A2I0MBV3;Columba|A0A2I0MT84
+cluster327	5	Q60790	GO:0046580; P:negative regulation of Ras protein signal transduction; IEA:InterPro	Anas|A0A493T0I3;Columba|A0A2I0LW13;Columba|A0A2I0LYK9;Columba|A0A2I0MC48;Columba|A0A2I0MSR4
+cluster329	5	A2ALS5	GO:0051056; P:regulation of small GTPase mediated signal transduction; IEA:InterPro	Anas|A0A493T587;Anas|A0A493TB73;Anas|A0A8B9TES9;Columba|A0A2I0LYM7;Columba|A0A2I0MLR2
+cluster341	5	Q9NZM3	GO:0016032; P:viral process; IEA:UniProtKB-KW	Anas|A0A8B9QSS3;Columba|A0A2I0LTS2;Columba|A0A2I0M1K6;Columba|A0A2I0MK31;Columba|A0A2I0MVD2
+cluster350	5	Q9WV92	GO:0008360; P:regulation of cell shape; IMP:BHF-UCL	Anas|A0A8B9TKQ4;Columba|A0A2I0LNT3;Columba|A0A2I0LRZ7;Columba|A0A2I0MT87;Columba|A0A2I0MWK5
+cluster361	5	Q9UGK8	GO:0007165; P:signal transduction; TAS:UniProtKB	Anas|R0M8D3;Columba|A0A2I0LNR8;Columba|A0A2I0M367;Columba|A0A2I0MF06;Columba|A0A2I0MI84
+cluster371	4	Q90670	GO:0007179; P:transforming growth factor beta receptor signaling pathway; IBA:GO_Central	Anas|A0A493SY77;Columba|A0A2I0MGC8;Columba|A0A2I0MRE7;Columba|A0A2I0MRL0
+cluster461	4	P98150	GO:0007165; P:signal transduction; IEA:InterPro	Anas|A0A493SV05;Columba|A0A2I0M903;Columba|A0A2I0M9F6;Columba|A0A2I0MF89
+cluster482	4	P62253	GO:0006511; P:ubiquitin-dependent protein catabolic process; IBA:GO_Central	Anas|A0A493T3F5;Columba|A0A2I0LUP8;Columba|A0A2I0LYE0;Columba|A0A2I0M1V0
+cluster520	4	Q9NZA1	GO:0007605; P:sensory perception of sound; IMP:UniProtKB	Anas|A0A493TTT5;Columba|A0A2I0LIC9;Columba|A0A2I0MRS2;Columba|A0A2I0MVK6
+cluster541	4	Q91WG5	GO:0006110; P:regulation of glycolytic process; ISO:MGI	Anas|A0A8B9QNC1;Columba|A0A2I0LK95;Columba|A0A2I0LKI1;Columba|A0A2I0MQT0
+cluster547	4	P27042	GO:0009253; P:peptidoglycan catabolic process; IEA:InterPro	Anas|A0A8B9QRA4;Columba|A0A2I0MS32;Columba|A0A2I0MS42;Columba|A0A2I0MS43
+cluster568	4	A6N7Y9	GO:0035093; P:spermatogenesis, exchange of chromosomal proteins; ISS:UniProtKB	Anas|A0A8B9SQ87;Columba|A0A2I0LRR3;Columba|A0A2I0LRR9;Columba|A0A2I0M8H2
+cluster580	4	Q8IZT8	GO:0046596; P:regulation of viral entry into host cell; IDA:UniProtKB	Anas|A0A8B9SYP0;Columba|A0A2I0LX16;Columba|A0A2I0M7H4;Columba|A0A2I0MUD6
+cluster604	4	O43825	GO:0006487; P:protein N-linked glycosylation; IBA:GO_Central	Anas|A0A8B9TKG4;Columba|A0A2I0LJ67;Columba|A0A2I0M1C8;Columba|A0A2I0MDQ5
+cluster645	4	P21869	GO:0016055; P:Wnt signaling pathway; IEA:UniProtKB-KW	Anas|A0A8B9VV06;Columba|A0A2I0LIP9;Columba|A0A2I0LIS4;Columba|A0A2I0M7Q9
+cluster648	4	O94851	GO:0019417; P:sulfur oxidation; ISS:UniProtKB	Anas|A0A8B9VY73;Columba|A0A2I0LHL8;Columba|A0A2I0LT29;Columba|A0A2I0MI17
+cluster689	4	O15013	GO:0035023; P:regulation of Rho protein signal transduction; IEA:InterPro	Anas|A0A493T5E8;Columba|A0A2I0M386;Columba|A0A2I0M715;Columba|A0A2I0MTG1
+cluster707	4	Q3SZJ2	GO:0050852; P:T cell receptor signaling pathway; ISS:UniProtKB	Anas|A0A8B9QNL7;Columba|A0A2I0MT80;Columba|A0A2I0MXV2;Columba|A0A2I0MXY8
+cluster710	4	Q9HBH5	GO:0001649; P:osteoblast differentiation; HDA:UniProtKB	Anas|A0A8B9QSW1;Columba|A0A2I0MNH6;Columba|A0A2I0MS49;Columba|A0A2I0MTG5
+cluster726	4	Q92636	GO:0007165; P:signal transduction; TAS:ProtInc	Anas|A0A8B9SQE0;Columba|A0A2I0LXH8;Columba|A0A2I0MTN8;Columba|A0A2I0MX00
+cluster733	4	Q9BQQ6	GO:0070374; P:positive regulation of ERK1 and ERK2 cascade; IDA:MGI	Anas|A0A8B9T272;Columba|A0A2I0LZW6;Columba|A0A2I0M3M8;Columba|A0A2I0MHV4
+cluster766	4	Q9NZN5	GO:0007266; P:Rho protein signal transduction; IEA:InterPro	Anas|A0A8B9UCH9;Columba|A0A2I0LJI3;Columba|A0A2I0LPG4;Columba|A0A2I0LS93

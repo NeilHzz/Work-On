@@ -27,8 +27,8 @@ from matplotlib.collections import PatchCollection
 from matplotlib.colors import TwoSlopeNorm
 from matplotlib.lines import Line2D
 import matplotlib.ticker as ticker
-matplotlib.rcParams["font.family"] = "Times New Roman"
-matplotlib.rcParams["font.sans-serif"] = ["Times New Roman", "DejaVu Sans"]
+matplotlib.rcParams["font.family"] = "Minion Pro"
+matplotlib.rcParams["font.sans-serif"] = ["Minion Pro", "DejaVu Sans"]
 matplotlib.rcParams["mathtext.fontset"] = "stix"
 from scipy import stats
 import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -328,7 +328,7 @@ def draw_hotspot(ax, summary):
     ax.set_xticks(range(len(species_order)))
     ax.set_xticklabels(species_order, fontsize=TICK_FS)
     for tick in ax.get_xticklabels():
-        tick.set_fontfamily('Times New Roman')
+        tick.set_fontfamily('Minion Pro')
         tick.set_fontstyle('italic')
     ax.set_ylabel(r'Ca$^{2+}$ binding hotspots (n)', fontsize=AXIS_LABEL_FS)
     ax.set_title(r'Ca$^{2+}$ Hotspot Residues', fontsize=TITLE_FS, pad=8)
@@ -413,7 +413,7 @@ def draw_ca2_sasa(ax, csv_map):
     ax.set_xticks(range(len(species_order)))
     ax.set_xticklabels(species_order, fontsize=TICK_FS)
     for tick in ax.get_xticklabels():
-        tick.set_fontfamily('Times New Roman')
+        tick.set_fontfamily('Minion Pro')
         tick.set_fontstyle('italic')
     ax.set_ylabel('Asp+Glu surface SASA (Å²)', fontsize=AXIS_LABEL_FS)
     ax.set_title('Carboxylate Surface Accessibility', fontsize=TITLE_FS, pad=8)
@@ -553,7 +553,7 @@ def main():
     draw_strip(ax_strip, csv_map)
     fig_a.text(0.01, 1.0 - 0.05 / fig_h_strip, 'A',
                fontsize=PANEL_LABEL_FS, fontweight='bold', va='top')
-    save_panel(fig_a, 'Fig5A')
+    save_panel(fig_a, 'reglyco_surface_summary')
     plt.close(fig_a)
 
     # ── Panel B: Ca2+ hotspot residues ────────────────────────────────────
@@ -563,7 +563,7 @@ def main():
     fig_b.text(0.01, 0.98, 'B', transform=fig_b.transFigure,
                fontsize=PANEL_LABEL_FS, fontweight='bold', va='top')
     fig_b.tight_layout()
-    save_panel(fig_b, 'Fig5B')
+    save_panel(fig_b, 'Fig4K_hotspot_residues')
     plt.close(fig_b)
 
     # ── Panel C: Ca2+ SASA ────────────────────────────────────────────────
@@ -573,7 +573,7 @@ def main():
     fig_c.text(0.01, 0.98, 'C', transform=fig_c.transFigure,
                fontsize=PANEL_LABEL_FS, fontweight='bold', va='top')
     fig_c.tight_layout()
-    save_panel(fig_c, 'Fig5C')
+    save_panel(fig_c, 'Fig4L_carboxylate_surface_accessibility')
     plt.close(fig_c)
 
     # ── Panel D: APBS strip ───────────────────────────────────────────────
@@ -583,7 +583,7 @@ def main():
     fig_d.text(0.01, 0.98, 'D', transform=fig_d.transFigure,
                fontsize=PANEL_LABEL_FS, fontweight='bold', va='top')
     fig_d.tight_layout()
-    save_panel(fig_d, 'Fig5D')
+    save_panel(fig_d, 'reglyco_apbs_strip')
     plt.close(fig_d)
 
 
